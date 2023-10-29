@@ -1,0 +1,42 @@
+.privacy_bg {
+    background: #092637;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    padding-top: 15vh;
+    text-align: justify;
+}
+
+.privacy_bg h1 {
+    font-family: 'NunitoSans-Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 150%;
+    text-align: left;
+    /* identical to box height, or 60px */
+
+
+    color: #FFFFFF;
+}
+
+.privacy h5 {
+    font-family: 'NunitoSans-Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 150%;
+    color: #FFFFFF;
+}
+
+.privacy p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.6rem;
+    margin-top: 15px;
+    color: #FFFFFF;
+}

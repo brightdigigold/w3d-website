@@ -1,0 +1,45 @@
+.refund_bg {
+    background: #092637;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    padding-top: 100px;
+    text-align: justify;
+}
+.refund_bg h1{
+    font-family: 'NunitoSans-Bold';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 150%;
+        /* identical to box height, or 60px */
+    
+    
+        color: #FFFFFF;
+}
+.refund_and_cancellations p{
+    font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 21px;
+    
+        color: #FFFFFF;
+}
+.mission_points ol li {
+    font-weight: 400;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.6rem;
+    color: #FFFFFF;
+    list-style: disc;
+    padding-bottom: 0;
+    list-style: decimal;
+}
+
+@media screen and (max-width:767px) {
+    .cancellations{
+        margin-top: -40px !important;
+    }
+}

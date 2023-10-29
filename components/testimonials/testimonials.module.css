@@ -1,0 +1,123 @@
+.testimonials_bg {
+    /* background: linear-gradient(0.69deg, #0B4263 0.62%, #081A24 101.27%); */
+    padding-bottom: 30px;
+}
+
+.testimonials_text {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: capitalize;
+    color: #FFFFFF;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    font-family: 'NunitoSans-ExtraBold';
+}
+
+
+
+.user_image_text_bg {
+    background: rgba(44, 123, 172, 0.2);
+    border-bottom: 2px solid #63BDFF;
+    border-radius: 20px;
+    position: relative;
+    min-height: 330px;
+    margin: 10px 10px 30px 10px;
+}
+
+.user_image {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -20px;
+    margin: 0 auto;
+    width: 100px;
+
+}
+
+.user_image img {
+    border-radius: 50%;
+    filter: drop-shadow(0px 5.66667px 12.75px rgba(0, 0, 0, 0.25));
+}
+
+.user_text {
+    padding: 0px 15px 25px 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 80px;
+}
+
+.user_description {
+    padding: 0px 15px 25px 15px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+@media screen and (max-width:767px) {
+    .testimonial .container{
+        --bs-gutter-x: 0rem !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .testimonials_text {
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 150%;
+        text-align: center;
+        text-transform: capitalize;
+        color: #FFFFFF;
+        padding-top: 0px;
+        padding-bottom: 10px;
+    }
+    
+}
+
+
+@media screen and (min-width: 480px)and (max-width: 767px) {
+    .user_image_text_bg {
+        background: rgba(44, 123, 172, 0.2);
+        border-bottom: 2px solid #63BDFF;
+        border-radius: 20px;
+        position: relative;
+        min-height:350px;
+        margin: 10px;
+    }
+  }
+  
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .user_image_text_bg {
+        background: rgba(44, 123, 172, 0.2);
+        border-bottom: 2px solid #63BDFF;
+        border-radius: 20px;
+        position: relative;
+        min-height: 350px;
+        margin: 10px;
+    }
+  }
+  
+  @media screen and (min-width: 1024px) {
+    .user_image_text_bg {
+        background: rgba(44, 123, 172, 0.2);
+        border-bottom: 2px solid #63BDFF;
+        border-radius: 20px;
+        position: relative;
+        min-height: 320px;
+        margin: 10px;
+    }
+  }
+ 
+  
+  
+  
+  

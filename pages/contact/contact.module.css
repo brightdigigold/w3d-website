@@ -1,0 +1,183 @@
+.contact_bg {
+    background:#092637 ;;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    padding-top: 100px;
+}
+
+.contact h1 {
+    padding-top: 30px;
+    font-family: 'NunitoSans-Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 150%;
+    /* identical to box height, or 60px */
+
+
+    color: #FFFFFF;
+}
+
+.contact_desc {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    margin-top: 20px;
+    color: #FFFFFF;
+}
+
+
+.call_us {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0 auto;
+    max-width: 250px;
+    background: linear-gradient(91.53deg, #1965F2 2.52%, #1996F2 31.88%, #03CCE0 95.11%, #03DDE0 113.18%), #2C7BAC;
+    opacity: 0.8;
+    border-radius: 8px 8px 0px 0px;
+    padding: 5px;
+}
+
+.mail_us {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0 auto;
+    max-width: 250px;
+    background: linear-gradient(87.97deg, #A9C1FF 4.17%, #3145FF 96.53%);
+    opacity: 0.8;
+    border-radius: 8px 8px 0px 0px;
+    padding: 5px;
+}
+
+.reach_us {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0 auto;
+    max-width: 250px;
+    background: linear-gradient(77.09deg, #FDB6A7 -10.58%, #FB5C88 82.75%);
+    opacity: 0.8;
+    border-radius: 8px 8px 0px 0px;
+    padding: 5px;
+}
+
+.call_us_box {
+    background: #11405C;
+    border-radius: 20px;
+    min-height: 210px;
+    padding: 35px 20px 20px;
+}
+
+.call_us_box a {
+    text-decoration: none;
+}
+
+.call_us_text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 20px;
+    color: #FFFFFF;
+}
+
+.call_us_telephone {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    margin-top: 15px;
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.contact_form label {
+    margin-top: 30px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+.call_us_telephone a {
+    color: white;
+    text-decoration: none;
+}
+
+.contact_form input {
+    background: rgba(44, 123, 172, 0.2);
+    border-radius: 4px;
+    width: 100%;
+    padding: 15px;
+    color: #fff;
+}
+
+.fileselected input{
+    color: rgba(0, 0, 0, 0);
+}
+
+.contact_form textarea {
+    background: rgba(44, 123, 172, 0.2);
+    border-radius: 4px;
+    color: #fff;
+    width: 100%;
+    padding: 15px;
+}
+
+.send button {
+    background: linear-gradient(90.12deg, #C5A643 0.1%, #AE8323 12.05%, #C5A643 22.45%, #CEA83D 33.88%, #BC932E 41.16%, #B28726 47.4%, #C09832 56.75%, #D7B344 68.19%, #EAC954 74.43%, #F6E472 89.5%, #EAC954 99.9%), #63BDFF;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 25%;
+    color: #FFFFFF;
+    padding: 15px;
+    margin: 30px 0px 50px 0px;
+}
+
+@media screen and (max-width:767px) {
+    .contactUs{
+        padding-top: 15px !important;
+    }
+    .send button {
+        width: 100%;
+    }
+    
+}
+
+.fileselected{
+    position: relative;
+}
+
+.nofileselected{
+    margin: 0px;
+    display: flex;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 125px;
+    color: #fff;
+    align-items: center;
+}

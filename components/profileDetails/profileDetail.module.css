@@ -1,0 +1,463 @@
+/* profile */
+.userProfile_bg {
+    background: rgba(44, 123, 172, 0.2);
+    border-radius: 8px;
+    width: 100%;
+    min-height: 492px;
+    position: relative;
+}
+
+.profile_image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.profileImage {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background: #164866;
+    object-fit: cover;
+    /* padding: 50px; */
+}
+
+.edit_image {
+    position: relative;
+    top: 30px;
+    right: 22px;
+    background: #164866;
+    border-radius: 50%;
+    width: 27px;
+    height: 27px;
+    color: #63BDFF;
+    cursor: pointer;
+}
+
+.fileUpload {
+    position: absolute;
+    opacity: 0;
+    border-radius: 50%;
+    width: 27px;
+    margin-right: 5px;
+}
+
+.user_profile {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+.user_profile input {
+    margin-top: 5px;
+    background: #164866;
+    border-radius: 4px;
+    padding: 15px;
+    border: none;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+
+
+.accordion_bg {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.accordion-button .collapsed {
+    background: #293045 !important;
+}
+
+.cross {
+    float: right;
+    color: #fff;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* kyc */
+
+.name,
+.dob,
+.email,
+.gst {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgb(125 199 245 / 10%);
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.left_side_data {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #7F9CAD;
+}
+
+.right_side_data {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: right;
+    color: #C6E9FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.verified_icon{
+    color: green;
+    margin-left: 5px;
+    font-size: 22px;
+}
+
+.verified_text{
+    margin-left: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.edit_details {
+    margin-top: 110px;
+    border: 1px solid #FFD662;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFD662;
+}
+.deleteBank {
+    margin-top: 20px;
+    background: rgba(255, 87, 87, 0.1);
+    border: 1px solid rgba(255, 87, 87, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    /* padding: 10px; */
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FF5757;
+}
+
+.edit_details_kyc {
+    margin-top: 315px;
+    border: 1px solid #FFD662;
+    border-radius: 8px;
+    text-align: center;
+    /* padding: 10px; */
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFD662;
+}
+
+.verification_bg {
+    background: rgba(44, 123, 172, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.verification {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user_kyc {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 15px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.user_kyc input,
+.user_kyc select {
+    margin-top: 5px;
+    background: #164866;
+    border-radius: 4px;
+    padding: 15px;
+    border: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.aadharCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.aadharImage {
+    margin: 10px;
+}
+
+.aadhar_card_upload_text label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.notification {
+    background-color: #FF5757;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.notification_arrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* address */
+.profile_address {
+    background: #164866;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px 15px 0px 15px;
+}
+
+.verify button {
+    margin-top: 20px;
+    background: linear-gradient(90.12deg, #C5A643 0.1%, #AE8323 12.05%, #C5A643 22.45%, #CEA83D 33.88%, #BC932E 41.16%, #B28726 47.4%, #C09832 56.75%, #D7B344 68.19%, #EAC954 74.43%, #F6E472 89.5%, #EAC954 99.9%);
+    border-radius: 8px;
+    text-align: center;
+    /* padding: 10px; */
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    width: 100%;
+}
+
+.left_side_address,
+.right_side_address {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #FFFFFF;
+}
+
+.address1 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #C6E9FF;
+    /* max-width: 300px; */
+    margin-top: 10px;
+}
+
+
+.delete {
+    background: rgba(255, 87, 87, 0.1);
+    border-radius: 0px 0px 0px 8px;
+    font-size: 16px;
+    line-height: 150%;
+    cursor: pointer;
+    color: #FF5757;
+    /* padding: 8px; */
+}
+.deleteicons{
+    padding-right: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #FF5757; 
+}
+.edit {
+    background: rgba(253, 232, 163, 0.1);
+    border-radius: 0px 0px 8px 0px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #FDE8A3;
+    /* padding: 8px; */
+}
+
+.edit_details_address {
+    margin-top: 100px;
+    border: 1px solid #FFD662;
+    border-radius: 8px;
+    text-align: center;
+    /* padding: 10px; */
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFD662;
+}
+
+.add_details_address {
+    position: absolute;
+    bottom: 30px;
+    border: 1px solid #FFD662;
+    border-radius: 8px;
+    text-align: center;
+    /* padding: 10px; */
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFD662;
+    width: 96%;
+    margin:0 auto;
+}
+
+.add_details_address3 {
+    border: 1px solid #FFD662;
+    border-radius: 8px;
+    text-align: center;
+    /* padding: 10px; */
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFD662;
+    width: 100%;
+}
+
+/* .add_details_address button{
+    width: 100%;
+} */
+.aadhar,
+.arrow {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #FFFFFF;
+}
+
+.details h1 {
+    margin-top: 20px;
+    background: #164866;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 150%;
+    color: #EEC644;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 50px;
+}
+
+/* Payment */
+.payment_bg {
+    background: rgba(44, 123, 172, 0.2);
+    border-radius: 8px;
+    width: 100%;
+    min-height: 492px;
+    padding: 30px 15px;
+}
+
+.upi_id {
+    background: rgba(44, 123, 172, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 20px;
+    ;
+    cursor: pointer;
+}
+
+.add_upi_id {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+
+
+    color: #FFFFFF;
+}
+
+.add_upi_id_desc {
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+
+
+    color: #FFFFFF;
+}
+
+@media screen and (max-width:767px) {
+    .add_details_address {
+        position: absolute;
+        bottom: 30px;
+        border: 1px solid #FFD662;
+        border-radius: 8px;
+        text-align: center;
+        /* padding: 10px; */
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 150%;
+        text-align: center;
+        text-transform: uppercase;
+        color: #FFD662;
+        width: 93%;
+    }
+}
+
+.upilist{
+    color: white;
+    background: #154a6b;
+    border-radius: 8px;
+}
+
+.upirow{
+    padding: 15px;
+   
+    border-radius: 10px;
+}
+
+.gstnumber{
+    position: relative;
+}
+
+.gstnumber .verified-text{
+    top: 35px;
+}
+.gstnumber .verified-icon{
+    top: 35px;
+}
+.dobcalender{
+    position: absolute;
+    z-index: 999;
+}

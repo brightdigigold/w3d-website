@@ -1,0 +1,209 @@
+.about_bg {
+    background:#092637 ;;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    padding-top: 100px;
+}
+
+.about_bg h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 150%;
+    /* identical to box height, or 60px */
+
+
+    color: #FFFFFF;
+}
+
+.about_company {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7rem;
+    text-align: justify;
+    color: #FFFFFF;
+    margin-top: 30px;
+    text-align: justify;
+
+}
+
+.mission_bg {
+    background: rgba(44, 123, 172, 0.2);
+    padding: 20px 0px 40px 0px;
+
+}
+
+.mission_bg h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 150%;
+    /* identical to box height, or 60px */
+    color: #FFFFFF;
+}
+
+.mission_points ul li {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #FFFFFF;
+    list-style: disc;
+    padding-bottom: 0;
+    line-height: 1.7rem;
+    text-align: justify;
+}
+
+.vision_bg {
+    margin-top: 20px;
+    background: rgba(44, 123, 172, 0.2);
+    padding: 40px 0px 40px 0px;
+}
+
+.vision_bg h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 150%;
+    /* identical to box height, or 60px */
+    color: #FFFFFF;
+}
+
+.why_digi_gold {
+    padding: 40px 0;
+}
+
+.why_digi_gold_text {
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 150%;
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+
+.assured_heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 250px;
+    color: #FFFFFF;
+    background: linear-gradient(91.53deg, #1965F2 2.52%, #1996F2 31.88%, #03CCE0 95.11%, #03DDE0 113.18%), #2C7BAC;
+    opacity: 0.8;
+    border-radius: 8px 8px 0px 0px;
+    padding: 10px;
+    font-weight: 900;
+}
+
+.liquidity_heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 250px;
+    color: #FFFFFF;
+    background: linear-gradient(87.97deg, #A9C1FF 4.17%, #3145FF 96.53%);
+    opacity: 0.8;
+    border-radius: 8px 8px 0px 0px;
+    padding: 10px;
+    font-weight: 900;
+}
+
+.investment_heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 250px;
+    color: #FFFFFF;
+    background: linear-gradient(77.09deg, #FDB6A7 -10.58%, #FB5C88 82.75%);
+    opacity: 0.8;
+    border-radius: 8px 8px 0px 0px;
+    padding: 10px;
+    font-weight: 900;
+}
+
+.assured_text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: #FFFFFF;
+    background: linear-gradient(90deg, rgba(44, 123, 172, 0) 0%, rgba(44, 123, 172, 0.2) 47.4%, rgba(44, 123, 172, 0) 100%);
+    padding: 30px;
+}
+
+.security_heading {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0 auto;
+    width: 250px;
+    background: linear-gradient(92.12deg, #FDE090 -14.84%, #FE9A81 71.1%), #2C7BAC;
+    opacity: 0.8;
+    border-radius: 8px 8px 0px 0px;
+    padding: 10px;
+    font-weight: 900;
+}
+
+.transparency_heading {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin: 0 auto;
+    width: 250px;
+    background: linear-gradient(91.82deg, #03E090 -2.89%, #77F174 102.89%);
+    opacity: 0.8;
+    border-radius: 8px 8px 0px 0px;
+    padding: 10px;
+    font-weight: 900;
+}
+
+.assured_border {
+    background: rgba(0, 0, 0, 0.3);
+    filter: blur(12px);
+}
+
+.security_transparency {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width:767px) {
+    .about_bg .about_the_company {
+        margin-top: -40px;
+    }
+
+    .about_company {
+        margin-top: 15px;
+    }
+
+    .why_digi_gold {
+        padding-top: 10px 0;
+    }
+
+    .why_digi_gold_text {
+        padding: 5px;
+    }
+
+    .assured_heading,
+    .liquidity_heading,
+    .investment_heading,
+    .security_heading,
+    .transparency_heading {
+        width: 100%;
+    }
+}

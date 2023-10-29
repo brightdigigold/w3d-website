@@ -1,0 +1,123 @@
+.multi_slider_bg {
+  background: rgba(44, 123, 172, 0.2);
+  /* padding-top: 10px;
+  padding-bottom: 60px;
+  margin-bottom: -21px; */
+  /* margin-top: 8px; */
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.silk-list {
+  padding-left: 10px !important;
+}
+
+.update_text {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 150%;
+  text-align: center;
+  text-transform: capitalize;
+  color: #ffffff;
+  padding-bottom: 50px;
+  font-family: 'NunitoSans-ExtraBold';
+}
+
+.card_text {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: #ffffff;
+  text-align: left;
+  margin: 15px 0px 20px 10px;
+}
+
+/* faqs css */
+.faqs {
+  margin-top: 0px !important;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 150%;
+  text-align: center;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+
+.faqs_bg {
+  background: rgba(44, 123, 172, 0.2);
+  border-radius: 12px;
+}
+
+.faqs_heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(44, 123, 172, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 30px;
+}
+
+.faqs_text {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+
+.arrow {
+  color: #ffffff;
+}
+
+.faqs_description {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 0 0 8px 8px;
+}
+
+.accordion_bg {
+  margin-top: 25px;
+  border-radius: 12px;
+}
+
+.accordion-button .collapsed {
+  background: #293045 !important;
+}
+
+@media screen and (max-width: 767px) {
+  .faqs {
+    margin-top: 0px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 150%;
+    text-align: center;
+    text-transform: capitalize;
+    color: #ffffff;
+  }
+
+  .multi-slider .container {
+    --bs-gutter-x: 0rem !important;
+  }
+
+  .update_text {
+    padding-bottom: 10px;
+  }
+}
+
+.view_all button {
+  background: rgba(99, 189, 255, 0.1);
+  border: 1px solid rgba(99, 189, 255, 0.2);
+  border-radius: 8px;
+  padding: 15px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  text-transform: capitalize;
+  color: #FFFFFF;
+  white-space: nowrap;
+}

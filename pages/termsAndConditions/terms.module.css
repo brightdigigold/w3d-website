@@ -1,0 +1,88 @@
+.terms_bg {
+    background: #092637;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    padding-top: 100px;
+    text-align: justify;
+}
+.terms_heading ul li{
+    /* list-style-type: disc; */
+    margin-left: -20px;
+}
+.terms_bg h1 {
+    font-family: 'NunitoSans-Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 150%;
+    /* identical to box height, or 60px */
+
+
+    color: #FFFFFF;
+}
+
+.terms p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    margin-top: 15px;
+    color: #FFFFFF;
+    text-align: justify;
+    line-height: 1.6rem;
+}
+
+.terms_heading {
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 20px;
+    line-height: 21px;
+    margin-top: 15px;
+    color: #FFFFFF;
+    margin: 20px 0px;
+}
+
+.general ol li {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    margin-top: 15px;
+    color: #FFFFFF;
+    list-style: disc;
+    text-align: justify;
+    line-height: 1.6rem;
+}
+
+.general h4{
+    color: white;
+}
+
+
+.general h5{
+    color: white;
+}
+
+.general h6{
+    color: white;
+}
+
+.general ol li ul li {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.6rem;
+    margin-top: 15px;
+    color: #FFFFFF;
+    list-style: lower-alpha;
+}
+
+@media screen and (max-width:767px) {
+    .condition{
+        margin-top: -40px !important;
+    }
+}
