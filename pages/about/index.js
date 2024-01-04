@@ -16,22 +16,7 @@ const About = () => {
                     <div className='row pt-5 pb-5'>
                         <div className='col-md-8 col-12'>
                             <h1 className={style.about_the_company}>About the Company</h1>
-                            <div className={style.about_company}>
-                                Welcome To Bright DiGi Gold! “A leading provider of Digital Gold”.
-                                Bright DiGi Gold was founded in the year 2021, with an aim to make gold accessible to create a new
-                                generation of investors. It is a sister concern of Bright Gold (Bright Metal Refiners), which has been
-                                in the business for a decade now.
-
-                                We are a technology driven company which makes it innovative and convenient for our investors to
-                                invest in digital gold globally. We endeavor to make your digital gold investment such as buying,
-                                selling and redeem gold in the simplest possible way.
-                                <br /> <br />
-                                Investors will always expect pure and quality Gold for their investment, Bright DiGi Gold will ensure
-                                the quality with purity. For each gram of your purchase, we guarantee purity and high-quality gold
-                                in physical form. We offer our valuable customers 24 karat 99.9% pure gold and 99.9% fine silver
-                                with a certificate of purity. The customer can start their investment journey on our platform with as
-                                little as ₹10. Your purchased gold is secured in a world class vault.
-                            </div>
+                           
                         </div>
                         <div className='col-md-4 col-12 '>
                             <div className='d-flex align-items-center justify-content-center'>
