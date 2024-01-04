@@ -17,7 +17,7 @@ const About = () => {
                         <div className='col-md-8 col-12'>
                             <h1 className={style.about_the_company}>About the Company</h1>
                             <div className={style.about_company}>
-                                Welcome To Bright DiGi Gold! “A leading provider of Digital Gold”.
+                                Welcome To Bright DiGi Gold! 
                                 Bright DiGi Gold was founded in the year 2021, with an aim to make gold accessible to create a new
                                 generation of investors. It is a sister concern of Bright Gold (Bright Metal Refiners), which has been
                                 in the business for a decade now.
