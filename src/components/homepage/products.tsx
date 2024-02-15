@@ -37,7 +37,7 @@ const Products = () => {
             />
           )}
 
-          {otpModal && <OtpModal />}
+          {/* {otpModal && <OtpModal />} */}
           <h1 className="text-white text-3xl sm:text-5xl extrabold">
             Our Coins
           </h1>
