@@ -1,0 +1,1 @@
+web: sh -c 'npm install --force && npm run build'
