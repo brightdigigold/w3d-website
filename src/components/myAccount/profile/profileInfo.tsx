@@ -111,9 +111,8 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
                     <span className="text-green-400"> Email Verified</span>
                   </div>
                 ) : (
-                  <div className=" flex items-center cursor-pointer mt-4">
+                  <div onClick={verifyEmail} className=" flex items-center cursor-pointer mt-4">
                     <MdScheduleSend
-                      onClick={verifyEmail}
                       className="cursor-pointer text-yellow-300"
                       size={24}
                     />
