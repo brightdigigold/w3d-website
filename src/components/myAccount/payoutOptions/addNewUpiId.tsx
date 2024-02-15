@@ -11,6 +11,7 @@ export default function UpiModal({
   toggleUPImodal,
   upiUpdated,
   setupiUpdated,
+  onClose
 }: any) {
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
@@ -18,6 +19,7 @@ export default function UpiModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [upiError, setUpiError] = useState("");
   // const [upiUpdated, setupiUpdated] = useState(false)
+
 
   const fetchBankAndUPIDetails = async () => {
     try {
@@ -205,6 +207,7 @@ export default function UpiModal({
                     type="submit"
                     className="mt-3 absolute top-5 bg-transparent right-5  justify-center rounded-full border-1 text-white p-2 text-sm font-semibold shadow-sm  sm:mt-0 sm:w-auto"
                     onClick={() => {
+                      onClose()
                       setOpen(false);
                       // toggleUPImodal();
                     }}

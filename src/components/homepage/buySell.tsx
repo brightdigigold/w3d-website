@@ -76,7 +76,12 @@ const BuySell = () => {
   const appliedCouponCode = useSelector(selectAppliedCouponCode);
   const isloggedIn = useSelector(selectIsloggedIn);
   const [previewData, setPreviewData] = useState<[]>([]);
-  const [OpenUpiModal, setOpenUpiModal] = useState<boolean>(false)
+  const [OpenUpiModal, setOpenUpiModal] = useState<boolean>(false);
+
+  const toggleOpenUpiModal = () => {
+    setOpenUpiModal(prev => !prev)
+  }
+
 
   const previewModal = async () => {
 
@@ -169,7 +174,7 @@ const BuySell = () => {
             title: "Oops...",
             titleText: "Session Expired",
           });
-        } else if (response.messageCode == 'Please add Bank/UPI details.') {
+        } else if (response.message == "Please add Bank/UPI details.") {
           Swal.fire({
             title: "Oops...!",
             titleText: response.message,
@@ -179,22 +184,20 @@ const BuySell = () => {
             confirmButtonText: "Add Your Bank/UPI Details",
             denyButtonText: `Don't save`
           }).then((result) => {
-            if (result.isConfirmed) {
-              // router.push('/myAccount')
-              setOpenUpiModal(true);
+            if (result.isConfirmed && !OpenUpiModal) {
+              toggleOpenUpiModal();
             }
           });
-        } else if (response.messageCode == "You Do not have enough assets to sell.") {
+        } else {
           Swal.fire({
             html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
-            title: "Error...",
+            title: "Oops...",
             titleText: response.message,
-            showConfirmButton: true,
-            timer: 1500,
           });
         }
       });
   };
+
   useEffect(() => {
     dispatch(setMetalType("gold"));
     dispatch(setEnteredAmount(500));
@@ -453,10 +456,11 @@ const BuySell = () => {
         )}
         {OpenUpiModal && (
           <UpiModal
-            toggled={toggled}
+            toggled={OpenUpiModal}
             toggleUPImodal={toggleUPImodal}
             upiUpdated={upiUpdated}
             setupiUpdated={setupiUpdated}
+            onClose={toggleOpenUpiModal}
           />
         )}
         <div className="block xl:pl-24 ">
