@@ -46,7 +46,7 @@ const page = ({ params }: any) => {
   const user = useSelector(selectUser);
   const { _id } = user.data;
   const [coinsInCart, setCoinsInCart] = useState<any[]>([]);
-  console.log('productsDetailById',productsDetailById)
+  console.log('productsDetailById', productsDetailById)
 
   const openCoinModalHandler = () => {
     if (isloggedIn) {
@@ -271,9 +271,14 @@ const page = ({ params }: any) => {
   };
 
   useEffect(() => {
-    getProductById();
-    getAllProductsOfCart();
-  }, []);
+    const fetchData = async () => {
+      await getProductById();
+      if (isloggedIn) {
+        await getAllProductsOfCart();
+      }
+    };
+    fetchData();
+  }, [isloggedIn]);
 
 
   if (!productsDetailById) {
@@ -390,7 +395,11 @@ const page = ({ params }: any) => {
                 img="/lottie/addcart.gif"
                 isDisabled={!productsDetailById.inStock}
                 handleClick={() => {
-                  addToCartHandler("AddToCart");
+                  if (isloggedIn) {
+                    addToCartHandler("AddToCart");
+                  } else {
+                    handleLoginClick();
+                  }
                 }}
                 title={""}
               />
