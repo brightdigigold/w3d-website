@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 3001",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prod": "next build && next start -p 3001"
   },
   "dependencies": {
     "@cashfreepayments/cashfree-js": "^1.0.4",
