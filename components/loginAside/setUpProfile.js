@@ -97,7 +97,6 @@ const SetUpProfile = (props) => {
       name: values.name,
       email: values.email,
       gender: values.gender,
-      // referralCode: values.referCode,
       dateOfBirth: values.dob,
       mobileVerified: "true",
     };
