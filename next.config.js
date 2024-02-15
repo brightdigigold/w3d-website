@@ -39,6 +39,9 @@ const nextConfig = {
 
     return config;
   },
+  experimental: {
+    appDir: true,
+  },
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
