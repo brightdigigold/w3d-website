@@ -697,10 +697,10 @@ const Cart = () => {
                     label: "Total Gold Coin Price (Incl. 3% GST)",
                     value: "₹ " + amountWithTaxGold,
                   })}
-                  {/* {renderPriceBreakdownItemCart({ label: 'Total Making Charges (Incl. 18% GST)', value: "₹ " + totalGoldMakingCharges })} */}
+
                 </>
               )}
-              <div className="mt-3">
+              <div className="mt-1">
                 {silverPayload.length > 0 && (
                   <>
                     {renderPriceBreakdownItemCart({
@@ -726,12 +726,12 @@ const Cart = () => {
                       label: "Total Silver Coin Price (Incl. 3% GST)",
                       value: "₹ " + amountWithTaxSilver,
                     })}
-                    {renderPriceBreakdownItemCart({
-                      label: "Total Making Charges (Incl. 18% GST)",
-                      value: "₹ " + totalMakingCharges,
-                    })}
                   </>
                 )}
+                {renderPriceBreakdownItemCart({
+                  label: 'Total Making Charges (Incl. 18% GST)',
+                  value: "₹ " + totalMakingCharges
+                })}
               </div>
             </div>
           )}

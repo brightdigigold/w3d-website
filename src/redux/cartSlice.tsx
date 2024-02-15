@@ -92,7 +92,7 @@ const cartSlice = createSlice({
 
 
         calculateFinalAmount: (state) => {
-            state.finalAmount = ParseFloat(state.amountWithTaxGold + state.amountWithTaxSilver, 2);
+            state.finalAmount = ParseFloat(state.amountWithTaxGold + state.amountWithTaxSilver + state.totalMakingCharges, 2);
         },
 
         setCartProducts: (state, action: PayloadAction<CartProduct[]>) => {
