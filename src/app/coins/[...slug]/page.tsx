@@ -270,14 +270,9 @@ const page = ({ params }: any) => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await getProductById();
-      if (isloggedIn) {
-        await getAllProductsOfCart();
-      }
-    };
-    fetchData();
-  }, [isloggedIn]);
+    getProductById();
+    getAllProductsOfCart();
+  }, []);
 
 
   if (!productsDetailById) {
@@ -292,7 +287,6 @@ const page = ({ params }: any) => {
           onClose={() => setOpenLoginAside(false)}
         />
       )}
-      
       {otpModal && <OtpModal />}
 
       {openCartSidebar && (
@@ -395,11 +389,7 @@ const page = ({ params }: any) => {
                 img="/lottie/addcart.gif"
                 isDisabled={!productsDetailById.inStock}
                 handleClick={() => {
-                  if (isloggedIn) {
-                    addToCartHandler("AddToCart");
-                  } else {
-                    handleLoginClick();
-                  }
+                  addToCartHandler("AddToCart");
                 }}
                 title={""}
               />
