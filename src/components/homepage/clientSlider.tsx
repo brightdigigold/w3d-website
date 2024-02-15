@@ -1,6 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
-// Import Swiper React components
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -41,11 +40,6 @@ export default function ClientSlider() {
   return (
     <>
       <div className="bg-white relative">
-        {/* <img
-          alt="banner"
-          src="/images/trust_secure.svg"
-          className=" absolute right-0 h-64 overflow-hidden"
-        /> */}
         <div className="">
           <div className="mx-auto px-4 sm:px-6 lg:px-16 py-8">
             <h1 className="text-center extrabold  text-3xl sm:text-5xl text-gray-700 mb-8">
@@ -53,8 +47,6 @@ export default function ClientSlider() {
             </h1>
             <div className=" hidden">
               <Swiper
-                // slidesPerView={5}
-                // spaceBetween={10}
                 loop={true}
                 breakpoints={{
                   640: {
@@ -100,7 +92,6 @@ export default function ClientSlider() {
                 alt="insite"
               />
               <img src="/client2.png" className="my-2 mx-auto" alt="insite" />
-              {/* <img src="/client3.png" className="my-2 mx-auto" alt="insite" /> */}
               <img src="/client4.png" className="my-2  mx-auto" alt="insite" />
               <img src="/client5.png" className="my-2 mx-auto" alt="insite" />
             </div>

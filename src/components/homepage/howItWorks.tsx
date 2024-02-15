@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import BuyTab from "./tabs/howItWork/Buy";
 import SellTab from "./tabs/howItWork/Sell";
-import ExchangeTab from "./tabs/howItWork/Gift";
 import Tabs from "./tabs/howItWork/Tabs";
 import GiftTab from "./tabs/howItWork/Gift";
 import DeliveryTab from "./tabs/howItWork/Delivery";
@@ -15,7 +14,6 @@ type TabsType = {
   Component: React.FC<{}>;
 }[];
 
-// Tabs Array
 const tabs: TabsType = [
   {
     label: "Buy",

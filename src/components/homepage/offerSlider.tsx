@@ -23,8 +23,6 @@ export default function OfferSlider() {
           <div className="mx-auto">
             <div className="">
               <Swiper
-                // slidesPerView={5}
-                // spaceBetween={10}
                 loop={true}
                 breakpoints={{
                   640: {

@@ -4,14 +4,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import Link from "next/link";
+import { Autoplay, Pagination } from "swiper/modules";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import LoginAside from "../authSection/loginAside";
 import { useRouter } from "next/navigation";
 
-// ... (your imports)
 
 export default function Marketing() {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -56,7 +54,7 @@ export default function Marketing() {
   ];
 
   const handleLinkClick = (item: any) => {
-    if (!isloggedIn && (item.name === "Start Gifting"&& item.name === "Gold KYC")) {
+    if (!isloggedIn && (item.name === "Start Gifting" && item.name === "Gold KYC")) {
       setOpenLoginAside(true);
     } else {
       router.push(item.href);

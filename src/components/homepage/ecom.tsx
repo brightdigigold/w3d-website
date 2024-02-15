@@ -2,19 +2,13 @@
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  fadeIn,
-  slideIn,
-  staggerContainer,
-  textVariant,
-} from "../../utils/motion";
+import { fadeIn, textVariant, } from "../../utils/motion";
 
 const Ecom = () => {
   return (
     <div className="bg-themeYellow">
       <div className="mx-auto px-4 sm:px-6 lg:px-16 py-16">
         <motion.div
-          // variants={staggerContainer}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.25 }}
