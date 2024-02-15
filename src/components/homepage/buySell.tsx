@@ -169,7 +169,7 @@ const BuySell = () => {
             title: "Oops...",
             titleText: "Session Expired",
           });
-        } else {
+        } else if (response.messageCode == 'Please add Bank/UPI details.') {
           Swal.fire({
             title: "Oops...!",
             titleText: response.message,
@@ -183,6 +183,14 @@ const BuySell = () => {
               // router.push('/myAccount')
               setOpenUpiModal(true);
             }
+          });
+        } else if (response.messageCode == "You Do not have enough assets to sell.") {
+          Swal.fire({
+            html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
+            title: "Error...",
+            titleText: response.message,
+            showConfirmButton: true,
+            timer: 1500,
           });
         }
       });
@@ -330,7 +338,7 @@ const BuySell = () => {
     if (!enteredAmount) {
       setValidationError("Please enter amount");
       return;
-    } else if (enteredAmount < 1) {
+    } else if (enteredAmount < 100) {
       setValidationError("Minimum Sell amount is Rs.100");
       return;
     }

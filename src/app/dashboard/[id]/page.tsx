@@ -70,7 +70,7 @@ function page({ params }: any) {
         <div className="w-[580px] z-[20]">
           <div className="coins_background shadow-md rounded-md mb-100 text-center text-white py-12 relative">
             <div className=" flex justify-center">
-              {dataOfTransaction?.data?.transactionData?.payment_status ===
+              {dataOfTransaction?.data?.transactionStatus ===
                 "SUCCESS" ? (
                 <img
                   src="/lottie/Successfully Done.gif"
