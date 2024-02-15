@@ -132,23 +132,21 @@ const Faq = () => {
           <div className="w-full ">
             <div
               onClick={() => handleSectionClick("BDG")}
-              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white hover:border-1 ${
-                activeSectionType === "BDG"
-                  ? "border-1 border-themeDarkBlue"
-                  : ""
-              }`}
+              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white hover:border-1 ${activeSectionType === "BDG"
+                ? "border-1 border-themeDarkBlue"
+                : ""
+                }`}
             >
               <img src="/faq1.png" className="h-12 mx-auto" />
               <p className="text-xxs  sm:text-sm mt-1">BDG</p>
             </div>
           </div>
-          <div className="w-full">
+          <div onClick={() => handleSectionClick("BUY")} className="w-full ">
             <div
-              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${
-                activeSectionType === "BUY"
-                  ? "border-1 border-themeDarkBlue"
-                  : ""
-              }`}
+              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${activeSectionType === "BUY"
+                ? "border-1 border-themeDarkBlue"
+                : ""
+                }`}
             >
               <img
                 onClick={() => handleSectionClick("BUY")}
@@ -158,13 +156,12 @@ const Faq = () => {
               <p className="text-xxs  sm:text-sm mt-1">BUY</p>
             </div>
           </div>
-          <div className="w-full ">
+          <div onClick={() => handleSectionClick("SELL")} className="w-full ">
             <div
-              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${
-                activeSectionType === "SELL"
-                  ? "border-1 border-themeDarkBlue"
-                  : ""
-              }`}
+              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${activeSectionType === "SELL"
+                ? "border-1 border-themeDarkBlue"
+                : ""
+                }`}
             >
               <img
                 onClick={() => handleSectionClick("SELL")}
@@ -177,11 +174,10 @@ const Faq = () => {
           <div className="w-full ">
             <div
               onClick={() => handleSectionClick("DELIVERY")}
-              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${
-                activeSectionType === "DELIVERY"
-                  ? "border-1 border-themeDarkBlue"
-                  : ""
-              }`}
+              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${activeSectionType === "DELIVERY"
+                ? "border-1 border-themeDarkBlue"
+                : ""
+                }`}
             >
               <img src="/faq4.png" className="h-12 mx-auto" />
               <p className="text-xxs  sm:text-sm mt-1">DELIVERY</p>
@@ -190,11 +186,10 @@ const Faq = () => {
           <div className="w-full">
             <div
               onClick={() => handleSectionClick("GIFT")}
-              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${
-                activeSectionType === "GIFT"
-                  ? "border-1 border-themeDarkBlue"
-                  : ""
-              }`}
+              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${activeSectionType === "GIFT"
+                ? "border-1 border-themeDarkBlue"
+                : ""
+                }`}
             >
               <img src="/faq5.png" className="h-12 mx-auto" />
               <p className="text-xxs  sm:text-sm mt-1">GIFT</p>
@@ -203,11 +198,10 @@ const Faq = () => {
           <div className="w-full">
             <div
               onClick={() => handleSectionClick("RNE")}
-              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${
-                activeSectionType === "RNE"
-                  ? "border-1 border-themeDarkBlue"
-                  : ""
-              }`}
+              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${activeSectionType === "RNE"
+                ? "border-1 border-themeDarkBlue"
+                : ""
+                }`}
             >
               <img src="/faq6.png" className="h-12 mx-auto" />
               <p className="text-xxs  sm:text-sm mt-1">RNE</p>
@@ -216,11 +210,10 @@ const Faq = () => {
           <div className="w-full">
             <div
               onClick={() => handleSectionClick("KYC")}
-              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${
-                activeSectionType === "KYC"
-                  ? "border-1 border-themeDarkBlue"
-                  : ""
-              }`}
+              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${activeSectionType === "KYC"
+                ? "border-1 border-themeDarkBlue"
+                : ""
+                }`}
             >
               <img src="/faq7.png" className="h-12 mx-auto" />
               <p className="text-xxs  sm:text-sm mt-1">KYC</p>
@@ -229,11 +222,10 @@ const Faq = () => {
           <div className="w-full">
             <div
               onClick={() => handleSectionClick("DIGITAL GOLD")}
-              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${
-                activeSectionType === "DIGITAL GOLD"
-                  ? "border-1 border-themeDarkBlue"
-                  : ""
-              }`}
+              className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${activeSectionType === "DIGITAL GOLD"
+                ? "border-1 border-themeDarkBlue"
+                : ""
+                }`}
             >
               <img src="/faq8.png" className="h-9 mx-auto" />
               <p className="text-xxs  sm:text-sm mt-1">DIGITAL GOLD</p>
