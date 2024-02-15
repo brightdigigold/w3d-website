@@ -10,6 +10,8 @@ import React, { useEffect, useState } from "react";
 function page({ params }: any) {
   const [dataOfTransaction, setdataOfTransaction] = useState<any>("");
   const router = useRouter();
+  const [remainingTime, setRemainingTime] = useState(5);
+  let interval: NodeJS.Timeout;
 
   const transactionData = async (t_id: any) => {
 
@@ -49,12 +51,22 @@ function page({ params }: any) {
 
   useEffect(() => {
     const gotoDashboard = () => {
+      interval = setInterval(() => {
+        setRemainingTime(prevTime => prevTime - 1);
+      }, 1000);
+
       setTimeout(() => {
+        clearInterval(interval);
         router.push("/dashboard");
       }, 5000);
     }
+
     gotoDashboard();
+
+    // Cleanup function to clear interval if component unmounts or changes
+    return () => clearInterval(interval);
   }, []);
+
 
 
   // console.log('dataOfTransaction?.data?.transactionData?.payment_status', dataOfTransaction?.data?.transactionStatus)
@@ -175,7 +187,7 @@ function page({ params }: any) {
                 </span>
               </Link>
             )}
-            <p>Redirecting to dashboard ... </p>
+            <p className="text-blue-200">Redirecting to dashboard in {remainingTime} seconds... </p>
           </div>
         </div>
       </div>
