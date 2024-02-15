@@ -46,7 +46,7 @@ const page = ({ params }: any) => {
   const user = useSelector(selectUser);
   const { _id } = user.data;
   const [coinsInCart, setCoinsInCart] = useState<any[]>([]);
-  console.log('productsDetailById', productsDetailById)
+  console.log('productsDetailById=================>', productsDetailById)
 
   const openCoinModalHandler = () => {
     if (isloggedIn) {
