@@ -1,0 +1,186 @@
+"use client";
+import { AesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
+import { ArrowDownIcon } from "@heroicons/react/20/solid";
+import axios from "axios";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+
+function page({ params }: any) {
+  const [dataOfTransaction, setdataOfTransaction] = useState<any>("");
+  const router = useRouter();
+
+  const transactionData = async (t_id: any) => {
+
+    const token = localStorage.getItem("token");
+    const configHeaders = {
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const data = {
+      id: t_id,
+    };
+    const resAfterEncrypt = await AesEncrypt(data);
+
+    const body = {
+      payload: resAfterEncrypt,
+    };
+    axios
+      .post(
+        `${process.env.baseUrl}/user/order/detailsById?`,
+        body,
+        configHeaders
+      )
+      .then(async (data) => {
+        const decryptedData = await funcForDecrypt(data.data.payload);
+        let dataOfParticularTransaction = JSON.parse(decryptedData);
+        setdataOfTransaction(dataOfParticularTransaction);
+      })
+      .catch((error) => console.error("errordata", error));
+  };
+
+  useEffect(() => {
+    transactionData(params.id);
+  }, []);
+
+  useEffect(() => {
+    const gotoDashboard = () => {
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 5000);
+    }
+    gotoDashboard();
+  }, []);
+
+
+  // console.log('dataOfTransaction?.data?.transactionData?.payment_status', dataOfTransaction?.data?.transactionStatus)
+
+  return (
+    <div className="px-4">
+      <div className="min-h-screen flex items-center justify-center">
+        <img
+          className="h-7xl absolute -bottom-12 -left-20 opacity-30"
+          src="/bdgwhite.png"
+          alt="Bright Digi Gold"
+        />
+        <div className="w-[580px] z-[20]">
+          <div className="coins_background shadow-md rounded-md mb-100 text-center text-white py-12 relative">
+            <div className=" flex justify-center">
+              {dataOfTransaction?.data?.transactionData?.payment_status ===
+                "SUCCESS" ? (
+                <img
+                  src="/lottie/Successfully Done.gif"
+                  className=" absolute h-36 -top-16 "
+                />
+              ) : (
+                <img
+                  src="/lottie/oops.gif"
+                  className=" absolute h-36 -top-16"
+                />
+              )}
+            </div>
+            {dataOfTransaction?.data?.order_id?.orderType === "BUY" &&
+              dataOfTransaction?.data?.order_id?.itemType === "GOLD" && (
+                <p className="text-2xl italic pt-16">
+                  24k <span className=" text-gold01">Gold</span> Purchase
+                  <br />
+                  <span className="text-3xl">
+                    {dataOfTransaction?.data?.transactionData?.payment_status}
+                  </span>
+                </p>
+              )}
+            {dataOfTransaction?.data?.order_id?.orderType === "BUY" &&
+              dataOfTransaction?.data?.order_id?.itemType === "SILVER" && (
+                <p className="text-2xl italic pt-16">
+                  99.99% <span className=" text-gold01">Silver</span> Purchase
+                  <br />
+                  <span className="text-3xl">
+                    {dataOfTransaction?.data?.transactionData?.payment_status}
+                  </span>
+                </p>
+              )}
+            {dataOfTransaction?.data?.order_id?.orderType === "PRODUCT" &&
+              dataOfTransaction?.data?.order_id?.itemType === "GOLD" && (
+                <p className="text-2xl italic pt-16">
+                  24k <span className=" text-gold01">Gold Coin</span> Purchase
+                  <br />
+                  <span className="text-3xl">
+                    {dataOfTransaction?.data?.transactionData?.payment_status}
+                  </span>
+                </p>
+              )}
+            {dataOfTransaction?.data?.order_id?.orderType === "PRODUCT" &&
+              dataOfTransaction?.data?.order_id?.itemType === "SILVER" && (
+                <p className="text-2xl italic pt-16">
+                  99.99% <span className=" text-gold01">Silver Coin</span>{" "}
+                  Purchase
+                  <br />
+                  <span className="text-3xl">
+                    {dataOfTransaction?.data?.transactionData?.payment_status}
+                  </span>
+                </p>
+              )}
+
+            {dataOfTransaction?.data?.order_id?.orderType === "CART" && (
+              <p className="text-2xl italic pt-16">
+                Cart Purchase
+                <br />
+                <span className="text-3xl">
+                  {dataOfTransaction?.data?.transactionData?.payment_status}
+                </span>
+              </p>
+            )}
+
+            <div className=" divide-x divide-yellow-400 flex gap-3 justify-center mt-4 text-xl">
+              <p> ₹ {dataOfTransaction?.data?.amount}</p>
+              <p className="pl-3">
+                {" "}
+                {dataOfTransaction?.data?.order_id?.gram} gm
+              </p>
+            </div>
+          </div>
+          <div
+            className={`p-4 mx-6 ${dataOfTransaction?.data?.transactionStatus === "SUCCESS"
+              ? "bg-green-500"
+              : dataOfTransaction?.data?.transactionStatus === "FAILED"
+                ? "bg-red-500"
+                : dataOfTransaction?.data?.transactionStatus === "PENDING"
+                  ? "bg-yellow-500"
+                  : "bg-red-500"
+              } rounded-bl-md rounded-br-md`}
+          >
+            {dataOfTransaction?.data?.transactionStatus === "SUCCESS" && (
+              <Link
+                target="_blank"
+                href={`${dataOfTransaction?.data?.order_id?.invoiceUrl}`}
+              >
+                <button className=" rounded-full px-4 py-2 text-white flex items-center bg-theme text-sm mx-auto">
+                  Download Invoice
+                  <ArrowDownIcon className=" text-gold01 h-4 gap-2" />{" "}
+                </button>
+              </Link>
+            )}
+            {dataOfTransaction?.data?.transactionStatus === "PENDING" && (
+              <Link
+                target="_blank"
+                href={`/dashboard`}
+              >
+                <span className=" rounded-full px-4 py-2 text-white flex items-center bg-theme text-sm mx-auto">
+                  PENDING
+                  <ArrowDownIcon className=" text-gold01 h-4 gap-2" />{" "}
+                </span>
+              </Link>
+            )}
+            <p>Redirecting to dashboard ... </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default page;
