@@ -3,7 +3,6 @@ import { funcForDecrypt } from "@/components/helperFunctions";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { api } from "@/api/DashboardServices";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/motion";
 import { useSelector } from "react-redux";
@@ -13,6 +12,8 @@ import {
   selectGoldVaultBalance,
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
+import { useRouter } from "next/navigation";
+import LoginAside from "../authSection/loginAside";
 
 const Coins = () => {
   const [ProductList, setProductList] = useState<any[]>([]);
@@ -20,6 +21,13 @@ const Coins = () => {
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
+  const router = useRouter();
+  const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
+  const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
+  useEffect(() => {
+    getAllProducts("ALL");
+  }, []);
 
   const getAllProducts = async (params: any) => {
     try {
@@ -38,17 +46,25 @@ const Coins = () => {
     }
   };
 
-  useEffect(() => {
-    getAllProducts("ALL");
-  }, []);
+  const handleLoginClick = () => {
+    setOpenLoginAside(!openLoginAside);
+  };
 
   const handleTabClick = (tab: "ALL" | "GOLD" | "SILVER") => {
     setActiveTab(tab);
     getAllProducts(tab);
   };
 
+
   return (
     <div className="pb-28 xl:pb-8 pt-16">
+      {openLoginAside && (
+        <LoginAside
+          isOpen={openLoginAside}
+          onClose={() => setOpenLoginAside(false)}
+        />
+      )}
+
       {otpModal && <OtpModal />}
       <div className="flex justify-center items-center">
         <img
@@ -69,18 +85,16 @@ const Coins = () => {
                   onClick={() => {
                     handleTabClick("ALL");
                   }}
-                  className={`ml-2 cursor-pointer text-lg border-r-2 border-slate-400 pr-4 bold ${
-                    activeTab === "ALL" ? "opacity-100 extrabold" : "opacity-50"
-                  }`}
+                  className={`ml-2 cursor-pointer text-lg border-r-2 border-slate-400 pr-4 bold ${activeTab === "ALL" ? "opacity-100 extrabold" : "opacity-50"
+                    }`}
                 >
                   All
                 </div>
                 <img
                   src={"Goldbarbanner.png"}
                   alt="digital gold bar"
-                  className={`ml-2 h-5 cursor-pointer bold ${
-                    activeTab === "GOLD" ? "opacity-100" : "opacity-50"
-                  }`}
+                  className={`ml-2 h-5 cursor-pointer bold ${activeTab === "GOLD" ? "opacity-100" : "opacity-50"
+                    }`}
                   onClick={() => {
                     handleTabClick("GOLD");
                   }}
@@ -89,18 +103,16 @@ const Coins = () => {
                   onClick={() => {
                     handleTabClick("GOLD");
                   }}
-                  className={`ml-2 cursor-pointer text-lg border-r-2 border-slate-400 pr-4 bold ${
-                    activeTab === "GOLD" ? "opacity-100" : "opacity-50"
-                  }`}
+                  className={`ml-2 cursor-pointer text-lg border-r-2 border-slate-400 pr-4 bold ${activeTab === "GOLD" ? "opacity-100" : "opacity-50"
+                    }`}
                 >
                   Gold
                 </div>
                 <img
                   src={"/Silverbar.png"}
                   alt="digital silver bar"
-                  className={`ml-2 h-5 cursor-pointer ${
-                    activeTab === "SILVER" ? "opacity-100" : "opacity-50"
-                  }`}
+                  className={`ml-2 h-5 cursor-pointer ${activeTab === "SILVER" ? "opacity-100" : "opacity-50"
+                    }`}
                   onClick={() => {
                     handleTabClick("SILVER");
                   }}
@@ -109,9 +121,8 @@ const Coins = () => {
                   onClick={() => {
                     handleTabClick("SILVER");
                   }}
-                  className={`ml-2 cursor-pointer text-lg ${
-                    activeTab === "SILVER" ? "opacity-100" : "opacity-50"
-                  }`}
+                  className={`ml-2 cursor-pointer text-lg ${activeTab === "SILVER" ? "opacity-100" : "opacity-50"
+                    }`}
                 >
                   Silver
                 </div>
@@ -153,11 +164,10 @@ const Coins = () => {
                   style={{
                     backgroundSize: "cover",
                     backgroundPosition: "bottom",
-                    backgroundImage: `url(${
-                      item.iteamtype.toLowerCase() === "gold"
-                        ? "/images/goldpart.png"
-                        : "/images/silverpart.png"
-                    })`,
+                    backgroundImage: `url(${item.iteamtype.toLowerCase() === "gold"
+                      ? "/images/goldpart.png"
+                      : "/images/silverpart.png"
+                      })`,
                   }}
                   className=""
                 >
@@ -179,12 +189,19 @@ const Coins = () => {
                         ₹{item.makingcharges}
                       </span>
                     </div>
-                    <Link
-                      href={`/coins/${item.slug}`}
+                    <button
+                      onClick={() => {
+                        if (!isloggedIn) {
+                          handleLoginClick();
+                        } else {
+                          router.push(`/coins/${item.slug}`)
+                        }
+                      }}
+                      // href={`/coins/${item.slug}`}
                       className="my-2 bg-themeBlue rounded-2xl extrabold w-3/4 py-2 block"
                     >
                       VIEW
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

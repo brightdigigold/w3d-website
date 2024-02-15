@@ -19,9 +19,7 @@ import { fetchWalletData } from "@/redux/vaultSlice";
 const HeroSection = () => {
   const dispatch = useDispatch();
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
-  const showProfileForm = useSelector(
-    (state: RootState) => state.auth.showProfileForm
-  );
+  const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
 
   const onClose = () => {
     dispatch(setShowProfileForm(false));
@@ -63,7 +61,7 @@ const HeroSection = () => {
     checkUserIsNew();
   }, []);
 
-  useEffect(() => {}, [otpModal]);
+  useEffect(() => { }, [otpModal]);
 
   useEffect(() => {
     dispatch(fetchWalletData() as any);
@@ -125,7 +123,7 @@ const HeroSection = () => {
                 </div>
 
                 <div className="flex gap-5 mt-8 relative">
-                  <Link
+                  <Link target="_blank"
                     href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                     className="cursor-pointer"
                   >
@@ -135,7 +133,7 @@ const HeroSection = () => {
                       alt="google play button"
                     />
                   </Link>
-                  <Link
+                  <Link target="_blank"
                     href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                     className="cursor-pointer"
                   >

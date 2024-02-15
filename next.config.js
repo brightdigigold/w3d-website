@@ -15,8 +15,8 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   env: {
-    // baseUrl: "https://api.brightdigigold.com",
-    baseUrl: "https://devapi.brightdigigold.com",
+    baseUrl: "https://api.brightdigigold.com",
+    // baseUrl: "https://devapi.brightdigigold.com",
     // cashfree: "sandbox",
     cashfree: "production",
     // baseUrl: "http://localhost:3031",
