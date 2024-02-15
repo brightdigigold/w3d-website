@@ -19,7 +19,6 @@ module.exports = {
     baseUrl: "https://devapi.brightdigigold.com",
     // cashfree: "sandbox",
     cashfree: "production",
-
     // baseUrl: "http://localhost:3031",
     // baseUrl: "http://192.168.1.6:3031",
   },

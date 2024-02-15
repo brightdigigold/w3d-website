@@ -1,8 +1,6 @@
 import React, { FC, Fragment } from "react";
 import { motion } from "framer-motion";
-import { fadeIn, staggerContainer } from "../../../../utils/motion";
-import animationData from "../../../../../public/lottie/line.json";
-import Lottie from "lottie-react";
+import { fadeIn, } from "../../../../utils/motion";
 const DeliveryTab: FC<{}> = () => {
   return (
     <Fragment>
@@ -11,31 +9,18 @@ const DeliveryTab: FC<{}> = () => {
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
       >
-        {/* <p className="text-center text-xl text-white mt-4">It is easy!</p> */}
         <div className="grid grid-cols-1 gap-6  sm:grid-cols-3 mt-8 mont-font relative">
-          {/* <img src="/line.gif" alt="gold price in india" className="abs-001" /> */}
           <motion.div
             variants={fadeIn("right", "spring", 0.25, 0.25)}
             className="hidden sm:block absolute top-72 sm:top-14 left-[-6%] sm:left-28 md:left-36 lg:left-44 xl:left-56 w-4/6"
           >
-            {/* <Lottie
-              animationData={animationData}
-              className="sm:h-12"
-              loop={false}
-            /> */}
+
             <img
               src="/line.png"
               alt="gold price in india"
               className="h-12 rotate-90 sm:rotate-0 min-w-[440px] sm:min-w-full sm:w-full hidden"
             />
           </motion.div>
-          {/* <motion.div
-            variants={fadeIn("right", "spring", 0.75, 0.75)}
-            className=" top-14 right-44 absolute"
-          >
-           
-            <img src="/line.png" alt="gold price in india" className="h-12" />
-          </motion.div> */}
           <motion.div variants={fadeIn("right", "spring", 0.2, 0.25)}>
             <p className="text-dark-blue text-md sm:text-lg font-bold text-center my-2">
               Step 1

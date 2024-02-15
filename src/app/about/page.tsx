@@ -14,7 +14,7 @@ import React, { Suspense } from "react";
 const About = () => {
   return (
     <main>
-      <Suspense fallback={<p className="text-white">Loading...</p>}>
+      <Suspense fallback={<p className="text-yellow-600">Loading...</p>}>
         <HeroAbout />
         <Info />
         <Mission />

@@ -1,4 +1,3 @@
-// import { url } from "aws-sdk/clients/finspace";
 import React, { FC } from "react";
 
 type TabsProps = {

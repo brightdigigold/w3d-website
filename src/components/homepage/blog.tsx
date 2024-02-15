@@ -1,55 +1,45 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
-// import "./styles.css";
 
 const features = [
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Maximise-Your-Daily-Savings.png",
-    // name: "Maximise Daily Savings With Digital Gold",
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/How-are-gold-prices-Determined.png",
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-    // name: "How Are Gold Prices Determined?- Know Complete Information!",
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Akshaya-Tritiya.png",
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-    // name: "Make A Golden Investment On This Akshaya Tritiya",
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Buying-gold-coins.png",
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-    // name: "Buying Gold Coins- Important Things To Know!",
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Minor-Steps-and-Great-Savings.png",
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-    // name: "Minor Steps And Great Savings: How To Effectively Save And Invest On Low Earnings",
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Things-to-Remember-Before-Buying-Gold-Jewellery.png",
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-    // name: "Things To Remember Before Buying Gold Jewellery",
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Involved-Risks-And-Their-Solutions.png",
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-    // name: "Digital Gold Investment: Involved Risks And Their Solutions",
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Role-of-Technology.png",
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-    // name: "The Future Is Now: Role Of Gold In Technology",
   },
 ];
 import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
@@ -116,9 +106,6 @@ export default function Blog() {
                         alt="insite"
                       />
                     </div>
-                    {/* <p className="mt-4 text-white text-xs sm:text-sm px-4">
-                    {feature.name}
-                  </p> */}
                   </div>
                 </Link>
               </SwiperSlide>

@@ -1,42 +1,25 @@
 import React, { FC, Fragment } from "react";
 import { motion } from "framer-motion";
-import { fadeIn, staggerContainer } from "../../../../utils/motion";
+import { fadeIn } from "../../../../utils/motion";
 const BuyTab: FC<{}> = () => {
   return (
     <Fragment>
-      {/* <p className="text-center text-xl text-white mt-4">It is easy!</p> */}
       <motion.div
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
       >
         <div className="grid grid-cols-1 gap-6  sm:grid-cols-3 mt-8 mont-font relative">
-          {/* <img src="/line.gif" alt="gold price in india" className="abs-001" /> */}
           <motion.div
             variants={fadeIn("right", "spring", 0.25, 0.25)}
             className="hidden sm:block absolute top-72 sm:top-14 left-[-6%] sm:left-28 md:left-36 lg:left-44 xl:left-56 w-4/6"
           >
-            {/* <Lottie
-              animationData={animationData}
-              className="sm:h-12"
-              loop={false}
-            /> */}
             <img
               src="/line.png"
               alt="gold price in india"
               className="h-12 rotate-90 sm:rotate-0 min-w-[440px] sm:min-w-full sm:w-full hidden"
             />
           </motion.div>
-          {/* <motion.div
-            variants={fadeIn("right", "spring", 2.0, 0.25)}
-            className=" top-14 right-44 absolute"
-          >
-            <Lottie
-              animationData={animationData}
-              className="sm:h-12"
-              loop={false}
-            />
-          </motion.div> */}
           <motion.div variants={fadeIn("right", "spring", 0.2, 0.25)}>
             <p className="text-dark-blue text-md sm:text-lg font-bold text-center my-2">
               Step 1
@@ -46,7 +29,6 @@ const BuyTab: FC<{}> = () => {
                 <img
                   src="/buy01.png"
                   alt="sell digital gold online"
-                  // className="w-12"
                 ></img>
               </div>
             </div>
@@ -67,7 +49,6 @@ const BuyTab: FC<{}> = () => {
                 <img
                   src="/buy02.png"
                   alt="24k gold price in india"
-                  // className="h-8"
                 ></img>
               </div>
             </div>

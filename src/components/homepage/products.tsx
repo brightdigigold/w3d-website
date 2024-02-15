@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
-import { fadeIn, staggerContainer } from "../../utils/motion";
+import { fadeIn } from "../../utils/motion";
 
 const Products = () => {
   return (
@@ -31,11 +31,6 @@ const Products = () => {
             className="bg-themeLight rounded-lg shadow-xl p-4 relative hover:shadow-lg hover:shadow-gray-100 product001"
           >
             <div className="relative">
-              {/* <img
-                alt="products"
-                className=" absolute left-0"
-                src="/Light_1.png"
-              /> */}
               <img
                 alt="products"
                 className=" absolute right-0"
@@ -46,11 +41,6 @@ const Products = () => {
                 className=" absolute right-0"
                 src="/Light_3.png"
               />
-              {/* <img
-                alt="products"
-                className=" absolute right-0"
-                src="/Light_4.png"
-              /> */}
             </div>
 
             <div className="">
@@ -117,11 +107,7 @@ const Products = () => {
             className="bg-themeLight rounded-lg shadow-xl p-4 relative hover:shadow-lg hover:shadow-gray-100 product001"
           >
             <div className="relative">
-              {/* <img
-                alt="products"
-                className=" absolute left-0"
-                src="/Light_1.png"
-              /> */}
+
               <img
                 alt="products"
                 className=" absolute right-0"
@@ -132,11 +118,6 @@ const Products = () => {
                 className=" absolute right-0"
                 src="/Light_3.png"
               />
-              {/* <img
-                alt="products"
-                className=" absolute right-0"
-                src="/Light_4.png"
-              /> */}
             </div>
 
             <div className="">
