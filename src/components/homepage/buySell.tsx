@@ -133,6 +133,7 @@ const BuySell = () => {
         const decryptedData = await funcForDecrypt(
           resAfterPreview.data.payload
         );
+        // console.log('JSON.parse(decryptedData)', JSON.parse(decryptedData))
         setPreviewData(JSON.parse(decryptedData).data.preview);
         setTransactionId(JSON.parse(decryptedData).data.transactionCache._id);
         if (JSON.parse(decryptedData).statusCode == 200) {
@@ -146,6 +147,7 @@ const BuySell = () => {
           errInPreview.response.data.payload
         );
         let response = JSON.parse(decryptedData);
+        // console.log('response', response)
         if (response.messageCode == "TECHNICAL_ERROR") {
           Swal.fire({
             html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
@@ -329,6 +331,11 @@ const BuySell = () => {
     previewModal();
   };
 
+
+  const minimumSellInGramsGold = ParseFloat(100 / goldData.salePrice, 4)
+  const minimumSellInGramsSilver = ParseFloat(100 / silverData.salePrice, 4)
+
+
   const handleSellClick = (e: any) => {
     // e.preventDefault();
     setValidationError("");
@@ -341,10 +348,34 @@ const BuySell = () => {
     if (!enteredAmount) {
       setValidationError("Please enter amount");
       return;
-    } else if (enteredAmount < 100) {
-      setValidationError("Minimum Sell amount is Rs.100");
-      return;
     }
+
+    if (metalType === "gold") {
+      if (activeTabPurchase === 'grams') {
+        if (enteredAmount < minimumSellInGramsGold) {
+          setValidationError(`Minimum Sell amount is ${minimumSellInGramsGold}`);
+          return;
+        }
+      } else {
+        if (enteredAmount < 100) {
+          setValidationError(`Minimum Sell amount is ${100}`);
+          return;
+        }
+      }
+    } else if (metalType === "silver") {
+      if (activeTabPurchase === 'grams') {
+        if (enteredAmount < minimumSellInGramsSilver) {
+          setValidationError(`Minimum Sell amount is ${minimumSellInGramsSilver}`);
+          return;
+        }
+      } else {
+        if (enteredAmount < 100) {
+          setValidationError(`Minimum Sell amount is ${100}`);
+          return;
+        }
+      }
+    }
+
 
     if (!user.data.isKycDone) {
       Swal.fire({
