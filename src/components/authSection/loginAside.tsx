@@ -3,7 +3,7 @@ import { AesDecrypt, AesEncrypt } from "@/components/helperFunctions";
 import { setShowOTPmodal } from "@/redux/authSlice";
 import axios, { AxiosRequestConfig } from "axios";
 import { Formik } from "formik";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -17,12 +17,12 @@ interface LoginAsideProps {
 const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [submitting, setSubmitting] = useState(false);
-  const [termsLinkColor, setTermsLinkColor] = useState("text-white");
   const dispatch = useDispatch();
+  const router = useRouter()
 
   const handleTermsClick = () => {
+    router.push("/term-and-conditions")
     onClose();
-    setTermsLinkColor("text-yellow-500");
   };
 
   const initialValues = {
@@ -173,22 +173,17 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                    <label
-                      onClick={handleTermsClick}
-                      className={`ml-2 items-center cursor-pointer text-white ${termsLinkColor}`}
-                    >
-                      <div>
-                        I agree to these
-                        <span>
-                          <Link
-                            className="text-yellow-400 underline pl-2"
-                            href="/term-and-conditions"
-                          >
-                            T & C
-                          </Link>
-                        </span>
-                      </div>
-                    </label>
+                    <div className="ml-2 items-center text-white">
+                      I agree to these
+                      <span>
+                        <button
+                          onClick={handleTermsClick}
+                          className="text-yellow-400 underline pl-2"
+                        >
+                          T & C
+                        </button>
+                      </span>
+                    </div>
                   </div>
                   {touched.termsAndConditions && errors.termsAndConditions ? (
                     <div

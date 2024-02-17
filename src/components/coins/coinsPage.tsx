@@ -129,7 +129,7 @@ const Coins = () => {
               </div>
             </div>
           </div>
-          <div className="text-white mt-4 lg:mt-0 sm:divide-x sm:flex items-center bg-themeLight rounded-md px-3 p-2">
+          {isloggedIn && (<div className="text-white mt-4 lg:mt-0 sm:divide-x sm:flex items-center bg-themeLight rounded-md px-3 p-2">
             <div className="flex items-center">
               <img src={"Goldbarbanner.png"} className="h-5" alt="vault" />
               <div className="text-white ml-2 pr-4 flex">
@@ -144,7 +144,7 @@ const Coins = () => {
                 <p className="text-slate-200 bold">{silverVaultBalance} Gm</p>
               </div>
             </div>
-          </div>
+          </div>)}
         </div>
         <motion.div
           // initial="hidden"

@@ -10,7 +10,6 @@ import Loading from "@/app/loading";
 
 const CustomCheckout = ({ data }: any) => {
   const orderIdRef = useRef(null);
-  // const [paymentMethod, setPaymentMethod] = useState<string>("");
   const [payload, setpayload] = useState({});
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState<boolean>(true);
