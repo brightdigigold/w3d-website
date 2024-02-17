@@ -111,22 +111,26 @@ const EditProfileModel = ({ onSaveDetails, onCancel }: any) => {
           fetchData();
           setOpen(false);
           resetForm();
-          onSaveDetails();
+          // onSaveDetails();
         }
       } catch (error: any) {
-        const decryptedData = AesDecrypt(error.response.data.payload);
-        const finalResult = JSON.parse(decryptedData);
-        console.error(error);
-        Swal.fire({
-          html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
-          title: "Oops...",
-          titleText: finalResult.message,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      } finally {
+        if (error.response && error.response.data && error.response.data.payload) {
+          const decryptedData = AesDecrypt(error.response.data.payload);
+          const finalResult = JSON.parse(decryptedData);
+          console.error(error);
+          Swal.fire({
+            html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
+            title: "Oops...",
+            titleText: finalResult.message,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        } else {
+          console.error(error);
+        }
+      }
+      finally {
         setIsSubmitting(false);
-        setOpen(false);
       }
     },
   });
@@ -208,10 +212,10 @@ const EditProfileModel = ({ onSaveDetails, onCancel }: any) => {
 
                   <div className="flex justify-center">
                     <button
-                      className="font-semibold py-2 bg-themeBlue rounded px-3 text-center inline-block"
+                      className="bold py-2 bg-themeBlue rounded px-3 text-center inline-block"
                       onClick={() => {
                         formik.submitForm();
-                        setOpen(false);
+                        // setOpen(false);
                       }}
                     >
                       Save Details
@@ -221,7 +225,7 @@ const EditProfileModel = ({ onSaveDetails, onCancel }: any) => {
                 <div className="mt-5 sm:mt-6">
                   <button
                     type="button"
-                    className=" absolute top-2 right-3 justify-center rounded-full border-1 p-1 text-sm font-semibold text-white shadow-sm focus-visible:outline"
+                    className=" absolute top-2 right-3 justify-center rounded-full border-1 p-1 text-sm bold text-white shadow-sm focus-visible:outline"
                     onClick={() => setOpen(false)}
                   >
                     <XMarkIcon className="h-5" />
