@@ -12,12 +12,16 @@ import Swal from "sweetalert2";
 import ProfileInput from "@/utils/profileInput";
 import Loading from "@/app/loading";
 
-const EditProfileModel = ({ onSaveDetails, onCancel }: any) => {
+const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: any) => {
   const [open, setOpen] = useState(true);
   const user = useSelector(selectUser);
   const dispatch: AppDispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const cancelButtonRef = useRef(null);
+
+  const handleClose = () => {
+    setOpenEditProfileModel(false);
+  };
 
   useEffect(() => {
     formik.setFieldValue("name", user.data?.name);
@@ -109,7 +113,7 @@ const EditProfileModel = ({ onSaveDetails, onCancel }: any) => {
             timer: 1500,
           });
           fetchData();
-          setOpen(false);
+          handleClose()
           resetForm();
           // onSaveDetails();
         }
@@ -215,7 +219,6 @@ const EditProfileModel = ({ onSaveDetails, onCancel }: any) => {
                       className="bold py-2 bg-themeBlue rounded px-3 text-center inline-block"
                       onClick={() => {
                         formik.submitForm();
-                        // setOpen(false);
                       }}
                     >
                       Save Details
@@ -226,7 +229,7 @@ const EditProfileModel = ({ onSaveDetails, onCancel }: any) => {
                   <button
                     type="button"
                     className=" absolute top-2 right-3 justify-center rounded-full border-1 p-1 text-sm bold text-white shadow-sm focus-visible:outline"
-                    onClick={() => setOpen(false)}
+                    onClick={() => handleClose()}
                   >
                     <XMarkIcon className="h-5" />
                   </button>

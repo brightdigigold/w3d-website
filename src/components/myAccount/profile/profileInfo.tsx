@@ -23,6 +23,7 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
   const EditProfileModelHandler = () => {
     setOpenEditProfileModel(!openEditProfileModel);
   };
+
   const verifyEmail = () => {
     if (!isSubmitting) {
       setIsSubmitting(true);
@@ -66,7 +67,7 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
 
   return (
     <div>
-      {openEditProfileModel && <EditProfileModel />}
+      {openEditProfileModel && <EditProfileModel setOpenEditProfileModel={setOpenEditProfileModel} />}
       <div className="w-full text-white flex flex-col text-sm sm:text-base relative">
         <div className="border-b p-4 flex justify-between items-center">
           <p className=" flex items-center">
@@ -82,11 +83,6 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
           </button>
         </div>
         <div className="p-4 grid sm:grid-cols-2 gap-4">
-          {/* <div className="mb-2 flex justify-between rounded-b-lg">
-            <span className="font-bold">Name</span>
-            <span>{user?.data?.name}</span>
-          </div> */}
-
           <div className="shadow shadow-gray-100 rounded p-3">
             <p className="flex items-center gap-1 mb-3 text-gray-300">
               <PhoneIcon className="h-4" /> Mobile Number
@@ -94,7 +90,6 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
             <p className="">{user?.data?.mobile_number}</p>
           </div>
 
-          {/* <hr className="border-gray-500 my-1" /> */}
           <div className="shadow shadow-gray-100 rounded p-3">
             <p className="flex items-center gap-1 mb-3 text-gray-300">
               <EnvelopeIcon className="h-4" /> Email ID
@@ -140,13 +135,8 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
               })}
             </p>
           </div>
-          {/* <div className="flex justify-between">
-                    <span className="font-bold">GST No.</span>
-                    <span>{user.data.gst_number || 'N/A'}</span>
-                </div> */}
         </div>
       </div>
-      {/* <div className="mx-3 flex justify-center"></div> */}
     </div>
   );
 };
