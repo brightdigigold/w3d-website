@@ -177,6 +177,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                       I agree to these
                       <span>
                         <button
+                          type="button"
                           onClick={handleTermsClick}
                           className="text-yellow-400 underline pl-2"
                         >
