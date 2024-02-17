@@ -75,8 +75,7 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
             Basic Details
           </p>
           <button
-            className="font-semibold flex items-center gap-1 text-gold01"
-            // onClick={onEditDetailsClick}
+            className="bold flex items-center gap-1 text-gold01"
             onClick={EditProfileModelHandler}
           >
             <PencilIcon className="h-4 inline-block" /> Edit

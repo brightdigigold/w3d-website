@@ -137,7 +137,7 @@ const AddressTab = () => {
             Address Details
           </p>
           <button
-            className="font-semibold flex items-center gap-1 text-gold01"
+            className="bold flex items-center gap-1 text-gold01"
             onClick={openAddNewAddress}
           >
             {addressList.length > 0 && (<PlusIcon className="h-5" />)}  {addressList.length === 0 ? "" : "Add More"}
