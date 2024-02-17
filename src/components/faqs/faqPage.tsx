@@ -3,6 +3,9 @@ import { funcForDecrypt } from "@/components/helperFunctions";
 import React, { useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import { FaChevronCircleDown, FaChevronCircleUp, FaPlus, FaMinus } from "react-icons/fa";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+import OtpModal from "../modals/otpModal";
 
 const Section = ({ sectionType, faqData, isActive }: any) => {
   const [open, setOpen] = useState(false);
@@ -92,6 +95,8 @@ const Section = ({ sectionType, faqData, isActive }: any) => {
 const Faq = () => {
   const [faqData, setFaqData] = useState<any[]>([]);
   const [activeSectionType, setActiveSectionType] = useState("BDG");
+  const otpModal = useSelector((state: RootState) => state.auth.otpModal);
+
 
   const handleSectionClick = (type: string) => {
     setActiveSectionType(type);
@@ -122,6 +127,7 @@ const Faq = () => {
 
   return (
     <div>
+      {otpModal && <OtpModal />}
       <div className="mx-auto pt-20 pb-28 xl:pb-8 px-4 sm:px-6 lg:px-16 py-4 text-white">
         <h1 className="text-white text-center text-2xl sm:text-4xl extrabold">
           FAQs

@@ -9,7 +9,6 @@ import OtpModal from "../modals/otpModal";
 const HeroAbout = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
 
-
   return (
     <div className="bg-theme pt-36 py-10 relative">
       {otpModal && <OtpModal />}
