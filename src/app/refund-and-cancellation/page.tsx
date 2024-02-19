@@ -16,7 +16,6 @@ const page = () => {
               </h1>
               <img src="/lottie/Refund Policy.gif" className="" />
             </div>
-
             <div className="col-12">
               <div className="pl-2 text-lg">
                 <p className="leading-8">
