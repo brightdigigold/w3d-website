@@ -457,7 +457,7 @@ const OrdersTabs = () => {
                                       // />
                                       <img
                                         src="/images/cart.png"
-                                        alt=""
+                                        alt="cart"
                                         className=""
                                         width={28}
                                       />
@@ -728,7 +728,7 @@ const OrdersTabs = () => {
                                       // />
                                       <img
                                         src="/images/cart.png"
-                                        alt=""
+                                        alt="cart"
                                         className=""
                                         width={28}
                                       />
@@ -849,7 +849,7 @@ const OrdersTabs = () => {
                                 item?.status === "COMPLETED" ? (
                                   // <img
                                   //   src="/check.png"
-                                  //   alt=""
+                                  //   alt="check"
                                   //   className=""
                                   //   width={40}
                                   // />
