@@ -17,7 +17,7 @@ import cartSlice from './cartSlice';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['shop', 'cart',],
+  blacklist: ['shop', 'cart', 'vault'],
 };
 
 const rootReducer = combineReducers({
