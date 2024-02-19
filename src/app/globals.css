@@ -60,8 +60,6 @@ body {
 } */
 
 
-
-
 .bold {
   font-family: Lato-Bold;
 }
@@ -194,6 +192,9 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.gatag {
+  display: none;
+}
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;

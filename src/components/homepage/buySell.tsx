@@ -48,6 +48,7 @@ import { useSpring, animated } from 'react-spring';
 import ShowVaultBuySell from "./showVaultBuySell";
 import { useRouter } from "next/navigation";
 import UpiModal from "../myAccount/payoutOptions/addNewUpiId";
+import { sendGTMEvent } from '@next/third-parties/google'
 
 const BuySell = () => {
   const router = useRouter()
@@ -313,6 +314,7 @@ const BuySell = () => {
   };
 
   const handleBuyClick = (e: any) => {
+
     // e.preventDefault();
     setValidationError("");
     if (!isloggedIn) {
@@ -781,7 +783,10 @@ const BuySell = () => {
               <div className="mt-12">
                 {purchaseType === "buy" && (
                   <button
-                    onClick={handleBuyClick}
+                    onClick={(event) => {
+                      sendGTMEvent({ event: 'buttonClicked', value: 'xyz' })
+                      handleBuyClick(event)
+                    }}
                     className="w-full bg-themeBlue rounded-lg py-2 uppercase extrabold"
                   >
                     <p>Start Savings</p>
