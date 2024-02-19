@@ -400,7 +400,7 @@ const BuySell = () => {
   };
 
   const QuickBuySellButtons = ({ amounts, unit, onClickHandler }: any) => (
-    <div className="mt-4 flex justify-between">
+    <div className={`mt-4 flex justify-between ${amounts == 500 ? 'pb-2' : ''}`}>
       {amounts.map((amount: any) => (
         <button
           key={amount}
@@ -413,13 +413,20 @@ const BuySell = () => {
             setValidationError("");
             dispatch(setEnteredAmount(amount));
           }}
-          className="bg-themeLight001 border border-blue-200 rounded-md py-1 px-2 sm:px-4 text-white text-sm"
+          className="bg-themeLight001 border bold border-blue-200 rounded-md py-1 px-2 sm:px-4 text-white text-sm relative" // Added relative positioning
         >
           {unit === "rupees" ? `₹${amount}` : `${amount}gm`}
+          {purchaseType === "buy" && amount === 500 && ( // Conditional rendering for the "POPULAR" tag
+            <span className="absolute bottom-[-16px] left-0 bg-themeBlue text-black semibold px-1 py-0.5 text-xs rounded">
+              POPULAR
+            </span>
+          )}
         </button>
       ))}
     </div>
   );
+
+
 
   useEffect(() => {
     if (isgold && activeTab == "buy") {
@@ -551,7 +558,7 @@ const BuySell = () => {
                       {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
                     </span>
                   </p>
-                  <div className="text-shine text-base sm:text-xl font-bold pt-0 py-2 pl-4 items-center  flex">
+                  <div className="text-shine text-base sm:text-xl bold pt-0 py-2 pl-4 items-center  flex">
                     ₹
                     {isgold ? (
                       <div className="">
