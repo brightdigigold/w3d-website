@@ -89,7 +89,7 @@ const Navbar = () => {
               </div>
               <div className="flex flex-1 items-center justify-center xl:items-stretch xl:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link href="/">
+                  <Link href="/" prefetch={true}>
                     <img
                       className="h-12 sm:h-16"
                       src={new URL(
@@ -101,7 +101,7 @@ const Navbar = () => {
                   </Link>
                 </div>
               </div>
-              <Link className={styles.p0} href="/">
+              <Link className={styles.p0} href="/" prefetch={true}>
                 Home
               </Link>
               <Link className={styles.p0} href="/coins" prefetch={true}>
@@ -133,7 +133,7 @@ const Navbar = () => {
                   <span>My Account</span>
                   {isDropdownOpen && (
                     <div className="absolute w-32 top-full  left-0 p-2 mt-0 bg-theme space-y-2 shadow-md rounded-md cursor-pointer">
-                      <Link href="/myAccount">
+                      <Link href="/myAccount" prefetch={true}>
                         <div
                           onClick={() => {
                             setDropdownOpen(false);
@@ -178,6 +178,7 @@ const Navbar = () => {
                 {isloggedIn && (
                   <Link
                     href="/cart"
+                    prefetch={true}
                     className="text-gray-300 rounded-md text-md extrabold xl:hidden"
                   >
                     <img src="/images/cart.png" className="h-6 ml-2" />
