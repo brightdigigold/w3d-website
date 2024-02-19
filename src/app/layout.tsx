@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { GoogleTagManager } from '@next/third-parties/google'
 import Head from "next/head";
+import Link from "next/link";
 
 let persistor = persistStore(store);
 export default function RootLayout({ children, }: { children: React.ReactNode; }) {
@@ -16,6 +17,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
   return (
     <html lang="en">
       <Head>
+        <Link rel="preload" href="/bdgwhite.png" as="image" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
