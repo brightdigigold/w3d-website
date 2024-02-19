@@ -96,7 +96,6 @@ const PrivacyPolicy = () => {
                                     with the Company and the requirements of relevant laws.
                                 </p>
                                 <h5 className="text-2xl sm:text-4xl my-4 mt-6 extrabold text-gold01">
-                                    {/* INFORMATION PROVIDED BY YOU */}
                                     Information Provided by You
                                 </h5>
                                 <p className="mb-3 leading-8  ">
