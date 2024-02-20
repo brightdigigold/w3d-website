@@ -15,9 +15,9 @@ const TermsAndCondition = () => {
                 <div className="container">
                     <div className="row pt-5 pb-5">
                         <div className=" sm:flex justify-between items-center text-center sm:text-left">
-                            <h5 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
+                            <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
                                 Terms &<br /> Conditions
-                            </h5>
+                            </h1>
                             <img src="/lottie/T & C Policy.gif" className="" />
                         </div>
                         <div className="col-12 text-lg">
@@ -43,7 +43,6 @@ const TermsAndCondition = () => {
                                         Guidelines) Rules, 2011, which demands this.
                                     </p>
                                     <p className="font-semibold tracking-wider">
-                                        {" "}
                                         Before using the services, users are advised to carefully
                                         read and understand these terms.
                                     </p>

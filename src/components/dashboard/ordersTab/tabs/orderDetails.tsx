@@ -14,11 +14,11 @@ const OrderDetails = (props: any) => {
             <div>
               {props?.orderDetails?.status === "SUCCESS" ||
               props?.orderDetails?.status === "COMPLETED" ? (
-                <img src="/check.png" alt="" className="" width={40} />
+                <img src="/check.png" alt="check" className="" width={40} />
               ) : props?.orderDetails?.status === "PENDING" ? (
-                <img src="/question-mark.png" alt="" className="" width={30} />
+                <img src="/question-mark.png" alt="question mark" className="" width={30} />
               ) : (
-                <img src="/close.png" alt="" className="" width={40} />
+                <img src="/close.png" alt="close" className="" width={40} />
               )}
             </div>
             <p className="px-2 col-span-1 text-sm sm:text-base">
@@ -72,7 +72,7 @@ const OrderDetails = (props: any) => {
                 ) : props?.orderDetails?.status === "PENDING" ? (
                   <img
                     src="/question-mark.png"
-                    alt=""
+                    alt="question mark"
                     className=""
                     width={30}
                   />

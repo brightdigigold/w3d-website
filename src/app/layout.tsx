@@ -5,19 +5,16 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "@/redux/store";
 import { Provider } from "react-redux";
-import { GoogleAnalytics } from '@next/third-parties/google'
-import { GoogleTagManager } from '@next/third-parties/google'
 import Head from "next/head";
-import Link from "next/link";
+import Image from "next/image";
 
 let persistor = persistStore(store);
 export default function RootLayout({ children, }: { children: React.ReactNode; }) {
-  // console.log('process.env.GOOGLE_TAG', process.env.GOOGLE_TAG)
 
   return (
     <html lang="en">
       <Head>
-        <Link rel="preload" href="/bdgwhite.png" as="image" />
+        <Image src="/bdgwhite.png" alt="Picture of the author" priority />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -35,7 +32,6 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
           <PersistGate loading={null} persistor={persistor}>
             <Navbar />
             {children}
-            {/* <GoogleTagManager gtmId="GTM-5JFBNN5" /> */}
             <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
             <Footer />
           </PersistGate>

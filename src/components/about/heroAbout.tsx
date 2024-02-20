@@ -10,7 +10,7 @@ const HeroAbout = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
 
   return (
-    <div className="bg-theme pt-36 py-10 relative">
+    <div className="bg-theme pt-24 sm:pt-36 py-10 relative">
       {otpModal && <OtpModal />}
       <div className="mx-auto px-4 sm:px-6 lg:px-16">
         <img
@@ -25,13 +25,13 @@ const HeroAbout = () => {
             viewport={{ once: false, amount: 0.25 }}
             className=""
           >
-            <motion.h1
+            {/* <motion.h1
               variants={fadeIn("right", "spring", 0.2, 1)}
               className="text-2xl sm:text-4xl text-white text-center font-semibold leading-tight mb-28"
             >
               “Buy & Sell 24 karat Digital Gold” <br /> From The Comfort of Your
               Home
-            </motion.h1>
+            </motion.h1> */}
 
             <div className="flex items-center justify-center px-4 lg:px-52">
               <motion.div variants={fadeIn("left", "spring", 0.2, 1)}>
