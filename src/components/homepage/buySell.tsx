@@ -1,8 +1,5 @@
 "use client";
-import {
-  ArrowUpIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/20/solid";
+import { ArrowUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

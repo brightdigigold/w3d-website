@@ -15,9 +15,9 @@ const ShippingPolicy = () => {
                 <div className="container">
                     <div className="row pt-5 pb-5">
                         <div className=" sm:flex justify-between items-center text-center sm:text-left">
-                            <h5 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
+                            <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
                                 Shipping Policy
-                            </h5>
+                            </h1>
                             <img src="/lottie/Shipping Policy.gif" className="" />
                         </div>
                         <div className="col-md-8 col-12">
