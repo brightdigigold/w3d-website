@@ -22,7 +22,7 @@ const About = () => {
           Home
         </h1>
         <HeroAbout />
-        {/* <Info /> */}
+        <Info />
         <Mission />
         <Motive />
         <Succession />
