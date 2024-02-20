@@ -18,6 +18,6 @@ export default page;
 
 export const metadata: Metadata = {
   title: "Cart - Bright DiGi Gold",
-  description:
-    "Bright DiGi Gold allows you to Buy, Sell, Gift and Refer & Earn Digital Gold online conveniently and effectively.",
+  // description:
+    // "Bright DiGi Gold allows you to Buy, Sell, Gift and Refer & Earn Digital Gold online conveniently and effectively.",
 };
