@@ -1,0 +1,6 @@
+# Allow all web crawlers access to all content
+User-agent: *
+Allow: /
+
+# Location of your site's sitemap
+Sitemap: https://www.brightdigigold.com/sitemap.xml

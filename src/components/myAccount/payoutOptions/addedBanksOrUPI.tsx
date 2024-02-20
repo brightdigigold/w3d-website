@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import UpiModal from "./addNewUpiId";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { ArchiveBoxXMarkIcon, QrCodeIcon } from "@heroicons/react/24/outline";
+import Notiflix from "notiflix";
 
 const AddedBanksOrUpiIds = ({ toggled }: any) => {
   const [upiList, setUpiList] = useState([]);
@@ -60,7 +61,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
         })
         .then(async (result) => {
           if (result.isConfirmed) {
-            //   Notiflix.Loading.custom({svgSize:'180px',customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>'});
+              Notiflix.Loading.custom({svgSize:'180px',customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>'});
             let dataToBeEncryptPayload = {
               id: deleteItem,
             };
@@ -175,6 +176,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
             toggleUPImodal={toggleUPImodal}
             upiUpdated={upiUpdated}
             setupiUpdated={setupiUpdated}
+            onClose={toggleUPImodal}
           />
         )}
         <div className="p-4">

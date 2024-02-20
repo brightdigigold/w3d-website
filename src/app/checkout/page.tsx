@@ -13,7 +13,7 @@ const page = () => {
         <div className="min-h-screen bg-theme flex items-center justify-center">
           <img
             className="h-7xl absolute -bottom-12 -left-20 opacity-30"
-            src="/bdgwhite.png"
+            src="/bdgwhite.png" // Fallback for browsers that do not support srcset
             alt="digital gold"
           />
           <CustomCheckout data={data} />

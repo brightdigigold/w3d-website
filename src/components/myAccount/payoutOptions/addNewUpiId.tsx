@@ -20,6 +20,8 @@ export default function UpiModal({
   const [upiError, setUpiError] = useState("");
   // const [upiUpdated, setupiUpdated] = useState(false)
 
+  
+
 
   const fetchBankAndUPIDetails = async () => {
     try {
@@ -99,7 +101,6 @@ export default function UpiModal({
                 titleText: `${JSON.parse(decryptedData).message}`,
                 timer: 1500,
               });
-
               setupiUpdated(true);
               setOpen(false);
             }
@@ -207,9 +208,8 @@ export default function UpiModal({
                     type="submit"
                     className="mt-3 absolute top-5 bg-transparent right-5  justify-center rounded-full border-1 text-white p-2 text-sm font-semibold shadow-sm  sm:mt-0 sm:w-auto"
                     onClick={() => {
-                      onClose()
+                      if (onClose) onClose(); 
                       setOpen(false);
-                      // toggleUPImodal();
                     }}
                     ref={cancelButtonRef}
                   >

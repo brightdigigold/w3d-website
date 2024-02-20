@@ -1,8 +1,5 @@
 "use client";
-import {
-  ArrowUpIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/20/solid";
+import { ArrowUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -288,7 +285,6 @@ const BuySell = () => {
   };
 
   const handleEnteredAmountChangeGrams = (e: any) => {
-    // e.preventDefault();
     setActiveTabPurchase('grams')
     dispatch(setTransactionType('grams'));
 
@@ -315,7 +311,6 @@ const BuySell = () => {
 
   const handleBuyClick = (e: any) => {
 
-    // e.preventDefault();
     setValidationError("");
     if (!isloggedIn) {
       setOpenLoginAside(true);
@@ -339,9 +334,7 @@ const BuySell = () => {
 
 
   const handleSellClick = (e: any) => {
-    // e.preventDefault();
     setValidationError("");
-
     if (!isloggedIn) {
       setOpenLoginAside(true);
       return;
@@ -352,30 +345,15 @@ const BuySell = () => {
       return;
     }
 
-    if (metalType === "gold") {
-      if (activeTabPurchase === 'grams') {
-        if (enteredAmount < minimumSellInGramsGold) {
-          setValidationError(`Minimum Sell amount is ${minimumSellInGramsGold}`);
-          return;
-        }
-      } else {
-        if (enteredAmount < 100) {
-          setValidationError(`Minimum Sell amount is ${100}`);
-          return;
-        }
-      }
-    } else if (metalType === "silver") {
-      if (activeTabPurchase === 'grams') {
-        if (enteredAmount < minimumSellInGramsSilver) {
-          setValidationError(`Minimum Sell amount is ${minimumSellInGramsSilver}`);
-          return;
-        }
-      } else {
-        if (enteredAmount < 100) {
-          setValidationError(`Minimum Sell amount is ${100}`);
-          return;
-        }
-      }
+    const minimumSellAmountInRupees = 100;
+
+    const minimumSellAmount = activeTabPurchase === 'grams'
+      ? (metalType === "gold" ? minimumSellInGramsGold : minimumSellInGramsSilver)
+      : minimumSellAmountInRupees;
+
+    if (enteredAmount < minimumSellAmount) {
+      setValidationError(`Minimum Sell amount is ${minimumSellAmount}`);
+      return;
     }
 
 

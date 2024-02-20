@@ -211,11 +211,11 @@ export default function OtpModal() {
                   {/* <h1 className="text-gold01 extrabold text-5xl text-center mb-3">
                     OTP
                   </h1> */}
-                  <div className="sm:flex sm:items-start">
+                  <div className="sm:flex sm:items-start justify-center">
                     <div className="mt-3 items-center text-center sm:ml-4 sm:mt-0 sm:text-left">
                       <Dialog.Title
                         as="h3"
-                        className="text-base bold leading-6 text-white"
+                        className="text-base bold leading-6 text-white ml-2"
                       >
                         Enter OTP
                       </Dialog.Title>
@@ -252,7 +252,7 @@ export default function OtpModal() {
                           <div className="text-red-600">{otpError}</div>
                         )}
 
-                        <div className="flex flex-col justify-start w-48 h-18 mt-2">
+                        <div className="flex flex-col justify-start w-48 h-18 mt-2 ml-2">
                           <div className="flex items-center">
                             {resendTimer > 0 && (
                               <span className="mr-2 text-yellow-400">
@@ -282,7 +282,7 @@ export default function OtpModal() {
                           <button
                             data-modal-hide="popup-modal"
                             type="submit"
-                            className="mt-4 w-40 text-black bg-themeBlue focus:outline-none rounded-full border border-gray-200 text-sm bold px-5 py-2.5 focus:z-10"
+                            className="mt-4 w-40 text-md text-black bg-themeBlue focus:outline-none rounded-full border border-gray-200 bold px-5 py-2.5 focus:z-10"
                             onClick={() => {
                               handleSubmit();
                             }}

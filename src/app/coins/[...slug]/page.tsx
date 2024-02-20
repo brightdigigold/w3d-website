@@ -107,12 +107,11 @@ const page = ({ params }: any) => {
       );
       const decryptedData = AesDecrypt(response.data.payload);
       const finalResult = JSON.parse(decryptedData).data.cartProductForWeb;
-      setCoinsInCart(finalResult)
+      setCoinsInCart(finalResult);
     } catch (error) {
       alert(error);
     }
   };
-
 
   const getProductCountById = (coinsInCart: any, productId: any) => {
     for (const cartItem of coinsInCart) {
@@ -128,7 +127,6 @@ const page = ({ params }: any) => {
     setQuantity(productCount === 0 ? 1 : productCount);
     setCartQuantity(productCount);
   }, [coinsInCart]);
-
 
   const increaseQty = () => {
     const { coinHave } = productsDetailById;
@@ -235,7 +233,6 @@ const page = ({ params }: any) => {
       from_App: false,
     };
 
-
     const resAfterEncryptData = await funForAesEncrypt(dataToBeDecrypt);
 
     const payloadToSend = {
@@ -273,7 +270,6 @@ const page = ({ params }: any) => {
     getProductById();
     getAllProductsOfCart();
   }, []);
-
 
   if (!productsDetailById) {
     return <Loading />;
@@ -358,9 +354,9 @@ const page = ({ params }: any) => {
               />
             </div>
 
-            {(quantity == cartQuantity) && (
+            {quantity == cartQuantity && (
               <div>
-                <Link className="cursor-pointer" href='/cart'>
+                <Link className="cursor-pointer" href="/cart">
                   <CustomImageButton
                     img="/lottie/Go to cart.gif"
                     isDisabled={!productsDetailById.inStock}
@@ -370,11 +366,11 @@ const page = ({ params }: any) => {
               </div>
             )}
 
-            {(cartQuantity !== 0) && (cartQuantity !== quantity) && (
+            {cartQuantity !== 0 && cartQuantity !== quantity && (
               <div>
-                <CustomButton
+                <CustomImageButton
+                  img="/lottie/updatenow.png"
                   isDisabled={!productsDetailById.inStock}
-                  containerStyles="w-full justify-center rounded-full bg-themeBlue px-5 py-4 sm:py-2 text-sm sm:text-lg bold text-black ring-1 ring-inset sm:mt-0 sm:w-auto"
                   handleClick={() => {
                     addToCartHandler("UpdateCart");
                   }}
@@ -384,7 +380,7 @@ const page = ({ params }: any) => {
             )}
 
             {/* ADD TO CART */}
-            {(cartQuantity == 0) && (
+            {cartQuantity == 0 && (
               <CustomImageButton
                 img="/lottie/addcart.gif"
                 isDisabled={!productsDetailById.inStock}
@@ -394,7 +390,6 @@ const page = ({ params }: any) => {
                 title={""}
               />
             )}
-
           </div>
         </div>
         <div className="col-span-5 xl:col-span-3">
@@ -514,7 +509,9 @@ const page = ({ params }: any) => {
                 <tbody>
                   <tr>
                     <td className="w-32 inline-block">Weight </td>
-                    <td className="pl-2 bold">{productsDetailById.weight} Gm</td>
+                    <td className="pl-2 bold">
+                      {productsDetailById.weight} Gm
+                    </td>
                   </tr>
                   <tr>
                     <td className="w-32 inline-block">Metal Purity</td>
