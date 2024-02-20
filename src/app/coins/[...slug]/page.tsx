@@ -215,10 +215,10 @@ const page = ({ params }: any) => {
 
   const totalPrice = ParseFloat(
     +productsDetailById?.weight *
-      quantity *
-      (productsDetailById?.iteamtype === "GOLD"
-        ? goldData.totalPrice
-        : silverData.totalPrice),
+    quantity *
+    (productsDetailById?.iteamtype === "GOLD"
+      ? goldData.totalPrice
+      : silverData.totalPrice),
     2
   );
 
@@ -345,7 +345,7 @@ const page = ({ params }: any) => {
             {/* BUY NOW */}
             <div>
               <CustomImageButton
-                img="/lottie/updatenow.png"
+                img="/lottie/buynow.png"
                 isDisabled={!productsDetailById.inStock}
                 handleClick={() => {
                   openCoinModalHandler();
@@ -368,9 +368,10 @@ const page = ({ params }: any) => {
 
             {cartQuantity !== 0 && cartQuantity !== quantity && (
               <div>
-                <CustomButton
+                <CustomImageButton
+                  img="/lottie/updatenow.png"
                   isDisabled={!productsDetailById.inStock}
-                  containerStyles="w-full justify-center rounded-full bg-themeBlue px-5 py-4 sm:py-2 text-sm sm:text-lg bold text-black ring-1 ring-inset sm:mt-0 sm:w-auto"
+                  // containerStyles="w-full justify-center rounded-full bg-themeBlue px-5 py-4 sm:py-2 text-sm sm:text-lg bold text-black ring-1 ring-inset sm:mt-0 sm:w-auto"
                   handleClick={() => {
                     addToCartHandler("UpdateCart");
                   }}
