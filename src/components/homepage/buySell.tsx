@@ -315,7 +315,6 @@ const BuySell = () => {
 
   const handleBuyClick = (e: any) => {
 
-    // e.preventDefault();
     setValidationError("");
     if (!isloggedIn) {
       setOpenLoginAside(true);
@@ -339,43 +338,30 @@ const BuySell = () => {
 
 
   const handleSellClick = (e: any) => {
-    // e.preventDefault();
     setValidationError("");
-
     if (!isloggedIn) {
       setOpenLoginAside(true);
       return;
     }
-
+    
+    // Check if an amount has been entered
     if (!enteredAmount) {
       setValidationError("Please enter amount");
       return;
     }
-
-    if (metalType === "gold") {
-      if (activeTabPurchase === 'grams') {
-        if (enteredAmount < minimumSellInGramsGold) {
-          setValidationError(`Minimum Sell amount is ${minimumSellInGramsGold}`);
-          return;
-        }
-      } else {
-        if (enteredAmount < 100) {
-          setValidationError(`Minimum Sell amount is ${100}`);
-          return;
-        }
-      }
-    } else if (metalType === "silver") {
-      if (activeTabPurchase === 'grams') {
-        if (enteredAmount < minimumSellInGramsSilver) {
-          setValidationError(`Minimum Sell amount is ${minimumSellInGramsSilver}`);
-          return;
-        }
-      } else {
-        if (enteredAmount < 100) {
-          setValidationError(`Minimum Sell amount is ${100}`);
-          return;
-        }
-      }
+    
+    // Define a generic minimum amount for non-grams transactions
+    const minimumSellAmountInRupees = 100;
+    
+    // Determine the minimum sell amount based on metal type and active tab
+    const minimumSellAmount = activeTabPurchase === 'grams' 
+      ? (metalType === "gold" ? minimumSellInGramsGold : minimumSellInGramsSilver)
+      : minimumSellAmountInRupees;
+    
+    // Validate against the determined minimum sell amount
+    if (enteredAmount < minimumSellAmount) {
+      setValidationError(`Minimum Sell amount is ${minimumSellAmount}`);
+      return;
     }
 
 
