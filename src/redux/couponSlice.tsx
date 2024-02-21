@@ -68,14 +68,14 @@ const couponSlice = createSlice({
           // Calculate extra gold based on coupon percentage and maximum value
           const extraGoldOfRuppess = (amount * coupon.percentage) / 100;
           state.extraGoldOfRuppess = Math.min(extraGoldOfRuppess, coupon.maximum);
-          const extraGold = ParseFloat(extraGoldOfRuppess / goldPrice, 4);
+          const extraGold = ParseFloat(state.extraGoldOfRuppess / goldPrice, 4);
           state.extraGold = extraGold
         } else if (transactionType === 'grams' && metalType === 'gold') {
           const gst = ParseFloat((goldPrice * 0.03 * amount), 2);
           const actualAmount = ParseFloat(goldPrice * amount + gst, 2);
           const extraGoldOfRuppess = (actualAmount * coupon.percentage) / 100;
           state.extraGoldOfRuppess = Math.min(extraGoldOfRuppess, coupon.maximum);
-          const extraGold = ParseFloat(extraGoldOfRuppess / goldPrice, 4);
+          const extraGold = ParseFloat(state.extraGoldOfRuppess / goldPrice, 4);
           state.extraGold = extraGold
         }
         state.selectedCoupon = coupon;

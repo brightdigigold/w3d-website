@@ -36,6 +36,7 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         calculatePurchasedGoldWeight: (state) => {
+            console.log('state.totalGoldWeight', state.totalGoldWeight)
             if (state.useVaultBalanceGold) {
                 // Check if the vault balance is greater than total gold weight
                 if (state.goldVaultBalance >= state.totalGoldWeight) {
@@ -59,10 +60,12 @@ const cartSlice = createSlice({
                 state.goldGstForCart = ParseFloat(state.totalGoldWeight * 0.03 * state.liveGoldPrice, 2);
                 state.amountWithoutTaxGold = ParseFloat(state.liveGoldPrice * state.totalGoldWeight, 4);
                 state.amountWithTaxGold = ParseFloat((state.amountWithoutTaxGold + state.goldGstForCart), 2);
+
             }
         },
 
         calculatePurchasedSilverWeight: (state) => {
+
             if (state.useVaultBalanceSilver) {
                 // Check if the vault balance is greater than total silver weight
                 if (state.silverVaultBalance > state.totalSilverWeight) {
@@ -74,7 +77,7 @@ const cartSlice = createSlice({
                 } else {
                     // User needs to purchase the difference
                     state.purchasedSilverWeight = Math.abs(ParseFloat(state.silverVaultBalance - state.totalSilverWeight, 4));
-                    state.silverGstForCart = ParseFloat(state.liveSilverPrice * state.purchasedSilverWeight * 0.03, 2);
+                    state.silverGstForCart = ParseFloat((state.liveSilverPrice * state.purchasedSilverWeight) * 0.03, 2);
                     state.amountWithoutTaxSilver = ParseFloat(state.liveSilverPrice * state.purchasedSilverWeight, 4);
                     state.amountWithTaxSilver = ParseFloat((state.amountWithoutTaxSilver + state.silverGstForCart), 2);
                     state.silverVaultWeightUsed = state.silverVaultBalance

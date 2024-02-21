@@ -230,6 +230,7 @@ const BuySell = () => {
   };
 
   const handleTabRupeesAndGrams = (tab: "rupees" | "grams") => {
+    dispatch(clearCoupon());
     setActiveTabPurchase(tab);
     dispatch(setTransactionType(tab));
     dispatch(setEnteredAmount(tab === "rupees" ? totalAmount : ParseFloat(metalQuantity, 4)));
@@ -255,6 +256,7 @@ const BuySell = () => {
 
   const handleEnteredAmountChange = (e: any) => {
     // e.preventDefault();
+    dispatch(clearCoupon());
     setActiveTabPurchase('rupees')
     dispatch(setTransactionType('rupees'))
     const enteredValue = ParseFloat(e.target.value, 4);
@@ -285,6 +287,7 @@ const BuySell = () => {
   };
 
   const handleEnteredAmountChangeGrams = (e: any) => {
+    dispatch(clearCoupon());
     setActiveTabPurchase('grams')
     dispatch(setTransactionType('grams'));
 
