@@ -21,7 +21,7 @@ import {
   SelectPurchaseType,
 } from "@/redux/shopSlice";
 
-export default function Modal({ isOpen, onClose, transactionId }: any) {
+export default function Modal({ isOpen, onClose, transactionId, previewData }: any) {
   const gst = useSelector((state: RootState) => state.shop.gst);
   const metalType = useSelector((state: RootState) => state.shop.metalType);
   const [encryptedPayload, setEncryptedPayload] = useState<string>("");
@@ -37,6 +37,10 @@ export default function Modal({ isOpen, onClose, transactionId }: any) {
   const extraGold = useSelector((state: RootState) => state.coupon.extraGold);
   const [isModalOpen, setModalOpen] = useState(false);
   const cancelButtonRef = useRef(null);
+
+  const welcomeGold = previewData.find(item => item.key === 'Welcome GOLD')?.value;
+
+  // console.log('welcomeGold', welcomeGold)
 
   const openModalPayout = async () => {
     setModalOpen(true);
@@ -76,6 +80,8 @@ export default function Modal({ isOpen, onClose, transactionId }: any) {
 
     fetchData();
   }, [dataToEncrept]);
+
+  console.log('previewData', previewData);
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -145,9 +151,9 @@ export default function Modal({ isOpen, onClose, transactionId }: any) {
                   {metalType === "gold" && purchaseType === "buy" && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">
-                        Promotional Silver{" "}
-                      </p>{" "}
-                      <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat(metalQuantity, 4)} gm</p>
+                        {welcomeGold ? "Welcome Gold" : "Promotional Silver"}
+                      </p>
+                      <p className=" text-sm sm:text-base bold text-blue-100"> {welcomeGold ? welcomeGold : ParseFloat(metalQuantity, 4)} {welcomeGold ? "" : "gm"}</p>
                     </div>
                   )}
                   {isAnyCouponApplied && (

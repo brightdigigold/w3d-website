@@ -78,7 +78,9 @@ const CustomCheckout = ({ data }: any) => {
 
   const initializeSDK = async () => {
     cashfree = await load({
-      mode: "production",
+      // mode: "production",
+      mode: "sandbox",
+
     });
   };
   initializeSDK();

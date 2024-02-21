@@ -787,6 +787,7 @@ const BuySell = () => {
                 )}
                 {isModalOpen && (
                   <Modal
+                    previewData={previewData}
                     transactionId={transactionId}
                     isOpen={isModalOpen}
                     onClose={closeModal}
