@@ -54,7 +54,6 @@ const EditProfile = ({ onSaveDetails, onCancel }: any) => {
     },
     enableReinitialize: true,
     validate(values) {
-      // console.log('values 43', values);
       const errors: any = {};
       const isValidLength = /^.{2,50}$/;
       //validation on name
@@ -80,7 +79,6 @@ const EditProfile = ({ onSaveDetails, onCancel }: any) => {
     },
 
     onSubmit: async (values, { resetForm }) => {
-      console.log("values from 78", values);
       setIsSubmitting(true);
       try {
         const resAfterEncrypt = await AesEncrypt(values);

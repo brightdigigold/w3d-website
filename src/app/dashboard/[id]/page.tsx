@@ -68,9 +68,6 @@ function page({ params }: any) {
   }, []);
 
 
-
-  // console.log('dataOfTransaction?.data?.transactionData?.payment_status', dataOfTransaction?.data?.transactionStatus)
-
   return (
     <div className="px-4">
       <div className="min-h-screen flex items-center justify-center">

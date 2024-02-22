@@ -131,7 +131,6 @@ const BuySell = () => {
         const decryptedData = await funcForDecrypt(
           resAfterPreview.data.payload
         );
-        // console.log('JSON.parse(decryptedData)', JSON.parse(decryptedData))
         setPreviewData(JSON.parse(decryptedData).data.preview);
         setTransactionId(JSON.parse(decryptedData).data.transactionCache._id);
         if (JSON.parse(decryptedData).statusCode == 200) {
@@ -145,7 +144,6 @@ const BuySell = () => {
           errInPreview.response.data.payload
         );
         let response = JSON.parse(decryptedData);
-        // console.log('response', response)
         if (response.messageCode == "TECHNICAL_ERROR") {
           Swal.fire({
             html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,

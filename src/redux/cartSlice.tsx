@@ -36,11 +36,9 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         calculatePurchasedGoldWeight: (state) => {
-            console.log('logged globally')
             if (state.useVaultBalanceGold) {
                 // Check if the vault balance is greater than total gold weight
                 if (state.goldVaultBalance >= state.totalGoldWeight) {
-                    console.log('state.goldVaultBalance >= state.totalGoldWeight')
                     state.purchasedGoldWeight = 0; // User doesn't need to purchase additional gold
                     state.goldGstForCart = 0;
                     state.amountWithoutTaxGold = 0;
@@ -48,7 +46,6 @@ const cartSlice = createSlice({
                     state.goldVaultWeightUsed = state.totalGoldWeight
                 } else {
                     // User needs to purchase the difference
-                    console.log('state.totalGoldWeight', state.totalGoldWeight)
                     state.purchasedGoldWeight = Math.abs(ParseFloat(state.totalGoldWeight - state.goldVaultBalance, 4));
                     state.goldGstForCart = ParseFloat(state.liveGoldPrice * state.purchasedGoldWeight * 0.03, 2);
                     state.amountWithoutTaxGold = ParseFloat(state.liveGoldPrice * state.purchasedGoldWeight, 4);

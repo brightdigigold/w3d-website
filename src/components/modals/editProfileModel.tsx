@@ -121,7 +121,6 @@ const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: 
         if (error.response && error.response.data && error.response.data.payload) {
           const decryptedData = AesDecrypt(error.response.data.payload);
           const finalResult = JSON.parse(decryptedData);
-          console.error(error);
           Swal.fire({
             html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
             title: "Oops...",

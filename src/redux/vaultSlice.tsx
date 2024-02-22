@@ -11,7 +11,6 @@ const apiForWallet = async () => {
         'Content-Type': 'application/json',
       },
     });
-    //  console.log('response', response);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -28,7 +27,6 @@ export const fetchWalletData = createAsyncThunk('vault/fetchWalletData', async (
   try {
     dispatch(setLoading(true));
     const walletData: Wallet = await apiForWallet();
-    console.log('=====>', walletData)
     dispatch(setGoldVaultBalance(walletData?.gold));
     dispatch(setGiftedGoldWeight(walletData?.holdGoldGram));
     dispatch(setSilverVaultBalance(walletData?.silver));

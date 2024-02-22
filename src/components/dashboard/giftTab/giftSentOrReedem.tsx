@@ -117,7 +117,6 @@ const Redeem = (refreshOnGiftSent: any) => {
         const decryptedData = await AesDecrypt(data.payload);
         let userRewardsDecrypt = JSON.parse(decryptedData).data.rewardsData;
 
-        // console.log("decryptedData", JSON.parse(decryptedData).data);
         if (userRewardsDecrypt.length > 0) {
           setPage(JSON.parse(decryptedData).data.currentPage);
           setTotalPage(JSON.parse(decryptedData).data.totalPages);
@@ -180,7 +179,6 @@ const Redeem = (refreshOnGiftSent: any) => {
             getRewards(metal, status, page, size);
             const decryptedData = AesDecrypt(error.response.data.payload);
             let decryptedResponse = JSON.parse(decryptedData);
-            // console.log('decryptedResponse', decryptedResponse)
             Swal.fire({
               html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
               title: decryptedResponse?.message
@@ -200,7 +198,6 @@ const Redeem = (refreshOnGiftSent: any) => {
     getRewards(metal, status, page, size);
   }, [refreshOnGiftSent]);
 
-  // console.log('userRewards', userRewards)
   return (
     <div className="w-full rounded">
       <div className=" col-span-2 p-4 rounded-lg bg-themeLight text-white">

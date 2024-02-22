@@ -87,7 +87,6 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
     fetchData();
   }, [dataToEncrept]);
 
-  console.log('previewData', previewData);
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
