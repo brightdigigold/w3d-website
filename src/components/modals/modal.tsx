@@ -1,10 +1,11 @@
 "use client";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { ParseFloat, funForAesEncrypt } from "../helperFunctions";
 import {
+  clearCoupon,
   isCouponApplied,
   selectAppliedCouponCode,
 } from "@/redux/couponSlice";
@@ -22,6 +23,7 @@ import {
 } from "@/redux/shopSlice";
 
 export default function Modal({ isOpen, onClose, transactionId, previewData }: any) {
+  const dispatch = useDispatch();
   const gst = useSelector((state: RootState) => state.shop.gst);
   const metalType = useSelector((state: RootState) => state.shop.metalType);
   const [encryptedPayload, setEncryptedPayload] = useState<string>("");
@@ -39,7 +41,13 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   const cancelButtonRef = useRef(null);
   const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value;
 
-  console.log('welcomeGold', welcomeGold)
+  // console.log('welcomeGold', welcomeGold)
+
+  useEffect(() => {
+    if (welcomeGold) {
+      dispatch(clearCoupon());
+    }
+  }, [])
 
   const openModalPayout = async () => {
     setModalOpen(true);
