@@ -8,7 +8,6 @@ import {
 } from "@/components/helperFunctions";
 import { selectUser } from "@/redux/userDetailsSlice";
 import {
-  fetchWalletData,
   selectGoldVaultBalance,
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
@@ -64,7 +63,7 @@ const Cart = () => {
   const totalGoldWeight = useSelector((state: RootState) => state.cart.totalGoldWeight);
   const totalSilverWeight = useSelector((state: RootState) => state.cart.totalSilverWeight);
   const totalMakingCharges = useSelector((state: RootState) => state.cart.totalMakingCharges);
-  const totalMakingChargesGold = useSelector((state: RootState) => state.cart.totalMakingChargesGold);
+  const totalGoldMakingCharges = useSelector((state: RootState) => state.cart.totalMakingChargesGold);
   const totalMakingChargesSilver = useSelector((state: RootState) => state.cart.totalMakingChargesSilver);
   const totalGoldCoins = useSelector((state: RootState) => state.cart.totalGoldCoins);
   const totalSilverCoins = useSelector((state: RootState) => state.cart.totalSilverCoins);
@@ -124,13 +123,13 @@ const Cart = () => {
     dispatch(setSilverVaultBalance(silverVaultBalance));
     calculateTotals();
     updateAddressList();
-    // dispatch(fetchWalletData() as any);
   }, []);
 
   const calculateTotals = () => {
+    console.log('clicked!!!')
     let totalGoldWeight = 0;
     let totalSilverWeight = 0;
-    let totalMakingChargesGold = 0;
+    let totalGoldMakingCharges = 0;
     let totalSilverMakingCharges = 0;
     let totalMakingCharges = 0;
     let totalMakingWithoutTax = 0;
@@ -151,7 +150,7 @@ const Cart = () => {
 
       if (item?.product?.iteamtype === "GOLD") {
         totalGoldWeight += itemWeight;
-        totalMakingChargesGold += itemMakingCharges;
+        totalGoldMakingCharges += itemMakingCharges;
         totalGoldCoins += item?.product?.count;
       } else if (item?.product?.iteamtype === "SILVER") {
         totalSilverWeight += itemWeight;
@@ -173,7 +172,7 @@ const Cart = () => {
     // Dispatch actions to update the state in the Redux store
     dispatch(setTotalGoldWeight(totalGoldWeight));
     dispatch(setTotalSilverWeight(totalSilverWeight));
-    dispatch(setTotalMakingChargesGold(totalMakingChargesGold));
+    dispatch(setTotalMakingChargesGold(totalGoldMakingCharges));
     dispatch(setTotalMakingChargesSilver(totalSilverMakingCharges));
     dispatch(setTotalMakingCharges(totalMakingCharges));
     dispatch(setTotalMakingWithoutTax(totalMakingWithoutTax));
@@ -250,7 +249,7 @@ const Cart = () => {
   useEffect(() => {
     dispatch(setTotalGoldWeight(totalGoldWeight));
     dispatch(setTotalSilverWeight(totalSilverWeight));
-    dispatch(setTotalMakingChargesGold(totalMakingChargesGold));
+    dispatch(setTotalMakingChargesGold(totalGoldMakingCharges));
     dispatch(setTotalMakingCharges(totalMakingCharges));
     dispatch(setTotalMakingWithoutTax(totalMakingWithoutTax));
     dispatch(setGoldVaultBalance(goldVaultBalance));
@@ -583,7 +582,7 @@ const Cart = () => {
                 key={product?.product._id}
                 className="rounded-xl bg-themeLight mb-3 sm:p-4 p-3 shadow-black shadow-sm"
               >
-                <div className="md:flex justify-between gap-2 items-center bg-slate-600">
+                <div className="md:flex justify-between gap-2 items-center">
                   <div className=" flex gap-4 items-center">
                     <div>
                       <img
@@ -618,7 +617,7 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex  items-center justify-end pt-2 md:pt-0 bg-red-600">
+                  <div className="flex  items-center justify-end pt-2 md:pt-0">
                     <div className="flex items-center rounded-lg bg-themeLight">
                       <div
                         onClick={(event: any) => {
@@ -814,7 +813,7 @@ const Cart = () => {
                         label: "Total Gold Coin Price (Incl. 3% GST)",
                         value: "₹ " + amountWithTaxGold.toLocaleString("en-IN"),
                       })}
-                      {/* {renderPriceBreakdownItemCart({ label: 'Total Making Charges (Incl. 18% GST)', value: "₹ " + totalMakingChargesGold })} */}
+                      {/* {renderPriceBreakdownItemCart({ label: 'Total Making Charges (Incl. 18% GST)', value: "₹ " + totalGoldMakingCharges })} */}
                     </>
                   )}
                   <div className="mt-3">
