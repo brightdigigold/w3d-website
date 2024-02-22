@@ -166,19 +166,19 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                     </div>
                   )}
 
-                  {welcomeGold && (
+                  {welcomeGold ? (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">Total Gold Weight </p>
                       <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat((metalQuantity ?? 0) + welcomeGold, 4)} gm</p>
                     </div>
-                  )}
-
-                  {metalType === "gold" && isAnyCouponApplied && (
+                  ) : metalType === "gold" && isAnyCouponApplied && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">Total Gold Weight </p>
                       <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat((metalQuantity ?? 0) + extraGold, 4)} gm</p>
                     </div>
                   )}
+
+
 
                   {purchaseType === "buy" && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
