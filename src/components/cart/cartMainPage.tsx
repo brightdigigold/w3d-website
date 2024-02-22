@@ -64,7 +64,7 @@ const Cart = () => {
   const totalGoldWeight = useSelector((state: RootState) => state.cart.totalGoldWeight);
   const totalSilverWeight = useSelector((state: RootState) => state.cart.totalSilverWeight);
   const totalMakingCharges = useSelector((state: RootState) => state.cart.totalMakingCharges);
-  const totalGoldMakingCharges = useSelector((state: RootState) => state.cart.totalMakingChargesGold);
+  const totalMakingChargesGold = useSelector((state: RootState) => state.cart.totalMakingChargesGold);
   const totalMakingChargesSilver = useSelector((state: RootState) => state.cart.totalMakingChargesSilver);
   const totalGoldCoins = useSelector((state: RootState) => state.cart.totalGoldCoins);
   const totalSilverCoins = useSelector((state: RootState) => state.cart.totalSilverCoins);
@@ -130,7 +130,7 @@ const Cart = () => {
   const calculateTotals = () => {
     let totalGoldWeight = 0;
     let totalSilverWeight = 0;
-    let totalGoldMakingCharges = 0;
+    let totalMakingChargesGold = 0;
     let totalSilverMakingCharges = 0;
     let totalMakingCharges = 0;
     let totalMakingWithoutTax = 0;
@@ -151,7 +151,7 @@ const Cart = () => {
 
       if (item?.product?.iteamtype === "GOLD") {
         totalGoldWeight += itemWeight;
-        totalGoldMakingCharges += itemMakingCharges;
+        totalMakingChargesGold += itemMakingCharges;
         totalGoldCoins += item?.product?.count;
       } else if (item?.product?.iteamtype === "SILVER") {
         totalSilverWeight += itemWeight;
@@ -173,7 +173,7 @@ const Cart = () => {
     // Dispatch actions to update the state in the Redux store
     dispatch(setTotalGoldWeight(totalGoldWeight));
     dispatch(setTotalSilverWeight(totalSilverWeight));
-    dispatch(setTotalMakingChargesGold(totalGoldMakingCharges));
+    dispatch(setTotalMakingChargesGold(totalMakingChargesGold));
     dispatch(setTotalMakingChargesSilver(totalSilverMakingCharges));
     dispatch(setTotalMakingCharges(totalMakingCharges));
     dispatch(setTotalMakingWithoutTax(totalMakingWithoutTax));
@@ -250,7 +250,7 @@ const Cart = () => {
   useEffect(() => {
     dispatch(setTotalGoldWeight(totalGoldWeight));
     dispatch(setTotalSilverWeight(totalSilverWeight));
-    dispatch(setTotalMakingChargesGold(totalGoldMakingCharges));
+    dispatch(setTotalMakingChargesGold(totalMakingChargesGold));
     dispatch(setTotalMakingCharges(totalMakingCharges));
     dispatch(setTotalMakingWithoutTax(totalMakingWithoutTax));
     dispatch(setGoldVaultBalance(goldVaultBalance));
@@ -814,7 +814,7 @@ const Cart = () => {
                         label: "Total Gold Coin Price (Incl. 3% GST)",
                         value: "₹ " + amountWithTaxGold.toLocaleString("en-IN"),
                       })}
-                      {/* {renderPriceBreakdownItemCart({ label: 'Total Making Charges (Incl. 18% GST)', value: "₹ " + totalGoldMakingCharges })} */}
+                      {/* {renderPriceBreakdownItemCart({ label: 'Total Making Charges (Incl. 18% GST)', value: "₹ " + totalMakingChargesGold })} */}
                     </>
                   )}
                   <div className="mt-3">
