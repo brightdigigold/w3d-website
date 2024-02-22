@@ -3,6 +3,8 @@ import React, { memo, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { UserReward } from "@/types";
+import { fetchWalletData } from "@/redux/vaultSlice";
+import { useDispatch } from "react-redux";
 
 const Redeem = (refreshOnGiftSent: any) => {
   const [userRewards, setUserRewards] = useState<UserReward[]>([]);
@@ -12,6 +14,7 @@ const Redeem = (refreshOnGiftSent: any) => {
   const [totalPage, setTotalPage] = useState(1);
   const [itemList, setItemList] = useState<any[]>([]);
   const [size, setSize] = useState(5);
+  const dispatch = useDispatch();
 
   const redeemReward = async (id: any) => {
     Swal.fire({
@@ -49,6 +52,7 @@ const Redeem = (refreshOnGiftSent: any) => {
               timer: 1500,
             });
             getRewards(metal, status, page, size);
+            dispatch(fetchWalletData() as any);
           })
           .catch(async (error) => {
             const decryptedData = AesDecrypt(error.response.data.payload);
@@ -170,6 +174,7 @@ const Redeem = (refreshOnGiftSent: any) => {
               timer: 1500,
             });
             getRewards(metal, status, page, size);
+            dispatch(fetchWalletData() as any);
           })
           .catch(async (error) => {
             getRewards(metal, status, page, size);
