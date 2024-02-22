@@ -2,7 +2,8 @@
 import Link from "next/link";
 import React from "react";
 import { Disclosure } from "@headlessui/react";
-import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
+import { FaChevronCircleDown, FaChevronCircleUp, FaPlus, FaMinus } from 'react-icons/fa';
+
 
 const faqs = [
   {
@@ -53,12 +54,12 @@ const Faq = () => {
                           </span>
                           <span className="ml-6 flex h-7 items-center ">
                             {open ? (
-                              <FaChevronCircleUp
+                              <FaPlus
                                 className="h-6 w-6"
                                 aria-hidden="true"
                               />
                             ) : (
-                              <FaChevronCircleDown
+                              <FaMinus
                                 className="h-6 w-6"
                                 aria-hidden="true"
                               />
@@ -72,12 +73,12 @@ const Faq = () => {
                           </span>
                           <span className="ml-6 flex h-7 items-center ">
                             {open ? (
-                              <FaChevronCircleUp
+                              <FaPlus
                                 className="h-6 w-6"
                                 aria-hidden="true"
                               />
                             ) : (
-                              <FaChevronCircleDown
+                              <FaMinus
                                 className="h-6 w-6"
                                 aria-hidden="true"
                               />

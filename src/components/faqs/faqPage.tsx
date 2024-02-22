@@ -117,7 +117,7 @@ const Faq = () => {
             </div>
           </div>
           <div className="w-full">
-            <div
+            <div onClick={() => handleSectionClick("BUY")}
               className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${
                 activeSectionType === "BUY"
                   ? "border-1 border-themeDarkBlue"
@@ -125,7 +125,7 @@ const Faq = () => {
               }`}
             >
               <img
-                onClick={() => handleSectionClick("BUY")}
+                // onClick={() => handleSectionClick("BUY")}
                 src="/faq2.png"
                 className="h-12 mx-auto"
               />
@@ -133,7 +133,7 @@ const Faq = () => {
             </div>
           </div>
           <div className="w-full ">
-            <div
+            <div onClick={() => handleSectionClick("SELL")}
               className={`cursor-pointer rounded-md w-full bg-themeLight block sm:inline-block px-2 sm:px-6 py-1 sm:py-2 text-center shadow-xl text-white  ${
                 activeSectionType === "SELL"
                   ? "border-1 border-themeDarkBlue"
@@ -141,7 +141,7 @@ const Faq = () => {
               }`}
             >
               <img
-                onClick={() => handleSectionClick("SELL")}
+                // onClick={() => handleSectionClick("SELL")}
                 src="/faq3.png"
                 className="h-12 mx-auto"
               />
