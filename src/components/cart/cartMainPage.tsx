@@ -56,7 +56,7 @@ import AddAddressModel from "../modals/addAddressModel";
 const Cart = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [isOpened, setIsOpened] = useState(false);
+  const [isOpened, setIsOpened] = useState<boolean>(false);
   const [encryptedPayload, setEncryptedPayload] = useState<string>("");
   const cart = useSelector((state: RootState) => state.cart);
   const cartProducts = useSelector((state: RootState) => state.cart.products);
@@ -90,12 +90,11 @@ const Cart = () => {
   const user = useSelector(selectUser);
   const [quantity, setQuantity] = useState<number>(1);
   const { _id } = user.data;
-  const [maxCoinError, setMaxCoinError] = useState("");
-  const [openConvertMetalModal, setOpenConvertMetalModal] =
-    useState<boolean>(false);
+  const [maxCoinError, setMaxCoinError] = useState<String>("");
+  const [openConvertMetalModal, setOpenConvertMetalModal] = useState<boolean>(false);
   const [metalTypeToConvert, setMetalTypeToConvert] = useState<String>("GOLD");
   const [addressList, setaddressList] = useState<Address[]>([]);
-  const [selectedAddressId, setSelectedAddressId] = useState("");
+  const [selectedAddressId, setSelectedAddressId] = useState<String>("");
   const [showAddNewAddress, setShowAddNewAddress] = useState<boolean>(false);
   const maxAddressCount: number = 3;
 
@@ -126,7 +125,6 @@ const Cart = () => {
   }, []);
 
   const calculateTotals = () => {
-    console.log('clicked!!!')
     let totalGoldWeight = 0;
     let totalSilverWeight = 0;
     let totalGoldMakingCharges = 0;
@@ -250,6 +248,7 @@ const Cart = () => {
     dispatch(setTotalGoldWeight(totalGoldWeight));
     dispatch(setTotalSilverWeight(totalSilverWeight));
     dispatch(setTotalMakingChargesGold(totalGoldMakingCharges));
+    dispatch(setTotalMakingChargesSilver(totalMakingChargesSilver));
     dispatch(setTotalMakingCharges(totalMakingCharges));
     dispatch(setTotalMakingWithoutTax(totalMakingWithoutTax));
     dispatch(setGoldVaultBalance(goldVaultBalance));
