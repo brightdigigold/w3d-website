@@ -3,6 +3,7 @@ import { RootState } from '@/redux/store';
 import React from 'react'
 import { useSelector } from 'react-redux';
 import OtpModal from '../modals/otpModal';
+import Link from 'next/link';
 
 const ShippingPolicy = () => {
     const otpModal = useSelector((state: RootState) => state.auth.otpModal);
@@ -54,7 +55,7 @@ const ShippingPolicy = () => {
                                     possible. All of our products are 100% certified and there
                                     should never be any problems with quality. In the unlikely
                                     event of any issues, please contact
-                                    support@brightdigigold.com, we will investigate the matter to
+                                    <Link style={{ color: "#0d6efd" }} href="mailto:support@brightdigigold.com">support@brightdigigold.com</Link>, we will investigate the matter to
                                     resolve any concerns or issues.
                                 </p>
                             </div>
@@ -82,7 +83,7 @@ const ShippingPolicy = () => {
                         <br />
                         We will also send this report and your holding details to your
                         registered email within 24 hours. For any questions or
-                        clarifications please contact us on support@brightdigigold.com.
+                        clarifications please contact us on <Link style={{ color: "#0d6efd" }} href="mailto:support@brightdigigold.com">support@brightdigigold.com</Link>.
                     </p>
                 </div>
             </div>

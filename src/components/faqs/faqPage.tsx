@@ -1,91 +1,60 @@
 "use client";
-import { funcForDecrypt } from "@/components/helperFunctions";
-import React, { useEffect, useState } from "react";
-import { Disclosure } from "@headlessui/react";
-import { FaChevronCircleDown, FaChevronCircleUp, FaPlus, FaMinus } from "react-icons/fa";
-import { RootState } from "@/redux/store";
-import { useSelector } from "react-redux";
-import OtpModal from "../modals/otpModal";
+import React, { useEffect, useState } from 'react';
+import { Disclosure } from '@headlessui/react';
+import { FaChevronCircleDown, FaChevronCircleUp, FaPlus, FaMinus } from 'react-icons/fa';
+import { RootState } from '@/redux/store';
+import { useSelector } from 'react-redux';
+import { funcForDecrypt } from '../helperFunctions';
+import OtpModal from '../modals/otpModal';
 
 const Section = ({ sectionType, faqData, isActive }: any) => {
-  const [open, setOpen] = useState(false);
+  const [openIndex, setOpenIndex] = useState<number | null>(null); // Track the index of the open item
 
   if (!isActive) {
     return null;
   }
 
+  const handleToggle = (index: number) => {
+    // Toggle the open state based on the index. If the same index is clicked, close it.
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   const renderSection = () => {
-    return faqData.map((faq: any, index: any) => {
+    return faqData.map((faq: any, index: number) => {
       if (faq.type === sectionType) {
+        const isOpen = index === openIndex; // Determine if this FAQ is open
         return (
-          <Disclosure
-            as="div"
-            key={faq?.index}
-            className="pt-4"
-            onClick={() => {
-              setOpen(!open);
-            }}
-          >
+          <Disclosure as="div" key={index} className="pt-4">
             <>
-              <dt>
-                {open ? (
-                  <Disclosure.Button className="faq-back flex w-full relative text-sm sm:text-base items-start justify-between text-left text-white rounded-t-2xl px-4 py-4">
-                    <span className="text-base bold leading-7">
-                      {faq.title}
-                    </span>
-                    <span className="ml-6 flex h-7 items-center">
-                      {open ? (
-                        <FaMinus
-                          className="h-6 w-6"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <FaPlus
-                          className="h-6 w-6"
-                          aria-hidden="true"
-                        />
-                      )}
-                    </span>
-                  </Disclosure.Button>
-                ) : (
-                  <Disclosure.Button className="faq-back flex w-full relative text-sm sm:text-base items-start justify-between text-left text-white rounded-2xl px-4 py-4">
-                    <span className="text-base bold leading-7">
-                      {faq.title}
-                    </span>
-                    <span className="ml-6 flex h-7 items-center">
-                      {open ? (
-                        <FaMinus
-                          className="h-6 w-6"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <FaPlus
-                          className="h-6 w-6"
-                          aria-hidden="true"
-                        />
-                      )}
-                    </span>
-                  </Disclosure.Button>
-                )}
+              <dt onClick={() => handleToggle(index)}> {/* Updated to use handleToggle */}
+                <Disclosure.Button className={`faq-back flex w-full relative text-sm sm:text-base items-start justify-between text-left text-white ${isOpen ? 'rounded-t-2xl' : 'rounded-2xl'} px-4 py-4`}>
+                  <span className="text-base bold leading-7">
+                    {faq.title}
+                  </span>
+                  <span className="ml-6 flex h-7 items-center">
+                    {isOpen ? (
+                      <FaMinus className="h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <FaPlus className="h-6 w-6" aria-hidden="true" />
+                    )}
+                  </span>
+                </Disclosure.Button>
               </dt>
-              <Disclosure.Panel
-                as="dd"
-                className="bold  sm:text-lg leading-7 text-gray-600 rounded-b-2xl px-4 py-2 bg-themeBlue"
-              >
+              <Disclosure.Panel as="dd" className="bold sm:text-lg leading-7 text-gray-600 rounded-b-2xl px-4 py-2 bg-themeBlue">
                 <p dangerouslySetInnerHTML={{ __html: faq.description }} />
               </Disclosure.Panel>
             </>
           </Disclosure>
         );
       }
-    });
+      return null; // Return null for unmatched type, ensuring all paths return a value
+    }).filter(Boolean); // Filter out any nulls from the map
   };
 
   return (
     <div>
       <h3 className="py-6 text-gold01 text-center text-2xl">{sectionType}</h3>
       <dl className="space-y-2 divide-y divide-gray-900/10">
-        {/* Assuming you have a way to determine whether the section is open or closed */}
         {renderSection()}
       </dl>
     </div>

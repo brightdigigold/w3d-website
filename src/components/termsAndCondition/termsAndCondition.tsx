@@ -3,6 +3,7 @@ import React from 'react'
 import OtpModal from '../modals/otpModal';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import Link from 'next/link';
 
 
 const TermsAndCondition = () => {
@@ -185,8 +186,8 @@ const TermsAndCondition = () => {
                                             In Case of fraudulent transactions, Customer whose account
                                             has been debited needs to File a Complaint (F.I.R) with
                                             the cyber cell and share the copy of the same with us at{" "}
-                                            <span style={{ color: "#0d6efd" }}>
-                                                support@brightdigigold.com{" "}
+                                            <span>
+                                                <Link style={{ color: "#0d6efd" }} href="mailto:support@brightdigigold.com">support@brightdigigold.com</Link>
                                             </span>
                                             within 48 hours of the transaction.. We at Bright DiGi
                                             Gold will assist the customer to make an account on our
@@ -346,8 +347,8 @@ const TermsAndCondition = () => {
                                         <li className="p-2 list-disc leading-8  ">
                                             The contact details of Grievance Officer for the purposes
                                             of Bright Digi Gold are: E-mail ID:{" "}
-                                            <span style={{ color: "#0d6efd" }}>
-                                                support@brightdigigold.com{" "}
+                                            <span>
+                                                <Link style={{ color: "#0d6efd" }} href="mailto:support@brightdigigold.com">support@brightdigigold.com</Link>
                                             </span>
                                             Address:501 - 503, 5th Floor, World Trade Centre, Babar
                                             Road, New Delhi - 110001.
@@ -407,8 +408,8 @@ const TermsAndCondition = () => {
                                             information about the transaction if the victim contacts
                                             the company through the proper channels, including BDGPL's
                                             customer support number and email{" "}
-                                            <span style={{ color: "#0d6efd" }}>
-                                                support@brightdigigold.com{" "}
+                                            <span>
+                                                <Link style={{ color: "#0d6efd" }} href="mailto:support@brightdigigold.com">support@brightdigigold.com</Link>
                                             </span>
                                             , along with proof of the fraud from the appropriate
                                             public authority or Cyber Cell
