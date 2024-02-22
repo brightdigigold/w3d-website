@@ -55,7 +55,7 @@ const couponSlice = createSlice({
         state.appliedCouponCode = null;
         state.extraGoldOfRuppess = 0;
         state.extraGold = 0;
-      } else if (transactionType === 'grams' && Math.round((amount * goldPrice) + gst) < coupon.minimum) {
+      } else if (transactionType === 'grams' && ParseFloat((amount * goldPrice) + gst, 2) < coupon.minimum) {
         state.error = `This Coupon is not applicable for amount less than Rs ${coupon.minimum}`;
         state.selectedCoupon = null;
         state.appliedCouponCode = null;

@@ -23,7 +23,7 @@ const recalculateValues = (state: GiftState) => {
     } else if (state.transactionType === 'grams') {
         state.actualAmount = ParseFloat(metalPrice * enteredAmount, 2);
         state.metalQuantity = state.enteredAmount;
-        state.totalAmount = Math.round(state.actualAmount);
+        state.totalAmount = ParseFloat(state.actualAmount, 2);
     }
 }
 
