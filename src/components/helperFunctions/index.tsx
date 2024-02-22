@@ -17,7 +17,6 @@ export function AesDecrypt(data: any) {
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
   });
-  //
 
   return cipher.toString(CryptoJS.enc.Utf8);
 }

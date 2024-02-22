@@ -23,11 +23,11 @@ const nextConfig = {
   // },
   env: {
     // baseUrl: "https://api.brightdigigold.com",
-    baseUrl: "https://devapi.brightdigigold.com",
+    // baseUrl: "https://devapi.brightdigigold.com",
     // cashfree: "sandbox",
     cashfree: "production",
     // baseUrl: "http://localhost:3031",
-    baseUrl: "http://192.168.1.10:3031",
+    baseUrl: "http://192.168.1.8:3031",
     GOOGLE_TAG : "GTM-5JFBNN5",
   },
   reactStrictMode: true,

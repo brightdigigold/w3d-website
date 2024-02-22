@@ -37,10 +37,9 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   const extraGold = useSelector((state: RootState) => state.coupon.extraGold);
   const [isModalOpen, setModalOpen] = useState(false);
   const cancelButtonRef = useRef(null);
+  const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value;
 
-  const welcomeGold = previewData.find(item => item.key === 'Welcome GOLD')?.value;
-
-  // console.log('welcomeGold', welcomeGold)
+  console.log('welcomeGold', welcomeGold)
 
   const openModalPayout = async () => {
     setModalOpen(true);
@@ -166,12 +165,21 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                       </p>
                     </div>
                   )}
+
+                  {welcomeGold && (
+                    <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
+                      <p className=" text-sm sm:text-base">Total Gold Weight </p>
+                      <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat((metalQuantity ?? 0) + welcomeGold, 4)} gm</p>
+                    </div>
+                  )}
+
                   {metalType === "gold" && isAnyCouponApplied && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">Total Gold Weight </p>
                       <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat((metalQuantity ?? 0) + extraGold, 4)} gm</p>
                     </div>
                   )}
+
                   {purchaseType === "buy" && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">GST ( +3% )</p>{" "}
