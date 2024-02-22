@@ -39,9 +39,11 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   const extraGold = useSelector((state: RootState) => state.coupon.extraGold);
   const [isModalOpen, setModalOpen] = useState(false);
   const cancelButtonRef = useRef(null);
-  const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value;
+  const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value.replace(/ gm/g, '');
 
-  // console.log('welcomeGold', welcomeGold)
+  console.log('welcomeGold', welcomeGold)
+  const a = "0.007 gm"
+  console.log('value of a', +a.replace(/ gm/g, ''))
 
   useEffect(() => {
     if (welcomeGold) {
@@ -177,7 +179,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                   {welcomeGold ? (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">Total Gold Weight </p>
-                      <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat((metalQuantity ?? 0) + welcomeGold, 4)} gm</p>
+                      <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat((metalQuantity ?? 0) + (+welcomeGold), 4)} gm</p>
                     </div>
                   ) : metalType === "gold" && isAnyCouponApplied && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
