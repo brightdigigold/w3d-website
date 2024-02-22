@@ -38,6 +38,8 @@ import {
   setTotalSilverCoins,
   setTotalSilverWeight,
   setUseVaultBalanceSilver,
+  calculatePurchasedGoldWeight,
+  calculatePurchasedSilverWeight
 } from "@/redux/cartSlice";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProgressBar from "@/components/progressBar";
@@ -124,6 +126,7 @@ const Cart = () => {
   }, []);
 
   const calculateTotals = () => {
+    console.log('clicked!!!')
     let totalGoldWeight = 0;
     let totalSilverWeight = 0;
     let totalGoldMakingCharges = 0;
@@ -191,6 +194,8 @@ const Cart = () => {
     dispatch(setSilverVaultBalance(silverVaultBalance));
     dispatch(setLiveGoldPrice(goldData.totalPrice));
     dispatch(setLiveSilverPrice(silverData.totalPrice));
+    dispatch(calculatePurchasedGoldWeight());
+    dispatch(calculatePurchasedSilverWeight());
   }, [
     cart.products,
     liveGoldPrice,
@@ -356,6 +361,7 @@ const Cart = () => {
     coinHave: number,
     productId: any
   ) => {
+
     if (quantity >= maxForCart) {
       setMaxCoinError(
         `You can only purchase ${maxForCart} coins of this item.`
