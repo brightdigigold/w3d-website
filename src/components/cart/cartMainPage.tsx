@@ -471,11 +471,11 @@ const Cart = () => {
           No Item In Cart
         </p>
         <div className=" flex justify-center">
-          <div>
-            <img src="/lottie/Empty cart.gif" />
+          <div >
+            <img src="/lottie/Empty carts.gif" />
             <div className=" flex justify-center">
               <Link
-                className="text-black bg-themeBlue rounded px-4 py-2 mt-12"
+                className="text-black bg-themeBlue rounded px-4 py-2 "
                 href="/coins"
               >
                 Continue Shopping
