@@ -41,9 +41,6 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   const cancelButtonRef = useRef(null);
   const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value.replace(/ gm/g, '');
 
-  console.log('welcomeGold', welcomeGold)
-  const a = "0.007 gm"
-  console.log('value of a', +a.replace(/ gm/g, ''))
 
   useEffect(() => {
     if (welcomeGold) {

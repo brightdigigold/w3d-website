@@ -8,6 +8,7 @@ import {
 } from "@/components/helperFunctions";
 import { selectUser } from "@/redux/userDetailsSlice";
 import {
+  fetchWalletData,
   selectGoldVaultBalance,
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
@@ -123,10 +124,10 @@ const Cart = () => {
     dispatch(setSilverVaultBalance(silverVaultBalance));
     calculateTotals();
     updateAddressList();
+    // dispatch(fetchWalletData() as any);
   }, []);
 
   const calculateTotals = () => {
-    console.log('clicked!!!')
     let totalGoldWeight = 0;
     let totalSilverWeight = 0;
     let totalGoldMakingCharges = 0;
@@ -582,7 +583,7 @@ const Cart = () => {
                 key={product?.product._id}
                 className="rounded-xl bg-themeLight mb-3 sm:p-4 p-3 shadow-black shadow-sm"
               >
-                <div className="md:flex justify-between gap-2 items-center">
+                <div className="md:flex justify-between gap-2 items-center bg-slate-600">
                   <div className=" flex gap-4 items-center">
                     <div>
                       <img
@@ -617,7 +618,7 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex  items-center justify-end pt-2 md:pt-0">
+                  <div className="flex  items-center justify-end pt-2 md:pt-0 bg-red-600">
                     <div className="flex items-center rounded-lg bg-themeLight">
                       <div
                         onClick={(event: any) => {
