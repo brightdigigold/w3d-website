@@ -44,6 +44,8 @@ const cartSlice = createSlice({
                     state.amountWithoutTaxGold = 0;
                     state.amountWithTaxGold = 0;
                     state.goldVaultWeightUsed = state.totalGoldWeight
+                    state.finalAmount = ParseFloat(state.amountWithTaxGold + state.amountWithTaxSilver + state.totalMakingCharges, 2);
+
                 } else {
                     // User needs to purchase the difference
                     state.purchasedGoldWeight = Math.abs(ParseFloat(state.totalGoldWeight - state.goldVaultBalance, 4));
@@ -51,6 +53,8 @@ const cartSlice = createSlice({
                     state.amountWithoutTaxGold = ParseFloat(state.liveGoldPrice * state.purchasedGoldWeight, 4);
                     state.amountWithTaxGold = ParseFloat((state.amountWithoutTaxGold + state.goldGstForCart), 2);
                     state.goldVaultWeightUsed = state.goldVaultBalance
+                    state.finalAmount = ParseFloat(state.amountWithTaxGold + state.amountWithTaxSilver + state.totalMakingCharges, 2);
+
                 }
             }
             if (!state.useVaultBalanceGold) {
@@ -59,6 +63,8 @@ const cartSlice = createSlice({
                 state.goldGstForCart = ParseFloat(state.totalGoldWeight * 0.03 * state.liveGoldPrice, 2);
                 state.amountWithoutTaxGold = ParseFloat(state.liveGoldPrice * state.totalGoldWeight, 4);
                 state.amountWithTaxGold = ParseFloat((state.amountWithoutTaxGold + state.goldGstForCart), 2);
+                state.finalAmount = ParseFloat(state.amountWithTaxGold + state.amountWithTaxSilver + state.totalMakingCharges, 2);
+
 
             }
         },
@@ -73,13 +79,16 @@ const cartSlice = createSlice({
                     state.amountWithoutTaxSilver = 0;
                     state.amountWithTaxSilver = 0;
                     state.silverVaultWeightUsed = state.totalSilverWeight
+                    state.finalAmount = ParseFloat(state.amountWithTaxGold + state.amountWithTaxSilver + state.totalMakingCharges, 2);
+
                 } else {
                     // User needs to purchase the difference
                     state.purchasedSilverWeight = Math.abs(ParseFloat(state.silverVaultBalance - state.totalSilverWeight, 4));
                     state.silverGstForCart = ParseFloat((state.liveSilverPrice * state.purchasedSilverWeight) * 0.03, 2);
                     state.amountWithoutTaxSilver = ParseFloat(state.liveSilverPrice * state.purchasedSilverWeight, 4);
                     state.amountWithTaxSilver = ParseFloat((state.amountWithoutTaxSilver + state.silverGstForCart), 2);
-                    state.silverVaultWeightUsed = state.silverVaultBalance
+                    state.silverVaultWeightUsed = state.silverVaultBalance;
+                    state.finalAmount = ParseFloat(state.amountWithTaxGold + state.amountWithTaxSilver + state.totalMakingCharges, 2);
                 }
             }
             if (!state.useVaultBalanceSilver) {
@@ -88,10 +97,10 @@ const cartSlice = createSlice({
                 state.silverGstForCart = ParseFloat(state.liveSilverPrice * state.totalSilverWeight * 0.03, 2);
                 state.amountWithoutTaxSilver = ParseFloat(state.liveSilverPrice * state.totalSilverWeight, 4);
                 state.amountWithTaxSilver = ParseFloat((state.amountWithoutTaxSilver + state.silverGstForCart), 2);
+                state.finalAmount = ParseFloat(state.amountWithTaxGold + state.amountWithTaxSilver + state.totalMakingCharges, 2);
+
             }
         },
-
-
 
         calculateFinalAmount: (state) => {
             state.finalAmount = ParseFloat(state.amountWithTaxGold + state.amountWithTaxSilver + state.totalMakingCharges, 2);
