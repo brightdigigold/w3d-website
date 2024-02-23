@@ -54,12 +54,12 @@ const Faq = () => {
                           </span>
                           <span className="ml-6 flex h-7 items-center ">
                             {open ? (
-                              <FaPlus
+                              <FaMinus
                                 className="h-6 w-6"
                                 aria-hidden="true"
                               />
                             ) : (
-                              <FaMinus
+                              <FaPlus
                                 className="h-6 w-6"
                                 aria-hidden="true"
                               />
@@ -73,12 +73,12 @@ const Faq = () => {
                           </span>
                           <span className="ml-6 flex h-7 items-center ">
                             {open ? (
-                              <FaPlus
+                              <FaMinus
                                 className="h-6 w-6"
                                 aria-hidden="true"
                               />
                             ) : (
-                              <FaMinus
+                              <FaPlus
                                 className="h-6 w-6"
                                 aria-hidden="true"
                               />
