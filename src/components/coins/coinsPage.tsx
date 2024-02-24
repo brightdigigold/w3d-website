@@ -10,16 +10,19 @@ import { RootState } from "@/redux/store";
 import OtpModal from "@/components/modals/otpModal";
 import {
   selectGoldVaultBalance,
+  selectLoading,
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
 import { useRouter } from "next/navigation";
 import LoginAside from "../authSection/loginAside";
+import ButtonLoader from "../buttonLoader";
 
 const Coins = () => {
   const [ProductList, setProductList] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState("ALL");
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
+  const loading = useSelector(selectLoading);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const router = useRouter();
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
@@ -134,14 +137,14 @@ const Coins = () => {
               <img src={"Goldbarbanner.png"} className="h-5" alt="vault" />
               <div className="text-white ml-2 pr-4 flex">
                 <p className="text-yellow-300 extrabold mr-2">Gold :</p>
-                <p className="text-yellow-300 bold">{goldVaultBalance} Gm</p>
+                <p className="text-yellow-300 bold">{goldVaultBalance ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} Gm</p>
               </div>
             </div>
             <div className="flex items-center mt-2 sm:mt-0">
               <img src={"/Silverbar.png"} className="h-5 sm:ml-4" alt="vault" />
               <div className="ml-2 flex">
                 <p className="text-slate-200 extrabold mr-2">Silver :</p>
-                <p className="text-slate-200 bold">{silverVaultBalance} Gm</p>
+                <p className="text-slate-200 bold">{silverVaultBalance ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} Gm</p>
               </div>
             </div>
           </div>)}

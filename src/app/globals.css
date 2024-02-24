@@ -1006,3 +1006,27 @@ input.inputBox {
     max-width: 1320px;
   }
 }
+
+/* button loader css */
+.button-loader {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #a6d7f1; /* Change color as needed */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
