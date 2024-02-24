@@ -19,6 +19,8 @@ const Vault = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
+  // console.log('giftedGoldWeight', giftedGoldWeight)
+
   return (
     <div className="w-full">
       {/* {loading && <Loading />} */}
@@ -67,7 +69,7 @@ const Vault = () => {
                 />
                 <div>
                   <p className=" text-sm sm:text-2xl">Gold</p>
-                  <p className="text-green-500">{giftedGoldWeight ? giftedGoldWeight : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
+                  <p className="text-green-500">{giftedGoldWeight} gms</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -77,7 +79,7 @@ const Vault = () => {
                 />
                 <div>
                   <p className=" text-sm sm:text-2xl"> Silver</p>
-                  <p className="text-green-500">{giftedSilverWeight ? giftedSilverWeight : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
+                  <p className="text-green-500">{giftedSilverWeight} gms</p>
                 </div>
               </div>
             </div>
