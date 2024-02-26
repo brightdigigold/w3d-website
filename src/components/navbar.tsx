@@ -18,19 +18,22 @@ import SidebarAside from "./mobileSidebar";
 import LoginAside from "./authSection/loginAside";
 import { resetVault } from "@/redux/vaultSlice";
 import { clearCoupon } from "@/redux/couponSlice";
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const pathname = usePathname();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const [openLoginAside, setOpenLoginAside] = useState(false);
   const [openSidebarAside, setOpenSidebarAside] = useState(false);
-  const dispatch = useDispatch();
-  const handleDropdownToggle = (
-    isOpen: boolean | ((prevState: boolean) => boolean)
-  ) => {
+  const handleDropdownToggle = (isOpen: boolean | ((prevState: boolean) => boolean)) => {
     setDropdownOpen(isOpen);
   };
+
+  console.log('pathname', pathname)
 
   const logoutProfile = () => {
     localStorage.removeItem("mobile_number");
@@ -101,26 +104,36 @@ const Navbar = () => {
                   </Link>
                 </div>
               </div>
-              <Link className={styles.p0} href="/" prefetch={true}>
-                Home
-              </Link>
-              <Link className={styles.p0} href="/coins" prefetch={true}>
-                Coins
-              </Link>
-              <Link className={styles.p0} href="/about" prefetch={true}>
-                About
-              </Link>
+              <div className={clsx({ 'border-b-4 border-yellow-500 rounded-md': pathname == '/', })}>
+                <Link className={styles.p0} href="/" prefetch={true}>
+                  Home
+                </Link>
+              </div>
+              <div className={clsx({ 'border-b-4 border-yellow-500 rounded-md': pathname == '/coins', })}>
+                <Link className={styles.p0} href="/coins" prefetch={true}>
+                  Coins
+                </Link>
+              </div>
+              <div className={clsx('mb-0', { 'border-b-4 border-yellow-500 rounded-md': pathname == '/about', })}>
+                <Link className={styles.p0} href="/about" prefetch={true}>
+                  About
+                </Link>
+              </div>
               {/* <Link className={styles.p0} href="/contact" prefetch={true}>
                 Contact Us
               </Link> */}
               {isloggedIn && (
                 <>
-                  <Link className={styles.p0} href="/dashboard" prefetch={true}>
-                    Dashboard
-                  </Link>
-                  <Link className={styles.p0} href="/cart" prefetch={true}>
-                    Cart
-                  </Link>
+                  <div className={clsx({ 'border-b-4 border-yellow-500 rounded-md': pathname == '/dashboard', })}>
+                    <Link className={styles.p0} href="/dashboard" prefetch={true}>
+                      Dashboard
+                    </Link>
+                  </div>
+                  <div className={clsx({ 'border-b-4 border-yellow-500 rounded-md': pathname == '/cart' })}>
+                    <Link className={styles.p0} href="/cart" prefetch={true}>
+                      Cart
+                    </Link>
+                  </div>
                 </>
               )}
 
@@ -128,11 +141,11 @@ const Navbar = () => {
                 <div
                   onMouseEnter={() => handleDropdownToggle(true)}
                   onMouseLeave={() => handleDropdownToggle(false)}
-                  className="hidden xl:block text-lg extrabold tracking-wider text-gray-100 hover:bg-gray-800 hover:text-white rounded-md px-5 py-2 relative cursor-pointer z-20"
+                  className={clsx('hidden xl:block text-lg extrabold tracking-wider text-gray-100 hover:bg-gray-800 hover:text-white rounded-md px-5 py-2 relative cursor-pointer z-20', { 'border-b-4 border-yellow-500': pathname == '/myAccount' })}
                 >
                   <span>My Account</span>
                   {isDropdownOpen && (
-                    <div className="absolute w-32 top-full  left-0 p-2 mt-0 bg-theme space-y-2 shadow-md rounded-md cursor-pointer">
+                    <div className='absolute w-32 top-full  left-0 p-2 mt-0 bg-theme space-y-2 shadow-md rounded-md cursor-pointer'>
                       <Link href="/myAccount" prefetch={true}>
                         <div
                           onClick={() => {
@@ -210,7 +223,7 @@ const Navbar = () => {
                       <span className="sr-only">Open user menu</span>
                       {isloggedIn && (
                         <Link
-                          className="block xl:hidden text-gold01   rounded-md px-1 py-2 text-md font-medium"
+                          className="block xl:hidden text-gold01   rounded-md px-1 py-2 text-md medium"
                           href="#"
                         >
                           <UserCircleIcon
@@ -302,8 +315,9 @@ const Navbar = () => {
 
           {/* Mobile dropdown */}
         </>
-      )}
-    </Disclosure>
+      )
+      }
+    </Disclosure >
   );
 };
 
