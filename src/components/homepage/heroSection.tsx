@@ -29,7 +29,6 @@ const HeroSection = () => {
   useEffect(() => {
     const checkUserIsNew = async () => {
       const token = localStorage.getItem("token");
-      console.log('token', token)
 
       if (token) {
         const configHeaders = {
@@ -47,7 +46,7 @@ const HeroSection = () => {
           const data = await response.json();
           const decryptedData = await AesDecrypt(data.payload);
           const userdata = JSON.parse(decryptedData).data;
-          console.log('userdata', userdata)
+          // console.log('userdata', userdata)
           if (userdata?.isBasicDetailsCompleted) {
             dispatch(setShowOTPmodal(false));
             dispatch(profileFilled(true));
