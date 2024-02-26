@@ -35,8 +35,8 @@ export const fetchWalletData = createAsyncThunk('vault/fetchWalletData', async (
     dispatch(setError(null));
     return walletData;
   } catch (error) {
-    dispatch(setLoading(false));
-    dispatch(setError('Error fetching wallet data'));
+    // dispatch(setLoading(false));
+    dispatch(setError('fetching wallet data...'));
     throw error;
   }
 });

@@ -9,6 +9,7 @@ import {
 } from "@/redux/vaultSlice";
 import React, { memo } from "react";
 import { useSelector } from "react-redux";
+import ButtonLoader from "@/components/buttonLoader";
 
 const Vault = () => {
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
@@ -18,10 +19,11 @@ const Vault = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
+  // console.log('giftedGoldWeight', giftedGoldWeight)
+
   return (
     <div className="w-full">
-      {loading && <Loading />}
-      {error && <p>Error: {error}</p>}
+      {/* {loading && <Loading />} */}
       <div className="grid lg:grid-cols-2 gap-6">
         <div>
           <p className=" text-white  mb-2 mt-3 md:mt-0 tracking-wider extrabold"> Vault Balance</p>
@@ -37,7 +39,7 @@ const Vault = () => {
                 />
                 <div>
                   <p className=" text-sm sm:text-2xl">Gold</p>
-                  <p className="text-green-500 text-sm sm:text-lg">{goldVaultBalance} gms</p>
+                  <p className="text-green-500 text-sm sm:text-lg ">{goldVaultBalance ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -47,7 +49,7 @@ const Vault = () => {
                 />
                 <div>
                   <p className=" text-sm sm:text-2xl"> Silver</p>
-                  <p className="text-green-500 text-sm sm:text-lg">{silverVaultBalance} gms</p>
+                  <p className="text-green-500 text-sm sm:text-lg">{silverVaultBalance ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
                 </div>
               </div>
             </div>
@@ -83,6 +85,7 @@ const Vault = () => {
             </div>
           </div>
         </div>
+        {error && <p className="text-white">{error}</p>}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-// goldSlice.ts
+// metalSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GoldData, SilverData } from '@/types';
 import { RootState } from './store';

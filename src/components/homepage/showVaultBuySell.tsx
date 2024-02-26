@@ -3,7 +3,8 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
 import { ParseFloat } from '../helperFunctions';
-import { selectGoldVaultBalance, selectSilverVaultBalance } from '@/redux/vaultSlice';
+import { selectGoldVaultBalance, selectSilverVaultBalance, selectLoading } from '@/redux/vaultSlice';
+import ButtonLoader from '../buttonLoader';
 
 const ShowVaultBuySell = () => {
     const purchaseType = useSelector(SelectPurchaseType);
@@ -11,7 +12,7 @@ const ShowVaultBuySell = () => {
     const metalPricePerGram = useSelector(selectMetalPricePerGram);
     const goldVaultBalance = useSelector(selectGoldVaultBalance);
     const silverVaultBalance = useSelector(selectSilverVaultBalance);
-
+    const loading = useSelector(selectLoading);
 
     const [props, setProps] = useSpring(() => ({
         opacity: 1,
@@ -49,8 +50,8 @@ const ShowVaultBuySell = () => {
                             )}
                             <p className="text-white text-sm sm:text-lg">
                                 {metalType === "gold"
-                                    ? `${ParseFloat(goldVaultBalance, 4)}`
-                                    : `${ParseFloat(silverVaultBalance, 4)}`} gm
+                                    ? goldVaultBalance ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />
+                                    : silverVaultBalance ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />}  gm
                             </p>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-4">

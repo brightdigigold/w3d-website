@@ -518,7 +518,7 @@ const Cart = () => {
         <div className="bg-themeLight rounded-xl col-span-3 xl:col-span-2">
           <div className="flex flex-col sm:flex-row justify-between sm:justify-around items-center p-4">
             <div>
-              <p className="text-semibold text-1xl mb-3 sm:mb-0">
+              <p className="text-semibold text-xl mb-3 sm:mb-0">
                 Convert From Vault
               </p>
             </div>
