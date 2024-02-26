@@ -163,7 +163,7 @@ export default function ConvertMetalModal({
                                         : ""
                                         }`}
                                       disabled={
-                                        goldVaultBalance === 0 ||
+                                        goldVaultBalance === 0 &&
                                         silverVaultBalance === 0
                                       }
                                       onChange={

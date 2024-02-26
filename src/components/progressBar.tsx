@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
 import { decrementTimer, resetTimer } from "@/redux/actionTypes";
+import { metalPrice } from "@/api/DashboardServices";
+import {  setGoldData, setSilverData } from "@/redux/metalSlice";
+import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
+import { setMetalPrice } from "@/redux/shopSlice";
 
 interface ProgressBarProps {
   metalTypeForProgressBar: string;
@@ -66,12 +70,26 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       );
     }
   }, [displayMetalType, goldData.totalPrice, silverData.totalPrice]);
+  const fetchDataOfMetals = useCallback(async () => {
+    try {
+      const response: any = await metalPrice(); // Assuming this returns a JSON string
+      const metalPriceOfGoldSilver = JSON.parse(response);
+      dispatch(setGoldData(metalPriceOfGoldSilver.data.gold[0]));
+      dispatch(setSilverData(metalPriceOfGoldSilver.data.silver[0]));
+      dispatch(setLiveGoldPrice(metalPriceOfGoldSilver.data.gold[0].totalPrice))
+      dispatch(setLiveSilverPrice(metalPriceOfGoldSilver.data.silver[0].totalPrice))
+      dispatch(setMetalPrice(metalPriceOfGoldSilver.data.gold[0].totalPrice));
+    } catch (error) {
+      // alert(error);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       if (time === 0) {
         clearInterval(intervalRef.current as unknown as number);
         intervalRef.current = null;
+        fetchDataOfMetals()
         memoizedDispatch(resetTimer());
       } else {
         memoizedDispatch(decrementTimer());

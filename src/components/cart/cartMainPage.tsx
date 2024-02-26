@@ -164,7 +164,7 @@ const Cart = () => {
       amountWithoutTaxGold = ParseFloat(liveGoldPrice * totalGoldWeight, 2);
       GoldGstForCart = ParseFloat(totalGoldWeight * liveGoldPrice * 0.03, 2);
       amountWithTaxGold = ParseFloat(totalGoldWeight * liveGoldPrice + GoldGstForCart, 2);
-      finalAmount = ParseFloat(amountWithTaxGold + amountWithTaxSilver + totalMakingCharges, 2);
+      // finalAmount = ParseFloat(amountWithTaxGold + amountWithTaxSilver + totalMakingCharges, 2);
     });
 
     // Dispatch actions to update the state in the Redux store
@@ -181,7 +181,7 @@ const Cart = () => {
     dispatch(setAmountWithTaxGold(amountWithTaxGold));
     dispatch(setAmountWithoutTaxGold(amountWithoutTaxGold));
     dispatch(calculateFinalAmount());
-    dispatch(setFinalAmount(finalAmount));
+    // dispatch(setFinalAmount(finalAmount));
     dispatch(setTotalGoldCoins(totalGoldCoins));
     dispatch(setTotalSilverCoins(totalSilverCoins));
   };
