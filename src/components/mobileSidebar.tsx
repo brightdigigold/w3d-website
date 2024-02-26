@@ -234,7 +234,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
   );
 };
 const styles = {
-  p0: "hidden xl:block text-lg  font-semibold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md px-5 py-2",
-  p1: "block flex items-center gap-3 rounded-md px-3 py-2 text-sm  font-semibold text-white",
+  p0: "hidden xl:block text-lg bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md px-5 py-2",
+  p1: "block flex items-center gap-3 rounded-md px-3 py-2 text-sm  bold text-white",
 };
 export default SidebarAside;

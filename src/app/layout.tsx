@@ -7,6 +7,12 @@ import store from "@/redux/store";
 import { Provider } from "react-redux";
 import Head from "next/head";
 import Image from "next/image";
+import { Lato } from 'next/font/google'; 
+
+export const lato = Lato({
+  weight: ['400', '700', '100', '300', '900'],
+  subsets: ['latin'],
+});
 
 let persistor = persistStore(store);
 export default function RootLayout({ children, }: { children: React.ReactNode; }) {
