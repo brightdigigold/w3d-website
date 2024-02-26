@@ -396,7 +396,7 @@ const BuySell = () => {
         >
           {unit === "rupees" ? `₹${amount}` : `${amount}gm`}
           {purchaseType === "buy" && amount === 500 && ( // Conditional rendering for the "POPULAR" tag
-            <span className="absolute bottom-[-16px] left-0 bg-themeBlue text-black semibold px-1 py-0.5 text-xs rounded">
+            <span className="absolute bottom-[-16px] left-0 bg-themeBlue text-black sm:px-1 px-0.5 sm:py-0.5  sm:text-xs text-xxs rounded">
               POPULAR
             </span>
           )}
