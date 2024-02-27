@@ -88,7 +88,7 @@ const HeroSection = () => {
             <div className="hidden lg:block mt-10">
               <motion.h1
                 variants={fadeIn("right", "spring", 0.2, 0.2)}
-                className="text-6xl text-white font-semibold leading-tight mb-12 "
+                className="text-6xl text-white bold leading-tight mb-12 "
               >
                 <span className="text-themeBlueLight extrabold">
                   Start Your Savings
@@ -105,7 +105,7 @@ const HeroSection = () => {
                     src="/Goldbarbanner.png"
                     alt="Digital Gold Bar"
                   />
-                  <p className="text-gold01 p-1 px-3 ml-3 lg:text-lg xl:text-xl font-bold inline-block">
+                  <p className="text-gold01 p-1 px-3 ml-3 lg:text-lg xl:text-xl bold inline-block">
                     Best Platform to Buy & Sell 24K Digital Gold
                   </p>
                 </div>
@@ -117,7 +117,7 @@ const HeroSection = () => {
                   hassle-free savings is here.
                 </p>
                 <div className="flex items-center">
-                  <p className="text-xl font-bold text-white">Trusted By</p>
+                  <p className="text-xl bold text-white">Trusted By</p>
                   <img
                     className="h-14 ml-2 mt-2"
                     src="/Startup India.svg"
