@@ -1,4 +1,7 @@
-/** @type {import('next').NextConfig} */
+/**
+ * @type {import('next').NextConfig}
+ */
+
 const nextConfig = {
   webpack(config) {
     config.module.rules.push({
@@ -9,9 +12,11 @@ const nextConfig = {
 
     return config;
   },
+
   experimental: {
     appDir: true,
   },
+
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
