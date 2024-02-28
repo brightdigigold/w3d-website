@@ -25,14 +25,8 @@ const Coins = () => {
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
   const { ProductList, isLoading, error } = useFetchProductCoins(activeTab);
 
-  const handleLoginClick = () => {
-    setOpenLoginAside(!openLoginAside);
-  };
-  // console.log('product list', ProductList);
-
-  const handleTabClick = (tab: "ALL" | "GOLD" | "SILVER") => {
-    setActiveTab(tab);
-  };
+  const toggleLoginAside = () => setOpenLoginAside(!openLoginAside);
+  const handleTabClick = (tab: string) => setActiveTab(tab);
 
 
   return (
@@ -138,7 +132,7 @@ const Coins = () => {
           >
             {ProductList.map((item, index) => (
               <Suspense fallback={<Loading />}>
-                <ProductItem key={index} item={item} isLoggedIn={isLoggedIn} handleLoginClick={handleLoginClick} router={router} />
+                <ProductItem key={index} item={item} isLoggedIn={isLoggedIn} handleLoginClick={toggleLoginAside} router={router} />
               </Suspense>
             ))}
           </motion.div>
