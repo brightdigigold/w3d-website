@@ -31,7 +31,7 @@ const Mission = () => {
               conveniently from home.
             </p>
             <motion.div
-              variants={textVariant(1.1)}
+              variants={textVariant(0.5)}
               className=" col-span-2 sm:col-span-1 rounded-2xl bg-themeBlue"
             >
               <img
@@ -44,7 +44,7 @@ const Mission = () => {
               Our Mission
             </h1>
             <motion.div
-              variants={textVariant(1.1)}
+              variants={textVariant(0.5)}
               className="col-span-2 sm:col-span-1 rounded-2xl bg-themeBlue px-12"
             >
               <img
