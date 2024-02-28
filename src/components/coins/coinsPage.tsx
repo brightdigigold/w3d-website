@@ -1,7 +1,6 @@
 "use client";
 import { funcForDecrypt } from "@/components/helperFunctions";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import React, { Suspense, useEffect, useState } from "react";
 import { api } from "@/api/DashboardServices";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/motion";
@@ -16,6 +15,8 @@ import {
 import { useRouter } from "next/navigation";
 import LoginAside from "../authSection/loginAside";
 import ButtonLoader from "../buttonLoader";
+import ProductItem from "./productItem";
+import Loading from "@/app/loading";
 
 const Coins = () => {
   const [ProductList, setProductList] = useState<any[]>([]);
@@ -52,6 +53,7 @@ const Coins = () => {
   const handleLoginClick = () => {
     setOpenLoginAside(!openLoginAside);
   };
+
 
   const handleTabClick = (tab: "ALL" | "GOLD" | "SILVER") => {
     setActiveTab(tab);
@@ -159,55 +161,9 @@ const Coins = () => {
             className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 xl:gap-16 my-6 "
           >
             {ProductList.map((item, index) => (
-              <div
-                key={index}
-                className="py-4 rounded-md shadow-xl text-center coins_background transition-transform transform hover:scale-105  hover:shadow-lg hover:shadow-sky-100"
-              >
-                <div
-                  style={{
-                    backgroundSize: "cover",
-                    backgroundPosition: "bottom",
-                    backgroundImage: `url(${item.iteamtype.toLowerCase() === "gold"
-                      ? "/images/goldpart.png"
-                      : "/images/silverpart.png"
-                      })`,
-                  }}
-                  className=""
-                >
-                  <div className="flex flex-col items-center px-2">
-                    <div>
-                      <Image
-                        src={item.image.image}
-                        alt="Bright digi gold coins"
-                        width={150}
-                        height={90}
-                      />
-                    </div>
-                    <div className="mt-2 text-xs sm:text-base text-white">
-                      {item.name}
-                    </div>
-                    <div className="text-themeBlueLight text-xs sm:text-lg items-center">
-                      Making charges
-                      <span className="text-base sm:text-2xl bold ml-1">
-                        ₹{item.makingcharges}
-                      </span>
-                    </div>
-                    <button
-                      onClick={() => {
-                        if (!isloggedIn) {
-                          handleLoginClick();
-                        } else {
-                          router.push(`/coins/${item.slug}`)
-                        }
-                      }}
-                      // href={`/coins/${item.slug}`}
-                      className="my-2 bg-themeBlue rounded-2xl extrabold w-3/4 py-2 block"
-                    >
-                      VIEW
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <Suspense fallback={<Loading />}>
+                <ProductItem key={index} item={item} isLoggedIn={isloggedIn} handleLoginClick={handleLoginClick} router={router} />
+              </Suspense>
             ))}
           </motion.div>
         </motion.div>

@@ -14,21 +14,21 @@ import React, { Suspense } from "react";
 const About = () => {
   return (
     <main>
-      <Suspense fallback={<p className="text-yellow-600">Loading...</p>}>
-        <h1
-          className="text-2xl sm:text-4xl text-white text-center bold leading-tight mt-24"
-        >
-          “Buy & Sell 24 karat Digital Gold” <br /> From The Comfort of Your
-          Home
-        </h1>
-        <HeroAbout />
-        <Info />
-        <Mission />
-        <Motive />
-        <Succession />
-        <Review />
-        <AboutFoot />
-      </Suspense>
+      {/* <Suspense fallback={<p className="text-yellow-600">Loading...</p>}> */}
+      <h1
+        className="text-2xl sm:text-4xl text-white text-center bold leading-tight mt-24"
+      >
+        “Buy & Sell 24 karat Digital Gold” <br /> From The Comfort of Your
+        Home
+      </h1>
+      <HeroAbout />
+      <Info />
+      <Mission />
+      <Motive />
+      <Succession />
+      <Review />
+      <AboutFoot />
+      {/* </Suspense> */}
     </main>
   );
 };
