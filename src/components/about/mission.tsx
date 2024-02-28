@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
-import Lottie from "lottie-react";
 
 import { motion } from "framer-motion";
-import { fadeIn, staggerContainer } from "../../utils/motion";
+import { textVariant } from "../../utils/motion";
 
 const Mission = () => {
   return (
@@ -32,19 +31,27 @@ const Mission = () => {
               conveniently from home.
             </p>
             <motion.div
-              variants={fadeIn("right", "spring", 0.5, 0.5)}
+              variants={textVariant(1.1)}
               className=" col-span-2 sm:col-span-1 rounded-2xl bg-themeBlue"
             >
-              <img src="/lottie/Vision.gif" className="mx-auto h-72"   alt="Bright Digi Gold Vision"/>
+              <img
+                src="/lottie/Vision.gif"
+                className="mx-auto h-72"
+                alt="Bright Digi Gold Vision"
+              />
             </motion.div>
             <h1 className="col-span-2 text-3xl sm:text-5xl text-gold01 text-center extrabold leading-tight mb-0 sm:mb-6">
               Our Mission
             </h1>
             <motion.div
-              variants={fadeIn("left", "spring", 0.5, 0.5)}
+              variants={textVariant(1.1)}
               className="col-span-2 sm:col-span-1 rounded-2xl bg-themeBlue px-12"
             >
-              <img src="/lottie/Mission.gif" className="mx-auto h-72"  alt="Bright Digi Gold Mission"/>
+              <img
+                src="/lottie/Mission.gif"
+                className="mx-auto h-72"
+                alt="Bright Digi Gold Mission"
+              />
             </motion.div>
             <p className="col-span-2 sm:col-span-1 text-white text-left leading-8  mb-4 mt-6 text-lg">
               Bright Digi Gold envisions leadership in digital gold trade,
