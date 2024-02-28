@@ -1,7 +1,5 @@
 "use client";
-import { funcForDecrypt } from "@/components/helperFunctions";
-import React, { Suspense, useEffect, useState } from "react";
-import { api } from "@/api/DashboardServices";
+import React, { Suspense, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/motion";
 import { useSelector } from "react-redux";
@@ -17,9 +15,9 @@ import LoginAside from "../authSection/loginAside";
 import ButtonLoader from "../buttonLoader";
 import ProductItem from "./productItem";
 import Loading from "@/app/loading";
+import useFetchProductCoins from "./useFetchProductCoins";
 
 const Coins = () => {
-  const [ProductList, setProductList] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState("ALL");
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
@@ -28,36 +26,17 @@ const Coins = () => {
   const router = useRouter();
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-
-  useEffect(() => {
-    getAllProducts("ALL");
-  }, []);
-
-  const getAllProducts = async (params: any) => {
-    try {
-      let url = `/public/products?limit=50&page=0`;
-      if (params) {
-        url = `/public/products?limit=50&page=0&metal=${params}`;
-      }
-      const response = await api.get(url);
-      if (response.status) {
-        const coins = await funcForDecrypt(response.data.payload);
-        const x = JSON.parse(coins);
-        setProductList(x.data);
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
+  const { ProductList, isLoading, error } = useFetchProductCoins(activeTab);
 
   const handleLoginClick = () => {
     setOpenLoginAside(!openLoginAside);
   };
 
+  // console.log('product list', ProductList);
+
 
   const handleTabClick = (tab: "ALL" | "GOLD" | "SILVER") => {
     setActiveTab(tab);
-    getAllProducts(tab);
   };
 
 
@@ -151,6 +130,8 @@ const Coins = () => {
             </div>
           </div>)}
         </div>
+        {isLoading && <Loading />}
+        {error && <p className="text-red-500 text-center bold text-lg">{error}</p>}
         <motion.div
           // initial="hidden"
           whileInView="show"
