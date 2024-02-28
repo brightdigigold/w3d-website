@@ -5,11 +5,6 @@ import { fadeIn } from "../../utils/motion";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import OtpModal from "@/components/modals/otpModal";
-import {
-  selectGoldVaultBalance,
-  selectLoading,
-  selectSilverVaultBalance,
-} from "@/redux/vaultSlice";
 import { useRouter } from "next/navigation";
 import LoginAside from "../authSection/loginAside";
 import ButtonLoader from "../buttonLoader";
@@ -19,21 +14,21 @@ import useFetchProductCoins from "./useFetchProductCoins";
 
 const Coins = () => {
   const [activeTab, setActiveTab] = useState("ALL");
-  const goldVaultBalance = useSelector(selectGoldVaultBalance);
-  const silverVaultBalance = useSelector(selectSilverVaultBalance);
-  const loading = useSelector(selectLoading);
-  const otpModal = useSelector((state: RootState) => state.auth.otpModal);
+  const { goldVaultBalance, silverVaultBalance, loading, otpModal, isLoggedIn } = useSelector((state: RootState) => ({
+    goldVaultBalance: state.vault.goldVaultBalance,
+    silverVaultBalance: state.vault.silverVaultBalance,
+    loading: state.vault.loading,
+    otpModal: state.auth.otpModal,
+    isLoggedIn: state.auth.isLoggedIn,
+  }));
   const router = useRouter();
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
-  const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const { ProductList, isLoading, error } = useFetchProductCoins(activeTab);
 
   const handleLoginClick = () => {
     setOpenLoginAside(!openLoginAside);
   };
-
   // console.log('product list', ProductList);
-
 
   const handleTabClick = (tab: "ALL" | "GOLD" | "SILVER") => {
     setActiveTab(tab);
@@ -113,7 +108,7 @@ const Coins = () => {
               </div>
             </div>
           </div>
-          {isloggedIn && (<div className="text-white mt-4 lg:mt-0 sm:divide-x sm:flex items-center bg-themeLight rounded-md px-3 p-2">
+          {isLoggedIn && (<div className="text-white mt-4 lg:mt-0 sm:divide-x sm:flex items-center bg-themeLight rounded-md px-3 p-2">
             <div className="flex items-center">
               <img src={"Goldbarbanner.png"} className="h-5" alt="vault" />
               <div className="text-white ml-2 pr-4 flex">
@@ -143,7 +138,7 @@ const Coins = () => {
           >
             {ProductList.map((item, index) => (
               <Suspense fallback={<Loading />}>
-                <ProductItem key={index} item={item} isLoggedIn={isloggedIn} handleLoginClick={handleLoginClick} router={router} />
+                <ProductItem key={index} item={item} isLoggedIn={isLoggedIn} handleLoginClick={handleLoginClick} router={router} />
               </Suspense>
             ))}
           </motion.div>
