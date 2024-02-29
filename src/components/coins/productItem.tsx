@@ -30,7 +30,6 @@ const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLogin
                     : "/images/silverpart.png"
                     })`,
             }}
-            className=""
         >
             <div className="flex flex-col items-center px-2">
                 <div>

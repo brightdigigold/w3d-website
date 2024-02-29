@@ -72,10 +72,7 @@ const Coins = () => {
                     handleTabClick("GOLD");
                   }}
                 />
-                <div
-                  onClick={() => {
-                    handleTabClick("GOLD");
-                  }}
+                <div onClick={() => { handleTabClick("GOLD") }}
                   className={`ml-2 cursor-pointer text-lg border-r-2 border-slate-400 pr-4 bold ${activeTab === "GOLD" ? "opacity-100" : "opacity-50"
                     }`}
                 >

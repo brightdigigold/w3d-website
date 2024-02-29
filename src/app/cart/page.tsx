@@ -17,7 +17,6 @@ const page = () => {
 export default page;
 
 export const metadata: Metadata = {
-  title: "Cart - Bright DiGi Gold",
-  // description:
-    // "Bright DiGi Gold allows you to Buy, Sell, Gift and Refer & Earn Digital Gold online conveniently and effectively.",
+  title: "Add To Cart - Bright DiGi Gold",
+  description: "Discover a quick way to buy gold and silver coins with Bright DiGi Gold’s add to cart feature. ",
 };

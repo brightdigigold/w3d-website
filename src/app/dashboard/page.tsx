@@ -19,5 +19,5 @@ export default Dashboard;
 
 export const metadata: Metadata = {
   title: "Transaction dashboard-Bright DiGi Gold ",
-  // description: "f",
+  description: "Track and manage your Gold/Silver savings effortlessly with Bright DiGi Gold’s intuitive Dashboard. ",
 };
