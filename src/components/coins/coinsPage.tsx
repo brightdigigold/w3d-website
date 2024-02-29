@@ -12,6 +12,17 @@ import ProductItem from "./productItem";
 import Loading from "@/app/loading";
 import useFetchProductCoins from "./useFetchProductCoins";
 
+const TabButton = ({ tab, activeTab, handleTabClick }) => (
+  <div
+    onClick={() => handleTabClick(tab.tabName)}
+    className={` text-gray-100 cursor-pointer flex items-center ${activeTab === tab.tabName ? "opacity-100 extrabold" : "opacity-50"}`}
+    aria-pressed={activeTab === tab.tabName}
+  >
+    {tab.src && <img src={tab.src} alt={tab.alt} className="h-4 sm:h-5 ml-2" />}
+    <span className={`ml-1 text-sm sm:text-base ${tab.tabName !== 'SILVER' ? "border-r-2 border-slate-400 pr-2" : ""}`}>{tab.tabName}</span>
+  </div>
+);
+
 const Coins = () => {
   const [activeTab, setActiveTab] = useState("ALL");
   const { goldVaultBalance, silverVaultBalance, loading, otpModal, isLoggedIn } = useSelector((state: RootState) => ({
@@ -29,111 +40,84 @@ const Coins = () => {
   const handleTabClick = (tab: string) => setActiveTab(tab);
 
 
+  const Tabs = [
+    { tabName: "ALL" },
+    { tabName: "GOLD", src: "Goldbarbanner.png", alt: "digital gold bar" },
+    { tabName: "SILVER", src: "Silverbar.png", alt: "digital silver bar" },
+  ];
+
   return (
     <div className="pb-28 xl:pb-8 pt-16">
-      {openLoginAside && (
-        <LoginAside
-          isOpen={openLoginAside}
-          onClose={() => setOpenLoginAside(false)}
-        />
-      )}
-
+      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} />}
       {otpModal && <OtpModal />}
+
       <div className="flex justify-center items-center">
-        <img
-          src={"/lottie/ProductBannerNEW.jpg"}
-          alt="gold and silver coin banner"
-          className="rounded-b"
-        />
+        <img src={"/lottie/ProductBannerNEW.jpg"} alt="gold and silver coin banner" className="rounded-b" />
       </div>
       <div className="container mx-auto">
-        <div className="lg:flex flex-row md:flex-row mt-4 md:items-center md:justify-between p-3 rounded-md">
-          <div className="sm:flex items-center">
-            <h1 className=" text-white mr-4 text-center text-2xl sm:text-4xl extrabold">
-              Coins
-            </h1>
-            <div className="mb-4 md:mb-0 md:mr-4 bg-themeLight px-3 py-2 rounded-md">
-              <div className="text-white flex items-center bold">
-                <div
-                  onClick={() => {
-                    handleTabClick("ALL");
-                  }}
-                  className={`ml-2 cursor-pointer text-lg border-r-2 border-slate-400 pr-4 bold ${activeTab === "ALL" ? "opacity-100 extrabold" : "opacity-50"
-                    }`}
-                >
-                  All
+        <h1 className="text-white mr-4 text-2xl sm:text-4xl extrabold text-center m-3">Our Coins</h1>
+        <div className="flex justify-between rounded-md items-center  bg-themeLight sm:bg-transparent">
+          <div className="lg:flex flex-row mt-4 md:items-center md:justify-between p-3 rounded-md">
+            <div className="md:mr-4 mb-2 px-3 py-2 rounded-md flex items-center md:bg-[#2C7BAC33]">
+              {Tabs.map((tab) => (
+                <TabButton key={tab.tabName} tab={tab} activeTab={activeTab} handleTabClick={setActiveTab} />
+              ))}
+            </div>
+          </div>
+
+          <div className="sm:hidden mt-2 mb-2 flex items-center bg-themeBlue rounded-xl h-fit py-2 mr-2">
+            <div>
+              <img
+                src={"../../images/vault.png"}
+                alt="digital gold bar"
+                className="px-1 py-2 h-10 w-10 sm:h-16 cursor-pointer"
+              />
+            </div>
+            <div className="text-yellow-600 font-bold text-xxs sm:text-base flex justify-between">
+              <div className="flex items-center">
+                <div className="flex flex-col border-r-2 border-slate-400 pr-2">
+                  <p className="text-gray-800">GOLD</p>
+                  <p>{goldVaultBalance}Gm</p>
                 </div>
-                <img
-                  src={"Goldbarbanner.png"}
-                  alt="digital gold bar"
-                  className={`ml-2 h-5 cursor-pointer bold ${activeTab === "GOLD" ? "opacity-100" : "opacity-50"
-                    }`}
-                  onClick={() => {
-                    handleTabClick("GOLD");
-                  }}
-                />
-                <div onClick={() => { handleTabClick("GOLD") }}
-                  className={`ml-2 cursor-pointer text-lg border-r-2 border-slate-400 pr-4 bold ${activeTab === "GOLD" ? "opacity-100" : "opacity-50"
-                    }`}
-                >
-                  Gold
-                </div>
-                <img
-                  src={"/Silverbar.png"}
-                  alt="digital silver bar"
-                  className={`ml-2 h-5 cursor-pointer ${activeTab === "SILVER" ? "opacity-100" : "opacity-50"
-                    }`}
-                  onClick={() => {
-                    handleTabClick("SILVER");
-                  }}
-                />
-                <div
-                  onClick={() => {
-                    handleTabClick("SILVER");
-                  }}
-                  className={`ml-2 cursor-pointer text-lg ${activeTab === "SILVER" ? "opacity-100" : "opacity-50"
-                    }`}
-                >
-                  Silver
+              </div>
+              <div className="flex items-center px-2">
+                <div className="flex flex-col">
+                  <p className="text-gray-800">SILVER</p>
+                  <p>{silverVaultBalance}Gm</p>
                 </div>
               </div>
             </div>
           </div>
-          {isLoggedIn && (<div className="text-white mt-4 lg:mt-0 sm:divide-x sm:flex items-center bg-themeLight rounded-md px-3 p-2">
-            <div className="flex items-center">
-              <img src={"Goldbarbanner.png"} className="h-5" alt="vault" />
-              <div className="text-white ml-2 pr-4 flex">
-                <p className="text-yellow-300 extrabold mr-2">Gold :</p>
-                <p className="text-yellow-300 bold">{goldVaultBalance ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} Gm</p>
+          <div className="hidden sm:block">
+            {isLoggedIn && (<div className=" text-white mt-4 lg:mt-0 sm:divide-x flex items-center bg-themeLight rounded-md px-3 p-2">
+              <div className="flex items-center">
+                <img src={"Goldbarbanner.png"} className="h-5" alt="vault" />
+                <div className="text-white ml-1 pr-4 flex">
+                  <p className="text-yellow-300 extrabold mr-2">Gold :</p>
+                  <p className="text-yellow-300 bold">{goldVaultBalance ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} Gm</p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center mt-2 sm:mt-0">
-              <img src={"/Silverbar.png"} className="h-5 sm:ml-4" alt="vault" />
-              <div className="ml-2 flex">
-                <p className="text-slate-200 extrabold mr-2">Silver :</p>
-                <p className="text-slate-200 bold">{silverVaultBalance ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} Gm</p>
+              <div className="flex items-center mt-1 sm:mt-0">
+                <img src={"/Silverbar.png"} className="h-5 sm:ml-4" alt="vault" />
+                <div className="ml-2 flex items-center">
+                  <p className="text-slate-200 extrabold mr-2">Silver :</p>
+                  <p className="text-slate-200 extrabold">{silverVaultBalance ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} Gm</p>
+                </div>
               </div>
-            </div>
-          </div>)}
+            </div>)}
+          </div>
         </div>
-        {isLoading && <Loading />}
-        {error && <p className="text-red-500 text-center bold text-lg">{error}</p>}
-        <motion.div
-          // initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.25 }}
-        >
-          <motion.div
-            variants={fadeIn("right", "spring", 0.25, 0.25)}
-            className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 xl:gap-16 my-6 "
-          >
-            {ProductList.map((item, index) => (
-              <Suspense fallback={<Loading />}>
-                <ProductItem key={index} item={item} isLoggedIn={isLoggedIn} handleLoginClick={toggleLoginAside} router={router} />
-              </Suspense>
-            ))}
+
+        {isLoading ? <Loading /> : error ? <p className="text-red-500 text-center bold text-lg">{error}</p> : (
+          <motion.div whileInView="show" viewport={{ once: false, amount: 0.25 }}>
+            <motion.div variants={fadeIn("right", "spring", 0.25, 0.25)} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 xl:gap-16 my-6">
+              {ProductList.map((item, index) => (
+                <ProductItem key={index} item={item} isLoggedIn={isLoggedIn} handleLoginClick={() => setOpenLoginAside(true)} router={router} />
+              ))}
+            </motion.div>
           </motion.div>
-        </motion.div>
+        )}
+
       </div>
     </div>
   );
