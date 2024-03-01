@@ -36,10 +36,6 @@ const Coins = () => {
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
   const { ProductList, isLoading, error } = useFetchProductCoins(activeTab);
 
-  const toggleLoginAside = () => setOpenLoginAside(!openLoginAside);
-  const handleTabClick = (tab: string) => setActiveTab(tab);
-
-
   const Tabs = [
     { tabName: "ALL" },
     { tabName: "GOLD", src: "Goldbarbanner.png", alt: "digital gold bar" },
@@ -111,13 +107,14 @@ const Coins = () => {
         {isLoading ? <Loading /> : error ? <p className="text-red-500 text-center bold text-lg">{error}</p> : (
           <motion.div whileInView="show" viewport={{ once: false, amount: 0.25 }}>
             <motion.div variants={fadeIn("right", "spring", 0.25, 0.25)} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 xl:gap-16 my-6">
-              {ProductList.map((item, index) => (
-                <ProductItem key={index} item={item} isLoggedIn={isLoggedIn} handleLoginClick={() => setOpenLoginAside(true)} router={router} />
-              ))}
+              <Suspense>
+                {ProductList.map((item, index) => (
+                  <ProductItem key={index} item={item} isLoggedIn={isLoggedIn} handleLoginClick={() => setOpenLoginAside(true)} router={router} />
+                ))}
+              </Suspense>
             </motion.div>
           </motion.div>
         )}
-
       </div>
     </div>
   );
