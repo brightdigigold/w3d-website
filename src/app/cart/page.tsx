@@ -17,6 +17,6 @@ const page = () => {
 export default page;
 
 export const metadata: Metadata = {
-  title: "Add To Cart - Bright DiGi Gold",
-  description: "Discover a quick way to buy gold and silver coins with Bright DiGi Gold’s add to cart feature. ",
+  title: "Add To Cart Feature- Bright DiGi Gold",
+  description: "Discover a quick way to buy gold and silver coins with an add to cart feature.",
 };
