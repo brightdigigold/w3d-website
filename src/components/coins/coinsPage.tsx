@@ -19,8 +19,8 @@ const TabButton = ({ tab, activeTab, handleTabClick }) => (
     className={` text-gray-100 cursor-pointer flex items-center ${activeTab === tab.tabName ? "opacity-100 extrabold" : "opacity-50"}`}
     aria-pressed={activeTab === tab.tabName}
   >
-    <div>{tab.src && <Image src={tab.src} alt={tab.alt} className="h-4 sm:h-5 ml-1" width={28} height={30} />}</div>
-    <div className={`text-sm sm:text-base  ${tab.tabName !== 'SILVER' ? "border-r-2 border-slate-400 pr-1" : ""}`}>{tab.tabName}</div>
+    <div>{tab.src && <Image src={tab.src} alt={tab.alt} className="h-4 sm:h-5 ml-1 sm:ml-2" width={28} height={30} />}</div>
+    <div className={`text-sm sm:text-base ml-0 sm:ml-2  ${tab.tabName !== 'SILVER' ? "border-r-2 border-slate-400 pr-1" : ""}`}>{tab.tabName}</div>
   </div>
 );
 
@@ -62,7 +62,9 @@ const Coins = () => {
           <div>
 
             <div className="sm:hidden mt-2 mb-2 flex items-center bg-themeBlue rounded-xl h-fit py-2">
-              <Image className="px-1 py-2 h-10 w-11" src={"../../images/vault.png"} alt="vault" height={0} width={0} />
+              <div>
+                <Image className="px-1 py-2 h-10 w-11" src={"../../images/vault.png"} alt="vault" height={0} width={0} />
+              </div>
               <div className="text-yellow-600 font-bold text-xxs sm:text-base flex justify-between">
                 <div className="flex items-center">
                   <div className="flex flex-col border-r-2 border-slate-400 pr-2">
@@ -90,7 +92,7 @@ const Coins = () => {
                 </div>
               </div>
               <div className="flex items-center mt-1 sm:mt-0">
-                <Image src={"/Silverbar.png"} className="h-5 sm:ml-4" alt="vault" width={32} height={30}/>
+                <Image src={"/Silverbar.png"} className="h-5 sm:ml-4" alt="vault" width={32} height={30} />
                 <div className="ml-2 flex items-center">
                   <p className="text-slate-200 extrabold mr-2">Silver :</p>
                   <p className="text-slate-200 extrabold">{silverVaultBalance ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} Gm</p>
@@ -111,7 +113,7 @@ const Coins = () => {
             </motion.div>
           </motion.div>
         )}
-        
+
       </div>
     </div>
   );
