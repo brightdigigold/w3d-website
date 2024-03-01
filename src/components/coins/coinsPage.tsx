@@ -16,11 +16,11 @@ import Image from "next/image";
 const TabButton = ({ tab, activeTab, handleTabClick }) => (
   <div
     onClick={() => handleTabClick(tab.tabName)}
-    className={` text-gray-100 cursor-pointer flex items-center bg-black ${activeTab === tab.tabName ? "opacity-100 extrabold" : "opacity-50"}`}
+    className={` text-gray-100 cursor-pointer flex items-center ${activeTab === tab.tabName ? "opacity-100 extrabold" : "opacity-50"}`}
     aria-pressed={activeTab === tab.tabName}
   >
-    {tab.src && <img src={tab.src} alt={tab.alt} className="h-4 sm:h-5 ml-2" />}
-    <span className={`ml-1 text-sm sm:text-base bg-red-600 ${tab.tabName !== 'SILVER' ? "border-r-2 border-slate-400 pr-2" : ""}`}>{tab.tabName}</span>
+    <div>{tab.src && <Image src={tab.src} alt={tab.alt} className="h-4 sm:h-5 ml-1" width={28} height={30} />}</div>
+    <div className={`text-sm sm:text-base  ${tab.tabName !== 'SILVER' ? "border-r-2 border-slate-400 pr-1" : ""}`}>{tab.tabName}</div>
   </div>
 );
 
@@ -49,32 +49,32 @@ const Coins = () => {
       {otpModal && <OtpModal />}
 
       <div className="flex justify-center items-center">
-        <img src={"/lottie/ProductBannerNEW.jpg"} alt="gold and silver coin banner" className="rounded-b" />
+        <Image src={"/lottie/ProductBannerNEW.jpg"} alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} />
       </div>
       <div className="container mx-auto">
         <h1 className="text-white mr-4 text-2xl sm:text-4xl extrabold text-center m-3">Our Coins</h1>
-        <div className="flex justify-between rounded-md items-center  bg-themeLight sm:bg-transparent">
-          <div className="lg:flex flex-row mt-4 md:items-center md:justify-between p-3 rounded-md">
-            <div className="md:mr-4 mb-2 px-3 py-2 rounded-md flex items-center md:bg-[#2C7BAC33]">
-              {Tabs.map((tab) => (
-                <TabButton key={tab.tabName} tab={tab} activeTab={activeTab} handleTabClick={setActiveTab} />
-              ))}
-            </div>
+        <div className="flex justify-between items-center bg-themeLight px-1 rounded-md">
+          <div className="px-2 py-2 rounded-md md:bg-[#2C7BAC33] flex">
+            {Tabs.map((tab) => (
+              <TabButton key={tab.tabName} tab={tab} activeTab={activeTab} handleTabClick={setActiveTab} />
+            ))}
           </div>
+          <div>
 
-          <div className="sm:hidden mt-2 mb-2 flex items-center bg-themeBlue rounded-xl h-fit py-2 mr-2">
-            <Image className="px-1 py-2 h-10 w-11" src={"../../images/vault.png"} alt="vault" height={0} width={0} />
-            <div className="text-yellow-600 font-bold text-xxs sm:text-base flex justify-between">
-              <div className="flex items-center">
-                <div className="flex flex-col border-r-2 border-slate-400 pr-2">
-                  <p className="text-gray-800">GOLD</p>
-                  <p>{goldVaultBalance}Gm</p>
+            <div className="sm:hidden mt-2 mb-2 flex items-center bg-themeBlue rounded-xl h-fit py-2">
+              <Image className="px-1 py-2 h-10 w-11" src={"../../images/vault.png"} alt="vault" height={0} width={0} />
+              <div className="text-yellow-600 font-bold text-xxs sm:text-base flex justify-between">
+                <div className="flex items-center">
+                  <div className="flex flex-col border-r-2 border-slate-400 pr-2">
+                    <p className="text-gray-800">GOLD</p>
+                    <p>{goldVaultBalance}Gm</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center px-2">
-                <div className="flex flex-col">
-                  <p className="text-gray-800">SILVER</p>
-                  <p>{silverVaultBalance}Gm</p>
+                <div className="flex items-center px-2">
+                  <div className="flex flex-col">
+                    <p className="text-gray-800">SILVER</p>
+                    <p>{silverVaultBalance}Gm</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -83,14 +83,14 @@ const Coins = () => {
           <div className="hidden sm:block">
             {isLoggedIn && (<div className=" text-white mt-4 lg:mt-0 sm:divide-x flex items-center bg-themeLight rounded-md px-3 p-2">
               <div className="flex items-center">
-                <img src={"Goldbarbanner.png"} className="h-5" alt="vault" />
+                <Image src={"Goldbarbanner.png"} className="h-5" alt="vault" width={32} height={30} />
                 <div className="text-white ml-1 pr-4 flex">
                   <p className="text-yellow-300 extrabold mr-2">Gold :</p>
                   <p className="text-yellow-300 bold">{goldVaultBalance ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} Gm</p>
                 </div>
               </div>
               <div className="flex items-center mt-1 sm:mt-0">
-                <img src={"/Silverbar.png"} className="h-5 sm:ml-4" alt="vault" />
+                <Image src={"/Silverbar.png"} className="h-5 sm:ml-4" alt="vault" width={32} height={30}/>
                 <div className="ml-2 flex items-center">
                   <p className="text-slate-200 extrabold mr-2">Silver :</p>
                   <p className="text-slate-200 extrabold">{silverVaultBalance ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} Gm</p>
@@ -111,6 +111,7 @@ const Coins = () => {
             </motion.div>
           </motion.div>
         )}
+        
       </div>
     </div>
   );
