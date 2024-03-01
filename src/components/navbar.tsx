@@ -33,8 +33,6 @@ const Navbar = () => {
     setDropdownOpen(isOpen);
   };
 
-  console.log('pathname', pathname)
-
   const logoutProfile = () => {
     localStorage.removeItem("mobile_number");
     localStorage.removeItem("token");
@@ -312,11 +310,8 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-
-          {/* Mobile dropdown */}
         </>
-      )
-      }
+      )}
     </Disclosure >
   );
 };

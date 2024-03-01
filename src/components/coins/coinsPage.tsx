@@ -11,15 +11,16 @@ import ButtonLoader from "../buttonLoader";
 import ProductItem from "./productItem";
 import Loading from "@/app/loading";
 import useFetchProductCoins from "./useFetchProductCoins";
+import Image from "next/image";
 
 const TabButton = ({ tab, activeTab, handleTabClick }) => (
   <div
     onClick={() => handleTabClick(tab.tabName)}
-    className={` text-gray-100 cursor-pointer flex items-center ${activeTab === tab.tabName ? "opacity-100 extrabold" : "opacity-50"}`}
+    className={` text-gray-100 cursor-pointer flex items-center bg-black ${activeTab === tab.tabName ? "opacity-100 extrabold" : "opacity-50"}`}
     aria-pressed={activeTab === tab.tabName}
   >
     {tab.src && <img src={tab.src} alt={tab.alt} className="h-4 sm:h-5 ml-2" />}
-    <span className={`ml-1 text-sm sm:text-base ${tab.tabName !== 'SILVER' ? "border-r-2 border-slate-400 pr-2" : ""}`}>{tab.tabName}</span>
+    <span className={`ml-1 text-sm sm:text-base bg-red-600 ${tab.tabName !== 'SILVER' ? "border-r-2 border-slate-400 pr-2" : ""}`}>{tab.tabName}</span>
   </div>
 );
 
@@ -62,13 +63,7 @@ const Coins = () => {
           </div>
 
           <div className="sm:hidden mt-2 mb-2 flex items-center bg-themeBlue rounded-xl h-fit py-2 mr-2">
-            <div>
-              <img
-                src={"../../images/vault.png"}
-                alt="digital gold bar"
-                className="px-1 py-2 h-10 w-10 sm:h-16 cursor-pointer"
-              />
-            </div>
+            <Image className="px-1 py-2 h-10 w-11" src={"../../images/vault.png"} alt="vault" height={0} width={0} />
             <div className="text-yellow-600 font-bold text-xxs sm:text-base flex justify-between">
               <div className="flex items-center">
                 <div className="flex flex-col border-r-2 border-slate-400 pr-2">
@@ -84,6 +79,7 @@ const Coins = () => {
               </div>
             </div>
           </div>
+
           <div className="hidden sm:block">
             {isLoggedIn && (<div className=" text-white mt-4 lg:mt-0 sm:divide-x flex items-center bg-themeLight rounded-md px-3 p-2">
               <div className="flex items-center">
