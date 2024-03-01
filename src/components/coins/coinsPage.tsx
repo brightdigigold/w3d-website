@@ -53,7 +53,7 @@ const Coins = () => {
       </div>
       <div className="container mx-auto">
         <h1 className="text-white mr-4 text-2xl sm:text-4xl extrabold text-center m-3">Our Coins</h1>
-        <div className="flex justify-between items-center bg-themeLight px-1 rounded-md">
+        <div className="flex justify-between items-center bg-[#2C7BAC33] md:bg-transparent px-1 rounded-md">
           <div className="px-2 py-2 rounded-md md:bg-[#2C7BAC33] flex">
             {Tabs.map((tab) => (
               <TabButton key={tab.tabName} tab={tab} activeTab={activeTab} handleTabClick={setActiveTab} />
