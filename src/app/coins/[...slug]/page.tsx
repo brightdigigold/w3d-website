@@ -21,22 +21,18 @@ import SimpleImageSlider from "react-simple-image-slider";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import CustomImageButton from "@/components/customImageButton";
-import CustomButton from "@/components/customButton";
 import { SelectGoldData, SelectSilverData } from "@/redux/metalSlice";
+import CheckPinCode from "../ProductDetails/checkPinCode";
+import useFetchProductDetailsById from "../ProductDetails/useFetchProductDetailsById";
 
 const page = ({ params }: any) => {
   const id = params.slug;
+  const { productsDetailById, productId, photo, isLoading, error } = useFetchProductDetailsById(id);
   const router = useRouter();
-  const [productsDetailById, setProductDetailById] = useState<any>();
-  const [productId, setproductId] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
   const [cartQuantity, setCartQuantity] = useState<number>(1);
   const goldData = useSelector(SelectGoldData);
   const silverData = useSelector(SelectSilverData);
-  const formRef = useRef<HTMLFormElement>(null);
-  const [pincodeError, setPincodeError] = useState<string | null>(null);
-  const [delivery, setDeliverey] = useState<boolean>(false);
-  const [photo, setphoto] = useState<[]>([]);
   const [openCoinModal, setOpenCoinModal] = useState<boolean>(false);
   const [maxCoinError, setMaxCoinError] = useState<string>("");
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
@@ -75,21 +71,6 @@ const page = ({ params }: any) => {
 
   const closeCoinModalHandler = () => {
     setOpenCoinModal(false);
-  };
-
-  const getProductById = async () => {
-    try {
-      const response = await api.get(`/public/product/${id}/details`);
-      if (response.status) {
-        const responseOfApi = await funcForDecrypt(response.data.payload);
-        const productDetails = JSON.parse(responseOfApi);
-        setProductDetailById(productDetails.data);
-        setproductId(productDetails.data.sku);
-        setphoto(productDetails.data.image);
-      }
-    } catch (error) {
-      alert(error);
-    }
   };
 
   const getAllProductsOfCart = async () => {
@@ -154,50 +135,7 @@ const page = ({ params }: any) => {
     }
   };
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const pincodeValue = e.currentTarget.pincode.value;
-    // Validate pincode
-    if (!pincodeValue) {
-      setPincodeError("Please enter a 6-digit pincode.");
-      return;
-    }
-    if (pincodeValue.toString() < 6) {
-      setPincodeError("Please enter a 6-digit pincode.");
-      return;
-    }
-    if (!pincodeValue.match(/^\d{6}$/)) {
-      setPincodeError("Invalid pincode. Please enter a 6-digit pincode.");
-      return;
-    } else {
-      setPincodeError(null);
-    }
-    // Handle form submission logic here
-    try {
-      const token = localStorage.getItem("token");
-      const configHeaders = {
-        headers: {
-          authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      };
-      const response = await axios.get(
-        `${process.env.baseUrl}/user/ecom/pincode/${pincodeValue}`,
-        configHeaders
-      );
-      const decryptedData = AesDecrypt(response.data.payload);
-      const finalResult = JSON.parse(decryptedData);
-      if (finalResult.data.length > 0) {
-        setDeliverey(true);
-        setPincodeError(`Available at ${pincodeValue} pincode`);
-      } else {
-        setDeliverey(false);
-        setPincodeError(`Not available at ${pincodeValue} pincode`);
-      }
-    } catch (error: any) {
-      setPincodeError(error);
-    }
-  };
+
 
   const handleLoginClick = () => {
     setOpenLoginAside(!openLoginAside);
@@ -267,7 +205,7 @@ const page = ({ params }: any) => {
   };
 
   useEffect(() => {
-    getProductById();
+    // getProductById();
     getAllProductsOfCart();
   }, []);
 
@@ -283,6 +221,7 @@ const page = ({ params }: any) => {
           onClose={() => setOpenLoginAside(false)}
         />
       )}
+
       {otpModal && <OtpModal />}
 
       {openCartSidebar && (
@@ -424,40 +363,7 @@ const page = ({ params }: any) => {
             </div>
           </div>
           {/* pin code */}
-          <div className="py-2 mt-4">
-            <form ref={formRef} onSubmit={handleFormSubmit}>
-              <label className="text-sm">Check Pincode Availability</label>
-              <br />
-              <div className="rounded-md bg-themeLight px-4 py-2 relative">
-                <input
-                  name="pincode"
-                  type="tel"
-                  className="text-white bg-transparent w-full focus:outline-none h-8"
-                  placeholder="Enter Your Pincode"
-                  maxLength={6}
-                  // pattern="\d{6}"
-                  // required
-                  onChange={(event) => {
-                    const { value } = event.target;
-                    const updatedValue = value.replace(/[^0-9]/g, "");
-                    event.target.value = updatedValue;
-                    setPincodeError(null);
-                  }}
-                />
-                <button
-                  className=" absolute right-4 rounded-xl text-yellow-400 border border-yellow-400 px-5 py-1"
-                  type="submit"
-                >
-                  Check
-                </button>
-              </div>
-              {pincodeError && delivery == true ? (
-                <div className="text-green-500">{pincodeError}</div>
-              ) : (
-                <div className="text-red-500">{pincodeError}</div>
-              )}
-            </form>
-          </div>
+          <CheckPinCode />
           {/*coin description */}
           <div className="bg-themeLight px-4 py-4 rounded-md mt-4">
             <p className="text-sm">{productsDetailById.description}</p>
