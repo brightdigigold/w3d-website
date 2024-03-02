@@ -11,9 +11,6 @@ export default function useFetchProductCart(_id: string) {
         setIsLoadingCart(true);
         setErrorCart(null);
 
-        console.log('called!!!')
-
-
         try {
             const token = localStorage.getItem("token");
             const configHeaders = {

@@ -9,7 +9,6 @@ export default function useFetchProductDetailsById(id: string) {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    console.log('productId', productId)
 
     const getProductById = useCallback(async () => {
         setIsLoading(true);
