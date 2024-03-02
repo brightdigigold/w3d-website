@@ -209,6 +209,7 @@ const page = ({ params }: any) => {
             />
           </div>
           <div className="grid grid-cols-2 gap-3 items-center mt-2">
+
             {/* BUY NOW */}
             <div>
               <CustomImageButton
@@ -220,7 +221,7 @@ const page = ({ params }: any) => {
                 title={""}
               />
             </div>
-
+            {/* { GO TO CART } */}
             {quantity == cartQuantity && (
               <div>
                 <Link className="cursor-pointer" href="/cart">
@@ -233,6 +234,7 @@ const page = ({ params }: any) => {
               </div>
             )}
 
+            {/* UPDATE TO CART */}
             {cartQuantity !== 0 && cartQuantity !== quantity && (
               <div>
                 <CustomImageButton
