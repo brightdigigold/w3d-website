@@ -234,7 +234,7 @@ const page = ({ params }: any) => {
               </div>
             )}
 
-            {/* UPDATE TO CART */}
+            {/* Update TO CART */}
             {cartQuantity !== 0 && cartQuantity !== quantity && (
               <div>
                 <CustomImageButton
