@@ -1,7 +1,7 @@
 import { fetchCoupons } from "@/api/DashboardServices";
 import { useEffect, useState } from "react"
 
-export const useCoupons = () => {
+export const useFetchCoupons = () => {
     const [coupons, setCoupons] = useState([])
     useEffect(() => {
         const fetchCouponsData = async () => {
@@ -10,7 +10,7 @@ export const useCoupons = () => {
                 const couponsData = await JSON.parse(response);
                 setCoupons(couponsData.data)
             } catch (error) {
-                console.error('Error fetching metal data:', error);
+                console.error('Error fetching Coupon data:', error);
             }
         };
         fetchCouponsData()

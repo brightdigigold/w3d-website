@@ -1,5 +1,4 @@
 "use client";
-import { api } from "@/api/DashboardServices";
 import Loading from "@/app/loading";
 import LoginAside from "@/components/authSection/loginAside";
 import CartSideBar from "@/components/cart/cartSidebar";
@@ -15,7 +14,7 @@ import { RootState } from "@/redux/store";
 import { selectUser } from "@/redux/userDetailsSlice";
 import axios from "axios";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import SimpleImageSlider from "react-simple-image-slider";
 import Swal from "sweetalert2";
@@ -23,11 +22,16 @@ import { useRouter } from "next/navigation";
 import CustomImageButton from "@/components/customImageButton";
 import { SelectGoldData, SelectSilverData } from "@/redux/metalSlice";
 import CheckPinCode from "../ProductDetails/checkPinCode";
-import useFetchProductDetailsById from "../ProductDetails/useFetchProductDetailsById";
+import useFetchProductDetailsById from "../../../hooks/useFetchProductDetailsById";
+import useFetchProductCart from "@/hooks/useFetchProductCart";
 
 const page = ({ params }: any) => {
+  const user = useSelector(selectUser);
   const id = params.slug;
+  const { _id } = user.data;
   const { productsDetailById, productId, photo, isLoading, error } = useFetchProductDetailsById(id);
+  const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
+
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
   const [cartQuantity, setCartQuantity] = useState<number>(1);
@@ -39,9 +43,6 @@ const page = ({ params }: any) => {
   const [openCartSidebar, setOpenCartSidebar] = useState<boolean>(false);
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
-  const user = useSelector(selectUser);
-  const { _id } = user.data;
-  const [coinsInCart, setCoinsInCart] = useState<any[]>([]);
 
   const openCoinModalHandler = () => {
     if (isloggedIn) {
@@ -73,26 +74,6 @@ const page = ({ params }: any) => {
     setOpenCoinModal(false);
   };
 
-  const getAllProductsOfCart = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const configHeaders = {
-        headers: {
-          authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      };
-      const response = await axios.get(
-        `${process.env.baseUrl}/user/ecom/getCartProduct/cart/${_id}`,
-        configHeaders
-      );
-      const decryptedData = AesDecrypt(response.data.payload);
-      const finalResult = JSON.parse(decryptedData).data.cartProductForWeb;
-      setCoinsInCart(finalResult);
-    } catch (error) {
-      alert(error);
-    }
-  };
 
   const getProductCountById = (coinsInCart: any, productId: any) => {
     for (const cartItem of coinsInCart) {
@@ -135,8 +116,6 @@ const page = ({ params }: any) => {
     }
   };
 
-
-
   const handleLoginClick = () => {
     setOpenLoginAside(!openLoginAside);
   };
@@ -145,7 +124,7 @@ const page = ({ params }: any) => {
     if (isloggedIn) {
       setMaxCoinError("");
       await addToCart(action_type);
-      getAllProductsOfCart();
+      // refetch();
     } else {
       handleLoginClick();
     }
@@ -192,7 +171,7 @@ const page = ({ params }: any) => {
         const decryptedData = await funcForDecrypt(response.data.payload);
         if (JSON.parse(decryptedData).status) {
           setOpenCartSidebar(!openCartSidebar);
-          getAllProductsOfCart();
+          refetch();
         }
       })
       .catch((error) => {
@@ -204,10 +183,6 @@ const page = ({ params }: any) => {
       });
   };
 
-  useEffect(() => {
-    // getProductById();
-    getAllProductsOfCart();
-  }, []);
 
   if (!productsDetailById) {
     return <Loading />;

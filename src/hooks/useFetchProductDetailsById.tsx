@@ -9,7 +9,9 @@ export default function useFetchProductDetailsById(id: string) {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const getProductById = useCallback(async (id: string) => {
+    console.log('productId', productId)
+
+    const getProductById = useCallback(async () => {
         setIsLoading(true);
         setError(null);
 
@@ -29,10 +31,9 @@ export default function useFetchProductDetailsById(id: string) {
         }
     }, [id])
 
-    
     useEffect(() => {
-        getProductById(id);
-      }, [getProductById]);
-    
-      return { productsDetailById, productId, error, photo, isLoading };
+        getProductById();
+    }, [getProductById]);
+
+    return { productsDetailById, productId, error, photo, isLoading };
 }

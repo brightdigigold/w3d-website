@@ -13,7 +13,7 @@ import {
   selectAppliedCouponCode,
 } from "@/redux/couponSlice";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import { useCoupons } from "@/customHooks/coupons";
+import { useFetchCoupons } from "@/hooks/useFetchCoupons";
 import ProgressBar from "../progressBar";
 import Lottie from "lottie-react";
 import partyPopper from "../../../public/lottie/Party Poppers.json";
@@ -33,7 +33,7 @@ import {
 export default function ModalCoupon({ isOpen, onClose }: any) {
   const cancelButtonRef = useRef(null);
   const [couponLottie, setCouponLottie] = useState<boolean>(false);
-  const coupons = useCoupons();
+  const coupons = useFetchCoupons();
   const error = useSelector(SelectError);
   const dispatch = useDispatch();
   const goldData = useSelector(SelectGoldData);

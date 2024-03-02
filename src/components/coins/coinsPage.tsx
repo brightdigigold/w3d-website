@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import LoginAside from "../authSection/loginAside";
 import ProductItem from "./productItem";
 import Loading from "@/app/loading";
-import useFetchProductCoins from "./useFetchProductCoins";
+import useFetchProductCoins from "../../hooks/useFetchProductCoins";
 import Image from "next/image";
 import TabButton from "./tabComponent";
 import VaultBalance from "./vaultBalance";

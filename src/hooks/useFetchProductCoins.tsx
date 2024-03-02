@@ -1,7 +1,7 @@
 import { api } from "@/api/DashboardServices";
-import { funcForDecrypt } from "../helperFunctions";
+import { funcForDecrypt } from "../components/helperFunctions";
 import { useCallback, useEffect, useState } from "react";
-import { Product } from "./productItem";
+import { Product } from "../components/coins/productItem";
 
 export default function useFetchProductCoins(params: any) {
     const [ProductList, setProductList] = useState<Product[]>([]);
