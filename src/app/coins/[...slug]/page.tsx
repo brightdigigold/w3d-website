@@ -2,17 +2,11 @@
 import Loading from "@/app/loading";
 import LoginAside from "@/components/authSection/loginAside";
 import CartSideBar from "@/components/cart/cartSidebar";
-import {
-  AesDecrypt,
-  ParseFloat,
-  funForAesEncrypt,
-  funcForDecrypt,
-} from "@/components/helperFunctions";
+import { ParseFloat } from "@/components/helperFunctions";
 import CoinModal from "@/components/modals/buyCoinModal";
 import OtpModal from "@/components/modals/otpModal";
 import { RootState } from "@/redux/store";
 import { selectUser } from "@/redux/userDetailsSlice";
-import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -24,16 +18,18 @@ import { SelectGoldData, SelectSilverData } from "@/redux/metalSlice";
 import CheckPinCode from "../ProductDetails/checkPinCode";
 import useFetchProductDetailsById from "../../../hooks/useFetchProductDetailsById";
 import useFetchProductCart from "@/hooks/useFetchProductCart";
+import { useAddToCart } from "@/hooks/useAddToCart";
 
 const page = ({ params }: any) => {
   const user = useSelector(selectUser);
   const id = params.slug;
   const { _id } = user.data;
-  const { productsDetailById, productId, photo, isLoading, error } = useFetchProductDetailsById(id);
-  const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
-
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
+  const { productsDetailById, productId, photo, isLoading, error } = useFetchProductDetailsById(id);
+  const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
+  const onSuccessfulAdd = () => setOpenCartSidebar(true);
+  const { addToCart, isSuccess, } = useAddToCart(_id, quantity, productId, onSuccessfulAdd, refetch,);
   const [cartQuantity, setCartQuantity] = useState<number>(1);
   const goldData = useSelector(SelectGoldData);
   const silverData = useSelector(SelectSilverData);
@@ -139,50 +135,6 @@ const page = ({ params }: any) => {
     2
   );
 
-  const addToCart = async (action_type: string) => {
-    const token = localStorage.getItem("token");
-
-    const dataToBeDecrypt = {
-      user_id: _id,
-      count: quantity,
-      product_Id: productId,
-      action_type: action_type,
-      from_App: false,
-    };
-
-    const resAfterEncryptData = await funForAesEncrypt(dataToBeDecrypt);
-
-    const payloadToSend = {
-      payload: resAfterEncryptData,
-    };
-    const configHeaders = {
-      headers: {
-        authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    axios
-      .post(
-        `${process.env.baseUrl}/user/ecom/create/cart`,
-        payloadToSend,
-        configHeaders
-      )
-      .then(async (response) => {
-        const decryptedData = await funcForDecrypt(response.data.payload);
-        if (JSON.parse(decryptedData).status) {
-          setOpenCartSidebar(!openCartSidebar);
-          refetch();
-        }
-      })
-      .catch((error) => {
-        Swal.fire({
-          html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
-          title: "Oops...",
-          titleText: "Something went wrong!",
-        });
-      });
-  };
-
 
   if (!productsDetailById) {
     return <Loading />;
@@ -190,6 +142,7 @@ const page = ({ params }: any) => {
 
   return (
     <div className="container pt-32 py-16 text-white pb-28 xl:pb-8">
+
       {openLoginAside && (
         <LoginAside
           isOpen={openLoginAside}
