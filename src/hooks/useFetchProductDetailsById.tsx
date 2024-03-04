@@ -44,11 +44,7 @@ export default function useFetchProductDetailsById(id: string) {
                 const responseOfApi = await funcForDecrypt(response.data.payload);
                 const productDetails = JSON.parse(responseOfApi);
                 const { ...finalData } = productDetails.data
-                console.log('productDetails', productDetails)
-                // console.log('productDetails.data',productDetails.data )
                 setProductDetailById(finalData);
-                setproductId(productDetails.data.sku);
-                setphoto(productDetails.data.image);
             }
         } catch (error: any) {
             setError(error.toString());
@@ -61,5 +57,5 @@ export default function useFetchProductDetailsById(id: string) {
         getProductById();
     }, [getProductById]);
 
-    return { productsDetailById, productId, error, photo, isLoading };
+    return { productsDetailById, error, isLoading };
 }

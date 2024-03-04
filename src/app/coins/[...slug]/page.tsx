@@ -8,7 +8,7 @@ import OtpModal from "@/components/modals/otpModal";
 import { RootState } from "@/redux/store";
 import { selectUser } from "@/redux/userDetailsSlice";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import SimpleImageSlider from "react-simple-image-slider";
 import Swal from "sweetalert2";
@@ -19,6 +19,7 @@ import CheckPinCode from "../ProductDetails/checkPinCode";
 import useFetchProductDetailsById from "../../../hooks/useFetchProductDetailsById";
 import useFetchProductCart from "@/hooks/useFetchProductCart";
 import { useAddToCart } from "@/hooks/useAddToCart";
+import ProductDescription from "../ProductDetails/productDescription";
 
 const page = ({ params }: any) => {
   const user = useSelector(selectUser);
@@ -26,7 +27,7 @@ const page = ({ params }: any) => {
   const { _id } = user.data;
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
-  const { productsDetailById, productId, isLoading, error } = useFetchProductDetailsById(id);
+  const { productsDetailById, isLoading, error } = useFetchProductDetailsById(id);
   // console.log('productsDetailById', productsDetailById)
   const { coinHave, sku, image, description, weight, inStock, name, makingcharges, purity, dimension, quality, iteamtype, maxForCart } = productsDetailById! || {};
   const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
@@ -83,28 +84,12 @@ const page = ({ params }: any) => {
   };
 
   useEffect(() => {
-    const productCount = getProductCountById(coinsInCart, productId);
+    const productCount = getProductCountById(coinsInCart, sku);
     setQuantity(productCount === 0 ? 1 : productCount);
     setCartQuantity(productCount);
   }, [coinsInCart]);
 
-  // const increaseQty = () => {
 
-  //   if (quantity <= 9) {
-  //     if (coinHave !== undefined && coinHave > quantity) {
-  //       setQuantity((prevQuantity) => prevQuantity + 1);
-  //       setMaxCoinError("");
-  //     } else if (coinHave === undefined) {
-  //       setMaxCoinError(
-  //         `Oops! This Coin Is Not Available. Please Try Again After Some Time.`
-  //       );
-  //     } else {
-  //       setMaxCoinError(`You can only purchase ${quantity} coins.`);
-  //     }
-  //   } else {
-  //     setMaxCoinError(`You can only purchase ${quantity} coins of at a time`);
-  //   }
-  // };
   const increaseQty = useCallback(() => {
     if (quantity <= 9 && coinHave !== undefined && coinHave > quantity) {
       setQuantity((prevQuantity) => prevQuantity + 1);
@@ -117,16 +102,14 @@ const page = ({ params }: any) => {
       setMaxCoinError(`You can only purchase ${quantity} coins.`);
     }
   }, [coinHave, quantity]);
-  
 
-  console.log('re-rendering ...')
 
-  const decreaseQty = () => {
+  const decreaseQty = useCallback(() => {
     setMaxCoinError("");
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
-  };
+  }, [quantity]);
 
   const handleLoginClick = () => {
     setOpenLoginAside(!openLoginAside);
@@ -142,9 +125,13 @@ const page = ({ params }: any) => {
     }
   };
 
-  const totalPrice = ParseFloat(
-    (weight * quantity) *
-    (iteamtype === "GOLD" ? goldData.totalPrice : silverData.totalPrice), 2);
+  const totalPrice = useMemo(() => {
+    return ParseFloat(
+      (weight * quantity) *
+      (iteamtype === "GOLD" ? goldData.totalPrice : silverData.totalPrice),
+      2
+    );
+  }, [weight, quantity, iteamtype, goldData.totalPrice, silverData.totalPrice]);
 
 
   if (!productsDetailById) {
@@ -306,76 +293,7 @@ const page = ({ params }: any) => {
           {/* pin code */}
           <CheckPinCode />
           {/*coin description */}
-          <div className="bg-themeLight px-4 py-4 rounded-md mt-4">
-            <p className="text-sm">{description}</p>
-            <div className="grid grid-cols-4 mt-4">
-              <div className=" text-center px-2">
-                <img
-                  src={"/24K guaranteed .png"}
-                  alt="icons"
-                  className="mx-auto mb-2 h-12 sm:h-20"
-                />
-                <p className="font-8x sm:text-base">
-                  24K Guaranteed <br /> Quality Certified
-                </p>
-              </div>
-              <div className="text-center px-2">
-                <img
-                  src={"/Free Insurance.png"}
-                  alt="icons"
-                  className="mx-auto mb-2  h-12 sm:h-20"
-                />
-                <p className="font-8x sm:text-base">
-                  Free Insurance <br /> on Delivery
-                </p>
-              </div>
-              <div className="text-center px-2">
-                <img
-                  src={"/order tracking support.png"}
-                  alt="icons"
-                  className="mx-auto mb-2   h-12 sm:h-20"
-                />
-                <p className="font-8x sm:text-base">
-                  Order Tracking &<br />
-                  Support
-                </p>
-              </div>
-              <div className="text-center px-2">
-                <img
-                  src={"/zero negative.png"}
-                  alt="icons"
-                  className="mx-auto mb-2 h-12 sm:h-20"
-                />
-                <p className="font-8x sm:text-base">
-                  Zero negative <br /> weight tolerance
-                </p>
-              </div>
-            </div>
-            <div className="mt-6">
-              <table>
-                <tbody>
-                  <tr>
-                    <td className="w-32 inline-block">Weight </td>
-                    <td className="pl-2 bold">
-                      {weight} Gm
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="w-32 inline-block">Metal Purity</td>
-                    <td className="pl-2">{purity}</td>
-                  </tr>
-                  <tr>
-                    <td className="w-32 inline-block">Dimension</td>
-                    <td className="pl-2">{dimension}</td>
-                  </tr>
-                  <tr>
-                    <td className="w-32 inline-block">Quality</td>
-                    <td className="pl-2">{quality}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <ProductDescription description={description} weight={weight} purity={purity} dimension={dimension} quality={quality} />
         </div>
       </div>
     </div>

@@ -1,11 +1,13 @@
 import { AesDecrypt } from '@/components/helperFunctions';
 import axios from 'axios';
-import React, { useRef, useState } from 'react'
+import React, { memo, useRef, useState } from 'react'
 
 const CheckPinCode = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [pincodeError, setPincodeError] = useState<string | null>(null);
   const [delivery, setDeliverey] = useState<boolean>(false);
+
+  console.log('from pincode')
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,42 +54,42 @@ const CheckPinCode = () => {
     }
   };
 
-    return (
-        <div className="py-2 mt-4">
-            <form ref={formRef} onSubmit={handleFormSubmit}>
-                <label className="text-sm">Check Pincode Availability</label>
-                <br />
-                <div className="rounded-md bg-themeLight px-4 py-2 relative">
-                    <input
-                        name="pincode"
-                        type="tel"
-                        className="text-white bg-transparent w-full focus:outline-none h-8"
-                        placeholder="Enter Your Pincode"
-                        maxLength={6}
-                        // pattern="\d{6}"
-                        // required
-                        onChange={(event) => {
-                            const { value } = event.target;
-                            const updatedValue = value.replace(/[^0-9]/g, "");
-                            event.target.value = updatedValue;
-                            setPincodeError(null);
-                        }}
-                    />
-                    <button
-                        className=" absolute right-4 rounded-xl text-yellow-400 border border-yellow-400 px-5 py-1"
-                        type="submit"
-                    >
-                        Check
-                    </button>
-                </div>
-                {pincodeError && delivery == true ? (
-                    <div className="text-green-500">{pincodeError}</div>
-                ) : (
-                    <div className="text-red-500">{pincodeError}</div>
-                )}
-            </form>
+  return (
+    <div className="py-2 mt-4">
+      <form ref={formRef} onSubmit={handleFormSubmit}>
+        <label className="text-sm">Check Pincode Availability</label>
+        <br />
+        <div className="rounded-md bg-themeLight px-4 py-2 relative">
+          <input
+            name="pincode"
+            type="tel"
+            className="text-white bg-transparent w-full focus:outline-none h-8"
+            placeholder="Enter Your Pincode"
+            maxLength={6}
+            // pattern="\d{6}"
+            // required
+            onChange={(event) => {
+              const { value } = event.target;
+              const updatedValue = value.replace(/[^0-9]/g, "");
+              event.target.value = updatedValue;
+              setPincodeError(null);
+            }}
+          />
+          <button
+            className=" absolute right-4 rounded-xl text-yellow-400 border border-yellow-400 px-5 py-1"
+            type="submit"
+          >
+            Check
+          </button>
         </div>
-    )
+        {pincodeError && delivery == true ? (
+          <div className="text-green-500">{pincodeError}</div>
+        ) : (
+          <div className="text-red-500">{pincodeError}</div>
+        )}
+      </form>
+    </div>
+  )
 }
 
-export default CheckPinCode
+export default memo(CheckPinCode)
