@@ -13,16 +13,18 @@ import useFetchProductCoins from "../../hooks/useFetchProductCoins";
 import Image from "next/image";
 import TabButton from "./tabComponent";
 import VaultBalance from "./vaultBalance";
+import { selectGoldVaultBalance, selectSilverVaultBalance, selectLoading } from "@/redux/vaultSlice";
+import ButtonLoader from "../buttonLoader";
 
 const Coins = () => {
   const [activeTab, setActiveTab] = useState("ALL");
-  const { goldVaultBalance, silverVaultBalance, otpModal, isLoggedIn } = useSelector((state: RootState) => ({
-    goldVaultBalance: state.vault.goldVaultBalance,
-    silverVaultBalance: state.vault.silverVaultBalance,
-    loading: state.vault.loading,
-    otpModal: state.auth.otpModal,
-    isLoggedIn: state.auth.isLoggedIn,
-  }));
+  const  isLoggedIn = useSelector((state: RootState) => (state.auth.isLoggedIn))
+  const  otpModal = useSelector((state: RootState) => (state.auth.otpModal))
+
+  const goldVaultBalance = useSelector(selectGoldVaultBalance);
+  const silverVaultBalance = useSelector(selectSilverVaultBalance);
+  const loading = useSelector(selectLoading);
+
   const router = useRouter();
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
   const { ProductList, isLoading, error } = useFetchProductCoins(activeTab);
@@ -59,13 +61,13 @@ const Coins = () => {
                 <div className="flex items-center">
                   <div className="flex flex-col border-r-2 border-slate-400 pr-2">
                     <p className="text-gray-800">GOLD</p>
-                    <p>{goldVaultBalance}Gm</p>
+                    <p>{goldVaultBalance != null ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />}Gm</p>
                   </div>
                 </div>
                 <div className="flex items-center px-2">
                   <div className="flex flex-col">
                     <p className="text-gray-800">SILVER</p>
-                    <p>{silverVaultBalance}Gm</p>
+                    <p>{silverVaultBalance != null ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />}Gm</p>
                   </div>
                 </div>
               </div>

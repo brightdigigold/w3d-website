@@ -2,15 +2,12 @@ import React from 'react'
 import Image from "next/image";
 import ButtonLoader from "../buttonLoader";
 import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
+import { selectGoldVaultBalance, selectSilverVaultBalance, selectLoading } from '@/redux/vaultSlice';
 
 const VaultBalance = () => {
-
-    const { goldVaultBalance, silverVaultBalance, loading } = useSelector((state: RootState) => ({
-        goldVaultBalance: state.vault.goldVaultBalance,
-        silverVaultBalance: state.vault.silverVaultBalance,
-        loading: state.vault.loading,
-    }));
+    const goldVaultBalance = useSelector(selectGoldVaultBalance);
+    const silverVaultBalance = useSelector(selectSilverVaultBalance);
+    const loading = useSelector(selectLoading);
 
     return (
         <div className=" text-white mt-4 lg:mt-0 sm:divide-x flex items-center bg-themeLight rounded-md px-3 p-2">
