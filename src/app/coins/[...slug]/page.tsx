@@ -21,18 +21,16 @@ import useFetchProductCart from "@/hooks/useFetchProductCart";
 import { useAddToCart } from "@/hooks/useAddToCart";
 import ProductDescription from "../ProductDetails/productDescription";
 
-const page = ({ params }: any) => {
+const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
-  const id = params.slug;
+  const id = slug;
   const { _id } = user.data;
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
-  const { productsDetailById, isLoading, error } = useFetchProductDetailsById(id);
-  // console.log('productsDetailById', productsDetailById)
-  const { coinHave, sku, image, description, weight, inStock, name, makingcharges, purity, dimension, quality, iteamtype, maxForCart } = productsDetailById! || {};
+  const { productsDetailById, productId, isLoading, error } = useFetchProductDetailsById(id);
   const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
   const onSuccessfulAdd = () => setOpenCartSidebar(true);
-  const { addToCart, isSuccess, } = useAddToCart(_id, quantity, sku, onSuccessfulAdd, refetch,);
+  const { addToCart, isSuccess, } = useAddToCart(_id, quantity, productId, onSuccessfulAdd, refetch,);
   const [cartQuantity, setCartQuantity] = useState<number>(1);
   const goldData = useSelector(SelectGoldData);
   const silverData = useSelector(SelectSilverData);
@@ -42,6 +40,12 @@ const page = ({ params }: any) => {
   const [openCartSidebar, setOpenCartSidebar] = useState<boolean>(false);
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
+
+  useEffect(() => {
+    const productCount = getProductCountById(coinsInCart, productId);
+    setQuantity(productCount === 0 ? 1 : productCount);
+    setCartQuantity(productCount);
+  }, [coinsInCart]);
 
   const openCoinModalHandler = () => {
     if (isloggedIn) {
@@ -73,7 +77,6 @@ const page = ({ params }: any) => {
     setOpenCoinModal(false);
   };
 
-
   const getProductCountById = (coinsInCart: any, productId: any) => {
     for (const cartItem of coinsInCart) {
       if (cartItem.product.sku == productId) {
@@ -83,25 +86,16 @@ const page = ({ params }: any) => {
     return 0;
   };
 
-  useEffect(() => {
-    const productCount = getProductCountById(coinsInCart, sku);
-    setQuantity(productCount === 0 ? 1 : productCount);
-    setCartQuantity(productCount);
-  }, [coinsInCart]);
-
-
   const increaseQty = useCallback(() => {
-    if (quantity <= 9 && coinHave !== undefined && coinHave > quantity) {
+    if (quantity <= 9 && productsDetailById?.coinHave !== undefined && productsDetailById?.coinHave > quantity) {
       setQuantity((prevQuantity) => prevQuantity + 1);
       setMaxCoinError("");
-    } else if (quantity <= 9 && coinHave === undefined) {
-      setMaxCoinError(
-        `Oops! This Coin Is Not Available. Please Try Again After Some Time.`
-      );
+    } else if (quantity <= 9 && productsDetailById?.coinHave === undefined) {
+      setMaxCoinError("Oops! This Coin Is Not Available. Please Try Again After Some Time.");
     } else {
       setMaxCoinError(`You can only purchase ${quantity} coins.`);
     }
-  }, [coinHave, quantity]);
+  }, [quantity, productsDetailById]);
 
 
   const decreaseQty = useCallback(() => {
@@ -126,12 +120,13 @@ const page = ({ params }: any) => {
   };
 
   const totalPrice = useMemo(() => {
+    const { weight, iteamtype } = productsDetailById! || {};
     return ParseFloat(
       (weight * quantity) *
       (iteamtype === "GOLD" ? goldData.totalPrice : silverData.totalPrice),
       2
     );
-  }, [weight, quantity, iteamtype, goldData.totalPrice, silverData.totalPrice]);
+  }, [productsDetailById, quantity, goldData.totalPrice, silverData.totalPrice]);
 
 
   if (!productsDetailById) {
@@ -171,7 +166,7 @@ const page = ({ params }: any) => {
       <div className="grid xl:grid-cols-5 gap-12">
         <div className="col-span-5 xl:col-span-2 relative">
           {/* Absolute positioning for out-of-stock image */}
-          {!inStock && (
+          {!productsDetailById.inStock && (
             <div className="bg-red-600 absolute top-0 right-0 px-2  rounded-bl-lg">
               <p className="font-medium">Out Of Stock</p>
             </div>
@@ -180,7 +175,7 @@ const page = ({ params }: any) => {
             <SimpleImageSlider
               width={400}
               height={400}
-              images={image}
+              images={productsDetailById.image}
               showBullets={false}
               style={{ margin: "0 auto" }}
               showNavs={false}
@@ -195,7 +190,7 @@ const page = ({ params }: any) => {
             <SimpleImageSlider
               width={240}
               height={240}
-              images={image}
+              images={productsDetailById.image}
               showBullets={false}
               style={{ margin: "0 auto" }}
               showNavs={false}
@@ -212,7 +207,7 @@ const page = ({ params }: any) => {
             <div>
               <CustomImageButton
                 img="/lottie/buynow.png"
-                isDisabled={!inStock}
+                isDisabled={!productsDetailById.inStock}
                 handleClick={() => {
                   openCoinModalHandler();
                 }}
@@ -225,7 +220,7 @@ const page = ({ params }: any) => {
                 <Link className="cursor-pointer" href="/cart">
                   <CustomImageButton
                     img="/lottie/Go to cart.gif"
-                    isDisabled={!inStock}
+                    isDisabled={!productsDetailById.inStock}
                     title="GO TO CART"
                   />
                 </Link>
@@ -237,7 +232,7 @@ const page = ({ params }: any) => {
               <div>
                 <CustomImageButton
                   img="/lottie/updatenow.png"
-                  isDisabled={!inStock}
+                  isDisabled={!productsDetailById.inStock}
                   handleClick={() => {
                     addToCartHandler("UpdateCart");
                   }}
@@ -250,7 +245,7 @@ const page = ({ params }: any) => {
             {cartQuantity == 0 && (
               <CustomImageButton
                 img="/lottie/addcart.gif"
-                isDisabled={!inStock}
+                isDisabled={!productsDetailById.inStock}
                 handleClick={() => {
                   addToCartHandler("AddToCart");
                 }}
@@ -263,7 +258,7 @@ const page = ({ params }: any) => {
           <div className="flex justify-between items-center">
             <div>
               <h1 className="mb-2 sm:text-lg extrabold">
-                {name}
+                {productsDetailById.name}
               </h1>
               <div className="mb-2">
                 Total Price{" "}
@@ -276,7 +271,7 @@ const page = ({ params }: any) => {
                 </span>
               </div>
               <div className="text-base sm:text-lg bold text-blue-100 ">
-                Making Charge ₹{makingcharges}
+                Making Charge ₹{productsDetailById.makingcharges}
               </div>
               {maxCoinError && <p className="text-red-600">{maxCoinError}</p>}
             </div>
@@ -290,13 +285,20 @@ const page = ({ params }: any) => {
               </div>
             </div>
           </div>
-          {/* pin code */}
+          {/*check pin code */}
           <CheckPinCode />
+
           {/*coin description */}
-          <ProductDescription description={description} weight={weight} purity={purity} dimension={dimension} quality={quality} />
+          <ProductDescription
+            description={productsDetailById?.description}
+            weight={productsDetailById?.weight}
+            purity={productsDetailById?.purity}
+            dimension={productsDetailById?.dimension}
+            quality={productsDetailById?.quality}
+          />
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

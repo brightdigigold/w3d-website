@@ -29,7 +29,6 @@ interface ProductDetails {
 export default function useFetchProductDetailsById(id: string) {
     const [productsDetailById, setProductDetailById] = useState<ProductDetails>();
     const [productId, setproductId] = useState<string>("");
-    const [photo, setphoto] = useState<[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -45,6 +44,7 @@ export default function useFetchProductDetailsById(id: string) {
                 const productDetails = JSON.parse(responseOfApi);
                 const { ...finalData } = productDetails.data
                 setProductDetailById(finalData);
+                setproductId(productDetails.data.sku);
             }
         } catch (error: any) {
             setError(error.toString());
@@ -57,5 +57,5 @@ export default function useFetchProductDetailsById(id: string) {
         getProductById();
     }, [getProductById]);
 
-    return { productsDetailById, error, isLoading };
+    return { productsDetailById, productId, error, isLoading };
 }
