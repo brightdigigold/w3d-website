@@ -8,7 +8,7 @@ import OtpModal from "@/components/modals/otpModal";
 import { RootState } from "@/redux/store";
 import { selectUser } from "@/redux/userDetailsSlice";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import SimpleImageSlider from "react-simple-image-slider";
 import Swal from "sweetalert2";
@@ -26,10 +26,12 @@ const page = ({ params }: any) => {
   const { _id } = user.data;
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
-  const { productsDetailById, productId, photo, isLoading, error } = useFetchProductDetailsById(id);
+  const { productsDetailById, productId, isLoading, error } = useFetchProductDetailsById(id);
+  // console.log('productsDetailById', productsDetailById)
+  const { coinHave, sku, image, description, weight, inStock, name, makingcharges, purity, dimension, quality, iteamtype, maxForCart } = productsDetailById! || {};
   const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
   const onSuccessfulAdd = () => setOpenCartSidebar(true);
-  const { addToCart, isSuccess, } = useAddToCart(_id, quantity, productId, onSuccessfulAdd, refetch,);
+  const { addToCart, isSuccess, } = useAddToCart(_id, quantity, sku, onSuccessfulAdd, refetch,);
   const [cartQuantity, setCartQuantity] = useState<number>(1);
   const goldData = useSelector(SelectGoldData);
   const silverData = useSelector(SelectSilverData);
@@ -86,24 +88,38 @@ const page = ({ params }: any) => {
     setCartQuantity(productCount);
   }, [coinsInCart]);
 
-  const increaseQty = () => {
-    const { coinHave } = productsDetailById;
+  // const increaseQty = () => {
 
-    if (quantity <= 9) {
-      if (coinHave !== undefined && coinHave > quantity) {
-        setQuantity((prevQuantity) => prevQuantity + 1);
-        setMaxCoinError("");
-      } else if (coinHave === undefined) {
-        setMaxCoinError(
-          `Oops! This Coin Is Not Available. Please Try Again After Some Time.`
-        );
-      } else {
-        setMaxCoinError(`You can only purchase ${quantity} coins.`);
-      }
+  //   if (quantity <= 9) {
+  //     if (coinHave !== undefined && coinHave > quantity) {
+  //       setQuantity((prevQuantity) => prevQuantity + 1);
+  //       setMaxCoinError("");
+  //     } else if (coinHave === undefined) {
+  //       setMaxCoinError(
+  //         `Oops! This Coin Is Not Available. Please Try Again After Some Time.`
+  //       );
+  //     } else {
+  //       setMaxCoinError(`You can only purchase ${quantity} coins.`);
+  //     }
+  //   } else {
+  //     setMaxCoinError(`You can only purchase ${quantity} coins of at a time`);
+  //   }
+  // };
+  const increaseQty = useCallback(() => {
+    if (quantity <= 9 && coinHave !== undefined && coinHave > quantity) {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+      setMaxCoinError("");
+    } else if (quantity <= 9 && coinHave === undefined) {
+      setMaxCoinError(
+        `Oops! This Coin Is Not Available. Please Try Again After Some Time.`
+      );
     } else {
-      setMaxCoinError(`You can only purchase ${quantity} coins of at a time`);
+      setMaxCoinError(`You can only purchase ${quantity} coins.`);
     }
-  };
+  }, [coinHave, quantity]);
+  
+
+  console.log('re-rendering ...')
 
   const decreaseQty = () => {
     setMaxCoinError("");
@@ -127,13 +143,8 @@ const page = ({ params }: any) => {
   };
 
   const totalPrice = ParseFloat(
-    +productsDetailById?.weight *
-    quantity *
-    (productsDetailById?.iteamtype === "GOLD"
-      ? goldData.totalPrice
-      : silverData.totalPrice),
-    2
-  );
+    (weight * quantity) *
+    (iteamtype === "GOLD" ? goldData.totalPrice : silverData.totalPrice), 2);
 
 
   if (!productsDetailById) {
@@ -173,7 +184,7 @@ const page = ({ params }: any) => {
       <div className="grid xl:grid-cols-5 gap-12">
         <div className="col-span-5 xl:col-span-2 relative">
           {/* Absolute positioning for out-of-stock image */}
-          {!productsDetailById.inStock && (
+          {!inStock && (
             <div className="bg-red-600 absolute top-0 right-0 px-2  rounded-bl-lg">
               <p className="font-medium">Out Of Stock</p>
             </div>
@@ -182,7 +193,7 @@ const page = ({ params }: any) => {
             <SimpleImageSlider
               width={400}
               height={400}
-              images={photo}
+              images={image}
               showBullets={false}
               style={{ margin: "0 auto" }}
               showNavs={false}
@@ -197,7 +208,7 @@ const page = ({ params }: any) => {
             <SimpleImageSlider
               width={240}
               height={240}
-              images={photo}
+              images={image}
               showBullets={false}
               style={{ margin: "0 auto" }}
               showNavs={false}
@@ -214,7 +225,7 @@ const page = ({ params }: any) => {
             <div>
               <CustomImageButton
                 img="/lottie/buynow.png"
-                isDisabled={!productsDetailById.inStock}
+                isDisabled={!inStock}
                 handleClick={() => {
                   openCoinModalHandler();
                 }}
@@ -227,7 +238,7 @@ const page = ({ params }: any) => {
                 <Link className="cursor-pointer" href="/cart">
                   <CustomImageButton
                     img="/lottie/Go to cart.gif"
-                    isDisabled={!productsDetailById.inStock}
+                    isDisabled={!inStock}
                     title="GO TO CART"
                   />
                 </Link>
@@ -239,7 +250,7 @@ const page = ({ params }: any) => {
               <div>
                 <CustomImageButton
                   img="/lottie/updatenow.png"
-                  isDisabled={!productsDetailById.inStock}
+                  isDisabled={!inStock}
                   handleClick={() => {
                     addToCartHandler("UpdateCart");
                   }}
@@ -252,7 +263,7 @@ const page = ({ params }: any) => {
             {cartQuantity == 0 && (
               <CustomImageButton
                 img="/lottie/addcart.gif"
-                isDisabled={!productsDetailById.inStock}
+                isDisabled={!inStock}
                 handleClick={() => {
                   addToCartHandler("AddToCart");
                 }}
@@ -265,7 +276,7 @@ const page = ({ params }: any) => {
           <div className="flex justify-between items-center">
             <div>
               <h1 className="mb-2 sm:text-lg extrabold">
-                {productsDetailById.name}
+                {name}
               </h1>
               <div className="mb-2">
                 Total Price{" "}
@@ -278,7 +289,7 @@ const page = ({ params }: any) => {
                 </span>
               </div>
               <div className="text-base sm:text-lg bold text-blue-100 ">
-                Making Charge ₹{productsDetailById.makingcharges}
+                Making Charge ₹{makingcharges}
               </div>
               {maxCoinError && <p className="text-red-600">{maxCoinError}</p>}
             </div>
@@ -296,7 +307,7 @@ const page = ({ params }: any) => {
           <CheckPinCode />
           {/*coin description */}
           <div className="bg-themeLight px-4 py-4 rounded-md mt-4">
-            <p className="text-sm">{productsDetailById.description}</p>
+            <p className="text-sm">{description}</p>
             <div className="grid grid-cols-4 mt-4">
               <div className=" text-center px-2">
                 <img
@@ -346,20 +357,20 @@ const page = ({ params }: any) => {
                   <tr>
                     <td className="w-32 inline-block">Weight </td>
                     <td className="pl-2 bold">
-                      {productsDetailById.weight} Gm
+                      {weight} Gm
                     </td>
                   </tr>
                   <tr>
                     <td className="w-32 inline-block">Metal Purity</td>
-                    <td className="pl-2">{productsDetailById.purity}</td>
+                    <td className="pl-2">{purity}</td>
                   </tr>
                   <tr>
                     <td className="w-32 inline-block">Dimension</td>
-                    <td className="pl-2">{productsDetailById.dimension}</td>
+                    <td className="pl-2">{dimension}</td>
                   </tr>
                   <tr>
                     <td className="w-32 inline-block">Quality</td>
-                    <td className="pl-2">{productsDetailById.quality}</td>
+                    <td className="pl-2">{quality}</td>
                   </tr>
                 </tbody>
               </table>

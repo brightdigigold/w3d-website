@@ -39,7 +39,7 @@ const Vault = () => {
                 />
                 <div>
                   <p className=" text-sm sm:text-2xl">Gold</p>
-                  <p className="text-green-500 text-sm sm:text-lg ">{goldVaultBalance ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
+                  <p className="text-green-500 text-sm sm:text-lg ">{goldVaultBalance != null ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -49,7 +49,7 @@ const Vault = () => {
                 />
                 <div>
                   <p className=" text-sm sm:text-2xl"> Silver</p>
-                  <p className="text-green-500 text-sm sm:text-lg">{silverVaultBalance ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
+                  <p className="text-green-500 text-sm sm:text-lg">{silverVaultBalance != null ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
                 </div>
               </div>
             </div>
@@ -69,7 +69,7 @@ const Vault = () => {
                 />
                 <div>
                   <p className=" text-sm sm:text-2xl">Gold</p>
-                  <p className="text-green-500">{giftedGoldWeight} gms</p>
+                  <p className="text-green-500">{giftedGoldWeight != null ? giftedGoldWeight : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -79,7 +79,7 @@ const Vault = () => {
                 />
                 <div>
                   <p className=" text-sm sm:text-2xl"> Silver</p>
-                  <p className="text-green-500">{giftedSilverWeight} gms</p>
+                  <p className="text-green-500">{giftedSilverWeight != null ? giftedSilverWeight : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gms</p>
                 </div>
               </div>
             </div>

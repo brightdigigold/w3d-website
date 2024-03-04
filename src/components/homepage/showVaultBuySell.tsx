@@ -34,6 +34,8 @@ const ShowVaultBuySell = () => {
         });
     }, [purchaseType, setProps]);
 
+    console.log('goldVaultBalance ====> ', goldVaultBalance)
+
     return (
         <animated.div style={props} >
             {purchaseType === "sell" && (
@@ -50,9 +52,10 @@ const ShowVaultBuySell = () => {
                             )}
                             <p className="text-white text-sm sm:text-lg">
                                 {metalType === "gold"
-                                    ? goldVaultBalance ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />
-                                    : silverVaultBalance ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />}  gm
+                                    ? goldVaultBalance != null ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />
+                                    : silverVaultBalance != null ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />} gm
                             </p>
+
                         </div>
                         <div className="flex items-center gap-2 sm:gap-4">
                             <img src="/Green Rupees.png" className="w-8 sm:w-10 " alt="rupees" />

@@ -2,32 +2,32 @@ import { api } from "@/api/DashboardServices";
 import { funcForDecrypt } from "@/components/helperFunctions";
 import { useCallback, useEffect, useState } from "react";
 
-// interface ProductDetails {
-//     coinHave: number;
-//     createdAt: string;
-//     description: string;
-//     dimension: string;
-//     image: string[];
-//     imageAlt: string;
-//     inStock: boolean;
-//     iteamtype: string; 
-//     makingcharges: string;
-//     maxForCart: number;
-//     name: string;
-//     purity: string;
-//     quality: string;
-//     sku: string;
-//     slug: string;
-//     status: boolean;
-//     updatedAt: string;
-//     weight: number;
-//     __v: number;
-//     _id: string;
-//   }
-  
+interface ProductDetails {
+    coinHave: number;
+    createdAt: string;
+    description: string;
+    dimension: string;
+    image: string[];
+    imageAlt: string;
+    inStock: boolean;
+    iteamtype: string;
+    makingcharges: string;
+    maxForCart: number;
+    name: string;
+    purity: string;
+    quality: string;
+    sku: string;
+    slug: string;
+    status: boolean;
+    updatedAt: string;
+    weight: number;
+    __v: number;
+    _id: string;
+}
+
 
 export default function useFetchProductDetailsById(id: string) {
-    const [productsDetailById, setProductDetailById] = useState<any>();
+    const [productsDetailById, setProductDetailById] = useState<ProductDetails>();
     const [productId, setproductId] = useState<string>("");
     const [photo, setphoto] = useState<[]>([]);
     const [error, setError] = useState<string | null>(null);
@@ -43,8 +43,10 @@ export default function useFetchProductDetailsById(id: string) {
             if (response.status) {
                 const responseOfApi = await funcForDecrypt(response.data.payload);
                 const productDetails = JSON.parse(responseOfApi);
-                console.log('productDetails.data',productDetails.data )
-                setProductDetailById(productDetails.data);
+                const { ...finalData } = productDetails.data
+                console.log('productDetails', productDetails)
+                // console.log('productDetails.data',productDetails.data )
+                setProductDetailById(finalData);
                 setproductId(productDetails.data.sku);
                 setphoto(productDetails.data.image);
             }
