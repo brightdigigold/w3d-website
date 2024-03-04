@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 
 const ProductDescription = ({description, weight, purity, dimension, quality}) => {
-    console.log('re render from details')
 
     return (
         <div className="bg-themeLight px-4 py-4 rounded-md mt-4">

@@ -7,8 +7,6 @@ const CheckPinCode = () => {
   const [pincodeError, setPincodeError] = useState<string | null>(null);
   const [delivery, setDeliverey] = useState<boolean>(false);
 
-  console.log('from pincode')
-
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const pincodeValue = e.currentTarget.pincode.value;
