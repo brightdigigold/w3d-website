@@ -32,7 +32,7 @@ const features = [
     pera: "Bright DiGi Gold is a wonderful app. I cannot believe that buying gold could be so easy and convenient. Anyone who wants to invest in gold can definitely go for it without any doubt.",
   },
 ];
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 export default function Review() {
   return (
@@ -43,7 +43,7 @@ export default function Review() {
             Feedback
           </h1>
           <Swiper
-            loop={true}
+             loop={features.length > 1}
             breakpoints={{
               600: {
                 slidesPerView: 1,

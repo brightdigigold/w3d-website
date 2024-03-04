@@ -73,6 +73,7 @@ export default function Marketing() {
         )}
         <div className="mx-auto backSlider px-4 sm:px-6 lg:px-16 pb-16">
           <Swiper
+            loop={features.length > 1} // Enable loop mode only if there are enough slides
             spaceBetween={30}
             autoplay={{
               delay: 5000,
@@ -83,14 +84,10 @@ export default function Marketing() {
             className="mySwiper"
           >
             {features.map((item, index) => (
-              <SwiperSlide
-                key={`${index}-Slider`}
-                className="relative swiper-slide p-4"
-              >
+              <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4">
                 <div className="grid lg:grid-cols-2 gap-20 place-items-center">
                   <div>
                     <img
-
                       className="mx-auto h-auto xl:h-96 pt-10 lg:pt-0"
                       src={item.img}
                       alt={item.alt}

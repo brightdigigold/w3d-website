@@ -1,5 +1,5 @@
 import { SelectMetalType, SelectPurchaseType, selectMetalPricePerGram } from '@/redux/shopSlice';
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
 import { ParseFloat } from '../helperFunctions';
@@ -14,7 +14,7 @@ const ShowVaultBuySell = () => {
     const silverVaultBalance = useSelector(selectSilverVaultBalance);
     const loading = useSelector(selectLoading);
 
-    const [props, setProps] = useSpring(() => ({
+    const [props, set] = useSpring(() => ({
         opacity: 1,
         transform: 'translateX(0%)',
         from: {
@@ -28,13 +28,13 @@ const ShowVaultBuySell = () => {
     }));
 
     useEffect(() => {
-        setProps({
+        const animationProps = {
             opacity: 1,
             transform: `translateX(${purchaseType === 'sell' ? '0%' : '-100%'})`,
-        });
-    }, [purchaseType, setProps]);
+        };
+        set(animationProps);
+    }, [purchaseType, set]);
 
-    console.log('goldVaultBalance ====> ', goldVaultBalance)
 
     return (
         <animated.div style={props} >

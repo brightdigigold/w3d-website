@@ -560,7 +560,9 @@ const Cart = () => {
               }}
               className="flex border-2 border-yellow-400 rounded-full p-3 items-center cursor-pointer"
             >
-              <img src={"Goldbarbanner.png"} className="h-5" alt="vault" />
+              {/* <img src={"Goldbarbanner.png"} className="h-5" alt="vault" /> */}
+              <img src={"Goldbarbanner.png"} className="h-5" style={{ width: "auto" }} alt="vault" />
+
               <CustomButton title="GOLD" containerStyles="px-3" />
             </div>
             <div
@@ -570,7 +572,9 @@ const Cart = () => {
               }}
               className="flex border-2 border-yellow-400 rounded-full p-3 items-center cursor-pointer"
             >
-              <img src={"/Silverbar.png"} className="h-5" alt="vault" />
+              {/* <img src={"/Silverbar.png"} className="h-5" alt="vault" /> */}
+              <img src={"Silverbar.png"} className="h-5" style={{ width: "auto" }} alt="vault" />
+
               <CustomButton title="SILVER" containerStyles="px-3" />
             </div>
           </div>

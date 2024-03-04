@@ -58,7 +58,7 @@ export default function ClientSlider() {
                     spaceBetween: 10,
                   },
                   1024: {
-                    slidesPerView: 5,
+                    slidesPerView: Math.min(features.length, 5),
                     spaceBetween: 10,
                   },
                 }}
@@ -66,7 +66,7 @@ export default function ClientSlider() {
                   delay: 2500,
                   disableOnInteraction: false,
                 }}
-                modules={[Autoplay]}
+                modules={[Autoplay, Pagination, Navigation]}
                 className="mySwiper"
               >
                 {features.map((feature, index) => (
