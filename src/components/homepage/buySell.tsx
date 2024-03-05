@@ -527,7 +527,7 @@ const BuySell = () => {
                   </label>
                 </div>
                 <div>
-                  <p className="text-white pl-4 mt-4 sm:mt-6 relative sm:text-md">
+                  <span className="text-white pl-4 mt-4 sm:mt-6 relative sm:text-md">
                     <img
                       src="/lottie/Live Price.gif"
                       className="h-5 sm:h-6 inline-block"
@@ -536,15 +536,15 @@ const BuySell = () => {
                     <span className="pl-1 pt-2">
                       {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
                     </span>
-                  </p>
+                  </span>
                   <div className="text-shine text-base sm:text-xl bold pt-0 py-2 pl-4 items-center  flex">
                     ₹
                     {isgold ? (
                       <div className="">
                         {activeTab === "buy" ? (
-                          <p className="">{goldData.totalPrice}</p>
+                          <span className="">{goldData.totalPrice}</span>
                         ) : (
-                          <p>{goldData.salePrice}</p>
+                          <span>{goldData.salePrice}</span>
                         )}
                       </div>
                     ) : (
@@ -556,15 +556,15 @@ const BuySell = () => {
                         )}
                       </div>
                     )}
-                    /gm <p className="pl-1 text-xxs sm:text-xs mt-1">+3% GST</p>
+                    /gm <span className="pl-1 text-xxs sm:text-xs mt-1">+3% GST</span>
                     <div className="text-xs">
                       {purchaseType === "buy" ? "" : ""}
                     </div>
                   </div>
-                  <p className="text-xs text-gray-400 pl-4">
+                  <span className="text-xs text-gray-400 pl-4">
                     {metalType == "gold" ? "24k 99.9% Pure Gold" : "99.99% Pure Silver"}
-                  </p>
-                  <p className="text-xxs sm:text-xs font-base pl-4 flex">
+                  </span>
+                  <span className="text-xxs sm:text-xs font-base pl-4 flex">
                     {isgold ? (
                       <div
                         className={`${goldData.percentage >= 0
@@ -594,10 +594,10 @@ const BuySell = () => {
                         {silverData.percentage} %
                       </div>
                     )}
-                    <p className="text-7x sm:text-xs text-white ml-2 inline-block">
+                    <span className="text-7x sm:text-xs text-white ml-2 inline-block">
                       Since Yesterday
-                    </p>
-                  </p>
+                    </span>
+                  </span>
                 </div>
               </div>
               <div className="mt-4 sm:mt-4 w-full 2xl:w-4/5 float-left">
@@ -725,7 +725,7 @@ const BuySell = () => {
               ) : (
                 <QuickBuySellButtons amounts={[0.1, 0.5, 1, 2]} unit="gm" />
               )}
-              <p className="text-center text-xxs sm:text-xs flex justify-center items-center mt-6 text-gray-400">
+              <span className="text-center text-xxs sm:text-xs flex justify-center items-center mt-6 text-gray-400">
                 Your Assets will be Saved in Safe & Secured Vault
                 <img
                   className="h-5 ml-2"
@@ -735,7 +735,7 @@ const BuySell = () => {
                   ).toString()}
                   alt="Secure"
                 />{" "}
-              </p>
+              </span>
               <img src="/brink.png" className="h-4 sm:h-7 mt-2 mx-auto" alt="Brinks" />
               <div>
                 <animated.div style={props}>
@@ -752,9 +752,9 @@ const BuySell = () => {
                             ).toString()}
                             alt="Benefits"
                           />
-                          <p className="text-white text-lg leading-4 ml-2">
+                          <span className="text-white text-lg leading-4 ml-2">
                             {isAnyCouponApplied ? `Coupon Applied ${appliedCouponCode}` : "Apply Coupon"}
-                          </p>
+                          </span>
                         </div>
                         <button className="text-white rounded-full border-2">
                           <div>
@@ -775,7 +775,7 @@ const BuySell = () => {
                     }}
                     className="w-full bg-themeBlue rounded-lg py-2 uppercase extrabold"
                   >
-                    <p>Start Savings</p>
+                    <span>Start Savings</span>
                   </button>
                 )}
                 {purchaseType === "sell" && (
@@ -783,7 +783,7 @@ const BuySell = () => {
                     onClick={handleSellClick}
                     className="w-full bg-themeBlue rounded-lg py-2 uppercase extrabold"
                   >
-                    <p>Sell Now</p>
+                    <span>Sell Now</span>
                   </button>
                 )}
                 {isModalOpen && (
