@@ -560,9 +560,9 @@ const BuySell = () => {
                       {purchaseType === "buy" ? "" : ""}
                     </div>
                   </div>
-                  <span className="text-xs text-gray-400 pl-4">
+                  <p className="text-xs text-gray-400 pl-4">
                     {metalType == "gold" ? "24k 99.9% Pure Gold" : "99.99% Pure Silver"}
-                  </span>
+                  </p>
                   <span className="text-xxs sm:text-xs font-base pl-4 flex">
                     {isgold ? (
                       <div
