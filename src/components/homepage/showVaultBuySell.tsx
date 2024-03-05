@@ -14,30 +14,25 @@ const ShowVaultBuySell = () => {
     const silverVaultBalance = useSelector(selectSilverVaultBalance);
     const loading = useSelector(selectLoading);
 
-    const [props, set] = useSpring(() => ({
+    // Notice the use of "api" in the destructuring here
+    const [styles, api] = useSpring(() => ({
         opacity: 1,
         transform: 'translateX(0%)',
-        from: {
-            opacity: 0,
-            transform: 'translateX(-100%)',
-        },
-        config: {
-            duration: 2000, // 2000 milliseconds (2 seconds)
-        },
-        delay: 1000, // 3 seconds delay
-    }));
-
+        from: { opacity: 0, transform: 'translateX(-100%)' },
+        config: { duration: 2000 },
+        delay: 1000,
+    }), []);
 
     useEffect(() => {
-        const animationProps = {
+        // Now using api.start() to update the animation properties
+        api.start({
             opacity: 1,
             transform: `translateX(${purchaseType === 'sell' ? '0%' : '-100%'})`,
-        };
-        set(animationProps);
-    }, [purchaseType, set]);
+        });
+    }, [purchaseType, api]);
 
     return (
-        <animated.div style={props} >
+        <animated.div style={styles} >
             {purchaseType === "sell" && (
                 <div className="bg-themeLight001 p-0 mx-4 mt-4 justify-between rounded-lg border-1 grid grid-cols-4 sm:gap-4 items-center">
                     <div className="col-span-1 justify-center flex items-center">
