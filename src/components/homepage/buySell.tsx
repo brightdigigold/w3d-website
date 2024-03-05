@@ -46,6 +46,10 @@ import ShowVaultBuySell from "./showVaultBuySell";
 import { useRouter } from "next/navigation";
 import UpiModal from "../myAccount/payoutOptions/addNewUpiId";
 import { sendGTMEvent } from '@next/third-parties/google'
+import NextImage from "../nextImage";
+import LivePrice from '../../../public/lottie/LivePrice.gif'
+import coupon from '../../../public/coupon.png';
+
 
 const BuySell = () => {
   const router = useRouter()
@@ -396,7 +400,7 @@ const BuySell = () => {
         >
           {unit === "rupees" ? `₹${amount}` : `${amount}gm`}
           {purchaseType === "buy" && amount === 500 && ( // Conditional rendering for the "POPULAR" tag
-            <span className="absolute bottom-[-16px] left-0 bg-themeBlue text-black semibold px-1 py-0.5 text-xs rounded">
+            <span className="absolute bottom-[-16px] left-0 bg-themeBlue text-black semibold px-0.5 sm:px-1 py-0 sm:py-0.5 text-xxs sm:text-xs rounded">
               POPULAR
             </span>
           )}
@@ -462,7 +466,6 @@ const BuySell = () => {
 
   const toggleUPImodal = "toggleUPImodal"
   const [upiUpdated, setupiUpdated] = useState(false);
-  const toggled = "toggled"
 
   return (
     <>
@@ -516,7 +519,7 @@ const BuySell = () => {
             <div className="grid grid-cols-2 gap-2 items-end">
               <div className="w-full ">
                 <div
-                  className="toggle_button_spacing pl-2 mt-6"
+                  className="toggle_button_spacing pl-1 mt-4"
                   onChange={toggleMetal}
                 >
                   <label className="toggle-button">
@@ -527,16 +530,12 @@ const BuySell = () => {
                   </label>
                 </div>
                 <div>
-                  <span className="text-white pl-4 mt-4 sm:mt-6 relative sm:text-md">
-                    <img
-                      src="/lottie/Live Price.gif"
-                      className="h-5 sm:h-6 inline-block"
-                      alt="Live Price"
-                    />
-                    <span className="pl-1 pt-2">
+                  <div className="text-white pl-4 mt-2">
+                    <NextImage src={LivePrice} alt="Live Price" className="inline-block"  style={{ width: "30px", height: "auto" }} priority={true} />
+                    <span className="pl-1">
                       {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
                     </span>
-                  </span>
+                  </div>
                   <div className="text-shine text-base sm:text-xl bold pt-0 py-2 pl-4 items-center  flex">
                     ₹
                     {isgold ? (
@@ -603,18 +602,9 @@ const BuySell = () => {
               <div className="mt-4 sm:mt-4 w-full 2xl:w-4/5 float-left">
                 <div className="flex justify-end 2xl:justify-center pr-4 sm:pr-12 2xl:pr-4">
                   {metalType === "gold" ? (
-                    <img
-                      src="/lottie/Gold Stack Animation.gif"
-                      className="h-24 sm:h-32"
-                      alt="Gold Bar Animation"
-                    />
+                    <NextImage src="/lottie/Gold Stack Animation.gif" alt="Gold Bar Animation" className="h-24 sm:h-32" sizes="100vw" style={{ width: '100%', height: 'auto', }} width={0} height={0} priority={true} />
                   ) : (
-                    <img
-                      src="/lottie/Silver Stacks animation.gif"
-                      className="h-20 sm:h-32"
-                      alt="Silver Bar Animation"
-
-                    />
+                    <NextImage src="/lottie/Silver Stacks animation.gif" alt="Silver Bar Animation" className="h-20 sm:h-32" sizes="100vw" style={{ width: '100%', height: 'auto', }} width={0} height={0} priority={true} />
                   )}
                 </div>
                 <Timer />
@@ -744,14 +734,15 @@ const BuySell = () => {
                       <div className="flex justify-between mt-6"></div>
                       <div className="py-2 px-4 rounded-lg bg-themeLight flex items-center justify-between">
                         <div className="flex items-center">
-                          <img
+                          {/* <img
                             className="h-10"
                             src={new URL(
                               "../../../public/coupon.png",
                               import.meta.url
                             ).toString()}
                             alt="Benefits"
-                          />
+                          /> */}
+                          <NextImage src={coupon} alt="Benefits" style={{ width: "35px", height: "auto" }} />
                           <span className="text-white text-lg leading-4 ml-2">
                             {isAnyCouponApplied ? `Coupon Applied ${appliedCouponCode}` : "Apply Coupon"}
                           </span>
