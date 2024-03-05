@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
+import Link from "next/link";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -42,8 +44,6 @@ const features = [
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
   },
 ];
-import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
-import Link from "next/link";
 
 export default function Blog() {
   return (

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 type TabsProps = {
   tabs: {
@@ -63,4 +63,4 @@ const Tabs: FC<TabsProps> = ({
     </div>
   );
 };
-export default Tabs;
+export default memo(Tabs);

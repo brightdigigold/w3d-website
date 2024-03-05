@@ -2,6 +2,7 @@ import React, { FC, Fragment } from "react";
 import { motion } from "framer-motion";
 import { fadeIn, } from "../../../../utils/motion";
 const DeliveryTab: FC<{}> = () => {
+
   return (
     <Fragment>
       <motion.div
