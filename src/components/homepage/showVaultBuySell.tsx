@@ -27,6 +27,7 @@ const ShowVaultBuySell = () => {
         delay: 1000, // 3 seconds delay
     }));
 
+
     useEffect(() => {
         const animationProps = {
             opacity: 1,
@@ -34,7 +35,6 @@ const ShowVaultBuySell = () => {
         };
         set(animationProps);
     }, [purchaseType, set]);
-
 
     return (
         <animated.div style={props} >

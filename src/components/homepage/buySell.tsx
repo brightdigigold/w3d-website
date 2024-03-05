@@ -443,26 +443,20 @@ const BuySell = () => {
   };
 
 
-
-  const [props, setProps] = useSpring(() => ({
-    opacity: 1,
-    transform: 'translateX(0%)', // Start position
-    from: {
-      opacity: 0,
-      transform: 'translateX(100%)', // Start from right side of the screen
-    },
-    config: {
-      duration: 2000, // 2000 milliseconds (2 seconds)
-    },
-    delay: 1000, // 3 seconds delay
+  const [style, api] = useSpring(() => ({
+    opacity: 0,
+    transform: 'translateX(100%)',
+    config: { duration: 2000 },
   }));
 
   useEffect(() => {
-    setProps({
+    api.start({
       opacity: 1,
-      transform: `translateX(${isgold && purchaseType === 'buy' ? '0%' : '100%'})`, // Move to the left (0%) if conditions are met, otherwise, move to the right (100%)
+      transform: `translateX(${isgold && purchaseType === 'buy' ? '0%' : '100%'})`,
     });
-  }, [isgold, purchaseType, setProps]);
+  }, [isgold, purchaseType, api]);
+
+
 
   const toggleUPImodal = "toggleUPImodal"
   const [upiUpdated, setupiUpdated] = useState(false);
@@ -531,7 +525,7 @@ const BuySell = () => {
                 </div>
                 <div>
                   <div className="text-white pl-4 mt-2">
-                    <NextImage src={LivePrice} alt="Live Price" className="inline-block"  style={{ width: "30px", height: "auto" }} priority={true} />
+                    <NextImage src={LivePrice} alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} priority={true} />
                     <span className="pl-1">
                       {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
                     </span>
@@ -724,40 +718,30 @@ const BuySell = () => {
                     import.meta.url
                   ).toString()}
                   alt="Secure"
-                />{" "}
+                />
               </span>
               <img src="/brink.png" className="h-4 sm:h-7 mt-2 mx-auto" alt="Brinks" />
               <div>
-                <animated.div style={props}>
+                <animated.div style={style}>
                   {isgold && purchaseType === 'buy' && (
-                    <div>
+                    <>
                       <div className="flex justify-between mt-6"></div>
                       <div className="py-2 px-4 rounded-lg bg-themeLight flex items-center justify-between">
                         <div className="flex items-center">
-                          {/* <img
-                            className="h-10"
-                            src={new URL(
-                              "../../../public/coupon.png",
-                              import.meta.url
-                            ).toString()}
-                            alt="Benefits"
-                          /> */}
-                          <NextImage src={coupon} alt="Benefits" style={{ width: "35px", height: "auto" }} />
+                          <NextImage src={coupon} alt="Benefits" style={{ width: "35px", height: "35px" }} />
                           <span className="text-white text-lg leading-4 ml-2">
                             {isAnyCouponApplied ? `Coupon Applied ${appliedCouponCode}` : "Apply Coupon"}
                           </span>
                         </div>
                         <button className="text-white rounded-full border-2">
-                          <div>
-                            <ChevronDownIcon onClick={openModal} className="h-8" />
-                          </div>
+                          <ChevronDownIcon onClick={openModal} className="h-8" />
                         </button>
                       </div>
-                    </div>
+                    </>
                   )}
                 </animated.div>
               </div>
-              <div className="mt-12">
+              <div className="mt-8">
                 {purchaseType === "buy" && (
                   <button
                     onClick={(event) => {
