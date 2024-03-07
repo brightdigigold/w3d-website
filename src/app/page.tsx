@@ -14,6 +14,7 @@ import {
 import { Suspense } from "react";
 import Loading from "./loading";
 import { Metadata } from "next";
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { GoogleTagManager } from '@next/third-parties/google'
 
 
