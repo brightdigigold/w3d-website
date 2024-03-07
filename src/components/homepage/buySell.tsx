@@ -456,8 +456,6 @@ const BuySell = () => {
     });
   }, [isgold, purchaseType, api]);
 
-
-
   const toggleUPImodal = "toggleUPImodal"
   const [upiUpdated, setupiUpdated] = useState(false);
 
