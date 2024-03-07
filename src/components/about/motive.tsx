@@ -18,7 +18,7 @@ const Motive = () => {
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-16">
             <motion.div variants={fadeIn("right", "spring", 0.25, 0.25)}>
               <div className="flex items-center gap-4">
-                <img src="/Assured.png" className="h-12" alt="24k purity"/>
+                <img src="/Assured.png" className="h-12" alt="24k purity" />
                 <p className="extrabold"> Assured 24K Purity</p>
               </div>
               <p className="mt-4">
@@ -29,19 +29,31 @@ const Motive = () => {
 
             <motion.div variants={fadeIn("right", "spring", 0.5, 0.5)}>
               <div className="flex items-center gap-4">
-                <img src="/Guaranteed Security.png" className="h-12" alt="security" />
+                <img
+                  src="/Guaranteed Security.png"
+                  className="h-12"
+                  alt="security"
+                />
                 <p className="extrabold"> Guaranteed Security</p>
               </div>
               <p className="mt-4 inline-block">
                 Our robust security measures ensure the safety of your digital
                 assets, which are stored in world class vault{" "}
-                <img src="/client5.png" className="inline-block h-3" alt="brinks"/>
+                <img
+                  src="/client5.png"
+                  className="inline-block h-8"
+                  alt="brinks"
+                />
               </p>
             </motion.div>
 
             <motion.div variants={fadeIn("right", "spring", 0.75, 0.75)}>
               <div className="flex items-center gap-4">
-                <img src="/Transparency.png" className="h-12" alt="100% Transparency" />
+                <img
+                  src="/Transparency.png"
+                  className="h-12"
+                  alt="100% Transparency"
+                />
                 <p className="extrabold"> 100% Transparency</p>
               </div>
               <p className="mt-4">
@@ -53,7 +65,11 @@ const Motive = () => {
 
             <motion.div variants={fadeIn("right", "spring", 1.0, 1.0)}>
               <div className="flex items-center gap-4">
-                <img src="/Cost-Effective.png" className="h-12"  alt="Cost-Effective"/>
+                <img
+                  src="/Cost-Effective.png"
+                  className="h-12"
+                  alt="Cost-Effective"
+                />
                 <p className="extrabold"> Cost-Effective</p>
               </div>
               <p className="mt-4">
@@ -64,7 +80,11 @@ const Motive = () => {
 
             <motion.div variants={fadeIn("right", "spring", 1.25, 1.25)}>
               <div className="flex items-center gap-4">
-                <img src="/Convenience.png" className="h-12" alt="Convenience"/>
+                <img
+                  src="/Convenience.png"
+                  className="h-12"
+                  alt="Convenience"
+                />
                 <p className="extrabold"> Convenience</p>
               </div>
               <p className="mt-4">
@@ -76,7 +96,11 @@ const Motive = () => {
 
             <motion.div variants={fadeIn("right", "spring", 1.5, 1.5)}>
               <div className="flex items-center gap-4">
-                <img src="/Liquidity and Flexibility.png" className="h-12" alt="Liquidity and Flexibility" />
+                <img
+                  src="/Liquidity and Flexibility.png"
+                  className="h-12"
+                  alt="Liquidity and Flexibility"
+                />
                 <p className="extrabold"> Liquidity and Flexibility</p>
               </div>
               <p className="mt-4">
