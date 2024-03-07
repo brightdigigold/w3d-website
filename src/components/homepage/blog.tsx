@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
+import Link from "next/link";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -41,9 +43,11 @@ const features = [
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Role-of-Technology.png",
     link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
   },
+  {
+    img: "https://blog.brightdigigold.com/wp-content/uploads/2024/03/Making-Gold-Choices-300x169.jpg",
+    link: "https://blog.brightdigigold.com/2024/03/05/making-gold-choices-digital-gold-vs-physical-gold/",
+  },
 ];
-import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
-import Link from "next/link";
 
 export default function Blog() {
   return (
@@ -97,7 +101,7 @@ export default function Blog() {
                 key={`${index}-Slider`}
                 className="relative swiper-slide p-0 sm:p-4 pt-10"
               >
-                <Link href={feature.link}>
+                <Link target="_blank" href={feature.link}>
                   <div className="rounded-2xl h-44 sm:h-72 relative">
                     <div className="flex justify-center">
                       <img
