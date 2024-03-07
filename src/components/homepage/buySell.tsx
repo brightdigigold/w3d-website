@@ -524,32 +524,32 @@ const BuySell = () => {
                 <div>
                   <div className="text-white pl-4 mt-2">
                     <NextImage src={LivePrice} alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} priority={true} />
-                    <span className="pl-1">
+                    <span className="pl-1 bold">
                       {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
                     </span>
                   </div>
                   <div className="text-shine text-base sm:text-xl bold pt-0 py-2 pl-4 items-center  flex">
-                    ₹
+                    <span className="text-2xl pr-0.5">₹</span>
                     {isgold ? (
-                      <div className="">
+                      <>
                         {activeTab === "buy" ? (
                           <span className="">{goldData.totalPrice}</span>
                         ) : (
                           <span>{goldData.salePrice}</span>
                         )}
-                      </div>
+                      </>
                     ) : (
-                      <div>
+                      <>
                         {activeTab === "buy" ? (
                           <div> {silverData.totalPrice}</div>
                         ) : (
                           <div>{silverData.salePrice}</div>
                         )}
-                      </div>
+                      </>
                     )}
-                    /gm <span className="pl-1 text-xxs sm:text-xs mt-1">+3% GST</span>
+                    /gm
                     <div className="text-xs">
-                      {purchaseType === "buy" ? "" : ""}
+                      {purchaseType === "buy" ? <span className="pl-1 text-xxs sm:text-xs mt-1">+3% GST</span> : ""}
                     </div>
                   </div>
                   <p className="text-xs text-gray-400 pl-4">
