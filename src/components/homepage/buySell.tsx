@@ -538,8 +538,7 @@ const BuySell = () => {
                     </span>
                   </p>
                   <div className="text-shine text-base sm:text-xl bold pt-0 py-2 pl-4 items-center  flex">
-                    ₹
-                    {isgold ? (
+                    <span className="text-2xl">₹</span> {isgold ? (
                       <div className="">
                         {activeTab === "buy" ? (
                           <p className="">{goldData.totalPrice}</p>
@@ -556,10 +555,10 @@ const BuySell = () => {
                         )}
                       </div>
                     )}
-                    /gm <p className="pl-1 text-xxs sm:text-xs mt-1">+3% GST</p>
-                    <div className="text-xs">
-                      {purchaseType === "buy" ? "" : ""}
-                    </div>
+                    /gm
+                    {/* <div className="text-xs"> */}
+                    {purchaseType === "buy" ? <p className="pl-1 text-xxs sm:text-xs mt-1">+3% GST</p> : ""}
+                    {/* </div> */}
                   </div>
                   <p className="text-xs text-gray-400 pl-4">
                     {metalType == "gold" ? "24k 99.9% Pure Gold" : "99.99% Pure Silver"}

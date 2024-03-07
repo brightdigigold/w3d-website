@@ -33,7 +33,6 @@ const Navbar = () => {
     setDropdownOpen(isOpen);
   };
 
-  console.log('pathname', pathname)
 
   const logoutProfile = () => {
     localStorage.removeItem("mobile_number");
