@@ -78,8 +78,6 @@ const BuySell = () => {
   const [previewData, setPreviewData] = useState<[]>([]);
   const [OpenUpiModal, setOpenUpiModal] = useState<boolean>(false);
 
-  console.log('user', user);
-
   const toggleOpenUpiModal = () => {
     setOpenUpiModal(prev => !prev)
   }
