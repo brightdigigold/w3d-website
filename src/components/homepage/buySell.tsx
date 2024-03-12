@@ -40,16 +40,14 @@ import Notiflix from "notiflix";
 import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
 import LoginAside from "../authSection/loginAside";
 import { SelectGoldData, SelectSilverData } from "@/redux/metalSlice";
-import { selectIsloggedIn } from "@/redux/authSlice";
+import { selectIsloggedIn, setShowProfileForm } from "@/redux/authSlice";
 import { useSpring, animated } from 'react-spring';
 import ShowVaultBuySell from "./showVaultBuySell";
 import { useRouter } from "next/navigation";
 import UpiModal from "../myAccount/payoutOptions/addNewUpiId";
-import { sendGTMEvent } from '@next/third-parties/google'
 import NextImage from "../nextImage";
 import LivePrice from '../../../public/lottie/LivePrice.gif'
 import coupon from '../../../public/coupon.png';
-
 
 const BuySell = () => {
   const router = useRouter()
@@ -80,10 +78,11 @@ const BuySell = () => {
   const [previewData, setPreviewData] = useState<[]>([]);
   const [OpenUpiModal, setOpenUpiModal] = useState<boolean>(false);
 
+  console.log('user', user);
+
   const toggleOpenUpiModal = () => {
     setOpenUpiModal(prev => !prev)
   }
-
 
   const previewModal = async () => {
 
@@ -319,6 +318,11 @@ const BuySell = () => {
     setValidationError("");
     if (!isloggedIn) {
       setOpenLoginAside(true);
+      return;
+    }
+
+    if(!user.data.isBasicDetailsCompleted){
+      dispatch(setShowProfileForm(true));
       return;
     }
 
@@ -743,7 +747,6 @@ const BuySell = () => {
                 {purchaseType === "buy" && (
                   <button
                     onClick={(event) => {
-                      sendGTMEvent({ event: 'buttonClicked', value: 'xyz' })
                       handleBuyClick(event)
                     }}
                     className="w-full bg-themeBlue rounded-lg py-2 uppercase extrabold"

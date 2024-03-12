@@ -41,7 +41,6 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   const cancelButtonRef = useRef(null);
   const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value.replace(/ gm/g, '');
 
-
   useEffect(() => {
     if (welcomeGold) {
       dispatch(clearCoupon());
@@ -77,6 +76,8 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
     fromApp: false,
     payment_mode: "cashfree",
   };
+
+  console.log('dataToEncrept', dataToEncrept)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -201,13 +202,13 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                     </p>
                   </div>
                 </div>
-                <p className="pt-4 pb-2">
+                <div className="pt-4 pb-2">
                   <ProgressBar
                     fromCart={true}
                     metalTypeForProgressBar={metalType}
                     displayMetalType={metalType}
                   />
-                </p>
+                </div>
                 <div className="text-yellow-400 px-4 m-2 py-1 pb-2 flex justify-center sm:px-6">
                   <button
                     type="button"

@@ -20,11 +20,14 @@ import useFetchProductDetailsById from "../../../hooks/useFetchProductDetailsByI
 import useFetchProductCart from "@/hooks/useFetchProductCart";
 import { useAddToCart } from "@/hooks/useAddToCart";
 import ProductDescription from "../ProductDetails/productDescription";
+import { setShowProfileForm } from "@/redux/authSlice";
+import { useDispatch } from "react-redux";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
   const id = slug;
   const { _id } = user.data;
+  const dispatch = useDispatch();
   const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
   const { productsDetailById, productId, isLoading, error } = useFetchProductDetailsById(id);
@@ -50,6 +53,14 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const openCoinModalHandler = () => {
     if (isloggedIn) {
       setMaxCoinError("");
+
+      console.log('',user?.data?.isBasicDetailsCompleted, user?.data?.isKycDone)
+
+      if (!user?.data?.isBasicDetailsCompleted) {
+        dispatch(setShowProfileForm(true));
+        return;
+      }
+
       if (!user?.data?.isKycDone) {
         Swal.fire({
           title: "Oops...!",

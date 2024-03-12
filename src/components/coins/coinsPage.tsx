@@ -15,11 +15,19 @@ import TabButton from "./tabComponent";
 import VaultBalance from "./vaultBalance";
 import { selectGoldVaultBalance, selectSilverVaultBalance, selectLoading } from "@/redux/vaultSlice";
 import ButtonLoader from "../buttonLoader";
+import SetProfileForNewUser from "../setProfile";
+import { selectIsloggedIn, setShowProfileForm } from "@/redux/authSlice";
+import { useDispatch } from "react-redux";
+import { selectUser } from "@/redux/userDetailsSlice";
 
 const Coins = () => {
   const [activeTab, setActiveTab] = useState("ALL");
-  const  isLoggedIn = useSelector((state: RootState) => (state.auth.isLoggedIn))
-  const  otpModal = useSelector((state: RootState) => (state.auth.otpModal))
+  const isLoggedIn = useSelector((state: RootState) => (state.auth.isLoggedIn))
+  const otpModal = useSelector((state: RootState) => (state.auth.otpModal))
+  const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
+  const dispatch = useDispatch();
+  const isloggedIn = useSelector(selectIsloggedIn);
+  const user = useSelector(selectUser);
 
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
@@ -35,10 +43,27 @@ const Coins = () => {
     { tabName: "SILVER", src: "Silverbar.png", alt: "digital silver bar" },
   ];
 
+  const onClose = () => {
+    dispatch(setShowProfileForm(false));
+  };
+
+  const loginOrSetProfileHandler = () => {
+
+    if (!isloggedIn) {
+      setOpenLoginAside(true);
+      return;
+    } else if (!user.data.isBasicDetailsCompleted) {
+      dispatch(setShowProfileForm(true));
+      return;
+    }
+  }
+
   return (
     <div className="pb-28 xl:pb-8 pt-16">
       {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} />}
       {otpModal && <OtpModal />}
+
+      <button className="px-3 py-3 text-yellow-600 rounded" onClick={() => dispatch(setShowProfileForm(true))}>click me</button>
 
       <div className="flex justify-center items-center">
         <Image src={"/lottie/ProductBannerNEW.jpg"} alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} />
@@ -84,11 +109,15 @@ const Coins = () => {
             <motion.div variants={fadeIn("right", "spring", 0.25, 0.25)} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 xl:gap-16 my-6">
               <Suspense>
                 {ProductList.map((item, index) => (
-                  <ProductItem key={index} item={item} isLoggedIn={isLoggedIn} handleLoginClick={() => setOpenLoginAside(true)} router={router} />
+                  <ProductItem key={index} item={item} isLoggedIn={isLoggedIn} handleLoginClick={() => loginOrSetProfileHandler()} router={router} />
                 ))}
               </Suspense>
             </motion.div>
           </motion.div>
+        )}
+
+        {showProfileForm && (
+          <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
         )}
 
       </div>

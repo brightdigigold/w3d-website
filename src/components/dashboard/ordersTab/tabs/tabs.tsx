@@ -25,6 +25,7 @@ import {
 } from "react-icons/ai";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import { useDispatch } from "react-redux";
+import Image from "next/image";
 
 const OrdersTabs = () => {
   const dispatch = useDispatch();
@@ -455,11 +456,12 @@ const OrdersTabs = () => {
                                       //   className="text-yellow-400"
                                       //   size={28}
                                       // />
-                                      <img
+                                      <Image
                                         src="/images/cart.png"
                                         alt="cart"
                                         className=""
                                         width={28}
+                                        height={28}
                                       />
                                     )}
                                   {/* digital gold BUY image */}

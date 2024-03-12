@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaSpinner } from 'react-icons/fa'; // Import spinner icon from react-icons library
+import { FaSpinner } from 'react-icons/fa'; 
 
 interface ButtonLoaderProps {
   loading: boolean;

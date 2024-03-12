@@ -11,9 +11,15 @@ const apiForWallet = async () => {
         'Content-Type': 'application/json',
       },
     });
+
+    // console.log('response', response);
+
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      const res = await response
+      console.log('response', res);
+      throw new Error(`${response.status}`);
     }
+
 
     const data = await response.json();
     const decryptedData = await funcForDecrypt(data.payload);
@@ -24,9 +30,11 @@ const apiForWallet = async () => {
 };
 
 export const fetchWalletData = createAsyncThunk('vault/fetchWalletData', async (_, { dispatch }) => {
+
   try {
     dispatch(setLoading(true));
     const walletData: Wallet = await apiForWallet();
+
     dispatch(setGoldVaultBalance(walletData?.gold));
     dispatch(setGiftedGoldWeight(walletData?.holdGoldGram));
     dispatch(setSilverVaultBalance(walletData?.silver));
@@ -34,12 +42,27 @@ export const fetchWalletData = createAsyncThunk('vault/fetchWalletData', async (
     dispatch(setLoading(false));
     dispatch(setError(null));
     return walletData;
-  } catch (error) {
-    // dispatch(setLoading(false));
-    dispatch(setError('fetching wallet data...'));
+  } catch (error: any) {
+
+    const errorMessage = error.toString();
+    const errorCodeMatch = errorMessage.match(/\d+/);; // Extract numbers from the error message
+    const errorCode = errorCodeMatch ? parseInt(errorCodeMatch![0]) : 0; 
+
+    if (error && errorCode == 401) {
+      dispatch(setError('Unauthorized access. Please login again.'));
+      return;
+    } else if (error && errorCode >= 500) {
+      dispatch(setError('Server error. Please try again later.'));
+      return;
+    } else {
+      dispatch(setError('An error occurred while fetching wallet data.'));
+    }
     throw error;
+  } finally {
+    dispatch(setLoading(false));
   }
 });
+
 
 const initialState = {
   goldVaultBalance: 0,

@@ -13,11 +13,8 @@ import {
 } from "@/redux/authSlice";
 import { useRouter } from "next/navigation";
 import { resetUserDetails, selectUser } from "@/redux/userDetailsSlice";
-import { IoMdHome } from "react-icons/io";
 // import { resetUserDetails } from "@/redux/userDetailsSlice";
-import { PhoneIcon } from "@heroicons/react/20/solid";
-import ProfileImage from "./myAccount/profile/profileImage";
-import { Dialog } from "@headlessui/react";
+
 interface SidebarAsideProps {
   isOpen: boolean;
   onClose: () => any;
@@ -29,6 +26,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const cancelButtonRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -43,6 +41,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen, onClose]);
+
   const logoutProfile = () => {
     localStorage.removeItem("mobile_number");
     localStorage.removeItem("token");
@@ -53,7 +52,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
     dispatch(resetUserDetails());
     router.push("/");
   };
-  const cancelButtonRef = useRef(null);
+
   return (
     <div
       ref={sidebarRef}

@@ -20,7 +20,6 @@ import Notiflix from "notiflix";
 import { fetchWalletData } from "@/redux/vaultSlice";
 
 export default function OtpModal() {
-  let completeButtonRef = useRef(null);
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
@@ -159,7 +158,6 @@ export default function OtpModal() {
       }
     } catch (error) {
       // Handle errors here
-      console.error(error);
       Swal.fire({
         html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
         title: "An error occurred",
