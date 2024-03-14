@@ -63,8 +63,6 @@ const Coins = () => {
       {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} />}
       {otpModal && <OtpModal />}
 
-      <button className="px-3 py-3 text-yellow-600 rounded" onClick={() => dispatch(setShowProfileForm(true))}>click me</button>
-
       <div className="flex justify-center items-center">
         <Image src={"/lottie/ProductBannerNEW.jpg"} alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} />
       </div>

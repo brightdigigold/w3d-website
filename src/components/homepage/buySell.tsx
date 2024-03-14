@@ -741,15 +741,16 @@ const BuySell = () => {
                   )}
                 </animated.div>
               </div>
-              <div className="mt-8">
+              <div className="mt-8" >
                 {purchaseType === "buy" && (
                   <button
+                
                     onClick={(event) => {
                       handleBuyClick(event)
                     }}
                     className="w-full bg-themeBlue rounded-lg py-2 uppercase extrabold"
                   >
-                    <span>Start Savings</span>
+                    <span className="text-xl">Start Savings</span>
                   </button>
                 )}
                 {purchaseType === "sell" && (

@@ -17,10 +17,7 @@ export interface ProductItemProps {
     isLoggedIn: boolean;
     handleLoginClick: () => void;
     router: any;
-    // profileComplete: boolean;
-    // handleCompleteProfile: () => void;
 }
-
 
 const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLoginClick, router }) => {
     const dispatch = useDispatch();

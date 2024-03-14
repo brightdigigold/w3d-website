@@ -7,10 +7,12 @@ import "swiper/css/navigation";
 
 const features = [
   {
-    img: "/lottie/offer1.jpg",
+    img: "/lottie/holi1.png",
+    // img: "/lottie/offer1.jpg",
   },
   {
-    img: "/lottie/offer2.jpg",
+    // img: "/lottie/offer2.jpg",
+    img: "/lottie/holi2.png",
   },
 ];
 import { Autoplay } from "swiper/modules";
