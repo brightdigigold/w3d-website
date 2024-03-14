@@ -63,7 +63,9 @@ const Coins = () => {
       {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} />}
       {otpModal && <OtpModal />}
 
+
       <div className="flex justify-center items-center">
+        {/* <Image src={"/lottie/ProductBannerNEW.jpg"} alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} /> */}
         <Image src={"/lottie/product.png"} alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} />
       </div>
       <div className="container mx-auto">
