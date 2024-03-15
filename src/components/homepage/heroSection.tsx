@@ -16,6 +16,7 @@ import OtpModal from "../modals/otpModal";
 import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import { GoogleTagManager } from '@next/third-parties/google'
+import NextImage from "../nextImage";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -150,6 +151,7 @@ const HeroSection = () => {
               </motion.div>
 
               <div className="flex justify-center mt-4"></div>
+
             </div>
             <motion.div variants={fadeIn("bottom", "spring", 0.5, 0.5)}>
               <BuySell />

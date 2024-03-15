@@ -1,4 +1,5 @@
 "use client";
+import { MixPannelEvents } from "@/components/analytics/mixPannelEvents";
 import { AesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
 import { ArrowDownIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
@@ -65,6 +66,17 @@ function page({ params }: any) {
 
     // Cleanup function to clear interval if component unmounts or changes
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    dataOfTransaction?.data?.transactionStatus ===
+      "SUCCESS" &&
+      MixPannelEvents('Order success', {
+        "order_id": params.id,
+        "item_type": dataOfTransaction?.data?.order_id?.itemType,
+        "order_type": dataOfTransaction?.data?.order_id?.orderType,
+        "amount": dataOfTransaction?.data?.amount,
+      });
   }, []);
 
 
