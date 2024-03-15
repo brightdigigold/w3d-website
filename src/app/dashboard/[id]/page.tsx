@@ -50,26 +50,26 @@ function page({ params }: any) {
     transactionData(params.id);
   }, []);
 
+  // useEffect(() => {
+  //   const gotoDashboard = () => {
+  //     interval = setInterval(() => {
+  //       setRemainingTime(prevTime => prevTime - 1);
+  //     }, 1000);
+
+  //     setTimeout(() => {
+  //       clearInterval(interval);
+  //       router.push("/dashboard");
+  //     }, 5000);
+  //   }
+
+  //   gotoDashboard();
+
+  //   // Cleanup function to clear interval if component unmounts or changes
+  //   return () => clearInterval(interval);
+  // }, []);
+
   useEffect(() => {
-    const gotoDashboard = () => {
-      interval = setInterval(() => {
-        setRemainingTime(prevTime => prevTime - 1);
-      }, 1000);
-
-      setTimeout(() => {
-        clearInterval(interval);
-        router.push("/dashboard");
-      }, 5000);
-    }
-
-    gotoDashboard();
-
-    // Cleanup function to clear interval if component unmounts or changes
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    dataOfTransaction?.data?.transactionStatus ===
+    dataOfTransaction?.data?.transactionStatus ==
       "SUCCESS" &&
       MixPannelEvents('Order success', {
         "order_id": params.id,
