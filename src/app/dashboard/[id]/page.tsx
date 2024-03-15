@@ -83,7 +83,7 @@ function page({ params }: any) {
       "order_id": params.id,
       "item_type": dataOfTransaction?.data?.order_id?.itemType,
       "order_type": dataOfTransaction?.data?.order_id?.orderType,
-      "amount": 16,
+      "amount": dataOfTransaction?.data?.amount,
     })
 
     mixpanel.track('Order Success', {
@@ -101,6 +101,18 @@ function page({ params }: any) {
     })
   }, []);
 
+  useEffect(() => {
+    if (dataOfTransaction?.data?.transactionStatus === "SUCCESS" || "PENDING") {
+      mixpanel.track('Order Success', {
+        "order_id": params.id,
+        "item_type": dataOfTransaction?.data?.order_id?.itemType,
+        "order_type": dataOfTransaction?.data?.order_id?.orderType,
+        "amount": dataOfTransaction?.data?.amount,
+      });
+    }
+  }, [dataOfTransaction]);
+
+
 
   return (
     <div className="px-4">
@@ -114,17 +126,18 @@ function page({ params }: any) {
           <div className="coins_background shadow-md rounded-md mb-100 text-center text-white py-12 relative">
             <div className=" flex justify-center">
               {dataOfTransaction?.data?.transactionStatus ===
-                "SUCCESS" ? (
-                <img
-                  src="/lottie/Successfully Done.gif"
-                  className=" absolute h-36 -top-16 "
-                />
-              ) : (
-                <img
-                  src="/lottie/oops.gif"
-                  className=" absolute h-36 -top-16"
-                />
-              )}
+                "SUCCESS" && (
+                  <img
+                    src="/lottie/Successfully Done.gif"
+                    className=" absolute h-36 -top-16 "
+                  />)}
+              {dataOfTransaction?.data?.transactionStatus ===
+                "PENDING" || "FAILED" && (
+                  <img
+                    src="/lottie/oops.gif"
+                    className=" absolute h-36 -top-16"
+                  />
+                )}
             </div>
             {dataOfTransaction?.data?.order_id?.orderType === "BUY" &&
               dataOfTransaction?.data?.order_id?.itemType === "GOLD" && (
@@ -181,7 +194,6 @@ function page({ params }: any) {
             <div className=" divide-x divide-yellow-400 flex gap-3 justify-center mt-4 text-xl">
               <p> ₹ {dataOfTransaction?.data?.amount}</p>
               <p className="pl-3">
-                {" "}
                 {dataOfTransaction?.data?.order_id?.gram} gm
               </p>
             </div>
