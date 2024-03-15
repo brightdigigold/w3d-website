@@ -1,5 +1,4 @@
 "use client";
-import { MixPannelEvents } from "@/components/analytics/mixPannelEvents";
 import { AesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
 import { ArrowDownIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
@@ -71,7 +70,7 @@ function page({ params }: any) {
 
 
   useEffect(() => {
-    if (dataOfTransaction?.data?.transactionStatus === "SUCCESS" || "PENDING") {
+    if (dataOfTransaction?.data?.transactionStatus === "SUCCESS") {
       mixpanel.track('Order Success', {
         "order_id": params.id,
         "item_type": dataOfTransaction?.data?.order_id?.itemType,
@@ -79,25 +78,6 @@ function page({ params }: any) {
         "amount": dataOfTransaction?.data?.amount,
       });
     }
-
-    MixPannelEvents('Order Success', {
-      "order_id": params.id,
-      "item_type": dataOfTransaction?.data?.order_id?.itemType,
-      "order_type": dataOfTransaction?.data?.order_id?.orderType,
-      "amount": dataOfTransaction?.data?.amount,
-    }, () => {
-      console.log('Mixpanel is not ready, callback invoked');
-    });
-
-    MixPannelEvents('Order Success', {
-      "order_id": params.id,
-      "item_type": dataOfTransaction?.data?.order_id?.itemType,
-      "order_type": dataOfTransaction?.data?.order_id?.orderType,
-      "amount": dataOfTransaction?.data?.amount,
-    }, () => {
-      console.log('Mixpanel is not ready, callback invoked');
-    });
-
   }, [dataOfTransaction]);
 
 
