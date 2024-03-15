@@ -21,6 +21,7 @@ import {
   SelectTotalAmount,
   SelectPurchaseType,
 } from "@/redux/shopSlice";
+import mixpanel from "mixpanel-browser";
 
 export default function Modal({ isOpen, onClose, transactionId, previewData }: any) {
   const dispatch = useDispatch();
@@ -44,6 +45,24 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   useEffect(() => {
     if (welcomeGold) {
       dispatch(clearCoupon());
+    }
+
+    if (purchaseType === "buy") {
+      mixpanel.track('Buy Modal(web) ', {
+        "transaction_Type": transactionType,
+        "order_type": purchaseType,
+        "metal_Type": metalType,
+        "metal_Quantity": metalQuantity,
+        "amount": totalAmount,
+      });
+    } else {
+      mixpanel.track('Sell Modal(web)', {
+        "transaction_Type": transactionType,
+        "order_type": purchaseType,
+        "metal_Type": metalType,
+        "metal_Quantity": metalQuantity,
+        "amount": totalAmount,
+      });
     }
   }, [])
 
@@ -76,8 +95,6 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
     fromApp: false,
     payment_mode: "cashfree",
   };
-
-  console.log('dataToEncrept', dataToEncrept)
 
   useEffect(() => {
     const fetchData = async () => {

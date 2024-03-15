@@ -25,6 +25,7 @@ import {
   selectGoldVaultBalance,
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
+import mixpanel from "mixpanel-browser";
 
 const GiftTab = () => {
   const dispatch = useDispatch();
@@ -46,18 +47,10 @@ const GiftTab = () => {
   const goldData = useSelector((state: RootState) => state.gold);
   const silverData = useSelector((state: RootState) => state.silver);
   const totalAmount = useSelector((state: RootState) => state.gift.totalAmount);
-  const metalQuantity = useSelector(
-    (state: RootState) => state.gift.metalQuantity
-  );
-  const transactionType = useSelector(
-    (state: RootState) => state.gift.transactionType
-  );
-  const enteredAmount = useSelector(
-    (state: RootState) => state.gift.enteredAmount
-  );
-  const actualAmount = useSelector(
-    (state: RootState) => state.gift.actualAmount
-  );
+  const metalQuantity = useSelector((state: RootState) => state.gift.metalQuantity);
+  const transactionType = useSelector((state: RootState) => state.gift.transactionType);
+  const enteredAmount = useSelector((state: RootState) => state.gift.enteredAmount);
+  const actualAmount = useSelector((state: RootState) => state.gift.actualAmount);
 
   useEffect(() => {
     dispatch(setMetalType("gold"));
@@ -97,8 +90,7 @@ const GiftTab = () => {
       if (activeTab === "rupees") {
         if (enteredValue > 5 * goldData.salePrice) {
           setValidationError(
-            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is ₹${
-              5 * goldData.salePrice
+            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is ₹${5 * goldData.salePrice
             } only. Please change the amount.`
           );
           return;
@@ -110,8 +102,7 @@ const GiftTab = () => {
       if (activeTab === "rupees") {
         if (enteredValue > 50 * silverData.salePrice) {
           setValidationError(
-            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is ₹${
-              50 * silverData.salePrice
+            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is ₹${50 * silverData.salePrice
             } only. Please change the amount.`
           );
           return;
@@ -293,11 +284,18 @@ const GiftTab = () => {
 
         if (result.status) {
           setOtpModalShow(false);
+          setOtp("");
+          setOtpError("");
+          mixpanel.track('Gift Sent (web) ', {
+            "transaction_Type": transactionType,
+            "metal_Quantity": metalQuantity,
+            "metal_Type": metalType,
+            "amount": totalAmount,
+            "Gift Sent to": mobile,
+          });
           dispatch(setEnteredAmount(0));
           dispatch(fetchWalletData() as any);
           setRefresh(true);
-          setOtp("");
-          setOtpError("");
           Swal.fire({
             html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
             title: "Gift has been sent successfully",
@@ -347,35 +345,31 @@ const GiftTab = () => {
             <div className="grid grid-cols-2 items-center py-4">
               <div
                 onClick={toggleMetal}
-                className={`flex justify-center text-center py-3 rounded font-semibold cursor-pointer ${
-                  isgold === true
-                    ? "bg-themeBlue extrabold active text-black"
-                    : "bg-themeLight01 text-white"
-                }`}
+                className={`flex justify-center text-center py-3 rounded font-semibold cursor-pointer ${isgold === true
+                  ? "bg-themeBlue extrabold active text-black"
+                  : "bg-themeLight01 text-white"
+                  }`}
               >
                 <img
                   src={"/Goldbarbanner.png"}
                   alt="digital gold"
-                  className={`mr-2 cursor-pointer h-5 sm:h-6 ${
-                    isgold === true ? "opacity-100" : "opacity-50"
-                  }`}
+                  className={`mr-2 cursor-pointer h-5 sm:h-6 ${isgold === true ? "opacity-100" : "opacity-50"
+                    }`}
                 />
                 <p className="text-sm sm:text-base">Gold</p>
               </div>
               <div
                 onClick={toggleMetal}
-                className={`flex justify-center text-center py-3 rounded font-semibold cursor-pointer ${
-                  isgold === false
-                    ? "bg-themeBlue text-black extrabold  active"
-                    : "bg-themeLight01 text-white"
-                }`}
+                className={`flex justify-center text-center py-3 rounded font-semibold cursor-pointer ${isgold === false
+                  ? "bg-themeBlue text-black extrabold  active"
+                  : "bg-themeLight01 text-white"
+                  }`}
               >
                 <img
                   src={"/Silverbar.png"}
                   alt="digital gold"
-                  className={`mr-2 cursor-pointer h-5 sm:h-6 ${
-                    isgold === false ? "opacity-100" : "opacity-50"
-                  }`}
+                  className={`mr-2 cursor-pointer h-5 sm:h-6 ${isgold === false ? "opacity-100" : "opacity-50"
+                    }`}
                 />
                 <p className="text-sm sm:text-base">Silver</p>
               </div>
@@ -433,21 +427,19 @@ const GiftTab = () => {
               <div className="flex items-center justify-center ">
                 <div className="flex justify-around border-1 bg-themeLight rounded mx-auto w-4/5 lg:w-3/4">
                   <div
-                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tl rounded-bl font-semibold cursor-pointer ${
-                      activeTab === "rupees"
-                        ? "bg-transparent text-black bg-themeBlue active extrabold"
-                        : "text-white "
-                    }`}
+                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tl rounded-bl font-semibold cursor-pointer ${activeTab === "rupees"
+                      ? "bg-transparent text-black bg-themeBlue active extrabold"
+                      : "text-white "
+                      }`}
                     onClick={() => handleTabRupeesAndGrams("rupees")}
                   >
                     {activeTab === "buy" ? " In Rupees" : " In Rupees"}
                   </div>
                   <div
-                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tr rounded-br font-semibold cursor-pointer ${
-                      activeTab === "grams"
-                        ? "bg-transparent text-black bg-themeBlue active extrabold"
-                        : "text-white "
-                    }`}
+                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tr rounded-br font-semibold cursor-pointer ${activeTab === "grams"
+                      ? "bg-transparent text-black bg-themeBlue active extrabold"
+                      : "text-white "
+                      }`}
                     onClick={() => handleTabRupeesAndGrams("grams")}
                   >
                     {activeTab === "buy" ? "In Grams" : "In Grams"}
@@ -457,9 +449,8 @@ const GiftTab = () => {
               <div className="pt-2 mt-2 grid grid-cols-2 items-center gap-6 border-1 font-extrabold p-1 rounded-lg">
                 <div className="relative rounded-md shadow-sm">
                   <div
-                    className={`pointer-events-none absolute text-gray-400  inset-y-0 left-0 flex items-center ${
-                      activeTab === "rupees" ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"
-                    }`}
+                    className={`pointer-events-none absolute text-gray-400  inset-y-0 left-0 flex items-center ${activeTab === "rupees" ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"
+                      }`}
                   >
                     ₹
                   </div>
@@ -467,9 +458,8 @@ const GiftTab = () => {
                   <input
                     type="number"
                     inputMode="numeric"
-                    className={`bg-transparent  pl-7 py-1 focus:outline-none text-gray-100 w-full ${
-                      activeTab === "rupees" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
-                    }`}
+                    className={`bg-transparent  pl-7 py-1 focus:outline-none text-gray-100 w-full ${activeTab === "rupees" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
+                      }`}
                     placeholder="0000"
                     onClick={() => handleTabRupeesAndGrams("rupees")}
                     onChange={(e) => {
@@ -530,18 +520,16 @@ const GiftTab = () => {
                         e.preventDefault();
                       }
                     }}
-                    className={`bg-transparent w-full pr-14 py-1  focus:outline-none text-gray-100 text-right ${
-                      activeTab === "grams" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
-                    }`}
+                    className={`bg-transparent w-full pr-14 py-1  focus:outline-none text-gray-100 text-right ${activeTab === "grams" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
+                      }`}
                     value={
                       activeTab === "grams" ? enteredAmount : metalQuantity
                     }
-                    // readOnly
+                  // readOnly
                   />
                   <div
-                    className={`pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 ${
-                      activeTab === "grams" ? "text-sm sm:text-2xl" : "text-xs sm:text-xl"
-                    }`}
+                    className={`pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 ${activeTab === "grams" ? "text-sm sm:text-2xl" : "text-xs sm:text-xl"
+                      }`}
                   >
                     gm
                   </div>

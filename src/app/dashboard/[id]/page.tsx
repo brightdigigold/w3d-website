@@ -80,8 +80,6 @@ function page({ params }: any) {
     }
   }, [dataOfTransaction]);
 
-
-
   return (
     <div className="px-4">
       <div className="min-h-screen flex items-center justify-center">
