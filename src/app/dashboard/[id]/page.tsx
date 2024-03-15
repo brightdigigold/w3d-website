@@ -51,55 +51,24 @@ function page({ params }: any) {
     transactionData(params.id);
   }, []);
 
-  // useEffect(() => {
-  //   const gotoDashboard = () => {
-  //     interval = setInterval(() => {
-  //       setRemainingTime(prevTime => prevTime - 1);
-  //     }, 1000);
-
-  //     setTimeout(() => {
-  //       clearInterval(interval);
-  //       router.push("/dashboard");
-  //     }, 5000);
-  //   }
-
-  //   gotoDashboard();
-
-  //   // Cleanup function to clear interval if component unmounts or changes
-  //   return () => clearInterval(interval);
-  // }, []);
-
   useEffect(() => {
-    // dataOfTransaction?.data?.transactionStatus ===
-    //   "SUCCESS" &&
-    MixPannelEvents('Order Success', {
-      "order_id": params.id,
-      "item_type": dataOfTransaction?.data?.order_id?.itemType,
-      "order_type": dataOfTransaction?.data?.order_id?.orderType,
-      "amount": dataOfTransaction?.data?.amount,
-    });
+    const gotoDashboard = () => {
+      interval = setInterval(() => {
+        setRemainingTime(prevTime => prevTime - 1);
+      }, 1000);
 
-    MixPannelEvents("Order Success", {
-      "order_id": params.id,
-      "item_type": dataOfTransaction?.data?.order_id?.itemType,
-      "order_type": dataOfTransaction?.data?.order_id?.orderType,
-      "amount": dataOfTransaction?.data?.amount,
-    })
+      setTimeout(() => {
+        clearInterval(interval);
+        router.push("/dashboard");
+      }, 5000);
+    }
 
-    mixpanel.track('Order Success', {
-      "order_id": params.id,
-      "item_type": dataOfTransaction?.data?.order_id?.itemType,
-      "order_type": dataOfTransaction?.data?.order_id?.orderType,
-      "amount": dataOfTransaction?.data?.amount,
-    });
+    gotoDashboard();
 
-    mixpanel.track("Order Success", {
-      "order_id": params.id,
-      "item_type": dataOfTransaction?.data?.order_id?.itemType,
-      "order_type": dataOfTransaction?.data?.order_id?.orderType,
-      "amount": 2,
-    })
+    // Cleanup function to clear interval if component unmounts or changes
+    return () => clearInterval(interval);
   }, []);
+
 
   useEffect(() => {
     if (dataOfTransaction?.data?.transactionStatus === "SUCCESS" || "PENDING") {
@@ -110,6 +79,25 @@ function page({ params }: any) {
         "amount": dataOfTransaction?.data?.amount,
       });
     }
+
+    MixPannelEvents('Order Success', {
+      "order_id": params.id,
+      "item_type": dataOfTransaction?.data?.order_id?.itemType,
+      "order_type": dataOfTransaction?.data?.order_id?.orderType,
+      "amount": dataOfTransaction?.data?.amount,
+    }, () => {
+      console.log('Mixpanel is not ready, callback invoked');
+    });
+
+    MixPannelEvents('Order Success', {
+      "order_id": params.id,
+      "item_type": dataOfTransaction?.data?.order_id?.itemType,
+      "order_type": dataOfTransaction?.data?.order_id?.orderType,
+      "amount": dataOfTransaction?.data?.amount,
+    }, () => {
+      console.log('Mixpanel is not ready, callback invoked');
+    });
+
   }, [dataOfTransaction]);
 
 

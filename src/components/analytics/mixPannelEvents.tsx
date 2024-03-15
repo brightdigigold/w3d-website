@@ -1,14 +1,11 @@
-
-
-export const MixPannelEvents = (event_name: string, properties: {}) => {
-    console.log("event_name", event_name)
-    console.log("properties", properties)
+export const MixPannelEvents = (event_name: string, properties: {}, callback?: () => void) => {
     
     try {
         console.log('event_name, properties', event_name, properties)
         if ((window as any).mixpanel) {
             (window as any).mixpanel.track(event_name, properties);
-            console.log('fall in try')
+        } else if (callback) {
+            callback(); // Invoke the callback if provided
         }
     } catch (e) {
         console.log(e);

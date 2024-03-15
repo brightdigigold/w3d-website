@@ -7,8 +7,6 @@ import axios from "axios";
 import { load } from "@cashfreepayments/cashfree-js";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Loading from "@/app/loading";
-import { MixPannelEvents } from "../analytics/mixPannelEvents";
-import mixpanel from "mixpanel-browser";
 
 const CustomCheckout = ({ data }: any) => {
   const orderIdRef = useRef(null);
