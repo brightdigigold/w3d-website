@@ -83,7 +83,7 @@ function page({ params }: any) {
       "order_id": params.id,
       "item_type": dataOfTransaction?.data?.order_id?.itemType,
       "order_type": dataOfTransaction?.data?.order_id?.orderType,
-      "amount": dataOfTransaction?.data?.amount,
+      "amount": 6,
     })
 
     mixpanel.track("Order Success", {
