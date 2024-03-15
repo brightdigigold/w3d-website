@@ -32,29 +32,6 @@ const CustomCheckout = ({ data }: any) => {
   );
 
 
-  useEffect(() => {
-    MixPannelEvents('Order success', {
-      "order_id": '12345678',
-      "item_type": "GOLD",
-      "order_type": 'PURCHASE',
-      "amount": 500,
-    });
-
-    MixPannelEvents('Order Success', {
-      "order_id": '1234567890',
-      "item_type": "GOLD",
-      "order_type": 'PURCHASE',
-      "amount": 500,
-    });
-
-    mixpanel.track("Order Success", {
-      "order_id": '123456700',
-      "item_type": "GOLD",
-      "order_type": 'PURCHASEssss',
-      "amount": 500,
-    })
-  }, [])
-
   const handleButtonClick = (buttonIndex: any) => {
     // Select the clicked button
     setSelectedButton(buttonIndex);

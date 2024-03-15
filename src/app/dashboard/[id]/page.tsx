@@ -72,19 +72,26 @@ function page({ params }: any) {
   useEffect(() => {
     // dataOfTransaction?.data?.transactionStatus ===
     //   "SUCCESS" &&
-    MixPannelEvents('Order success', {
+    MixPannelEvents('Order Success', {
       "order_id": params.id,
       "item_type": dataOfTransaction?.data?.order_id?.itemType,
       "order_type": dataOfTransaction?.data?.order_id?.orderType,
       "amount": dataOfTransaction?.data?.amount,
     });
 
-    mixpanel.track("Order Success", {
+    MixPannelEvents("Order Success", {
       "order_id": params.id,
       "item_type": dataOfTransaction?.data?.order_id?.itemType,
       "order_type": dataOfTransaction?.data?.order_id?.orderType,
-      "amount": 6,
+      "amount": 16,
     })
+
+    mixpanel.track('Order Success', {
+      "order_id": params.id,
+      "item_type": dataOfTransaction?.data?.order_id?.itemType,
+      "order_type": dataOfTransaction?.data?.order_id?.orderType,
+      "amount": dataOfTransaction?.data?.amount,
+    });
 
     mixpanel.track("Order Success", {
       "order_id": params.id,
