@@ -3,6 +3,7 @@ import { MixPannelEvents } from "@/components/analytics/mixPannelEvents";
 import { AesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
 import { ArrowDownIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
+import mixpanel from "mixpanel-browser";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -50,33 +51,47 @@ function page({ params }: any) {
     transactionData(params.id);
   }, []);
 
+  // useEffect(() => {
+  //   const gotoDashboard = () => {
+  //     interval = setInterval(() => {
+  //       setRemainingTime(prevTime => prevTime - 1);
+  //     }, 1000);
+
+  //     setTimeout(() => {
+  //       clearInterval(interval);
+  //       router.push("/dashboard");
+  //     }, 5000);
+  //   }
+
+  //   gotoDashboard();
+
+  //   // Cleanup function to clear interval if component unmounts or changes
+  //   return () => clearInterval(interval);
+  // }, []);
+
   useEffect(() => {
-    const gotoDashboard = () => {
-      interval = setInterval(() => {
-        setRemainingTime(prevTime => prevTime - 1);
-      }, 1000);
+    // dataOfTransaction?.data?.transactionStatus ===
+    //   "SUCCESS" &&
+    MixPannelEvents('Order success', {
+      "order_id": params.id,
+      "item_type": dataOfTransaction?.data?.order_id?.itemType,
+      "order_type": dataOfTransaction?.data?.order_id?.orderType,
+      "amount": dataOfTransaction?.data?.amount,
+    });
 
-      setTimeout(() => {
-        clearInterval(interval);
-        router.push("/dashboard");
-      }, 5000);
-    }
+    mixpanel.track("Order Success", {
+      "order_id": params.id,
+      "item_type": dataOfTransaction?.data?.order_id?.itemType,
+      "order_type": dataOfTransaction?.data?.order_id?.orderType,
+      "amount": dataOfTransaction?.data?.amount,
+    })
 
-    gotoDashboard();
-
-    // Cleanup function to clear interval if component unmounts or changes
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    dataOfTransaction?.data?.transactionStatus ===
-      "SUCCESS" &&
-      MixPannelEvents('Order success', {
-        "order_id": params.id,
-        "item_type": dataOfTransaction?.data?.order_id?.itemType,
-        "order_type": dataOfTransaction?.data?.order_id?.orderType,
-        "amount": dataOfTransaction?.data?.amount,
-      });
+    mixpanel.track("Order Success", {
+      "order_id": params.id,
+      "item_type": dataOfTransaction?.data?.order_id?.itemType,
+      "order_type": dataOfTransaction?.data?.order_id?.orderType,
+      "amount": 2,
+    })
   }, []);
 
 

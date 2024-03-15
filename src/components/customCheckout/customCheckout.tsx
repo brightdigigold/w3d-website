@@ -7,6 +7,8 @@ import axios from "axios";
 import { load } from "@cashfreepayments/cashfree-js";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Loading from "@/app/loading";
+import { MixPannelEvents } from "../analytics/mixPannelEvents";
+import mixpanel from "mixpanel-browser";
 
 const CustomCheckout = ({ data }: any) => {
   const orderIdRef = useRef(null);
@@ -28,6 +30,23 @@ const CustomCheckout = ({ data }: any) => {
   const [selectedButton, setSelectedButton] = useState(
     finalAmount <= 100000 ? 1 : null
   );
+
+
+  useEffect(() => {
+    MixPannelEvents('Order success', {
+      "order_id": '1234567',
+      "item_type": "GOLD",
+      "order_type": 'PURCHASE',
+      "amount": 500,
+    });
+
+    mixpanel.track("Order Success", {
+      "order_id": '1234567',
+      "item_type": "GOLD",
+      "order_type": 'PURCHASEssss',
+      "amount": 500,
+    })
+  }, [])
 
   const handleButtonClick = (buttonIndex: any) => {
     // Select the clicked button
@@ -78,8 +97,8 @@ const CustomCheckout = ({ data }: any) => {
 
   const initializeSDK = async () => {
     cashfree = await load({
-      mode: "production",
-      // mode: "sandbox",
+      // mode: "production",
+      mode: "sandbox",
 
     });
   };
@@ -226,6 +245,8 @@ const CustomCheckout = ({ data }: any) => {
       checkoutCart({ ...payload, paymentType: paymentMethod });
     }
   };
+
+
 
   return (
     <div className="bg-themeLight01 shadow-md rounded-md w-[580px] mb-100 z-10 relative">
