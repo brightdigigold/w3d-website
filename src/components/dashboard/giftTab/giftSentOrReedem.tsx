@@ -205,80 +205,77 @@ const Redeem = (refreshOnGiftSent: any) => {
           Gifting History
         </p>
         <dl className="mt-10 space-y-2">
-          {userRewards.length > 0 && (
-            <div className="w-full ">
-              <div className="grid grid-cols-8 gap-2 items-center justify-between w-full">
-                <div className="w-full col-span-4 md:col-span-3">
-                  <label className="text-white m-3">Metal</label>
-                  <select
-                    name="metal"
-                    id="metal"
-                    onChange={handleMetalChange}
-                    className="cursor-pointer text-white rounded bg-themeLight px-3 py-2 w-full md:w-32 focus:outline-none"
-                  >
-                    <option value="ALL" selected={true}>
-                      All
-                    </option>
-                    <option value="GOLD">GOLD</option>
-                    <option value="SILVER">SILVER</option>
-                  </select>
-                </div>
-                <div className="w-full col-span-4 md:col-span-3">
-                  <label className="text-white m-3">Status</label>
-                  <select
-                    name="status"
-                    id="status"
-                    onChange={handleStatusChange}
-                    className="cursor-pointer text-white rounded bg-themeLight px-3 py-2 w-full md:w-32 focus:outline-none"
-                  >
-                    <option value="ALL" selected={true}>
-                      All
-                    </option>
-                    <option value="PENDING">Pending</option>
-                    <option value="CANCELLED">Cancelled</option>
-                    <option value="REDEEM">Redeemed</option>
-                  </select>
-                </div>
-                {itemList.length > 0 && (
-                  <div className="flex items-center justify-center md:justify-end col-span-8 md:col-span-2">
-                    {page > 1 && (
-                      <div
-                        className="m-2 px-2 text-center text-white rounded bg-themeLight cursor-pointer"
-                        onClick={prevPageHandler}
-                      >
-                        Prev
-                      </div>
-                    )}
-                    <div className="">
-                      <select
-                        className="cursor-pointer px-2 text-white rounded bg-themeLight"
-                        onChange={updatePage}
-                        value={page}
-                      >
-                        {itemList.map((number, index) => (
-                          <option
-                            className="text-black text-center"
-                            key={index}
-                            value={number}
-                          >
-                            {number}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    {page < totalPage && (
-                      <div
-                        className="m-2 px-2 text-center text-white  rounded bg-themeLight cursor-pointer"
-                        onClick={nextPageHandler}
-                      >
-                        Next
-                      </div>
-                    )}
-                  </div>
-                )}
+          <div className="w-full ">
+            <div className="grid grid-cols-8 gap-2 items-center justify-between w-full">
+              <div className="w-full col-span-4 md:col-span-3">
+                <label className="text-white m-3">Metal</label>
+                <select
+                  name="metal"
+                  id="metal"
+                  onChange={handleMetalChange}
+                  value={metal}
+                  className="cursor-pointer text-white rounded bg-themeLight px-3 py-2 w-full md:w-32 focus:outline-none"
+                >
+                  <option value="ALL">All</option>
+                  <option value="GOLD">GOLD</option>
+                  <option value="SILVER">SILVER</option>
+                </select>
               </div>
+              <div className="w-full col-span-4 md:col-span-3">
+                <label className="text-white m-3">Status</label>
+                <select
+                  name="status"
+                  id="status"
+                  onChange={handleStatusChange}
+                  value={status}
+                  className="cursor-pointer text-white rounded bg-themeLight px-3 py-2 w-full md:w-32 focus:outline-none"
+                >
+                  <option value="ALL">All</option>
+                  <option value="PENDING">Pending</option>
+                  <option value="CANCELLED">Cancelled</option>
+                  <option value="REDEEM">Redeemed</option>
+                </select>
+              </div>
+              {itemList.length > 0 && (
+                <div className="flex items-center justify-center md:justify-end col-span-8 md:col-span-2">
+                  {page > 1 && (
+                    <div
+                      className="m-2 px-2 text-center text-white rounded bg-themeLight cursor-pointer"
+                      onClick={prevPageHandler}
+                    >
+                      Prev
+                    </div>
+                  )}
+                  <div className="">
+                    <select
+                      className="cursor-pointer px-2 text-white rounded bg-themeLight"
+                      onChange={updatePage}
+                      value={page}
+                    >
+                      {itemList.map((number, index) => (
+                        <option
+                          className="text-black text-center"
+                          key={index}
+                          value={number}
+                        >
+                          {number}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {page < totalPage && (
+                    <div
+                      className="m-2 px-2 text-center text-white  rounded bg-themeLight cursor-pointer"
+                      onClick={nextPageHandler}
+                    >
+                      Next
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
-          )}
+          </div>
+
 
           {userRewards.length == 0 && (
             <div className="d-flex justify-content-center align-items-center nodata py-6 text-2xl">

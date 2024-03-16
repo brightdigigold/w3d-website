@@ -345,7 +345,7 @@ const GiftTab = () => {
             <div className="grid grid-cols-2 items-center py-4">
               <div
                 onClick={toggleMetal}
-                className={`flex justify-center text-center py-3 rounded font-semibold cursor-pointer ${isgold === true
+                className={`flex justify-center text-center py-3 rounded bold cursor-pointer ${isgold === true
                   ? "bg-themeBlue extrabold active text-black"
                   : "bg-themeLight01 text-white"
                   }`}
@@ -360,7 +360,7 @@ const GiftTab = () => {
               </div>
               <div
                 onClick={toggleMetal}
-                className={`flex justify-center text-center py-3 rounded font-semibold cursor-pointer ${isgold === false
+                className={`flex justify-center text-center py-3 rounded bold cursor-pointer ${isgold === false
                   ? "bg-themeBlue text-black extrabold  active"
                   : "bg-themeLight01 text-white"
                   }`}
@@ -382,7 +382,7 @@ const GiftTab = () => {
                   className="mr-2 h-5 sm:h-8"
                   alt="digital gold gift"
                 />
-                <div className="text-sm sm:text-lg font-semibold sm:flex items-center">
+                <div className="text-sm sm:text-lg bold sm:flex items-center">
                   <p className="text-sm sm:text-lg mr-2 ">Gift</p>
                   {isgold ? (
                     <p className="text-gold01">Gold</p>
@@ -427,7 +427,7 @@ const GiftTab = () => {
               <div className="flex items-center justify-center ">
                 <div className="flex justify-around border-1 bg-themeLight rounded mx-auto w-4/5 lg:w-3/4">
                   <div
-                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tl rounded-bl font-semibold cursor-pointer ${activeTab === "rupees"
+                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tl rounded-bl bold cursor-pointer ${activeTab === "rupees"
                       ? "bg-transparent text-black bg-themeBlue active extrabold"
                       : "text-white "
                       }`}
@@ -436,7 +436,7 @@ const GiftTab = () => {
                     {activeTab === "buy" ? " In Rupees" : " In Rupees"}
                   </div>
                   <div
-                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tr rounded-br font-semibold cursor-pointer ${activeTab === "grams"
+                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tr rounded-br bold cursor-pointer ${activeTab === "grams"
                       ? "bg-transparent text-black bg-themeBlue active extrabold"
                       : "text-white "
                       }`}
@@ -446,7 +446,7 @@ const GiftTab = () => {
                   </div>
                 </div>
               </div>
-              <div className="pt-2 mt-2 grid grid-cols-2 items-center gap-6 border-1 font-extrabold p-1 rounded-lg">
+              <div className="pt-2 mt-2 grid grid-cols-2 items-center gap-6 border-1 extrabold p-1 rounded-lg">
                 <div className="relative rounded-md shadow-sm">
                   <div
                     className={`pointer-events-none absolute text-gray-400  inset-y-0 left-0 flex items-center ${activeTab === "rupees" ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"
@@ -617,7 +617,7 @@ const GiftTab = () => {
                       </div>
                       <div
                         onClick={() => handleSubmit()}
-                        className="rounded-md items-center justify-center text-center bg-themeBlue text-black font-semibold mt-6 cursor-pointer"
+                        className="rounded-md items-center justify-center text-center bg-themeBlue text-black bold mt-6 cursor-pointer"
                       >
                         <button
                           type="submit"

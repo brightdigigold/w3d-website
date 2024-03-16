@@ -44,7 +44,6 @@ const OrdersTabs = () => {
   const [selectedTransactionStatus, setSelectedTransactionStatus] = useState("ALL");
   const [selectedMetalType, setSelectedMetalType] = useState("ALL");
 
-
   const [range, setRange] = useState([
     {
       startDate: new Date(`${2023}/${1}/${1}`),
