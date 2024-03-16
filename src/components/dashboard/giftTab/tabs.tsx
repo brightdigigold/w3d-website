@@ -144,6 +144,9 @@ const GiftTab = () => {
     }
   };
 
+  console.log('totalAmount 147', totalAmount)
+
+
   const QuickGiftButtons = ({ amounts, unit, onClickHandler }: any) => (
     <div className="mt-4 flex justify-between">
       {amounts.map((amount: number) => (
@@ -279,13 +282,13 @@ const GiftTab = () => {
           configHeaders
         );
         const decryptedData = await AesDecrypt(response.data.payload);
-
         const result = JSON.parse(decryptedData);
 
         if (result.status) {
           setOtpModalShow(false);
           setOtp("");
           setOtpError("");
+          console.log('totalAmount 288', totalAmount)
           mixpanel.track('Gift Sent (web) ', {
             "transaction_Type": transactionType,
             "metal_Quantity": metalQuantity,
@@ -547,7 +550,7 @@ const GiftTab = () => {
                   unit="rupees"
                 />
               ) : (
-                <QuickGiftButtons amounts={[0.1, 0.5, 1, 2]} unit="gm" />
+                <QuickGiftButtons amounts={[0.2, 0.5, 1, 2]} unit="gm" />
               )}
               <div className="mt-6">
                 <p className="text-lg">Add a Personalized Message</p>

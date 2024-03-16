@@ -41,7 +41,7 @@ const OtpModal: React.FC<OtpModalProps> = ({
         <div className="fixed inset-0 flex items-center justify-center">
           <div className="bg-theme p-4 max-w-md mx-auto rounded-lg">
             <div className="flex justify-between items-center mb-4">
-              <div className="text-lg font-semibold text-white">Enter OTP</div>
+              <div className="text-lg bold text-white">Enter OTP</div>
               <div className="cursor-pointer" onClick={onClose}>
                 <IoMdClose style={{ color: "white" }} size={26} />
               </div>

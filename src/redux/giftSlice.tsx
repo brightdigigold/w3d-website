@@ -20,13 +20,13 @@ const recalculateValues = (state: GiftState) => {
     if (state.transactionType === 'rupees') {
         state.metalQuantity = ParseFloat((enteredAmount / metalPrice), 4);
         state.actualAmount = ParseFloat((enteredAmount), 2);
+        state.totalAmount = ParseFloat((enteredAmount), 2);
     } else if (state.transactionType === 'grams') {
         state.actualAmount = ParseFloat(metalPrice * enteredAmount, 2);
         state.metalQuantity = state.enteredAmount;
         state.totalAmount = ParseFloat(state.actualAmount, 2);
     }
 }
-
 
 const giftSlice = createSlice({
     name: 'gift',
