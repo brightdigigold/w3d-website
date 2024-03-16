@@ -276,7 +276,6 @@ const Redeem = (refreshOnGiftSent: any) => {
             </div>
           </div>
 
-
           {userRewards.length == 0 && (
             <div className="d-flex justify-content-center align-items-center nodata py-6 text-2xl">
               <div style={{ textAlign: "center", color: "white" }}>

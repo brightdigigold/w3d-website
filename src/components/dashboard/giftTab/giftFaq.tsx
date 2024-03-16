@@ -1,6 +1,5 @@
 import { AesDecrypt } from "@/components/helperFunctions";
 import { Disclosure } from "@headlessui/react";
-import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { memo, useEffect, useState } from "react";
 import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
@@ -89,7 +88,7 @@ const GiftFaq: React.FC = () => {
           })}
           <div className="flex justify-center items-center">
             <Link href="/faqs">
-              <div className="mt-4 bg-themeBlue text-black rounded-lg px-12 py-2 cursor-pointer text-lg font-semibold">
+              <div className="mt-4 bg-themeBlue text-black rounded-lg px-12 py-2 cursor-pointer text-lg bold">
                 View All
               </div>
             </Link>
