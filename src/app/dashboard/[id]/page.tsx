@@ -70,7 +70,7 @@ function page({ params }: any) {
 
 
   useEffect(() => {
-    if (dataOfTransaction?.data?.transactionStatus === "SUCCESS") {
+    if (dataOfTransaction?.data?.transactionStatus === "SUCCESS" || "PENDING") {
       mixpanel.track('Order Success', {
         "order_id": params.id,
         "item_type": dataOfTransaction?.data?.order_id?.itemType,
