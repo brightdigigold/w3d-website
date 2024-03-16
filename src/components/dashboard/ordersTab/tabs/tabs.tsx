@@ -40,6 +40,11 @@ const OrdersTabs = () => {
   const [activeTab, setActiveTab] = useState<String>("");
   const [totalPage, setTotalPage] = useState(1);
   const [itemList, setItemList] = useState<any[]>([]);
+  const [selectedTransaction, setSelectedTransaction] = useState("ALL");
+  const [selectedTransactionStatus, setSelectedTransactionStatus] = useState("ALL");
+  const [selectedMetalType, setSelectedMetalType] = useState("ALL");
+
+
   const [range, setRange] = useState([
     {
       startDate: new Date(`${2023}/${1}/${1}`),
@@ -162,6 +167,7 @@ const OrdersTabs = () => {
 
   const handleStatusChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
+    setSelectedTransactionStatus(value)
     setStatus(value);
     const formattedEndDate = range[0].endDate
       ? format(new Date(range[0].endDate), "yyyy-MM-dd")
@@ -182,6 +188,7 @@ const OrdersTabs = () => {
 
   const handleMetalChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
+    setSelectedMetalType(value);
     setMetalValue(value);
     const formattedEndDate = range[0].endDate
       ? format(new Date(range[0].endDate), "yyyy-MM-dd")
@@ -202,6 +209,7 @@ const OrdersTabs = () => {
 
   const handleTransactionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
+    setSelectedTransaction(value);
     setTransactionValue(value);
     const formattedEndDate = range[0].endDate
       ? format(new Date(range[0].endDate), "yyyy-MM-dd")
@@ -317,8 +325,9 @@ const OrdersTabs = () => {
                 onChange={(e) => {
                   handleStatusChange(e);
                 }}
+                value={selectedTransactionStatus}
               >
-                <option value="ALL" selected={true}>
+                <option value="ALL">
                   ALL
                 </option>
                 <option value="PENDING" className="cursor-pointer">
@@ -343,9 +352,10 @@ const OrdersTabs = () => {
                 onChange={(e) => {
                   handleMetalChange(e);
                 }}
+                value={selectedMetalType}
                 className="cursor-pointer text-white rounded bg-themeDarkBlue  px-3 py-2 w-full md:w-32 focus:outline-none"
               >
-                <option value="ALL" selected={true}>
+                <option value="ALL">
                   All
                 </option>
                 <option value="GOLD">GOLD</option>
@@ -396,9 +406,10 @@ const OrdersTabs = () => {
               onChange={(e) => {
                 handleTransactionChange(e);
               }}
+              value={selectedTransaction}
               className="cursor-pointer text-white rounded bg-themeDarkBlue  px-3 py-2 w-full md:w-32 focus:outline-none"
             >
-              <option value="ALL" selected={true}>
+              <option value="ALL">
                 All
               </option>
               <option value="BUY">BUY</option>
@@ -421,7 +432,7 @@ const OrdersTabs = () => {
                     <dt>
                       {open ? (
                         <Disclosure.Button className="faq-back w-full relative text-sm sm:text-base items-start justify-between text-left text-white rounded-t-2xl px-4 py-4">
-                          <span className="text-base font-semibold leading-7 ">
+                          <span className="text-base bold leading-7 ">
                             {/* {faq.question} */}
                             <div className="grid grid-cols-2 gap-1">
                               <div className="col-span-1 grid grid-cols-6 gap-3 items-center">
@@ -546,7 +557,7 @@ const OrdersTabs = () => {
                                       )}
                                       {item?.orderType === "REWARD" &&
                                         "Promotional " +
-                                          formatString(item?.itemType)}
+                                        formatString(item?.itemType)}
                                       {item?.orderType === "BUY" && (
                                         <p className="ml-1">Purchase</p>
                                       )}
@@ -569,16 +580,15 @@ const OrdersTabs = () => {
                                   </div>
                                   <div className="flex items-center col-span-4 lg:col-span-1">
                                     <span
-                                      className={`text-xs rounded-lg  py-1  ${
-                                        item?.status === "SUCCESS" ||
+                                      className={`text-xs rounded-lg  py-1  ${item?.status === "SUCCESS" ||
                                         item?.status === "COMPLETED"
-                                          ? "text-green-500"
-                                          : item?.status === "PENDING"
+                                        ? "text-green-500"
+                                        : item?.status === "PENDING"
                                           ? "text-yellow-500"
                                           : item?.status === "FAILED"
-                                          ? "text-red-500"
-                                          : "" // Default color or add another color class
-                                      }`}
+                                            ? "text-red-500"
+                                            : "" // Default color or add another color class
+                                        }`}
                                     >
                                       {item?.status}
                                     </span>
@@ -588,7 +598,7 @@ const OrdersTabs = () => {
                               <div className="col-span-1 grid place-items-end">
                                 <div className="flex gap-1 lg:gap-8 flex-col sm:flex-row justify-start items-center ">
                                   {item?.totalAmount !== 0 && (
-                                    <p className="text-white font-extrabold text-sm sm:text-xl">
+                                    <p className="text-white bold text-sm sm:text-xl">
                                       ₹{item?.totalAmount}
                                     </p>
                                   )}
@@ -631,7 +641,7 @@ const OrdersTabs = () => {
                         </Disclosure.Button>
                       ) : (
                         <Disclosure.Button className="faq-back w-full relative text-sm sm:text-base items-start justify-between text-left text-white rounded-2xl px-4 py-2">
-                          <span className="text-base font-semibold leading-7 ">
+                          <span className="text-base bold leading-7 ">
                             {/* {faq.question} */}
                             <div className="grid grid-cols-2 gap-1">
                               <div className="col-span-1 grid grid-cols-6 gap-3 items-center">
@@ -753,7 +763,7 @@ const OrdersTabs = () => {
                                     )}
                                     {item?.orderType === "REWARD" &&
                                       " Promotional " +
-                                        formatString(item?.itemType)}
+                                      formatString(item?.itemType)}
                                     {item?.orderType === "BUY" && (
                                       <p className="ml-1">Purchase</p>
                                     )}
@@ -775,16 +785,15 @@ const OrdersTabs = () => {
                                   </div>
                                   <div className="flex items-center col-span-4 lg:col-span-1">
                                     <span
-                                      className={`text-xs rounded-lg  py-1  ${
-                                        item?.status === "SUCCESS" ||
+                                      className={`text-xs rounded-lg  py-1  ${item?.status === "SUCCESS" ||
                                         item?.status === "COMPLETED"
-                                          ? "text-green-500"
-                                          : item?.status === "PENDING"
+                                        ? "text-green-500"
+                                        : item?.status === "PENDING"
                                           ? "text-yellow-500"
                                           : item?.status === "FAILED"
-                                          ? "text-red-500"
-                                          : "" // Default color or add another color class
-                                      }`}
+                                            ? "text-red-500"
+                                            : "" // Default color or add another color class
+                                        }`}
                                     >
                                       {item?.status}
                                     </span>
@@ -794,7 +803,7 @@ const OrdersTabs = () => {
                               <div className="col-span-1 grid place-items-end">
                                 <div className="flex gap-1 lg:gap-8 flex-col lg:flex-row justify-start items-center text-xl">
                                   {item?.totalAmount !== 0 && (
-                                    <p className="text-white font-extrabold text-sm sm:text-xl">
+                                    <p className="text-white extrabold text-sm sm:text-xl">
                                       ₹{item?.totalAmount}
                                     </p>
                                   )}
@@ -838,7 +847,7 @@ const OrdersTabs = () => {
                       )}
                     </dt>
                     <Disclosure.Panel as="dd" className="">
-                      <p className="text-base leading-7 text-white rounded-b-2xl px-4 py-2 bg-orderTab">
+                      <div className="text-base leading-7 text-white rounded-b-2xl px-4 py-2 bg-orderTab">
                         {/* {answer} */}
                         <div className="">
                           <p className="text-base sm:text-xl">
@@ -848,7 +857,7 @@ const OrdersTabs = () => {
                             <div className="flex items-center col-span-2">
                               <div>
                                 {item?.status === "SUCCESS" ||
-                                item?.status === "COMPLETED" ? (
+                                  item?.status === "COMPLETED" ? (
                                   // <img
                                   //   src="/check.png"
                                   //   alt="check"
@@ -889,9 +898,9 @@ const OrdersTabs = () => {
                                     <p>Gift Received</p>
                                   )}
                               </p> */}
-                              <p>
+                              <div>
                                 {item?.status === "SUCCESS" ||
-                                item?.status === "COMPLETED" ? (
+                                  item?.status === "COMPLETED" ? (
                                   <p className="px-2 col-span-1 text-sm sm:text-base">
                                     Payment Success
                                   </p>
@@ -904,7 +913,7 @@ const OrdersTabs = () => {
                                     Payment Failed
                                   </p>
                                 )}
-                              </p>
+                              </div>
                             </div>
                             <div className="text-right">
                               <p className="text-sm sm:text-base">
@@ -933,7 +942,7 @@ const OrdersTabs = () => {
                               <div className="flex items-center col-span-2">
                                 <div className="">
                                   {item?.status === "SUCCESS" ||
-                                  item?.status === "COMPLETED" ? (
+                                    item?.status === "COMPLETED" ? (
                                     <AiOutlineCheckCircle
                                       className="text-green-400"
                                       size={28}
@@ -953,13 +962,13 @@ const OrdersTabs = () => {
                                 <p className="px-2 col-span-1 text-sm sm:text-base">
                                   {item?.orderType === "PRODUCT" &&
                                     formatString(item?.itemType) +
-                                      " Coin Purchase"}
+                                    " Coin Purchase"}
                                   {item?.orderType === "CART" &&
                                     "Cart Purchase"}
                                   {item?.orderType === "REWARD" &&
                                     "Promotional " +
-                                      formatString(item?.itemType) +
-                                      " Received"}
+                                    formatString(item?.itemType) +
+                                    " Received"}
                                   {item?.orderType === "BUY" &&
                                     formatString(item?.itemType) + " Purchase"}
                                   {item?.orderType === "SELL" && (
@@ -970,11 +979,11 @@ const OrdersTabs = () => {
                                   {item?.orderType === "GIFT" &&
                                     item?.rewardsType === "SEND" &&
                                     formatString(`${item?.itemType}`) +
-                                      " Gift Sent"}
+                                    " Gift Sent"}
                                   {item?.orderType === "GIFT" &&
                                     item?.rewardsType === "RECEIVED" &&
                                     formatString(`${item?.itemType}`) +
-                                      " Gift Received"}
+                                    " Gift Received"}
                                 </p>
                               </div>
                               <div className=" text-right">
@@ -1038,7 +1047,7 @@ const OrdersTabs = () => {
                             )}
                           </div>
                         </div>
-                      </p>
+                      </div>
                     </Disclosure.Panel>
                   </>
                 )}
@@ -1095,7 +1104,6 @@ const OrdersTabs = () => {
       {dashboardData && dashboardData.length === 0 && (
         <>
           <div className="text-center text-4xl text-white bg-themeLight py-24 rounded-lg">
-            {/* <img src = "/lottie/notransaction.gif" className="h-200 w-300"/> */}
             <img src="/lottie/No Transaction.gif" className="h-40 mx-auto" />
             <p> No Data Found</p>
           </div>
