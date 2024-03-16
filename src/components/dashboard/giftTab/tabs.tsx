@@ -144,9 +144,6 @@ const GiftTab = () => {
     }
   };
 
-  console.log('totalAmount 147', totalAmount)
-
-
   const QuickGiftButtons = ({ amounts, unit, onClickHandler }: any) => (
     <div className="mt-4 flex justify-between">
       {amounts.map((amount: number) => (
@@ -288,7 +285,6 @@ const GiftTab = () => {
           setOtpModalShow(false);
           setOtp("");
           setOtpError("");
-          console.log('totalAmount 288', totalAmount)
           mixpanel.track('Gift Sent (web) ', {
             "transaction_Type": transactionType,
             "metal_Quantity": metalQuantity,

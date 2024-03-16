@@ -5,6 +5,7 @@ import axios from "axios";
 import { UserReward } from "@/types";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import { useDispatch } from "react-redux";
+import mixpanel from "mixpanel-browser";
 
 const Redeem = (refreshOnGiftSent: any) => {
   const [userRewards, setUserRewards] = useState<UserReward[]>([]);
@@ -43,6 +44,13 @@ const Redeem = (refreshOnGiftSent: any) => {
           .then(async (data) => {
             const decryptedData = AesDecrypt(data.data.payload);
             let decryptedResponse = JSON.parse(decryptedData);
+            console.log('decryptedResponse', decryptedResponse)
+            mixpanel.track('Gift Received (web) ', {
+              "metal_Quantity_Received": decryptedResponse.data.gram,
+              "metal_Type": decryptedResponse.data.itemType,
+              "user_id": decryptedResponse.data.user_id,
+              "user_gifting_id": decryptedResponse.data.user_gifting_id,
+            });
             Swal.fire({
               html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
               title: decryptedResponse?.data?.customMessage
