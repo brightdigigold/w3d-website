@@ -70,10 +70,10 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
       {openEditProfileModel && <EditProfileModel setOpenEditProfileModel={setOpenEditProfileModel} />}
       <div className="w-full text-white flex flex-col text-sm sm:text-base relative">
         <div className="border-b p-4 flex justify-between items-center">
-          <p className=" flex items-center">
+          <div className=" flex items-center">
             <UserIcon className="h-5 inline-block pr-2 text-themeBlueLight" />{" "}
             Basic Details
-          </p>
+          </div>
           <button
             className="bold flex items-center gap-1 text-gold01"
             onClick={EditProfileModelHandler}
@@ -83,27 +83,27 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
         </div>
         <div className="p-4 grid sm:grid-cols-2 gap-4">
           <div className="shadow shadow-gray-100 rounded p-3">
-            <p className="flex items-center gap-1 mb-3 text-gray-300">
+            <div className="flex items-center gap-1 mb-3 text-gray-300">
               <PhoneIcon className="h-4" /> Mobile Number
-            </p>
+            </div>
             <p className="">{user?.data?.mobile_number}</p>
           </div>
 
           <div className="shadow shadow-gray-100 rounded p-3">
-            <p className="flex items-center gap-1 mb-3 text-gray-300">
+            <div className="flex items-center gap-1 mb-3 text-gray-300">
               <EnvelopeIcon className="h-4" /> Email ID
-            </p>
-            <p className=" break-words">
+            </div>
+            <div className=" break-words">
               {user?.data?.email}
-              <p className="">
+              <div className="">
                 {user?.data?.isEmailVerified ? (
-                  <div className=" flex items-center cursor-pointer mt-4">
+                  <span className=" flex items-center cursor-pointer mt-4">
                     <VscVerifiedFilled
                       className="cursor-pointer text-green-400"
                       size={24}
                     />
                     <span className="text-green-400"> Email Verified</span>
-                  </div>
+                  </span>
                 ) : (
                   <div onClick={verifyEmail} className=" flex items-center cursor-pointer mt-4">
                     <MdScheduleSend
@@ -113,19 +113,19 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
                     <span className=" text-yellow-300"> Verify Email</span>
                   </div>
                 )}
-              </p>
-            </p>
+              </div>
+            </div>
           </div>
           <div className=" shadow shadow-gray-100 rounded p-3">
-            <p className="flex items-center gap-1 mb-3 text-gray-300">
+            <div className="flex items-center gap-1 mb-3 text-gray-300">
               <UserIcon className="h-4" /> Gender
-            </p>
+            </div>
             <p>{user?.data?.gender?.toUpperCase()}</p>
           </div>
           <div className="shadow shadow-gray-100 rounded p-3">
-            <p className="flex items-center gap-1 mb-3 text-gray-300">
+            <div className="flex items-center gap-1 mb-3 text-gray-300">
               <CalendarIcon className="h-4" /> Date of Birth
-            </p>
+            </div>
             <p>
               {new Date(user?.data?.dateOfBirth).toLocaleDateString("en-IN", {
                 day: "2-digit",

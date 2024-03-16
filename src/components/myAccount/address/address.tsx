@@ -132,10 +132,10 @@ const AddressTab = () => {
       )}
       <div className="coins_background rounded-lg mt-4">
         <div className="border-b p-4 flex justify-between items-center">
-          <p className="text-white flex items-center">
+          <div className="text-white flex items-center">
             <img src="/location.png" className="h-5 inline-block pr-2" />
             Address Details
-          </p>
+          </div>
           <button
             className="bold flex items-center gap-1 text-gold01"
             onClick={openAddNewAddress}
@@ -170,7 +170,7 @@ const AddressTab = () => {
                 className="shadow shadow-gray-100 rounded p-3 relative"
                 key={key}
               >
-                <p className="">
+                <span className="">
                   <div className="pl-1 mt-4 mb-4 text-white">
                     <p>{address?.address?.line1},</p>
                     <p>{address?.address?.line2},</p>
@@ -178,7 +178,7 @@ const AddressTab = () => {
                     <p>{address?.address?.state},</p>
                     <p>{address?.address?.pincode}</p>
                   </div>
-                </p>
+                </span>
                 <div className="flex items-center justify-end gap-2 mt-2 mb-3 absolute top-0 right-2">
                   <button
                     className=" text-gold01"
