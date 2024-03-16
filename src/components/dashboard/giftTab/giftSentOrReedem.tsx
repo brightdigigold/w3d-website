@@ -44,7 +44,6 @@ const Redeem = (refreshOnGiftSent: any) => {
           .then(async (data) => {
             const decryptedData = AesDecrypt(data.data.payload);
             let decryptedResponse = JSON.parse(decryptedData);
-            console.log('decryptedResponse', decryptedResponse)
             mixpanel.track('Gift Received (web) ', {
               "metal_Quantity_Received": decryptedResponse.data.gram,
               "metal_Type": decryptedResponse.data.itemType,

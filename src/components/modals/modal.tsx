@@ -54,8 +54,10 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
         "metal_Type": metalType,
         "metal_Quantity": metalQuantity,
         "amount": totalAmount,
+        "applied_Coupon_Code": isAnyCouponApplied ? appliedCouponCode : 'not applied',
       });
-    } else {
+    }
+    else {
       mixpanel.track('Sell Modal(web)', {
         "transaction_Type": transactionType,
         "order_type": purchaseType,
@@ -201,8 +203,6 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                       <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat((metalQuantity ?? 0) + extraGold, 4)} gm</p>
                     </div>
                   )}
-
-
 
                   {purchaseType === "buy" && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
