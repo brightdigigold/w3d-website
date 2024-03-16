@@ -292,9 +292,9 @@ const Redeem = (refreshOnGiftSent: any) => {
             </div>
           )}
           <div className=" grid lg:grid-cols-2 gap-2">
-            {userRewards.map((userRewards) => {
+            {userRewards.map((userRewards, index) => {
               return (
-                <div className="text-white bg-themeLight rounded-md my-2">
+                <div key={index} className="text-white bg-themeLight rounded-md my-2">
                   <div className="m-3 flex flex-col gap-4 sm:gap-2 sm:flex-row items-center justify-between">
                     <div className="w-full text-left">
                       <div className="text-yellow-500">

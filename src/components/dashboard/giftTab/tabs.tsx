@@ -382,14 +382,14 @@ const GiftTab = () => {
                   className="mr-2 h-5 sm:h-8"
                   alt="digital gold gift"
                 />
-                <p className="text-sm sm:text-lg font-semibold sm:flex items-center">
+                <div className="text-sm sm:text-lg font-semibold sm:flex items-center">
                   <p className="text-sm sm:text-lg mr-2 ">Gift</p>
                   {isgold ? (
                     <p className="text-gold01">Gold</p>
                   ) : (
                     <p className="text-white">Silver</p>
                   )}
-                </p>
+                </div>
               </div>
               <div>
                 <div className="flex items-center justify-end">
