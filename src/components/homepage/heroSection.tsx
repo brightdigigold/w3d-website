@@ -148,7 +148,13 @@ const HeroSection = () => {
                     />
                   </Link>
                 </div>
+                
               </motion.div>
+              <img
+                      src="/lottie/Holi Celebration.gif"
+                      className="h-20"
+                      alt="google play button"
+                    />
 
               <div className="flex justify-center mt-4"></div>
 

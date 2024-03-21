@@ -319,7 +319,7 @@ const BuySell = () => {
       return;
     }
 
-    if(!user.data.isBasicDetailsCompleted){
+    if (!user.data.isBasicDetailsCompleted) {
       dispatch(setShowProfileForm(true));
       return;
     }
@@ -593,10 +593,15 @@ const BuySell = () => {
                   </span>
                 </div>
               </div>
-              <div className="mt-4 sm:mt-4 w-full 2xl:w-4/5 float-left">
-                <div className="flex justify-end 2xl:justify-center pr-4 sm:pr-12 2xl:pr-4">
+              <div className="mt-4 sm:mt-4 w-full 2xl:w-4/5 float-left " style={{ backgroundImage: "url('/lottie/Happy.gif')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <div className="flex justify-end 2xl:justify-center pr-4 sm:pr-12 2xl:pr-4"
+                >
                   {metalType === "gold" ? (
-                    <NextImage src="/lottie/Gold Stack Animation.gif" alt="Gold Bar Animation" className="h-24 sm:h-32" sizes="100vw" style={{ width: '100%', height: 'auto', }} width={0} height={0} priority={true} />
+                    <>
+                      <NextImage src="/lottie/Gold Stack Animation.gif" alt="Gold Bar Animation" className="h-24 sm:h-32" sizes="100vw" style={{ width: '100%', height: 'auto', }} width={0} height={0} priority={true} />
+                    </>
+
+
                   ) : (
                     <NextImage src="/lottie/Silver Stacks animation.gif" alt="Silver Bar Animation" className="h-20 sm:h-32" sizes="100vw" style={{ width: '100%', height: 'auto', }} width={0} height={0} priority={true} />
                   )}
@@ -709,7 +714,12 @@ const BuySell = () => {
               ) : (
                 <QuickBuySellButtons amounts={[0.1, 0.5, 1, 2]} unit="gm" />
               )}
-              <span className="text-center text-xxs sm:text-xs flex justify-center items-center mt-6 text-gray-400">
+              {/* <img
+                      src="/lottie/Holi Celebration.gif"
+                      className="h-14"
+                      alt="google play button"
+                    /> */}
+              {/* <span className="text-center text-xxs sm:text-xs flex justify-center items-center mt-6 text-gray-400">
                 Your Assets will be Saved in Safe & Secured Vault
                 <img
                   className="h-5 ml-2"
@@ -720,7 +730,22 @@ const BuySell = () => {
                   alt="Secure"
                 />
               </span>
-              <img src="/brink.png" className="h-4 sm:h-7 mt-2 mx-auto" alt="Brinks" />
+              <img src="/brink.png" className="h-4 sm:h-7 mt-2 mx-auto" alt="Brinks" /> */}
+              <div className="flex flex-col items-center mt-6">
+                <div className="flex items-center">
+                  <img src="/lottie/Holi Celebration.gif" className="h-10" alt="Holi Celebration" />
+                  <span className="text-center text-xxs sm:text-xs  flex justify-center items-center mt-6 text-gray-400">
+                    Your Assets will be Saved in Safe & Secured Vault
+                    <img
+                      className="h-5 ml-2"
+                      src={new URL("../../../public/secure.png", import.meta.url).toString()}
+                      alt="Secure"
+                    />
+                  </span>
+                </div>
+                <img src="/brink.png" className="h-4 sm:h-7 mt-2" alt="Brinks" />
+              </div>
+
               <div>
                 <animated.div style={style}>
                   {isgold && purchaseType === 'buy' && (
@@ -741,10 +766,11 @@ const BuySell = () => {
                   )}
                 </animated.div>
               </div>
+
               <div className="mt-8" >
                 {purchaseType === "buy" && (
                   <button
-                
+
                     onClick={(event) => {
                       handleBuyClick(event)
                     }}
