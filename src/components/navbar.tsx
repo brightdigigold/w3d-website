@@ -20,6 +20,7 @@ import { resetVault } from "@/redux/vaultSlice";
 import { clearCoupon } from "@/redux/couponSlice";
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import mixpanel from "mixpanel-browser";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const Navbar = () => {
     localStorage.removeItem("mobile_number");
     localStorage.removeItem("token");
     localStorage.removeItem("isLogIn");
+    mixpanel.reset();
     dispatch(setShowOTPmodal(false));
     dispatch(setIsLoggedIn(false));
     dispatch(setShowProfileForm(false));
