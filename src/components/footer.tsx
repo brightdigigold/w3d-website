@@ -4,10 +4,6 @@ import {
   EnvelopeIcon,
   MapPinIcon,
   PhoneIcon,
-  TruckIcon,
-  HomeIcon,
-  UserIcon,
-  ArrowsRightLeftIcon,
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import React, { useState } from "react";
