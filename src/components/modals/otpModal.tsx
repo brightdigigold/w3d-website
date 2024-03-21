@@ -18,6 +18,7 @@ import { fetchUserDetails } from "@/redux/userDetailsSlice";
 import CustomButton from "../customButton";
 import Notiflix from "notiflix";
 import { fetchWalletData } from "@/redux/vaultSlice";
+import mixpanel from "mixpanel-browser";
 
 export default function OtpModal() {
   const [open, setOpen] = useState(true);
@@ -29,6 +30,11 @@ export default function OtpModal() {
   const dispatch: AppDispatch = useDispatch();
   const [resendTimer, setResendTimer] = useState(120);
   const [resendDisabled, setResendDisabled] = useState(false);
+
+  const mobile_number = localStorage.getItem("mobile_number")?.toString();
+
+  console.log('Mobile number',mobile_number);
+
 
   useEffect(() => {
     let countdown: string | number | NodeJS.Timeout | any;
@@ -96,8 +102,12 @@ export default function OtpModal() {
           dispatch(setIsLoggedIn(true));
           dispatch(fetchWalletData() as any);
           if (result.data.isNewUser) {
+            mixpanel.track('New User Login(web)');
+            mixpanel.identify(mobile_number);
+            mixpanel.identify(localStorage.getItem("mobile_number")?.toString());
             dispatch(setShowProfileForm(true));
           }
+          mixpanel.identify(mobile_number);
           dispatch(setShowOTPmodal(false));
           router.push("/");
         } else {
@@ -258,8 +268,8 @@ export default function OtpModal() {
                                 {`${Math.floor(resendTimer / 60)
                                   .toString()
                                   .padStart(2, "0")}:${(resendTimer % 60)
-                                  .toString()
-                                  .padStart(2, "0")}`}
+                                    .toString()
+                                    .padStart(2, "0")}`}
                               </span>
                             )}
 
@@ -267,9 +277,8 @@ export default function OtpModal() {
                               <CustomButton
                                 btnType="submit"
                                 title="Resend OTP"
-                                containerStyles={`text-yellow-400 ${
-                                  resendDisabled ? "cursor-not-allowed" : ""
-                                }`}
+                                containerStyles={`text-yellow-400 ${resendDisabled ? "cursor-not-allowed" : ""
+                                  }`}
                                 handleClick={() => resendOtp()}
                                 isDisabled={resendDisabled}
                               />

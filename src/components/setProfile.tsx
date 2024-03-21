@@ -18,6 +18,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import format from "date-fns/format";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import mixpanel from "mixpanel-browser";
+import { fetchUserDetails } from "@/redux/userDetailsSlice";
 
 interface setNewUserProfile {
   isOpen: boolean;
@@ -131,11 +133,18 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
       const finalResult = JSON.parse(decryptedData);
 
       if (finalResult.status == true) {
+        mixpanel.track('Profile Setup(web) ', {
+          "Email": values.email,
+          "Name": values.name,
+          "Mobile_Number": values.mobile_number,
+          "Gender": values.gender,
+        });
         dispatch(profileFilled(true));
         dispatch(setIsLoggedIn(true));
         dispatch(setShowOTPmodal(false));
         router.push("/");
         onClose();
+        dispatch(fetchUserDetails() as any);
         Swal.fire({
           html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
           title: "Profile Setup Successfully",
@@ -183,9 +192,8 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
 
   return (
     <aside
-      className={`fixed top-0 right-0 h-full lg:w-4/12 md:w-5/12 sm:w-6/12 bg-theme shadow-lg transform translate-x-${
-        isOpen ? "0" : "full"
-      } transition-transform ease-in-out z-50`}
+      className={`fixed top-0 right-0 h-full lg:w-4/12 md:w-5/12 sm:w-6/12 bg-theme shadow-lg transform translate-x-${isOpen ? "0" : "full"
+        } transition-transform ease-in-out z-50`}
       style={{ zIndex: 1000 }}
     >
       <div className="grid  overflow-y-scroll h-screen place-items-center w-full">

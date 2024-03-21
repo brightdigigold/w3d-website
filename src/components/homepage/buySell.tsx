@@ -744,7 +744,6 @@ const BuySell = () => {
               <div className="mt-8" >
                 {purchaseType === "buy" && (
                   <button
-                
                     onClick={(event) => {
                       handleBuyClick(event)
                     }}
