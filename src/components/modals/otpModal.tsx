@@ -30,11 +30,7 @@ export default function OtpModal() {
   const dispatch: AppDispatch = useDispatch();
   const [resendTimer, setResendTimer] = useState(120);
   const [resendDisabled, setResendDisabled] = useState(false);
-
   const mobile_number = localStorage.getItem("mobile_number")?.toString();
-
-  console.log('Mobile number',mobile_number);
-
 
   useEffect(() => {
     let countdown: string | number | NodeJS.Timeout | any;
@@ -102,9 +98,8 @@ export default function OtpModal() {
           dispatch(setIsLoggedIn(true));
           dispatch(fetchWalletData() as any);
           if (result.data.isNewUser) {
-            mixpanel.track('New User Login(web)');
             mixpanel.identify(mobile_number);
-            mixpanel.identify(localStorage.getItem("mobile_number")?.toString());
+            mixpanel.track('New User Login(web)');
             dispatch(setShowProfileForm(true));
           }
           mixpanel.identify(mobile_number);

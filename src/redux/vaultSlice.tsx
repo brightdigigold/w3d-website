@@ -16,7 +16,6 @@ const apiForWallet = async () => {
 
     if (!response.ok) {
       const res = await response
-      console.log('response', res);
       throw new Error(`${response.status}`);
     }
 
@@ -46,7 +45,7 @@ export const fetchWalletData = createAsyncThunk('vault/fetchWalletData', async (
 
     const errorMessage = error.toString();
     const errorCodeMatch = errorMessage.match(/\d+/);; // Extract numbers from the error message
-    const errorCode = errorCodeMatch ? parseInt(errorCodeMatch![0]) : 0; 
+    const errorCode = errorCodeMatch ? parseInt(errorCodeMatch![0]) : 0;
 
     if (error && errorCode == 401) {
       dispatch(setError('Unauthorized access. Please login again.'));
