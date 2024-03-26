@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
+import { getBlogPosts } from '@/components/sanity/getPost';
 import Link from "next/link";
 
 import "swiper/css";
@@ -9,47 +10,29 @@ import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
-
-const features = [
-  {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Maximise-Your-Daily-Savings.png",
-    link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-  },
-  {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/How-are-gold-prices-Determined.png",
-    link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-  },
-  {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Akshaya-Tritiya.png",
-    link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-  },
-  {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Buying-gold-coins.png",
-    link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-  },
-  {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Minor-Steps-and-Great-Savings.png",
-    link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-  },
-  {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Things-to-Remember-Before-Buying-Gold-Jewellery.png",
-    link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-  },
-  {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Involved-Risks-And-Their-Solutions.png",
-    link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-  },
-  {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/blogs/Role-of-Technology.png",
-    link: "https://blog.brightdigigold.com/2023/04/20/make-a-golden-investment-on-this-akshaya-tritiya/",
-  },
-  {
-    img: "https://blog.brightdigigold.com/wp-content/uploads/2024/03/Making-Gold-Choices-300x169.jpg",
-    link: "https://blog.brightdigigold.com/2024/03/05/making-gold-choices-digital-gold-vs-physical-gold/",
-  },
-];
+interface Post {
+  slug: {
+    _type: string;
+    current: string;
+  };
+  thumbImage: {
+    asset: {
+      url: string;
+    };
+  };
+  title: string;
+}
 
 export default function Blog() {
+
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    getBlogPosts().then(posts => setPosts(posts.slice(0, 8)));
+  }, []);
+
+  // console.log('posts 64', posts);
+
   return (
     <>
       <div className="bg-theme">
@@ -96,21 +79,21 @@ export default function Blog() {
             className="mySwiperblog"
             style={{ padding: "0 20px !important" }}
           >
-            {features.map((feature, index) => (
+            {posts.map((feature, index) => (
               <SwiperSlide
                 key={`${index}-Slider`}
                 className="relative swiper-slide p-0 sm:p-4 pt-10"
               >
-                <Link target="_blank" href={feature.link}>
-                  <div className="rounded-2xl h-44 sm:h-72 relative">
-                    <div className="flex justify-center">
-                      <img
-                        src={feature.img}
-                        className="w-full rounded-2xl cursor-pointer"
-                        alt="insite"
-                      />
-                    </div>
+                <Link href={`/blog/${feature.slug.current}`} passHref>
+                <div className="rounded-2xl h-44 sm:h-72 relative">
+                  <div className="flex justify-center">
+                    <img
+                      src={feature.thumbImage?.asset?.url}
+                      className="w-full rounded-2xl cursor-pointer"
+                      alt="insite"
+                    />
                   </div>
+                </div>
                 </Link>
               </SwiperSlide>
             ))}

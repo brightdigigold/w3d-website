@@ -33,8 +33,8 @@ const nextConfig = {
     cashfree: "production",
     // baseUrl: "http://localhost:3032",
     // baseUrl: "http://192.168.1.10:3031",
-    GOOGLE_TAG : "GTM-5JFBNN5",
-
+    GOOGLE_TAG: "GTM-5JFBNN5",
+    NEXT_PUBLIC_SANITY_PROJECT_ID: "nkdqpbbn",
     MIX_PANNEL_TOKEN: "497551b628f786f66e8a0fb646d605eb",
   },
   reactStrictMode: true,
@@ -45,4 +45,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-

@@ -16,7 +16,7 @@ import OtpModal from "../modals/otpModal";
 import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import { GoogleTagManager } from '@next/third-parties/google'
-import NextImage from "../nextImage";
+import BlogPage from "../sanity/abc";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -73,6 +73,7 @@ const HeroSection = () => {
   return (
     <div className="bg-theme pt-28 py-10">
       <GoogleTagManager gtmId="GTM-5JFBNN5" />
+      {/* <BlogPage /> */}
       {otpModal && <OtpModal />}
       <motion.div
         initial="hidden"
