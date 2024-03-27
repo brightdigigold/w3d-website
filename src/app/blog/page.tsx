@@ -24,6 +24,8 @@ function BlogPosts() {
     getBlogPosts().then(setPosts);
   }, []);
 
+  console.log('posts', posts);
+
   return (
     <div>
       <h1 className='mt-24 text-yellow-400 text-center bold text-3xl sm:text-4xl'>Blogs</h1>
@@ -32,12 +34,13 @@ function BlogPosts() {
           {posts.map(post => (
             <Link key={post.slug.current} href={`/blog/${post.slug.current}`} passHref className='bg-slate-500 rounded-lg overflow-hidden hover:bg-slate-600 transition-colors'>
               <div>
-                <h2 className='text-white py-2 text-lg text-center'>{post.title}</h2>
                 {post.thumbImage && (
-                    <NextImage src={post.thumbImage.asset.url} alt={post.title} className="inline-block" width={400} height={0} />
+                    <NextImage src={post.thumbImage.asset.url} alt={post.title} className="inline-block" width={700} height={700} />
 
                   // <img src={post.thumbImage.asset.url} alt={post.title} className='w-full h-auto' />
                 )}
+                <h2 className='text-white py-2 text-lg text-center'>{post.title}</h2>
+
               </div>
             </Link>
           ))}

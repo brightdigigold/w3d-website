@@ -32,7 +32,6 @@
     "heroicons": "^2.1.1",
     "lottie-react": "^2.4.0",
     "mixpanel-browser": "^2.49.0",
-    "moment": "^2.29.4",
     "next": "^14.1.0",
     "notiflix": "^3.2.7",
     "react": "^18",
