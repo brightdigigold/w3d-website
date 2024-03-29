@@ -11,7 +11,7 @@ const BlogDetailsById = ({ portableTextContent }) => (
     <PortableText
       content={portableTextContent}
       serializers={{
-        h4: ({ children }) => <h4 className=" bold py-2 text-2xl">{children}</h4>,
+        h4: ({ children }) => <h4 className=" bold py-3 text-2xl">{children}</h4>,
         p: ({ children }) => <p className="m-3 prose bg-black-600">{children}</p>,
         section: ({ children }) => <section className="bg-yellow-600">{children}</section>,
         article: ({ children }) => <article className="bg-green-600">{children}</article>,

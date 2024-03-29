@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import goldBarData from "../../../public/lottie/GoldBricks.json";
-import Lottie from "lottie-react";
 
 const Succession = () => {
   return (
@@ -24,15 +22,10 @@ const Succession = () => {
             diversify their investment portfolio and protect their wealth.
           </p>
           <div className="relative col-span-2 md:col-span-1">
-            {/* <Lottie
-              animationData={goldBarData}
-              className="h-72 md:absolute right-20 lg:right-40"
-              loop={true}
-            /> */}
+            
             <img src="/lottie/GOLDGRAPH.gif" className="h-96 mx-auto" />
           </div>
         </div>
-        {/* <CustomButton title="Invest now" /> */}
       </div>
     </div>
   );

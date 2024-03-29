@@ -15,7 +15,12 @@ interface PostSlug {
   current: string;
 }
 
+interface categories {
+  title: string;
+}
+
 interface BlogPost {
+  categories: categories [];
   title: string;
   slug: PostSlug;
   thumbImage: PostThumbImage;
@@ -23,7 +28,7 @@ interface BlogPost {
 
 // Update the getBlogPosts function signature to reflect its return type
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  const query = '*[_type == "post"] | order(publishedAt desc) {title,slug,thumbImage{asset->{url}}}';
+  const query = '*[_type == "post"] | order(publishedAt desc) {title,categories[]->{title},slug,thumbImage{asset->{url}}}';
   const posts: BlogPost[] = await client.fetch(query);
   return posts;
 }

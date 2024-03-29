@@ -4,18 +4,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { Autoplay } from "swiper/modules";
 
 const features = [
   {
-    img: "/lottie/holi1.png",
-    // img: "/lottie/offer1.jpg",
+    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/offer1.jpg",
   },
   {
-    // img: "/lottie/offer2.jpg",
-    img: "/lottie/holi2.png",
+    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/offer2.jpg",
   },
 ];
-import { Autoplay } from "swiper/modules";
 
 export default function OfferSlider() {
   return (

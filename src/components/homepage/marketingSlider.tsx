@@ -18,7 +18,7 @@ export default function Marketing() {
 
   const features = [
     {
-      img: "/lottie/Gift online.gif",
+      img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/giftonline.gif",
       alt: "Gifting",
       name: "Start Gifting",
       pera: " Gift 24K pure gold and 99.99% fine silver with your special ones and share the happiness in a unique way.",
@@ -26,7 +26,7 @@ export default function Marketing() {
       href: "/dashboard",
     },
     {
-      img: "/lottie/KYC Verification.gif",
+      img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/KYC+Verification.gif",
       alt: "Kyc Verification",
       name: "Gold KYC",
       pera: " Simplify your life by completing your KYC effortlessly and embark on a seamless digital gold and silver savings journey.",
@@ -34,18 +34,16 @@ export default function Marketing() {
       href: "/myAccount",
     },
     {
-      img: "/lottie/Customer support.gif",
+      img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/Customer+support.gif",
       alt: "Customer support",
-
       name: "Customer Support",
       pera: "Trust us to be your reliable partner for your financial journey. Our robust customer support is always there to assist you.",
       linkName: "Contact Us",
       href: "/contact",
     },
     {
-      img: "/lottie/Home Deliveryy.gif",
+      img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/homepagedelivery.gif",
       alt: "Home Delivery",
-
       name: "Get It Delivered",
       pera: " Say goodbye to hassle and embrace the happiness of owing gold/silver at your fingertips with utmost ease.",
       linkName: "Buy Now",

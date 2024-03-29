@@ -9,7 +9,7 @@ const Graph = () => {
         From
         <span className=" text-gold01 pl-1">2019-2024</span>
       </p>
-      <img src="/Growth Graph.gif" className="w-full px-0 sm:px-16" alt="Growth Graph"/>
+      <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GrowthGraph.gif" className="w-full px-0 sm:px-16" alt="Growth Graph"/>
     </div>
   );
 };

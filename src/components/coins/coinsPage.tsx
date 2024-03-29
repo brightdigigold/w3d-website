@@ -63,10 +63,8 @@ const Coins = () => {
       {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} />}
       {otpModal && <OtpModal />}
 
-
       <div className="flex justify-center items-center">
-        {/* <Image src={"/lottie/ProductBannerNEW.jpg"} alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} /> */}
-        <Image src={"/lottie/product.png"} alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} />
+        <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/ProductBannerNEW.jpg" alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} />
       </div>
       <div className="container mx-auto">
         <h1 className="text-white mr-4 text-2xl sm:text-4xl extrabold text-center m-3">Our Coins</h1>
