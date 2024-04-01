@@ -192,7 +192,6 @@ const Footer = () => {
                     </li>
                     <li className="mb-4">
                       <Link
-                        target="_blank"
                         className="text-white"
                         href="/blog"
                       >
