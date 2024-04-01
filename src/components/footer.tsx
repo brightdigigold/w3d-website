@@ -194,7 +194,7 @@ const Footer = () => {
                       <Link
                         target="_blank"
                         className="text-white"
-                        href="https://blog.brightdigigold.com/"
+                        href="/blog"
                       >
                         Blog
                       </Link>
