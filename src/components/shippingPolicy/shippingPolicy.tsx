@@ -60,16 +60,7 @@ const ShippingPolicy = () => {
                                 </p>
                             </div>
                         </div>
-                        {/* <div className="col-md-4 col-12 ">
-            <div className="d-flex align-items-center justify-content-center">
-              <Image
-                src={"/images/shippingPolicy.svg"}
-                height={300}
-                width={300}
-                alt="about_the_company"
-              />
-            </div>
-          </div> */}
+                      
                     </div>
                     <h5 className="text-2xl sm:text-4xl my-4  mt-6 extrabold text-gold01">
                         Digital Confirmation Report
