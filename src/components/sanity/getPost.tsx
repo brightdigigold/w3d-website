@@ -32,3 +32,8 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   const posts: BlogPost[] = await client.fetch(query);
   return posts;
 }
+export async function getPrivacyPosts() {
+  const query = '*[_type=="policy"&& slug.current=="privacy-policy"][0]{body}';
+  const posts = await client.fetch(query);
+  return posts;
+}
