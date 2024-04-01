@@ -2,6 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/motion";
+import Image from "next/image";
+
 export default function Promotional() {
   return (
     <>
@@ -14,10 +16,12 @@ export default function Promotional() {
         >
           <div className="grid">
             <motion.div variants={fadeIn("right", "spring", 0.5, 1)}>
-              <img
+              <Image
                 className="z-10 w-full"
                 src="/Web Banner New App .png"
                 alt="App Banner"
+                width={1920}
+                height={400}
               />
             </motion.div>
           </div>

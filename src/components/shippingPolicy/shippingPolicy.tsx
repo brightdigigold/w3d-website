@@ -19,7 +19,7 @@ const ShippingPolicy = () => {
                             <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
                                 Shipping Policy
                             </h1>
-                            <img src="/lottie/Shipping Policy.gif" className="" />
+                            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" className="" />
                         </div>
                         <div className="col-md-8 col-12">
                             <div className="">

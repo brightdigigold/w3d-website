@@ -276,7 +276,7 @@ export default function CoinModal({
                                     metalTypeForProgressBar === "GOLD" && (
                                       <div className="absolute z-[100] top-0 w-full left-0 h-full justify-center flex items-center coins_backgroun">
                                         <img
-                                          src="/lottie/Conversion.gif"
+                                          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/Conversion.gif"
                                           alt="Conversion Gold"
                                           className="h-60"
                                         />
@@ -286,7 +286,7 @@ export default function CoinModal({
                                     metalTypeForProgressBar === "SILVER" && (
                                       <div className="absolute z-[100] top-0 w-full left-0 h-full justify-center flex items-center coins_backgroun">
                                         <img
-                                          src="/lottie/Conversion silver.gif"
+                                          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/Conversion+silver.gif"
                                           alt="Conversion Silver"
                                           className="h-60"
                                         />

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import LoginAside from "../authSection/loginAside";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 
 export default function Marketing() {
@@ -84,11 +85,13 @@ export default function Marketing() {
             {features.map((item, index) => (
               <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4">
                 <div className="grid lg:grid-cols-2 gap-20 place-items-center">
-                  <div>
-                    <img
-                      className="mx-auto h-auto xl:h-96 pt-10 lg:pt-0"
+                  <div className="relative mx-auto xl:h-96 pt-10 lg:pt-0" style={{ width: '50%', height: '50%' }}>
+                    <Image
                       src={item.img}
                       alt={item.alt}
+                      width={800} // Specify the width of your image here
+                      height={100} // Specify the height of your image here
+                      layout="responsive" // Adjust quality if needed
                     />
                   </div>
                   <div>

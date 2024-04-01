@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
 import { getBlogPosts } from '@/components/sanity/getPost';
 import Link from "next/link";
+import Image from "next/image";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -87,10 +88,12 @@ export default function Blog() {
                 <Link href={`/blog/${feature.slug.current}`} passHref>
                 <div className="rounded-2xl h-44 sm:h-72 relative">
                   <div className="flex justify-center">
-                    <img
+                    <Image
                       src={feature.thumbImage?.asset?.url}
-                      className="w-full rounded-2xl cursor-pointer"
+                      className="rounded-2xl cursor-pointer"
                       alt="insite"
+                      width={1920}
+                      height={800}
                     />
                   </div>
                 </div>

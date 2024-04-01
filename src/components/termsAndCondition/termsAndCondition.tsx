@@ -19,7 +19,7 @@ const TermsAndCondition = () => {
                             <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
                                 Terms &<br /> Conditions
                             </h1>
-                            <img src="/lottie/T & C Policy.gif" className="" />
+                            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/T+%26+C+Policy.gif" className="" />
                         </div>
                         <div className="col-12 text-lg">
                             <div className="">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeIn, textVariant, } from "../../utils/motion";
+import Image from "next/image";
 
 const Ecom = () => {
   return (
@@ -18,11 +19,13 @@ const Ecom = () => {
             variants={fadeIn("right", "spring", 0.2, 1)}
             className=" flex items-end relative"
           >
-            <img alt="products" className="h-40 mx-auto" src="/goldcoin.png" />
-            <img
+            <Image alt="products" className="mx-auto" width={1920} height={400} src="/goldcoin.png" />
+            <Image
               alt="products"
-              className="h-32 mx-auto"
+              className=" mx-auto"
               src="/BanyanTree.png"
+              width={1920}
+              height={400}
             />
           </motion.div>
           <div>

@@ -13,6 +13,7 @@ import {
   selectGoldVaultBalance,
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
+import NextImage from "@/components/nextImage";
 
 const data = [
   { id: 1, name: "PROFILE", img: "/24K guaranteed .png" },
@@ -33,9 +34,10 @@ const MyAccountTabs = () => {
 
   return (
     <div className="w-full relative">
-      <img
-        className="h-7xl absolute top-0 left-0 opacity-50"
+      <NextImage
+        className=" absolute top-0 left-0 opacity-50"
         src="/bdgwhite.png"
+        width={500} height={500}
         alt="Bright Digi Gold"
       />
       <div className="mb-12 grid lg:grid-cols-2 justify-center items-center">

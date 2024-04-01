@@ -10,6 +10,7 @@ import Image from "next/image";
 import Script from 'next/script'
 import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
+import NextImage from "@/components/nextImage";
 
 
 let persistor = persistStore(store);
@@ -22,7 +23,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
   return (
     <html lang="en">
       <Head>
-        <Image src="/bdgwhite.png" alt="Picture of the author" priority />
+        <NextImage src="/bdgwhite.png" width={400} height={300} alt="Picture of the author" priority />
         <script
           dangerouslySetInnerHTML={{
             __html: `

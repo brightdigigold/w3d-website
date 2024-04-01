@@ -33,6 +33,7 @@ const features = [
   },
 ];
 import { Autoplay, Pagination } from "swiper/modules";
+import Image from "next/image";
 
 export default function Review() {
   return (
@@ -77,10 +78,12 @@ export default function Review() {
                 <div className="bg-theme rounded-2xl border-b-2 border-blue-400  relative">
                   <div className="bg-themeLight h-72 p-4">
                     <div className="flex justify-center">
-                      <img
+                      <Image
                         src={feature.img}
-                        className="rounded-full absolute -top-10 h-24 w-24 border border-blue-300"
+                        className="rounded-full absolute -top-10 border border-blue-300"
                         alt="insite"
+                        width={100}
+                        height={100}
                       />
                     </div>
                     <p className="mt-16 text-center text-white extrabold text-sm">

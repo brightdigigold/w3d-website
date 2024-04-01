@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { FaChevronCircleDown, FaChevronCircleUp, FaPlus, FaMinus } from 'react-icons/fa';
+import NextImage from "../nextImage";
 
 
 const faqs = [
@@ -99,10 +100,12 @@ const Faq = () => {
           </dl>
         </div>
       </div>
-      <img
-        src="/bdgwhite.png"
-        className="absolute top-28 left-0 opacity-20 -z-10 sm:z-10"
-      />
+      {/* <NextImage
+            className="absolute -bottom-72 -left-20 opacity-20"
+            src="/bdgwhite.png"
+            width={400} height={500}
+            alt="Your Company"
+          /> */}
     </div>
   );
 };

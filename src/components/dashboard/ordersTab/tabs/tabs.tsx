@@ -1103,7 +1103,7 @@ const OrdersTabs = () => {
       {dashboardData && dashboardData.length === 0 && (
         <>
           <div className="text-center text-4xl text-white bg-themeLight py-24 rounded-lg">
-            <img src="/lottie/No Transaction.gif" className="h-40 mx-auto" />
+            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/No+Transaction.gif" className="h-40 mx-auto" />
             <p> No Data Found</p>
           </div>
         </>

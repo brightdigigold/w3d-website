@@ -202,7 +202,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
                 }}
                 className={styles.p1}
               >
-                <img src="/images/shipping policy.png" className="h-6 w-8" />
+                <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" className="h-6 w-8" />
                 Shipping Policy
               </div>
             </Link>

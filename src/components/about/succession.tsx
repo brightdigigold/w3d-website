@@ -23,7 +23,7 @@ const Succession = () => {
           </p>
           <div className="relative col-span-2 md:col-span-1">
             
-            <img src="/lottie/GOLDGRAPH.gif" className="h-96 mx-auto" />
+            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/GOLDGRAPH.gif" className="h-96 mx-auto" />
           </div>
         </div>
       </div>

@@ -67,7 +67,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
           titleText:
             "It seems your KYC is pending. Please complete your KYC first.",
           padding: "2em",
-          html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
+          html: `<img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
           showCancelButton: true,
           confirmButtonText: "Complete Your KYC",
           denyButtonText: `Don't save`,

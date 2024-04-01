@@ -1,5 +1,6 @@
 "use client";
 import { AesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
+import NextImage from "@/components/nextImage";
 import { ArrowDownIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import mixpanel from "mixpanel-browser";
@@ -83,10 +84,11 @@ function page({ params }: any) {
   return (
     <div className="px-4">
       <div className="min-h-screen flex items-center justify-center">
-        <img
-          className="h-7xl absolute -bottom-12 -left-20 opacity-30"
+        <NextImage
+          className=" absolute -bottom-12 -left-20 opacity-30"
           src="/bdgwhite.png"
           alt="Bright Digi Gold"
+          width={500} height={500}
         />
         <div className="w-[580px] z-[20]">
           <div className="coins_background shadow-md rounded-md mb-100 text-center text-white py-12 relative">
@@ -100,7 +102,7 @@ function page({ params }: any) {
               {dataOfTransaction?.data?.transactionStatus ===
                 "PENDING" || "FAILED" && (
                   <img
-                    src="/lottie/oops.gif"
+                    src="https://brightdigigold.s3.ap-south-1.amazonaws.com/oops.gif"
                     className=" absolute h-36 -top-16"
                   />
                 )}

@@ -598,10 +598,10 @@ const BuySell = () => {
                 >
                   {metalType === "gold" ? (
                     <>
-                      <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GoldStackAnimation.gif" alt="Gold Bar Animation" className="h-24 sm:h-32" sizes="100vw" style={{ width: '100%', height: 'auto', }} width={0} height={0} priority={true} />
+                      <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GoldStackAnimation.gif" alt="Gold Bar Animation" width={300} height={300} priority={true} />
                     </>
                   ) : (
-                    <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/SilverStacksanimation.gif" alt="Silver Bar Animation" className="h-20 sm:h-32" sizes="100vw" style={{ width: '100%', height: 'auto', }} width={0} height={0} priority={true} />
+                    <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/SilverStacksanimation.gif" alt="Silver Bar Animation" width={300} height={300} priority={true} />
                   )}
                 </div>
                 <Timer />

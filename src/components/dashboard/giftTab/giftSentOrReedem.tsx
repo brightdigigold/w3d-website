@@ -287,7 +287,7 @@ const Redeem = (refreshOnGiftSent: any) => {
             <div className="d-flex justify-content-center align-items-center nodata py-6 text-2xl">
               <div style={{ textAlign: "center", color: "white" }}>
                 <img
-                  src="/lottie/No Transaction.gif"
+                  src="https://brightdigigold.s3.ap-south-1.amazonaws.com/No+Transaction.gif"
                   className="h-40 mx-auto"
                 />
                 <p>No Gifting history found</p>

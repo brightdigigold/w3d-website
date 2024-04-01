@@ -5,6 +5,7 @@ import { fadeIn, textVariant } from "../../utils/motion";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import OtpModal from "../modals/otpModal";
+import NextImage from "../nextImage";
 
 const HeroAbout = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
@@ -13,10 +14,11 @@ const HeroAbout = () => {
     <div className="bg-theme pt-24 sm:pt-36 py-10 relative">
       {otpModal && <OtpModal />}
       <div className="mx-auto px-4 sm:px-6 lg:px-16">
-        <img
-          className="h-800 absolute top-48 -left-20 opacity-20 z-10"
+        <NextImage
+          className=" absolute top-48 -left-20 opacity-20 z-10"
           src="/bdgwhite.png"
           alt="Bright Digi Gold"
+          width={500} height={500}
         />
         <div className="grid gap-4">
           <motion.div

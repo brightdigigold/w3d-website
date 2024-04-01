@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
                             <h1 className="text-2xl sm:text-7xl mb-4   extrabold text-white text-center">
                                 Privacy Policy
                             </h1>
-                            <img src="/lottie/Privacy Policy.gif" className="" />
+                            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Privacy+Policy.gif" className="" />
                         </div>
                         <div className="col-12 text-lg">
                             <div className=" text-white">
