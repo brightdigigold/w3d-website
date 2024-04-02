@@ -4,67 +4,54 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
 <url>
   <loc>https://www.brightdigigold.com/</loc>
-  <lastmod>2024-02-15T05:52:23+00:00</lastmod>
-  <priority>0.5</priority>
-</url>
-<url>
-  <loc>https://www.brightdigigold.com/coins</loc>
-  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.brightdigigold.com/about</loc>
-  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.brightdigigold.com/contact</loc>
-  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.brightdigigold.com/shipping-policy</loc>
-  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.brightdigigold.com/refund-and-cancellation</loc>
-  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.brightdigigold.com/term-and-conditions</loc>
-  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.brightdigigold.com/cart</loc>
-  <lastmod>2024-02-15T05:52:23+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.brightdigigold.com/dashboard</loc>
-  <lastmod>2024-02-15T05:52:23+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.brightdigigold.com/privacy-policy</loc>
-  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://blog.brightdigigold.com/</loc>
-  <lastmod>2023-10-10T05:52:23+00:00</lastmod>
+  <loc>https://www.brightdigigold.com/coins</loc>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.brightdigigold.com/faqs</loc>
-  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.brightdigigold.com/contact</loc>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.brightdigigold.com/blog</loc>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.brightdigigold.com/term-and-conditions</loc>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.brightdigigold.com/privacy-policy</loc>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.brightdigigold.com/shipping-policy</loc>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.brightdigigold.com/refund-and-cancellation</loc>
+  <lastmod>2024-04-02T08:04:38+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 </urlset>
