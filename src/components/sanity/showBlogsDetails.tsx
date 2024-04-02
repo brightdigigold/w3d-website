@@ -20,6 +20,7 @@ const BlogDetailsById = ({ portableTextContent }) => (
         ol: ({ children }) => <ol className="m-3">{children}</ol>,
         li: ({ children }) => <li className="m-3">{children}</li>,
         strong: ({ children }) => <strong className="bold">{children}</strong>,
+        link: ({ children }) => <link className="bold text-yellow-400">{children}</link>,
         someCustomType: CustomComponent, // Use your actual custom type name here
         // Add more custom serializers as needed
       }}
