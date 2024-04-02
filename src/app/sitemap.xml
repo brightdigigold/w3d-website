@@ -10,7 +10,7 @@
 <url>
   <loc>https://www.brightdigigold.com/</loc>
   <lastmod>2024-02-15T05:52:23+00:00</lastmod>
-  <priority>1.00</priority>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://www.brightdigigold.com/coins</loc>
@@ -24,6 +24,11 @@
 </url>
 <url>
   <loc>https://www.brightdigigold.com/contact</loc>
+  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.brightdigigold.com/shipping-policy</loc>
   <lastmod>2024-02-10T05:52:23+00:00</lastmod>
   <priority>0.80</priority>
 </url>
@@ -49,11 +54,6 @@
 </url>
 <url>
   <loc>https://www.brightdigigold.com/privacy-policy</loc>
-  <lastmod>2024-02-10T05:52:23+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.brightdigigold.com/shipping-policy</loc>
   <lastmod>2024-02-10T05:52:23+00:00</lastmod>
   <priority>0.80</priority>
 </url>

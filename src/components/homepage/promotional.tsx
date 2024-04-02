@@ -18,7 +18,7 @@ export default function Promotional() {
             <motion.div variants={fadeIn("right", "spring", 0.5, 1)}>
               <Image
                 className="z-10 w-full"
-                src="/Web Banner New App .png"
+                src="/images/svg-viewer.svg"
                 alt="App Banner"
                 width={1920}
                 height={400}
