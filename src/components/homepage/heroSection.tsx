@@ -72,7 +72,7 @@ const HeroSection = () => {
   }, [dispatch]);
 
   return (
-    <div className="bg-theme pt-28 py-10" style={{ maxWidth: '1920px' }}>
+    <div className="bg-theme pt-28 py-10" >
       <GoogleTagManager gtmId="GTM-5JFBNN5" />
       {otpModal && <OtpModal />}
       <motion.div

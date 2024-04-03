@@ -7,12 +7,13 @@ import "swiper/css/navigation";
 export default function ClientSlider() {
   return (
     <>
-      <div className="bg-white relative" style={{ maxWidth: '1920px' }}>
+      <div className="bg-white relative">
         <div className="">
           <div className="mx-auto px-4 sm:px-6 lg:px-16 py-8">
             <h1 className="text-center extrabold  text-3xl sm:text-5xl text-gray-700 mb-8">
               We Are Trusted By
             </h1>
+
             <div className="grid grid-cols-4 gap-2 sm:gap-12  place-items-center">
               <img
                 src="/client1.png"

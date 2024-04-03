@@ -20,7 +20,7 @@ const Products = () => {
   };
 
   return (
-    <div className="bg-theme" style={{ maxWidth: '1920px' }}>
+    <div className="bg-theme" >
 
       <motion.div
         initial="hidden"
