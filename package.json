@@ -39,6 +39,7 @@
     "react-confetti": "^6.1.0",
     "react-date-range": "^1.4.0",
     "react-datepicker": "^4.25.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18",
     "react-helmet": "^6.1.0",
     "react-helmet-async": "^2.0.4",

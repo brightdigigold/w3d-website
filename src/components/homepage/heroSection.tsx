@@ -132,9 +132,10 @@ const HeroSection = () => {
                     href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                     className="cursor-pointer"
                   >
-                    <img
+                    <NextImage
                       src="/lottie/google-play-button.png"
-                      className="h-14"
+                      width={180} height={180}
+                      // className="h-14"
                       alt="google play button"
                     />
                   </Link>
@@ -142,16 +143,17 @@ const HeroSection = () => {
                     href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                     className="cursor-pointer"
                   >
-                    <img
+                    <NextImage
                       src="/lottie/app-store-button.png"
-                      className="h-14"
+                      width={180} height={180}
+                      // className="h-14"
                       alt="app store button"
                     />
                   </Link>
                 </div>
-                
+
               </motion.div>
-              
+
 
               <div className="flex justify-center mt-4"></div>
 

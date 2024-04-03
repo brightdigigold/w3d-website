@@ -46,8 +46,9 @@ import ShowVaultBuySell from "./showVaultBuySell";
 import { useRouter } from "next/navigation";
 import UpiModal from "../myAccount/payoutOptions/addNewUpiId";
 import NextImage from "../nextImage";
-import LivePrice from '../../../public/lottie/LivePrice.gif'
 import coupon from '../../../public/coupon.png';
+import Link from "next/link";
+import { isMobile } from 'react-device-detect';
 
 const BuySell = () => {
   const router = useRouter()
@@ -784,6 +785,28 @@ const BuySell = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex gap-5 mt-8 relative justify-center sm:hidden">
+        <Link target="_blank"
+          href={isMobile ? 'https://brightdigigold.page.link/y1E4' : "https://play.google.com/store/apps/details?id=com.brightdigigold.customer"}
+          className="cursor-pointer"
+        >
+          <NextImage
+            src="/lottie/google-play-button.png"
+            width={180} height={180}
+            alt="google play button"
+          />
+        </Link>
+        <Link target="_blank"
+          href={isMobile ? 'https://brightdigigold.page.link/y1E4' : "https://play.google.com/store/apps/details?id=com.brightdigigold.customer"}
+          className="cursor-pointer"
+        >
+          <NextImage
+            src="/lottie/app-store-button.png"
+            width={180} height={180}
+            alt="app store button"
+          />
+        </Link>
       </div>
     </>
   );

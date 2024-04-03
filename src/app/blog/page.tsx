@@ -1,8 +1,8 @@
 'use client'
-import NextImage from '@/components/nextImage';
 import { getBlogPosts } from '@/components/sanity/getPost';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface Post {
   categories: { title: string }[];
@@ -35,7 +35,7 @@ function BlogPosts() {
     : posts;
 
   return (
-    <div className=''>
+    <div className='container'>
       <h1 className='mt-24 text-yellow-400 text-center extrabold text-3xl sm:text-5xl'>Blogs</h1>
       {/* Category Selector */}
       <div className='flex px-8 m-2 items-center '>
@@ -55,7 +55,7 @@ function BlogPosts() {
             <Link key={post.slug.current} href={`/blog/${post.slug.current}`} passHref>
               <div className='bg-header rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-lg'>
                 {post.thumbImage && (
-                  <NextImage src={post.thumbImage.asset.url} alt={post.title} className="inline-block" width={700} height={700} priority />
+                  <Image src={post.thumbImage.asset.url} alt={post.title} className="inline-block" width={700} height={700} priority />
                 )}
                 <h3 className='text-white py-2 text-sm md:text-lg text-center'>{post.title}</h3>
               </div>
