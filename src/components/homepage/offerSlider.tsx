@@ -18,7 +18,7 @@ const features = [
 
 export default function OfferSlider() {
   return (
-    <div className="relative">
+    <div className="relative" style={{ maxWidth: '1920px' }}>
       <Swiper
         loop={features.length > 1}
         breakpoints={{

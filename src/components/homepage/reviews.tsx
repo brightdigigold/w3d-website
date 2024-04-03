@@ -32,19 +32,19 @@ const features = [
     pera: "Bright DiGi Gold is a wonderful app. I cannot believe that buying gold could be so easy and convenient. Anyone who wants to invest in gold can definitely go for it without any doubt.",
   },
 ];
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import Image from "next/image";
 
 export default function Review() {
   return (
     <>
-      <div className="bg-themeBlue">
+      <div className="bg-themeBlue" style={{ maxWidth: '1920px' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-16 py-8">
           <h1 className="text-center text-gray-800 text-3xl sm:text-5xl extrabold mb-12">
             Feedback
           </h1>
           <Swiper
-             loop={features.length > 1}
+            loop={features.length > 1}
             breakpoints={{
               600: {
                 slidesPerView: 1,

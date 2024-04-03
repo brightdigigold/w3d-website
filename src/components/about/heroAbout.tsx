@@ -11,7 +11,7 @@ const HeroAbout = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
 
   return (
-    <div className="bg-theme pt-24 sm:pt-36 py-10 relative">
+    <div className="bg-theme pt-24 sm:pt-36 py-10 relative" style={{ maxWidth: '1920px' }}>
       {otpModal && <OtpModal />}
       <div className="mx-auto px-4 sm:px-6 lg:px-16">
         <NextImage

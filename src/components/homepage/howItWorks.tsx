@@ -48,7 +48,7 @@ const tabs: TabsType = [
 const HowItWorks = () => {
   const [selectedTab, setSelectedTab] = useState<number>(tabs[0].index);
   return (
-    <div className="bg-themeBlue">
+    <div className="bg-themeBlue" style={{ maxWidth: '1920px' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-16 py-16">
         <h1 className="text-3xl sm:text-5xl extrabold text-center">
           How it Works

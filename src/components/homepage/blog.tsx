@@ -36,7 +36,7 @@ export default function Blog() {
 
   return (
     <>
-      <div className="bg-theme">
+      <div className="bg-theme" style={{ maxWidth: '1920px' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
           <h1 className="text-center text-yellow-500 text-3xl sm:text-5xl extrabold mb-0 sm:mb-6">
             Our Blogs

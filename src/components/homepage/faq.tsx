@@ -25,7 +25,7 @@ const faqs = [
 ];
 const Faq = () => {
   return (
-    <div className="bg-theme relative">
+    <div className="bg-theme relative" style={{ maxWidth: '1920px' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-16 py-12 pb-20">
         <div className="flex justify-between ">
           <p></p>

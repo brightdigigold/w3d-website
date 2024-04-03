@@ -214,10 +214,22 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
                 }}
                 className={styles.p1}
               >
-                {/* <PhoneIcon className="text-themeBlueLight h-5 px-2" /> */}
                 <img src="/images/contacts.png" className="h-5 w-8" />
                
                 Contact Us
+              </div>
+            </Link>
+
+            <Link href="/blog" prefetch={true}>
+              <div
+                onClick={() => {
+                  onClose();
+                }}
+                className={styles.p1}
+              >
+                <img src="/images/contacts.png" className="h-5 w-8" />
+               
+                Blog
               </div>
             </Link>
 

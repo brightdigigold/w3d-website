@@ -22,6 +22,7 @@ const HeroSection = () => {
   const dispatch = useDispatch();
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
+  
 
   const onClose = () => {
     dispatch(setShowProfileForm(false));
@@ -71,7 +72,7 @@ const HeroSection = () => {
   }, [dispatch]);
 
   return (
-    <div className="bg-theme pt-28 py-10">
+    <div className="bg-theme pt-28 py-10" style={{ maxWidth: '1920px' }}>
       <GoogleTagManager gtmId="GTM-5JFBNN5" />
       {otpModal && <OtpModal />}
       <motion.div
