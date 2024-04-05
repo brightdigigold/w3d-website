@@ -18,7 +18,7 @@ const features = [
 
 export default function OfferSlider() {
   return (
-    <div className="relative" >
+    <div className="relative">
       <Swiper
         loop={features.length > 1}
         breakpoints={{
@@ -47,10 +47,10 @@ export default function OfferSlider() {
             <Image
               src={feature.img}
               alt="Bdg offer"
-              width={1920} // Specify the width of your image here
+              width={3000} // Specify the width of your image here
               height={300} // Specify the height of your image here
-            // layout="responsive" 
-            // This will make the image responsive
+              // layout="responsive" 
+              // This will make the image responsive
             />
           </SwiperSlide>
         ))}

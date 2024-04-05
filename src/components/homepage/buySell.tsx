@@ -599,10 +599,22 @@ const BuySell = () => {
                 >
                   {metalType === "gold" ? (
                     <>
-                      <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GoldStackAnimation.gif" alt="Gold Bar Animation" width={300} height={300} priority={true} />
+                      <video width="320" height="240" preload="none" autoPlay loop muted>
+                        <source src="/GoldStackAnimation.webM" type="video/webm" />
+                        <track
+                          src="/path/to/subtitles.vtt"
+                          kind="subtitles"
+                          srcLang="en"
+                          label="English"
+                        />
+                        Your browser does not support the video tag.
+                      </video>
+                      {/* <NextImage src="/GoldStackAnimation.webM" alt="Gold Bar Animation" width={300} height={300} priority={true} /> */}
                     </>
                   ) : (
-                    <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/SilverStacksanimation.gif" alt="Silver Bar Animation" width={300} height={300} priority={true} />
+                    <>
+                      <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/SilverStacksanimation.gif" alt="Silver Bar Animation" width={300} height={300} priority={true} />
+                    </>
                   )}
                 </div>
                 <Timer />

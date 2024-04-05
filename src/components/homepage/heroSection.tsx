@@ -86,6 +86,7 @@ const HeroSection = () => {
             src="/bdgwhite.png"
             width={500} height={500}
             alt="Your Company"
+            priority={true}
           />
           <div className="grid lg:grid-cols-2 gap-4">
             <div className="hidden lg:block mt-10">
