@@ -4,8 +4,31 @@ import BlogDetailsById from '@/components/sanity/showBlogsDetails';
 import { client } from '@/utils/sanityClient';
 import { useEffect, useState } from 'react';
 
+interface PostDisplayDetails {
+    title: string;
+    slug: {
+        current: string;
+    };
+    mainImage: {
+        asset: {
+            url: string;
+        };
+    };
+    author: {
+        name: string;
+        image: {
+            asset: {
+                url: string;
+            };
+        };
+    };
+    publishedAt: string;
+    metaDescription: string;
+    body: any[]; // This can be further detailed based on the structure of your CMS content blocks
+}
+
 const PostDisplay = ({ slug }) => {
-    const [post, setPost] = useState<any>();
+    const [post, setPost] = useState<PostDisplayDetails>();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -36,7 +59,6 @@ const PostDisplay = ({ slug }) => {
         fetchPost();
     }, [slug]);
 
-    console.log('post request', post)
     if (!post) return <div>No post data</div>;
 
     return (
