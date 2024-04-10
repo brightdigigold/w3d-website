@@ -10,6 +10,7 @@ interface Post {
     _type: string;
     current: string;
   };
+  metaDescription: string;
   thumbImage: {
     asset: {
       url: string;
@@ -21,7 +22,6 @@ interface Post {
 function MainBlogPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  // const screenWidth = window.screen.width;
 
   useEffect(() => {
     getBlogPosts().then(setPosts);

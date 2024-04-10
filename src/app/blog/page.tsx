@@ -10,10 +10,9 @@ const page = () => {
   )
 }
 
-export default page
-
 export const metadata: Metadata = {
   title: "Insights and Inspiration: The Bright DiGi Gold Blog",
   description:
     "Stay ahead in the digital gold revolution with our blog's timely updates, educational resources, and expert perspectives.",
 };
+export default page
