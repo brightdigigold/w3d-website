@@ -1,81 +1,42 @@
 'use client'
 import { RootState } from '@/redux/store';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import OtpModal from '../modals/otpModal';
 import Link from 'next/link';
+import { getShippingPosts } from '../sanity/getPost';
+import BlogDetailsById from '../sanity/showBlogsDetails';
+interface Shipping {
+    body: any; 
+  }
 
 const ShippingPolicy = () => {
     const otpModal = useSelector((state: RootState) => state.auth.otpModal);
+    const [shipping, setShipping] = useState<Shipping>();
+    useEffect(() => {
+        getShippingPosts().then(setShipping);
+    }, []);
+
 
     return (
         <div className="text-gray-100">
             {otpModal && <OtpModal />}
 
-            <div className="mx-auto px-4 sm:px-6 lg:px-16 py-16 pb-28 xl:pb-16 pt-32">
+            <div className="mx-auto px-4 sm:px-6 lg:px-16 py-16 pb-28 xl:pb-8 pt-32">
                 <div className="container">
                     <div className="row pt-5 pb-5">
-                        <div className=" sm:flex justify-between items-center text-center sm:text-left">
-                            <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
+                        <div className="sm:flex justify-between items-center text-center sm:text-left">
+                            <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white text-center">
                                 Shipping Policy
                             </h1>
-                            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" className="" />
+                            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Privacy+Policy.gif" className="" />
                         </div>
-                        <div className="col-md-8 col-12">
-                            <div className="">
-                                <p className="text-2xl sm:text-4xl my-4  mt-6 extrabold text-gold01">
-                                    Delivery of Coins
-                                </p>
-                            </div>
-                            <div className="text-lg text-white">
-                                <p className="mb-3 leading-8  ">
-                                    {" "}
-                                    The Gold will be delivered to the customer at the doorstep{" "}
-                                    <span style={{ fontWeight: "bolder" }}>
-                                        within 12 working days
-                                    </span>{" "}
-                                    from the date of placing the order.
-                                </p>
-                                <p className="mb-3 leading-8  ">
-                                    {" "}
-                                    Deliveries are made only to the registered address of the
-                                    customer. Please keep proof of identity ready at the time of
-                                    delivery as it may be required for verification by the courier
-                                    partner. If no one is available at the registered address to
-                                    take delivery, delivery will be attempted at least one more
-                                    time after which the package will be returned to the vault and
-                                    the customer's balance will be credited back with the
-                                    corresponding grams of gold. Shipping charges will be payable
-                                    again as and when the customer asks for delivery.
-                                </p>
-                                <p className="mb-3 leading-8  ">
-                                    Customers are required to verify that the package has not been
-                                    tampered with and is of acceptable quality. Once delivery has
-                                    been taken by the customer, returns and refunds are not
-                                    possible. All of our products are 100% certified and there
-                                    should never be any problems with quality. In the unlikely
-                                    event of any issues, please contact
-                                    <Link style={{ color: "#0d6efd" }} href="mailto:support@brightdigigold.com">support@brightdigigold.com</Link>, we will investigate the matter to
-                                    resolve any concerns or issues.
-                                </p>
-                            </div>
+                        <div className='text-gray-100'>
+                        {shipping && (
+                          <BlogDetailsById portableTextContent={shipping.body} />
+                        ) }
                         </div>
-                      
                     </div>
-                    <h5 className="text-2xl sm:text-4xl my-4  mt-6 extrabold text-gold01">
-                        Digital Confirmation Report
-                    </h5>
-                    <p className="text-lg text-white leading-8  ">
-                        Once you effect a transaction on our platform, a confirmation
-                        message (on the transaction committed) will immediately be sent to
-                        you through (email, platform and SMS). A trade confirmation report
-                        will be available for download from the “your account” section on
-                        our platform.
-                        <br />
-                        We will also send this report and your holding details to your
-                        registered email within 24 hours. For any questions or
-                        clarifications please contact us on <Link style={{ color: "#0d6efd" }} href="mailto:support@brightdigigold.com">support@brightdigigold.com</Link>.
-                    </p>
                 </div>
             </div>
         </div>

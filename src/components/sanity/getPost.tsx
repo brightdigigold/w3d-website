@@ -37,3 +37,19 @@ export async function getPrivacyPosts() {
   const posts = await client.fetch(query);
   return posts;
 }
+
+export async function getShippingPosts() {
+  const query = '*[_type=="policy"&& slug.current=="shipping-policy"][0]{body}';
+  const posts = await client.fetch(query);
+  return posts;
+}
+export async function gettermsPosts() {
+  const query = '*[_type=="policy"&& slug.current=="terms-and-conditions"][0]{body}';
+  const posts = await client.fetch(query);
+  return posts;
+}
+export async function getrefundsPosts() {
+  const query = '*[_type=="policy"&& slug.current=="refund-and-cancellation"][0]{body}';
+  const posts = await client.fetch(query);
+  return posts;
+}
