@@ -20,7 +20,7 @@ import { GoogleTagManager } from '@next/third-parties/google'
 export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
-      <GoogleTagManager gtmId="GTM-5JFBNN5" />
+      {/* <GoogleTagManager gtmId="GTM-5JFBNN5" /> */}
       <HeroSection />
       <OfferSlider />
       <Promotional />

@@ -75,7 +75,8 @@ const MyAccountTabs = () => {
             <p className="p-4 text-white">Personal Details</p>
           </div>
           <KycTab />
-          <ProfileTab /> <AddressTab />
+          <ProfileTab />
+          <AddressTab />
         </div>
         <div>
           <div>

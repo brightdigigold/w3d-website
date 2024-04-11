@@ -63,7 +63,7 @@ export default function Marketing() {
 
   return (
     <>
-      <div className="bg-theme">
+      <div className="bg-theme" >
         {openLoginAside && (
           <LoginAside
             isOpen={openLoginAside}

@@ -6,7 +6,7 @@ import { fadeIn, slideIn } from "../../utils/motion";
 
 const Info = () => {
   return (
-    <div className="bg-themeBlue pt-10">
+    <div className="bg-themeBlue pt-10" >
       <motion.div
         initial="hidden"
         whileInView="show"

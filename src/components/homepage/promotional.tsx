@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function Promotional() {
   return (
     <>
-      <div className=" bg-themeBlue">
+      <div className=" bg-themeBlue " >
         <motion.div
           initial="hidden"
           whileInView="show"

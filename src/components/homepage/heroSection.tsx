@@ -23,6 +23,10 @@ const HeroSection = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
 
+  console.log('abc===>>>>>>>>', process.env.abc);
+  console.log('url', process.env.url);
+  
+
   const onClose = () => {
     dispatch(setShowProfileForm(false));
   };
@@ -71,7 +75,7 @@ const HeroSection = () => {
   }, [dispatch]);
 
   return (
-    <div className="bg-theme pt-28 py-10">
+    <div className="bg-theme pt-28 py-10" >
       <GoogleTagManager gtmId="GTM-5JFBNN5" />
       {otpModal && <OtpModal />}
       <motion.div
@@ -85,6 +89,7 @@ const HeroSection = () => {
             src="/bdgwhite.png"
             width={500} height={500}
             alt="Your Company"
+            priority={true}
           />
           <div className="grid lg:grid-cols-2 gap-4">
             <div className="hidden lg:block mt-10">
@@ -132,9 +137,10 @@ const HeroSection = () => {
                     href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                     className="cursor-pointer"
                   >
-                    <img
+                    <NextImage
                       src="/lottie/google-play-button.png"
-                      className="h-14"
+                      width={180} height={180}
+                      // className="h-14"
                       alt="google play button"
                     />
                   </Link>
@@ -142,16 +148,17 @@ const HeroSection = () => {
                     href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                     className="cursor-pointer"
                   >
-                    <img
+                    <NextImage
                       src="/lottie/app-store-button.png"
-                      className="h-14"
+                      width={180} height={180}
+                      // className="h-14"
                       alt="app store button"
                     />
                   </Link>
                 </div>
-                
+
               </motion.div>
-              
+
 
               <div className="flex justify-center mt-4"></div>
 
