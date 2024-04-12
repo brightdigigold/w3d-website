@@ -1,8 +1,26 @@
 'use client'
 import NextImage from '@/components/nextImage';
+import PortableText from '@/components/sanity/showBlogsDetails';
 import BlogDetailsById from '@/components/sanity/showBlogsDetails';
 import { client } from '@/utils/sanityClient';
 import { useEffect, useState } from 'react';
+
+interface BlockSpan {
+    _key: string;
+    _type: string;
+    marks: string[]; // Array of strings for marks
+    text: string; // Text content of the span
+}
+
+interface Block {
+    _key: string;
+    _type: string;
+    children: BlockSpan[]; // Array of BlockSpan
+    markDefs: any[]; // Array of any; define further based on your needs
+    style: string; // Style of the block (e.g., 'h4', 'normal')
+}
+
+type BlockContent = Block[];
 
 interface PostDisplayDetails {
     title: string;
@@ -24,7 +42,8 @@ interface PostDisplayDetails {
     };
     publishedAt: string;
     metaDescription: string;
-    body: any[]; // This can be further detailed based on the structure of your CMS content blocks
+    body: BlockContent
+    // body: any[]; // This can be further detailed based on the structure of your CMS content blocks
 }
 
 const PostDisplay = ({ slug }) => {
@@ -79,7 +98,9 @@ const PostDisplay = ({ slug }) => {
                 </div>
             </div>
             <div>
-                <BlogDetailsById portableTextContent={post.body} />
+                {/* <BlogDetailsById portableTextContent={post.body} /> */}
+                {/* @ts-ignore */}
+                {post.body &&  <PortableText content={post?.body} />}
             </div>
         </div>
     );

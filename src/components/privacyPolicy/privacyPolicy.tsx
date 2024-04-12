@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { getPrivacyPosts } from '../sanity/getPost';
 import BlogDetailsById from '../sanity/showBlogsDetails';
+import PortableText from '../sanity/showBlogsDetails';
 interface Privacy {
-  body: any; 
+    body: any;
 }
 
 const PrivacyPolicy = () => {
@@ -30,9 +31,10 @@ const PrivacyPolicy = () => {
                             <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Privacy+Policy.gif" className="" />
                         </div>
                         <div className='text-gray-100'>
-                        {privacy && (
-                          <BlogDetailsById portableTextContent={privacy.body} />
-                        ) }
+                            {privacy && (
+                                //   <BlogDetailsById portableTextContent={privacy.body} />
+                                <PortableText content={privacy.body} />
+                            )}
                         </div>
                     </div>
                 </div>
