@@ -23,10 +23,6 @@ const HeroSection = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
 
-  console.log('abc===>>>>>>>>', process.env.abc);
-  console.log('url', process.env.url);
-  
-
   const onClose = () => {
     dispatch(setShowProfileForm(false));
   };

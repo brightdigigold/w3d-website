@@ -16,7 +16,7 @@ export const useAddToCart = (
     quantity: number,
     productId: string,
     refetch: () => void,
-    onSuccessfulAdd: () => void  
+    onSuccessfulAdd: () => void
 ): UseAddToCartHook => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -57,7 +57,7 @@ export const useAddToCart = (
 
             if (parsedData.status) {
                 setIsSuccess(true);
-                onSuccessfulAdd();  // Call this function here
+                onSuccessfulAdd();
                 refetch();
             } else {
                 setError('Failed to add to cart');

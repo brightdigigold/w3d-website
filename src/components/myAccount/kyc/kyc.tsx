@@ -23,9 +23,72 @@ const KycTab = () => {
   const user = useSelector(selectUser);
   const [showDetails, setShowDetails] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [panNumber, setPanNumber] = useState<String>();
+  const [panNumber, setPanNumber] = useState<String>('');
   const dispatch = useDispatch<AppDispatch>();
-  const [refresh, setrefresh] = useState(false)
+  const [refresh, setrefresh] = useState(false);
+  const [loading, setloading] = useState<boolean>(false);
+  const [enteredPanNumber, setEnteredPanNumber] = useState<String>('')
+
+
+  useEffect(() => {
+    fetchData();
+    KycData();
+  }, [refresh]);
+
+
+
+  const updateDetails = async (name: string, dob: string) => {
+    const payload = {
+      Name: name,
+      Dob: dob,
+      panNumber: enteredPanNumber.toUpperCase(),
+      documentType: "PANCARD"
+    };
+    try {
+      const token = localStorage.getItem("token");
+
+      setIsSubmitting(true);
+      const resAfterEncryptData = await funForAesEncrypt(
+        payload
+      );
+
+      const payloadToSend = {
+        payload: resAfterEncryptData,
+      };
+
+      const response = await axios.put(`${process.env.baseUrl}/user/autoUpdate/Kyc`, payloadToSend, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const decryptedData = AesDecrypt(response.data.payload);
+
+      const finalResult = JSON.parse(decryptedData);
+      if (finalResult.status) {
+        Swal.fire({
+          html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
+          width: '450px',
+          padding: '4em',
+          title: finalResult.message,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+        KycData();
+        fetchData();
+        setrefresh(true);
+      }
+    } catch (error) {
+      Swal.fire(
+        'Failed!',
+        'There was a problem updating your details.',
+        'error'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
 
   const handleToggleDetails = () => {
     setShowDetails((prevShowDetails) => !prevShowDetails);
@@ -38,13 +101,17 @@ const KycTab = () => {
     setPanNumber(decryptedPan);
   };
 
-  useEffect(() => {
-    KycData();
-  }, [refresh]);
 
   const fetchData = async () => {
     dispatch(fetchUserDetails());
   };
+
+
+  useEffect(() => {
+    if (user?.data?.kyc?.panNumber) {
+      KycData();
+    }
+  }, [user?.data?.kyc?.panNumber, refresh]);  // Ensuring useEffect runs whenever necessary data changes
 
 
   const formik = useFormik({
@@ -55,6 +122,7 @@ const KycTab = () => {
     validate(values) {
       const errors: any = {};
       // Validation of PAN number
+      setEnteredPanNumber(values.pancard_number)
       if (values.pancard_number === "") {
         errors.pancard_number = "Please Enter PAN Number";
       } else if (
@@ -106,8 +174,6 @@ const KycTab = () => {
 
         const finalResult = JSON.parse(decryptedData);
         if (finalResult.status) {
-          // setCheckingPanStatus(true);
-          // updateUserData();
           Swal.fire({
             html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
             width: '450px',
@@ -116,22 +182,30 @@ const KycTab = () => {
             showConfirmButton: false,
             timer: 3000,
           });
+          setrefresh(true);
           KycData();
           fetchData();
-          setrefresh(true);
         }
         resetForm();
       } catch (error: any) {
-        console.error(error);
         const decryptedData = await AesDecrypt(error.response.data.payload);
         const finalResult = JSON.parse(decryptedData);
         Swal.fire({
           html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
           title: "Oops...",
           titleText: finalResult.message,
-          showConfirmButton: false,
-          timer: 3000,
-        });
+          showConfirmButton: finalResult.message === "Pan card number already Exist." ? false : true,
+          showDenyButton: true,
+          cancelButtonColor: "#d33",
+          confirmButtonText: finalResult.message === "Pan card number already Exist." ? "" : "Update",
+          denyButtonText: "Cancel"
+          // timer: 3000,
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            updateDetails(finalResult?.data?.Name, finalResult?.data?.Dob);
+          }
+        }
+        )
         resetForm();
       } finally {
         setIsSubmitting(false);
