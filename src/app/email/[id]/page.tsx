@@ -18,7 +18,7 @@ import { AesDecrypt } from '@/components/helperFunctions';
 // 	}
 // };
 
-const PageEmailVerify = ({ id }) => {
+const PageEmailVerify = ({ id }: any) => {
   const router = useRouter();
   const [message, setMessage] = useState('');
 
