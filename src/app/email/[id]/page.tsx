@@ -7,16 +7,6 @@ import Swal from 'sweetalert2';
 import { useRouter, } from "next/router";
 import Link from 'next/link';
 import { AesDecrypt } from '@/components/helperFunctions';
-// import { log } from '@/components/logger';
-
-// export const getServerSideProps = async ({ query, req, res }) => {
-// 	log('query', query)
-// 	return {
-// 		props: {
-// 			id : query.id
-// 		},
-// 	}
-// };
 
 const PageEmailVerify = ({ id }: any) => {
   const router = useRouter();
