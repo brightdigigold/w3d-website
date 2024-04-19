@@ -234,6 +234,7 @@ const CustomCheckout = ({ data }: any) => {
     <div className="bg-themeLight01 shadow-md rounded-md w-[580px] mb-100 z-10 relative">
       <div className="mb-6 mt-4 px-2 sm:px-0">
         <ProgressBar
+          purchaseType="buy"
           fromCart={true}
           metalTypeForProgressBar={"both"}
           displayMetalType={"both"}

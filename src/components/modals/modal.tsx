@@ -221,6 +221,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                 </div>
                 <div className="pt-4 pb-2">
                   <ProgressBar
+                    purchaseType={purchaseType}
                     fromCart={true}
                     metalTypeForProgressBar={metalType}
                     displayMetalType={metalType}

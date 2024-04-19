@@ -3,19 +3,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
 import { decrementTimer, resetTimer } from "@/redux/actionTypes";
 import { metalPrice } from "@/api/DashboardServices";
-import {  setGoldData, setSilverData } from "@/redux/metalSlice";
+import { setGoldData, setSilverData } from "@/redux/metalSlice";
 import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
 import { setMetalPrice } from "@/redux/shopSlice";
 import NextImage from "./nextImage";
 import LivePrice from '../../public/lottie/LivePrice.gif'
 
 interface ProgressBarProps {
+  purchaseType?: string;
   metalTypeForProgressBar: string;
   fromCart: boolean;
   displayMetalType: "gold" | "silver" | "both";
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
+  purchaseType,
   metalTypeForProgressBar,
   fromCart,
   displayMetalType,
@@ -48,13 +50,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     if (displayMetalType.toLowerCase() === "gold") {
       return (
         <span className="text-yellow-700 text-md">
-          Gold : ₹{goldData.totalPrice}
+          Gold : ₹{purchaseType === "buy" ? goldData.totalPrice : goldData.salePrice}
         </span>
       );
     } else if (displayMetalType === "silver") {
       return (
         <span className="text-gray-800 text-md">
-          Silver : ₹{silverData.totalPrice}
+          Silver : ₹{purchaseType === "buy" ? silverData.totalPrice : silverData.salePrice}
         </span>
       );
     } else {
@@ -111,7 +113,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       <div className="inner-content">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-          <NextImage src='https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/LivePrice.gif' alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} width={1} height={1} priority={true} />
+            <NextImage src='https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/LivePrice.gif' alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} width={1} height={1} priority={true} />
             <div className="text-black text-xs sm:text-sm font-semibold">
               {fromCart === true
                 ? getMetalPrice()
