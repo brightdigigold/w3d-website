@@ -599,15 +599,9 @@ const BuySell = () => {
                 >
                   {metalType === "gold" ? (
                     <>
-                      <video width="320" height="240" preload="none" autoPlay loop muted>
+                      <video width="320" height="240" preload="none" autoPlay loop muted playsInline>
                         <source src="/GoldStackAnimation.webM" type="video/webm" />
-                        <track
-                          src="/path/to/subtitles.vtt"
-                          kind="subtitles"
-                          srcLang="en"
-                          label="English"
-                        />
-                        Your browser does not support the video tag.
+                        
                       </video>
                       {/* <NextImage src="/GoldStackAnimation.webM" alt="Gold Bar Animation" width={300} height={300} priority={true} /> */}
                     </>
