@@ -30,7 +30,7 @@ const PrivacyPolicy = () => {
                             </h1>
                             <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Privacy+Policy.gif" className="" />
                         </div>
-                        <div className='text-gray-100'>
+                        <div className='text-gray-100 text-justify'>
                             {privacy && (
                                 //   <BlogDetailsById portableTextContent={privacy.body} />
                                 <PortableText content={privacy.body} />

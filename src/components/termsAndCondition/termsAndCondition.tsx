@@ -30,7 +30,7 @@ const TermsAndCondition = () => {
                             </h1>
                             <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/T+%26+C+Policy.gif" className="" />
                         </div>
-                        <div className='text-gray-100'>
+                        <div className='text-gray-100 text-justify'>
                             {terms && (
                                 //   <BlogDetailsById portableTextContent={terms.body} />
                                 <PortableText content={terms.body} />

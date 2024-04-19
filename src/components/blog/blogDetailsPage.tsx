@@ -97,7 +97,7 @@ const PostDisplay = ({ slug }) => {
                     })}
                 </div>
             </div>
-            <div>
+            <div className='text-justify'>
                 {/* <BlogDetailsById portableTextContent={post.body} /> */}
                 {/* @ts-ignore */}
                 {post.body &&  <PortableText content={post?.body} />}

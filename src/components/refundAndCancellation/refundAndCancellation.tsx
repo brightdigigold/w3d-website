@@ -34,7 +34,7 @@ const RefundAndCancellation = () => {
                 </h1>
                 <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Refund+Policy.gif" className="" />
               </div>
-              <div className='text-gray-100'>
+              <div className='text-gray-100 text-justify'>
                 {refunds && (
                   // <BlogDetailsById portableTextContent={refunds.body} />
                   <PortableText content={refunds.body} />
