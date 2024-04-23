@@ -49,7 +49,7 @@ export default function OfferSlider() {
               alt="Bdg offer"
               width={3000} // Specify the width of your image here
               height={300} // Specify the height of your image here
-              // layout="responsive" 
+              layout="responsive" 
               // This will make the image responsive
             />
           </SwiperSlide>

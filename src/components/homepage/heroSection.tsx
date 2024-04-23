@@ -17,6 +17,7 @@ import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import { GoogleTagManager } from '@next/third-parties/google'
 import NextImage from "../nextImage";
+import Image from "next/image"
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -66,13 +67,18 @@ const HeroSection = () => {
 
   useEffect(() => { }, [otpModal]);
 
+  const functionToFetchWalletData = () => {
+    if (localStorage.getItem('token') != null) {
+      dispatch(fetchWalletData() as any);
+    }
+  };
+
   useEffect(() => {
-    dispatch(fetchWalletData() as any);
+    functionToFetchWalletData()
   }, [dispatch]);
 
   return (
     <div className="bg-theme pt-28 py-10" >
-      <GoogleTagManager gtmId="GTM-5JFBNN5" />
       {otpModal && <OtpModal />}
       <motion.div
         initial="hidden"
@@ -80,13 +86,16 @@ const HeroSection = () => {
         viewport={{ once: false, amount: 0.25 }}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-16">
-          <NextImage
-            className="absolute -bottom-72 -left-20 opacity-20"
-            src="/bdgwhite.png"
-            width={500} height={500}
-            alt="Your Company"
-            priority={true}
-          />
+          <div className="relative">
+            <NextImage
+              src="/bdgwhite.png"
+              alt="Your Company"
+              width={400}
+              height={400}
+              priority
+              className="absolute -left-20 opacity-20"
+            />
+          </div>
           <div className="grid lg:grid-cols-2 gap-4">
             <div className="hidden lg:block mt-10">
               <motion.h1

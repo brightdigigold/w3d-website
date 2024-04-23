@@ -23,7 +23,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
     <html lang="en">
       <Head>
         <NextImage src="/bdgwhite.png" width={400} height={300} alt="Picture of the author" priority={true} />
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -33,7 +33,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
             })(window,document,'script','dataLayer',${process.env.GOOGLE_TAG});
             `,
           }}
-        />
+        /> */}
 
       </Head>
       <body>
@@ -41,7 +41,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
           <PersistGate loading={null} persistor={persistor}>
             <Navbar />
             {children}
-            <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
+            {/* <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} /> */}
             <Footer />
           </PersistGate>
         </Provider>

@@ -49,6 +49,7 @@ import NextImage from "../nextImage";
 import coupon from '../../../public/coupon.png';
 import Link from "next/link";
 import { isMobile } from 'react-device-detect';
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const BuySell = () => {
   const router = useRouter()
@@ -465,6 +466,7 @@ const BuySell = () => {
   return (
     <>
       <div className="">
+        <GoogleTagManager gtmId="GTM-5JFBNN5" />
         {openLoginAside && (
           <LoginAside
             isOpen={openLoginAside}

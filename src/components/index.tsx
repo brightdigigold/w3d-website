@@ -5,7 +5,6 @@ import Promotional from "./homepage/promotional";
 import Products from "./homepage/products";
 import HowItWorks from "./homepage/howItWorks";
 import Marketing from "./homepage/marketingSlider";
-import SuccessInvestment from "./homepage/successInvestment";
 import ClientSlider from "./homepage/clientSlider";
 import Review from "./homepage/reviews";
 import Blog from "./homepage/blog";
@@ -30,7 +29,6 @@ export {
   Products,
   HowItWorks,
   Marketing,
-  SuccessInvestment,
   ClientSlider,
   Review,
   Blog,

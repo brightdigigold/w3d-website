@@ -172,16 +172,16 @@ const Navbar = () => {
                   )}
                 </div>
               ) : (
-                <label
+                <div
                   className="text-white hidden xl:inline-block ml-3"
                   onClick={handleLoginClick}
                 >
                   <span>
-                    <Link className="text-white " href="">
-                      Login/Sign Up
-                    </Link>
+                  <Link className="text-white " href="#">
+                    Login/Sign Up
+                  </Link>
                   </span>
-                </label>
+                </div>
               )}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
