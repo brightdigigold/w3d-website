@@ -450,7 +450,7 @@ const BuySell = () => {
   const [style, api] = useSpring(() => ({
     opacity: 0,
     transform: 'translateX(100%)',
-    config: { duration: 2000 },
+    config: { duration: 1200 },
   }));
 
   useEffect(() => {
@@ -534,7 +534,7 @@ const BuySell = () => {
                     </span>
                   </div>
                   <div className="text-shine text-base sm:text-xl bold pt-0 py-2 pl-4 items-center  flex">
-                    <span className="text-2xl pr-0.5">₹</span>
+                    <span className="sm:text-2xl pr-0.5">₹</span>
                     {isgold ? (
                       <>
                         {activeTab === "buy" ? (
