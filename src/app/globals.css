@@ -59,8 +59,11 @@ body {
   border-radius: 10px;
 } */
 
-
-
+.swiper-pagination-bullet {
+  height: 12px !important;
+  width: 12px !important;
+  background-color: #a6d7f1 !important;
+}
 
 .bold {
   font-family: Lato-Bold;
@@ -79,11 +82,7 @@ body {
 .bg-themeLight001 {
   background: rgb(0 0 0 / 20%);
 }
-.swiper-pagination-bullet {
-  height: 12px !important;
-  width: 12px !important;
-  background-color: #a6d7f1 !important;
-}
+
 .swiper-pagination-fraction,
 .swiper-pagination-custom,
 .swiper-horizontal > .swiper-pagination-bullets,
@@ -129,14 +128,7 @@ body {
 .bg-orderTab {
   background-color: #324f61;
 }
-.swal2-modal {
-  background: #081a24 !important;
-  color: #fff !important;
-  box-shadow: 0px 0px 2px #ccc !important;
-}
-.otpBackColor {
-  background-color: rgb(8, 50, 98);
-}
+
 .swalButtonsNo {
   padding: 3px 20px !important;
   text-align: center;
@@ -159,19 +151,13 @@ body {
   font-size: 22px !important;
   color: #000 !important;
 }
-.swal2-confirm {
-  background: #cde8f1 !important;
-  color: #000 !important;
-}
+
 
 .border-gold {
   border: 1px solid #fef468;
 }
 .tab-bg {
   background: #11354b;
-}
-.tab-activeBg {
-  background: rgb(23 67 94);
 }
 
 .timer {
@@ -202,20 +188,6 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/* coin transasition */
-.coin_transition {
-  transition: transform 0.7s ease;
-}
-
-.gold_coin {
-  transition: transform 1.2s ease;
-  transform: rotateX(0deg);
-}
-
-.silver_coin {
-  transition: transform 1.2s ease;
-  transform: rotateY(360deg);
-}
 
 /* toggle button */
 .toggle-button {
@@ -251,9 +223,6 @@ input[type="number"] {
   overflow: hidden;
 }
 /* Add these styles to your CSS */
-.swal2-container {
-  overflow: visible;
-}
 
 .swal2-popup {
   overflow: visible !important;
@@ -304,12 +273,7 @@ input[type="number"] {
   transition: 0.5s;
   border-radius: 50%;
 }
-.aniFab {
-  transform: scale(1) !important;
-}
-.aniFab:hover {
-  transform: scale(1.25);
-}
+
 input:checked + .slider {
   background-color: #c0c0c0; /* Change background color to Silver when checked */
 }
@@ -352,10 +316,7 @@ input:checked + .slider:before {
 .text-7x {
   font-size: 7px;
 }
-.imgcoup {
-  background: url(/coupon\ 499.png);
-  background-size: cover;
-}
+
 .otpInput input {
   border: 1px solid #cde8f1 !important;
 }
@@ -492,13 +453,6 @@ input:checked + .slider ~ .text-gold {
   /* border-bottom: 1px solid; */
 }
 
-.abs-001 {
-  position: absolute;
-  width: 72%;
-  top: 31%;
-  left: 14%;
-  z-index: 1;
-}
 .container {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -540,14 +494,8 @@ input:checked + .slider ~ .text-gold {
   border-color: rgba(240, 164, 48, 1);
   background: rgba(240, 164, 48, 1);
 }
-.h-800 {
-  height: 800px;
-}
-.bg-imgAbout {
-  background-image: url(../../public/aboutbackfoot.png);
-  background-size: cover;
-  background-position: right;
-}
+
+
 .loginGrad {
   background: linear-gradient(0.69deg, #154c6d 0.62%, #12242e 101.27%);
 }
@@ -564,9 +512,6 @@ input:checked + .slider ~ .text-gold {
 .coins_backgroun {
   background-color: #0b2f47;
 }
-.rotate-silver {
-  transform: rotate(45deg);
-}
 
 input.inputBox {
   font-size: 16px;
@@ -575,16 +520,6 @@ input.inputBox {
   /* border: 2px solid #eae205; */
   background-color: #092637;
   text-align: center;
-}
-
-.calendarWrap {
-  display: inline-block;
-  position: relative;
-}
-
-.otp_background {
-  margin: auto;
-  background: #092637;
 }
 
 .caret-transparent::before {
@@ -596,23 +531,6 @@ input.inputBox {
   }
 }
 
-.delete {
-  background: rgba(255, 87, 87, 0.1);
-  border-radius: 8px 8px;
-  font-size: 16px;
-  line-height: 150%;
-  cursor: pointer;
-  color: #ff5757;
-}
-
-.edit {
-  background: rgba(253, 232, 163, 0.1);
-  border-radius: 8px 8px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
-  color: #fde8a3;
-}
 
 .swalButtonsYes {
   padding: 3px;
@@ -632,25 +550,6 @@ input.inputBox {
   background-color: #e5270a;
   border-radius: 4px;
   color: "#fff";
-}
-
-/* transition.css */
-.bank-verification-enter {
-  opacity: 0.01;
-}
-
-.bank-verification-enter.bank-verification-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in-out;
-}
-
-.bank-verification-exit {
-  opacity: 1;
-}
-
-.bank-verification-exit.bank-verification-exit-active {
-  opacity: 0.01;
-  transition: opacity 500ms ease-in-out;
 }
 
 /* progress bar */
@@ -685,199 +584,6 @@ input.inputBox {
   box-sizing: border-box;
 }
 
-/* refund and cancellation */
-
-.shipping_bg {
-  background: #092637;
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-attachment: fixed;
-  height: 100%;
-  width: 100%;
-  padding-top: 100px;
-  text-align: justify;
-}
-
-.shipping_bg h1 {
-  font-family: "NunitoSans-Bold";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 150%;
-  color: #ffffff;
-}
-
-.shipping_policy {
-  margin-top: 10px;
-  font-weight: 400;
-  font-size: 16px;
-  text-align: justify;
-  line-height: 1.6rem;
-  color: #ffffff;
-}
-
-.report h1 {
-  font-family: "DM Sans";
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 23px;
-  color: #ffffff;
-  /* margin-bottom: -20px !important; */
-}
-
-.report_desc {
-  font-family: "DM Sans";
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 23px;
-  /* margin: 30px 0px 60px 0px; */
-  color: #ffffff;
-}
-@media screen and (max-width: 767px) {
-  .policy {
-    margin-top: -30px !important;
-  }
-}
-
-/* shipping policy */
-
-.shipping_bg {
-  background: #092637;
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-attachment: fixed;
-  height: 100%;
-  width: 100%;
-  padding-top: 100px;
-  text-align: justify;
-}
-
-.shipping_bg h1 {
-  font-family: "NunitoSans-Bold";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 150%;
-  color: #ffffff;
-}
-
-.shipping_policy {
-  margin-top: 30px;
-  font-weight: 400;
-  font-size: 16px;
-  text-align: justify;
-  line-height: 1.6rem;
-  color: #ffffff;
-}
-
-.report h1 {
-  font-family: "DM Sans";
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 23px;
-  color: #ffffff;
-  /* margin-bottom: -20px !important; */
-}
-
-.report_desc {
-  font-family: "DM Sans";
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 23px;
-  /* margin: 30px 0px 60px 0px; */
-  color: #ffffff;
-}
-@media screen and (max-width: 767px) {
-  .policy {
-    margin-top: -30px !important;
-  }
-}
-
-/* privacy policy */
-
-.privacy_bg {
-  background: #092637;
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-attachment: fixed;
-  height: 100%;
-  width: 100%;
-  padding-top: 15vh;
-  text-align: justify;
-}
-
-.privacy_bg h1 {
-  font-family: "NunitoSans-Bold";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 150%;
-  text-align: left;
-  /* identical to box height, or 60px */
-
-  color: #ffffff;
-}
-
-.privacy h5 {
-  font-family: "NunitoSans-Bold";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 150%;
-  color: #ffffff;
-}
-
-.privacy p {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  text-align: justify;
-  line-height: 1.6rem;
-  margin-top: 15px;
-  color: #ffffff;
-}
-
-/* refund and cancellation */
-
-.refund_bg {
-  background: #092637;
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-attachment: fixed;
-  height: 100%;
-  width: 100%;
-  padding-top: 100px;
-  text-align: justify;
-}
-.refund_bg h1 {
-  font-family: "NunitoSans-Bold";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 150%;
-  /* identical to box height, or 60px */
-
-  color: #ffffff;
-}
-.refund_and_cancellations p {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 21px;
-
-  color: #ffffff;
-}
-.mission_points ol li {
-  font-weight: 400;
-  font-size: 16px;
-  text-align: justify;
-  line-height: 1.6rem;
-  color: #ffffff;
-  list-style: disc;
-  padding-bottom: 0;
-  list-style: decimal;
-}
-
 @media screen and (max-width: 767px) {
   .cancellations {
     margin-top: -40px !important;
@@ -896,11 +602,7 @@ input.inputBox {
     height: 40px;
   }
 }
-@media (max-width: 768px) {
-  .abs-001 {
-    display: none;
-  }
-}
+
 @media (max-width: 600px) {
   .tabs-component1 [role="tablist"] button {
     border-bottom: 3px solid;
@@ -922,15 +624,8 @@ input.inputBox {
     color: #7f9cad;
     opacity: 0.5;
   }
-  .gold_coin {
-    transition: transform 1.2s ease;
-    transform: rotateX(0deg);
-  }
+ 
 
-  .silver_coin {
-    transition: transform 1.2s ease;
-    transform: rotateY(250deg);
-  }
   /* toggle button */
   .toggle-button {
     position: relative;
@@ -1029,6 +724,11 @@ input.inputBox {
 }
 
 @keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
+

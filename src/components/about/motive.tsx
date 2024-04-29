@@ -35,7 +35,7 @@ const Motive = () => {
               <p className="mt-4 inline-block">
                 Our robust security measures ensure the safety of your digital
                 assets, which are stored in world class vault{" "}
-                <img src="/client5.png" className="inline-block h-3" alt="brinks"/>
+                <img src="/client5.png" className="inline-block h-10" alt="brinks"/>
               </p>
             </motion.div>
 
