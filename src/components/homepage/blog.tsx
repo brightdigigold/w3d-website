@@ -32,15 +32,16 @@ export default function Blog() {
     getBlogPosts().then(posts => setPosts(posts.slice(0, 8)));
   }, []);
 
-  // console.log('posts 64', posts);
 
   return (
     <>
       <div className="bg-theme" >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-center text-yellow-500 text-3xl sm:text-5xl extrabold mb-0 sm:mb-6">
-            Our Blogs
-          </h1>
+          <Link href="/blog" className="cursor-pointer">
+            <h1 className="text-center text-yellow-500 text-3xl sm:text-5xl extrabold mb-0 sm:mb-6">
+              Our Blogs
+            </h1>
+          </Link>
           <Swiper
             loop={true}
             breakpoints={{
@@ -86,17 +87,17 @@ export default function Blog() {
                 className="relative swiper-slide p-0 sm:p-4 pt-10"
               >
                 <Link href={`/blog/${feature.slug.current}`} passHref>
-                <div className="rounded-2xl h-44 sm:h-72 relative">
-                  <div className="flex justify-center">
-                    <Image
-                      src={feature.thumbImage?.asset?.url}
-                      className="rounded-2xl cursor-pointer"
-                      alt="insite"
-                      width={1920}
-                      height={800}
-                    />
+                  <div className="rounded-2xl h-44 sm:h-72 relative">
+                    <div className="flex justify-center">
+                      <Image
+                        src={feature.thumbImage?.asset?.url}
+                        className="rounded-2xl cursor-pointer"
+                        alt="insite"
+                        width={1920}
+                        height={800}
+                      />
+                    </div>
                   </div>
-                </div>
                 </Link>
               </SwiperSlide>
             ))}
