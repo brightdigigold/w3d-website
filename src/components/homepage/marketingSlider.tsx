@@ -85,7 +85,7 @@ export default function Marketing() {
             {features.map((item, index) => (
               <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4">
                 <div className="grid lg:grid-cols-2 gap-20 place-items-center">
-                  <div className="relative mx-auto xl:h-96 pt-10 lg:pt-0" style={{ width: '50%', height: '50%' }}>
+                  <div className="relative mx-auto xl:h-96 pt-10 lg:pt-0" style={{ width: '90%', height: '100%' }}>
                     <Image
                       src={item.img}
                       alt={item.alt}
