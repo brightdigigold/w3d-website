@@ -42,10 +42,10 @@ const CustomCheckout = ({ data }: any) => {
       try {
         setLoading(true);
         const decryptedData = await funcForDecrypt(data);
-        console.log(
-          "decryptedData from custom checkout",
-          JSON.parse(decryptedData)
-        );
+        // console.log(
+        //   "decryptedData from custom checkout",
+        //   JSON.parse(decryptedData)
+        // );
         setpayload({ ...JSON.parse(decryptedData) });
         // const { ...itemMode } = JSON.parse(decryptedData);
         const { itemMode, totalAmount } = JSON.parse(decryptedData);
@@ -79,8 +79,8 @@ const CustomCheckout = ({ data }: any) => {
 
   const initializeSDK = async () => {
     cashfree = await load({
-      // mode: "production",
-      mode: "sandbox",
+      mode: "production",
+      // mode: "sandbox",
     });
   };
   initializeSDK();
