@@ -48,6 +48,14 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
 
   const akshayTrityOfferHandler = () => {
     setapplyAkshaytrityaoffer(true)
+    Swal.fire({
+      html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
+      title: "Akshay Tritya Offer Applied Successfully",
+      width: "450px",
+      padding: "4em",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 
   useEffect(() => {
@@ -59,8 +67,6 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const openCoinModalHandler = () => {
     if (isloggedIn) {
       setMaxCoinError("");
-
-      console.log('', user?.data?.isBasicDetailsCompleted, user?.data?.isKycDone)
 
       if (!user?.data?.isBasicDetailsCompleted) {
         dispatch(setShowProfileForm(true));

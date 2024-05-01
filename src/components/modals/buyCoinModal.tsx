@@ -107,6 +107,7 @@ export default function CoinModal({
             ? goldData.totalPrice
             : silverData.totalPrice,
         fromApp: false,
+        couponCode: "AKSHAYTRITYA",
         product_quantity: totalCoins,
         product_id: productsDetailById._id,
       };
