@@ -78,28 +78,9 @@ const Coins = ({ params }: any) => {
                             <TabButton key={tab.tabName} tab={tab} activeTab={activeTab} handleTabClick={setActiveTab} />
                         ))}
                     </div>
-                    <div>
+                    {/* <div>
 
-                        <div className="sm:hidden mt-2 mb-2 flex items-center bg-themeBlue rounded-xl h-fit py-2">
-                            <div>
-                                <Image className="px-1 py-2 h-10 w-11" src={"../../../../public/images/vault.png"} alt="vault" height={10} width={40} />
-                            </div>
-                            <div className="text-yellow-600 font-bold text-xxs sm:text-base flex justify-between">
-                                <div className="flex items-center">
-                                    <div className="flex flex-col border-r-2 border-slate-400 pr-2">
-                                        <p className="text-gray-800">GOLD</p>
-                                        <p>{goldVaultBalance != null ? goldVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />}Gm</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center px-2">
-                                    <div className="flex flex-col">
-                                        <p className="text-gray-800">SILVER</p>
-                                        <p>{silverVaultBalance != null ? silverVaultBalance : <ButtonLoader loading={loading} buttonText={"fetching..."} />}Gm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {isLoading ? <Loading /> : error ? <p className="text-red-500 text-center bold text-lg">{error}</p> : (

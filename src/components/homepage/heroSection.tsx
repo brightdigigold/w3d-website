@@ -90,6 +90,7 @@ const HeroSection = () => {
 
   return (
     <>
+      {akshayTrityaOffer && <AkshayTrityaOffer />}
       <div className="bg-theme pt-28 py-10" >
         {otpModal && <OtpModal />}
 

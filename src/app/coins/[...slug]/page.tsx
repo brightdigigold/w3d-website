@@ -319,7 +319,6 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                 </span>
               </div>
             </div>
-
           </div>) : null}
 
         </div>

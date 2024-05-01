@@ -1,4 +1,4 @@
-import { Fragment, useState, useRef } from 'react';
+import { Fragment, useState,useEffect, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
 // import {} from  ''
@@ -26,10 +26,30 @@ export default function AkshayTrityaOffer({ }: any) {
         }
     };
 
+    useEffect(() => {
+        const originalOverflow = document.body.style.overflow;
+        document.body.style.overflow = open ? 'hidden' : originalOverflow;
+        return () => {
+            document.body.style.overflow = originalOverflow; // Restore on cleanup
+        };
+    }, [open]);
+
+
+    useEffect(() => {
+        if (open) {
+            document.body.classList.add('modal-open');
+        } else {
+            document.body.classList.remove('modal-open');
+        }
+        return () => document.body.classList.remove('modal-open');
+    }, [open]);
+    
+    
+
 
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={setOpen}>
+            <Dialog as="div" className="z-[110] fixed inset-0 overflow-y-auto" onClose={setOpen}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -39,11 +59,11 @@ export default function AkshayTrityaOffer({ }: any) {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="fixed inset-0   transition-opacity" />
+                    <div className="fixed inset-0  bg-black bg-opacity-50 transition-opacity" />
                 </Transition.Child>
 
-                <div className="fixed inset-0 z-10 overflow-y-auto">
-                    <div className="scroll-smooth focus:scroll-auto flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div className="fixed inset-0 z-[50] w-screen overflow-y-auto">
+                    <div className="flex min-h-full z-[50] items-center justify-center p-4 text-center sm:items-center sm:p-0">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -53,11 +73,11 @@ export default function AkshayTrityaOffer({ }: any) {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="  relative transform overflow-hidden rounded-lg  px-4 pb-4 pt-5 text-left  transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-8">
+                            <Dialog.Panel className="relative transform overflow-hidden rounded-lg  text-left  transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-8">
                                 <div  onMouseEnter={handleMouseEnter}
                                     onMouseLeave={handleMouseLeave}
                                     >
-                                    <video ref={videoRef} width="320" height="240" preload="none" autoPlay loop muted >
+                                    <video ref={videoRef} width="320" height="300" preload="none" autoPlay loop muted >
                                         <source src="/video/Free Coin.webM" type="video/webm" />
                                         <track
                                             src="/path/to/subtitles.vtt"
@@ -73,10 +93,7 @@ export default function AkshayTrityaOffer({ }: any) {
                                     <Link href={`/coins/folder/${'GOLD'}`}>
                                         <button
                                             type="button"
-                                            // style={{
-                                            //     background: 'linear-gradient(to right, #f83b0d, #fbb273, #fbc844)'
-                                            // }}
-                                            className="bg-themeDarkBlue text-themeBlueLight text-md inline-flex w-full justify-center rounded-md  px-3 py-2 text-sm font-semibold text-bg-theme shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
+                                            className="bg-themeDarkBlue text-themeBlueLight bold text-md inline-flex w-full justify-center rounded-md  px-3 py-2 text-sm  text-bg-theme shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
                                         >
                                             Avail This Offer
                                         </button>

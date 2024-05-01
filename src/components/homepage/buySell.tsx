@@ -50,7 +50,6 @@ import coupon from '../../../public/coupon.png';
 import Link from "next/link";
 import { isMobile } from 'react-device-detect';
 import { GoogleTagManager } from "@next/third-parties/google";
-import AkshayTrityaOffer from "./akshatrityaModal";
 
 const BuySell = () => {
   const router = useRouter()
@@ -464,19 +463,8 @@ const BuySell = () => {
   const toggleUPImodal = "toggleUPImodal"
   const [upiUpdated, setupiUpdated] = useState(false);
 
-  const [akshayTrityaOffer, setAkshayTrityaOffer] = useState<boolean>(false);
-
-  useEffect(() => {
-    const hasVisited = sessionStorage.getItem('hasVisited');
-    if (!hasVisited) {
-      setAkshayTrityaOffer(true); // Open the modal only if they haven't visited during this session
-      sessionStorage.setItem('hasVisited', 'true'); // Mark them as having visited for this session
-    }
-  }, []);
-
   return (
     <>
-      {akshayTrityaOffer && <AkshayTrityaOffer />}
       <div className="">
         <GoogleTagManager gtmId="GTM-5JFBNN5" />
         {openLoginAside && (
