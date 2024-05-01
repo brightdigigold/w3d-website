@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BuySell from "./buySell";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -18,11 +18,22 @@ import { fetchWalletData } from "@/redux/vaultSlice";
 import { GoogleTagManager } from '@next/third-parties/google'
 import NextImage from "../nextImage";
 import Image from "next/image"
+import AkshayTrityaOffer from "./akshatrityaModal";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
+  const [akshayTrityaOffer, setAkshayTrityaOffer] = useState<boolean>(false);
+
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem('hasVisited');
+    console.log('hasVisited', hasVisited);
+    if (!hasVisited) {
+      setAkshayTrityaOffer(true); // Open the modal only if they haven't visited during this session
+      sessionStorage.setItem('hasVisited', 'true'); // Mark them as having visited for this session
+    }
+  }, []);
 
   const onClose = () => {
     dispatch(setShowProfileForm(false));
@@ -79,6 +90,7 @@ const HeroSection = () => {
 
   return (
     <div className="bg-theme pt-28 py-10" >
+      {akshayTrityaOffer && <AkshayTrityaOffer />}
       {otpModal && <OtpModal />}
       <motion.div
         initial="hidden"
@@ -161,12 +173,8 @@ const HeroSection = () => {
                     />
                   </Link>
                 </div>
-
               </motion.div>
-
-
               <div className="flex justify-center mt-4"></div>
-
             </div>
             <motion.div variants={fadeIn("bottom", "spring", 0.5, 0.5)}>
               <BuySell />
