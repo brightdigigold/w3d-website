@@ -24,7 +24,16 @@ const HeroSection = () => {
   const dispatch = useDispatch();
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
-  const [akshayTrityaOffer, setAkshayTrityaOffer] = useState<boolean>(true);
+  const [akshayTrityaOffer, setAkshayTrityaOffer] = useState<boolean>(false);
+
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem('hasVisited');
+    console.log('hasVisited', hasVisited);
+    if (!hasVisited) {
+      setAkshayTrityaOffer(true); // Open the modal only if they haven't visited during this session
+      sessionStorage.setItem('hasVisited', 'true'); // Mark them as having visited for this session
+    }
+  }, []);
 
   const onClose = () => {
     dispatch(setShowProfileForm(false));
@@ -164,12 +173,8 @@ const HeroSection = () => {
                     />
                   </Link>
                 </div>
-
               </motion.div>
-
-
               <div className="flex justify-center mt-4"></div>
-
             </div>
             <motion.div variants={fadeIn("bottom", "spring", 0.5, 0.5)}>
               <BuySell />

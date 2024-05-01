@@ -22,6 +22,7 @@ import { useAddToCart } from "@/hooks/useAddToCart";
 import ProductDescription from "../ProductDetails/productDescription";
 import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
+import CustomButton from "@/components/customButton";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
@@ -43,6 +44,11 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const [openCartSidebar, setOpenCartSidebar] = useState<boolean>(false);
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
+  const [applyAkshaytrityaoffer, setapplyAkshaytrityaoffer] = useState(false);
+
+  const akshayTrityOfferHandler = () => {
+    setapplyAkshaytrityaoffer(true)
+  }
 
   useEffect(() => {
     const productCount = getProductCountById(coinsInCart, productId);
@@ -54,7 +60,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     if (isloggedIn) {
       setMaxCoinError("");
 
-      console.log('',user?.data?.isBasicDetailsCompleted, user?.data?.isKycDone)
+      console.log('', user?.data?.isBasicDetailsCompleted, user?.data?.isKycDone)
 
       if (!user?.data?.isBasicDetailsCompleted) {
         dispatch(setShowProfileForm(true));
@@ -225,45 +231,60 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                 title={""}
               />
             </div>
-            {/* { GO TO CART } */}
-            {quantity == cartQuantity && (
-              <div>
-                <Link className="cursor-pointer" href="/cart">
-                  <CustomImageButton
-                    img="/lottie/Go to cart.gif"
-                    isDisabled={!productsDetailById.inStock}
-                    title="GO TO CART"
-                  />
-                </Link>
-              </div>
-            )}
+            {!applyAkshaytrityaoffer && <div>
 
-            {/* Update TO CART */}
-            {cartQuantity !== 0 && cartQuantity !== quantity && (
-              <div>
+              {/* { GO TO CART } */}
+              {quantity == cartQuantity && (
+                <div>
+                  <Link className="cursor-pointer" href="/cart">
+                    <CustomImageButton
+                      img="/lottie/Go to cart.gif"
+                      isDisabled={!productsDetailById.inStock}
+                      title="GO TO CART"
+                    />
+                  </Link>
+                </div>
+              )}
+
+              {/* Update TO CART */}
+              {cartQuantity !== 0 && cartQuantity !== quantity && (
+                <div>
+                  <CustomImageButton
+                    img="/lottie/updatenow.png"
+                    isDisabled={!productsDetailById.inStock}
+                    handleClick={() => {
+                      addToCartHandler("UpdateCart");
+                    }}
+                    title="UPDATE CART"
+                  />
+                </div>
+              )}
+
+              {/* ADD TO CART */}
+              {cartQuantity == 0 && (
                 <CustomImageButton
-                  img="/lottie/updatenow.png"
+                  img="/lottie/addcart.gif"
                   isDisabled={!productsDetailById.inStock}
                   handleClick={() => {
-                    addToCartHandler("UpdateCart");
+                    addToCartHandler("AddToCart");
                   }}
-                  title="UPDATE CART"
+                  title={""}
                 />
-              </div>
-            )}
+              )}
 
-            {/* ADD TO CART */}
-            {cartQuantity == 0 && (
-              <CustomImageButton
-                img="/lottie/addcart.gif"
-                isDisabled={!productsDetailById.inStock}
-                handleClick={() => {
-                  addToCartHandler("AddToCart");
-                }}
-                title={""}
-              />
-            )}
+            </div>}
           </div>
+
+          <CustomButton
+            // img="/lottie/addcart.gif"
+            containerStyles="cursor-pointer text-3xl bg-themeBlue text-black mt-4  px-3 text-center py-3 rounded-3xl"
+            // className="flex rounded border-slate-500"
+            isDisabled={!productsDetailById.inStock}
+            handleClick={() => {
+              akshayTrityOfferHandler()
+            }}
+            title="Apply AkshayTritya Offer"
+          />
         </div>
         <div className="col-span-5 xl:col-span-3">
           <div className="flex justify-between items-center">
