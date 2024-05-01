@@ -20,6 +20,7 @@ import { fadeIn } from "@/utils/motion";
 import ProductItem from "@/components/coins/productItem";
 import SetProfileForNewUser from "@/components/setProfile";
 // import { vault } from "../../../../public/images/vault.png"
+import {} from "../../../../../public/images/AkshayaTritiyabanner.jpg"
 
 const Coins = ({ params }: any) => {
     const metalTypeOf = params.akshayTrityaOffer;
@@ -67,7 +68,7 @@ const Coins = ({ params }: any) => {
             {otpModal && <OtpModal />}
 
             <div className="flex justify-center items-center">
-                <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/ProductBannerNEW.jpg" alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} />
+                <Image src="/images/AkshayaTritiyabanner.jpg" alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} />
             </div>
             <div className="container mx-auto">
                 <h1 className="text-white mr-4 text-2xl sm:text-4xl extrabold text-center m-3">Our Coins</h1>
