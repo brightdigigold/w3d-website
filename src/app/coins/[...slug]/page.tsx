@@ -23,11 +23,12 @@ import ProductDescription from "../ProductDetails/productDescription";
 import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
 import CustomButton from "@/components/customButton";
+// import { } from "../../../../public/images/akshayTrityaOffer.gif"
+import Image from "next/image";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
   const id = slug;
-  console.log('id', id);
   const { _id } = user.data;
   const dispatch = useDispatch();
   const router = useRouter();
@@ -196,11 +197,18 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               <p className="font-medium">Out Of Stock</p>
             </div>
           )}
-          {id == "5-Gram-Gold-Coin" && "10-Gram-Gold-Coin" && (
-            <div className="bg-green-600 absolute top-0 right-0 px-2  rounded-bl-lg">
-              <p className="font-medium">OFFER COIN</p>
+          {id == "5-Gram-Gold-Coin"  && (
+            <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+              <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
             </div>
           )}
+
+          {id == "10-Gram-Gold-Coin" && (
+            <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+              <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
+            </div>
+          )}
+
           <div className="hidden sm:block bg-themeLight rounded p-4">
             <SimpleImageSlider
               width={400}
@@ -288,16 +296,17 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
             </div>}
           </div>
 
-          {id == "5-Gram-Gold-Coin" || "10-Gram-Gold-Coin" &&<CustomButton
-            // img="/lottie/addcart.gif"
-            containerStyles="cursor-pointer text-3xl bg-themeBlue text-black mt-4  px-3 text-center py-3 rounded-3xl"
-            // className="flex rounded border-slate-500"
-            isDisabled={!productsDetailById.inStock}
-            handleClick={() => {
-              akshayTrityOfferHandler()
-            }}
-            title="Apply AkshayTritya Offer"
-          />}
+          {id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (
+            <CustomButton
+              containerStyles="cursor-pointer text-3xl bg-themeBlue text-black mt-4 px-3 text-center py-3 rounded-3xl"
+              isDisabled={!productsDetailById.inStock}
+              handleClick={() => {
+                akshayTrityOfferHandler();
+              }}
+              title="Apply Akshay Tritya Offer"
+            />
+          ) : null}
+
         </div>
         <div className="col-span-5 xl:col-span-3">
           <div className="flex justify-between items-center">

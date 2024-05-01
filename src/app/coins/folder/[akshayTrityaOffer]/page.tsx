@@ -40,8 +40,6 @@ const Coins = ({ params }: any) => {
     const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
     const { ProductList, isLoading, error } = useFetchProductCoins(activeTab);
 
-    console.log('loading product list')
-
     const Tabs = [
         // { tabName: "ALL" },
         { tabName: "GOLD", src: "/Goldbarbanner.png", alt: "digital gold bar" },
