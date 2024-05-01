@@ -310,11 +310,11 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
             </div>
             <div className="col-span-1 mt-4 flex justify-end py-3 items-end cursor-pointer">
               <div className="tooltip">
-                <MdInfo size={36} className="" />
+                <MdInfo size={36} className="" color="yellow" />
                 <span className="tooltiptext">
-                  <ul>
-                    <li>1 sona k sikka pe 1 chandi ka sikka free.</li>
-                    <li>direct purchase pe hi milega.</li>
+                  <ul className="text-sm">
+                    <li className="m-2">1. Get double the sparkle. Buy 10 gram Gold Coin and get 10 gram Silver Coin absolutely FREE. Limited Time Offer.</li>
+                    <li className="m-2">2. Get double the sparkle. Buy 5 gram Gold Coin and get 5 gram Silver Coin absolutely FREE. Limited Time Offer.</li>
                   </ul>
                 </span>
               </div>

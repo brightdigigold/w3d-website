@@ -754,7 +754,7 @@ input.inputBox {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 320px;
+  width: 400px;
   background: #04283d;
   color: #fff;
   text-align: center;
@@ -762,14 +762,37 @@ input.inputBox {
   padding: 5px;
   position: absolute;
   z-index: 1;
-  bottom: 125%;
+  bottom: 145%;
   left: 50%;
-  margin-left: -300px;
+  margin-left: -380px;
   opacity: 0;
   transition: opacity 0.3s;
+ 
+  border: 2px solid transparent; /* Make the static border transparent */
+  animation: borderFlash 2s linear infinite;
 }
+
+@keyframes borderFlash {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgb(214, 214, 112), 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent;
+  }
+  25% {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 3px rgb(214, 214, 98), 0 0 0 0 transparent, 0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 3px rgb(207, 207, 85), 0 0 0 0 transparent;
+  }
+  75% {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 3px yellow;
+  }
+}
+
+
+
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
+
+
