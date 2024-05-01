@@ -197,7 +197,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               <p className="font-medium">Out Of Stock</p>
             </div>
           )}
-          {id == "5-Gram-Gold-Coin"  && (
+          {id == "5-Gram-Gold-Coin" && (
             <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
               <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
             </div>
@@ -298,12 +298,12 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
 
           {id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (
             <CustomButton
-              containerStyles="cursor-pointer text-3xl bg-themeBlue text-black mt-4 px-3 text-center py-3 rounded-3xl"
-              isDisabled={!productsDetailById.inStock}
+              containerStyles="w-full bold cursor-pointer text-2xl bg-themeBlue text-black mt-4 px-3 text-center py-3 rounded-3xl"
+              isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
               handleClick={() => {
                 akshayTrityOfferHandler();
               }}
-              title="Apply Akshay Tritya Offer"
+              title={!applyAkshaytrityaoffer ? "Apply Akshay Tritya Offer" : "OFFER APPLIED"}
             />
           ) : null}
 
@@ -330,11 +330,17 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               {maxCoinError && <p className="text-red-600">{maxCoinError}</p>}
             </div>
             <div className="flex items-center rounded-lg bg-themeLight">
-              <div onClick={decreaseQty} className={styles.p1}>
+              <div onClick={() => {
+                decreaseQty();
+                setapplyAkshaytrityaoffer(false)
+              }} className={styles.p1}>
                 -
               </div>
               <div className="">{quantity}</div>
-              <div onClick={increaseQty} className={styles.p2}>
+              <div onClick={() => {
+                increaseQty();
+                setapplyAkshaytrityaoffer(false)
+              }} className={styles.p2}>
                 +
               </div>
             </div>
