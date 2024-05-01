@@ -198,7 +198,6 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-
 /* toggle button */
 .toggle-button {
   position: relative;
@@ -248,7 +247,7 @@ input[type="number"] {
   transform: translateX(-50%); /* Centers the image horizontally */
   width: 200px;
   height: 200px;
-  z-index: 1600; 
+  z-index: 1600;
   /* SweetAlert2 uses high z-index values, ensure this is higher */
 }
 
@@ -266,7 +265,6 @@ input[type="number"] {
 .swal2-popup-custom {
   /* background-color: #f0f0f0; Light grey background */
   background-color: #11354b;
-
 }
 
 .swal2-title-custom {
@@ -515,7 +513,6 @@ input:checked + .slider ~ .text-gold {
   background: rgba(240, 164, 48, 1);
 }
 
-
 .loginGrad {
   background: linear-gradient(0.69deg, #154c6d 0.62%, #12242e 101.27%);
 }
@@ -550,7 +547,6 @@ input.inputBox {
     height: 150px !important;
   }
 }
-
 
 .swalButtonsYes {
   padding: 3px;
@@ -644,7 +640,6 @@ input.inputBox {
     color: #7f9cad;
     opacity: 0.5;
   }
- 
 
   /* toggle button */
   .toggle-button {
@@ -752,3 +747,29 @@ input.inputBox {
   }
 }
 
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 320px;
+  background: #04283d;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -300px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

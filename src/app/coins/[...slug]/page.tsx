@@ -23,8 +23,10 @@ import ProductDescription from "../ProductDetails/productDescription";
 import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
 import CustomButton from "@/components/customButton";
-// import { } from "../../../../public/images/akshayTrityaOffer.gif"
 import Image from "next/image";
+import { MdInfo } from 'react-icons/md';
+
+
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
@@ -295,17 +297,30 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
 
             </div>}
           </div>
+          {id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (<div className="grid grid-cols-6 justify-center">
+            <div className="col-span-5">
+              <CustomButton
+                containerStyles="w-full bold cursor-pointer text-2xl bg-themeBlue text-black mt-4 px-3 text-center py-3 rounded-3xl"
+                isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
+                handleClick={() => {
+                  akshayTrityOfferHandler();
+                }}
+                title={!applyAkshaytrityaoffer ? "Apply Akshay Tritya Offer" : "OFFER APPLIED"}
+              />
+            </div>
+            <div className="col-span-1 mt-4 flex justify-end py-3 items-end cursor-pointer">
+              <div className="tooltip">
+                <MdInfo size={36} className="" />
+                <span className="tooltiptext">
+                  <ul>
+                    <li>1 sona k sikka pe 1 chandi ka sikka free.</li>
+                    <li>direct purchase pe hi milega.</li>
+                  </ul>
+                </span>
+              </div>
+            </div>
 
-          {id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (
-            <CustomButton
-              containerStyles="w-full bold cursor-pointer text-2xl bg-themeBlue text-black mt-4 px-3 text-center py-3 rounded-3xl"
-              isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
-              handleClick={() => {
-                akshayTrityOfferHandler();
-              }}
-              title={!applyAkshaytrityaoffer ? "Apply Akshay Tritya Offer" : "OFFER APPLIED"}
-            />
-          ) : null}
+          </div>) : null}
 
         </div>
         <div className="col-span-5 xl:col-span-3">
