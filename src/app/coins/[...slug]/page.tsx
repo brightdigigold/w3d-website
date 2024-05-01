@@ -312,9 +312,11 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               <div className="tooltip">
                 <MdInfo size={36} className="" color="yellow" />
                 <span className="tooltiptext">
-                  <ul className="text-sm">
-                    <li className="m-2">1. Get double the sparkle. Buy 10 gram Gold Coin and get 10 gram Silver Coin absolutely FREE. Limited Time Offer.</li>
-                    <li className="m-2">2. Get double the sparkle. Buy 5 gram Gold Coin and get 5 gram Silver Coin absolutely FREE. Limited Time Offer.</li>
+                  <ul className="text-sm text-justify">
+                    <li className="m-2">1. When you purchase 5 GM Gold Coin(s), you will receive 5 GM Silver Coin(s). Similarly, if you purchase 10 GM Gold Coin(s), you will receive 10 GM Silver Coin(s).</li>
+                    <li className="m-2">2. The "Convert from Vault" option is not applicable to this offer.</li>
+                    <li className="m-2">3. You cannot use the Cart feature to avail this offer.</li>
+
                   </ul>
                 </span>
               </div>
