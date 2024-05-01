@@ -23,6 +23,7 @@ interface CoinModalProps {
   closeModalOfCoin: () => void;
   productsDetailById: any;
   totalCoins: number;
+  akshayTrityaOfferApplied: boolean;
 }
 
 export default function CoinModal({
@@ -30,6 +31,7 @@ export default function CoinModal({
   closeModalOfCoin,
   productsDetailById,
   totalCoins,
+  akshayTrityaOfferApplied
 }: CoinModalProps) {
   const [showAdditionalContent, setShowAdditionalContent] = useState(true);
   const cancelButtonRef = useRef(null);
@@ -77,7 +79,7 @@ export default function CoinModal({
     keysToShow.includes(item.key)
   );
 
-   
+
   const totalAmountItem = previewData.find(
     (item) => item.key === "Total Amount"
   );
@@ -107,6 +109,7 @@ export default function CoinModal({
             ? goldData.totalPrice
             : silverData.totalPrice,
         fromApp: false,
+        couponCode: akshayTrityaOfferApplied ? "AKSHAYTRITYA" : null,
         product_quantity: totalCoins,
         product_id: productsDetailById._id,
       };
@@ -190,6 +193,7 @@ export default function CoinModal({
       >
         {openAddressModal && (
           <SelectAddress
+            akshayTrityaOfferApplied={akshayTrityaOfferApplied}
             totalAmountValue={totalAmountValue}
             transactionId={transactionId}
             previewData={previewData}
@@ -251,7 +255,7 @@ export default function CoinModal({
                                   <div className="text-sm sm:text-base w-full tracking-[.1em] bold text-white">
                                     Available Vault Balance :
                                   </div>
-                                  <div className="flex items-center mt-2 bold text-white ">
+                                  {!akshayTrityaOfferApplied && <div className="flex items-center mt-2 bold text-white ">
                                     <label className="semibold dark:text-gray-300 text-sm sm:text-base">
                                       Convert All
                                     </label>
@@ -266,11 +270,11 @@ export default function CoinModal({
                                         }`}
                                       disabled={
                                         goldVaultBalance === 0 &&
-                                        silverVaultBalance === 0
+                                        silverVaultBalance === 0 && akshayTrityaOfferApplied
                                       }
                                       onChange={handleSelectConvertFromVault}
                                     />
-                                  </div>
+                                  </div>}
 
                                   {showLottie &&
                                     metalTypeForProgressBar === "GOLD" && (
@@ -345,7 +349,7 @@ export default function CoinModal({
                       </div>
                       <div className="mt-2">
 
-                       
+
                         {filteredPreviewData.map((item, index) =>
                           renderPriceBreakdownItem({
                             label: item.key,

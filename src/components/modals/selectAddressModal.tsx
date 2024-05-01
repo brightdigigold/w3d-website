@@ -22,6 +22,7 @@ export default function SelectAddress({
   closeAddressModal,
   productsDetailById,
   metalTypeForProgressBar,
+  akshayTrityaOfferApplied
 }: AddressModalProps) {
   const cancelButtonRef = useRef(null);
   const appliedCouponCode = useSelector((state: RootState) => state.coupon.appliedCouponCode);
@@ -163,7 +164,8 @@ export default function SelectAddress({
     address_id: addressId,
     gst_number: "",
     totalAmount: +totalAmount,
-    couponCode: appliedCouponCode,
+    couponCode: akshayTrityaOfferApplied ? "AKSHAYTRITYA" : null,
+    // couponCode: appliedCouponCode,
     product_id: productsDetailById._id,
     itemMode: "PHYSICAL",
     fromApp: false,
