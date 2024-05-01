@@ -18,7 +18,7 @@ import { fetchWalletData } from "@/redux/vaultSlice";
 import { GoogleTagManager } from '@next/third-parties/google'
 import NextImage from "../nextImage";
 import Image from "next/image"
-import AkshayTrityaOffer from "../modals/akshatrityaModal";
+import AkshayTrityaOffer from "./akshatrityaModal";
 
 const HeroSection = () => {
   const dispatch = useDispatch();

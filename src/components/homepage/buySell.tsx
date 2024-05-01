@@ -602,7 +602,7 @@ const BuySell = () => {
                   {metalType === "gold" ? (
                     <>
                       {/* <video width="320" height="240" preload="none" autoPlay loop muted playsInline>
-                        <source src="/GoldStackAnimation.webM" type="video/webm" />
+                        <source src="/video/Free Coin.webM" type="video/webm" />
                         <track
                           src="/path/to/subtitles.vtt"
                           kind="subtitles"
