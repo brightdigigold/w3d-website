@@ -179,6 +179,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
 
       {openCoinModal && (
         <CoinModal
+          akshayTrityaOfferApplied={applyAkshaytrityaoffer}
           totalCoins={quantity}
           productsDetailById={productsDetailById}
           openModalOfCoin={openCoinModal}
@@ -192,6 +193,11 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
           {!productsDetailById.inStock && (
             <div className="bg-red-600 absolute top-0 right-0 px-2  rounded-bl-lg">
               <p className="font-medium">Out Of Stock</p>
+            </div>
+          )}
+           {productsDetailById.inStock && (
+            <div className="bg-green-600 absolute top-0 right-0 px-2  rounded-bl-lg">
+              <p className="font-medium">OFFER COIN</p>
             </div>
           )}
           <div className="hidden sm:block bg-themeLight rounded p-4">
