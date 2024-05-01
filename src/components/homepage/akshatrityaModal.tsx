@@ -76,9 +76,9 @@ export default function AkshayTrityaOffer({ }: any) {
                                             // style={{
                                             //     background: 'linear-gradient(to right, #f83b0d, #fbb273, #fbc844)'
                                             // }}
-                                            className="bg-themeBlue inline-flex w-full justify-center rounded-md  px-3 py-2 text-sm font-semibold text-bg-theme shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
+                                            className="bg-themeDarkBlue text-themeBlueLight text-md inline-flex w-full justify-center rounded-md  px-3 py-2 text-sm font-semibold text-bg-theme shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
                                         >
-                                            Avail The Offer
+                                            Avail This Offer
                                         </button>
                                     </Link>
                                 </div>
