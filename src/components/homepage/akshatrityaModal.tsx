@@ -78,7 +78,7 @@ export default function AkshayTrityaOffer({ }: any) {
                                     onMouseLeave={handleMouseLeave}
                                     >
                                     <video ref={videoRef} width="320" height="300" preload="none" autoPlay loop muted >
-                                        <source src="/video/Free Coin.webM" type="video/webm" />
+                                        <source src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Free+Coin.webm" type="video/webm" />
                                         <track
                                             src="/path/to/subtitles.vtt"
                                             kind="subtitles"
