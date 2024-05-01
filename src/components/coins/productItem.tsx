@@ -22,11 +22,15 @@ export interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLoginClick, router }) => {
     const dispatch = useDispatch();
     const user = useSelector(selectUser);
+    console.log('item', item.slug == "5-Gram-Gold-Coin");
 
     return (
         <div
             className="py-4 rounded-md shadow-xl text-center coins_background transition-transform transform hover:scale-105 hover:shadow-lg hover:shadow-sky-100"
         >
+            {item.slug == "5-Gram-Gold-Coin" || "10-Gram-Gold-Coin" && <div className="bg-green-600 absolute top-0 right-0 px-2  rounded-bl-lg">
+              <p className="font-medium">OFFER COIN</p>
+            </div>}
             <div
                 style={{
                     backgroundSize: "cover",

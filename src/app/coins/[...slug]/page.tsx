@@ -27,6 +27,7 @@ import CustomButton from "@/components/customButton";
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
   const id = slug;
+  console.log('id', id);
   const { _id } = user.data;
   const dispatch = useDispatch();
   const router = useRouter();
@@ -195,7 +196,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               <p className="font-medium">Out Of Stock</p>
             </div>
           )}
-           {productsDetailById.inStock && (
+          {id == "5-Gram-Gold-Coin" && "10-Gram-Gold-Coin" && (
             <div className="bg-green-600 absolute top-0 right-0 px-2  rounded-bl-lg">
               <p className="font-medium">OFFER COIN</p>
             </div>
@@ -287,7 +288,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
             </div>}
           </div>
 
-          <CustomButton
+          {id == "5-Gram-Gold-Coin" || "10-Gram-Gold-Coin" &&<CustomButton
             // img="/lottie/addcart.gif"
             containerStyles="cursor-pointer text-3xl bg-themeBlue text-black mt-4  px-3 text-center py-3 rounded-3xl"
             // className="flex rounded border-slate-500"
@@ -296,7 +297,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               akshayTrityOfferHandler()
             }}
             title="Apply AkshayTritya Offer"
-          />
+          />}
         </div>
         <div className="col-span-5 xl:col-span-3">
           <div className="flex justify-between items-center">
