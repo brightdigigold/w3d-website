@@ -129,6 +129,12 @@ body {
   background-color: #324f61;
 }
 
+.swal2-modal {
+  background: #081a24 !important;
+  color: #fff !important;
+  box-shadow: 0px 0px 2px #ccc !important;
+}
+
 .swalButtonsNo {
   padding: 3px 20px !important;
   text-align: center;
@@ -152,6 +158,10 @@ body {
   color: #000 !important;
 }
 
+.swal2-confirm {
+  background: #cde8f1 !important;
+  color: #000 !important;
+}
 
 .border-gold {
   border: 1px solid #fef468;
@@ -223,6 +233,9 @@ input[type="number"] {
   overflow: hidden;
 }
 /* Add these styles to your CSS */
+.swal2-container {
+  overflow: visible;
+}
 
 .swal2-popup {
   overflow: visible !important;
@@ -235,7 +248,8 @@ input[type="number"] {
   transform: translateX(-50%); /* Centers the image horizontally */
   width: 200px;
   height: 200px;
-  z-index: 1600; /* SweetAlert2 uses high z-index values, ensure this is higher */
+  z-index: 1600; 
+  /* SweetAlert2 uses high z-index values, ensure this is higher */
 }
 
 .swal2-image-customs {
@@ -250,7 +264,9 @@ input[type="number"] {
 
 /* Custom styles for SweetAlert2 */
 .swal2-popup-custom {
-  background-color: #f0f0f0; /* Light grey background */
+  /* background-color: #f0f0f0; Light grey background */
+  background-color: #11354b;
+
 }
 
 .swal2-title-custom {
@@ -262,6 +278,10 @@ input[type="number"] {
   color: white; /* White text color */
 }
 
+.swal2-confirm-custom {
+  background-color: #3085d6; /* Blue background for the confirm button */
+  color: white; /* White text color */
+}
 .slider:before {
   position: absolute;
   content: "";
