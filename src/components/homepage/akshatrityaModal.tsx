@@ -86,14 +86,12 @@ export default function AkshayTrityaOffer({ }: any) {
                                         x
                                     </button>
                                     <Link href={`/coins/folder/${'GOLD'}`}>
-
                                         <div onMouseEnter={handleMouseEnter}
                                             onMouseLeave={handleMouseLeave}
                                         >
-
                                             <video ref={videoRef} width="100%"
                                                 height="auto" preload="none" autoPlay loop muted playsInline>
-                                                <source src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Free+Coin.webm" type="video/webm" />
+                                                <source src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/free_coin.mp4" type="video/mp4" />
                                                 <track
                                                     src="/path/to/subtitles.vtt"
                                                     kind="subtitles"
@@ -105,8 +103,6 @@ export default function AkshayTrityaOffer({ }: any) {
                                         </div>
                                     </Link>
                                 </div>
-
-
 
                                 <div className="">
                                     <Link href={`/coins/folder/${'GOLD'}`}>

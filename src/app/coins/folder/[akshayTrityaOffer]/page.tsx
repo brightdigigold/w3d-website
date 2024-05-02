@@ -68,7 +68,7 @@ const Coins = ({ params }: any) => {
             {otpModal && <OtpModal />}
 
             <div className="flex justify-center items-center">
-                <Image src="/images/AkshayaTritiyabanner.jpg" alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} />
+                <Image src="/images/AkshayaTritiyabanner.jpg" alt="gold and silver coin banner" className="rounded-b mt-4" width={1600} height={300} />
             </div>
             <div className="container mx-auto">
                 <h1 className="text-white mr-4 text-2xl sm:text-4xl extrabold text-center m-3">Our Coins</h1>
@@ -78,9 +78,6 @@ const Coins = ({ params }: any) => {
                             <TabButton key={tab.tabName} tab={tab} activeTab={activeTab} handleTabClick={setActiveTab} />
                         ))}
                     </div>
-                    {/* <div>
-
-                    </div> */}
                 </div>
 
                 {isLoading ? <Loading /> : error ? <p className="text-red-500 text-center bold text-lg">{error}</p> : (

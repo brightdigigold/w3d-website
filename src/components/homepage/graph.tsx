@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const Graph = () => {
   return (
@@ -9,7 +10,20 @@ const Graph = () => {
         From
         <span className=" text-gold01 pl-1">2019-2024</span>
       </p>
-      <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GrowthGraph.gif" className="w-full px-0 sm:px-16" alt="Growth Graph"/>
+      {/* <div className="" style={{ width: "80%", height: "60%" }}>
+        <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GrowthGraph.gif" className=" px-0 sm:px-16" width={400} height={400} alt="Growth Graph" />
+      </div> */}
+
+      <div className="relative mx-auto pt-10 lg:pt-0 w-full md:w-3/4 lg:w-2/3">
+        <Image
+          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GrowthGraph.gif"
+          alt="Growth Graph"
+          width={400}
+          height={400}
+          layout="responsive"
+        />
+      </div>
+
     </div>
   );
 };
