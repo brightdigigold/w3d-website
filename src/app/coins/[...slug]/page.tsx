@@ -50,17 +50,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const [applyAkshaytrityaoffer, setapplyAkshaytrityaoffer] = useState(false);
 
-  const akshayTrityOfferHandler = () => {
-    setapplyAkshaytrityaoffer(true)
-    Swal.fire({
-      html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
-      title: "Akshay Tritya Offer Applied Successfully",
-      width: "450px",
-      padding: "4em",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  }
+
 
   useEffect(() => {
     const productCount = getProductCountById(coinsInCart, productId);
@@ -154,6 +144,19 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
       2
     );
   }, [productsDetailById, quantity, goldData.totalPrice, silverData.totalPrice]);
+
+  const akshayTrityOfferHandler = () => {
+    setapplyAkshaytrityaoffer(true)
+    Swal.fire({
+      html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
+      title: `You will receive ${quantity} <br /> ${productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver" : "5-Gram-Silver"}-${quantity === 1 ? 'coin' : "Coins"} for free!`,
+      // text: "AKSHAYTRITYA OFFER APPLIED",
+      width: "450px",
+      padding: "2em",
+      showConfirmButton: false,
+      timer: 5000,
+    });
+  }
 
 
   if (!productsDetailById) {

@@ -754,7 +754,7 @@ input.inputBox {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 380px;
+  width: 360px;
   background: #04283d;
   color: #fff;
   text-align: center;
@@ -764,7 +764,7 @@ input.inputBox {
   z-index: 1;
   bottom: 145%;
   left: 50%;
-  margin-left: -380px;
+  margin-left: -370px;
   opacity: 0;
   transition: opacity 0.3s;
  
