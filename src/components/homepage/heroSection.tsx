@@ -120,8 +120,10 @@ const HeroSection = () => {
                     Start Your Savings
                   </span>
                   <br />
-                  <span className="font-thin">
-                    With Just <span className="text-gold01 extrabold">₹</span>10
+                  <span className="font-thin flex items-center gap-2">
+                    With Just <span className="text-gold01 extrabold mt-3">
+                      <NextImage alt="rupees icon" src="/Rupees.png" width={45} height={45} />
+                      </span>10
                   </span>
                 </motion.h1>
                 <motion.div variants={textVariant(1.1)}>
