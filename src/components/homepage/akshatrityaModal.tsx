@@ -1,4 +1,4 @@
-import { Fragment, useState,useEffect, useRef } from 'react';
+import { Fragment, useState, useEffect, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
 // import {} from  ''
@@ -26,11 +26,13 @@ export default function AkshayTrityaOffer({ }: any) {
         }
     };
 
+
+
     useEffect(() => {
         const originalOverflow = document.body.style.overflow;
         document.body.style.overflow = open ? 'hidden' : originalOverflow;
         return () => {
-            document.body.style.overflow = originalOverflow; // Restore on cleanup
+            document.body.style.overflow = originalOverflow;
         };
     }, [open]);
 
@@ -43,13 +45,13 @@ export default function AkshayTrityaOffer({ }: any) {
         }
         return () => document.body.classList.remove('modal-open');
     }, [open]);
-    
-    
+
+
 
 
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="z-[110] fixed inset-0 overflow-y-auto" onClose={setOpen}>
+            <Dialog as="div" className="fixed inset-0 overflow-y-auto z-50" onClose={setOpen}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -73,21 +75,38 @@ export default function AkshayTrityaOffer({ }: any) {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative transform overflow-hidden rounded-lg  text-left  transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-8">
-                                <div  onMouseEnter={handleMouseEnter}
-                                    onMouseLeave={handleMouseLeave}
+                            <Dialog.Panel className="relative w-full max-w-md px-4 py-8  rounded-lg shadow-lg transform transition-all sm:max-w-xs">
+                                <div className='relative'>
+                                    <button
+                                        onClick={() => setOpen(false)}
+                                        className="absolute top-0 right-0 p-2 text-black bg-white  rounded-full border-2 border-white"
+                                        aria-label="Close"
+                                        style={{ zIndex: 20, width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderColor: 'white' }}
                                     >
-                                    <video ref={videoRef} width="320" height="300" preload="none" autoPlay loop muted >
-                                        <source src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Free+Coin.webm" type="video/webm" />
-                                        <track
-                                            src="/path/to/subtitles.vtt"
-                                            kind="subtitles"
-                                            srcLang="en"
-                                            label="English"
-                                        />
-                                        Your browser does not support the video tag.
-                                    </video>
+                                        x
+                                    </button>
+                                    <Link href={`/coins/folder/${'GOLD'}`}>
+
+                                        <div onMouseEnter={handleMouseEnter}
+                                            onMouseLeave={handleMouseLeave}
+                                        >
+
+                                            <video ref={videoRef} width="100%"
+                                                height="auto" preload="none" autoPlay loop muted playsInline>
+                                                <source src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Free+Coin.webm" type="video/webm" />
+                                                <track
+                                                    src="/path/to/subtitles.vtt"
+                                                    kind="subtitles"
+                                                    srcLang="en"
+                                                    label="English"
+                                                />
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    </Link>
                                 </div>
+
+
 
                                 <div className="">
                                     <Link href={`/coins/folder/${'GOLD'}`}>
