@@ -257,10 +257,11 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                 title={""}
               />
             </div>
-            {!applyAkshaytrityaoffer && <div>
+            {/* {!applyAkshaytrityaoffer &&  */}
+            {/* <div> */}
 
-              {/* { GO TO CART } */}
-              {quantity == cartQuantity && (
+            {/* { GO TO CART } */}
+            {/* {quantity == cartQuantity && (
                 <div>
                   <Link className="cursor-pointer" href="/cart">
                     <CustomImageButton
@@ -270,10 +271,10 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                     />
                   </Link>
                 </div>
-              )}
+              )} */}
 
-              {/* Update TO CART */}
-              {cartQuantity !== 0 && cartQuantity !== quantity && (
+            {/* Update TO CART */}
+            {/* {cartQuantity !== 0 && cartQuantity !== quantity && (
                 <div>
                   <CustomImageButton
                     img="/lottie/updatenow.png"
@@ -284,10 +285,10 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                     title="UPDATE CART"
                   />
                 </div>
-              )}
+              )} */}
 
-              {/* ADD TO CART */}
-              {cartQuantity == 0 && (
+            {/* ADD TO CART */}
+            {/* {cartQuantity == 0 && (
                 <CustomImageButton
                   img="/lottie/addcart.gif"
                   isDisabled={!productsDetailById.inStock}
@@ -296,34 +297,59 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                   }}
                   title={""}
                 />
-              )}
+              )} */}
 
-            </div>}
-          </div>
-          {/* {id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (<div className="grid grid-cols-6 justify-center">
-            <div className="col-span-5">
-              <CustomButton
-                containerStyles="px-2 bold cursor-pointer text-sm bg-themeBlue text-black mt-3 text-center py-2 rounded-xl"
-                isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
-                handleClick={() => {
-                  akshayTrityOfferHandler();
-                }}
-                title={!applyAkshaytrityaoffer ? "APPLY AKSHAYA TRITIYA OFFER" : "OFFER APPLIED"}
-              />
-            </div>
-            <div className="col-span-1 mt-3 flex justify-end py-2 items-end cursor-pointer">
-              <div className="tooltip">
-                <MdInfo size={24} className="" color="yellow" />
-                <span className="tooltiptext">
-                  <ul className="text-sm text-justify">
-                    <li className="m-2">1. When you purchase 5 GM Gold Coin(s), you will receive 5 GM Silver Coin(s). Similarly, if you purchase 10 GM Gold Coin(s), you will receive 10 GM Silver Coin(s).</li>
-                    <li className="m-2">2. The "Convert from Vault" option is not applicable to this offer.</li>
-                    <li className="m-2">3. You cannot use the Cart feature to avail this offer.</li>
-                  </ul>
-                </span>
+            {/* </div>} */}
+
+
+            <div className={`fade-section ${applyAkshaytrityaoffer ? 'disabled' : ''}`}>
+
+              <div>
+                {/* GO TO CART */}
+                {quantity === cartQuantity && (
+                  <div>
+                    <Link className="cursor-pointer" href="/cart">
+                      <CustomImageButton
+                        img="/lottie/Go to cart.gif"
+                        isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
+                        title="GO TO CART"
+                      />
+                    </Link>
+                  </div>
+                )}
+
+                {/* Update TO CART */}
+                {cartQuantity !== 0 && cartQuantity !== quantity && (
+                  <div>
+                    <CustomImageButton
+                      img="/lottie/updatenow.png"
+                      isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
+                      handleClick={() => {
+                        addToCartHandler("UpdateCart");
+                      }}
+                      title="UPDATE CART"
+                    />
+                  </div>
+                )}
+
+                {/* ADD TO CART */}
+                {cartQuantity === 0 && (
+                  <CustomImageButton
+                    img="/lottie/addcart.gif"
+                    isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
+                    handleClick={() => {
+                      addToCartHandler("AddToCart");
+                    }}
+                    title=""
+                  />
+                )}
               </div>
+              {/* )} */}
             </div>
-          </div>) : null} */}
+
+
+          </div>
+
 
           {
             id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (
