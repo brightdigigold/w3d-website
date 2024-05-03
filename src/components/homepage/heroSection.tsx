@@ -15,7 +15,6 @@ import { RootState } from "@/redux/store";
 import OtpModal from "../modals/otpModal";
 import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
-import { GoogleTagManager } from '@next/third-parties/google'
 import NextImage from "../nextImage";
 import Image from "next/image"
 import AkshayTrityaOffer from "./akshatrityaModal";
@@ -28,10 +27,9 @@ const HeroSection = () => {
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem('hasVisited');
-    console.log('hasVisited', hasVisited);
     if (!hasVisited) {
-      setAkshayTrityaOffer(true); // Open the modal only if they haven't visited during this session
-      sessionStorage.setItem('hasVisited', 'true'); // Mark them as having visited for this session
+      setAkshayTrityaOffer(true); 
+      sessionStorage.setItem('hasVisited', 'true'); 
     }
   }, []);
 
@@ -101,13 +99,13 @@ const HeroSection = () => {
         >
           <div className="mx-auto px-4 sm:px-6 lg:px-16">
             <div className="relative">
-              <NextImage
+              <Image
                 src="/bdgwhite.png"
                 alt="Your Company"
                 width={400}
                 height={400}
                 priority
-                className="absolute -left-20 opacity-20"
+                className="absolute  opacity-20"
               />
             </div>
             <div className="grid lg:grid-cols-2 gap-4">
