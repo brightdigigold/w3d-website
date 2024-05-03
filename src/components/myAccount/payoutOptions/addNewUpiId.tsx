@@ -20,9 +20,6 @@ export default function UpiModal({
   const [upiError, setUpiError] = useState("");
   // const [upiUpdated, setupiUpdated] = useState(false)
 
-  
-
-
   const fetchBankAndUPIDetails = async () => {
     try {
       const { UpiList, BankList, decryptedDataList } = await fetchAllUPI();
