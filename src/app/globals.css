@@ -764,7 +764,7 @@ input.inputBox {
   z-index: 1;
   bottom: 145%;
   left: 50%;
-  margin-left: -370px;
+  margin-left: -180px;
   opacity: 0;
   transition: opacity 0.3s;
  
@@ -798,5 +798,13 @@ input.inputBox {
 body.modal-open {
   position: fixed;
   width: 100%;
+}
+
+/* Custom CSS or TailwindCSS @media queries */
+@media (max-width: 640px) { /* Example for smaller devices */
+  .custom-button-container {
+      padding: 4px 4px; /* Smaller padding */
+      font-size: 12px; /* Smaller font size */
+  }
 }
 

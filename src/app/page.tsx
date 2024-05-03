@@ -14,13 +14,15 @@ import {
 import { Suspense } from "react";
 import Loading from "./loading";
 import { Metadata } from "next";
+import AkshaytrityaOfferBanner from "@/components/homepage/akshaytrityaOfferBanner";
 
 export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
       <HeroSection />
-      <OfferSlider />
+      {/* <OfferSlider /> */}
       <Promotional />
+      <AkshaytrityaOfferBanner />
       <Products />
       <HowItWorks />
       <Marketing />

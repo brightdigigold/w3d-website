@@ -300,32 +300,57 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
 
             </div>}
           </div>
-          {id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (<div className="grid grid-cols-6 justify-center">
+          {/* {id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (<div className="grid grid-cols-6 justify-center">
             <div className="col-span-5">
               <CustomButton
-                containerStyles="w-full bold cursor-pointer text-2xl bg-themeBlue text-black mt-4 px-3 text-center py-3 rounded-3xl"
+                containerStyles="px-2 bold cursor-pointer text-sm bg-themeBlue text-black mt-3 text-center py-2 rounded-xl"
                 isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
                 handleClick={() => {
                   akshayTrityOfferHandler();
                 }}
-                title={!applyAkshaytrityaoffer ? "Apply Akshay Tritya Offer" : "OFFER APPLIED"}
+                title={!applyAkshaytrityaoffer ? "APPLY AKSHAYA TRITIYA OFFER" : "OFFER APPLIED"}
               />
             </div>
-            <div className="col-span-1 mt-4 flex justify-end py-3 items-end cursor-pointer">
+            <div className="col-span-1 mt-3 flex justify-end py-2 items-end cursor-pointer">
               <div className="tooltip">
-                <MdInfo size={36} className="" color="yellow" />
+                <MdInfo size={24} className="" color="yellow" />
                 <span className="tooltiptext">
                   <ul className="text-sm text-justify">
                     <li className="m-2">1. When you purchase 5 GM Gold Coin(s), you will receive 5 GM Silver Coin(s). Similarly, if you purchase 10 GM Gold Coin(s), you will receive 10 GM Silver Coin(s).</li>
                     <li className="m-2">2. The "Convert from Vault" option is not applicable to this offer.</li>
                     <li className="m-2">3. You cannot use the Cart feature to avail this offer.</li>
-
                   </ul>
                 </span>
               </div>
             </div>
-          </div>) : null}
+          </div>) : null} */}
 
+          {
+            id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (
+              <div className="text-center">
+                <CustomButton
+                  containerStyles=" px-3 extrabold cursor-pointer text-md bg-[#FFD835] text-black sm:mt-3 text-center py-2 rounded-3xl"
+                  isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
+                  handleClick={() => {
+                    akshayTrityOfferHandler();
+                  }}
+                  title={!applyAkshaytrityaoffer ? "APPLY AKSHAYA TRITIYA OFFER" : "OFFER APPLIED"}
+                />
+                <div>
+                  <div className="tooltip mt-2">
+                    <MdInfo size={24} className="" color="yellow" />
+                    <span className="tooltiptext">
+                      <ul className="text-sm text-justify">
+                        <li className="m-2">1. When you purchase 5 GM Gold Coin(s), you will receive 5 GM Silver Coin(s). Similarly, if you purchase 10 GM Gold Coin(s), you will receive 10 GM Silver Coin(s).</li>
+                        <li className="m-2">2. The "Convert from Vault" option is not applicable to this offer.</li>
+                        <li className="m-2">3. You cannot use the Cart feature to avail this offer.</li>
+                      </ul>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ) : null
+          }
         </div>
         <div className="col-span-5 xl:col-span-3">
           <div className="flex justify-between items-center">

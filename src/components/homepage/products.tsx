@@ -8,6 +8,7 @@ import OtpModal from "../modals/otpModal";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Products = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
@@ -70,14 +71,18 @@ const Products = () => {
             </div>
 
             <div className="">
+              <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+                <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
+              </div>
               <img
                 alt="products"
                 className="h-28 sm:h-40 mx-auto mt-10"
-                src="/goldcoin.png"
+                src="https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"
               />
             </div>
             <p className="mt-6 text-center font-bold text-xs sm:text-base text-white">
-              1 Gram Gold Coin
+              {/* 1 Gram Gold Coin */}
+              5 Gram Gold Coin
             </p>
 
             <button
@@ -85,7 +90,8 @@ const Products = () => {
                 if (!isloggedIn) {
                   handleLoginClick();
                 } else {
-                  router.push(`/coins/1-Gram-Gold-Coin`)
+                  // router.push(`/coins/1-Gram-Gold-Coin`)
+                  router.push(`/coins/5-Gram-Gold-Coin`)
                 }
               }}
               // href={`/coins/1-Gram-Gold-Coin`}
@@ -117,6 +123,7 @@ const Products = () => {
             </div>
 
             <div className="">
+
               <img
                 alt="products"
                 className="h-28 sm:h-40 mx-auto mt-10"
@@ -161,6 +168,9 @@ const Products = () => {
             </div>
 
             <div className="">
+              <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+                <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
+              </div>
               <img
                 alt="products"
                 className="h-28 sm:h-40 mx-auto mt-10"

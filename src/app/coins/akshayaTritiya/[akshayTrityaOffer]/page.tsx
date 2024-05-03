@@ -7,24 +7,18 @@ import OtpModal from "@/components/modals/otpModal";
 import { useRouter } from "next/navigation";
 import Loading from "@/app/loading";
 import Image from "next/image";
-import { selectGoldVaultBalance, selectSilverVaultBalance, selectLoading } from "@/redux/vaultSlice";
 import { selectIsloggedIn, setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
 import { selectUser } from "@/redux/userDetailsSlice";
 import useFetchProductCoins from "@/hooks/useFetchProductCoins";
 import LoginAside from "@/components/authSection/loginAside";
 import TabButton from "@/components/coins/tabComponent";
-import ButtonLoader from "@/components/buttonLoader";
-import VaultBalance from "@/components/coins/vaultBalance";
 import { fadeIn } from "@/utils/motion";
 import ProductItem from "@/components/coins/productItem";
 import SetProfileForNewUser from "@/components/setProfile";
-// import { vault } from "../../../../public/images/vault.png"
-import {} from "../../../../../public/images/AkshayaTritiyabanner.jpg"
 
 const Coins = ({ params }: any) => {
     const metalTypeOf = params.akshayTrityaOffer;
-    // console.log('params', metalTypeOf);
     const [activeTab, setActiveTab] = useState(metalTypeOf);
     const isLoggedIn = useSelector((state: RootState) => (state.auth.isLoggedIn))
     const otpModal = useSelector((state: RootState) => (state.auth.otpModal))
@@ -32,11 +26,6 @@ const Coins = ({ params }: any) => {
     const dispatch = useDispatch();
     const isloggedIn = useSelector(selectIsloggedIn);
     const user = useSelector(selectUser);
-
-    const goldVaultBalance = useSelector(selectGoldVaultBalance);
-    const silverVaultBalance = useSelector(selectSilverVaultBalance);
-    const loading = useSelector(selectLoading);
-
     const router = useRouter();
     const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
     const { ProductList, isLoading, error } = useFetchProductCoins(activeTab);

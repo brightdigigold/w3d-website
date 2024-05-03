@@ -85,27 +85,25 @@ export default function AkshayTrityaOffer({ }: any) {
                                     >
                                         x
                                     </button>
-                                    <Link href={`/coins/folder/${'GOLD'}`}>
-                                        <div onMouseEnter={handleMouseEnter}
-                                            onMouseLeave={handleMouseLeave}
-                                        >
-                                            <video ref={videoRef} width="100%"
-                                                height="auto" preload="none" autoPlay loop muted playsInline>
-                                                <source src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/free_coin.mp4" type="video/mp4" />
-                                                <track
-                                                    src="/path/to/subtitles.vtt"
-                                                    kind="subtitles"
-                                                    srcLang="en"
-                                                    label="English"
-                                                />
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                    </Link>
+                                    <div onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
+                                    >
+                                        <video ref={videoRef} width="100%"
+                                            height="auto" preload="none" autoPlay loop muted playsInline>
+                                            <source src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/free_coin.mp4" type="video/mp4" />
+                                            <track
+                                                src="/path/to/subtitles.vtt"
+                                                kind="subtitles"
+                                                srcLang="en"
+                                                label="English"
+                                            />
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
                                 </div>
 
                                 <div className="">
-                                    <Link href={`/coins/folder/${'GOLD'}`}>
+                                    <Link href={`/coins/akshayaTritiya/${'GOLD'}`}>
                                         <button
                                             type="button"
                                             className="bg-themeDarkBlue text-themeBlueLight bold text-md inline-flex w-full justify-center rounded-md  px-3 py-2 text-sm  text-bg-theme shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
