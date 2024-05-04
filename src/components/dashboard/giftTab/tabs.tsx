@@ -455,7 +455,7 @@ const GiftTab = () => {
                   </div>
 
                   <input
-                    type="number"
+                    // type="number"
                     inputMode="numeric"
                     className={`bg-transparent  pl-7 py-1 focus:outline-none text-gray-100 w-full ${activeTab === "rupees" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
                       }`}
@@ -499,7 +499,8 @@ const GiftTab = () => {
                 </div>
                 <div className="relative rounded-md shadow-sm">
                   <input
-                    type="number"
+                    // type="number"
+                    inputMode="numeric"
                     placeholder="0.0000"
                     min={0.0015}
                     max={2}
