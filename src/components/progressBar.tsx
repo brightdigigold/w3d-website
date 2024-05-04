@@ -23,9 +23,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   displayMetalType,
 }: ProgressBarProps) => {
   const time = useSelector((state: RootState) => state.time.time);
-  const metalPricePerGram = useSelector(
-    (state: RootState) => state.shop.metalPrice
-  );
+  const metalPricePerGram = useSelector((state: RootState) => state.shop.metalPrice);
   const goldData = useSelector((state: RootState) => state.gold);
   const silverData = useSelector((state: RootState) => state.silver);
   const dispatch = useDispatch();
@@ -45,6 +43,8 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       .toString()
       .padStart(2, "0")}`;
   }, []);
+
+  console.log('purchaseType', purchaseType)
 
   const getMetalPrice = useCallback(() => {
     if (displayMetalType.toLowerCase() === "gold") {

@@ -365,6 +365,7 @@ export default function CoinModal({
                   fromCart={fromCart}
                   metalTypeForProgressBar={metalTypeForProgressBar.toLowerCase()}
                   displayMetalType={metalTypeForProgressBar.toLowerCase()}
+                  purchaseType="buy"
                 />
                 <div className="justify-between px-4 py-3 flex flex-row-reverse sm:px-6">
                   <CustomButton

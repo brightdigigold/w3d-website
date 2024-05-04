@@ -375,7 +375,7 @@ input:checked + .slider ~ .text-gold {
   left: 1px !important;
   background: rgba(44, 123, 172, 0.2);
   border-radius: 50%;
-  height: 130px !important;
+  height: 30px !important;
   width: 30px !important;
   right: auto;
 }

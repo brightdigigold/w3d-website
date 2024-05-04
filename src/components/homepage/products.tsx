@@ -123,7 +123,6 @@ const Products = () => {
             </div>
 
             <div className="">
-
               <img
                 alt="products"
                 className="h-28 sm:h-40 mx-auto mt-10"
