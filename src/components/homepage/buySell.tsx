@@ -261,10 +261,10 @@ const BuySell = () => {
     setActiveTabPurchase('rupees')
     dispatch(setTransactionType('rupees'))
     const enteredValue = ParseFloat(e.target.value, 4);
-    if (activeTabPurchase === 'rupees' && e.target.value.includes('.')) {
-      setValidationError("Decimal values are not allowed for rupees");
-      return; // Exit the function early
-    }
+    // if (activeTabPurchase === 'rupees' && e.target.value.includes('.')) {
+    //   setValidationError("Decimal values are not allowed for rupees");
+    //   return; // Exit the function early
+    // }
     if (isAnyCouponApplied) {
       if (enteredValue < 500) {
         dispatch(clearCoupon());
@@ -288,6 +288,7 @@ const BuySell = () => {
   };
 
   const handleEnteredAmountChangeGrams = (e: any) => {
+    e.preventDefault();
     dispatch(clearCoupon());
     setActiveTabPurchase('grams')
     dispatch(setTransactionType('grams'));
@@ -652,7 +653,7 @@ const BuySell = () => {
                   </div>
 
                   <input
-                    type="number"
+                    // type="number"
                     inputMode="numeric"
                     className={`bg-transparent pl-7 py-1 focus:outline-none text-gray-100 w-full ${activeTabPurchase === "rupees" ? " text-2xl sm:text-3xl" : "text-sm sm:text-xl"}`}
                     placeholder="0000"
@@ -661,7 +662,7 @@ const BuySell = () => {
                     onFocus={(e: React.FocusEvent<HTMLInputElement>) => { e.preventDefault() }}
                     onScroll={(e: React.UIEvent<HTMLElement>) => { e.preventDefault() }}
                     onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
-                    step="0.0001"
+                    // step="0.0001"
                     value={
                       activeTabPurchase === "rupees"
                         ? enteredAmount === 0
@@ -685,8 +686,10 @@ const BuySell = () => {
                   />
                 </div>
                 <div className="relative rounded-md shadow-sm">
+                
                   <input
-                    type="number"
+                    // type="number"
+                    inputMode="numeric"
                     placeholder="0.0000"
                     onClick={() => handleTabRupeesAndGrams("grams")}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEnteredAmountChangeGrams(e)}
