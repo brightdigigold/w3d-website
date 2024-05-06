@@ -5,11 +5,11 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "@/redux/store";
 import { Provider } from "react-redux";
-import Head from "next/head";
-import Script from 'next/script'
+// import Head from "next/head";
+// import Script from 'next/script'
 import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
-import NextImage from "@/components/nextImage";
+// import NextImage from "@/components/nextImage";
 
 
 let persistor = persistStore(store);
@@ -21,9 +21,9 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
 
   return (
     <html lang="en">
-      <Head>
-        <NextImage src="/bdgwhite.png" width={400} height={300} alt="Picture of the author" priority={true} />
-        {/* <script
+      {/* <Head> */}
+      {/* <NextImage src="/bdgwhite.png" width={400} height={300} alt="Picture of the author" priority={true} /> */}
+      {/* <script
           dangerouslySetInnerHTML={{
             __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -35,13 +35,13 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
           }}
         /> */}
 
-      </Head>
+      {/* </Head> */}
       <body>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Navbar />
             {children}
-            {/* <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} /> */}
+            <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
             <Footer />
           </PersistGate>
         </Provider>

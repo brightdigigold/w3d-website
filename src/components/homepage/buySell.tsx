@@ -489,7 +489,7 @@ const BuySell = () => {
               <div
                 className={`text-center py-3 border-r-2 border-slate-500 extrabold cursor-pointer ${activeTab === "buy"
                   ? "bg-themeLight text-white active"
-                  : "bg-themeLight01 text-sky-600"
+                  : "bg-themeLight01 text-sky-500"
                   }`}
                 onClick={() => {
                   handleTabBuyAndSell("buy");
@@ -498,9 +498,9 @@ const BuySell = () => {
                 BUY
               </div>
               <div
-                className={`text-center py-3 cursor-pointer ${activeTab === "sell"
+                className={`text-center py-3 cursor-pointer extrabold ${activeTab === "sell"
                   ? "bg-themeLight text-white active"
-                  : "bg-themeLight01 text-sky-600"
+                  : "bg-themeLight01 text-sky-500"
                   }`}
                 onClick={() => {
                   if (!isloggedIn) {
@@ -686,7 +686,7 @@ const BuySell = () => {
                   />
                 </div>
                 <div className="relative rounded-md shadow-sm">
-                
+
                   <input
                     // type="number"
                     inputMode="numeric"
@@ -756,9 +756,9 @@ const BuySell = () => {
                             {isAnyCouponApplied ? `Coupon Applied ${appliedCouponCode}` : "Apply Coupon"}
                           </span>
                         </div>
-                        <button className="text-white rounded-full border-2">
+                        <div className="text-white rounded-full border-2">
                           <ChevronDownIcon onClick={openModal} className="h-8" />
-                        </button>
+                        </div>
                       </div>
                     </>
                   )}
@@ -810,7 +810,9 @@ const BuySell = () => {
         >
           <NextImage
             src="/lottie/google-play-button.png"
-            width={180} height={180}
+            // width={180} height={180}
+            width={16 * 10} // 16 units width
+            height={9 * 10} // 9 units height
             alt="google play button"
           />
         </Link>
@@ -820,7 +822,9 @@ const BuySell = () => {
         >
           <NextImage
             src="/lottie/app-store-button.png"
-            width={180} height={180}
+            // width={180} height={180}
+            width={16 * 10} // 16 units width
+            height={9 * 10} // 9 units height
             alt="app store button"
           />
         </Link>

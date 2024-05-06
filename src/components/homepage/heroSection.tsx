@@ -28,8 +28,8 @@ const HeroSection = () => {
   useEffect(() => {
     const hasVisited = sessionStorage.getItem('hasVisited');
     if (!hasVisited) {
-      setAkshayTrityaOffer(true); 
-      sessionStorage.setItem('hasVisited', 'true'); 
+      setAkshayTrityaOffer(true);
+      sessionStorage.setItem('hasVisited', 'true');
     }
   }, []);
 
@@ -104,7 +104,6 @@ const HeroSection = () => {
                 alt="Your Company"
                 width={400}
                 height={400}
-                priority
                 className="absolute  opacity-20"
               />
             </div>
@@ -121,7 +120,7 @@ const HeroSection = () => {
                   <span className="font-thin flex items-center gap-2">
                     With Just <span className="text-gold01 extrabold mt-3">
                       <NextImage alt="rupees icon" src="/Rupees.png" width={45} height={45} />
-                      </span>10
+                    </span>10
                   </span>
                 </motion.h1>
                 <motion.div variants={textVariant(1.1)}>
@@ -156,10 +155,16 @@ const HeroSection = () => {
                       href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                       className="cursor-pointer"
                     >
-                      <NextImage
+                      {/* <NextImage
                         src="/lottie/google-play-button.png"
                         width={180} height={180}
                         // className="h-14"
+                        alt="google play button"
+                      /> */}
+                      <NextImage
+                        src="/lottie/google-play-button.png"
+                        width={16 * 10} // 16 units width
+                        height={9 * 10} // 9 units height
                         alt="google play button"
                       />
                     </Link>
@@ -169,7 +174,9 @@ const HeroSection = () => {
                     >
                       <NextImage
                         src="/lottie/app-store-button.png"
-                        width={180} height={180}
+                        // width={180} height={180}
+                        width={16 * 10} // 16 units width
+                        height={9 * 10} // 9 units height
                         // className="h-14"
                         alt="app store button"
                       />

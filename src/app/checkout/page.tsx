@@ -16,7 +16,7 @@ const page = () => {
             className=" absolute -bottom-12 -left-20 opacity-30"
             src="/bdgwhite.png"
             alt="digital gold"
-            priority
+            // priority
             width={400} 
             height={300} 
           />

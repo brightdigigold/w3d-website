@@ -70,7 +70,7 @@ const Timer: React.FC = () => {
   return (
     <div>
       <div className="flex items-center justify-end 2xl:justify-center gap-2 pr-4 sm:pr-12 2xl:pr-4 mt-3">
-        <img src="/alarm-filled.png" className="h-2 sm:h-4" />
+        <img src="/alarm-filled.png" alt="clock image" className="h-2 sm:h-4" />
         {metalType === "gold" ? (
           <p className="text-xxs sm:text-sm text-gold01">
             <span className=" sm:inline">Gold Rate</span> expire in :{" "}
