@@ -18,6 +18,8 @@ import SelectAddress from "./selectAddressModal";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { RootState } from "@/redux/store";
+import { useRouter } from "next/navigation";
+import { selectUser } from "@/redux/userDetailsSlice";
 interface CoinModalProps {
   openModalOfCoin: boolean;
   closeModalOfCoin: () => void;
@@ -48,7 +50,8 @@ export default function CoinModal({
   const [amountWithoutTax, setAmountWithoutTax] = useState(0);
   const [loading, setLoading] = useState(true);
   const [showLottie, setShowLottie] = useState(false);
-  const [coinValue, setCoinValue] = useState(0);
+  const user = useSelector(selectUser);
+  const router = useRouter();
 
   const getKeysToShow = () => {
     if (useWallet) {
@@ -132,7 +135,6 @@ export default function CoinModal({
       const decryptedData = await funcForDecrypt(resAfterPreview.data.payload);
 
       setPreviewData(JSON.parse(decryptedData).data.preview);
-      setCoinValue(93)
       setTransactionId(JSON.parse(decryptedData).data.transactionCache._id);
 
       setAmountWithoutTax(
@@ -161,8 +163,34 @@ export default function CoinModal({
   };
 
   const openAddressModalHandler = () => {
-    setopenAddressModal(true);
+
+    if (useWallet) {
+      if (!user?.data?.isKycDone) {
+        Swal.fire({
+          title: "Oops...!",
+          titleText: "It seems your KYC is pending. Please complete your KYC first.",
+          padding: "2em",
+          html: `<img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
+          showCancelButton: true,
+          confirmButtonText: "Complete Your KYC",
+          denyButtonText: `Don't save`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/myAccount");
+          }
+        });
+        return;
+      } else {
+        setopenAddressModal(true);
+      }
+    }
+    if (!useWallet) {
+      setopenAddressModal(true);
+      return;
+    }
   };
+
+
   const closeAddressModalHandler = () => {
     setopenAddressModal(false);
   };
@@ -365,7 +393,6 @@ export default function CoinModal({
                   fromCart={fromCart}
                   metalTypeForProgressBar={metalTypeForProgressBar.toLowerCase()}
                   displayMetalType={metalTypeForProgressBar.toLowerCase()}
-                  purchaseType="buy"
                 />
                 <div className="justify-between px-4 py-3 flex flex-row-reverse sm:px-6">
                   <CustomButton

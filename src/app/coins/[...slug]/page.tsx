@@ -30,10 +30,10 @@ import { MdInfo } from 'react-icons/md';
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
+  const router = useRouter();
   const id = slug;
   const { _id } = user.data;
   const dispatch = useDispatch();
-  const router = useRouter();
   const [quantity, setQuantity] = useState<number>(1);
   const { productsDetailById, productId, isLoading, error } = useFetchProductDetailsById(id);
   const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
@@ -67,23 +67,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
         return;
       }
 
-      if (!user?.data?.isKycDone) {
-        Swal.fire({
-          title: "Oops...!",
-          titleText:
-            "It seems your KYC is pending. Please complete your KYC first.",
-          padding: "2em",
-          html: `<img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
-          showCancelButton: true,
-          confirmButtonText: "Complete Your KYC",
-          denyButtonText: `Don't save`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.push("/myAccount");
-          }
-        });
-        return;
-      }
+ 
       setOpenCoinModal(true);
     } else {
       handleLoginClick();
