@@ -39,7 +39,8 @@ import {
   setTotalSilverWeight,
   setUseVaultBalanceSilver,
   calculatePurchasedGoldWeight,
-  calculatePurchasedSilverWeight
+  calculatePurchasedSilverWeight,
+  setUseVaultBalanceGold
 } from "@/redux/cartSlice";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProgressBar from "@/components/progressBar";
@@ -118,6 +119,8 @@ const Cart = () => {
 
   useEffect(() => {
     getAllProductsOfCart();
+    dispatch(setUseVaultBalanceGold(false));
+    dispatch(setUseVaultBalanceSilver(false));
     dispatch(setGoldVaultBalance(goldVaultBalance));
     dispatch(setSilverVaultBalance(silverVaultBalance));
     calculateTotals();
@@ -407,25 +410,28 @@ const Cart = () => {
       return;
     }
 
-    if (!user.data.isKycDone) {
-      Swal.fire({
-        title: "Oops...!",
-        titleText:
-          "It seems your KYC is pending. Please complete your KYC first.",
-        padding: "2em",
-        html: `<img src="/lottie/oops.gif" class="swal2-image-custom" alt="Successfully Done">`,
-        showCancelButton: true,
-        confirmButtonText: "Complete Your KYC",
-        denyButtonText: `Don't save`,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          router.push("/myAccount");
-        }
-      });
-      return;
-    } else {
-      router.push(`/checkout?data=${encryptedPayload}`);
+    if (isGoldVault || isSilverVault) {
+      if (!user.data.isKycDone) {
+        Swal.fire({
+          title: "Oops...!",
+          titleText:
+            "It seems your KYC is pending. Please complete your KYC first.",
+          padding: "2em",
+          html: `<img src="/lottie/oops.gif" class="swal2-image-custom" alt="Successfully Done">`,
+          showCancelButton: true,
+          confirmButtonText: "Complete Your KYC",
+          denyButtonText: `Don't save`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/myAccount");
+          }
+        });
+        return;
+      } else {
+        router.push(`/checkout?data=${encryptedPayload}`);
+      }
     }
+    router.push(`/checkout?data=${encryptedPayload}`);
   };
 
   const renderPriceBreakdownItemCart = ({
