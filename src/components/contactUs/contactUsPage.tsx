@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import OtpModal from "@/components/modals/otpModal";
+import {} from "../../../public/images/MailiIcon.png"
 
 const Contacts = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -144,7 +145,7 @@ const Contacts = () => {
               linkTo="tel:9289480033"
             />
             <Card
-              imageUrl="https://www.brightdigigold.com/images/email.png"
+              imageUrl="https://brightdigigold.s3.ap-south-1.amazonaws.com/Mail+icon.png"
               title="MAIL US"
               description="support@brightdigigold.com"
               linkTo="mailto:support@brightdigigold.com"
