@@ -264,7 +264,7 @@ const Footer = () => {
                         href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                         className="cursor-pointer"
                       >
-                        <img src="/lottie/app-store-button.png" className="" />
+                        <img src="/lottie/app-store-button.png" className="" alt="app store pic" />
                       </Link>
                     </div>
                   </div>
