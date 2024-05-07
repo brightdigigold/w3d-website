@@ -810,9 +810,8 @@ const BuySell = () => {
         >
           <NextImage
             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
-            // width={180} height={180}
-            width={16 * 10} // 16 units width
-            height={9 * 10} // 9 units height
+            width={16 * 10} 
+            height={9 * 10}
             alt="google play button"
           />
         </Link>
@@ -822,9 +821,8 @@ const BuySell = () => {
         >
           <NextImage
             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
-            // width={180} height={180}
-            width={16 * 10} // 16 units width
-            height={9 * 10} // 9 units height
+            width={16 * 10} 
+            height={9 * 10}
             alt="app store button"
           />
         </Link>

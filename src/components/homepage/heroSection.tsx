@@ -18,6 +18,7 @@ import { fetchWalletData } from "@/redux/vaultSlice";
 import NextImage from "../nextImage";
 import Image from "next/image"
 import AkshayTrityaOffer from "./akshatrityaModal";
+import { } from "../../../public/bdgwhite.png"
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -102,11 +103,15 @@ const HeroSection = () => {
               <Image
                 src="/bdgwhite.png"
                 alt="Your Company"
-                width={400}
-                height={400}
-                className="absolute  opacity-20"
+                width={24 * 10}
+                height={16 * 10}
+                className="absolute  opacity-40 h-72 top-72 hidden sm:block"
               />
             </div>
+            {/* <div className="relative">
+              <div className="absolute top-72 h-72 opacity-40 bg-cover bg-no-repeat bg-center hidden sm:block" style={{ backgroundImage: `url('../../../public/bdgwhite.png')` }}></div>
+            </div> */}
+
             <div className="grid lg:grid-cols-2 gap-4">
               <div className="hidden lg:block mt-10">
                 <motion.h1
@@ -155,16 +160,11 @@ const HeroSection = () => {
                       href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                       className="cursor-pointer"
                     >
-                      {/* <NextImage
-                        src="/lottie/google-play-button.png"
-                        width={180} height={180}
-                        // className="h-14"
-                        alt="google play button"
-                      /> */}
+
                       <NextImage
                         src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
                         alt="google play button"
-                        width={18 * 12} // 16 units width
+                        width={18 * 12}
                         height={9 * 10}
                       />
                     </Link>
@@ -174,10 +174,8 @@ const HeroSection = () => {
                     >
                       <NextImage
                         src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
-                        // width={180} height={180}
-                        width={18 * 12} // 16 units width
-                        height={9 * 10} // 9 units height
-                        // className="h-14"
+                        width={18 * 12}
+                        height={9 * 10}
                         alt="app store button"
                       />
                     </Link>
