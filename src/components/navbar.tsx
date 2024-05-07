@@ -194,7 +194,7 @@ const Navbar = () => {
                     prefetch={true}
                     className="text-gray-300 rounded-md text-md extrabold xl:hidden"
                   >
-                    <img src="/images/cart.png" className="h-6 ml-2" />
+                    <img src="/images/cart.png" alt="cart pic" className="h-6 ml-2" />
                   </Link>
                 )}
                 {!isloggedIn && (

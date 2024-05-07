@@ -23,15 +23,6 @@ const Footer = () => {
         <>
           <div className=" fixed bottom-0 loginGrad p-2 grid grid-cols-4 w-full z-[40] py-3 border-t xl:hidden">
             <div className=" flex justify-center">
-              {/* <Link href="/" className=" text-white text-sm">
-                <HomeIcon className="h-7  mx-auto text-gold01" />
-                <img
-                  src="/images/homeNav.png" className="h-7 mx-auto "
-                  src={isHomeClicked ? "/images/anotherImage.png " : "/images/homeNav.png"}
-                />
-
-                Home
-              </Link> */}
               <Link href="/" className="text-white text-sm" onClick={() => handleLinkClick('home')}>
                 <img
                   src={activeLink === 'home' ? "/images/homeNav.png" : "/images/homeNav_alt.png"}
@@ -42,11 +33,6 @@ const Footer = () => {
               </Link>
             </div>
             <div className=" flex justify-center">
-              {/* <Link href="/dashboard" className=" text-white text-sm">
-                
-                <img src="/images/investment.png" className="h-7 mx-auto " />
-                Transactions
-              </Link> */}
               <Link href="/dashboard" className="text-white text-sm" onClick={() => handleLinkClick('dashboard')}>
                 <img
                   src={activeLink === 'dashboard' ? "/images/investment.png" : "/images/investment _active.png"}
@@ -58,16 +44,14 @@ const Footer = () => {
             </div>
             <div className=" flex justify-center">
               <Link href="/coins" className=" text-white text-sm" onClick={() => handleLinkClick('coins')}>
-                {/* <TruckIcon className="h-7  mx-auto text-gold01" /> */}
-                <img src={activeLink === 'coins' ? "/images/products.png" : "/images/products_alt.png"} className="h-7 mx-auto " />
+                <img alt="product pic" src={activeLink === 'coins' ? "/images/products.png" : "/images/products_alt.png"} className="h-7 mx-auto " />
                 Products
               </Link>
             </div>
 
             <div className=" flex justify-center">
               <Link href="/myAccount" className=" text-white text-sm" onClick={() => handleLinkClick('myAccount')}>
-                {/* <UserIcon className="h-7  mx-auto text-gold01" /> */}
-                <img src={activeLink === 'myAccount' ? "/images/profile.png" : "/images/profilealt.png"} className="h-7 mx-auto " />
+                <img alt="user icon" src={activeLink === 'myAccount' ? "/images/profile.png" : "/images/profilealt.png"} className="h-7 mx-auto " />
                 Profile
               </Link>
             </div>
@@ -90,11 +74,6 @@ const Footer = () => {
                           href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                           className="cursor-pointer"
                         >
-                          {/* <Lottie
-                    animationData={IOS}
-                    className="h-32 absolute -top-16 -left-2"
-                    loop={true}
-                  /> */}
                           <img
                             src="/lottie/google-play-button.png"
                             className="pb-4 md:pb-0"
@@ -105,12 +84,7 @@ const Footer = () => {
                           href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                           className="cursor-pointer"
                         >
-                          {/* <img className="h-10" src="/andriod.png" alt="Your Company" /> */}
-                          {/* <Lottie
-                    animationData={GooglePlay}
-                    className="h-32 absolute -top-16 left-28"
-                    loop={true}
-                  /> */}
+
                           <img
                             src="/lottie/app-store-button.png"
                             className=""
@@ -257,12 +231,6 @@ const Footer = () => {
                     </ul>
                   </div>
                 </div>
-
-                {/* <div>
-            <p className="text-center text-white text-sm">
-              © BrightDiGiGold. All Rights Reserved.
-            </p>
-          </div> */}
               </div>
             </div>
           </div>
@@ -286,26 +254,16 @@ const Footer = () => {
                         href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                         className="cursor-pointer"
                       >
-                        {/* <Lottie
-                    animationData={IOS}
-                    className="h-32 absolute -top-16 -left-2"
-                    loop={true}
-                  /> */}
                         <img
                           src="/lottie/google-play-button.png"
                           className="pb-4 md:pb-0"
+                          alt="google play button"
                         />
                       </Link>
                       <Link
                         href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                         className="cursor-pointer"
                       >
-                        {/* <img className="h-10" src="/andriod.png" alt="Your Company" /> */}
-                        {/* <Lottie
-                    animationData={GooglePlay}
-                    className="h-32 absolute -top-16 left-28"
-                    loop={true}
-                  /> */}
                         <img src="/lottie/app-store-button.png" className="" />
                       </Link>
                     </div>
@@ -449,12 +407,6 @@ const Footer = () => {
                   </ul>
                 </div>
               </div>
-
-              {/* <div>
-            <p className="text-center text-white text-sm">
-              © BrightDiGiGold. All Rights Reserved.
-            </p>
-          </div> */}
             </div>
           </div>
         </div>
