@@ -162,10 +162,10 @@ const HeroSection = () => {
                         alt="google play button"
                       /> */}
                       <NextImage
-                        src="/lottie/google-play-button.png"
-                        width={16 * 10} // 16 units width
-                        height={9 * 10} // 9 units height
+                        src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
                         alt="google play button"
+                        width={18 * 12} // 16 units width
+                        height={9 * 10}
                       />
                     </Link>
                     <Link target="_blank"
@@ -173,9 +173,9 @@ const HeroSection = () => {
                       className="cursor-pointer"
                     >
                       <NextImage
-                        src="/lottie/app-store-button.png"
+                        src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
                         // width={180} height={180}
-                        width={16 * 10} // 16 units width
+                        width={18 * 12} // 16 units width
                         height={9 * 10} // 9 units height
                         // className="h-14"
                         alt="app store button"

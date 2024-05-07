@@ -75,7 +75,7 @@ const Footer = () => {
                           className="cursor-pointer"
                         >
                           <img
-                            src="/lottie/google-play-button.png"
+                            src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
                             className="pb-4 md:pb-0"
                             alt="google play button"
                           />
@@ -86,7 +86,7 @@ const Footer = () => {
                         >
 
                           <img
-                            src="/lottie/app-store-button.png"
+                            src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
                             className=""
                             alt="app store button"
                           />
@@ -255,7 +255,7 @@ const Footer = () => {
                         className="cursor-pointer"
                       >
                         <img
-                          src="/lottie/google-play-button.png"
+                          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
                           className="pb-4 md:pb-0"
                           alt="google play button"
                         />
@@ -264,7 +264,7 @@ const Footer = () => {
                         href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                         className="cursor-pointer"
                       >
-                        <img src="/lottie/app-store-button.png" className="" alt="app store pic" />
+                        <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png" className="" alt="app store pic" />
                       </Link>
                     </div>
                   </div>

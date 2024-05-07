@@ -809,7 +809,7 @@ const BuySell = () => {
           className="cursor-pointer"
         >
           <NextImage
-            src="/lottie/google-play-button.png"
+            src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
             // width={180} height={180}
             width={16 * 10} // 16 units width
             height={9 * 10} // 9 units height
@@ -821,7 +821,7 @@ const BuySell = () => {
           className="cursor-pointer"
         >
           <NextImage
-            src="/lottie/app-store-button.png"
+            src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
             // width={180} height={180}
             width={16 * 10} // 16 units width
             height={9 * 10} // 9 units height
