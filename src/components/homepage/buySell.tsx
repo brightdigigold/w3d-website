@@ -257,10 +257,15 @@ const BuySell = () => {
 
   const handleEnteredAmountChange = (e: any) => {
     // e.preventDefault();
+    
     dispatch(clearCoupon());
     setActiveTabPurchase('rupees')
     dispatch(setTransactionType('rupees'))
     const enteredValue = ParseFloat(e.target.value, 4);
+    if (activeTabPurchase === 'rupees' && isNaN(enteredValue)) {
+      setValidationError("Please enter numbers only.");
+      return; 
+    }
     // if (activeTabPurchase === 'rupees' && e.target.value.includes('.')) {
     //   setValidationError("Decimal values are not allowed for rupees");
     //   return; // Exit the function early
@@ -288,12 +293,16 @@ const BuySell = () => {
   };
 
   const handleEnteredAmountChangeGrams = (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
     dispatch(clearCoupon());
     setActiveTabPurchase('grams')
     dispatch(setTransactionType('grams'));
 
     const enteredValue = ParseFloat(e.target.value, 4);
+    if (activeTabPurchase === 'grams' && isNaN(enteredValue)) {
+      setValidationError("Please enter numbers only.");
+      return; 
+    }
 
     dispatch(clearCoupon());
     if (!enteredAmount) {
@@ -653,7 +662,7 @@ const BuySell = () => {
                   </div>
 
                   <input
-                    // type="number"
+                    type="text"
                     inputMode="numeric"
                     className={`bg-transparent pl-7 py-1 focus:outline-none text-gray-100 w-full ${activeTabPurchase === "rupees" ? " text-2xl sm:text-3xl" : "text-sm sm:text-xl"}`}
                     placeholder="0000"
@@ -670,25 +679,26 @@ const BuySell = () => {
                           : enteredAmount
                         : totalAmount
                     }
-                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                      // Prevent the input of a decimal point if purchase type is rupees
-                      if (activeTabPurchase === "rupees" && e.key === ".") {
-                        e.preventDefault();
-                      }
-                      // Prevent entering negative values
-                      if (e.key === "-" || e.key === "e" || e.key === "E") {
-                        e.preventDefault();
-                      }
-                      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-                        e.preventDefault(); // Prevent the default action
-                      }
-                    }}
+                  onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                    // Prevent the input of a decimal point if purchase type is rupees
+                    if (activeTabPurchase === "rupees" && e.key === ".") {
+                      e.preventDefault();
+                    }
+                    // Prevent entering negative values
+                    if (e.key === "-" || e.key === "e" || e.key === "E") {
+                      e.preventDefault();
+                    }
+                    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                      e.preventDefault(); // Prevent the default action
+                    }
+                  }}
                   />
                 </div>
                 <div className="relative rounded-md shadow-sm">
+                  {/* <input type="text" inputMode="numeric" /> */}
 
                   <input
-                    // type="number"
+                    type="text"
                     inputMode="numeric"
                     placeholder="0.0000"
                     onClick={() => handleTabRupeesAndGrams("grams")}
@@ -810,7 +820,7 @@ const BuySell = () => {
         >
           <NextImage
             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
-            width={16 * 10} 
+            width={16 * 10}
             height={9 * 10}
             alt="google play button"
           />
@@ -821,7 +831,7 @@ const BuySell = () => {
         >
           <NextImage
             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
-            width={16 * 10} 
+            width={16 * 10}
             height={9 * 10}
             alt="app store button"
           />
