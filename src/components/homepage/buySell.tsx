@@ -698,7 +698,7 @@ const BuySell = () => {
                   {/* <input type="text" inputMode="numeric" /> */}
 
                   <input
-                    type="text"
+                    type="number"
                     inputMode="numeric"
                     placeholder="0.0000"
                     onClick={() => handleTabRupeesAndGrams("grams")}
