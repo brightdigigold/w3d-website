@@ -233,8 +233,8 @@ const BuySell = () => {
   const handleTabRupeesAndGrams = (tab: "rupees" | "grams") => {
     dispatch(clearCoupon());
     setActiveTabPurchase(tab);
-    dispatch(setTransactionType(tab));
-    dispatch(setEnteredAmount(tab === "rupees" ? totalAmount : ParseFloat(metalQuantity, 4)));
+    // dispatch(setTransactionType(tab));
+    // dispatch(setEnteredAmount(tab === "rupees" ? totalAmount : ParseFloat(metalQuantity, 4)));
     setValidationError("");
   };
 
@@ -262,11 +262,11 @@ const BuySell = () => {
     setActiveTabPurchase('rupees')
     dispatch(setTransactionType('rupees'))
     const enteredValue = ParseFloat(e.target.value, 4);
-    if (activeTabPurchase === 'rupees' && isNaN(enteredValue)) {
+    if (transactionType === 'rupees' && isNaN(enteredValue)) {
       setValidationError("Please enter numbers only.");
       return; 
     }
-    // if (activeTabPurchase === 'rupees' && e.target.value.includes('.')) {
+    // if (transactionType === 'rupees' && e.target.value.includes('.')) {
     //   setValidationError("Decimal values are not allowed for rupees");
     //   return; // Exit the function early
     // }
@@ -299,7 +299,7 @@ const BuySell = () => {
     dispatch(setTransactionType('grams'));
 
     const enteredValue = ParseFloat(e.target.value, 4);
-    if (activeTabPurchase === 'grams' && isNaN(enteredValue)) {
+    if (transactionType === 'grams' && isNaN(enteredValue)) {
       setValidationError("Please enter numbers only.");
       return; 
     }
@@ -366,7 +366,7 @@ const BuySell = () => {
 
     const minimumSellAmountInRupees = 100;
 
-    const minimumSellAmount = activeTabPurchase === 'grams'
+    const minimumSellAmount = transactionType === 'grams'
       ? (metalType === "gold" ? minimumSellInGramsGold : minimumSellInGramsSilver)
       : minimumSellAmountInRupees;
 
@@ -673,7 +673,7 @@ const BuySell = () => {
                     onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
                     // step="0.0001"
                     value={
-                      activeTabPurchase === "rupees"
+                      transactionType === "rupees"
                         ? enteredAmount === 0
                           ? ""
                           : enteredAmount
@@ -713,7 +713,7 @@ const BuySell = () => {
                     }}
                     className={`bg-transparent w-full pr-8 sm:pr-14 py-1  focus:outline-none text-gray-100 text-right ${activeTabPurchase === "grams" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"}`}
                     value={
-                      activeTabPurchase === "grams"
+                      transactionType === "grams"
                         ? enteredAmount
                         : ParseFloat(metalQuantity, 4)
                     }
