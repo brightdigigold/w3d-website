@@ -27,14 +27,14 @@ const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLogin
         <div
             className="py-4 rounded-md shadow-xl text-center coins_background transition-transform transform hover:scale-105 hover:shadow-lg hover:shadow-sky-100"
         >
-            {item.slug == "5-Gram-Gold-Coin" && <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+            {/* {item.slug == "5-Gram-Gold-Coin" && <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
                 <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
-            </div>}
+            </div>} */}
 
-            {item.slug == "10-Gram-Gold-Coin" && <div className=" absolute top-0 left-0 px-0  rounded-bl-lg">
+            {/* {item.slug == "10-Gram-Gold-Coin" && <div className=" absolute top-0 left-0 px-0  rounded-bl-lg">
                 <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
 
-            </div>}
+            </div>} */}
             <div
                 style={{
                     backgroundSize: "cover",

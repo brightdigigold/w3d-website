@@ -14,7 +14,7 @@ import {
 import { Suspense } from "react";
 import Loading from "./loading";
 import { Metadata } from "next";
-import AkshaytrityaOfferBanner from "@/components/homepage/akshaytrityaOfferBanner";
+
 
 export default function Home() {
   return (
@@ -22,7 +22,7 @@ export default function Home() {
       <HeroSection />
       {/* <OfferSlider /> */}
       <Promotional />
-      <AkshaytrityaOfferBanner />
+      {/* <AkshaytrityaOfferBanner /> */}
       <Products />
       <HowItWorks />
       <Marketing />

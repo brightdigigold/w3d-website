@@ -48,7 +48,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const [openCartSidebar, setOpenCartSidebar] = useState<boolean>(false);
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
-  const [applyAkshaytrityaoffer, setapplyAkshaytrityaoffer] = useState(false);
+  // const [applyAkshaytrityaoffer, setapplyAkshaytrityaoffer] = useState(false);
 
 
 
@@ -129,18 +129,18 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     );
   }, [productsDetailById, quantity, goldData.totalPrice, silverData.totalPrice]);
 
-  const akshayTrityOfferHandler = () => {
-    setapplyAkshaytrityaoffer(true)
-    Swal.fire({
-      html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
-      title: `You will receive ${quantity} <br /> ${productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver" : "5-Gram-Silver"}-${quantity === 1 ? 'coin' : "Coins"} for free!`,
-      // text: "AKSHAYTRITYA OFFER APPLIED",
-      width: "450px",
-      padding: "2em",
-      showConfirmButton: false,
-      timer: 5000,
-    });
-  }
+  // const akshayTrityOfferHandler = () => {
+  //   setapplyAkshaytrityaoffer(true)
+  //   Swal.fire({
+  //     html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
+  //     title: `You will receive ${quantity} <br /> ${productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver" : "5-Gram-Silver"}-${quantity === 1 ? 'coin' : "Coins"} for free!`,
+  //     // text: "AKSHAYTRITYA OFFER APPLIED",
+  //     width: "450px",
+  //     padding: "2em",
+  //     showConfirmButton: false,
+  //     timer: 5000,
+  //   });
+  // }
 
 
   if (!productsDetailById) {
@@ -168,7 +168,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
         />
       )}
 
-      {openCoinModal && (
+      {/* {openCoinModal && (
         <CoinModal
           akshayTrityaOfferApplied={applyAkshaytrityaoffer}
           totalCoins={quantity}
@@ -176,7 +176,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
           openModalOfCoin={openCoinModal}
           closeModalOfCoin={closeCoinModalHandler}
         />
-      )}
+      )} */}
 
       <div className="grid xl:grid-cols-5 gap-12">
         <div className="col-span-5 xl:col-span-2 relative">
@@ -186,17 +186,17 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               <p className="font-medium">Out Of Stock</p>
             </div>
           )}
-          {id == "5-Gram-Gold-Coin" && (
+          {/* {id == "5-Gram-Gold-Coin" && (
             <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
               <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
             </div>
-          )}
+          )} */}
 
-          {id == "10-Gram-Gold-Coin" && (
+          {/* {id == "10-Gram-Gold-Coin" && (
             <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
               <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
             </div>
-          )}
+          )} */}
 
           <div className="hidden sm:block bg-themeLight rounded p-4">
             <SimpleImageSlider
@@ -286,7 +286,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
             {/* </div>} */}
 
 
-            <div className={`fade-section ${applyAkshaytrityaoffer ? 'disabled' : ''}`}>
+            <div className={`fade-section }`}>
 
               <div>
                 {/* GO TO CART */}
@@ -295,7 +295,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                     <Link className="cursor-pointer" href="/cart">
                       <CustomImageButton
                         img="/lottie/Go to cart.gif"
-                        isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
+                        isDisabled={!productsDetailById.inStock }
                         title="GO TO CART"
                       />
                     </Link>
@@ -307,7 +307,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                   <div>
                     <CustomImageButton
                       img="/lottie/updatenow.png"
-                      isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
+                      isDisabled={!productsDetailById.inStock }
                       handleClick={() => {
                         addToCartHandler("UpdateCart");
                       }}
@@ -320,7 +320,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                 {cartQuantity === 0 && (
                   <CustomImageButton
                     img="/lottie/addcart.gif"
-                    isDisabled={!productsDetailById.inStock || applyAkshaytrityaoffer}
+                    isDisabled={!productsDetailById.inStock }
                     handleClick={() => {
                       addToCartHandler("AddToCart");
                     }}
@@ -335,7 +335,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
           </div>
 
 
-          {
+          {/* {
             id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (
               <div className="text-center">
                 <CustomButton
@@ -360,7 +360,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                 </div>
               </div>
             ) : null
-          }
+          } */}
         </div>
         <div className="col-span-5 xl:col-span-3">
           <div className="flex justify-between items-center">
@@ -386,14 +386,14 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
             <div className="flex items-center rounded-lg bg-themeLight">
               <div onClick={() => {
                 decreaseQty();
-                setapplyAkshaytrityaoffer(false)
+                // setapplyAkshaytrityaoffer(false)
               }} className={styles.p1}>
                 -
               </div>
               <div className="">{quantity}</div>
               <div onClick={() => {
                 increaseQty();
-                setapplyAkshaytrityaoffer(false)
+                // setapplyAkshaytrityaoffer(false)
               }} className={styles.p2}>
                 +
               </div>

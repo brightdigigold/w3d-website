@@ -16,23 +16,22 @@ import OtpModal from "../modals/otpModal";
 import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import NextImage from "../nextImage";
-import Image from "next/image"
-import AkshayTrityaOffer from "./akshatrityaModal";
+import Image from "next/image";
 import { } from "../../../public/bdgwhite.png"
 
 const HeroSection = () => {
   const dispatch = useDispatch();
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
-  const [akshayTrityaOffer, setAkshayTrityaOffer] = useState<boolean>(false);
+  // const [akshayTrityaOffer, setAkshayTrityaOffer] = useState<boolean>(false);
 
-  useEffect(() => {
-    const hasVisited = sessionStorage.getItem('hasVisited');
-    if (!hasVisited) {
-      setAkshayTrityaOffer(true);
-      sessionStorage.setItem('hasVisited', 'true');
-    }
-  }, []);
+  // useEffect(() => {
+  //   const hasVisited = sessionStorage.getItem('hasVisited');
+  //   if (!hasVisited) {
+  //     setAkshayTrityaOffer(true);
+  //     sessionStorage.setItem('hasVisited', 'true');
+  //   }
+  // }, []);
 
   const onClose = () => {
     dispatch(setShowProfileForm(false));
@@ -89,7 +88,7 @@ const HeroSection = () => {
 
   return (
     <>
-      {akshayTrityaOffer && <AkshayTrityaOffer />}
+      {/* {akshayTrityaOffer && <AkshayTrityaOffer />} */}
       <div className="bg-theme pt-28 py-10" >
         {otpModal && <OtpModal />}
 

@@ -71,9 +71,9 @@ const Products = () => {
             </div>
 
             <div className="">
-              <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+              {/* <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
                 <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
-              </div>
+              </div> */}
               <img
                 alt="products"
                 className="h-28 sm:h-40 mx-auto mt-10"
@@ -167,9 +167,9 @@ const Products = () => {
             </div>
 
             <div className="">
-              <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+              {/* <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
                 <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
-              </div>
+              </div> */}
               <img
                 alt="products"
                 className="h-28 sm:h-40 mx-auto mt-10"
