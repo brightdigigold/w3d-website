@@ -25,7 +25,7 @@ interface CoinModalProps {
   closeModalOfCoin: () => void;
   productsDetailById: any;
   totalCoins: number;
-  akshayTrityaOfferApplied: boolean;
+  // akshayTrityaOfferApplied: boolean;
 }
 
 export default function CoinModal({
@@ -33,7 +33,7 @@ export default function CoinModal({
   closeModalOfCoin,
   productsDetailById,
   totalCoins,
-  akshayTrityaOfferApplied
+  // akshayTrityaOfferApplied
 }: CoinModalProps) {
   const [showAdditionalContent, setShowAdditionalContent] = useState(true);
   const cancelButtonRef = useRef(null);
@@ -112,7 +112,7 @@ export default function CoinModal({
             ? goldData.totalPrice
             : silverData.totalPrice,
         fromApp: false,
-        couponCode: akshayTrityaOfferApplied ? "AKSHAYTRITYA" : null,
+        couponCode: null,
         product_quantity: totalCoins,
         product_id: productsDetailById._id,
       };
@@ -221,15 +221,14 @@ export default function CoinModal({
       >
         {openAddressModal && (
           <SelectAddress
-            akshayTrityaOfferApplied={akshayTrityaOfferApplied}
+            // akshayTrityaOfferApplied={akshayTrityaOfferApplied}
             totalAmountValue={totalAmountValue}
             transactionId={transactionId}
             previewData={previewData}
             openAddressModal={openAddressModal}
             closeAddressModal={closeAddressModalHandler}
             productsDetailById={productsDetailById}
-            metalTypeForProgressBar={metalTypeForProgressBar}
-          />
+            metalTypeForProgressBar={metalTypeForProgressBar} akshayTrityaOfferApplied={false} />
         )}
         <Transition.Child
           as={Fragment}
@@ -283,7 +282,7 @@ export default function CoinModal({
                                   <div className="text-sm sm:text-base w-full tracking-[.1em] bold text-white">
                                     Available Vault Balance :
                                   </div>
-                                  {!akshayTrityaOfferApplied && <div className="flex items-center mt-2 bold text-white ">
+                                  {<div className="flex items-center mt-2 bold text-white ">
                                     <label className="semibold dark:text-gray-300 text-sm sm:text-base">
                                       Convert All
                                     </label>
@@ -298,7 +297,7 @@ export default function CoinModal({
                                         }`}
                                       disabled={
                                         goldVaultBalance === 0 &&
-                                        silverVaultBalance === 0 && akshayTrityaOfferApplied
+                                        silverVaultBalance === 0
                                       }
                                       onChange={handleSelectConvertFromVault}
                                     />

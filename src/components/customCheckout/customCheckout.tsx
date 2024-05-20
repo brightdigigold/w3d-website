@@ -79,8 +79,8 @@ const CustomCheckout = ({ data }: any) => {
 
   const initializeSDK = async () => {
     cashfree = await load({
-      mode: "production",
-      // mode: "sandbox",
+      // mode: "production",
+      mode: "sandbox",
     });
   };
   initializeSDK();
@@ -95,8 +95,8 @@ const CustomCheckout = ({ data }: any) => {
 
     const checkoutOptions = {
       paymentSessionId: sessionId,
-      redirectTarget: "_self",
-      // redirectTarget: "_blank",
+      // redirectTarget: "_self",
+      redirectTarget: "_blank",
 
     };
     cashfree.checkout(checkoutOptions);

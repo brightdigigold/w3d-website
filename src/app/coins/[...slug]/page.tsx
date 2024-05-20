@@ -48,7 +48,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const [openCartSidebar, setOpenCartSidebar] = useState<boolean>(false);
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
-  // const [applyAkshaytrityaoffer, setapplyAkshaytrityaoffer] = useState(false);
+  const [applyAkshaytrityaoffer, setapplyAkshaytrityaoffer] = useState(false);
 
 
 
@@ -129,18 +129,18 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     );
   }, [productsDetailById, quantity, goldData.totalPrice, silverData.totalPrice]);
 
-  // const akshayTrityOfferHandler = () => {
-  //   setapplyAkshaytrityaoffer(true)
-  //   Swal.fire({
-  //     html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
-  //     title: `You will receive ${quantity} <br /> ${productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver" : "5-Gram-Silver"}-${quantity === 1 ? 'coin' : "Coins"} for free!`,
-  //     // text: "AKSHAYTRITYA OFFER APPLIED",
-  //     width: "450px",
-  //     padding: "2em",
-  //     showConfirmButton: false,
-  //     timer: 5000,
-  //   });
-  // }
+  const akshayTrityOfferHandler = () => {
+    setapplyAkshaytrityaoffer(true)
+    Swal.fire({
+      html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
+      title: `You will receive ${quantity} <br /> ${productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver" : "5-Gram-Silver"}-${quantity === 1 ? 'coin' : "Coins"} for free!`,
+      // text: "AKSHAYTRITYA OFFER APPLIED",
+      width: "450px",
+      padding: "2em",
+      showConfirmButton: false,
+      timer: 5000,
+    });
+  }
 
 
   if (!productsDetailById) {
@@ -168,15 +168,15 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
         />
       )}
 
-      {/* {openCoinModal && (
+      {openCoinModal && (
         <CoinModal
-          akshayTrityaOfferApplied={applyAkshaytrityaoffer}
+          // akshayTrityaOfferApplied={applyAkshaytrityaoffer}
           totalCoins={quantity}
           productsDetailById={productsDetailById}
           openModalOfCoin={openCoinModal}
           closeModalOfCoin={closeCoinModalHandler}
         />
-      )} */}
+      )}
 
       <div className="grid xl:grid-cols-5 gap-12">
         <div className="col-span-5 xl:col-span-2 relative">
