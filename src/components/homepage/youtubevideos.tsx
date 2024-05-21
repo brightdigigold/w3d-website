@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 export default function Videos() {
     const [videos, setVideos] = useState([
-        { id: "JhuNd_fs5Oo", title: "Why Bright Digi Gold ?",img:"/images/buybanner.png" },
+        { id: "JhuNd_fs5Oo", title: "Why Bright Digi Gold ?",img:"/images/whybdg.jpg" },
         { id: "r2dZ_py_0yc", title: "How to Buy Gold ?",img:"/images/buygold.png" },
         { id: "aV1XiNM5uHw", title: "How to Sell Gold ?",img:"/images/sellbanner.png"  },
         { id: "5bKB71zRMbE", title: "How to get delivery of your gold ?",img:"/images/delivery.png" },
