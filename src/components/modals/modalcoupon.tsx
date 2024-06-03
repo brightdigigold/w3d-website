@@ -85,6 +85,8 @@ export default function ModalCoupon({ isOpen, onClose }: any) {
     onClose(false);
   };
 
+  console.log("metalType", metalType);
+
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -217,6 +219,7 @@ export default function ModalCoupon({ isOpen, onClose }: any) {
                     fromCart={true}
                     metalTypeForProgressBar={metalType.toLowerCase()}
                     displayMetalType={metalType}
+                    purchaseType={purchaseType}
                   />
                 </div>
               </Dialog.Panel>
