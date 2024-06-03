@@ -44,8 +44,6 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       .padStart(2, "0")}`;
   }, []);
 
-  console.log('purchaseType', purchaseType)
-
   const getMetalPrice = useCallback(() => {
     if (displayMetalType.toLowerCase() === "gold") {
       return (

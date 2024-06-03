@@ -42,6 +42,9 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   const cancelButtonRef = useRef(null);
   const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value.replace(/ gm/g, '');
 
+  console.log("previewData", previewData);
+  console.log("metalType", metalType)
+
   useEffect(() => {
     if (welcomeGold) {
       dispatch(clearCoupon());
@@ -153,7 +156,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
               <Dialog.Panel className="text-white relative transform overflow-hidden rounded-lg coins_backgroun  text-left shadow-xl transition-all sm:my-8 w-full sm:w-full sm:max-w-lg ">
                 <div className="coins_backgroun px-4 pb-4 pt-5 sm:p-4 sm:pb-4">
                   <div className=" flex items-center gap-4 mb-4 pt-4">
-                    <img src="/Goldbarbanner.png" className="h-5"></img>
+                    {metalType == "gold" ? <img src="/Goldbarbanner.png" className="h-5" /> : <img src="/Silverbar.png" className="h-5" />}
                     <p className="text-base sm:text-xl ">
                       {purchaseType === "buy" ? "Price" : "Sell"} Breakdown
                     </p>
