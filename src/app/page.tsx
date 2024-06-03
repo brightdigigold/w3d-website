@@ -15,6 +15,8 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import { Metadata } from "next";
 import Videos from "@/components/homepage/youtubevideos";
+import Image from "next/image";
+// import {} "../../public/images/maintainanceImage.jpg"
 
 
 export default function Home() {
@@ -33,6 +35,8 @@ export default function Home() {
       <Blog />
       <Review />
       <Faq />
+      {/* <Image src="./images/maintainanceImage.jpg" alt="maintanance image" width={3000} height={100} /> */}
+      {/* <p className="text-center bold ">Website is under maintainance</p> */}
     </Suspense>
   );
 }
