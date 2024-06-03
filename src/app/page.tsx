@@ -22,11 +22,11 @@ import Image from "next/image";
 export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
-      {/* <HeroSection />
+      <HeroSection />
       <OfferSlider />
-      <Promotional /> */}
+      <Promotional />
       {/* <AkshaytrityaOfferBanner /> */}
-      {/* <Products />
+      <Products />
       <HowItWorks />
       <Videos />
       <Marketing />
@@ -34,7 +34,7 @@ export default function Home() {
       <Graph />
       <Blog />
       <Review />
-      <Faq /> */}
+      <Faq />
     </Suspense>
   );
 }
