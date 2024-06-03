@@ -40,7 +40,8 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             {/* <Navbar /> */}
-            {children}
+            {/* {children} */}
+            <img src="./images/maintainanceImage.jpg" alt="maintanance image" className="inset-0 w-full h-full object-cover" />
             {/* <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} /> */}
             {/* <Footer /> */}
           </PersistGate>

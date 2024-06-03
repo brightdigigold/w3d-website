@@ -35,7 +35,6 @@ export default function Home() {
       <Blog />
       <Review />
       <Faq /> */}
-      <img src="./images/maintainanceImage.jpg" alt="maintanance image" className="inset-0 w-full h-full object-cover" />
     </Suspense>
   );
 }
