@@ -161,13 +161,26 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                       {purchaseType === "buy" ? "Price" : "Sell"} Breakdown
                     </p>
                   </div>
+
+                  {/* <ul>
+                    {previewData.map((item, index) => (
+                      <li key={index}>
+                        <div className="flex justify-between py-1 border-b border-dashed border-gray-400">
+                          <div className="">{item.key}</div>
+                          <div className="text-sm sm:text-base bold text-blue-100">{item.value}</div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul> */}
+
                   <div className=" flex py-1 justify-between items-center border-b border-dashed border-gray-400">
                     <p className=" text-sm sm:text-base">
                       {purchaseType === "buy" ? "Purchasing" : "Sell"}{" "}
                       {metalType === "gold" ? "Gold" : "Silver"} Weight{" "}
                     </p>
-                    <p className=" text-sm sm:text-base bold text-blue-100">{ParseFloat(metalQuantity, 4)} gm</p>
+                    <p className="text-sm sm:text-base bold text-blue-100">{ParseFloat(metalQuantity, 4)} gm</p>
                   </div>
+
                   {purchaseType === "buy" && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">
