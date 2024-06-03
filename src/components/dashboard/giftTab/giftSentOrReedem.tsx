@@ -66,7 +66,7 @@ const Redeem = (refreshOnGiftSent: any) => {
             let decryptedResponse = JSON.parse(decryptedData);
             Swal.fire({
               html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
-              title: decryptedData ? decryptedResponse : "Oops!..",
+              title: decryptedData ? decryptedResponse?.message : "Oops!..",
               showConfirmButton: false,
               timer: 1500,
             });
