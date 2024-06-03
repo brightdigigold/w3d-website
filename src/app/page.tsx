@@ -22,21 +22,20 @@ import Image from "next/image";
 export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
-      <HeroSection />
+      {/* <HeroSection />
       <OfferSlider />
-      <Promotional />
+      <Promotional /> */}
       {/* <AkshaytrityaOfferBanner /> */}
-      <Products />
+      {/* <Products />
       <HowItWorks />
-      <Videos/>
+      <Videos />
       <Marketing />
       <ClientSlider />
       <Graph />
       <Blog />
       <Review />
-      <Faq />
-      {/* <Image src="./images/maintainanceImage.jpg" alt="maintanance image" width={3000} height={100} /> */}
-      {/* <p className="text-center bold ">Website is under maintainance</p> */}
+      <Faq /> */}
+      <img src="./images/maintainanceImage.jpg" alt="maintanance image" className="inset-0 w-full h-full object-cover" />
     </Suspense>
   );
 }

@@ -39,10 +39,10 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
       <body>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <Navbar />
+            {/* <Navbar /> */}
             {children}
-            <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
-            <Footer />
+            {/* <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} /> */}
+            {/* <Footer /> */}
           </PersistGate>
         </Provider>
       </body>
