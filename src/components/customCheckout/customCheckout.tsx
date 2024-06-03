@@ -42,10 +42,10 @@ const CustomCheckout = ({ data }: any) => {
       try {
         setLoading(true);
         const decryptedData = await funcForDecrypt(data);
-        console.log(
-          "decryptedData from custom checkout",
-          JSON.parse(decryptedData)
-        );
+        // console.log(
+        //   "decryptedData from custom checkout",
+        //   JSON.parse(decryptedData)
+        // );
         setpayload({ ...JSON.parse(decryptedData) });
         // const { ...itemMode } = JSON.parse(decryptedData);
         const { itemMode, totalAmount } = JSON.parse(decryptedData);
@@ -196,7 +196,7 @@ const CustomCheckout = ({ data }: any) => {
       .then(async (resAfterBuyReq) => {
         const decryptedData = await funcForDecrypt(resAfterBuyReq.data.payload);
 
-        console.log('decrypted data',decryptedData)
+        // console.log('decrypted data',decryptedData)
 
         if (JSON.parse(decryptedData).status) {
           orderIdRef.current = JSON.parse(decryptedData).data.order.order_id;
