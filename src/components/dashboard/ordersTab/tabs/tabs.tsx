@@ -414,7 +414,7 @@ const OrdersTabs = () => {
               <option value="BUY">BUY</option>
               <option value="SELL">SELL</option>
               <option value="PRODUCT">COINS</option>
-              <option value="GIFT">GIFT</option>
+              {/* <option value="GIFT">GIFT</option> */}
               <option value="REWARD">REWARD</option>
             </select>
           </div>
