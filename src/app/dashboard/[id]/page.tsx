@@ -73,7 +73,7 @@ function page({ params }: any) {
 
 
   useEffect(() => {
-    if (dataOfTransaction?.data?.transactionStatus === "SUCCESS" ) {
+    if (dataOfTransaction?.data?.transactionStatus === "SUCCESS") {
       mixpanel.track('Order Success', {
         "order_id": params.id,
         "item_type": dataOfTransaction?.data?.order_id?.itemType,
@@ -96,18 +96,21 @@ function page({ params }: any) {
           <div className="coins_background shadow-md rounded-md mb-100 text-center text-white py-12 relative">
             <div className=" flex justify-center">
               {dataOfTransaction?.data?.transactionStatus ===
-                "SUCCESS" && (
-                  <img
-                    src="/lottie/Successfully Done.gif"
-                    className=" absolute h-36 -top-16 "
-                  />)}
-              {dataOfTransaction?.data?.transactionStatus ===
+                "SUCCESS" ? (
+                <img
+                  src="/lottie/Successfully Done.gif"
+                  className=" absolute h-36 -top-16 "
+                />) : <img
+                src="https://brightdigigold.s3.ap-south-1.amazonaws.com/oops.gif"
+                className=" absolute h-36 -top-16"
+              />}
+              {/* {dataOfTransaction?.data?.transactionStatus ===
                 "PENDING" || "FAILED" && (
                   <img
                     src="https://brightdigigold.s3.ap-south-1.amazonaws.com/oops.gif"
                     className=" absolute h-36 -top-16"
                   />
-                )}
+                )} */}
             </div>
             {dataOfTransaction?.data?.order_id?.orderType === "BUY" &&
               dataOfTransaction?.data?.order_id?.itemType === "GOLD" && (
