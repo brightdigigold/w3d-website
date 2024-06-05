@@ -30,6 +30,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const memoizedDispatch = useCallback(dispatch, []);
 
+  console.log("progress bar",{purchaseType,
+    metalTypeForProgressBar,
+    fromCart,
+    displayMetalType})
+
   const calculateProgressBarWidth = useCallback(() => {
     const totalSeconds = 300;
     const remainingPercentage = (time / totalSeconds) * 100;
