@@ -53,23 +53,23 @@ function page({ params }: any) {
     transactionData(params.id);
   }, []);
 
-  // useEffect(() => {
-  //   const gotoDashboard = () => {
-  //     interval = setInterval(() => {
-  //       setRemainingTime(prevTime => prevTime - 1);
-  //     }, 1000);
+  useEffect(() => {
+    const gotoDashboard = () => {
+      interval = setInterval(() => {
+        setRemainingTime(prevTime => prevTime - 1);
+      }, 1000);
 
-  //     setTimeout(() => {
-  //       clearInterval(interval);
-  //       router.push("/dashboard");
-  //     }, 5000);
-  //   }
+      setTimeout(() => {
+        clearInterval(interval);
+        router.push("/dashboard");
+      }, 5000);
+    }
 
-  //   gotoDashboard();
+    gotoDashboard();
 
-  //   // Cleanup function to clear interval if component unmounts or changes
-  //   return () => clearInterval(interval);
-  // }, []);
+    // Cleanup function to clear interval if component unmounts or changes
+    return () => clearInterval(interval);
+  }, []);
 
 
   useEffect(() => {
@@ -192,7 +192,7 @@ function page({ params }: any) {
                 </button>
               </Link>
             )}
-            {dataOfTransaction?.data?.transactionStatus === "PENDING" && (
+            {/* {dataOfTransaction?.data?.transactionStatus === "PENDING" && (
               <Link
                 target="_blank"
                 href={`/dashboard`}
@@ -202,7 +202,7 @@ function page({ params }: any) {
                   <ArrowDownIcon className=" text-gold01 h-4 gap-2" />{" "}
                 </span>
               </Link>
-            )}
+            )} */}
             <p className="text-blue-200">Redirecting to dashboard in {remainingTime} seconds... </p>
           </div>
         </div>
