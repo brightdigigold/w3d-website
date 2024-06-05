@@ -15,6 +15,8 @@ function page({ params }: any) {
   const [remainingTime, setRemainingTime] = useState(5);
   let interval: NodeJS.Timeout;
 
+  console.log("transaction data==>", dataOfTransaction)
+
   const transactionData = async (t_id: any) => {
 
     const token = localStorage.getItem("token");
@@ -51,23 +53,23 @@ function page({ params }: any) {
     transactionData(params.id);
   }, []);
 
-  useEffect(() => {
-    const gotoDashboard = () => {
-      interval = setInterval(() => {
-        setRemainingTime(prevTime => prevTime - 1);
-      }, 1000);
+  // useEffect(() => {
+  //   const gotoDashboard = () => {
+  //     interval = setInterval(() => {
+  //       setRemainingTime(prevTime => prevTime - 1);
+  //     }, 1000);
 
-      setTimeout(() => {
-        clearInterval(interval);
-        router.push("/dashboard");
-      }, 5000);
-    }
+  //     setTimeout(() => {
+  //       clearInterval(interval);
+  //       router.push("/dashboard");
+  //     }, 5000);
+  //   }
 
-    gotoDashboard();
+  //   gotoDashboard();
 
-    // Cleanup function to clear interval if component unmounts or changes
-    return () => clearInterval(interval);
-  }, []);
+  //   // Cleanup function to clear interval if component unmounts or changes
+  //   return () => clearInterval(interval);
+  // }, []);
 
 
   useEffect(() => {
