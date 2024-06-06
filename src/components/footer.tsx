@@ -172,6 +172,14 @@ const Footer = () => {
                         Blog
                       </Link>
                     </li>
+                    <li className="mb-4">
+                      <Link
+                        className="text-white"
+                        href="/downloadReceit"
+                      >
+                        Receit
+                      </Link>
+                    </li>
                   </ul>
                   <ul className="mt-6 col-span-2 md:col-span-1">
                     <li className="mb-4">
@@ -346,6 +354,14 @@ const Footer = () => {
                       href="/blog"
                     >
                       Blog
+                    </Link>
+                  </li>
+                  <li className="mb-4">
+                    <Link
+                      className="text-white"
+                      href="/downloadReceit"
+                    >
+                      Receit
                     </Link>
                   </li>
                 </ul>

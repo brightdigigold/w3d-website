@@ -94,7 +94,7 @@ export const Card = ({ title, description, imageUrl, linkTo }: any) => {
   );
 };
 
-type InputType = "text" | "number" | "email" | "password" | "date" | "textarea";
+type InputType = "text" | "number" | "email" | "password" | "date" | "textarea" | "tel";
 interface InputProps {
   type?: InputType;
   autoComplete?: string;
@@ -148,8 +148,9 @@ const FormInput = ({
 };
 const styles = {
   p0: "mb-2",
-  p1: "block text-sm mb-2 text-dark-blue",
-  p2: "appearance-none placeholder:text-gray-500 block w-full px-3 py-2 border-0 rounded-md theme-shadow placeholder-gray-400 focus:border-yellow-600 focus:ring-1 focus:ring-yellow-600 sm:text-sm",
+  p1: "block text-sm mb-2 text-white ",
+  p2: "mt-2 block w-full sm:w-2/3 placeholder:text-gray-500 text-white rounded bg-theme px-3 py-2 focus:outline-none focus:bg-black  border-1  focus:ring-0 focus:border-b",
+  // p2: "appearance-none placeholder:text-gray-500 block w-full sm:w-2/3 px-3 py-2 border-0 rounded-md theme-shadow placeholder-gray-400 focus:border-yellow-600 focus:ring-1 focus:ring-yellow-600 sm:text-sm",
   p3: "text-red-500 text-sm",
   p4: "mt-1",
 };
