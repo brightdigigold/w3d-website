@@ -43,16 +43,46 @@ const OrdersTabs = () => {
   const [selectedTransaction, setSelectedTransaction] = useState("ALL");
   const [selectedTransactionStatus, setSelectedTransactionStatus] = useState("ALL");
   const [selectedMetalType, setSelectedMetalType] = useState("ALL");
-
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(`${2023}/${1}/${1}`),
-      endDate: addDays(new Date(), 7),
-      key: "selection",
-    },
-  ]);
   const [open, setOpen] = useState(false);
   const refOne = useRef<HTMLDivElement>(null);
+
+  // const [range, setRange] = useState([
+  //   {
+  //     startDate: new Date(`${2023}/${1}/${1}`),
+  //     endDate: addDays(new Date(), 7),
+  //     key: "selection",
+  //   },
+  // ]);
+
+  const [selectionRange, setSelectionRange] = useState({
+    startDate: new Date(`${2023}/${1}/${1}`),
+    endDate: new Date(),
+    key: "selection",
+  });
+
+  const handleSelect = (ranges) => {
+    // Do something with the selected range
+    const formattedStartDate = ranges.selection.startDate.toISOString().slice(0, 10);
+    const formattedEndDate = ranges.selection.endDate.toISOString().slice(0, 10);
+
+    console.log("==>", ranges.selection.startDate.toISOString())
+
+    console.log({ formattedStartDate, formattedEndDate });
+    setSelectionRange(ranges.selection);
+    handleFilter(
+      formattedEndDate,
+      formattedStartDate,
+      status,
+      metalValue,
+      transactionValue,
+      page,
+      size
+    );
+  };
+
+
+
+  console.log("selectionRange", selectionRange.endDate.toISOString().slice(0, 10))
 
   const OpenAccord = (item: any) => {
     setIsOpen(!isOpen);
@@ -75,11 +105,15 @@ const OrdersTabs = () => {
   useEffect(() => {
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
+    const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
+    const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
     handleFilter(
-      range[0].endDate ? format(new Date(range[0].endDate), "yyyy-MM-dd") : "",
-      range[0].startDate
-        ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-        : "",
+      // range[0].endDate ? format(new Date(range[0].endDate), "yyyy-MM-dd") : "",
+      // range[0].startDate
+      //   ? format(new Date(range[0].startDate), "yyyy-MM-dd")
+      //   : "",
+      formattedEndDate,
+      formattedStartDate,
       status,
       metalValue,
       transactionValue,
@@ -168,12 +202,9 @@ const OrdersTabs = () => {
     const { value } = e.target;
     setSelectedTransactionStatus(value)
     setStatus(value);
-    const formattedEndDate = range[0].endDate
-      ? format(new Date(range[0].endDate), "yyyy-MM-dd")
-      : "";
-    const formattedStartDate = range[0].startDate
-      ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-      : "";
+    const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
+    const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
+
     handleFilter(
       formattedEndDate,
       formattedStartDate,
@@ -189,12 +220,14 @@ const OrdersTabs = () => {
     const { value } = e.target;
     setSelectedMetalType(value);
     setMetalValue(value);
-    const formattedEndDate = range[0].endDate
-      ? format(new Date(range[0].endDate), "yyyy-MM-dd")
-      : "";
-    const formattedStartDate = range[0].startDate
-      ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-      : "";
+    const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
+    const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
+    // const formattedEndDate = range[0].endDate
+    //   ? format(new Date(range[0].endDate), "yyyy-MM-dd")
+    //   : "";
+    // const formattedStartDate = range[0].startDate
+    //   ? format(new Date(range[0].startDate), "yyyy-MM-dd")
+    //   : "";
     handleFilter(
       formattedEndDate,
       formattedStartDate,
@@ -210,12 +243,9 @@ const OrdersTabs = () => {
     const { value } = e.target;
     setSelectedTransaction(value);
     setTransactionValue(value);
-    const formattedEndDate = range[0].endDate
-      ? format(new Date(range[0].endDate), "yyyy-MM-dd")
-      : "";
-    const formattedStartDate = range[0].startDate
-      ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-      : "";
+    const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
+    const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
+ 
     handleFilter(
       formattedEndDate,
       formattedStartDate,
@@ -227,34 +257,33 @@ const OrdersTabs = () => {
     );
   };
 
-  const updateCalender = (item: any) => {
-    setRange([item.selection]);
-    const formattedEndDate = range[0].endDate
-      ? format(new Date(range[0].endDate), "yyyy-MM-dd")
-      : "";
-    const formattedStartDate = range[0].startDate
-      ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-      : "";
-    handleFilter(
-      formattedEndDate,
-      formattedStartDate,
-      status,
-      metalValue,
-      transactionValue,
-      page,
-      size
-    );
-  };
+  // const updateCalender = (item: any) => {
+  //   setRange([item.selection]);
+  //   const formattedEndDate = range[0].endDate
+  //     ? format(new Date(range[0].endDate), "yyyy-MM-dd")
+  //     : "";
+  //   const formattedStartDate = range[0].startDate
+  //     ? format(new Date(range[0].startDate), "yyyy-MM-dd")
+  //     : "";
+
+  //   console.log("date range", { formattedStartDate, formattedEndDate })
+  //   handleFilter(
+  //     formattedEndDate,
+  //     formattedStartDate,
+  //     status,
+  //     metalValue,
+  //     transactionValue,
+  //     page,
+  //     size
+  //   );
+  // };
 
   const updatePage = (e: any) => {
     let moveTo = e.target.value;
     setPage(moveTo);
-    const formattedEndDate = range[0].endDate
-      ? format(new Date(range[0].endDate), "yyyy-MM-dd")
-      : "";
-    const formattedStartDate = range[0].startDate
-      ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-      : "";
+    const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
+    const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
+  
     handleFilter(
       formattedEndDate,
       formattedStartDate,
@@ -268,13 +297,8 @@ const OrdersTabs = () => {
 
   const nextPageHandler = () => {
     setPage(page + 1);
-
-    const formattedEndDate = range[0].endDate
-      ? format(new Date(range[0].endDate), "yyyy-MM-dd")
-      : "";
-    const formattedStartDate = range[0].startDate
-      ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-      : "";
+    const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
+    const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
     handleFilter(
       formattedEndDate,
       formattedStartDate,
@@ -289,12 +313,8 @@ const OrdersTabs = () => {
   const prevPageHandler = () => {
     if (page > 1) {
       setPage(page - 1);
-      const formattedEndDate = range[0].endDate
-        ? format(new Date(range[0].endDate), "yyyy-MM-dd")
-        : "";
-      const formattedStartDate = range[0].startDate
-        ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-        : "";
+      const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
+      const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
       handleFilter(
         formattedEndDate,
         formattedStartDate,
@@ -366,10 +386,11 @@ const OrdersTabs = () => {
             <p className=" text-sm mb-1">Select Date</p>
             <div className=" cursor-pointer text-white rounded bg-themeDarkBlue  px-3 py-2 focus:outline-none">
               <input
-                value={`${format(range[0].startDate, "MM/dd/yyyy")} to ${format(
-                  range[0].endDate,
-                  "MM/dd/yyyy"
-                )}`}
+                // value={`${format(range[0].startDate, "MM/dd/yyyy")} to ${format(
+                //   range[0].endDate,
+                //   "MM/dd/yyyy"
+                // )}`}
+                value={`${format(selectionRange.startDate, "MM/dd/yyyy")} to ${format(selectionRange.endDate, "MM/dd/yyyy")}`}
                 readOnly
                 className="text-white placeholder:text-gray-500 cursor-pointer bg-transparent w-52"
                 onClick={() => setOpen((open) => !open)}
@@ -383,16 +404,24 @@ const OrdersTabs = () => {
             <div ref={refOne}>
               {open && (
                 <DateRangePicker
-                  onChange={(e) => {
-                    updateCalender(e);
-                  }}
-                  editableDateInputs={true}
-                  moveRangeOnFirstSelection={false}
-                  ranges={range}
+                  ranges={[selectionRange]}
+                  onChange={handleSelect}
                   months={1}
+                  editableDateInputs={true}
                   direction="horizontal"
                   className="calendarElement text-black"
                 />
+                // <DateRangePicker
+                //   onChange={(e) => {
+                //     updateCalender(e);
+                //   }}
+                //   editableDateInputs={true}
+                //   moveRangeOnFirstSelection={false}
+                //   ranges={range}
+                //   months={1}
+                //   direction="horizontal"
+                //   className="calendarElement text-black"
+                // />
               )}
             </div>
           </div>
