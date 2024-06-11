@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import {
   setIsLoggedIn,
+  setIsLoggedInForTempleReceipt,
   setShowOTPmodal,
   setShowProfileForm,
 } from "@/redux/authSlice";
@@ -24,6 +25,8 @@ import mixpanel from "mixpanel-browser";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
+  const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const pathname = usePathname();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
@@ -40,6 +43,7 @@ const Navbar = () => {
     localStorage.removeItem("isLogIn");
     mixpanel.reset();
     dispatch(setShowOTPmodal(false));
+    dispatch(setIsLoggedInForTempleReceipt(false));
     dispatch(setIsLoggedIn(false));
     dispatch(setShowProfileForm(false));
     dispatch(resetUserDetails());
@@ -51,8 +55,15 @@ const Navbar = () => {
   // logoutProfile();
 
   const handleLoginClick = () => {
-    setOpenLoginAside(!openLoginAside);
+    if(isLoggedInForTempleReceipt && devotee_isNewUser){
+      dispatch(setShowProfileForm(true));
+    } else{
+      setOpenLoginAside(!openLoginAside);
+    }
+    // mixpanel.track('New User Login(web)');
+    // dispatch(setShowProfileForm(true));
   };
+
   const handleSidebarClick = () => {
     setOpenSidebarAside(!openSidebarAside);
   };
@@ -65,6 +76,7 @@ const Navbar = () => {
             <LoginAside
               isOpen={openLoginAside}
               onClose={() => setOpenLoginAside(false)}
+              purpose="login"
             />
           )}
           {openSidebarAside && (
@@ -177,9 +189,9 @@ const Navbar = () => {
                   onClick={handleLoginClick}
                 >
                   <span>
-                  <Link className="text-white " href="#">
-                    Login/Sign Up
-                  </Link>
+                    <Link className="text-white " href="#">
+                      Login/Sign Up
+                    </Link>
                   </span>
                 </div>
               )}

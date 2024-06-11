@@ -23,7 +23,6 @@ export default function Home() {
       <HeroSection />
       <OfferSlider />
       <Promotional />
-      {/* <AkshaytrityaOfferBanner /> */}
       <Products />
       <HowItWorks />
       <Videos/>

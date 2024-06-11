@@ -1,18 +1,19 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
-
 import {
   setIsLoggedIn,
+  setIsLoggedInForTempleReceipt,
   setShowOTPmodal,
   setShowProfileForm,
 } from "@/redux/authSlice";
 import { useRouter } from "next/navigation";
 import { resetUserDetails, selectUser } from "@/redux/userDetailsSlice";
+import LoginAside from "./authSection/loginAside";
 // import { resetUserDetails } from "@/redux/userDetailsSlice";
 
 interface SidebarAsideProps {
@@ -27,6 +28,8 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
   const user = useSelector(selectUser);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const cancelButtonRef = useRef(null);
+  const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
+  const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -42,15 +45,33 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen, onClose]);
 
+
   const logoutProfile = () => {
     localStorage.removeItem("mobile_number");
     localStorage.removeItem("token");
     localStorage.removeItem("isLogIn");
     dispatch(setShowOTPmodal(false));
+    dispatch(setIsLoggedInForTempleReceipt(false));
     dispatch(setIsLoggedIn(false));
     dispatch(setShowProfileForm(false));
     dispatch(resetUserDetails());
     router.push("/");
+  };
+
+  // logoutProfile();
+
+  const [openLoginAside, setOpenLoginAside] = useState(false);
+
+  const handleLoginClick = () => {
+    if (isloggedIn) {
+      router.push('/downloadReceipt');
+      onClose();
+    }
+    else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+      dispatch(setShowProfileForm(true));
+    } else {
+      setOpenLoginAside(!openLoginAside);
+    }
   };
 
   return (
@@ -59,6 +80,13 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
       className={`fixed top-0 left-0 h-full w-2/3 loginGrad shadow-lg transform overflow-scroll translate-x-${isOpen ? "0" : "full"
         } transition-transform ease-in-out z-[999]`}
     >
+      {openLoginAside && (
+        <LoginAside
+          isOpen={openLoginAside}
+          onClose={() => setOpenLoginAside(false)}
+          purpose="receipt"
+        />
+      )}
       <div className="grid h-screen w-full">
         <div className="w-full">
           <button
@@ -68,12 +96,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
             <FaTimes className="text-themeBlueLight" />
           </button>
           <div className=" bg-themeDarkBlue flex justify-center pt-6">
-            {/* <img
-              src="/female_icon.png"
-              className="h-24 w-24 border-1 rounded-full"
-            /> */}
             <div className="sm:flex items-center bg-themeDarkBlue">
-              {/* <ProfileImage /> */}
               <Image
                 key={user?.data?.profile_image}
                 src={
@@ -220,6 +243,17 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
               </div>
             </Link>
 
+            {/* <Link href="/#" prefetch={true}> */}
+            <div
+              onClick={handleLoginClick}
+              className={styles.p1}
+            >
+              <img src="/images/contacts.png" className="h-5 w-8" />
+
+              Receipt
+            </div>
+            {/* </Link> */}
+
             <Link href="/blog" prefetch={true}>
               <div
                 onClick={() => {
@@ -228,7 +262,6 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
                 className={styles.p1}
               >
                 <img src="/Blog.png" className="h-12 w-10" />
-
                 Blogs
               </div>
             </Link>

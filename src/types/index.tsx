@@ -215,7 +215,6 @@ export interface AddressModalProps {
   transactionId: string;
   totalAmountValue: number;
   metalTypeForProgressBar: any;
-  akshayTrityaOfferApplied: boolean;
 }
 
 export interface Address {

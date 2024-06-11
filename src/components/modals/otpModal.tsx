@@ -10,9 +10,11 @@ import {
   setIsLoggedIn,
   setShowOTPmodal,
   setShowProfileForm,
+  setDevoteeIsNewUser,
+  setIsLoggedInForTempleReceipt
 } from "@/redux/authSlice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { fetchUserDetails } from "@/redux/userDetailsSlice";
 import CustomButton from "../customButton";
@@ -21,6 +23,8 @@ import { fetchWalletData } from "@/redux/vaultSlice";
 import mixpanel from "mixpanel-browser";
 
 export default function OtpModal() {
+  const purpoes = useSelector((state: RootState) => state.auth.purpoes);
+  console.log(purpoes)
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
@@ -94,17 +98,30 @@ export default function OtpModal() {
         const result = JSON.parse(decryptedData);
         if (result.status === true) {
           localStorage.setItem("token", result?.data?.otpVarifiedToken);
-          dispatch(fetchUserDetails());
-          dispatch(setIsLoggedIn(true));
-          dispatch(fetchWalletData() as any);
-          if (result.data.isNewUser) {
+          console.log("from otp modal", localStorage.getItem("token"))
+          if (purpoes === 'login') {
+            dispatch(fetchUserDetails());
+            dispatch(setIsLoggedIn(true));
+            dispatch(fetchWalletData() as any);
+            if (result.data.isNewUser) {
+              mixpanel.identify(mobile_number);
+              mixpanel.track('New User Login(web)');
+              dispatch(setShowProfileForm(true));
+            }
             mixpanel.identify(mobile_number);
-            mixpanel.track('New User Login(web)');
-            dispatch(setShowProfileForm(true));
+            dispatch(setShowOTPmodal(false));
+            router.push("/");
+          } else {
+            dispatch(setShowOTPmodal(false));
+            if (!result.data.isNewUser) {
+              dispatch(setIsLoggedIn(true));
+              dispatch(fetchUserDetails());
+              dispatch(fetchWalletData() as any);
+              router.push("/downloadReceipt");
+            }
+            dispatch(setIsLoggedInForTempleReceipt(true));
+            router.push("/downloadReceipt");
           }
-          mixpanel.identify(mobile_number);
-          dispatch(setShowOTPmodal(false));
-          router.push("/");
         } else {
           setOtp("");
           Swal.fire({

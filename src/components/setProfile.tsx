@@ -65,6 +65,7 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log("token", token)
     if (!token) {
     }
     document.addEventListener("keydown", hideOnEscape, true);

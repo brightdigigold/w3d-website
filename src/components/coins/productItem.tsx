@@ -1,4 +1,5 @@
 import { setShowProfileForm } from '@/redux/authSlice';
+import { RootState } from '@/redux/store';
 import { selectUser } from '@/redux/userDetailsSlice';
 import Image from 'next/image';
 import React from 'react';
@@ -21,20 +22,14 @@ export interface ProductItemProps {
 
 const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLoginClick, router }) => {
     const dispatch = useDispatch();
+    const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
+    const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
     const user = useSelector(selectUser);
 
     return (
         <div
             className="py-4 rounded-md shadow-xl text-center coins_background transition-transform transform hover:scale-105 hover:shadow-lg hover:shadow-sky-100"
         >
-            {/* {item.slug == "5-Gram-Gold-Coin" && <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
-                <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
-            </div>} */}
-
-            {/* {item.slug == "10-Gram-Gold-Coin" && <div className=" absolute top-0 left-0 px-0  rounded-bl-lg">
-                <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
-
-            </div>} */}
             <div
                 style={{
                     backgroundSize: "cover",
@@ -65,13 +60,17 @@ const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLogin
                     </div>
                     <button
                         onClick={() => {
-                            if (!isLoggedIn) {
+                            if (isLoggedIn) {
+                                router.push(`/coins/${item.slug}`);
+                            }
+                            else if (!isLoggedIn && !isLoggedInForTempleReceipt) {
                                 handleLoginClick();
-                            } else if (!user.data.isBasicDetailsCompleted) {
+                            }
+                            else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
                                 dispatch(setShowProfileForm(true));
                             }
-                            else {
-                                router.push(`/coins/${item.slug}`);
+                            else if (!user.data.isBasicDetailsCompleted) {
+                                dispatch(setShowProfileForm(true));
                             }
                         }}
                         className="my-2 bg-themeBlue rounded-2xl extrabold w-3/4 py-2 block"

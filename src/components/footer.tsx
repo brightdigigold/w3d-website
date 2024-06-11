@@ -8,17 +8,37 @@ import {
 import Link from "next/link";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import LoginAside from "./authSection/loginAside";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const [activeLink, setActiveLink] = useState('home');
+  const [openLoginAside, setOpenLoginAside] = useState(false);
+  const router = useRouter();
 
   const handleLinkClick = (linkName) => {
     setActiveLink(linkName);
   };
 
+  const handleLoginClick = () => {
+    if (!isloggedIn && !isLoggedInForTempleReceipt) {
+      setOpenLoginAside(!openLoginAside);
+    } else {
+      router.push('/downloadReceipt');
+    }
+  };
+
   return (
     <>
+      {openLoginAside && (
+        <LoginAside
+          isOpen={openLoginAside}
+          onClose={() => setOpenLoginAside(false)}
+          purpose="receipt"
+        />
+      )}
       {isloggedIn ? (
         <>
           <div className=" fixed bottom-0 loginGrad p-2 grid grid-cols-4 w-full z-[40] py-3 border-t xl:hidden">
@@ -173,12 +193,16 @@ const Footer = () => {
                       </Link>
                     </li>
                     <li className="mb-4">
-                      <Link
-                        className="text-white"
-                        href="/downloadReceit"
+                      <div
+                        onClick={handleLoginClick}
                       >
-                        Receit
-                      </Link>
+                        <Link
+                          className="text-white"
+                          href="#"
+                        >
+                          Receipt
+                        </Link>
+                      </div>
                     </li>
                   </ul>
                   <ul className="mt-6 col-span-2 md:col-span-1">
@@ -357,12 +381,16 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li className="mb-4">
-                    <Link
-                      className="text-white"
-                      href="/downloadReceit"
+                    <div
+                      onClick={handleLoginClick}
                     >
-                      Receit
-                    </Link>
+                      <Link
+                        className="text-white"
+                        href="#"
+                      >
+                        Receipt
+                      </Link>
+                    </div>
                   </li>
                 </ul>
                 <ul className="mt-6 col-span-2 md:col-span-1">

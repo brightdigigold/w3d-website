@@ -9,6 +9,7 @@ import {
   setShowOTPmodal,
   setShowProfileForm,
   profileFilled,
+  setIsLoggedInForTempleReceipt,
 } from "@/redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -17,21 +18,11 @@ import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import NextImage from "../nextImage";
 import Image from "next/image";
-import { } from "../../../public/bdgwhite.png"
 
 const HeroSection = () => {
   const dispatch = useDispatch();
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
-  // const [akshayTrityaOffer, setAkshayTrityaOffer] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   const hasVisited = sessionStorage.getItem('hasVisited');
-  //   if (!hasVisited) {
-  //     setAkshayTrityaOffer(true);
-  //     sessionStorage.setItem('hasVisited', 'true');
-  //   }
-  // }, []);
 
   const onClose = () => {
     dispatch(setShowProfileForm(false));
@@ -57,7 +48,6 @@ const HeroSection = () => {
           const data = await response.json();
           const decryptedData = await AesDecrypt(data.payload);
           const userdata = JSON.parse(decryptedData).data;
-          console.log('userdata=========>', userdata)
           if (userdata?.isBasicDetailsCompleted) {
             dispatch(setShowOTPmodal(false));
             dispatch(profileFilled(true));
@@ -88,7 +78,6 @@ const HeroSection = () => {
 
   return (
     <>
-      {/* {akshayTrityaOffer && <AkshayTrityaOffer />} */}
       <div className="bg-theme pt-28 py-10" >
         {otpModal && <OtpModal />}
 

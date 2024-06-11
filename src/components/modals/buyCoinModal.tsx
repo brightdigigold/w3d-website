@@ -25,7 +25,6 @@ interface CoinModalProps {
   closeModalOfCoin: () => void;
   productsDetailById: any;
   totalCoins: number;
-  // akshayTrityaOfferApplied: boolean;
 }
 
 export default function CoinModal({
@@ -33,7 +32,6 @@ export default function CoinModal({
   closeModalOfCoin,
   productsDetailById,
   totalCoins,
-  // akshayTrityaOfferApplied
 }: CoinModalProps) {
   const [showAdditionalContent, setShowAdditionalContent] = useState(true);
   const cancelButtonRef = useRef(null);
@@ -81,7 +79,6 @@ export default function CoinModal({
   const filteredPreviewData = previewData.filter((item) =>
     keysToShow.includes(item.key)
   );
-
 
   const totalAmountItem = previewData.find(
     (item) => item.key === "Total Amount"
@@ -221,14 +218,13 @@ export default function CoinModal({
       >
         {openAddressModal && (
           <SelectAddress
-            // akshayTrityaOfferApplied={akshayTrityaOfferApplied}
             totalAmountValue={totalAmountValue}
             transactionId={transactionId}
             previewData={previewData}
             openAddressModal={openAddressModal}
             closeAddressModal={closeAddressModalHandler}
             productsDetailById={productsDetailById}
-            metalTypeForProgressBar={metalTypeForProgressBar} akshayTrityaOfferApplied={false} />
+            metalTypeForProgressBar={metalTypeForProgressBar}  />
         )}
         <Transition.Child
           as={Fragment}

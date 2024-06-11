@@ -1,6 +1,6 @@
 "use client";
 import { AesDecrypt, AesEncrypt } from "@/components/helperFunctions";
-import { setShowOTPmodal } from "@/redux/authSlice";
+import { setShowOTPmodal, setPurpose } from "@/redux/authSlice";
 import axios, { AxiosRequestConfig } from "axios";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
@@ -12,13 +12,16 @@ import * as Yup from "yup";
 interface LoginAsideProps {
   isOpen: boolean;
   onClose: () => any;
+  purpose: string;
 }
 
-const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
+const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
+
+  console.log('purpose', purpose)
 
   const handleTermsClick = () => {
     router.push("/term-and-conditions")
@@ -32,10 +35,13 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
   };
 
   const validationSchema = Yup.object({
-    termsAndConditions: Yup.boolean().oneOf(
-      [true],
-      "Terms and conditions are Required"
-    ),
+    // termsAndConditions: Yup.boolean().oneOf(
+    //   [true],
+    //   "Terms and conditions are Required"
+    // ),
+
+    termsAndConditions: purpose === 'login' ? Yup.boolean()
+      .oneOf([true], "Terms and conditions are required") : Yup.boolean(),
     mobile_number: Yup.string()
       .required("Mobile number is required")
       .matches(/^[6789][0-9]{9}$/, "Mobile No. is not valid")
@@ -66,6 +72,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
         const decryptedData = await AesDecrypt(result.data.payload);
         if (JSON.parse(decryptedData).status) {
           localStorage.setItem("mobile_number", values.mobile_number);
+          dispatch(setPurpose(purpose));
           dispatch(setShowOTPmodal(true));
         }
         setSubmitting(false);
@@ -102,13 +109,13 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
               <img src="/secure.png" className="ml-1 inline-block h-5" />
             </p>
           </div>
-          <h1 className="text-2xl font-bold mb-0 text-white text-left">
+          {purpose === 'login' ? <> <h1 className="text-2xl font-bold mb-0 text-white text-left">
             Login/Sign Up
           </h1>
-          <h3 className="text-lg mb-4 text-white text-left">
-            Login to start
-            <span className="text-yellow-400 ml-1">SAVINGS</span>
-          </h3>
+            <h3 className="text-lg mb-4 text-white text-left">
+              Login to start
+              <span className="text-yellow-400 ml-1">SAVINGS</span>
+            </h3></> : null}
           <div className="mb-4 pt-4">
             <Formik
               initialValues={initialValues}
@@ -164,7 +171,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                     ) : null}
                   </div>
                   <div className="items-center mt-20 mb-2 flex">
-                    <input
+                    {purpose === "login" ? <input
                       className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background  rounded-lg focus:outline-none "
                       id="termsAndConditions"
                       type="checkbox"
@@ -172,8 +179,8 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                       checked={values.termsAndConditions}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                    />
-                    <div className="ml-2 items-center text-white">
+                    /> : null}
+                    {purpose === "login" ? <div className="ml-2 items-center text-white">
                       I agree to these
                       <span>
                         <button
@@ -184,7 +191,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                           T & C
                         </button>
                       </span>
-                    </div>
+                    </div> : null}
                   </div>
                   {touched.termsAndConditions && errors.termsAndConditions ? (
                     <div

@@ -47,6 +47,8 @@ const Coins = () => {
     dispatch(setShowProfileForm(false));
   };
 
+  console.log(user.data)
+
   const loginOrSetProfileHandler = () => {
 
     if (!isloggedIn) {
@@ -60,7 +62,7 @@ const Coins = () => {
 
   return (
     <div className="pb-28 xl:pb-8 pt-16">
-      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} />}
+      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login"/>}
       {otpModal && <OtpModal />}
 
       <div className="flex justify-center items-center">

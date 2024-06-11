@@ -6,18 +6,30 @@ import { fadeIn, staggerContainer } from "../../utils/motion";
 import LoginAside from "../authSection/loginAside";
 import OtpModal from "../modals/otpModal";
 import { RootState } from "@/redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { selectUser } from "@/redux/userDetailsSlice";
+import SetProfileForNewUser from "../setProfile";
+import { setShowProfileForm } from "@/redux/authSlice";
 
 const Products = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
   const router = useRouter();
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
+  const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
+  const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const handleLoginClick = () => {
     setOpenLoginAside(!openLoginAside);
+  };
+
+  const onClose = () => {
+    dispatch(setShowProfileForm(false));
   };
 
   return (
@@ -35,6 +47,7 @@ const Products = () => {
             <LoginAside
               isOpen={openLoginAside}
               onClose={() => setOpenLoginAside(false)}
+              purpose="login"
             />
           )}
 
@@ -71,9 +84,6 @@ const Products = () => {
             </div>
 
             <div className="">
-              {/* <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
-                <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
-              </div> */}
               <img
                 alt="products"
                 className="h-28 sm:h-40 mx-auto mt-10"
@@ -87,12 +97,26 @@ const Products = () => {
 
             <button
               onClick={() => {
-                if (!isloggedIn) {
-                  handleLoginClick();
-                } else {
-                  // router.push(`/coins/1-Gram-Gold-Coin`)
+
+                if (isloggedIn) {
                   router.push(`/coins/5-Gram-Gold-Coin`)
                 }
+                else if (!isloggedIn && !isLoggedInForTempleReceipt) {
+                  handleLoginClick();
+                }
+                else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                  dispatch(setShowProfileForm(true));
+                }
+                else if (!user.data.isBasicDetailsCompleted) {
+                  dispatch(setShowProfileForm(true));
+                }
+
+                // if (!isloggedIn) {
+                //   handleLoginClick();
+                // } else {
+                //   // router.push(`/coins/1-Gram-Gold-Coin`)
+                //   router.push(`/coins/5-Gram-Gold-Coin`)
+                // }
               }}
               // href={`/coins/1-Gram-Gold-Coin`}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
@@ -134,11 +158,24 @@ const Products = () => {
             </p>
 
             <button onClick={() => {
-              if (!isloggedIn) {
-                handleLoginClick();
-              } else {
+
+              if (isloggedIn) {
                 router.push(`/coins/10-Gram-Banyan-Tree-Silver-Coin`)
               }
+              else if (!isloggedIn && !isLoggedInForTempleReceipt) {
+                handleLoginClick();
+              }
+              else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                dispatch(setShowProfileForm(true));
+              }
+              else if (!user.data.isBasicDetailsCompleted) {
+                dispatch(setShowProfileForm(true));
+              }
+              // if (!isloggedIn) {
+              //   handleLoginClick();
+              // } else {
+              //   router.push(`/coins/10-Gram-Banyan-Tree-Silver-Coin`)
+              // }
             }}
               // href={`/coins/10-Gram-Banyan-Tree-Silver-Coin`}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
@@ -163,13 +200,9 @@ const Products = () => {
                 className=" absolute right-0"
                 src="/Light_3.png"
               />
-
             </div>
 
             <div className="">
-              {/* <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
-                <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
-              </div> */}
               <img
                 alt="products"
                 className="h-28 sm:h-40 mx-auto mt-10"
@@ -181,13 +214,26 @@ const Products = () => {
             </p>
 
             <button onClick={() => {
-              if (!isloggedIn) {
-                handleLoginClick();
-              } else {
+
+              if (isloggedIn) {
                 router.push(`/coins/10-Gram-Gold-Coin`)
               }
+              else if (!isloggedIn && !isLoggedInForTempleReceipt) {
+                handleLoginClick();
+              }
+              else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                dispatch(setShowProfileForm(true));
+              }
+              else if (!user.data.isBasicDetailsCompleted) {
+                dispatch(setShowProfileForm(true));
+              }
+
+              // if (!isloggedIn) {
+              //   handleLoginClick();
+              // } else {
+              //   router.push(`/coins/10-Gram-Gold-Coin`)
+              // }
             }}
-              // href={`/coins/10-Gram-Gold-Coin`}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
               View
@@ -198,11 +244,6 @@ const Products = () => {
             className="bg-themeLight rounded-lg shadow-xl p-4 relative hover:shadow-lg hover:shadow-gray-100 product001"
           >
             <div className="relative">
-              {/* <img
-                alt="products"
-                className=" absolute left-0"
-                src="/Star_1.png"
-              /> */}
               <img
                 alt="products"
                 className=" absolute right-0"
@@ -227,13 +268,24 @@ const Products = () => {
             </p>
 
             <button onClick={() => {
-              if (!isloggedIn) {
-                handleLoginClick();
-              } else {
+              if (isloggedIn) {
                 router.push(`/coins/100-Gram-Banyan-Tree-Silver-Coin`)
               }
+              else if (!isloggedIn && !isLoggedInForTempleReceipt) {
+                handleLoginClick();
+              }
+              else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                dispatch(setShowProfileForm(true));
+              }
+              else if (!user.data.isBasicDetailsCompleted) {
+                dispatch(setShowProfileForm(true));
+              }
+              // if (!isloggedIn) {
+              //   handleLoginClick();
+              // } else {
+              //   router.push(`/coins/100-Gram-Banyan-Tree-Silver-Coin`)
+              // }
             }}
-              // href={`/coins/100-Gram-Banyan-Tree-Silver-Coin`}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
               View
@@ -241,6 +293,9 @@ const Products = () => {
           </motion.div>
         </div>
       </motion.div>
+      {showProfileForm && (
+        <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
+      )}
     </div>
   );
 };
