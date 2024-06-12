@@ -79,6 +79,7 @@ const BuySell = () => {
   const isloggedIn = useSelector(selectIsloggedIn);
   const [previewData, setPreviewData] = useState<[]>([]);
   const [OpenUpiModal, setOpenUpiModal] = useState<boolean>(false);
+  const [transactionTypeForQuickBuySell, setTransactionTypeForQuickBuySell] = useState("rupees")
 
   const toggleOpenUpiModal = () => {
     setOpenUpiModal(prev => !prev)
@@ -100,6 +101,7 @@ const BuySell = () => {
       currentMatelPrice: number;
       fromApp: boolean;
       couponCode?: string;
+      activeLabel: string;
     } = {
       orderType: purchaseType.toUpperCase(),
       itemType: metalType.toUpperCase(),
@@ -108,6 +110,7 @@ const BuySell = () => {
       amount: totalAmount,
       currentMatelPrice: metalPricePerGram,
       fromApp: false,
+      activeLabel: transactionType,
     };
     if (isAnyCouponApplied) {
       dataToBeDecrypt.couponCode = appliedCouponCode ? appliedCouponCode : "";
@@ -233,6 +236,7 @@ const BuySell = () => {
   const handleTabRupeesAndGrams = (tab: "rupees" | "grams") => {
     dispatch(clearCoupon());
     setActiveTabPurchase(tab);
+    setTransactionTypeForQuickBuySell(tab);
     // dispatch(setTransactionType(tab));
     // dispatch(setEnteredAmount(tab === "rupees" ? totalAmount : ParseFloat(metalQuantity, 4)));
     setValidationError("");
@@ -396,12 +400,15 @@ const BuySell = () => {
     previewModal();
   };
 
+
   const QuickBuySellButtons = ({ amounts, unit, onClickHandler }: any) => (
     <div className={`mt-4 flex justify-between ${amounts == 500 ? 'pb-2' : ''}`}>
       {amounts.map((amount: any) => (
         <button
           key={amount}
           onClick={() => {
+            // @ts-ignore
+            dispatch(setTransactionType(transactionTypeForQuickBuySell))
             if (isAnyCouponApplied) {
               if (amount < 500) {
                 dispatch(clearCoupon());
@@ -422,7 +429,6 @@ const BuySell = () => {
       ))}
     </div>
   );
-
 
 
   useEffect(() => {
