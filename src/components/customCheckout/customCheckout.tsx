@@ -23,12 +23,11 @@ const CustomCheckout = ({ data }: any) => {
   const NETBANKING_PAYMENT = "nb";
   const CREDIT_CARD_PAYMENT = "cc";
   let cashfree: any;
-  const [paymentMethod, setPaymentMethod] = useState<string>('');
+  const [paymentMethod, setPaymentMethod] = useState<string>("");
 
   const [selectedButton, setSelectedButton] = useState(
     finalAmount <= 100000 ? 1 : null
   );
-
 
   const handleButtonClick = (buttonIndex: any) => {
     // Select the clicked button
@@ -36,7 +35,7 @@ const CustomCheckout = ({ data }: any) => {
   };
 
   useEffect(() => {
-    setPaymentMethod((finalAmount <= 100000) ? UPI_PAYMENT : "")
+    setPaymentMethod(finalAmount <= 100000 ? UPI_PAYMENT : "");
 
     const fetchData = async () => {
       try {
@@ -79,14 +78,13 @@ const CustomCheckout = ({ data }: any) => {
 
   const initializeSDK = async () => {
     cashfree = await load({
-      mode: "production",
-      // mode: "sandbox",
+      // mode: "production",
+      mode: "sandbox",
     });
   };
   initializeSDK();
 
   const doPayment = async (sessionId: string) => {
-
     if (!finalAmount || finalAmount === 0) {
       // Display an error message to the user
       alert("Invalid amount. Cannot proceed with the payment.");
@@ -97,7 +95,6 @@ const CustomCheckout = ({ data }: any) => {
       paymentSessionId: sessionId,
       // redirectTarget: "_self",
       redirectTarget: "_blank",
-
     };
     cashfree.checkout(checkoutOptions);
   };
@@ -229,8 +226,6 @@ const CustomCheckout = ({ data }: any) => {
     }
   };
 
-
-
   return (
     <div className="bg-themeLight01 shadow-md rounded-md w-[580px] mb-100 z-10 relative">
       <div className="mb-6 mt-4 px-2 sm:px-0">
@@ -254,8 +249,9 @@ const CustomCheckout = ({ data }: any) => {
                     handleButtonClick(1);
                     setPaymentMethodError("");
                   }}
-                  className={`flex bg-themeLight01 border-2 border-[bg-themeLightBlue] ${selectedButton === 1 ? "border-2 border-yellow-600" : ""
-                    }  items-center p-2 sm:p-4 rounded`}
+                  className={`flex bg-themeLight01 border-2 border-[bg-themeLightBlue] ${
+                    selectedButton === 1 ? "border-2 border-yellow-600" : ""
+                  }  items-center p-2 sm:p-4 rounded`}
                 >
                   <img src="/upi.png" className="h-8 w-13 pr-4" />
                   <span className={styles.p0}>UPI</span>
@@ -268,8 +264,9 @@ const CustomCheckout = ({ data }: any) => {
                   setPaymentMethodError("");
                   // buyDigitalGoldOrSilver({ ...payload, paymentType: 'dc', })
                 }}
-                className={`flex bg-themeLight01 border-2 border-[bg-themeLightBlue]${selectedButton === 2 ? "border-2 border-yellow-600" : ""
-                  }  items-center p-2 sm:p-4 rounded`}
+                className={`flex bg-themeLight01 border-2 border-[bg-themeLightBlue]${
+                  selectedButton === 2 ? "border-2 border-yellow-600" : ""
+                }  items-center p-2 sm:p-4 rounded`}
               >
                 <img src="/images/Debit Card.png" className="h-12 w-20 pr-4" />
                 <span className={styles.p0}>Debit Card</span>
@@ -281,8 +278,9 @@ const CustomCheckout = ({ data }: any) => {
                   handleButtonClick(3);
                   // checkoutCart({ ...payload, paymentType: 'nb', })
                 }}
-                className={`flex bg-themeLight01 border-2 border-[bg-themeLightBlue]${selectedButton === 3 ? "border-2 border-yellow-600" : ""
-                  }  items-center p-2 sm:p-4 rounded`}
+                className={`flex bg-themeLight01 border-2 border-[bg-themeLightBlue]${
+                  selectedButton === 3 ? "border-2 border-yellow-600" : ""
+                }  items-center p-2 sm:p-4 rounded`}
               >
                 <img src="/images/Net Banking.png" className="h-12 w-20 pr-4" />
                 <span className={styles.p0}>Netbanking</span>
@@ -294,8 +292,9 @@ const CustomCheckout = ({ data }: any) => {
                   handleButtonClick(4);
                   // checkoutCart({ ...payload, paymentType: 'cc', })
                 }}
-                className={`flex bg-themeLight01 border-2 border-[bg-themeLightBlue]${selectedButton === 4 ? "border-2 border-yellow-600" : ""
-                  }  items-center p-2 sm:p-4 rounded`}
+                className={`flex bg-themeLight01 border-2 border-[bg-themeLightBlue]${
+                  selectedButton === 4 ? "border-2 border-yellow-600" : ""
+                }  items-center p-2 sm:p-4 rounded`}
               >
                 <img src="/images/Credit Card.png" className="h-12 w-20 pr-4" />
                 <span className={styles.p0}>Credit Card</span>
@@ -313,23 +312,30 @@ const CustomCheckout = ({ data }: any) => {
                 )}
                 <div>
                   <p
-                    className={`text-white text-sm pb-2 ${!paymentMethod && paymentMethod == '' ? "filter blur-sm" : ""
-                      }`}
+                    className={`text-white text-sm pb-2 ${
+                      !paymentMethod && paymentMethod == ""
+                        ? "filter blur-sm"
+                        : ""
+                    }`}
                   >
                     Payment fulfilled via
                   </p>
                   <img
                     src="/Cashfree_Payments_Logo.png"
-                    className={`h-10 w-40 pr-4 mb-2 ${!paymentMethod && paymentMethod == '' ? "filter blur-sm" : ""
-                      }`}
+                    className={`h-10 w-40 pr-4 mb-2 ${
+                      !paymentMethod && paymentMethod == ""
+                        ? "filter blur-sm"
+                        : ""
+                    }`}
                     alt="Razorpay"
                   />
                 </div>
               </div>
 
               <div
-                className={`cursor-pointer ${!paymentMethod || paymentMethod == '' ? "filter blur-sm" : ""
-                  }`}
+                className={`cursor-pointer ${
+                  !paymentMethod || paymentMethod == "" ? "filter blur-sm" : ""
+                }`}
               >
                 <button
                   onClick={() => {
@@ -383,7 +389,7 @@ const CustomCheckout = ({ data }: any) => {
                   }
                 }}
                 className="bg-themeBlue  text-black font-bold py-2 px-4 rounded mb-4"
-              // disabled={!paymentMethod}
+                // disabled={!paymentMethod}
               >
                 Purchase for ₹{finalAmount}
               </button>
