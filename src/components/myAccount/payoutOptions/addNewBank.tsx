@@ -35,26 +35,30 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
   }, []);
 
   const initialValues = {
-    bankName: "",
-    accountName: "",
+    // bankName: "",
+    // accountName: "",
     accountNumber: "",
+    ConfirmAccountNumber: "",
     ifsc: "",
     isDefault: 1,
   };
 
   const validationSchema = Yup.object().shape({
-    bankName: Yup.string()
-      .required("Bank Name is required")
-      .matches(/^[a-zA-Z\s]+$/, "Invalid Bank Name"),
-    accountName: Yup.string()
-      .required("Account Holders Name is required")
-      .min(3, "Name must be at least 3 characters")
-      .max(50, "Name cannot exceed 50 characters")
-      .matches(/^[a-zA-Z0-9\s]+$/, "Invalid Account Holder Name"),
+    // bankName: Yup.string()
+    //   .required("Bank Name is required")
+    //   .matches(/^[a-zA-Z\s]+$/, "Invalid Bank Name"),
+    // accountName: Yup.string()
+    //   .required("Account Holders Name is required")
+    //   .min(3, "Name must be at least 3 characters")
+    //   .max(50, "Name cannot exceed 50 characters")
+    //   .matches(/^[a-zA-Z0-9\s]+$/, "Invalid Account Holder Name"),
     accountNumber: Yup.string()
       .required("Account Number is required")
       .min(9, "Account Number must be at least 9 characters")
       .max(18, "Account Number cannot exceed 18 characters"),
+    ConfirmAccountNumber: Yup.string()
+      .oneOf([Yup.ref('accountNumber')], 'Account Numbers must match')
+      .required('Confirm Account Number is required'),
     ifsc: Yup.string()
       .required("IFSC Number is required")
       .min(11, "IFSC code must be at least 11 characters")
@@ -136,7 +140,7 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
               e.preventDefault();
             }}
           >
-            <div className="mt-2">
+            {/* <div className="mt-2">
               <label>Bank Name</label>
               <br />
               <select
@@ -204,8 +208,8 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
                   component="div"
                 />
               </div>
-            )}
-            <div className="mt-2">
+            )} */}
+            {/* <div className="mt-2">
               <label>Account Holder’s Name</label>
               <br />
               <input
@@ -227,7 +231,7 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
                 className="text-red-500"
                 component="div"
               />
-            </div>
+            </div> */}
             <div className="mt-2">
               <label>Account Number</label>
               <br />
@@ -247,6 +251,29 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
               />
               <ErrorMessage
                 name="accountNumber"
+                className="text-red-500"
+                component="div"
+              />
+            </div>
+            <div className="mt-2">
+              <label>Confirm Account Number</label>
+              <br />
+              <input
+                className="mt-3 block w-full placeholder:text-gray-500 text-white rounded bg-theme px-3 py-2 focus:outline-none  border-1  focus:ring-0 focus:border-b"
+                name="ConfirmAccountNumber"
+                type="password"
+                placeholder="Enter Your Account Number"
+                maxLength={18}
+                value={values.ConfirmAccountNumber}
+                onChange={(event) => {
+                  const { name, value } = event.target;
+                  const updatedValue = value.replace(/[^0-9]/g, "");
+                  setFieldValue("ConfirmAccountNumber", updatedValue);
+                }}
+                onBlur={handleBlur}
+              />
+              <ErrorMessage
+                name="ConfirmAccountNumber"
                 className="text-red-500"
                 component="div"
               />
