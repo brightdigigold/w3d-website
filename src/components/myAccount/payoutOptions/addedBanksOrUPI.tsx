@@ -87,6 +87,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
             const decryptedData = await AesDecrypt(response.data.payload);
             const finalResult = JSON.parse(decryptedData);
             if (finalResult.status) {
+              Notiflix.Loading.remove();
               await fetchBankAndUPIDetails();
             } else {
               alert("some error occured please try again");
@@ -94,9 +95,11 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
           }
         })
         .catch((err) => {
+          Notiflix.Loading.remove();
           alert(err);
         })
         .finally(() => {
+          Notiflix.Loading.remove();
           setIsSubmitting(false);
         });
     }
