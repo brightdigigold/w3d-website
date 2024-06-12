@@ -79,10 +79,13 @@ const BuySell = () => {
   const isloggedIn = useSelector(selectIsloggedIn);
   const [previewData, setPreviewData] = useState<[]>([]);
   const [OpenUpiModal, setOpenUpiModal] = useState<boolean>(false);
+  const [transactionTypeForQuickBuySell, setTransactionTypeForQuickBuySell] = useState("rupees")
 
   const toggleOpenUpiModal = () => {
     setOpenUpiModal(prev => !prev)
   }
+
+  console.log("transactionType: ", transactionType)
 
   const previewModal = async () => {
 
@@ -100,6 +103,7 @@ const BuySell = () => {
       currentMatelPrice: number;
       fromApp: boolean;
       couponCode?: string;
+      activeLabel: string;
     } = {
       orderType: purchaseType.toUpperCase(),
       itemType: metalType.toUpperCase(),
@@ -108,10 +112,15 @@ const BuySell = () => {
       amount: totalAmount,
       currentMatelPrice: metalPricePerGram,
       fromApp: false,
+      activeLabel: transactionType,
     };
+
+
     if (isAnyCouponApplied) {
       dataToBeDecrypt.couponCode = appliedCouponCode ? appliedCouponCode : "";
     }
+
+    console.log("dataToBeDecrypt", dataToBeDecrypt)
     const resAfterEncryptData = await funForAesEncrypt(dataToBeDecrypt);
     const payloadToSend = {
       payload: resAfterEncryptData,
@@ -233,6 +242,7 @@ const BuySell = () => {
   const handleTabRupeesAndGrams = (tab: "rupees" | "grams") => {
     dispatch(clearCoupon());
     setActiveTabPurchase(tab);
+    setTransactionTypeForQuickBuySell(tab);
     // dispatch(setTransactionType(tab));
     // dispatch(setEnteredAmount(tab === "rupees" ? totalAmount : ParseFloat(metalQuantity, 4)));
     setValidationError("");
@@ -257,14 +267,14 @@ const BuySell = () => {
 
   const handleEnteredAmountChange = (e: any) => {
     // e.preventDefault();
-    
+
     dispatch(clearCoupon());
     setActiveTabPurchase('rupees')
     dispatch(setTransactionType('rupees'))
     const enteredValue = ParseFloat(e.target.value, 4);
     if (transactionType === 'rupees' && isNaN(enteredValue)) {
       setValidationError("Please enter numbers only.");
-      return; 
+      return;
     }
     // if (transactionType === 'rupees' && e.target.value.includes('.')) {
     //   setValidationError("Decimal values are not allowed for rupees");
@@ -301,7 +311,7 @@ const BuySell = () => {
     const enteredValue = ParseFloat(e.target.value, 4);
     if (transactionType === 'grams' && isNaN(enteredValue)) {
       setValidationError("Please enter numbers only.");
-      return; 
+      return;
     }
 
     dispatch(clearCoupon());
@@ -402,6 +412,8 @@ const BuySell = () => {
         <button
           key={amount}
           onClick={() => {
+            // @ts-ignore
+            dispatch(setTransactionType(transactionTypeForQuickBuySell))
             if (isAnyCouponApplied) {
               if (amount < 500) {
                 dispatch(clearCoupon());
@@ -679,19 +691,19 @@ const BuySell = () => {
                           : enteredAmount
                         : totalAmount
                     }
-                  onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                    // Prevent the input of a decimal point if purchase type is rupees
-                    if (activeTabPurchase === "rupees" && e.key === ".") {
-                      e.preventDefault();
-                    }
-                    // Prevent entering negative values
-                    if (e.key === "-" || e.key === "e" || e.key === "E") {
-                      e.preventDefault();
-                    }
-                    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-                      e.preventDefault(); // Prevent the default action
-                    }
-                  }}
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                      // Prevent the input of a decimal point if purchase type is rupees
+                      if (activeTabPurchase === "rupees" && e.key === ".") {
+                        e.preventDefault();
+                      }
+                      // Prevent entering negative values
+                      if (e.key === "-" || e.key === "e" || e.key === "E") {
+                        e.preventDefault();
+                      }
+                      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                        e.preventDefault(); // Prevent the default action
+                      }
+                    }}
                   />
                 </div>
                 <div className="relative rounded-md shadow-sm">
@@ -732,7 +744,7 @@ const BuySell = () => {
               <div className="text-white text-md mt-4">
                 {purchaseType === "buy" ? "Quick Buy" : "Quick Sell"}
               </div>
-              {transactionType === "rupees" ? (
+              {transactionTypeForQuickBuySell === "rupees" ? (
                 <QuickBuySellButtons
                   amounts={[100, 200, 500, 1000]}
                   unit="rupees"
