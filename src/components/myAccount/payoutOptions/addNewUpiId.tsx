@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { fetchAllUPI } from "@/api/DashboardServices";
 import { XMarkIcon } from "@heroicons/react/20/solid";
+import Notiflix from "notiflix";
 
 export default function UpiModal({
   toggled,
@@ -56,7 +57,7 @@ export default function UpiModal({
   const buyReqApiHandler = async () => {
     if (validate()) {
       if (!isSubmitting) {
-        // Notiflix.Loading.custom({svgSize:'180px',customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>'});
+        Notiflix.Loading.custom({svgSize:'180px',customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>'});
         setIsSubmitting(true);
 
         const dataToBeDecrypt = {
@@ -90,7 +91,7 @@ export default function UpiModal({
             );
 
             if (JSON.parse(decryptedData).status) {
-              //   Notiflix.Loading.remove();
+                Notiflix.Loading.remove();
               setUpiId("");
               Swal.fire({
                 html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
@@ -104,7 +105,7 @@ export default function UpiModal({
             // setPreviewData(JSON.parse(decryptedData).data);
           })
           .catch(async (errInBuyReq) => {
-            // Notiflix.Loading.remove();
+            Notiflix.Loading.remove();
             const decryptedData = await funcForDecrypt(
               errInBuyReq?.response?.data?.payload
             );
@@ -117,6 +118,7 @@ export default function UpiModal({
             });
           })
           .finally(() => {
+            Notiflix.Loading.remove();
             setIsSubmitting(false);
           });
       }
