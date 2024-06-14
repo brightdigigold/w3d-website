@@ -45,29 +45,16 @@ const OrdersTabs = () => {
   const [selectedMetalType, setSelectedMetalType] = useState("ALL");
   const [open, setOpen] = useState(false);
   const refOne = useRef<HTMLDivElement>(null);
-
-  // const [range, setRange] = useState([
-  //   {
-  //     startDate: new Date(`${2023}/${1}/${1}`),
-  //     endDate: addDays(new Date(), 7),
-  //     key: "selection",
-  //   },
-  // ]);
-
   const [selectionRange, setSelectionRange] = useState({
     startDate: new Date(`${2023}/${1}/${1}`),
     endDate: new Date(),
     key: "selection",
   });
 
-  const handleSelect = (ranges) => {
-    // Do something with the selected range
+  const handleSelect = (ranges: any) => {
     const formattedStartDate = ranges.selection.startDate.toISOString().slice(0, 10);
     const formattedEndDate = ranges.selection.endDate.toISOString().slice(0, 10);
 
-    console.log("==>", ranges.selection.startDate.toISOString())
-
-    console.log({ formattedStartDate, formattedEndDate });
     setSelectionRange(ranges.selection);
     handleFilter(
       formattedEndDate,
@@ -79,10 +66,6 @@ const OrdersTabs = () => {
       size
     );
   };
-
-
-
-  console.log("selectionRange", selectionRange.endDate.toISOString().slice(0, 10))
 
   const OpenAccord = (item: any) => {
     setIsOpen(!isOpen);
@@ -108,10 +91,6 @@ const OrdersTabs = () => {
     const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
     const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
     handleFilter(
-      // range[0].endDate ? format(new Date(range[0].endDate), "yyyy-MM-dd") : "",
-      // range[0].startDate
-      //   ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-      //   : "",
       formattedEndDate,
       formattedStartDate,
       status,
@@ -222,12 +201,7 @@ const OrdersTabs = () => {
     setMetalValue(value);
     const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
     const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
-    // const formattedEndDate = range[0].endDate
-    //   ? format(new Date(range[0].endDate), "yyyy-MM-dd")
-    //   : "";
-    // const formattedStartDate = range[0].startDate
-    //   ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-    //   : "";
+
     handleFilter(
       formattedEndDate,
       formattedStartDate,
@@ -245,7 +219,7 @@ const OrdersTabs = () => {
     setTransactionValue(value);
     const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
     const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
- 
+
     handleFilter(
       formattedEndDate,
       formattedStartDate,
@@ -257,33 +231,12 @@ const OrdersTabs = () => {
     );
   };
 
-  // const updateCalender = (item: any) => {
-  //   setRange([item.selection]);
-  //   const formattedEndDate = range[0].endDate
-  //     ? format(new Date(range[0].endDate), "yyyy-MM-dd")
-  //     : "";
-  //   const formattedStartDate = range[0].startDate
-  //     ? format(new Date(range[0].startDate), "yyyy-MM-dd")
-  //     : "";
-
-  //   console.log("date range", { formattedStartDate, formattedEndDate })
-  //   handleFilter(
-  //     formattedEndDate,
-  //     formattedStartDate,
-  //     status,
-  //     metalValue,
-  //     transactionValue,
-  //     page,
-  //     size
-  //   );
-  // };
-
   const updatePage = (e: any) => {
     let moveTo = e.target.value;
     setPage(moveTo);
     const formattedStartDate = format(selectionRange.startDate, "yyyy-MM-dd")
     const formattedEndDate = format(selectionRange.endDate, "yyyy-MM-dd")
-  
+
     handleFilter(
       formattedEndDate,
       formattedStartDate,
@@ -386,10 +339,6 @@ const OrdersTabs = () => {
             <p className=" text-sm mb-1">Select Date</p>
             <div className=" cursor-pointer text-white rounded bg-themeDarkBlue  px-3 py-2 focus:outline-none">
               <input
-                // value={`${format(range[0].startDate, "MM/dd/yyyy")} to ${format(
-                //   range[0].endDate,
-                //   "MM/dd/yyyy"
-                // )}`}
                 value={`${format(selectionRange.startDate, "MM/dd/yyyy")} to ${format(selectionRange.endDate, "MM/dd/yyyy")}`}
                 readOnly
                 className="text-white placeholder:text-gray-500 cursor-pointer bg-transparent w-52"
@@ -411,17 +360,6 @@ const OrdersTabs = () => {
                   direction="horizontal"
                   className="calendarElement text-black"
                 />
-                // <DateRangePicker
-                //   onChange={(e) => {
-                //     updateCalender(e);
-                //   }}
-                //   editableDateInputs={true}
-                //   moveRangeOnFirstSelection={false}
-                //   ranges={range}
-                //   months={1}
-                //   direction="horizontal"
-                //   className="calendarElement text-black"
-                // />
               )}
             </div>
           </div>
@@ -486,15 +424,6 @@ const OrdersTabs = () => {
                                   {/* cart image */}
                                   {item?.orderType === "CART" &&
                                     item?.itemType === "MIXED" && (
-                                      // <img
-                                      //   alt="gold-logo"
-                                      //   className="h-6"
-                                      //   src="/Rectangle.png"
-                                      // />
-                                      // <AiOutlineShoppingCart
-                                      //   className="text-yellow-400"
-                                      //   size={28}
-                                      // />
                                       <Image
                                         src="/images/cart.png"
                                         alt="cart"
@@ -615,7 +544,7 @@ const OrdersTabs = () => {
                                           ? "text-yellow-500"
                                           : item?.status === "FAILED"
                                             ? "text-red-500"
-                                            : "" // Default color or add another color class
+                                            : "#fff" // Default color or add another color class
                                         }`}
                                     >
                                       {item?.status}
@@ -757,15 +686,6 @@ const OrdersTabs = () => {
                                   {/* cart image  */}
                                   {item?.orderType === "CART" &&
                                     item?.itemType === "MIXED" && (
-                                      // <img
-                                      //   alt="gold-logo"
-                                      //   className="h-6"
-                                      //   src="/Rectangle.png"
-                                      // />
-                                      // <AiOutlineShoppingCart
-                                      //   className="text-yellow-400"
-                                      //   size={28}
-                                      // />
                                       <img
                                         src="/images/cart.png"
                                         alt="cart"
@@ -886,12 +806,6 @@ const OrdersTabs = () => {
                               <div>
                                 {item?.status === "SUCCESS" ||
                                   item?.status === "COMPLETED" ? (
-                                  // <img
-                                  //   src="/check.png"
-                                  //   alt="check"
-                                  //   className=""
-                                  //   width={40}
-                                  // />
                                   <AiOutlineCheckCircle
                                     className="text-green-400"
                                     size={28}
@@ -908,24 +822,6 @@ const OrdersTabs = () => {
                                   />
                                 )}
                               </div>
-                              {/* <p className="px-2 col-span-1 text-sm sm:text-base">
-                                {item?.orderType === "PRODUCT" && (
-                                  <p>Coin Purchase</p>
-                                )}
-                                {item?.orderType === "CART" && " Coin Purchase"}
-                                {item?.orderType === "REWARD" &&
-                                  "Promotional " + formatString(item?.itemType)}
-                                {item?.orderType === "BUY" && <p>Purchase</p>}
-                                {item?.orderType === "SELL" && <p>Sold</p>}
-                                {item?.orderType === "GIFT" &&
-                                  item?.rewardsType === "SEND" && (
-                                    <p>Gift Sent</p>
-                                  )}
-                                {item?.orderType === "GIFT" &&
-                                  item?.rewardsType === "RECEIVED" && (
-                                    <p>Gift Received</p>
-                                  )}
-                              </p> */}
                               <div>
                                 {item?.status === "SUCCESS" ||
                                   item?.status === "COMPLETED" ? (
