@@ -42,7 +42,7 @@ const TempleUtrCheck = () => {
                             onBlur={formik.handleBlur}
                         />
                         {formik.touched.utr && formik.errors.utr && (
-                            <div className="text-red-500 mt-1">{formik.errors.utr}</div>
+                            <div className="text-red-500 ">{formik.errors.utr}</div>
                         )}
                     </div>
 
