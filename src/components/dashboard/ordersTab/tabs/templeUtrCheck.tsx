@@ -22,8 +22,6 @@ const TempleUtrCheck = () => {
         },
     });
 
-
-
     return (
         <div className='mt-6'>
             <form onSubmit={formik.handleSubmit} className=''>
@@ -45,7 +43,6 @@ const TempleUtrCheck = () => {
                             <div className="text-red-500 ">{formik.errors.utr}</div>
                         )}
                     </div>
-
                     <div className=''>
                         <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-4 extrabold'>Submit</button>
                     </div>
