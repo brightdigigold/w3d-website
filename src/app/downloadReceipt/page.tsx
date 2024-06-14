@@ -47,7 +47,7 @@ const Page = () => {
             <form onSubmit={formik.handleSubmit}>
                 <FormInput
                     type="text"
-                    label="UTR"
+                    label="UPI/UTR Ref/Txn No."
                     name="utr"
                     placeholder="Enter UTR Number"
                     formik={formik}
