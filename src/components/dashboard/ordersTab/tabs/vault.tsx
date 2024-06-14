@@ -19,8 +19,6 @@ const Vault = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
-  // console.log('error-------------------oooooooo', error)
-
   return (
     <div className="w-full">
       {/* {loading && <Loading />} */}

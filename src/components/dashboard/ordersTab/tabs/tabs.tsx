@@ -24,11 +24,14 @@ import {
   AiFillCloseCircle,
 } from "react-icons/ai";
 import { fetchWalletData } from "@/redux/vaultSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
+import { selectUser } from "@/redux/userDetailsSlice";
+import TempleUtrCheck from "./templeUtrCheck";
 
 const OrdersTabs = () => {
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const [userDetails, setUserDetails] = useState("");
   const [status, setStatus] = useState("ALL");
   const [isOpen, setIsOpen] = useState(false);
@@ -50,6 +53,10 @@ const OrdersTabs = () => {
     endDate: new Date(),
     key: "selection",
   });
+
+  const userType = user.data.type;
+
+  console.log("userType", userType)
 
   const handleSelect = (ranges: any) => {
     const formattedStartDate = ranges.selection.startDate.toISOString().slice(0, 10);
@@ -387,6 +394,8 @@ const OrdersTabs = () => {
           </div>
         </div>
       )}
+
+      {userType == 'temple' && <TempleUtrCheck />}
 
       <Tab.Group defaultIndex={0}>
         <div className="grid grid-cols-5 gap-4 mt-6">

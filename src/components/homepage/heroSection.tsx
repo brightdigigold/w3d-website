@@ -91,9 +91,9 @@ const HeroSection = () => {
               <Image
                 src="/bdgwhite.png"
                 alt="Your Company"
-                width={24 * 10}
-                height={16 * 10}
-                className="absolute  opacity-40 h-72 top-72 hidden sm:block"
+                width={62 * 10}
+                height={32 * 10}
+                className="absolute opacity-20 mt-56 hidden sm:block ml-38"
               />
             </div>
             {/* <div className="relative">

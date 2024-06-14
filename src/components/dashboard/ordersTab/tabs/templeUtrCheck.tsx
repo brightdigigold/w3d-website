@@ -1,20 +1,10 @@
 'use client'
 import FormInput from '@/components/helperFunctions'
-import SetProfileForNewUser from '@/components/setProfile';
-import { setShowProfileForm } from '@/redux/authSlice';
-import { RootState } from '@/redux/store';
 import { useFormik } from 'formik';
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
-const Page = () => {
-  const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
-  const dispatch = useDispatch();
-
-  const onClose = () => {
-    dispatch(setShowProfileForm(false));
-  };
+const TempleUtrCheck = () => {
 
     const validationSchema = Yup.object().shape({
         utr: Yup.string()
@@ -23,7 +13,7 @@ const Page = () => {
             .required('Name is required'),
         mobileNumber: Yup.string()
             .required('Mobile number is required')
-            .matches(/^[0-9]{10}$/, 'Invalid mobile number') 
+            .matches(/^[0-9]{10}$/, 'Invalid mobile number')
     });
 
     const formik = useFormik({
@@ -40,22 +30,36 @@ const Page = () => {
     });
 
     return (
-        <div className='mt-20 w-full p-4'>
-            {showProfileForm && (
-              <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
-            )}
-            <form onSubmit={formik.handleSubmit}>
-                <FormInput
+        <div className='mt-4'>
+            <form onSubmit={formik.handleSubmit} className=''>
+                {/* <FormInput
                     type="text"
                     label="UTR"
                     name="utr"
                     placeholder="Enter UTR Number"
                     formik={formik}
                     autoComplete="off"
-                    // required
-                />
-                
-                <FormInput
+                // required
+                /> */}
+
+                <div className="w-full mt-4 flex flex-row items-center">
+                    <div>
+                        <label className="text-white mb-2">UPI/UTR Ref No.</label>
+                        <input
+                            type="text"
+                            name="utr"
+                            placeholder="Enter 12 Digit Ref No."
+                            className="block placeholder:text-gray-500 text-white rounded-3xl bg-theme  px-6 py-2 focus:outline-none focus:bg-theme  border-1 mt-2  focus:ring-0 focus:border-b"
+                        />
+                    </div>
+                    <div>
+                        <div className='mt-6 ml-2'>
+                            <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'>Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* <FormInput
                     type="text"
                     label="Name"
                     name="name"
@@ -70,14 +74,10 @@ const Page = () => {
                     name="mobileNumber"
                     formik={formik}
                     autoComplete="off"
-                />
-                 
-                <div className='my-4 items-center'>
-                    <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'>Submit</button>
-                </div>
+                /> */}
             </form>
         </div>
     )
 }
 
-export default Page;
+export default TempleUtrCheck;
