@@ -4,7 +4,6 @@ import NextImage from "@/components/nextImage";
 import { ArrowDownIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import mixpanel from "mixpanel-browser";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";

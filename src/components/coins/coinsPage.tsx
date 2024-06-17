@@ -47,7 +47,6 @@ const Coins = () => {
     dispatch(setShowProfileForm(false));
   };
 
-  console.log(user.data)
 
   const loginOrSetProfileHandler = () => {
 
