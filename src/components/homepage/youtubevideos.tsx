@@ -90,7 +90,7 @@ export default function Videos() {
                               spaceBetween: 10,
                             },
                           }}
-                        autoplay={{ delay: 2500, disableOnInteraction: false }}
+                        autoplay={{ delay: 4500, disableOnInteraction: false }}
                         // effect={"coverflow"}
                         // centeredSlides={true}
                         // coverflowEffect={{
@@ -113,7 +113,6 @@ export default function Videos() {
                                 <div className="rounded-2xl h-40 sm:h-72 relative overflow-hidden">
                                     <Image
                                         src={video.img}
-                                       
                                         alt={video.title}
                                         width={1920}
                                         height={100}
