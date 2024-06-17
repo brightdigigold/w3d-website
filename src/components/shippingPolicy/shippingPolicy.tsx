@@ -32,7 +32,7 @@ const ShippingPolicy = () => {
                             </h1>
                             <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" className="" />
                         </div>
-                        <div className='text-gray-100 text-justify'>
+                        <div className='text-gray-100 text-justify prose-strong:text-white prose-strong:text-xl prose-lg prose-w-full prose-headings:text-yellow-400 prose-headings:text-2xl prose-headings:text-left prose-a:text-blue-400'>
                             {shipping && (
                                 //   <BlogDetailsById portableTextContent={shipping.body} />
                                 <PortableText content={shipping.body} />
