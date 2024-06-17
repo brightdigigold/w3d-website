@@ -42,7 +42,7 @@ const customSerializers = {
   },
   block: (props: any) => {
     if (props.node.style === 'h4') {
-      return <h4 className='text-yellow-400 text-lg mt-3'>{props.children}</h4>;
+      return <h4 className='text-yellow-400 text-lg mt-3 bold'>{props.children}</h4>;
     }
     return defaultSerializers.types.block(props);
   },
