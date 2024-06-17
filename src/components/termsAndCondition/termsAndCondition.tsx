@@ -18,6 +18,8 @@ const TermsAndCondition = () => {
     useEffect(() => {
         gettermsPosts().then(setterms);
     }, []);
+
+
     return (
         <div className="text-gray-200">
             {otpModal && <OtpModal />}
@@ -30,12 +32,28 @@ const TermsAndCondition = () => {
                             </h1>
                             <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/T+%26+C+Policy.gif" className="" />
                         </div>
+                        {/* <div className='grid grid-cols-4 gap-6 bg-slate-900'>
+                            <div className='col-span-4'>
+                                <div className='text-gray-100 text-justify prose-strong:text-white prose-strong:text-xl prose-lg prose-w-full prose-headings:text-yellow-400 prose-headings:text-2xl prose-headings:text-left prose-a:text-blue-400'>
+                                    {terms && (
+                                        //   <BlogDetailsById portableTextContent={terms.body} />
+                                        <PortableText content={terms.body} />
+                                    )}
+                                </div>
+                            </div>
+                            <div className='col-span-1'>
+                                <p className='text-center bold text-lg'>Related Articles</p>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                            </div>
+                        </div> */}
+
                         <div className='text-gray-100 text-justify prose-strong:text-white prose-strong:text-xl prose-lg prose-w-full prose-headings:text-yellow-400 prose-headings:text-2xl prose-headings:text-left prose-a:text-blue-400'>
                             {terms && (
                                 //   <BlogDetailsById portableTextContent={terms.body} />
                                 <PortableText content={terms.body} />
                             )}
                         </div>
+
                     </div>
                 </div>
             </div>

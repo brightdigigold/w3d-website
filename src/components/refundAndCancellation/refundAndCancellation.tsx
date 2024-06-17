@@ -18,7 +18,7 @@ const RefundAndCancellation = () => {
     getrefundsPosts().then(setRefunds);
   }, []);
 
-  console.log('Refund', refunds);
+  // console.log('Refund', refunds);
 
   return (
     <div>
@@ -34,7 +34,7 @@ const RefundAndCancellation = () => {
                 </h1>
                 <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Refund+Policy.gif" className="" />
               </div>
-              <div className='text-gray-100 text-justify'>
+              <div className='text-gray-100 text-justify prose-strong:text-white prose-strong:text-xl prose-lg prose-w-full prose-headings:text-yellow-400 prose-headings:text-2xl prose-headings:text-left prose-a:text-blue-400'>
                 {refunds && (
                   // <BlogDetailsById portableTextContent={refunds.body} />
                   <PortableText content={refunds.body} />
