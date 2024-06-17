@@ -32,6 +32,7 @@ export default function Blog() {
     getBlogPosts().then(posts => setPosts(posts.slice(0, 8)));
   }, []);
 
+  console.log("posts", posts)
 
   return (
     <>
@@ -86,19 +87,22 @@ export default function Blog() {
                 key={`${index}-Slider`}
                 className="relative swiper-slide p-0 sm:p-4 pt-10"
               >
-                <Link href={`/blog/${feature.slug.current}`} passHref>
-                  <div className="rounded-2xl h-44 sm:h-72 relative">
-                    <div className="flex justify-center">
-                      <Image
-                        src={feature.thumbImage?.asset?.url}
-                        className="rounded-2xl cursor-pointer"
-                        alt="insite"
-                        width={1920}
-                        height={800}
-                      />
+                <div className="border border-1 rounded-b-2xl rounded-t-xl">
+                  <Link href={`/blog/${feature.slug.current}`} passHref>
+                    <div className="rounded-2xl h-44 sm:h-72 relative">
+                      <div className="flex justify-center">
+                        <Image
+                          src={feature.thumbImage?.asset?.url}
+                          className="rounded-t-xl cursor-pointer"
+                          alt="insite"
+                          width={1920}
+                          height={800}
+                        />
+                      </div>
+                      <p className="text-white text-center text-lg">{feature?.title}</p>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
