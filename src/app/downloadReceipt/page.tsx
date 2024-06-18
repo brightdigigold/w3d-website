@@ -14,6 +14,7 @@ const Page = () => {
     const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
+    const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
 
     const onClose = () => {
         dispatch(setShowProfileForm(false));
@@ -55,7 +56,7 @@ const Page = () => {
                     // Convert Buffer to Blob
                     const buffer = Buffer.from(dataOfParticularTransactionUTR.data.data);
                     const blob = new Blob([buffer], { type: 'application/pdf' });
-                    fileDownload(blob, 'DonationReceipt.pdf');
+                    setPdfBlob(blob);
                 } else {
                     console.error("Failed to generate receipt");
                 }
@@ -66,6 +67,12 @@ const Page = () => {
             }
         },
     });
+
+    const handleDownload = () => {
+        if (pdfBlob) {
+            fileDownload(pdfBlob, 'DonationReceipt.pdf');
+        }
+    };
 
     return (
         <div className='mt-20 w-full p-4'>
@@ -85,7 +92,17 @@ const Page = () => {
                     <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'>Submit</button>
                 </div>
             </form>
-            {loading && <p className='text-white'>downloading...</p>}
+            {loading && <p className='text-white'>Loading...</p>}
+            {pdfBlob && (
+                <div className='mt-4'>
+                    <button
+                        onClick={handleDownload}
+                        className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'
+                    >
+                        Download Receipt
+                    </button>
+                </div>
+            )}
         </div>
     )
 }
