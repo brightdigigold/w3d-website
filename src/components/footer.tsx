@@ -31,7 +31,7 @@ const Footer = () => {
   };
 
   return (
-    <>
+    <div className="fixed bottom-0">
       {openLoginAside && (
         <LoginAside
           isOpen={openLoginAside}
@@ -41,7 +41,7 @@ const Footer = () => {
       )}
       {isloggedIn ? (
         <>
-          <div className=" fixed bottom-0 loginGrad p-2 grid grid-cols-4 w-full z-[40] py-3 border-t xl:hidden">
+          <div className="fixed bottom-0 loginGrad p-2 grid grid-cols-4 w-full z-[40] py-3 border-t xl:hidden">
             <div className=" flex justify-center">
               <Link href="/" className="text-white text-sm" onClick={() => handleLinkClick('home')}>
                 <img
@@ -268,7 +268,7 @@ const Footer = () => {
           </div>
         </>
       ) : (
-        <div className="bg-header ">
+        <div className="bg-header fixed bottom-0">
           <div className="">
             <div className="mx-auto px-4 sm:px-6 lg:px-16 py-8">
               <div className="grid grid-cols-4 gap-4 lg:gap-4">
@@ -455,7 +455,7 @@ const Footer = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
