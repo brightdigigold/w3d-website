@@ -9,6 +9,7 @@ import SetProfileForNewUser from '@/components/setProfile';
 import { setShowProfileForm } from '@/redux/authSlice';
 import { RootState } from '@/redux/store';
 import fileDownload from 'js-file-download';
+import mixpanel from 'mixpanel-browser';
 
 const Page = () => {
     const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
@@ -69,6 +70,7 @@ const Page = () => {
     });
 
     const handleDownload = () => {
+        mixpanel.track('Receipt downloaded');
         if (pdfBlob) {
             fileDownload(pdfBlob, 'DonationReceipt.pdf');
         }
