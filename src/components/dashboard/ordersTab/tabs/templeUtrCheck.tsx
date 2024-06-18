@@ -3,20 +3,19 @@ import Loading from '@/app/loading';
 import { AesEncrypt, funcForDecrypt } from '@/components/helperFunctions';
 import axios from 'axios';
 import { useFormik } from 'formik';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import * as Yup from 'yup';
-import {  format } from "date-fns";
 
 const TempleUtrCheck = () => {
     const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState(false);
-    const [utrDetailsTransactions, setUtrDetailsTransactions] = useState<any>({});
+    const [utrDetailsTransactions, setUtrDetailsTransactions] = useState<any>(null);
 
-    
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+    }
 
-    console.log("utrDetailsTransactions", utrDetailsTransactions, utrDetailsTransactions?.data?.orderAt)
-
-    const validationSchema = Yup.object().shape({
+    const validationSchema = Yup.object({
         utr: Yup.string()
             .required('UTR is required')
             .length(12, 'UTR must be exactly 12 digits')
@@ -26,10 +25,8 @@ const TempleUtrCheck = () => {
         initialValues: {
             utr: "453525325220",
         },
-        validationSchema: validationSchema,
+        validationSchema,
         onSubmit: async (values) => {
-            // Handle form submission
-            console.log(values);
             setLoading(true);
             try {
                 const token = localStorage.getItem("token");
@@ -39,29 +36,25 @@ const TempleUtrCheck = () => {
                         "Content-Type": "application/json",
                     },
                 };
-                const data = {
-                    utr: values.utr,
-                };
+                const data = { utr: values.utr };
                 const resAfterEncrypt = await AesEncrypt(data);
-
-                const body = {
-                    payload: resAfterEncrypt,
-                };
 
                 const response = await axios.post(
                     `${process.env.baseUrl}/user/order/detailsByUTR`,
-                    body,
+                    { payload: resAfterEncrypt },
                     configHeaders
                 );
 
                 const decryptedData = await funcForDecrypt(response.data.payload);
-                let dataOfParticularTransactionUTR = JSON.parse(decryptedData);
-                // setdataOfTransaction(dataOfParticularTransaction);
-                console.log("dataOfParticularTransactionUTR from temple utr", dataOfParticularTransactionUTR);
-                setUtrDetailsTransactions(dataOfParticularTransactionUTR)
+                const dataOfParticularTransactionUTR = JSON.parse(decryptedData);
+
+                if (dataOfParticularTransactionUTR.statusCode === 200) {
+                    setUtrDetailsTransactions(dataOfParticularTransactionUTR.data);
+                } else {
+                    setUtrDetailsTransactions(null);
+                }
             } catch (error) {
-                setLoading(false);
-                console.error("errordata", error);
+                console.error("Error fetching UTR details:", error);
             } finally {
                 setLoading(false);
             }
@@ -70,62 +63,61 @@ const TempleUtrCheck = () => {
 
     return (
         <div className='mt-6'>
-            <form onSubmit={formik.handleSubmit} className=''>
-                <div className="flex items-center gap-4">
-                    <div className="w-full max-w-lg">
-                        <label htmlFor="utr" className="text-white mb-2">UPI/UTR Ref/Txn No.</label>
-                        <input
-                            type="text"
-                            name="utr"
-                            id="utr"
-                            placeholder="Enter 12 Digit Ref/Txn No."
-                            className={`block w-full max-w-lg placeholder:text-gray-500 text-white rounded-3xl bg-theme px-4 py-2 focus:outline-none focus:bg-theme border-1 mt-2 focus:ring-0 ${formik.touched.utr && formik.errors.utr ? 'border-red-500' : 'border-b'}`}
-                            autoComplete='off'
-                            value={formik.values.utr}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
+            <form onSubmit={formik.handleSubmit} className='flex items-start gap-4'>
+                <div className="w-full max-w-lg">
+                    <label htmlFor="utr" className="text-white mb-2">UPI/UTR Ref/Txn No.</label>
+                    <input
+                        type="text"
+                        name="utr"
+                        id="utr"
+                        placeholder="Enter 12 Digit Ref/Txn No."
+                        className={`block w-full placeholder:text-gray-500 text-white rounded-3xl bg-theme px-4 py-2 focus:outline-none focus:bg-theme border-1 mt-2 focus:ring-0 ${formik.touched.utr && formik.errors.utr ? 'border-red-500' : 'border-b'}`}
+                        autoComplete='off'
+                        value={formik.values.utr}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <div className="h-5">
                         {formik.touched.utr && formik.errors.utr && (
-                            <div className="text-red-500 ">{formik.errors.utr}</div>
+                            <div className="text-red-500 text-sm mt-1">{formik.errors.utr}</div>
                         )}
                     </div>
-                    <div className=''>
-                        <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-4 extrabold'>Submit</button>
-                    </div>
+                </div>
+                <div className='mt-8'>
+                    <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-4 extrabold'>Submit</button>
                 </div>
             </form>
             {loading && <Loading />}
-            <div className='w-full border border-1 h-auto mt-8 rounded-md'>
-                <div className='text-white flex justify-around p-2'>
-                    <p className='text-base bold leading-7'>Devotee Name</p>
-                    <p>{utrDetailsTransactions?.data?.payoutData?.devoteeName}</p>
+            {utrDetailsTransactions && (
+                <div className='w-full border h-auto mt-8 rounded-md p-4'>
+                    <div className='text-white flex justify-between p-2 border-b-2 border-yellow-400 rounded'>
+                        <p className='text-base bold leading-7'>Devotee Name</p>
+                        <p>{utrDetailsTransactions.payoutData?.devoteeName}</p>
+                    </div>
+                    <div className='text-white flex justify-between p-2'>
+                        <p className='text-base bold leading-7'>UPI/UTR Ref/Txn No</p>
+                        <p>{utrDetailsTransactions.payoutData?.bank_reference}</p>
+                    </div>
+                    <div className='text-white flex justify-between p-2'>
+                        <p className='text-base bold leading-7'>Amount</p>
+                        <p>₹ {utrDetailsTransactions.amount}</p>
+                    </div>
+                    <div className='text-white flex justify-between p-2'>
+                        <p className='text-base bold leading-7'>Grams</p>
+                        <p>{utrDetailsTransactions.gram} gms</p>
+                    </div>
+                    <div className='text-white flex justify-between p-2'>
+                        <p className='text-base bold leading-7'>Status</p>
+                        <p>{utrDetailsTransactions.status}</p>
+                    </div>
+                    <div className='text-white flex justify-between p-2'>
+                        <p className='text-base bold leading-7'>Date</p>
+                        <p>{formatDate(utrDetailsTransactions.orderAt)}</p>
+                    </div>
                 </div>
-                <div className='text-white flex justify-around p-2'>
-                    <p className='text-base bold leading-7'>UPI/UTR Ref/Txn No</p>
-                    <p>{utrDetailsTransactions?.data?.payoutData?.bank_reference}</p>
-                </div>
-                <div className='text-white flex justify-around p-2'>
-                    <p className='text-base bold leading-7'>Amount</p>
-                    <p>₹ {utrDetailsTransactions?.data?.amount}</p>
-                </div>
-                <div className='text-white flex justify-around p-2'>
-                    <p className='text-base bold leading-7'>Grams</p>
-                    <p>{utrDetailsTransactions?.data?.gram} gms</p>
-                </div>
-
-                <div className='text-white flex justify-around p-2'>
-                    <p className='text-base bold leading-7'>Status</p>
-                    <p>{utrDetailsTransactions?.data?.status}</p>
-                </div>
-
-                <div className='text-white flex justify-around p-2'>
-                    <p className='text-base bold leading-7'>Date</p>
-                    <p>{Date.parse(utrDetailsTransactions?.data?.orderAt).toLocaleString()}</p>
-                    {/* <p>{(utrDetailsTransactions?.data?.orderAt).toLocaleString()}</p> */}
-                </div>
-            </div>
+            )}
         </div>
-    )
+    );
 }
 
 export default TempleUtrCheck;

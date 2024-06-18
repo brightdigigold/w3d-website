@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useFormik } from 'formik';
@@ -12,6 +12,8 @@ import { RootState } from '@/redux/store';
 const Page = () => {
     const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+    const [utrDetailsTransactions, setUtrDetailsTransactions] = useState<any>(null);
 
     const onClose = () => {
         dispatch(setShowProfileForm(false));
@@ -29,15 +31,13 @@ const Page = () => {
 
     const formik = useFormik({
         initialValues: {
-            utr: "",
+            utr: "453525325220",
             // name: "",
             // mobileNumber: "",
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            // Handle form submission
-            console.log(values);
-
+            setLoading(true);
             try {
                 const token = localStorage.getItem("token");
                 const configHeaders = {
@@ -46,28 +46,29 @@ const Page = () => {
                         "Content-Type": "application/json",
                     },
                 };
-
-                const data = {
-                    utr: values.utr,
-                };
+                const data = { utr: values.utr };
                 const resAfterEncrypt = await AesEncrypt(data);
 
-                const body = {
-                    payload: resAfterEncrypt,
-                };
-
                 const response = await axios.post(
-                    `${process.env.baseUrl}/user/order/detailsByUTR`,
-                    body,
+                    `${process.env.baseUrl}/user/receipt`,
+                    { payload: resAfterEncrypt },
                     configHeaders
                 );
 
                 const decryptedData = await funcForDecrypt(response.data.payload);
-                let dataOfParticularTransactionUTR = JSON.parse(decryptedData);
-                // setdataOfTransaction(dataOfParticularTransaction);
-                console.log("dataOfParticularTransactionUTR", dataOfParticularTransactionUTR);
+                const dataOfParticularTransactionUTR = JSON.parse(decryptedData);
+
+                console.log("dataOfParticularTransactionUTR from receipt", dataOfParticularTransactionUTR)
+
+                if (dataOfParticularTransactionUTR.statusCode === 200) {
+                    setUtrDetailsTransactions(dataOfParticularTransactionUTR.data);
+                } else {
+                    setUtrDetailsTransactions(null);
+                }
             } catch (error) {
-                console.error("errordata", error);
+                console.error("Error fetching UTR details:", error);
+            } finally {
+                setLoading(false);
             }
         },
     });
@@ -87,7 +88,7 @@ const Page = () => {
                     autoComplete="off"
                 />
 
-                <FormInput
+                {/* <FormInput
                     type="text"
                     label="Name"
                     name="name"
@@ -101,7 +102,7 @@ const Page = () => {
                     name="mobileNumber"
                     formik={formik}
                     autoComplete="off"
-                />
+                /> */}
 
                 <div className='my-4 items-center'>
                     <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'>Submit</button>
