@@ -8,12 +8,12 @@ import FormInput, { AesEncrypt, funcForDecrypt } from '@/components/helperFuncti
 import SetProfileForNewUser from '@/components/setProfile';
 import { setShowProfileForm } from '@/redux/authSlice';
 import { RootState } from '@/redux/store';
+import fileDownload from 'js-file-download';
 
 const Page = () => {
     const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-    const [utrDetailsTransactions, setUtrDetailsTransactions] = useState<any>(null);
 
     const onClose = () => {
         dispatch(setShowProfileForm(false));
@@ -22,18 +22,11 @@ const Page = () => {
     const validationSchema = Yup.object().shape({
         utr: Yup.string()
             .required('UTR is required'),
-        // name: Yup.string()
-        //     .required('Name is required'),
-        // mobileNumber: Yup.string()
-        //     .required('Mobile number is required')
-        //     .matches(/^[0-9]{10}$/, 'Invalid mobile number')
     });
 
     const formik = useFormik({
         initialValues: {
             utr: "453525325220",
-            // name: "",
-            // mobileNumber: "",
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
@@ -50,7 +43,7 @@ const Page = () => {
                 const resAfterEncrypt = await AesEncrypt(data);
 
                 const response = await axios.post(
-                    `${process.env.baseUrl}/user/receipt`,
+                    `https://calf-awake-friendly.ngrok-free.app/user/receipt`,
                     { payload: resAfterEncrypt },
                     configHeaders
                 );
@@ -58,12 +51,13 @@ const Page = () => {
                 const decryptedData = await funcForDecrypt(response.data.payload);
                 const dataOfParticularTransactionUTR = JSON.parse(decryptedData);
 
-                console.log("dataOfParticularTransactionUTR from receipt", dataOfParticularTransactionUTR)
-
                 if (dataOfParticularTransactionUTR.statusCode === 200) {
-                    setUtrDetailsTransactions(dataOfParticularTransactionUTR.data);
+                    // Convert Buffer to Blob
+                    const buffer = Buffer.from(dataOfParticularTransactionUTR.data.data);
+                    const blob = new Blob([buffer], { type: 'application/pdf' });
+                    fileDownload(blob, 'DonationReceipt.pdf');
                 } else {
-                    setUtrDetailsTransactions(null);
+                    console.error("Failed to generate receipt");
                 }
             } catch (error) {
                 console.error("Error fetching UTR details:", error);
@@ -87,27 +81,11 @@ const Page = () => {
                     formik={formik}
                     autoComplete="off"
                 />
-
-                {/* <FormInput
-                    type="text"
-                    label="Name"
-                    name="name"
-                    formik={formik}
-                    autoComplete="off"
-                />
-
-                <FormInput
-                    type="number"
-                    label="Mobile Number"
-                    name="mobileNumber"
-                    formik={formik}
-                    autoComplete="off"
-                /> */}
-
                 <div className='my-4 items-center'>
                     <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'>Submit</button>
                 </div>
             </form>
+            {loading && <p className='text-white'>downloading...</p>}
         </div>
     )
 }
