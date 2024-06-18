@@ -113,6 +113,7 @@ export default function OtpModal() {
             router.push("/");
           } else {
             dispatch(setShowOTPmodal(false));
+            mixpanel.track('To download receipt');
             if (!result.data.isNewUser) {
               dispatch(setIsLoggedIn(true));
               dispatch(fetchUserDetails());

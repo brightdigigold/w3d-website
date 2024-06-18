@@ -42,9 +42,6 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   const cancelButtonRef = useRef(null);
   const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value.replace(/ gm/g, '');
 
-  console.log("previewData", previewData);
-  console.log("metalType", metalType)
-
   useEffect(() => {
     if (welcomeGold) {
       dispatch(clearCoupon());
