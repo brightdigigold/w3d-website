@@ -43,7 +43,7 @@ const Page = () => {
                 const resAfterEncrypt = await AesEncrypt(data);
 
                 const response = await axios.post(
-                    `https://calf-awake-friendly.ngrok-free.app/user/receipt`,
+                    `${process.env.baseUrl}/user/receipt`,
                     { payload: resAfterEncrypt },
                     configHeaders
                 );
