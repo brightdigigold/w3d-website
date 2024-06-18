@@ -22,7 +22,7 @@ const Page = () => {
 
     const validationSchema = Yup.object().shape({
         utr: Yup.string()
-            .required('UTR is required'),
+            .required('UTR is required').length(12, 'UTR should be of 12 digits'),
     });
 
     const formik = useFormik({

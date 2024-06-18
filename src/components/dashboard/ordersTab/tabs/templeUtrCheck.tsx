@@ -18,7 +18,7 @@ const TempleUtrCheck = () => {
     const validationSchema = Yup.object({
         utr: Yup.string()
             .required('UTR is required')
-            .length(12, 'UTR must be exactly 12 digits')
+            .length(12, 'UTR should be of 12 digits')
     });
 
     const formik = useFormik({
