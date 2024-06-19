@@ -189,6 +189,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                       <p className=" text-sm sm:text-base bold text-blue-100">₹  {actualAmount} </p>
                     </div>
                   )}
+
                   {metalType === "gold" && purchaseType === "buy" && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">
@@ -197,6 +198,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                       <p className=" text-sm sm:text-base bold text-blue-100"> {welcomeGold ? welcomeGold : ParseFloat(metalQuantity, 4)} {welcomeGold ? "" : "gm"}</p>
                     </div>
                   )}
+                  
                   {isAnyCouponApplied && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">

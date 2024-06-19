@@ -118,7 +118,6 @@ const BuySell = () => {
       dataToBeDecrypt.couponCode = appliedCouponCode ? appliedCouponCode : "";
     }
 
-    console.log("dataToBeDecrypt", dataToBeDecrypt)
     const resAfterEncryptData = await funForAesEncrypt(dataToBeDecrypt);
     const payloadToSend = {
       payload: resAfterEncryptData,

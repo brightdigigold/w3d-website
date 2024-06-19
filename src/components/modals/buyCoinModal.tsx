@@ -228,7 +228,8 @@ export default function CoinModal({
             openAddressModal={openAddressModal}
             closeAddressModal={closeAddressModalHandler}
             productsDetailById={productsDetailById}
-            metalTypeForProgressBar={metalTypeForProgressBar} akshayTrityaOfferApplied={false} />
+            metalTypeForProgressBar={metalTypeForProgressBar} 
+            akshayTrityaOfferApplied={false} />
         )}
         <Transition.Child
           as={Fragment}
