@@ -415,6 +415,7 @@ const BuySell = () => {
               }
             }
             setValidationError("");
+            dispatch(setTransactionType(unit));
             dispatch(setEnteredAmount(amount));
           }}
           className="bg-themeLight001 border bold border-blue-200 rounded-md py-1 px-2 sm:px-4 text-white text-sm relative" // Added relative positioning
@@ -738,13 +739,13 @@ const BuySell = () => {
               <div className="text-white text-md mt-4">
                 {purchaseType === "buy" ? "Quick Buy" : "Quick Sell"}
               </div>
-              {transactionType === "rupees" ? (
+              {activeTabPurchase === "rupees" ? (
                 <QuickBuySellButtons
                   amounts={[100, 200, 500, 1000]}
-                  unit="rupees"
+                  unit={activeTabPurchase}
                 />
               ) : (
-                <QuickBuySellButtons amounts={[0.1, 0.5, 1, 2]} unit="gm" />
+                <QuickBuySellButtons amounts={[0.1, 0.5, 1, 2]} unit={activeTabPurchase} />
               )}
 
               <span className="text-center text-xxs sm:text-xs flex justify-center items-center mt-6 text-gray-400">

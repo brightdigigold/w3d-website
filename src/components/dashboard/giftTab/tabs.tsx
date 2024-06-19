@@ -54,8 +54,6 @@ const GiftTab = () => {
   const enteredAmount = useSelector((state: RootState) => state.gift.enteredAmount);
   const actualAmount = useSelector((state: RootState) => state.gift.actualAmount);
 
-  console.table({ transactionType, totalAmount, metalQuantity, enteredAmount, actualAmount });
-
   useEffect(() => {
     dispatch(setMetalType("gold"));
     dispatch(setEnteredAmount(0));
