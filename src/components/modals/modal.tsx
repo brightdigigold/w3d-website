@@ -43,7 +43,6 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value.replace(/ gm/g, '');
 
   console.log("previewData", previewData);
-  console.log("metalType", metalType)
 
   useEffect(() => {
     if (welcomeGold) {
@@ -180,7 +179,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                     </p>
                     <p className="text-sm sm:text-base bold text-blue-100">{ParseFloat(metalQuantity, 4)} gm</p>
                   </div> */}
-{/* 
+                  {/* 
                   {purchaseType === "buy" && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">
