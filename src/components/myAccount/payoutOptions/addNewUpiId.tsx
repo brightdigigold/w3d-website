@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { fetchAllUPI } from "@/api/DashboardServices";
 import { XMarkIcon } from "@heroicons/react/20/solid";
+import Notiflix from "notiflix";
 
 export default function UpiModal({
   toggled,
@@ -56,7 +57,7 @@ export default function UpiModal({
   const buyReqApiHandler = async () => {
     if (validate()) {
       if (!isSubmitting) {
-        // Notiflix.Loading.custom({svgSize:'180px',customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>'});
+        Notiflix.Loading.custom({ svgSize: '180px', customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>' });
         setIsSubmitting(true);
 
         const dataToBeDecrypt = {
@@ -90,13 +91,14 @@ export default function UpiModal({
             );
 
             if (JSON.parse(decryptedData).status) {
-              //   Notiflix.Loading.remove();
+              Notiflix.Loading.remove();
               setUpiId("");
               Swal.fire({
                 html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
                 title: "Successfully Done",
-                titleText: `${JSON.parse(decryptedData).message}`,
-                timer: 1500,
+                // titleText: `${JSON.parse(decryptedData).message}`,
+                titleText: `Your UPI has been added successfully `,
+                timer: 2000,
               });
               setupiUpdated(true);
               setOpen(false);
@@ -104,7 +106,7 @@ export default function UpiModal({
             // setPreviewData(JSON.parse(decryptedData).data);
           })
           .catch(async (errInBuyReq) => {
-            // Notiflix.Loading.remove();
+            Notiflix.Loading.remove();
             const decryptedData = await funcForDecrypt(
               errInBuyReq?.response?.data?.payload
             );
@@ -117,6 +119,7 @@ export default function UpiModal({
             });
           })
           .finally(() => {
+            Notiflix.Loading.remove();
             setIsSubmitting(false);
           });
       }
@@ -205,7 +208,7 @@ export default function UpiModal({
                     type="submit"
                     className="mt-3 absolute top-5 bg-transparent right-5  justify-center rounded-full border-1 text-white p-2 text-sm font-semibold shadow-sm  sm:mt-0 sm:w-auto"
                     onClick={() => {
-                      if (onClose) onClose(); 
+                      if (onClose) onClose();
                       setOpen(false);
                     }}
                     ref={cancelButtonRef}
