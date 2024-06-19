@@ -162,7 +162,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                     </p>
                   </div>
 
-                  {/* <ul>
+                  <ul>
                     {previewData.map((item, index) => (
                       <li key={index}>
                         <div className="flex justify-between py-1 border-b border-dashed border-gray-400">
@@ -171,15 +171,15 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                         </div>
                       </li>
                     ))}
-                  </ul> */}
+                  </ul>
 
-                  <div className=" flex py-1 justify-between items-center border-b border-dashed border-gray-400">
+                  {/* <div className=" flex py-1 justify-between items-center border-b border-dashed border-gray-400">
                     <p className=" text-sm sm:text-base">
                       {purchaseType === "buy" ? "Purchasing" : "Sell"}{" "}
                       {metalType === "gold" ? "Gold" : "Silver"} Weight{" "}
                     </p>
                     <p className="text-sm sm:text-base bold text-blue-100">{ParseFloat(metalQuantity, 4)} gm</p>
-                  </div>
+                  </div> */}
 
                   {purchaseType === "buy" && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
@@ -198,7 +198,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                       <p className=" text-sm sm:text-base bold text-blue-100"> {welcomeGold ? welcomeGold : ParseFloat(metalQuantity, 4)} {welcomeGold ? "" : "gm"}</p>
                     </div>
                   )}
-                  
+
                   {isAnyCouponApplied && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">
