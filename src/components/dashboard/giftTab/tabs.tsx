@@ -32,6 +32,8 @@ const GiftTab = () => {
   const [isgold, setIsGold] = useState<boolean>(true);
   const [validationError, setValidationError] = useState<string>("");
   const [activeTab, setactiveTab] = useState<string>("rupees");
+  const [activeTabGift, setActiveTabGift] = useState<string>("rupees");
+
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
   const [otpModalShow, setOtpModalShow] = useState<boolean>(false);
   const [refresh, setRefresh] = useState<boolean>(false);
@@ -74,20 +76,23 @@ const GiftTab = () => {
   }, [isgold, activeTab, toggleMetal]);
 
   const handleTabRupeesAndGrams = (tab: "rupees" | "grams") => {
-    setactiveTab(tab);
-    dispatch(setTransactionType(tab));
-    dispatch(setEnteredAmount(tab === "rupees" ? totalAmount : metalQuantity));
+    setActiveTabGift(tab);
+    // setactiveTab(tab);
+    // dispatch(setTransactionType(tab));
+    // dispatch(setEnteredAmount(tab === "rupees" ? totalAmount : metalQuantity));
     setValidationError("");
   };
 
   const handleEnteredAmountChanges = (e: any) => {
     e.preventDefault();
-    setactiveTab("rupees");
+    setActiveTabGift("rupees");
+
+    // setactiveTab("rupees");
     dispatch(setTransactionType("rupees"));
     const enteredValue = ParseFloat(e.target.value, 4);
     setValidationError("");
     if (metalType === "gold") {
-      if (activeTab === "rupees") {
+      if (activeTabGift === "rupees") {
         if (enteredValue > 5 * goldData.salePrice) {
           setValidationError(
             `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is ₹${5 * goldData.salePrice
@@ -99,7 +104,7 @@ const GiftTab = () => {
         }
       }
     } else {
-      if (activeTab === "rupees") {
+      if (activeTabGift === "rupees") {
         if (enteredValue > 50 * silverData.salePrice) {
           setValidationError(
             `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is ₹${50 * silverData.salePrice
@@ -116,11 +121,13 @@ const GiftTab = () => {
   const handleEnteredAmountChangeGrams = (e: any) => {
     e.preventDefault();
     setactiveTab("grams");
+    setActiveTabGift("grams");
+
     dispatch(setTransactionType("grams"));
     const enteredValue = ParseFloat(e.target.value, 4);
     setValidationError("");
     if (metalType === "gold") {
-      if (activeTab === "grams") {
+      if (activeTabGift === "grams") {
         if (Number(e.target.value) > 5) {
           setValidationError(
             `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is 5gm only. Please change the amount.`
@@ -131,7 +138,7 @@ const GiftTab = () => {
         }
       }
     } else {
-      if (activeTab === "grams") {
+      if (activeTabGift === "grams") {
         if (Number(e.target.value) > 50) {
           setValidationError(
             `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is 50gm only. Please change the amount.`
@@ -150,6 +157,7 @@ const GiftTab = () => {
         <button
           key={amount}
           onClick={() => {
+            dispatch(setTransactionType(unit));
             dispatch(setEnteredAmount(amount));
           }}
           className="bg-themeLight001 border border-blue-200 rounded-md py-1 px-4 text-white text-sm"
@@ -426,57 +434,50 @@ const GiftTab = () => {
               <div className="flex items-center justify-center ">
                 <div className="flex justify-around border-1 bg-themeLight rounded mx-auto w-4/5 lg:w-3/4">
                   <div
-                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tl rounded-bl bold cursor-pointer ${activeTab === "rupees"
+                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tl rounded-bl bold cursor-pointer ${activeTabGift === "rupees"
                       ? "bg-transparent text-black bg-themeBlue active extrabold"
                       : "text-white "
                       }`}
                     onClick={() => handleTabRupeesAndGrams("rupees")}
                   >
-                    {activeTab === "buy" ? " In Rupees" : " In Rupees"}
+
+                    {" In Rupees"}
                   </div>
                   <div
-                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tr rounded-br bold cursor-pointer ${activeTab === "grams"
+                    className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tr rounded-br bold cursor-pointer ${activeTabGift === "grams"
                       ? "bg-transparent text-black bg-themeBlue active extrabold"
                       : "text-white "
                       }`}
                     onClick={() => handleTabRupeesAndGrams("grams")}
                   >
-                    {activeTab === "buy" ? "In Grams" : "In Grams"}
+                    {"In Grams"}
                   </div>
                 </div>
               </div>
               <div className="pt-2 mt-2 grid grid-cols-2 items-center gap-6 border-1 extrabold p-1 rounded-lg">
                 <div className="relative rounded-md shadow-sm">
                   <div
-                    className={`pointer-events-none absolute text-gray-400  inset-y-0 left-0 flex items-center ${activeTab === "rupees" ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"
+                    className={`pointer-events-none absolute text-gray-400  inset-y-0 left-0 flex items-center ${activeTabGift === "rupees" ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"
                       }`}
                   >
                     ₹
                   </div>
 
                   <input
-                    // type="number"
+                    type="text"
                     inputMode="numeric"
-                    className={`bg-transparent  pl-7 py-1 focus:outline-none text-gray-100 w-full ${activeTab === "rupees" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
+                    className={`bg-transparent  pl-7 py-1 focus:outline-none text-gray-100 w-full ${activeTabGift === "rupees" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
                       }`}
                     placeholder="0000"
                     onClick={() => handleTabRupeesAndGrams("rupees")}
-                    onChange={(e) => {
-                      handleEnteredAmountChanges(e);
-                    }}
-                    onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-                      e.preventDefault();
-                    }}
-                    onScroll={(e: React.UIEvent<HTMLElement>) => {
-                      e.preventDefault();
-                    }}
-                    onWheel={(e: React.WheelEvent<HTMLInputElement>) => {
-                      e.preventDefault();
-                    }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { handleEnteredAmountChanges(e) }}
+                    onFocus={(e: React.FocusEvent<HTMLInputElement>) => { e.preventDefault() }}
+                    onScroll={(e: React.UIEvent<HTMLElement>) => { e.preventDefault() }}
+                    onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
                     min={10}
                     step="0.0001"
                     value={
-                      activeTab === "rupees"
+                      transactionType === "rupees"
                         ? enteredAmount === 0
                           ? ""
                           : enteredAmount
@@ -484,7 +485,7 @@ const GiftTab = () => {
                     }
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                       // Prevent the input of a decimal point if purchase type is rupees
-                      if (activeTab === "rupees" && e.key === ".") {
+                      if (activeTabGift === "rupees" && e.key === ".") {
                         e.preventDefault();
                       }
                       // Prevent entering negative values
@@ -499,36 +500,30 @@ const GiftTab = () => {
                 </div>
                 <div className="relative rounded-md shadow-sm">
                   <input
-                    // type="number"
+                    type="number"
                     inputMode="numeric"
                     placeholder="0.0000"
-                    min={0.0015}
-                    max={2}
                     onClick={() => handleTabRupeesAndGrams("grams")}
-                    onChange={(e) => handleEnteredAmountChangeGrams(e)}
-                    onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-                      e.preventDefault();
-                    }}
-                    onScroll={(e: React.UIEvent<HTMLElement>) => {
-                      e.preventDefault();
-                    }}
-                    onWheel={(e: React.WheelEvent<HTMLInputElement>) => {
-                      e.preventDefault();
-                    }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEnteredAmountChangeGrams(e)}
+                    onFocus={(e: React.FocusEvent<HTMLInputElement>) => { e.preventDefault() }}
+                    onScroll={(e: React.UIEvent<HTMLElement>) => { e.preventDefault() }}
+                    onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                       if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                         e.preventDefault();
                       }
                     }}
-                    className={`bg-transparent w-full pr-14 py-1  focus:outline-none text-gray-100 text-right ${activeTab === "grams" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
+                    className={`bg-transparent w-full pr-14 py-1  focus:outline-none text-gray-100 text-right ${activeTabGift === "grams" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
                       }`}
                     value={
-                      activeTab === "grams" ? enteredAmount : metalQuantity
+                      transactionType === "grams"
+                        ? enteredAmount
+                        : ParseFloat(metalQuantity, 4)
                     }
                   // readOnly
                   />
                   <div
-                    className={`pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 ${activeTab === "grams" ? "text-sm sm:text-2xl" : "text-xs sm:text-xl"
+                    className={`pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 ${activeTabGift === "grams" ? "text-sm sm:text-2xl" : "text-xs sm:text-xl"
                       }`}
                   >
                     gm
@@ -541,13 +536,13 @@ const GiftTab = () => {
                 ""
               )}
               <p className="mt-3 text-lg pt-3">Quick Gift</p>
-              {transactionType === "rupees" ? (
+              {activeTabGift === "rupees" ? (
                 <QuickGiftButtons
                   amounts={[50, 100, 500, 1000]}
-                  unit="rupees"
+                  unit={activeTabGift}
                 />
               ) : (
-                <QuickGiftButtons amounts={[0.2, 0.5, 1, 2]} unit="gm" />
+                <QuickGiftButtons amounts={[0.2, 0.5, 1, 2]} unit={activeTabGift} />
               )}
               <div className="mt-6">
                 <p className="text-lg">Add a Personalized Message</p>
