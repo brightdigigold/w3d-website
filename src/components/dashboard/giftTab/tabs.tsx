@@ -159,6 +159,7 @@ const GiftTab = () => {
         <button
           key={amount}
           onClick={() => {
+            dispatch(setTransactionType(unit));
             dispatch(setEnteredAmount(amount));
           }}
           className="bg-themeLight001 border border-blue-200 rounded-md py-1 px-4 text-white text-sm"
@@ -441,7 +442,8 @@ const GiftTab = () => {
                       }`}
                     onClick={() => handleTabRupeesAndGrams("rupees")}
                   >
-                    {activeTab === "buy" ? " In Rupees" : " In Rupees"}
+
+                    {" In Rupees"}
                   </div>
                   <div
                     className={`text-center text-xxs w-1/2 sm:text-sm px-2 sm:px-9 py-2 rounded-tr rounded-br bold cursor-pointer ${activeTabGift === "grams"
@@ -450,7 +452,7 @@ const GiftTab = () => {
                       }`}
                     onClick={() => handleTabRupeesAndGrams("grams")}
                   >
-                    {activeTab === "buy" ? "In Grams" : "In Grams"}
+                    {"In Grams"}
                   </div>
                 </div>
               </div>
@@ -466,7 +468,7 @@ const GiftTab = () => {
                   <input
                     type="text"
                     inputMode="numeric"
-                    className={`bg-transparent  pl-7 py-1 focus:outline-none text-gray-100 w-full ${activeTab === "rupees" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
+                    className={`bg-transparent  pl-7 py-1 focus:outline-none text-gray-100 w-full ${activeTabGift === "rupees" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
                       }`}
                     placeholder="0000"
                     onClick={() => handleTabRupeesAndGrams("rupees")}
@@ -485,7 +487,7 @@ const GiftTab = () => {
                     }
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                       // Prevent the input of a decimal point if purchase type is rupees
-                      if (activeTab === "rupees" && e.key === ".") {
+                      if (activeTabGift === "rupees" && e.key === ".") {
                         e.preventDefault();
                       }
                       // Prevent entering negative values
@@ -513,7 +515,7 @@ const GiftTab = () => {
                         e.preventDefault();
                       }
                     }}
-                    className={`bg-transparent w-full pr-14 py-1  focus:outline-none text-gray-100 text-right ${activeTab === "grams" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
+                    className={`bg-transparent w-full pr-14 py-1  focus:outline-none text-gray-100 text-right ${activeTabGift === "grams" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
                       }`}
                     value={
                       transactionType === "grams"
@@ -536,13 +538,13 @@ const GiftTab = () => {
                 ""
               )}
               <p className="mt-3 text-lg pt-3">Quick Gift</p>
-              {transactionType === "rupees" ? (
+              {activeTabGift === "rupees" ? (
                 <QuickGiftButtons
                   amounts={[50, 100, 500, 1000]}
-                  unit="rupees"
+                  unit={activeTabGift}
                 />
               ) : (
-                <QuickGiftButtons amounts={[0.2, 0.5, 1, 2]} unit="gm" />
+                <QuickGiftButtons amounts={[0.2, 0.5, 1, 2]} unit={activeTabGift} />
               )}
               <div className="mt-6">
                 <p className="text-lg">Add a Personalized Message</p>
