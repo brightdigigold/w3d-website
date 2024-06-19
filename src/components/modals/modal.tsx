@@ -180,7 +180,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                     </p>
                     <p className="text-sm sm:text-base bold text-blue-100">{ParseFloat(metalQuantity, 4)} gm</p>
                   </div> */}
-
+{/* 
                   {purchaseType === "buy" && (
                     <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
                       <p className=" text-sm sm:text-base">
@@ -235,7 +235,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                         ? totalAmount
                         : enteredAmount}
                     </p>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="pt-4 pb-2">
                   <ProgressBar
