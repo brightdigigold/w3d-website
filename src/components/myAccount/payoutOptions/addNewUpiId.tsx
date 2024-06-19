@@ -57,7 +57,7 @@ export default function UpiModal({
   const buyReqApiHandler = async () => {
     if (validate()) {
       if (!isSubmitting) {
-        Notiflix.Loading.custom({svgSize:'180px',customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>'});
+        Notiflix.Loading.custom({ svgSize: '180px', customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>' });
         setIsSubmitting(true);
 
         const dataToBeDecrypt = {
@@ -91,13 +91,14 @@ export default function UpiModal({
             );
 
             if (JSON.parse(decryptedData).status) {
-                Notiflix.Loading.remove();
+              Notiflix.Loading.remove();
               setUpiId("");
               Swal.fire({
                 html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
                 title: "Successfully Done",
-                titleText: `${JSON.parse(decryptedData).message}`,
-                timer: 1500,
+                // titleText: `${JSON.parse(decryptedData).message}`,
+                titleText: `Your UPI has been added successfully `,
+                timer: 2000,
               });
               setupiUpdated(true);
               setOpen(false);
@@ -207,7 +208,7 @@ export default function UpiModal({
                     type="submit"
                     className="mt-3 absolute top-5 bg-transparent right-5  justify-center rounded-full border-1 text-white p-2 text-sm font-semibold shadow-sm  sm:mt-0 sm:w-auto"
                     onClick={() => {
-                      if (onClose) onClose(); 
+                      if (onClose) onClose();
                       setOpen(false);
                     }}
                     ref={cancelButtonRef}

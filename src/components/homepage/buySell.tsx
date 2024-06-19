@@ -85,8 +85,6 @@ const BuySell = () => {
     setOpenUpiModal(prev => !prev)
   }
 
-  console.log("transactionType: ", transactionType)
-
   const previewModal = async () => {
 
     Notiflix.Loading.custom({
