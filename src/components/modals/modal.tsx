@@ -42,6 +42,8 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
   const cancelButtonRef = useRef(null);
   const welcomeGold = previewData.find((item: any) => item.key === 'Welcome GOLD')?.value.replace(/ gm/g, '');
 
+  console.log("previewData", previewData);
+
   useEffect(() => {
     if (welcomeGold) {
       dispatch(clearCoupon());
@@ -159,7 +161,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                     </p>
                   </div>
 
-                  {/* <ul>
+                  <ul>
                     {previewData.map((item, index) => (
                       <li key={index}>
                         <div className="flex justify-between py-1 border-b border-dashed border-gray-400">
@@ -168,69 +170,8 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                         </div>
                       </li>
                     ))}
-                  </ul> */}
-
-                  <div className=" flex py-1 justify-between items-center border-b border-dashed border-gray-400">
-                    <p className=" text-sm sm:text-base">
-                      {purchaseType === "buy" ? "Purchasing" : "Sell"}{" "}
-                      {metalType === "gold" ? "Gold" : "Silver"} Weight{" "}
-                    </p>
-                    <p className="text-sm sm:text-base bold text-blue-100">{ParseFloat(metalQuantity, 4)} gm</p>
-                  </div>
-
-                  {purchaseType === "buy" && (
-                    <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
-                      <p className=" text-sm sm:text-base">
-                        {metalType === "gold" ? "Gold" : "Silver"} Value{" "}
-                      </p>
-                      <p className=" text-sm sm:text-base bold text-blue-100">₹  {actualAmount} </p>
-                    </div>
-                  )}
-                  {metalType === "gold" && purchaseType === "buy" && (
-                    <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
-                      <p className=" text-sm sm:text-base">
-                        {welcomeGold ? "Welcome Gold" : "Promotional Silver"}
-                      </p>
-                      <p className=" text-sm sm:text-base bold text-blue-100"> {welcomeGold ? welcomeGold : ParseFloat(metalQuantity, 4)} {welcomeGold ? "" : "gm"}</p>
-                    </div>
-                  )}
-                  {isAnyCouponApplied && (
-                    <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
-                      <p className=" text-sm sm:text-base">
-                        Promotional Gold({appliedCouponCode})
-                      </p>{" "}
-                      <p className=" text-sm sm:text-base bold text-blue-100">
-                        ₹ {extraGoldOfRuppess}
-                      </p>
-                    </div>
-                  )}
-
-                  {welcomeGold ? (
-                    <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
-                      <p className=" text-sm sm:text-base">Total Gold Weight </p>
-                      <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat((metalQuantity ?? 0) + (+welcomeGold), 4)} gm</p>
-                    </div>
-                  ) : metalType === "gold" && isAnyCouponApplied && (
-                    <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
-                      <p className=" text-sm sm:text-base">Total Gold Weight </p>
-                      <p className=" text-sm sm:text-base bold text-blue-100"> {ParseFloat((metalQuantity ?? 0) + extraGold, 4)} gm</p>
-                    </div>
-                  )}
-
-                  {purchaseType === "buy" && (
-                    <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
-                      <p className=" text-sm sm:text-base">GST ( +3% )</p>{" "}
-                      <p className=" text-sm sm:text-base bold text-blue-100">₹  {gst} </p>
-                    </div>
-                  )}
-                  <div className="py-1 flex justify-between items-center border-b border-dashed border-gray-400">
-                    <p className=" text-sm sm:text-base">Total Amount  </p>
-                    <p className=" text-sm sm:text-base bold text-blue-100">₹
-                      {transactionType === "grams"
-                        ? totalAmount
-                        : enteredAmount}
-                    </p>
-                  </div>
+                  </ul>
+                  
                 </div>
                 <div className="pt-4 pb-2">
                   <ProgressBar
