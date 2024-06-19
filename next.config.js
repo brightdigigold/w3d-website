@@ -28,12 +28,12 @@ const nextConfig = {
   // },
   env: {
     // baseUrl: "https://api.brightdigigold.com",
-    // baseUrl: "https://devapi.brightdigigold.com",
+    baseUrl: "https://devapi.brightdigigold.com",
     cashfree: "sandbox",
     // cashfree: "production",
     // baseUrl: "http://localhost:3032",
     // baseUrl: "http://192.168.1.5:3001",
-    baseUrl: "http://192.168.1.9:3002",
+    // baseUrl: "http://192.168.1.9:3002",
 
     GOOGLE_TAG: "GTM-5JFBNN5",
     NEXT_PUBLIC_SANITY_PROJECT_ID: "nkdqpbbn",
