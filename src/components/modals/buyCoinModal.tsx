@@ -98,9 +98,6 @@ export default function CoinModal({
   }, [useWallet]);
 
 
-
-  console.log("previewData++++++++===", previewData)
-
   const handleSelectConvertFromVault = (e: any) => {
     setUseWallet(e.target.checked);
   };
@@ -214,6 +211,9 @@ export default function CoinModal({
     return () => clearTimeout(timer);
   }, [useWallet]);
 
+  const isDisabled = (metalTypeForProgressBar === 'GOLD' && goldVaultBalance === 0) ||
+    (metalTypeForProgressBar === 'SILVER' && silverVaultBalance === 0);
+
   return (
     <Transition.Root show={openModalOfCoin} as={Fragment}>
       <Dialog
@@ -290,7 +290,7 @@ export default function CoinModal({
                                   <div className="text-sm sm:text-base w-full tracking-[.1em] bold text-white">
                                     Available Vault Balance :
                                   </div>
-                                  {<div className="flex items-center mt-2 bold text-white ">
+                                  <div className="flex items-center mt-2 bold text-white ">
                                     <label className="semibold dark:text-gray-300 text-sm sm:text-base">
                                       Convert All
                                     </label>
@@ -298,18 +298,12 @@ export default function CoinModal({
                                       id="default-checkbox"
                                       type="checkbox"
                                       value=""
-                                      className={`w-5 h-5 cursor-pointer  rounded-lg text-blue-600 bg-black ml-2 focus:bg-bg-theme dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ${goldVaultBalance === 0 ||
-                                        silverVaultBalance === 0
-                                        ? "cursor-not-allowed opacity-50"
-                                        : ""
-                                        }`}
-                                      disabled={
-                                        goldVaultBalance === 0 &&
-                                        silverVaultBalance === 0
-                                      }
+                                      className={`w-5 h-5 cursor-pointer rounded-lg text-blue-600 bg-black ml-2 focus:bg-bg-theme dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 
+                                      ${isDisabled ? "cursor-not-allowed opacity-50" : ""}`}
+                                      disabled={isDisabled}
                                       onChange={handleSelectConvertFromVault}
                                     />
-                                  </div>}
+                                  </div>
 
                                   {showLottie &&
                                     metalTypeForProgressBar === "GOLD" && (
