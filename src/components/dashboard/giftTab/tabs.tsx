@@ -455,24 +455,16 @@ const GiftTab = () => {
                   </div>
 
                   <input
-                    // type="number"
+                    type="text"
                     inputMode="numeric"
                     className={`bg-transparent  pl-7 py-1 focus:outline-none text-gray-100 w-full ${activeTab === "rupees" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"
                       }`}
                     placeholder="0000"
                     onClick={() => handleTabRupeesAndGrams("rupees")}
-                    onChange={(e) => {
-                      handleEnteredAmountChanges(e);
-                    }}
-                    onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-                      e.preventDefault();
-                    }}
-                    onScroll={(e: React.UIEvent<HTMLElement>) => {
-                      e.preventDefault();
-                    }}
-                    onWheel={(e: React.WheelEvent<HTMLInputElement>) => {
-                      e.preventDefault();
-                    }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => { handleEnteredAmountChanges(e) }}
+                    onFocus={(e: React.FocusEvent<HTMLInputElement>) => { e.preventDefault() }}
+                    onScroll={(e: React.UIEvent<HTMLElement>) => { e.preventDefault() }}
+                    onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
                     min={10}
                     step="0.0001"
                     value={
@@ -499,22 +491,14 @@ const GiftTab = () => {
                 </div>
                 <div className="relative rounded-md shadow-sm">
                   <input
-                    // type="number"
+                    type="number"
                     inputMode="numeric"
                     placeholder="0.0000"
-                    min={0.0015}
-                    max={2}
                     onClick={() => handleTabRupeesAndGrams("grams")}
-                    onChange={(e) => handleEnteredAmountChangeGrams(e)}
-                    onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-                      e.preventDefault();
-                    }}
-                    onScroll={(e: React.UIEvent<HTMLElement>) => {
-                      e.preventDefault();
-                    }}
-                    onWheel={(e: React.WheelEvent<HTMLInputElement>) => {
-                      e.preventDefault();
-                    }}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEnteredAmountChangeGrams(e)}
+                    onFocus={(e: React.FocusEvent<HTMLInputElement>) => { e.preventDefault() }}
+                    onScroll={(e: React.UIEvent<HTMLElement>) => { e.preventDefault() }}
+                    onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                       if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                         e.preventDefault();

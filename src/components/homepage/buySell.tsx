@@ -702,7 +702,6 @@ const BuySell = () => {
                   />
                 </div>
                 <div className="relative rounded-md shadow-sm">
-                  {/* <input type="text" inputMode="numeric" /> */}
 
                   <input
                     type="number"
