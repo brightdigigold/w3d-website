@@ -57,10 +57,12 @@ export default function CoinModal({
     if (useWallet) {
       return [
         "Coin",
+        "Coin Type",
+        "Total Weight",
         "Coin Weight",
         "Coin Quantity",
         "Purchase Weight",
-        "Vault Weight Used",
+        "Vault Used",
         "Remaining Vault Weight",
         // "Total GOLD",
         "Coin Value (Incl. 3% GST)",
@@ -69,7 +71,9 @@ export default function CoinModal({
     } else {
       return [
         "Coin",
+        "Coin Type",
         "Coin Weight",
+        "Total Weight",
         "Coin Quantity",
         // "Total GOLD",
         "Coin Value (Incl. 3% GST)",
@@ -92,6 +96,10 @@ export default function CoinModal({
   useEffect(() => {
     previewModal();
   }, [useWallet]);
+
+
+
+  console.log("previewData++++++++===", previewData)
 
   const handleSelectConvertFromVault = (e: any) => {
     setUseWallet(e.target.checked);
@@ -228,7 +236,7 @@ export default function CoinModal({
             openAddressModal={openAddressModal}
             closeAddressModal={closeAddressModalHandler}
             productsDetailById={productsDetailById}
-            metalTypeForProgressBar={metalTypeForProgressBar} 
+            metalTypeForProgressBar={metalTypeForProgressBar}
             akshayTrityaOfferApplied={false} />
         )}
         <Transition.Child
