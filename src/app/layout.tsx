@@ -5,7 +5,6 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "@/redux/store";
 import { Provider } from "react-redux";
-// import Head from "next/head";
 // import Script from 'next/script'
 import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
@@ -40,8 +39,10 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Navbar />
-            {children}
             <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
+            {/* <link rel="dns-prefetch" href="https://www.googletagmanager.com" /> */}
+            {/* <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" /> */}
+            {children}
             <Footer />
           </PersistGate>
         </Provider>
