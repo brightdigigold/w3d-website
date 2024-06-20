@@ -355,6 +355,7 @@ const BuySell = () => {
     previewModal();
   };
 
+
   const handleSellClick = (e: any) => {
     setValidationError("");
     if (!isloggedIn) {
@@ -367,7 +368,7 @@ const BuySell = () => {
       return;
     }
 
-    if (enteredAmount < totalAmount) {
+    if (totalAmount < 100) {
       setValidationError(`Minimum Sell amount is  Rs.${100}`);
       return;
     }
