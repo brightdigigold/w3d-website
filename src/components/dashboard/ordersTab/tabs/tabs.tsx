@@ -65,9 +65,6 @@ const OrdersTabs = () => {
     const formattedStartDate = ranges.selection.startDate.toISOString().slice(0, 10);
     const formattedEndDate = ranges.selection.endDate.toISOString().slice(0, 10);
 
-    console.log("==>", ranges.selection.startDate.toISOString())
-
-    console.log({ formattedStartDate, formattedEndDate });
     setSelectionRange(ranges.selection);
     handleFilter(
       formattedEndDate,
@@ -79,10 +76,6 @@ const OrdersTabs = () => {
       size
     );
   };
-
-
-
-  console.log("selectionRange", selectionRange.endDate.toISOString().slice(0, 10))
 
   const OpenAccord = (item: any) => {
     setIsOpen(!isOpen);

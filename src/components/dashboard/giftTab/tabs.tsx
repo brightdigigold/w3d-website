@@ -300,6 +300,7 @@ const GiftTab = () => {
             "amount": totalAmount,
             "Gift Sent to": mobile,
           });
+          console.log("result",result);
           dispatch(setEnteredAmount(0));
           dispatch(fetchWalletData() as any);
           setRefresh(true);

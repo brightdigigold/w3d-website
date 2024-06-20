@@ -17,6 +17,8 @@ const Redeem = (refreshOnGiftSent: any) => {
   const [size, setSize] = useState(5);
   const dispatch = useDispatch();
 
+  console.log("userRewards", userRewards)
+
   const redeemReward = async (id: any) => {
     Swal.fire({
       title: "Are you sure?",
