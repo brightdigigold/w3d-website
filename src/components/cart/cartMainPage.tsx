@@ -273,9 +273,6 @@ const Cart = () => {
     dispatch(setFinalAmount(finalAmount));
   }, [isGoldVault, isSilverVault]);
 
-  console.log("silverPayload", silverPayload);
-  console.log("goldPayload", goldPayload)
-
   const dataToEncrept = {
     orderType: "CART",
     goldCoins: goldPayload,
@@ -328,7 +325,6 @@ const Cart = () => {
 
     try {
       const token = localStorage.getItem("token");
-
       const dataToBeDecrypt = {
         user_id: _id,
         count: quantityChange,
