@@ -12,7 +12,7 @@ import {
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { RootState } from "@/redux/store";
@@ -55,6 +55,8 @@ import { useRouter } from "next/navigation";
 import AddAddressModel from "../modals/addAddressModel";
 
 const Cart = () => {
+  const user = useSelector(selectUser);
+  const { _id } = user.data;
   const router = useRouter();
   const dispatch = useDispatch();
   const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -88,16 +90,23 @@ const Cart = () => {
   const silverData = useSelector((state: RootState) => state.silver);
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
-  const user = useSelector(selectUser);
   const [quantity, setQuantity] = useState<number>(1);
-  const { _id } = user.data;
   const [maxCoinError, setMaxCoinError] = useState<String>("");
   const [openConvertMetalModal, setOpenConvertMetalModal] = useState<boolean>(false);
   const [metalTypeToConvert, setMetalTypeToConvert] = useState<String>("GOLD");
   const [addressList, setaddressList] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState<String>("");
   const [showAddNewAddress, setShowAddNewAddress] = useState<boolean>(false);
-  const maxAddressCount: number = 3;
+
+  const openConvertMetalModalHandler = (metalTypeToConvert: string) => {
+    if (metalTypeToConvert === 'GOLD' && goldPayload.length === 0) {
+      setOpenConvertMetalModal(false);
+    } else if (metalTypeToConvert === 'SILVER' && silverPayload.length === 0) {
+      setOpenConvertMetalModal(false);
+    } else {
+      setOpenConvertMetalModal(true);
+    }
+  };
 
   const handleSelectAddress = (addressId: string) => {
     setSelectedAddressId(addressId);
@@ -263,6 +272,9 @@ const Cart = () => {
     dispatch(calculateFinalAmount());
     dispatch(setFinalAmount(finalAmount));
   }, [isGoldVault, isSilverVault]);
+
+  console.log("silverPayload", silverPayload);
+  console.log("goldPayload", goldPayload)
 
   const dataToEncrept = {
     orderType: "CART",
@@ -561,20 +573,21 @@ const Cart = () => {
           <div className="flex flex-row justify-around items-center pt-3 pb-5 border-b-2 rounded-lg border-yellow-600">
             <div
               onClick={() => {
-                setOpenConvertMetalModal(true);
+                // setOpenConvertMetalModal(true);
                 setMetalTypeToConvert("GOLD");
+                openConvertMetalModalHandler('GOLD');
               }}
               className="flex border-2 border-yellow-400 rounded-full p-3 items-center cursor-pointer"
             >
-              {/* <img src={"Goldbarbanner.png"} className="h-5" alt="vault" /> */}
               <img src={"Goldbarbanner.png"} className="h-5" style={{ width: "auto" }} alt="vault" />
 
               <CustomButton title="GOLD" containerStyles="px-3" />
             </div>
             <div
               onClick={() => {
-                setOpenConvertMetalModal(true);
+                // setOpenConvertMetalModal(true);
                 setMetalTypeToConvert("SILVER");
+                openConvertMetalModalHandler('SILVER');
               }}
               className="flex border-2 border-yellow-400 rounded-full p-3 items-center cursor-pointer"
             >
