@@ -220,10 +220,12 @@ const BuySell = () => {
     setValidationError("");
     dispatch(clearCoupon());
   };
+
   // const toggleCoupon = () => {
   //   setShowCoupon(!showCoupon);
   //   dispatch(setCouponError(""));
   // };
+  
   const handleTabBuyAndSell = (tab: "buy" | "sell") => {
     setActiveTab(tab);
     dispatch(setEnteredAmount(0));
@@ -261,14 +263,14 @@ const BuySell = () => {
 
   const handleEnteredAmountChange = (e: any) => {
     // e.preventDefault();
-    
+
     dispatch(clearCoupon());
     setActiveTabPurchase('rupees')
     dispatch(setTransactionType('rupees'))
     const enteredValue = ParseFloat(e.target.value, 4);
     if (transactionType === 'rupees' && isNaN(enteredValue)) {
       setValidationError("Please enter numbers only.");
-      return; 
+      return;
     }
     // if (transactionType === 'rupees' && e.target.value.includes('.')) {
     //   setValidationError("Decimal values are not allowed for rupees");
@@ -305,7 +307,7 @@ const BuySell = () => {
     const enteredValue = ParseFloat(e.target.value, 4);
     if (transactionType === 'grams' && isNaN(enteredValue)) {
       setValidationError("Please enter numbers only.");
-      return; 
+      return;
     }
 
     dispatch(clearCoupon());
@@ -351,11 +353,6 @@ const BuySell = () => {
     previewModal();
   };
 
-
-  const minimumSellInGramsGold = ParseFloat(100 / goldData.salePrice, 4)
-  const minimumSellInGramsSilver = ParseFloat(100 / silverData.salePrice, 4)
-
-
   const handleSellClick = (e: any) => {
     setValidationError("");
     if (!isloggedIn) {
@@ -368,14 +365,8 @@ const BuySell = () => {
       return;
     }
 
-    const minimumSellAmountInRupees = 100;
-
-    const minimumSellAmount = transactionType === 'grams'
-      ? (metalType === "gold" ? minimumSellInGramsGold : minimumSellInGramsSilver)
-      : minimumSellAmountInRupees;
-
-    if (enteredAmount < minimumSellAmount) {
-      setValidationError(`Minimum Sell amount is ${minimumSellAmount}`);
+    if (enteredAmount < totalAmount) {
+      setValidationError(`Minimum Sell amount is  Rs.${100}`);
       return;
     }
 
@@ -687,19 +678,19 @@ const BuySell = () => {
                           : enteredAmount
                         : totalAmount
                     }
-                  onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                    // Prevent the input of a decimal point if purchase type is rupees
-                    if (activeTabPurchase === "rupees" && e.key === ".") {
-                      e.preventDefault();
-                    }
-                    // Prevent entering negative values
-                    if (e.key === "-" || e.key === "e" || e.key === "E") {
-                      e.preventDefault();
-                    }
-                    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-                      e.preventDefault(); // Prevent the default action
-                    }
-                  }}
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                      // Prevent the input of a decimal point if purchase type is rupees
+                      if (activeTabPurchase === "rupees" && e.key === ".") {
+                        e.preventDefault();
+                      }
+                      // Prevent entering negative values
+                      if (e.key === "-" || e.key === "e" || e.key === "E") {
+                        e.preventDefault();
+                      }
+                      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                        e.preventDefault(); // Prevent the default action
+                      }
+                    }}
                   />
                 </div>
                 <div className="relative rounded-md shadow-sm">
