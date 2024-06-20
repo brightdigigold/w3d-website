@@ -32,6 +32,7 @@ import TempleUtrCheck from "./templeUtrCheck";
 const OrdersTabs = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const userType = user.data.type;
   const [userDetails, setUserDetails] = useState("");
   const [status, setStatus] = useState("ALL");
   const [isOpen, setIsOpen] = useState(false);
@@ -54,9 +55,6 @@ const OrdersTabs = () => {
     key: "selection",
   });
 
-  const userType = user.data.type;
-
-  console.log("userType", userType)
 
   const handleSelect = (ranges: any) => {
     const formattedStartDate = ranges.selection.startDate.toISOString().slice(0, 10);

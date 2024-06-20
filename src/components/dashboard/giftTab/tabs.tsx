@@ -124,7 +124,7 @@ const GiftTab = () => {
     setActiveTabGift("grams");
 
     dispatch(setTransactionType("grams"));
-    const enteredValue = ParseFloat(e.target.value, 4);
+    const enteredValue = Math.abs(ParseFloat(e.target.value, 4));
     setValidationError("");
     if (metalType === "gold") {
       if (activeTabGift === "grams") {
