@@ -124,7 +124,7 @@ const GiftTab = () => {
     setActiveTabGift("grams");
 
     dispatch(setTransactionType("grams"));
-    const enteredValue = ParseFloat(e.target.value, 4);
+    const enteredValue = Math.abs(ParseFloat(e.target.value, 4));
     setValidationError("");
     if (metalType === "gold") {
       if (activeTabGift === "grams") {
@@ -300,7 +300,6 @@ const GiftTab = () => {
             "amount": totalAmount,
             "Gift Sent to": mobile,
           });
-          console.log("result",result);
           dispatch(setEnteredAmount(0));
           dispatch(fetchWalletData() as any);
           setRefresh(true);
