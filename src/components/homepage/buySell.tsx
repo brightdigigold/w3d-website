@@ -305,7 +305,8 @@ const BuySell = () => {
     setActiveTabPurchase('grams')
     dispatch(setTransactionType('grams'));
 
-    const enteredValue = ParseFloat(e.target.value, 4);
+    const enteredValue = Math.abs(ParseFloat(e.target.value, 4));
+    
     if (transactionType === 'grams' && isNaN(enteredValue)) {
       setValidationError("Please enter numbers only.");
       return;
@@ -694,7 +695,6 @@ const BuySell = () => {
                   />
                 </div>
                 <div className="relative rounded-md shadow-sm">
-                  {/* <input type="text" inputMode="numeric" /> */}
 
                   <input
                     type="number"
