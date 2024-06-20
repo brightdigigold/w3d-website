@@ -354,11 +354,6 @@ const BuySell = () => {
     previewModal();
   };
 
-
-  const minimumSellInGramsGold = ParseFloat(100 / goldData.salePrice, 4)
-  const minimumSellInGramsSilver = ParseFloat(100 / silverData.salePrice, 4)
-
-
   const handleSellClick = (e: any) => {
     setValidationError("");
     if (!isloggedIn) {
@@ -371,14 +366,8 @@ const BuySell = () => {
       return;
     }
 
-    const minimumSellAmountInRupees = 100;
-
-    const minimumSellAmount = transactionType === 'grams'
-      ? (metalType === "gold" ? minimumSellInGramsGold : minimumSellInGramsSilver)
-      : minimumSellAmountInRupees;
-
-    if (enteredAmount < minimumSellAmount) {
-      setValidationError(`Minimum Sell amount is ${minimumSellAmount}`);
+    if (enteredAmount < totalAmount) {
+      setValidationError(`Minimum Sell amount is  Rs.${100}`);
       return;
     }
 
