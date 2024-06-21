@@ -99,15 +99,13 @@ const Cart = () => {
   const [showAddNewAddress, setShowAddNewAddress] = useState<boolean>(false);
 
   const openConvertMetalModalHandler = (metalTypeToConvert: string) => {
-    if (metalTypeToConvert === 'GOLD' && goldPayload.length === 0) {
-      setOpenConvertMetalModal(false);
-    } else if (metalTypeToConvert === 'SILVER' && silverPayload.length === 0) {
-      setOpenConvertMetalModal(false);
-    } else {
-      setOpenConvertMetalModal(true);
-    }
+    const vaultBalanceOfMetal = metalTypeToConvert === 'GOLD' ? goldVaultBalance : silverVaultBalance;
+    const payloadLengthOfMetal = metalTypeToConvert === 'GOLD' ? goldPayload.length : silverPayload.length;
+  
+    setOpenConvertMetalModal(!(vaultBalanceOfMetal === 0 || payloadLengthOfMetal === 0));
   };
 
+    
   const handleSelectAddress = (addressId: string) => {
     setSelectedAddressId(addressId);
   };
