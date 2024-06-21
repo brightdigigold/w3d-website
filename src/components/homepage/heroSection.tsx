@@ -91,9 +91,10 @@ const HeroSection = () => {
               <Image
                 src="/bdgwhite.png"
                 alt="Your Company"
-                width={62 * 10}
-                height={32 * 10}
+                width={620}
+                height={320}
                 className="absolute opacity-20 mt-44 hidden sm:block ml-56"
+                priority={true} // Ensures the image is not lazy-loaded
               />
             </div>
             {/* <div className="relative">

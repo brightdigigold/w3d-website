@@ -1,15 +1,14 @@
 "use client";
 import "./globals.css";
-import { Footer, Navbar } from "@/components";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "@/redux/store";
 import { Provider } from "react-redux";
-// import Script from 'next/script'
 import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
-// import NextImage from "@/components/nextImage";
-
+import dynamic from 'next/dynamic';
+const Navbar = dynamic(() => import('@/components/navbar'));
+const Footer = dynamic(() => import('@/components/footer'));
 
 let persistor = persistStore(store);
 export default function RootLayout({ children, }: { children: React.ReactNode; }) {
@@ -20,28 +19,17 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
 
   return (
     <html lang="en">
-      {/* <Head> */}
-      {/* <NextImage src="/bdgwhite.png" width={400} height={300} alt="Picture of the author" priority={true} /> */}
-      {/* <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer',${process.env.GOOGLE_TAG});
-            `,
-          }}
-        /> */}
-
-      {/* </Head> */}
+      <head>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preload" href="/bdgwhite.png" as="image" />
+        <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" />
+        <link rel="dns-prefetch" href="https://nkdqpbbn.apicdn.sanity.io" />
+      </head>
       <body>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Navbar />
             <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
-            {/* <link rel="dns-prefetch" href="https://www.googletagmanager.com" /> */}
-            {/* <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" /> */}
             {children}
             <Footer />
           </PersistGate>
