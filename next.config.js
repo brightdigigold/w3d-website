@@ -1,26 +1,29 @@
-/**
- * @type {import('next').NextConfig}
- */
-
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+  analyzerMode: 'server',
+  analyzerPort: process.env.ANALYZER_PORT || 8889,
 });
 
 const nextConfig = {
-  webpack(config) {
-    // Integrate Webpack Bundle Analyzer
-    if (process.env.ANALYZE === "true") {
-      config.plugins.push(
-        new (require("webpack-bundle-analyzer").BundleAnalyzerPlugin)()
-      );
-    }
-
-    // Add SVGR loader for SVG files
+  webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
     });
+
+    if (process.env.ANALYZE === 'true') {
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'server',
+          analyzerPort: process.env.ANALYZER_PORT || 8889,
+        })
+      );
+    }
+
+    // Example: Lazy loading react-player components to reduce initial load
+    config.resolve.alias['react-player'] = require.resolve('react-player/lazy');
 
     return config;
   },
