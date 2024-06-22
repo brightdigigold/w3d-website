@@ -2,8 +2,20 @@
  * @type {import('next').NextConfig}
  */
 
-const nextConfig = { 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+const nextConfig = {
   webpack(config) {
+    // Integrate Webpack Bundle Analyzer
+    if (process.env.ANALYZE === "true") {
+      config.plugins.push(
+        new (require("webpack-bundle-analyzer").BundleAnalyzerPlugin)()
+      );
+    }
+
+    // Add SVGR loader for SVG files
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
@@ -13,35 +25,25 @@ const nextConfig = {
     return config;
   },
 
-  experimental: {
-    appDir: true,
-  },
-
   reactStrictMode: true,
+
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // basePath: '/beta',
-  // assetPrefix: '/beta',
-  // publicRuntimeConfig: {
-  //   baseURL: '/beta',
-  // },
+
   env: {
-    // baseUrl: "https://api.brightdigigold.com",
     baseUrl: "https://devapi.brightdigigold.com",
     cashfree: "sandbox",
-    // cashfree: "production",
-    // baseUrl: "http://localhost:3032",
-    // baseUrl: "http://192.168.1.5:3001",
     GOOGLE_TAG: "GTM-5JFBNN5",
     NEXT_PUBLIC_SANITY_PROJECT_ID: "nkdqpbbn",
     MIX_PANNEL_TOKEN: "497551b628f786f66e8a0fb646d605eb",
   },
-  reactStrictMode: true,
+
   swcMinify: true,
+
   images: {
     unoptimized: true,
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
