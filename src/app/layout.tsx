@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
 import dynamic from 'next/dynamic';
-const Navbar = dynamic(() => import('@/components/navbar'));
-const Footer = dynamic(() => import('@/components/footer'));
+const Navbar = dynamic(() => import('@/components/navbar'), { ssr: false });
+const Footer = dynamic(() => import('@/components/footer'), { ssr: false });
 
 let persistor = persistStore(store);
 export default function RootLayout({ children, }: { children: React.ReactNode; }) {
