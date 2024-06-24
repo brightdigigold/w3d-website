@@ -106,7 +106,7 @@ const BuySell = () => {
       orderType: purchaseType.toUpperCase(),
       itemType: metalType.toUpperCase(),
       unit: "GRAMS",
-      gram: metalQuantity,
+      gram: ParseFloat(metalQuantity, 4),
       amount: totalAmount,
       currentMatelPrice: metalPricePerGram,
       fromApp: false,
