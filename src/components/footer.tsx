@@ -189,7 +189,7 @@ const Footer = () => {
                         className="text-white"
                         href="/blog"
                       >
-                        Blog
+                        Blogs
                       </Link>
                     </li>
                     <li className="mb-4">
@@ -373,11 +373,10 @@ const Footer = () => {
                   </li>
                   <li className="mb-4">
                     <Link
-                      target="_blank"
                       className="text-white"
                       href="/blog"
                     >
-                      Blog
+                      Blogs
                     </Link>
                   </li>
                   <li className="mb-4">

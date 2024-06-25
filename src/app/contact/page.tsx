@@ -5,7 +5,12 @@ import { Metadata } from "next";
 
 const page = () => {
   return (
-    <><Contacts /></>
+    <div className='container py-16 pb-28 xl:pb-8 pt-32'>
+      <h1 className="text-white text-center text-2xl sm:text-4xl extrabold">
+        Contact Us
+      </h1>
+      <Contacts />
+    </div>
   )
 }
 

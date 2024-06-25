@@ -37,7 +37,6 @@ function MainBlogPage() {
 
   return (
     <div className='container'>
-      <h1 className='mt-24 text-yellow-400 text-center extrabold text-3xl sm:text-5xl'>Blogs</h1>
       {/* Category Selector */}
       <div className='flex px-8 m-2 items-center '>
         <p className='text-white text-sm md:text-lg m-2 text-center'>Select Category</p>
