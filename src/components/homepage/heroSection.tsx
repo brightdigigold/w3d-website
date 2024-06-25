@@ -93,13 +93,11 @@ const HeroSection = () => {
                 alt="Your Company"
                 width={620}
                 height={320}
-                className="absolute opacity-20 mt-44 hidden sm:block ml-56"
+                className="absolute opacity-20  hidden sm:block mt-36 ml-48"
+                objectFit="cover"
                 priority={true} // Ensures the image is not lazy-loaded
               />
             </div>
-            {/* <div className="relative">
-              <div className="absolute top-72 h-72 opacity-40 bg-cover bg-no-repeat bg-center hidden sm:block" style={{ backgroundImage: `url('../../../public/bdgwhite.png')` }}></div>
-            </div> */}
 
             <div className="grid lg:grid-cols-2 gap-4">
               <div className="hidden lg:block mt-10">
