@@ -21,16 +21,15 @@ const PrivacyPolicy = () => {
     return (
         <div>
             {otpModal && <OtpModal />}
-                <div className='container'>
-                    <div className='text-gray-100 text-justify prose-strong:text-white prose-strong:text-xl prose-lg prose-w-full prose-headings:text-yellow-400 prose-headings:text-2xl prose-headings:text-left prose-a:text-blue-400'>
-                        {privacy && (
-                            //   <BlogDetailsById portableTextContent={privacy.body} />
-                            <PortableText content={privacy.body} />
-                        )}
-                    </div>
+            <div className='container'>
+                <div className='text-gray-100 text-justify prose-strong:text-white prose-strong:text-xl prose-lg prose-w-full prose-headings:text-yellow-400 prose-headings:text-2xl prose-headings:text-left prose-a:text-blue-400'>
+                    {privacy && (
+                        //   <BlogDetailsById portableTextContent={privacy.body} />
+                        <PortableText content={privacy.body} />
+                    )}
                 </div>
             </div>
-        // </div>
+        </div>
     );
 }
 
