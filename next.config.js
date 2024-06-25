@@ -25,6 +25,11 @@ const nextConfig = {
     // Example: Lazy loading react-player components to reduce initial load
     config.resolve.alias['react-player'] = require.resolve('react-player/lazy');
 
+    // Generate source maps for better debugging
+    if (!isServer) {
+      config.devtool = 'source-map';
+    }
+
     return config;
   },
 
@@ -47,6 +52,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+
+  productionBrowserSourceMaps: true, // Add this line to enable source maps in production
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

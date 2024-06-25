@@ -55,9 +55,9 @@ const Navbar = () => {
   // logoutProfile();
 
   const handleLoginClick = () => {
-    if(isLoggedInForTempleReceipt && devotee_isNewUser){
+    if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
-    } else{
+    } else {
       setOpenLoginAside(!openLoginAside);
     }
     // mixpanel.track('New User Login(web)');
@@ -213,6 +213,7 @@ const Navbar = () => {
                   <Link
                     className=" text-gold01  rounded-md text-md extrabold ml-2 xl:hidden"
                     href="#"
+                    aria-label="User Profile"
                   >
                     <UserCircleIcon
                       onClick={() => {
@@ -224,31 +225,30 @@ const Navbar = () => {
                 )}
 
                 <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button
-                      onClick={() => {
-                        close();
-                      }}
-                      className="relative flex focus:outline-none"
-                    >
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">Open user menu</span>
-                      {isloggedIn && (
-                        <Link
-                          className="block xl:hidden text-gold01   rounded-md px-1 py-2 text-md medium"
-                          href="#"
-                        >
-                          <UserCircleIcon
-                            onClick={() => {
-                              close();
-                              setDropdownOpen(false);
-                            }}
-                            className="h-8"
-                          />
-                        </Link>
-                      )}
-                    </Menu.Button>
-                  </div>
+                  <Menu.Button
+                    onClick={() => {
+                      close();
+                    }}
+                    className="relative flex focus:outline-none"
+                  >
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">Open user menu</span>
+                    {isloggedIn && (
+                      <Link
+                        className="block xl:hidden text-gold01   rounded-md px-1 py-2 text-md medium"
+                        href="#"
+                        aria-label="User Profile"
+                      >
+                        <UserCircleIcon
+                          onClick={() => {
+                            close();
+                            setDropdownOpen(false);
+                          }}
+                          className="h-8"
+                        />
+                      </Link>
+                    )}
+                  </Menu.Button>
                   <Transition
                     as={Fragment}
                     enter="transition ease-out duration-100"
