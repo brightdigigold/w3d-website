@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import OtpModal from '../modals/otpModal';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import Link from 'next/link';
 import BlogDetailsById from '../sanity/showBlogsDetails';
 import { gettermsPosts } from '../sanity/getPost';
 import PortableText from '../sanity/showBlogsDetails';
@@ -23,16 +22,8 @@ const TermsAndCondition = () => {
     return (
         <div className="text-gray-200">
             {otpModal && <OtpModal />}
-            <div className="mx-auto px-4 sm:px-6 lg:px-16 py-16 pb-28 xl:pb-8 pt-32">
-                <div className="container">
-                    <div className="row pt-5 pb-5">
-                        <div className=" sm:flex justify-between items-center text-center sm:text-left">
-                            <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
-                                Terms &<br /> Conditions
-                            </h1>
-                            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/T+%26+C+Policy.gif" className="" />
-                        </div>
-                        {/* <div className='grid grid-cols-4 gap-6 bg-slate-900'>
+
+            {/* <div className='grid grid-cols-4 gap-6 bg-slate-900'>
                             <div className='col-span-4'>
                                 <div className='text-gray-100 text-justify prose-strong:text-white prose-strong:text-xl prose-lg prose-w-full prose-headings:text-yellow-400 prose-headings:text-2xl prose-headings:text-left prose-a:text-blue-400'>
                                     {terms && (
@@ -46,15 +37,12 @@ const TermsAndCondition = () => {
                                 <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
                             </div>
                         </div> */}
-
-                        <div className='text-gray-100 text-justify prose-strong:text-white prose-strong:text-xl prose-lg prose-w-full prose-headings:text-yellow-400 prose-headings:text-2xl prose-headings:text-left prose-a:text-blue-400'>
-                            {terms && (
-                                //   <BlogDetailsById portableTextContent={terms.body} />
-                                <PortableText content={terms.body} />
-                            )}
-                        </div>
-
-                    </div>
+            <div className='container'>
+                <div className='text-gray-100 text-justify prose-strong:text-white prose-strong:text-xl prose-lg prose-w-full prose-headings:text-yellow-400 prose-headings:text-2xl prose-headings:text-left prose-a:text-blue-400'>
+                    {terms && (
+                        //   <BlogDetailsById portableTextContent={terms.body} />
+                        <PortableText content={terms.body} />
+                    )}
                 </div>
             </div>
         </div>
