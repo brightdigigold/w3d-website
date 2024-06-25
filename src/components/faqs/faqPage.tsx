@@ -97,11 +97,7 @@ const Faq = () => {
   return (
     <div>
       {otpModal && <OtpModal />}
-      <div className="mx-auto pt-20 pb-28 xl:pb-8 px-4 sm:px-6 lg:px-16 py-4 text-white">
-        <h1 className="text-white text-center text-2xl sm:text-4xl extrabold">
-          FAQs
-        </h1>
-
+      <div className="mx-auto pt-4 pb-28 xl:pb-8 px-4 sm:px-6 lg:px-16 py-4 text-white">
         <div className="grid grid-cols-4 lg:grid-cols-8 gap-x-2 gap-y-5 sm:gap-x-5 mt-6 place-items-center">
           <div className="w-full ">
             <div

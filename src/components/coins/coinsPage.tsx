@@ -60,15 +60,12 @@ const Coins = () => {
   }
 
   return (
-    <div className="pb-28 xl:pb-8 pt-16">
+    <div className="">
       {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login"/>}
       {otpModal && <OtpModal />}
 
-      <div className="flex justify-center items-center">
-        <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/ProductBannerNEW.jpg" alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} />
-      </div>
+      
       <div className="container mx-auto">
-        <h1 className="text-white mr-4 text-2xl sm:text-4xl extrabold text-center m-3">Our Coins</h1>
         <div className="flex justify-between items-center bg-[#2C7BAC33] md:bg-transparent px-1 rounded-md">
           <div className="px-2 py-2 rounded-md md:bg-[#2C7BAC33] flex">
             {Tabs.map((tab) => (
