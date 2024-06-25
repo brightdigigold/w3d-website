@@ -212,22 +212,22 @@ const Footer = () => {
                       </Link>
                     </li>
                     <li className="mb-4">
-                      <Link target="_blank" className="text-white" href="/term-and-conditions">
+                      <Link className="text-white" href="/term-and-conditions">
                         Terms of Uses
                       </Link>
                     </li>
                     <li className="mb-4">
-                      <Link target="_blank" className="text-white" href="/privacy-policy">
+                      <Link className="text-white" href="/privacy-policy">
                         Privacy Policy
                       </Link>
                     </li>
                     <li className="mb-4">
-                      <Link target="_blank" className="text-white" href="/shipping-policy">
+                      <Link className="text-white" href="/shipping-policy">
                         Shipping Policy
                       </Link>
                     </li>
                     <li className="mb-4">
-                      <Link target="_blank"
+                      <Link
                         className="text-white"
                         href="/refund-and-cancellation"
                       >
@@ -399,22 +399,22 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li className="mb-4">
-                    <Link target="_blank" className="text-white" href="/term-and-conditions">
+                    <Link className="text-white" href="/term-and-conditions">
                       Terms of Uses
                     </Link>
                   </li>
                   <li className="mb-4">
-                    <Link target="_blank" className="text-white" href="/privacy-policy">
+                    <Link className="text-white" href="/privacy-policy">
                       Privacy Policy
                     </Link>
                   </li>
                   <li className="mb-4">
-                    <Link target="_blank" className="text-white" href="/shipping-policy">
+                    <Link className="text-white" href="/shipping-policy">
                       Shipping Policy
                     </Link>
                   </li>
                   <li className="mb-4">
-                    <Link target="_blank"
+                    <Link
                       className="text-white"
                       href="/refund-and-cancellation"
                     >
