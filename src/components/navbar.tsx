@@ -22,10 +22,12 @@ import { clearCoupon } from "@/redux/couponSlice";
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import mixpanel from "mixpanel-browser";
+import SetProfileForNewUser from "./setProfile";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
+  const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const pathname = usePathname();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -68,6 +70,10 @@ const Navbar = () => {
     setOpenSidebarAside(!openSidebarAside);
   };
 
+  const onClose = () => {
+    dispatch(setShowProfileForm(false));
+  };
+
   return (
     <Disclosure as="nav" className="bg-header fixed top-0 w-full z-[49]">
       {({ open, close }) => (
@@ -85,6 +91,11 @@ const Navbar = () => {
               onClose={() => setOpenSidebarAside(false)}
             />
           )}
+
+          {showProfileForm && (
+            <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
+          )}
+
           <div className="mx-auto px-2 sm:px-6 xl:px-16 py-2 z-10">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center xl:hidden">
