@@ -1,18 +1,31 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { fadeIn, textVariant } from "../../utils/motion";
 import { RootState } from "@/redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import OtpModal from "../modals/otpModal";
 import NextImage from "../nextImage";
+import LoginAside from "../authSection/loginAside";
+import SetProfileForNewUser from "../setProfile";
+import { selectIsloggedIn, setShowProfileForm } from "@/redux/authSlice";
 
 const HeroAbout = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
+  const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
+  const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
+
+  const dispatch = useDispatch();
+
+  const onClose = () => {
+    dispatch(setShowProfileForm(false));
+  };
 
   return (
     <div className="bg-theme pt-24 sm:pt-36 py-10 relative" >
       {otpModal && <OtpModal />}
+      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login" />}
+
       <div className="mx-auto px-4 sm:px-6 lg:px-16">
         <NextImage
           className=" absolute top-48 -left-20 opacity-20 z-10"
@@ -27,13 +40,6 @@ const HeroAbout = () => {
             viewport={{ once: false, amount: 0.25 }}
             className=""
           >
-            {/* <motion.h1
-              variants={fadeIn("right", "spring", 0.2, 1)}
-              className="text-2xl sm:text-4xl text-white text-center font-semibold leading-tight mb-28"
-            >
-              “Buy & Sell 24 karat Digital Gold” <br /> From The Comfort of Your
-              Home
-            </motion.h1> */}
 
             <div className="flex items-center justify-center px-4 lg:px-52">
               <motion.div variants={fadeIn("left", "spring", 0.2, 1)}>
@@ -68,6 +74,9 @@ const HeroAbout = () => {
               digital environment.
             </motion.p>
           </motion.div>
+          {showProfileForm && (
+            <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
+          )}
         </div>
       </div>
     </div>

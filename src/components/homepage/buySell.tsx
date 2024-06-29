@@ -50,11 +50,14 @@ import coupon from '../../../public/coupon.png';
 import Link from "next/link";
 import { isMobile } from 'react-device-detect';
 import { GoogleTagManager } from "@next/third-parties/google";
+import { RootState } from "@/redux/store";
 
 const BuySell = () => {
   const router = useRouter()
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
+  const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const [isgold, setIsGold] = useState<boolean>(true);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
@@ -332,10 +335,17 @@ const BuySell = () => {
   const handleBuyClick = (e: any) => {
 
     setValidationError("");
-    if (!isloggedIn) {
-      setOpenLoginAside(true);
-      return;
+
+    if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+      dispatch(setShowProfileForm(true));
+    } else {
+      setOpenLoginAside(!openLoginAside);
     }
+
+    // if (!isloggedIn) {
+    //   setOpenLoginAside(true);
+    //   return;
+    // }
 
     if (!user.data.isBasicDetailsCompleted) {
       dispatch(setShowProfileForm(true));
@@ -355,6 +365,8 @@ const BuySell = () => {
 
   const handleSellClick = (e: any) => {
     setValidationError("");
+
+
     if (!isloggedIn) {
       setOpenLoginAside(true);
       return;
@@ -511,7 +523,9 @@ const BuySell = () => {
                   : "bg-themeLight01 text-sky-500"
                   }`}
                 onClick={() => {
-                  if (!isloggedIn) {
+                  if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                    dispatch(setShowProfileForm(true));
+                  } else if (!isloggedIn) {
                     setOpenLoginAside(true);
                     return;
                   } else {
