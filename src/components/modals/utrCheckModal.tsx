@@ -37,10 +37,10 @@ const UTRcheckModal = ({ isOpen, closeModal, children }) => {
                             <div className="fixed top-0 right-0 m-2">
                                 <button
                                     type="button"
-                                    className="inline-flex justify-center px-2 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-full hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                                    className="inline-flex justify-center px-2 py-2 text-sm font-medium text-blue-900 border border-blue-100 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                                     onClick={closeModal}
                                 >
-                                    <FaTimes color='red' />
+                                    <FaTimes color='red' size={18} />
                                 </button>
                             </div>
                             {children}
