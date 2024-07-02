@@ -25,7 +25,7 @@ const TempleUtrCheck = () => {
 
     const formik = useFormik({
         initialValues: {
-            utr: "453525325220",
+            utr: "",
         },
         validationSchema,
         onSubmit: async (values) => {
@@ -39,7 +39,7 @@ const TempleUtrCheck = () => {
                     },
                 };
                 const data = { utr: values.utr };
-                const resAfterEncrypt = await AesEncrypt(data);
+                const resAfterEncrypt = AesEncrypt(data);
 
                 const response = await axios.post(
                     `${process.env.baseUrl}/user/order/detailsByUTR`,
@@ -66,6 +66,7 @@ const TempleUtrCheck = () => {
 
     return (
         <div className='mt-6'>
+            {loading && <Loading />}
             <form onSubmit={formik.handleSubmit} >
                 <div className="w-full max-w-lg">
                     <label htmlFor="utr" className="text-white mb-2">UPI/UTR Ref/Txn No.</label>
@@ -90,7 +91,6 @@ const TempleUtrCheck = () => {
                     <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-4 extrabold'>Submit</button>
                 </div>
             </form>
-            {loading && <Loading />}
             <UTRcheckModal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}>
                 {utrDetailsTransactions && (
                     <div className='w-full border h-auto mt-8 rounded-md p-4 text-white'>
