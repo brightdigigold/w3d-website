@@ -10,6 +10,8 @@ import {
 import React, { memo } from "react";
 import { useSelector } from "react-redux";
 import ButtonLoader from "@/components/buttonLoader";
+import { selectUser } from "@/redux/userDetailsSlice";
+import TempleUtrCheck from "./templeUtrCheck";
 
 const Vault = () => {
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
@@ -18,6 +20,8 @@ const Vault = () => {
   const giftedSilverWeight = useSelector(selectGiftedSilverWeight);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const user = useSelector(selectUser);
+  const userType = user.data.type
 
   return (
     <div className="w-full">
@@ -53,7 +57,7 @@ const Vault = () => {
             </div>
           </div>
         </div>
-        <div>
+        {userType === 'user' ? (<div>
           <p className=" text-white mb-2 tracking-wider extrabold"> Gifted Weight</p>
           <div className="py-2 px-4 border-1 rounded-lg bg-themeLight grid grid-cols-5 items-center text-white">
             <div className=" col-span-1">
@@ -82,7 +86,7 @@ const Vault = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div>) : <TempleUtrCheck />}
         {error && <p className="text-white">{error}</p>}
       </div>
     </div>

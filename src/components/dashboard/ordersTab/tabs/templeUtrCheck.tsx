@@ -5,10 +5,12 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
+import UTRcheckModal from '@/components/modals/utrCheckModal';
 
 const TempleUtrCheck = () => {
     const [loading, setLoading] = useState(false);
     const [utrDetailsTransactions, setUtrDetailsTransactions] = useState<any>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -50,6 +52,7 @@ const TempleUtrCheck = () => {
 
                 if (dataOfParticularTransactionUTR.statusCode === 200) {
                     setUtrDetailsTransactions(dataOfParticularTransactionUTR.data);
+                    setIsModalOpen(true); // Open the modal on success
                 } else {
                     setUtrDetailsTransactions(null);
                 }
@@ -63,7 +66,7 @@ const TempleUtrCheck = () => {
 
     return (
         <div className='mt-6'>
-            <form onSubmit={formik.handleSubmit} className='flex items-start gap-4'>
+            <form onSubmit={formik.handleSubmit} >
                 <div className="w-full max-w-lg">
                     <label htmlFor="utr" className="text-white mb-2">UPI/UTR Ref/Txn No.</label>
                     <input
@@ -83,39 +86,41 @@ const TempleUtrCheck = () => {
                         )}
                     </div>
                 </div>
-                <div className='mt-8'>
+                <div className=''>
                     <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-4 extrabold'>Submit</button>
                 </div>
             </form>
             {loading && <Loading />}
-            {utrDetailsTransactions && (
-                <div className='w-full border h-auto mt-8 rounded-md p-4'>
-                    <div className='text-white flex justify-between p-2 border-b-2 border-yellow-400 rounded'>
-                        <p className='text-base bold leading-7'>Devotee Name</p>
-                        <p>{utrDetailsTransactions.payoutData?.devoteeName}</p>
+            <UTRcheckModal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}>
+                {utrDetailsTransactions && (
+                    <div className='w-full border h-auto mt-8 rounded-md p-4 text-white'>
+                        <div className=' flex justify-between p-2 border-b-2 border-yellow-400 rounded '>
+                            <p className='text-base bold leading-7'>Devotee Name</p>
+                            <p>{utrDetailsTransactions.payoutData?.devoteeName}</p>
+                        </div>
+                        <div className='flex justify-between p-2'>
+                            <p className='text-base bold leading-7'>UPI/UTR Ref/Txn No</p>
+                            <p>{utrDetailsTransactions.payoutData?.bank_reference}</p>
+                        </div>
+                        <div className='flex justify-between p-2'>
+                            <p className='text-base bold leading-7'>Amount</p>
+                            <p>₹ {utrDetailsTransactions.amount}</p>
+                        </div>
+                        <div className='flex justify-between p-2'>
+                            <p className='text-base bold leading-7'>Grams</p>
+                            <p>{utrDetailsTransactions.gram} gms</p>
+                        </div>
+                        <div className='flex justify-between p-2'>
+                            <p className='text-base bold leading-7'>Status</p>
+                            <p>{utrDetailsTransactions.status}</p>
+                        </div>
+                        <div className='flex justify-between p-2'>
+                            <p className='text-base bold leading-7'>Date</p>
+                            <p>{formatDate(utrDetailsTransactions.orderAt)}</p>
+                        </div>
                     </div>
-                    <div className='text-white flex justify-between p-2'>
-                        <p className='text-base bold leading-7'>UPI/UTR Ref/Txn No</p>
-                        <p>{utrDetailsTransactions.payoutData?.bank_reference}</p>
-                    </div>
-                    <div className='text-white flex justify-between p-2'>
-                        <p className='text-base bold leading-7'>Amount</p>
-                        <p>₹ {utrDetailsTransactions.amount}</p>
-                    </div>
-                    <div className='text-white flex justify-between p-2'>
-                        <p className='text-base bold leading-7'>Grams</p>
-                        <p>{utrDetailsTransactions.gram} gms</p>
-                    </div>
-                    <div className='text-white flex justify-between p-2'>
-                        <p className='text-base bold leading-7'>Status</p>
-                        <p>{utrDetailsTransactions.status}</p>
-                    </div>
-                    <div className='text-white flex justify-between p-2'>
-                        <p className='text-base bold leading-7'>Date</p>
-                        <p>{formatDate(utrDetailsTransactions.orderAt)}</p>
-                    </div>
-                </div>
-            )}
+                )}
+            </UTRcheckModal>
         </div>
     );
 }

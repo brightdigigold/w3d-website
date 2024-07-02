@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { ParseFloat, funForAesEncrypt } from "../helperFunctions";
+import { funForAesEncrypt } from "../helperFunctions";
 import {
   clearCoupon,
   isCouponApplied,
@@ -171,7 +171,7 @@ export default function Modal({ isOpen, onClose, transactionId, previewData }: a
                       </li>
                     ))}
                   </ul>
-                  
+
                 </div>
                 <div className="pt-4 pb-2">
                   <ProgressBar

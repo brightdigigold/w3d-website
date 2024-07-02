@@ -287,9 +287,9 @@ const OrdersTabs = () => {
 
   return (
     <div className="w-full">
-      <div className="mb-12">
+      {userType === 'user' && <div className="mb-12">
         <Vault />
-      </div>
+      </div>}
       {dashboardData && dashboardData.length >= 0 && (
         <div className="md:flex flex-row text-white items-center justify-between">
           <div className="grid grid-cols-2 gap-4">
@@ -393,7 +393,9 @@ const OrdersTabs = () => {
         </div>
       )}
 
-      {userType == 'temple' && <TempleUtrCheck />}
+      {userType === 'temple' && <div className="mt-12">
+        <Vault />
+      </div>}
 
       <Tab.Group defaultIndex={0}>
         <div className="grid grid-cols-5 gap-4 mt-6">
