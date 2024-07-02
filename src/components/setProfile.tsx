@@ -5,7 +5,7 @@ import {
   setIsLoggedIn,
   setShowOTPmodal,
 } from "@/redux/authSlice";
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import { ErrorMessage, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
