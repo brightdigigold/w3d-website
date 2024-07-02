@@ -24,7 +24,6 @@ import mixpanel from "mixpanel-browser";
 
 export default function OtpModal() {
   const purpoes = useSelector((state: RootState) => state.auth.purpoes);
-  console.log(purpoes)
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
@@ -98,7 +97,6 @@ export default function OtpModal() {
         const result = JSON.parse(decryptedData);
         if (result.status === true) {
           localStorage.setItem("token", result?.data?.otpVarifiedToken);
-          console.log("from otp modal", localStorage.getItem("token"))
           if (purpoes === 'login') {
             dispatch(fetchUserDetails());
             dispatch(setIsLoggedIn(true));

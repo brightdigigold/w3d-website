@@ -32,8 +32,6 @@ export default function Blog() {
     getBlogPosts().then(posts => setPosts(posts.slice(0, 8)));
   }, []);
 
-  console.log("posts", posts)
-
   return (
     <>
       <div className="bg-theme" >
