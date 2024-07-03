@@ -89,13 +89,14 @@ const HeroSection = () => {
           <div className="mx-auto px-4 sm:px-6 lg:px-16">
             <div className="relative">
               <Image
-                src="/bdgwhite.png"
+                src="/bdgwhite5.webp"
                 alt="Your Company"
-                width={620}
-                height={320}
-                className="absolute opacity-20  hidden sm:block mt-36 ml-48"
-                objectFit="cover"
-                priority={true} // Ensures the image is not lazy-loaded
+                width={270}
+                height={270}
+                className="absolute opacity-20 hidden sm:block custom-image"
+                priority={true}
+                quality={100}
+                layout="responsive"
               />
             </div>
 

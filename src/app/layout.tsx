@@ -21,7 +21,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
     <html lang="en">
       <head>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preload" href="/bdgwhite.png" as="image" />
+        <link rel="preload" href="/bdgwhite1.webp" as="image" />
         <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" />
         <link rel="dns-prefetch" href="https://nkdqpbbn.apicdn.sanity.io" />
       </head>

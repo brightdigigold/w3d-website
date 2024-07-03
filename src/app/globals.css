@@ -50,8 +50,6 @@ body {
   background: #092637;
 }
 
-
-
 /* .modal-overlay {
   position: fixed;
   top: 0;
@@ -82,14 +80,11 @@ body {
   aspect-ratio: 16 / 9;
 } */
 
-
-
-
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;  
+  right: 0;
   bottom: 0;
   width: 100%;
   height: 100%;
@@ -120,7 +115,7 @@ body {
 }
 
 .video-player {
-  width: 100%;      
+  width: 100%;
   aspect-ratio: 16 / 9;
 }
 
@@ -220,12 +215,6 @@ body {
   font-size: 22px !important;
   color: "#fff";
 }
-
-
-
-
-
-
 
 .swalButtonsYes {
   padding: 3px 18px !important;
@@ -847,28 +836,30 @@ input.inputBox {
   margin-left: -180px;
   opacity: 0;
   transition: opacity 0.3s;
- 
+
   border: 2px solid transparent; /* Make the static border transparent */
   animation: borderFlash 2s linear infinite;
 }
 
 @keyframes borderFlash {
-  0%, 100% {
-    box-shadow: 0 0 0 3px rgb(214, 214, 112), 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent;
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgb(214, 214, 112), 0 0 0 0 transparent,
+      0 0 0 0 transparent, 0 0 0 0 transparent;
   }
   25% {
-    box-shadow: 0 0 0 0 transparent, 0 0 0 3px rgb(214, 214, 98), 0 0 0 0 transparent, 0 0 0 0 transparent;
+    box-shadow: 0 0 0 0 transparent, 0 0 0 3px rgb(214, 214, 98),
+      0 0 0 0 transparent, 0 0 0 0 transparent;
   }
   50% {
-    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 3px rgb(207, 207, 85), 0 0 0 0 transparent;
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent,
+      0 0 0 3px rgb(207, 207, 85), 0 0 0 0 transparent;
   }
   75% {
-    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 3px yellow;
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent,
+      0 0 0 3px yellow;
   }
 }
-
-
-
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
@@ -881,10 +872,11 @@ body.modal-open {
 }
 
 /* Custom CSS or TailwindCSS @media queries */
-@media (max-width: 640px) { /* Example for smaller devices */
+@media (max-width: 640px) {
+  /* Example for smaller devices */
   .custom-button-container {
-      padding: 4px 4px; /* Smaller padding */
-      font-size: 12px; /* Smaller font size */
+    padding: 4px 4px; /* Smaller padding */
+    font-size: 12px; /* Smaller font size */
   }
 }
 
@@ -895,4 +887,45 @@ body.modal-open {
 .disabled {
   pointer-events: none; /* This disables clicking */
   opacity: 0.5; /* This makes the button appear disabled or faded */
+}
+
+.custom-image {
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  /* iPad in landscape mode */
+  .custom-image {
+    /* margin-top: 128px; */
+    /* margin-left: -126px; */
+    max-width: 320px;
+    height: auto;
+    /* background-color: red; */
+  }
+}
+
+
+
+@media (min-width: 1024px) {
+  /* Laptop and above */
+  .custom-image {
+    margin-top: 128px;
+    margin-left: 176px;
+    max-width: 620px;
+    height: auto;
+    /* background-color: green; */
+  }
+}
+
+@media (min-width: 1440px) {
+  /* Above Laptop */
+  .custom-image {
+    margin-top: 186px;
+    margin-left: 438px; /* Different margin for larger screens */
+    max-width: 620px;
+    height: auto;
+    /* background-color: black; */
+  }
 }

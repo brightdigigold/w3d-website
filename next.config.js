@@ -50,7 +50,7 @@ const nextConfig = {
   swcMinify: true,
 
   images: {
-    unoptimized: true,
+    domains: ['localhost', 'brightdigigold.s3.ap-south-1.amazonaws.com', 'cdn.sanity.io'],
   },
 
   productionBrowserSourceMaps: true, // Add this line to enable source maps in production
