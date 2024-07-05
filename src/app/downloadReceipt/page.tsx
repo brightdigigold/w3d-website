@@ -10,8 +10,10 @@ import { setShowProfileForm } from '@/redux/authSlice';
 import { RootState } from '@/redux/store';
 import fileDownload from 'js-file-download';
 import mixpanel from 'mixpanel-browser';
+import OtpModal from '@/components/modals/otpModal';
 
 const Page = () => {
+    const otpModal = useSelector((state: RootState) => state.auth.otpModal);
     const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
@@ -78,6 +80,8 @@ const Page = () => {
 
     return (
         <div className='mt-20 w-full p-4'>
+            {otpModal && <OtpModal />}
+
             {showProfileForm && (
                 <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
             )}

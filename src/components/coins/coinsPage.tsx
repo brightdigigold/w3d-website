@@ -39,8 +39,8 @@ const Coins = () => {
 
   const Tabs = [
     { tabName: "ALL" },
-    { tabName: "GOLD", src: "Goldbarbanner.png", alt: "digital gold bar" },
-    { tabName: "SILVER", src: "Silverbar.png", alt: "digital silver bar" },
+    { tabName: "GOLD", src: "/Goldbarbanner.png", alt: "digital gold bar" },
+    { tabName: "SILVER", src: "/Silverbar.png", alt: "digital silver bar" },
   ];
 
   const onClose = () => {
@@ -76,7 +76,7 @@ const Coins = () => {
 
             <div className="sm:hidden mt-2 mb-2 flex items-center bg-themeBlue rounded-xl h-fit py-2">
               <div>
-                <Image className="px-1 py-2 h-10 w-11" src={"../../images/vault.png"} alt="vault" height={0} width={0} />
+                {/* <Image className="px-1 py-2 h-10 w-11" src="../../images/vault.png" alt="vault" height={0} width={0} /> */}
               </div>
               <div className="text-yellow-600 font-bold text-xxs sm:text-base flex justify-between">
                 <div className="flex items-center">

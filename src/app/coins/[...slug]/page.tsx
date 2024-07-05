@@ -63,8 +63,6 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
         dispatch(setShowProfileForm(true));
         return;
       }
-
-
       setOpenCoinModal(true);
     } else {
       handleLoginClick();
