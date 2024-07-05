@@ -21,8 +21,6 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  console.log('purpose', purpose)
-
   const handleTermsClick = () => {
     router.push("/term-and-conditions")
     onClose();

@@ -1,6 +1,6 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-  analyzerMode: 'server',
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+  analyzerMode: "server",
   analyzerPort: process.env.ANALYZER_PORT || 8889,
 });
 
@@ -12,22 +12,22 @@ const nextConfig = {
       use: ["@svgr/webpack"],
     });
 
-    if (process.env.ANALYZE === 'true') {
-      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+    if (process.env.ANALYZE === "true") {
+      const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
       config.plugins.push(
         new BundleAnalyzerPlugin({
-          analyzerMode: 'server',
+          analyzerMode: "server",
           analyzerPort: process.env.ANALYZER_PORT || 8889,
         })
       );
     }
 
     // Example: Lazy loading react-player components to reduce initial load
-    config.resolve.alias['react-player'] = require.resolve('react-player/lazy');
+    config.resolve.alias["react-player"] = require.resolve("react-player/lazy");
 
     // Generate source maps for better debugging
     if (!isServer) {
-      config.devtool = 'source-map';
+      config.devtool = "source-map";
     }
 
     return config;
@@ -50,7 +50,14 @@ const nextConfig = {
   swcMinify: true,
 
   images: {
-    domains: ['localhost', 'brightdigigold.s3.ap-south-1.amazonaws.com', 'cdn.sanity.io', 'd2fbpyhlah02sy.cloudfront.net'],
+    domains: [
+      "localhost",
+      "brightdigigold.s3.ap-south-1.amazonaws.com",
+      "cdn.sanity.io",
+      "d2fbpyhlah02sy.cloudfront.net",
+      "cdn-icons-png.flaticon.com",
+      "www.brightdigigold.com",
+    ],
   },
 
   productionBrowserSourceMaps: true, // Add this line to enable source maps in production
