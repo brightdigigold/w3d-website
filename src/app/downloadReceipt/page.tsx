@@ -55,16 +55,18 @@ const Page = () => {
                 const decryptedData = await funcForDecrypt(response.data.payload);
                 const dataOfParticularTransactionUTR = JSON.parse(decryptedData);
 
+                console.log("dataOfParticularTransactionUTR===>", decryptedData)
+
                 if (dataOfParticularTransactionUTR.statusCode === 200) {
                     // Convert Buffer to Blob
                     const buffer = Buffer.from(dataOfParticularTransactionUTR.data.data);
                     const blob = new Blob([buffer], { type: 'application/pdf' });
                     setPdfBlob(blob);
-                } else {
-                    console.error("Failed to generate receipt");
+                } else if (dataOfParticularTransactionUTR.statusCode === 406) {
+                    console.log(funcForDecrypt(response.data.payload));
                 }
             } catch (error) {
-                console.error("Error fetching UTR details:", error);
+                console.log("Error fetching UTR details:", error);
             } finally {
                 setLoading(false);
             }
@@ -85,30 +87,34 @@ const Page = () => {
             {showProfileForm && (
                 <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
             )}
-            <form onSubmit={formik.handleSubmit}>
-                <FormInput
-                    type="text"
-                    label="UPI/UTR Ref/Txn No."
-                    name="utr"
-                    placeholder="Enter UTR Number"
-                    formik={formik}
-                    autoComplete="off"
-                />
-                <div className='my-4 items-center'>
-                    <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'>Submit</button>
+            <div className="flex  items-center justify-center h-[600px]">
+                <div className="p-4 border border-yellow-200 shadow-yellow-200 shadow-sm rounded-md h-1/3 sm:h-1/3 w-screen sm:w-1/3 ">
+                    <form onSubmit={formik.handleSubmit}>
+                        <FormInput
+                            type="text"
+                            label="UPI/UTR Ref/Txn No."
+                            name="utr"
+                            placeholder="Enter UTR Number"
+                            formik={formik}
+                            autoComplete="off"
+                        />
+                        <div className='my-4 items-center'>
+                            <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-6 extrabold hover:shadow-black hover:shadow-md'>Submit</button>
+                        </div>
+                    </form>
+                    {loading && <p className='text-white'>Loading...</p>}
+                    {pdfBlob && (
+                        <div className='mt-4'>
+                            <button
+                                onClick={handleDownload}
+                                className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'
+                            >
+                                Download Receipt
+                            </button>
+                        </div>
+                    )}
                 </div>
-            </form>
-            {loading && <p className='text-white'>Loading...</p>}
-            {pdfBlob && (
-                <div className='mt-4'>
-                    <button
-                        onClick={handleDownload}
-                        className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'
-                    >
-                        Download Receipt
-                    </button>
-                </div>
-            )}
+            </div>
         </div>
     )
 }

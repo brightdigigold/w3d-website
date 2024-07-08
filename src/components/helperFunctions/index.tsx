@@ -149,7 +149,7 @@ const FormInput = ({
 const styles = {
   p0: "mb-2",
   p1: "block text-sm mb-2 text-white ",
-  p2: "block w-full sm:w-2/3 placeholder:text-gray-500 text-white rounded-3xl bg-theme  px-4 py-2 focus:outline-none focus:bg-theme  border-1  focus:ring-0 focus:border-b",
+  p2: "block w-full  placeholder:text-gray-500 text-white rounded-3xl bg-theme  px-4 py-2 focus:outline-none focus:bg-theme  border-1  focus:ring-0 focus:border-b",
   // p2: "appearance-none placeholder:text-gray-500 block w-full sm:w-2/3 px-3 py-2 border-0 rounded-md theme-shadow placeholder-gray-400 focus:border-yellow-600 focus:ring-1 focus:ring-yellow-600 sm:text-sm",
   p3: "text-red-500 text-sm",
   p4: "mt-1",
