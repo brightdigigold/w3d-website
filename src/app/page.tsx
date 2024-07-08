@@ -37,7 +37,7 @@ export default function Home() {
   );
 }
 export const metadata: Metadata = {
-  title: "Best Platform to Buy & Sell 24K Digital Gold - Bright DiGi Gold",
+  title: "Bright DiGi Gold | Best Digital Gold Platform To Buy 24K Gold",
   description:
-    "Bright DiGi Gold is a trusted and secure platform which allows you to start your digital gold journey with just ₹10 and make your savings grow.  ",
+    "Bright DiGi Gold Digital Gold is a trusted platform to buy 24k digital gold starting from ₹10. A safe and secure online way to save and invest in digital gold.",
 };

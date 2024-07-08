@@ -2,6 +2,7 @@
 import { AesDecrypt, AesEncrypt } from "@/components/helperFunctions";
 import {
   profileFilled,
+  setDevoteeIsNewUser,
   setIsLoggedIn,
   setShowOTPmodal,
 } from "@/redux/authSlice";
@@ -20,6 +21,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import mixpanel from "mixpanel-browser";
 import { fetchUserDetails } from "@/redux/userDetailsSlice";
+import Notiflix from "notiflix";
 
 interface setNewUserProfile {
   isOpen: boolean;
@@ -95,7 +97,7 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
     { setSubmitting, resetForm }: any
   ) => {
     setIsSubmitting(true);
-    //   Notiflix.Loading.init({ svgColor: "rgba(241,230,230,0.985)" });
+      Notiflix.Loading.init({ svgColor: "rgba(241,230,230,0.985)" });
 
     const dataToBeEncrypted = {
       mobile_number: values.mobile_number,
@@ -142,6 +144,7 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
         dispatch(profileFilled(true));
         dispatch(setIsLoggedIn(true));
         dispatch(setShowOTPmodal(false));
+        dispatch(setDevoteeIsNewUser(false));
         router.push("/");
         onClose();
         dispatch(fetchUserDetails() as any);
@@ -175,9 +178,10 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
         showConfirmButton: false,
         timer: 1500,
       });
+      Notiflix.Loading.remove();
     } finally {
       setIsSubmitting(false);
-      // Notiflix.Loading.remove();
+      Notiflix.Loading.remove();
     }
   };
 

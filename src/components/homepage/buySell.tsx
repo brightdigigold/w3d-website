@@ -332,32 +332,19 @@ const BuySell = () => {
     }
   };
 
-  const handleBuyClick = () => {
+  const handleBuyClick = (event: any) => {
+    event.preventDefault();
     console.log("isLoggedInForTempleReceipt && devotee_isNewUser", isLoggedInForTempleReceipt && devotee_isNewUser)
 
-    setValidationError("");
-    if (!isloggedIn) {
-      setOpenLoginAside(true);
-      return;
-    }
-
-    if (!user.data.isBasicDetailsCompleted) {
+    if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
       return;
     }
-    // if (isLoggedInForTempleReceipt && devotee_isNewUser) {
-    //   dispatch(setShowProfileForm(true));
-    //   return
-    // } else if (!openLoginAside) {
-    //   setOpenLoginAside(!openLoginAside);
-    //   return
-    // }
-    // if (isLoggedInForTempleReceipt && devotee_isNewUser) {
-    //   dispatch(setShowProfileForm(true));
-    // } else {
-    //   setOpenLoginAside(!openLoginAside);
-    //   return;
-    // }
+    if (!isloggedIn) {
+      setOpenLoginAside(!openLoginAside);
+      return;
+    }
+    
     if (!enteredAmount) {
       setValidationError("Please enter amount");
       return;
@@ -367,7 +354,6 @@ const BuySell = () => {
     }
     setValidationError("");
     previewModal();
-
   };
 
   const handleSellClick = (e: any) => {
@@ -456,10 +442,16 @@ const BuySell = () => {
 
 
   const openModal = () => {
-    if (!isloggedIn) {
-      setOpenLoginAside(true);
+    if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+      dispatch(setShowProfileForm(true));
       return;
     }
+
+    if (!isloggedIn) {
+      setOpenLoginAside(!openLoginAside);
+      return;
+    }
+
     if (!enteredAmount) {
       setValidationError("Please enter amount");
       return;
@@ -776,7 +768,7 @@ const BuySell = () => {
                             {isAnyCouponApplied ? `Coupon Applied ${appliedCouponCode}` : "Apply Coupon"}
                           </span>
                         </div>
-                        <div className="text-white rounded-full border-2">
+                        <div className="text-white rounded-full border-2 cursor-pointer">
                           <ChevronDownIcon onClick={openModal} className="h-8" />
                         </div>
                       </div>
@@ -788,8 +780,8 @@ const BuySell = () => {
               <div className="mt-8" >
                 {purchaseType === "buy" && (
                   <button
-                    onClick={() => {
-                      handleBuyClick()
+                    onClick={(event: any) => {
+                      handleBuyClick(event)
                     }}
                     className="w-full bg-themeBlue rounded-lg py-2 uppercase extrabold"
                   >
