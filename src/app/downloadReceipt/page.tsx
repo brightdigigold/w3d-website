@@ -30,18 +30,14 @@ const useTransactionForm = () => {
     };
 
     const handleError = async (error: any) => {
-        console.error("Error response:", error.response);
         if (error.response && error.response.data && error.response.data.payload) {
             try {
                 let decryptedError = await funcForDecrypt(error.response.data.payload);
-                console.error("Decrypted error message:", decryptedError);
                 setErrorMessage(JSON.parse(decryptedError).message);
             } catch (decryptionError) {
-                console.error("Error decrypting error message:", decryptionError);
                 setErrorMessage("An error occurred while processing your request.");
             }
         } else {
-            console.error("Unknown error:", error);
             setErrorMessage("An unknown error occurred.");
         }
     };
