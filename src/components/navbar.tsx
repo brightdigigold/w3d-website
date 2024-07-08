@@ -64,8 +64,6 @@ const Navbar = () => {
     } else {
       setOpenLoginAside(!openLoginAside);
     }
-    // mixpanel.track('New User Login(web)');
-    // dispatch(setShowProfileForm(true));
   };
 
   const handleSidebarClick = () => {

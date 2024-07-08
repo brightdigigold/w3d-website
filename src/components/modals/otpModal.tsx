@@ -104,7 +104,6 @@ export default function OtpModal() {
             if (result.data.isNewUser) {
               mixpanel.identify(mobile_number);
               mixpanel.track('New User Login(web)');
-              dispatch(setDevoteeIsNewUser(true));
               dispatch(setShowProfileForm(true));
             }
             mixpanel.identify(mobile_number);
@@ -112,15 +111,20 @@ export default function OtpModal() {
             router.push("/");
           } else {
             dispatch(setShowOTPmodal(false));
+            dispatch(setIsLoggedInForTempleReceipt(true));
             mixpanel.track('To download receipt');
-            if (!result.data.isNewUser) {
+            console.log(".>>>>>>>>", result.data.isNewUser);
+
+            if (result.data.isNewUser) {
+              dispatch(setDevoteeIsNewUser(true));
+              router.push("/downloadReceipt");
+            } else {
               dispatch(setIsLoggedIn(true));
               dispatch(fetchUserDetails());
               dispatch(fetchWalletData() as any);
+              dispatch(setDevoteeIsNewUser(false));
               router.push("/downloadReceipt");
             }
-            dispatch(setIsLoggedInForTempleReceipt(true));
-            router.push("/downloadReceipt");
           }
         } else {
           setOtp("");

@@ -334,6 +334,7 @@ const BuySell = () => {
 
   const handleBuyClick = (event: any) => {
     event.preventDefault();
+    console.log("first", devotee_isNewUser)
     console.log("isLoggedInForTempleReceipt && devotee_isNewUser", isLoggedInForTempleReceipt && devotee_isNewUser)
 
     if (isLoggedInForTempleReceipt && devotee_isNewUser) {
