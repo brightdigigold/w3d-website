@@ -336,13 +336,22 @@ const BuySell = () => {
     console.log("isLoggedInForTempleReceipt && devotee_isNewUser", isLoggedInForTempleReceipt && devotee_isNewUser)
 
     setValidationError("");
-    if (isLoggedInForTempleReceipt && devotee_isNewUser) {
-      dispatch(setShowProfileForm(true));
-      return
-    } else if (!openLoginAside) {
-      setOpenLoginAside(!openLoginAside);
-      return
+    if (!isloggedIn) {
+      setOpenLoginAside(true);
+      return;
     }
+
+    if (!user.data.isBasicDetailsCompleted) {
+      dispatch(setShowProfileForm(true));
+      return;
+    }
+    // if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+    //   dispatch(setShowProfileForm(true));
+    //   return
+    // } else if (!openLoginAside) {
+    //   setOpenLoginAside(!openLoginAside);
+    //   return
+    // }
     // if (isLoggedInForTempleReceipt && devotee_isNewUser) {
     //   dispatch(setShowProfileForm(true));
     // } else {
