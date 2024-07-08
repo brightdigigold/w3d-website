@@ -57,6 +57,8 @@ const Navbar = () => {
   // logoutProfile();
 
   const handleLoginClick = () => {
+    console.log("====", isLoggedInForTempleReceipt && devotee_isNewUser)
+
     if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
     } else {

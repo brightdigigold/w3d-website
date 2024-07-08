@@ -104,6 +104,7 @@ export default function OtpModal() {
             if (result.data.isNewUser) {
               mixpanel.identify(mobile_number);
               mixpanel.track('New User Login(web)');
+              dispatch(setDevoteeIsNewUser(true));
               dispatch(setShowProfileForm(true));
             }
             mixpanel.identify(mobile_number);

@@ -16,6 +16,7 @@ interface LoginAsideProps {
 }
 
 const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
+  console.log("purpose", purpose)
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch();

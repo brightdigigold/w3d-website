@@ -63,6 +63,7 @@ const BuySell = () => {
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
   const [isModalCouponOpen, setModalCouponOpen] = useState<boolean>(false);
   const [activeTabPurchase, setActiveTabPurchase] = useState<string>("rupees");
+  const [transactionTypeForQuickBuySell, setTransactionTypeForQuickBuySell] = useState("rupees")
   const [activeTab, setActiveTab] = useState<string>("buy");
   const [transactionId, setTransactionId] = useState<string>("");
   const [validationError, setValidationError] = useState<string>("");
@@ -82,7 +83,6 @@ const BuySell = () => {
   const isloggedIn = useSelector(selectIsloggedIn);
   const [previewData, setPreviewData] = useState<[]>([]);
   const [OpenUpiModal, setOpenUpiModal] = useState<boolean>(false);
-  const [transactionTypeForQuickBuySell, setTransactionTypeForQuickBuySell] = useState("rupees")
 
   const toggleOpenUpiModal = () => {
     setOpenUpiModal(prev => !prev)
@@ -332,26 +332,23 @@ const BuySell = () => {
     }
   };
 
-  const handleBuyClick = (e: any) => {
+  const handleBuyClick = () => {
+    console.log("isLoggedInForTempleReceipt && devotee_isNewUser", isLoggedInForTempleReceipt && devotee_isNewUser)
 
     setValidationError("");
-
     if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
-    } else {
+      return
+    } else if (!openLoginAside) {
       setOpenLoginAside(!openLoginAside);
+      return
     }
-
-    // if (!isloggedIn) {
-    //   setOpenLoginAside(true);
+    // if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+    //   dispatch(setShowProfileForm(true));
+    // } else {
+    //   setOpenLoginAside(!openLoginAside);
     //   return;
     // }
-
-    if (!user.data.isBasicDetailsCompleted) {
-      dispatch(setShowProfileForm(true));
-      return;
-    }
-
     if (!enteredAmount) {
       setValidationError("Please enter amount");
       return;
@@ -361,6 +358,7 @@ const BuySell = () => {
     }
     setValidationError("");
     previewModal();
+
   };
 
   const handleSellClick = (e: any) => {
@@ -491,7 +489,7 @@ const BuySell = () => {
           <LoginAside
             isOpen={openLoginAside}
             onClose={() => setOpenLoginAside(false)}
-            purpose=""
+            purpose="login"
           />
         )}
         {OpenUpiModal && (
@@ -523,6 +521,7 @@ const BuySell = () => {
                   : "bg-themeLight01 text-sky-500"
                   }`}
                 onClick={() => {
+                  console.log("isLoggedInForTempleReceipt && devotee_isNewUser", isLoggedInForTempleReceipt && devotee_isNewUser)
                   if (isLoggedInForTempleReceipt && devotee_isNewUser) {
                     dispatch(setShowProfileForm(true));
                   } else if (!isloggedIn) {
@@ -780,8 +779,8 @@ const BuySell = () => {
               <div className="mt-8" >
                 {purchaseType === "buy" && (
                   <button
-                    onClick={(event) => {
-                      handleBuyClick(event)
+                    onClick={() => {
+                      handleBuyClick()
                     }}
                     className="w-full bg-themeBlue rounded-lg py-2 uppercase extrabold"
                   >
