@@ -88,7 +88,7 @@ const Page = () => {
                 <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
             )}
             <div className="flex  items-center justify-center h-[600px]">
-                <div className="p-4 border border-yellow-200 shadow-yellow-200 shadow-sm rounded-md h-1/3 sm:h-1/3 w-screen sm:w-1/3 ">
+                <div className="p-4 border border-yellow-200 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-md h-1/3 sm:h-1/3 w-screen sm:w-1/3 ">
                     <form onSubmit={formik.handleSubmit}>
                         <FormInput
                             type="text"
