@@ -18,6 +18,7 @@ const Page = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const onClose = () => {
         dispatch(setShowProfileForm(false));
@@ -35,6 +36,7 @@ const Page = () => {
         validationSchema: validationSchema,
         onSubmit: async (values) => {
             setLoading(true);
+            setErrorMessage(null); // Reset error message on new submit
             try {
                 const token = localStorage.getItem("token");
                 const configHeaders = {
@@ -55,18 +57,29 @@ const Page = () => {
                 const decryptedData = await funcForDecrypt(response.data.payload);
                 const dataOfParticularTransactionUTR = JSON.parse(decryptedData);
 
-                console.log("dataOfParticularTransactionUTR===>", decryptedData)
-
                 if (dataOfParticularTransactionUTR.statusCode === 200) {
                     // Convert Buffer to Blob
                     const buffer = Buffer.from(dataOfParticularTransactionUTR.data.data);
                     const blob = new Blob([buffer], { type: 'application/pdf' });
                     setPdfBlob(blob);
                 } else if (dataOfParticularTransactionUTR.statusCode === 406) {
-                    console.log(funcForDecrypt(response.data.payload));
+                    setErrorMessage(dataOfParticularTransactionUTR.message);
                 }
-            } catch (error) {
-                console.log("Error fetching UTR details:", error);
+            } catch (error: any) {
+                console.error("Error response:", error.response);
+                if (error.response && error.response.data && error.response.data.payload) {
+                    try {
+                        let error1 = await funcForDecrypt(error.response.data.payload);
+                        console.error("Decrypted error message:", error1);
+                        setErrorMessage(JSON.parse(error1).message);
+                    } catch (decryptionError) {
+                        console.error("Error decrypting error message:", decryptionError);
+                        setErrorMessage("An error occurred while processing your request.");
+                    }
+                } else {
+                    console.error("Unknown error:", error);
+                    setErrorMessage("An unknown error occurred.");
+                }
             } finally {
                 setLoading(false);
             }
@@ -87,7 +100,7 @@ const Page = () => {
             {showProfileForm && (
                 <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
             )}
-            <div className="flex  items-center justify-center h-[600px]">
+            <div className="flex  items-center justify-center h-[650px]">
                 <div className="p-4 border border-yellow-200 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-md h-1/3 sm:h-1/3 w-screen sm:w-1/3 ">
                     <form onSubmit={formik.handleSubmit}>
                         <FormInput
@@ -103,6 +116,7 @@ const Page = () => {
                         </div>
                     </form>
                     {loading && <p className='text-white'>Loading...</p>}
+                    {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
                     {pdfBlob && (
                         <div className='mt-4'>
                             <button
