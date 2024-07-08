@@ -345,6 +345,11 @@ const BuySell = () => {
       setOpenLoginAside(!openLoginAside);
       return;
     }
+
+    if (!user.data.isBasicDetailsCompleted) {
+      dispatch(setShowProfileForm(true));
+      return;
+    }
     
     if (!enteredAmount) {
       setValidationError("Please enter amount");
