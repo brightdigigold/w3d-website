@@ -60,7 +60,7 @@ const nextConfig = {
     ],
   },
 
-  productionBrowserSourceMaps: true, // Add this line to enable source maps in production
+  productionBrowserSourceMaps: true, 
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
