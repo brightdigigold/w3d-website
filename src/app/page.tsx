@@ -40,4 +40,7 @@ export const metadata: Metadata = {
   title: "Bright DiGi Gold | Best Digital Gold Platform To Buy 24K Gold",
   description:
     "Bright DiGi Gold Digital Gold is a trusted platform to buy 24k digital gold starting from ₹10. A safe and secure online way to save and invest in digital gold.",
+
+
+    
 };
