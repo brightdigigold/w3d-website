@@ -107,7 +107,7 @@ export default function Videos() {
                                         <img
                                             src="/images/play.png"
                                             alt="Play Button"
-                                            className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 opacity-75 transform cursor-pointer"
+                                            className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 opacity-80 transform cursor-pointer"
                                             onClick={() => handleVideoClick(video.id)}
                                         />
                                     </div>
