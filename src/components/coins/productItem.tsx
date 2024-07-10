@@ -45,8 +45,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLogin
                         <Image
                             src={item.image.image}
                             alt="Bright digi gold coins"
-                            width={150}
-                            height={90}
+                            width={256}
+                            height={256}
                             style={{
                                 maxWidth: "100%",
                                 height: "auto"

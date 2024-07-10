@@ -63,7 +63,6 @@ const Coins = () => {
     <div className="">
       {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login"/>}
       {otpModal && <OtpModal />}
-
       
       <div className="container mx-auto">
         <div className="flex justify-between items-center bg-[#2C7BAC33] md:bg-transparent px-1 rounded-md">

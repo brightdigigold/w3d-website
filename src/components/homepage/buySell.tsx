@@ -675,7 +675,7 @@ const BuySell = () => {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => { handleEnteredAmountChange(e) }}
                     onFocus={(e: React.FocusEvent<HTMLInputElement>) => { e.preventDefault() }}
                     onScroll={(e: React.UIEvent<HTMLElement>) => { e.preventDefault() }}
-                    onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
+                    // onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
                     // step="0.0001"
                     value={
                       transactionType === "rupees"
