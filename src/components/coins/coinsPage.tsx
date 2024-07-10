@@ -61,9 +61,9 @@ const Coins = () => {
 
   return (
     <div className="">
-      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login"/>}
+      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login" />}
       {otpModal && <OtpModal />}
-      
+
       <div className="container mx-auto">
         <div className="flex justify-between items-center bg-[#2C7BAC33] md:bg-transparent px-1 rounded-md">
           <div className="px-2 py-2 rounded-md md:bg-[#2C7BAC33] flex">
@@ -75,7 +75,7 @@ const Coins = () => {
 
             <div className="sm:hidden mt-2 mb-2 flex items-center bg-themeBlue rounded-xl h-fit py-2">
               <div>
-                {/* <Image className="px-1 py-2 h-10 w-11" src="../../images/vault.png" alt="vault" height={0} width={0} /> */}
+                <Image className="px-0 py-0 sm:py-2 h-7 w-9" src="/images/vault.png" alt="vault" height={110} width={84}  />
               </div>
               <div className="text-yellow-600 font-bold text-xxs sm:text-base flex justify-between">
                 <div className="flex items-center">
