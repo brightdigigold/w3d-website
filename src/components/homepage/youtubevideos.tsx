@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,17 +12,15 @@ import Image from 'next/image';
 
 export default function Videos() {
     const [videos, setVideos] = useState([
-        { id: "JhuNd_fs5Oo", title: "Why Bright Digi Gold ?",img:"/images/whybdg.jpg" },
-        { id: "r2dZ_py_0yc", title: "How to Buy Gold ?",img:"/images/buygold.png" },
-        { id: "aV1XiNM5uHw", title: "How to Sell Gold ?",img:"/images/sellbanner.png"  },
-        { id: "5bKB71zRMbE", title: "How to get delivery of your gold ?",img:"/images/delivery.png" },
-        { id: "bCigluS2tRU", title: "How to earn rewards ?",img:"/images/rewards.png" },
-        
+        { id: "JhuNd_fs5Oo", title: "Why Bright Digi Gold ?", img: "/images/whybdg.jpg" },
+        { id: "r2dZ_py_0yc", title: "How to Buy Gold ?", img: "/images/buygold.png" },
+        { id: "aV1XiNM5uHw", title: "How to Sell Gold ?", img: "/images/sellbanner.png" },
+        { id: "5bKB71zRMbE", title: "How to get delivery of your gold ?", img: "/images/delivery.png" },
+        { id: "bCigluS2tRU", title: "How to earn rewards ?", img: "/images/rewards.png" },
     ]);
     const [playingVideoId, setPlayingVideoId] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
 
-    // Adding thumbnail URLs to the videos state
     useEffect(() => {
         const updatedVideos = videos.map(video => ({
             ...video,
@@ -36,9 +35,10 @@ export default function Videos() {
         setPlayingVideoId(id);
         setModalOpen(true);
     };
+
     const swiperRef = useRef<any>(null);
 
-    const handleMouseEnter = () => {
+    const handleMouseEnter:any = () => {
         if (swiperRef.current && swiperRef.current.swiper.autoplay.running) {
             swiperRef.current.swiper.autoplay.stop();
         }
@@ -61,66 +61,62 @@ export default function Videos() {
             <div className="bg-theme">
                 <div className="mx-auto px-4 sm:px-6 lg:px-16 py-12">
                     <h1 className="text-center text-yellow-500 text-3xl sm:text-5xl extrabold mb-0 sm:mb-6">
-                       Know More About Us
+                        Know More About Us
                     </h1>
                     <Swiper
                         loop={true}
-                        // breakpoints={{
-                        //     320: { slidesPerView: 2, spaceBetween: 5 },
-                        //     640: { slidesPerView: 2, spaceBetween: 5 },
-                        //     768: { slidesPerView: 2, spaceBetween: 5 },
-                        //     1024: { slidesPerView: 3, spaceBetween: 5 },
-                        // }}
-
                         breakpoints={{
                             600: {
-                              slidesPerView: 1,
-                              spaceBetween: 10,
+                                slidesPerView: 1,
+                                spaceBetween: 10,
                             },
                             640: {
-                              slidesPerView: 2,
-                              spaceBetween: 10,
+                                slidesPerView: 2,
+                                spaceBetween: 10,
                             },
                             768: {
-                              slidesPerView: 2,
-                              spaceBetween: 10,
+                                slidesPerView: 2,
+                                spaceBetween: 10,
                             },
                             1024: {
-                              slidesPerView: 3,
-                              spaceBetween: 10,
+                                slidesPerView: 3,
+                                spaceBetween: 10,
                             },
-                          }}
+                        }}
                         autoplay={{ delay: 4500, disableOnInteraction: false }}
-                        // effect={"coverflow"}
-                        // centeredSlides={true}
-                        // coverflowEffect={{
-                        //     rotate: 150,
-                        //     stretch: 0,
-                        //     depth: 10,
-                        //     modifier: 1,
-                        //     slideShadows: true,
-                        // }}
-                        // navigation={true}
                         modules={[EffectCoverflow, Navigation, Autoplay]}
                         className="mySwiper"
                         ref={swiperRef}
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
-                        // style={{ padding: "0 20px !important" }}
                     >
-                        {videos.map((video:any, index:any) => (
+                        {videos.map((video, index) => (
                             <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4 pt-10">
-                                <div className="rounded-2xl h-40 sm:h-72 relative overflow-hidden">
+                                <div className="rounded-2xl h-40 sm:h-72 relative overflow-hidden" onClick={() => handleVideoClick(video.id)}>
+                                {/* <div className="absolute inset-0 flex items-center justify-center">
+                                        <img
+                                            src="/images/play.png"
+                                            alt="Play Button"
+                                            className=" relative h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 opacity-80 transform cursor-pointer"
+                                            onClick={() => handleVideoClick(video.id)}
+                                        />
+                                    </div> */}
+                                    
                                     <Image
                                         src={video.img}
                                         alt={video.title}
                                         width={1920}
                                         height={100}
+
                                         objectFit="cover"
-                                        className="rounded-2xl cursor-pointer"
+                                        className="rounded-2xl cursor-pointer absolute"
                                         onClick={() => handleVideoClick(video.id)}
+                                    >
                                         
-                                    />
+                                    </Image>
+                                   
+                   
+                                    
                                 </div>
                             </SwiperSlide>
                         ))}
