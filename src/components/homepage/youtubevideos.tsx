@@ -93,24 +93,30 @@ export default function Videos() {
                         {videos.map((video, index) => (
                             <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4 pt-10">
                                 <div className="rounded-2xl h-40 sm:h-72 relative overflow-hidden" onClick={() => handleVideoClick(video.id)}>
+                                {/* <div className="absolute inset-0 flex items-center justify-center">
+                                        <img
+                                            src="/images/play.png"
+                                            alt="Play Button"
+                                            className=" relative h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 opacity-80 transform cursor-pointer"
+                                            onClick={() => handleVideoClick(video.id)}
+                                        />
+                                    </div> */}
+                                    
                                     <Image
                                         src={video.img}
                                         alt={video.title}
                                         width={1920}
                                         height={100}
+
                                         objectFit="cover"
-                                        className="rounded-2xl cursor-pointer"
+                                        className="rounded-2xl cursor-pointer absolute"
                                         onClick={() => handleVideoClick(video.id)}
-                                    />
+                                    >
+                                        
+                                    </Image>
                                    
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <img
-                                            src="/images/play.png"
-                                            alt="Play Button"
-                                            className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 opacity-80 transform cursor-pointer"
-                                            onClick={() => handleVideoClick(video.id)}
-                                        />
-                                    </div>
+                   
+                                    
                                 </div>
                             </SwiperSlide>
                         ))}
