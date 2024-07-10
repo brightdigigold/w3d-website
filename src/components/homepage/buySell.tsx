@@ -333,8 +333,6 @@ const BuySell = () => {
   };
 
   const handleBuyClick = () => {
-    console.log("first", devotee_isNewUser)
-    console.log("isLoggedInForTempleReceipt && devotee_isNewUser", isLoggedInForTempleReceipt && devotee_isNewUser)
 
     if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
@@ -527,7 +525,6 @@ const BuySell = () => {
                   : "bg-themeLight01 text-sky-500"
                   }`}
                 onClick={() => {
-                  console.log("isLoggedInForTempleReceipt && devotee_isNewUser", isLoggedInForTempleReceipt && devotee_isNewUser)
                   if (isLoggedInForTempleReceipt && devotee_isNewUser) {
                     dispatch(setShowProfileForm(true));
                   } else if (!isloggedIn) {
