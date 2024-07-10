@@ -108,7 +108,7 @@ const HeroSection = () => {
               }} />
           </div> */}
 
-          {/* <div className="relative">
+          <div className="relative">
             <DynamicImage
               src="/bdgwhite5.webp"
               alt="Your Company"
@@ -123,7 +123,7 @@ const HeroSection = () => {
                 height: "auto"
               }}
             />
-          </div> */}
+          </div>
 
           <div className="grid lg:grid-cols-2 gap-4">
             <div className="hidden lg:block mt-10">
