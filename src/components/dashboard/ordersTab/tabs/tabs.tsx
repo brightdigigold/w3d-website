@@ -25,7 +25,7 @@ import {
 } from "react-icons/ai";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { selectUser } from "@/redux/userDetailsSlice";
 import TempleUtrCheck from "./templeUtrCheck";
 

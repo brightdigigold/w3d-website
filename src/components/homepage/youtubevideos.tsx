@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 export default function Videos() {
     const [videos, setVideos] = useState([

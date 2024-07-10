@@ -17,7 +17,7 @@ import OtpModal from "../modals/otpModal";
 import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import NextImage from "../nextImage";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const HeroSection = () => {
   const dispatch = useDispatch();

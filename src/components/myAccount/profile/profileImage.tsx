@@ -4,7 +4,7 @@ import { fetchUserDetails, selectUser } from "@/redux/userDetailsSlice";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { CameraIcon } from "@heroicons/react/20/solid";
 
 const ProfileImage = () => {

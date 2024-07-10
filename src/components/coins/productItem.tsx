@@ -1,7 +1,7 @@
 import { setShowProfileForm } from '@/redux/authSlice';
 import { RootState } from '@/redux/store';
 import { selectUser } from '@/redux/userDetailsSlice';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

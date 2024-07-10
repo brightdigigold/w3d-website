@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import LoginAside from "../authSection/loginAside";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 
 export default function Marketing() {

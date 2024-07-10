@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 interface nextImage {

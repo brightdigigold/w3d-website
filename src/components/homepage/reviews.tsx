@@ -33,7 +33,7 @@ const features = [
   },
 ];
 import { Autoplay, Pagination } from "swiper/modules";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function Review() {
   return (

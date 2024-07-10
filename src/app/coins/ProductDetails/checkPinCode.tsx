@@ -87,7 +87,7 @@ const CheckPinCode = () => {
         )}
       </form>
     </div>
-  )
+  );
 }
 
 export default memo(CheckPinCode)

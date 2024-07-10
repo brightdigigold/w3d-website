@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import {
   setIsLoggedIn,
   setIsLoggedInForTempleReceipt,

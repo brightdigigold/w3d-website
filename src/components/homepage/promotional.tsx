@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/motion";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 export default function Promotional() {
   return (

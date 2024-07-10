@@ -3,7 +3,7 @@ import { funcForDecrypt } from "@/components/helperFunctions";
 import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { api } from "@/api/DashboardServices";
 import CustomButton from "../customButton";
 interface CartSideBarProps {

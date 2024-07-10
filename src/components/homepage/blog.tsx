@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
 import { getBlogPosts } from '@/components/sanity/getPost';
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import "swiper/css";
 import "swiper/css/pagination";

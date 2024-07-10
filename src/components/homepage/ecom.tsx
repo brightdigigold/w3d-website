@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeIn, textVariant, } from "../../utils/motion";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const Ecom = () => {
   return (

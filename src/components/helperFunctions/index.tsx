@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js";
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 export function classNames(...classes: string[]) {

@@ -1,7 +1,7 @@
 import Coins from '@/components/coins/coinsPage'
 import React from 'react'
 import { Metadata } from "next";
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 const page = () => {
   return (

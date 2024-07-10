@@ -2,7 +2,7 @@
 import { getBlogPosts } from '@/components/sanity/getPost';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 interface Post {
   categories: { title: string }[];
