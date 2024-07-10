@@ -204,7 +204,7 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
         <div className="w-full p-6">
           <button
             onClick={onClose}
-            className="absolute top-3 end-2.5 text-gray-500 hover:text-red-600 text-xl cursor-pointer"
+            className="absolute top-3 mr-4 rounded-full p-1 border border-[bg-themeLight] end-2.5 text-gray-500 hover:text-red-600 text-xl cursor-pointer"
           >
             <FaTimes />
           </button>

@@ -332,8 +332,7 @@ const BuySell = () => {
     }
   };
 
-  const handleBuyClick = (event: any) => {
-    event.preventDefault();
+  const handleBuyClick = () => {
     console.log("first", devotee_isNewUser)
     console.log("isLoggedInForTempleReceipt && devotee_isNewUser", isLoggedInForTempleReceipt && devotee_isNewUser)
 
@@ -786,8 +785,8 @@ const BuySell = () => {
               <div className="mt-8" >
                 {purchaseType === "buy" && (
                   <button
-                    onClick={(event: any) => {
-                      handleBuyClick(event)
+                    onClick={() => {
+                      handleBuyClick()
                     }}
                     className="w-full bg-themeBlue rounded-lg py-2 uppercase extrabold"
                   >
