@@ -110,10 +110,10 @@ const HeroSection = () => {
 
           <div className="relative">
             <DynamicImage
-              src="/bdgwhite5.webp"
+              src="/bdgwhite1.webp"
               alt="Your Company"
-              width={270}
-              height={270}
+              width={620}
+              height={620}
               className="absolute opacity-20 hidden sm:block custom-image"
               priority={true}
               quality={100}
@@ -180,8 +180,8 @@ const HeroSection = () => {
                       width={18 * 12}
                       height={9 * 10}
                       style={{
-                        'width': "auto",
-                        'height': "auto",
+                        width: "auto",
+                        height: "auto",
                       }}
                     />
                   </Link>
@@ -195,8 +195,8 @@ const HeroSection = () => {
                       height={9 * 10}
                       alt="app store button"
                       style={{
-                        'width': "auto",
-                        'height': "auto",
+                        width: "auto",
+                        height: "auto",
                       }}
                     />
                   </Link>
