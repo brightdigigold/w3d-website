@@ -11,6 +11,7 @@ import { RootState } from '@/redux/store';
 import fileDownload from 'js-file-download';
 import mixpanel from 'mixpanel-browser';
 import OtpModal from '@/components/modals/otpModal';
+import RequireAuth from '@/components/requireAuth';
 
 const useTransactionForm = () => {
     const [loading, setLoading] = useState(false);
@@ -103,41 +104,43 @@ const Page = () => {
     };
 
     return (
-        <div className='mt-20 w-full p-4'>
-            {otpModal && <OtpModal />}
-            {showProfileForm && (
-                <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
-            )}
-            <div className="flex items-center justify-center h-[650px]">
-                <div className="p-4 border border-yellow-200 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-md h-1/3 sm:h-1/3 w-screen sm:w-1/3">
-                    <form onSubmit={formik.handleSubmit}>
-                        <FormInput
-                            type="text"
-                            label="UPI/UTR Ref/Txn No."
-                            name="utr"
-                            placeholder="Enter UTR Number"
-                            formik={formik}
-                            autoComplete="off"
-                        />
-                        <div className='my-4 items-center'>
-                            <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-6 extrabold hover:shadow-black hover:shadow-md'>Submit</button>
-                        </div>
-                    </form>
-                    {loading && <p className='text-white'>Loading...</p>}
-                    {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
-                    {pdfBlob && (
-                        <div className='mt-4'>
-                            <button
-                                onClick={handleDownload}
-                                className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'
-                            >
-                                Download Receipt
-                            </button>
-                        </div>
-                    )}
+        <RequireAuth>
+            <div className='mt-20 w-full p-4'>
+                {otpModal && <OtpModal />}
+                {showProfileForm && (
+                    <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
+                )}
+                <div className="flex items-center justify-center h-[650px]">
+                    <div className="p-4 border border-yellow-200 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-md h-1/3 sm:h-1/3 w-screen sm:w-1/3">
+                        <form onSubmit={formik.handleSubmit}>
+                            <FormInput
+                                type="text"
+                                label="UPI/UTR Ref/Txn No."
+                                name="utr"
+                                placeholder="Enter UTR Number"
+                                formik={formik}
+                                autoComplete="off"
+                            />
+                            <div className='my-4 items-center'>
+                                <button type="submit" className='bg-themeBlue rounded-3xl py-2 px-6 extrabold hover:shadow-black hover:shadow-md'>Submit</button>
+                            </div>
+                        </form>
+                        {loading && <p className='text-white'>Loading...</p>}
+                        {errorMessage && <p className='text-red-500'>{errorMessage}</p>}
+                        {pdfBlob && (
+                            <div className='mt-4'>
+                                <button
+                                    onClick={handleDownload}
+                                    className='bg-themeBlue rounded-3xl py-2 px-6 extrabold'
+                                >
+                                    Download Receipt
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+        </RequireAuth>
     );
 };
 

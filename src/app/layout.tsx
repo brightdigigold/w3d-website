@@ -7,6 +7,8 @@ import { Provider } from "react-redux";
 import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
 import dynamic from 'next/dynamic';
+
+const DynamicImage = dynamic(() => import('next/image'), { ssr: false });
 const Navbar = dynamic(() => import('@/components/navbar'), { ssr: false });
 const Footer = dynamic(() => import('@/components/footer'), { ssr: false });
 
@@ -21,7 +23,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
     <html lang="en">
       <head>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preload" href="/bdgwhite1.webp" as="image" />
+        <link rel="preload" href="/bdgwhite5.webp" as="image" />
         <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" />
         <link rel="dns-prefetch" href="https://nkdqpbbn.apicdn.sanity.io" />
       </head>

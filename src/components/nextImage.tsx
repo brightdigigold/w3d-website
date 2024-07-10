@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 interface nextImage {
@@ -19,17 +19,20 @@ const NextImage = ({ sizes, alt, src, height, width, priority, className, fill, 
     return (
         <Image
             className={`${className}`}
-            sizes={sizes}
             src={src}
             alt={alt}
             width={width}
             height={height}
             priority={priority}
             fill={fill}
-            style={style}
             placeholder={placeholder}
-        />
-    )
+            sizes={sizes}
+            style={{
+                ...style,
+                maxWidth: "100%",
+                height: "auto"
+            }} />
+    );
 }
 
 export default NextImage;

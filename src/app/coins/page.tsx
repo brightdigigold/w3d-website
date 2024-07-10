@@ -1,18 +1,28 @@
 import Coins from '@/components/coins/coinsPage'
 import React from 'react'
 import { Metadata } from "next";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const page = () => {
   return (
     <div className='pb-28 xl:pb-8 pt-16'>
       <div className="flex justify-center items-center">
-        <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/ProductBannerNEW.jpg" alt="gold and silver coin banner" className="rounded-b" width={1600} height={300} priority={true} />
+        <Image
+          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/ProductBannerNEW.jpg"
+          alt="gold and silver coin banner"
+          className="rounded-b"
+          width={1600}
+          height={300}
+          priority={true}
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </div>
       <h1 className="text-white text-2xl sm:text-4xl extrabold text-center mt-8">Our Coins</h1>
       <Coins />
     </div>
-  )
+  );
 }
 
 export default page

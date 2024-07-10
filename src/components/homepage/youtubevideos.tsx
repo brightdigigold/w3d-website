@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export default function Videos() {
     const [videos, setVideos] = useState([
@@ -56,88 +56,87 @@ export default function Videos() {
         }
     };
 
-    return (
-        <>
-            <div className="bg-theme">
-                <div className="mx-auto px-4 sm:px-6 lg:px-16 py-12">
-                    <h1 className="text-center text-yellow-500 text-3xl sm:text-5xl extrabold mb-0 sm:mb-6">
-                        Know More About Us
-                    </h1>
-                    <Swiper
-                        loop={true}
-                        breakpoints={{
-                            600: {
-                                slidesPerView: 1,
-                                spaceBetween: 10,
-                            },
-                            640: {
-                                slidesPerView: 2,
-                                spaceBetween: 10,
-                            },
-                            768: {
-                                slidesPerView: 2,
-                                spaceBetween: 10,
-                            },
-                            1024: {
-                                slidesPerView: 3,
-                                spaceBetween: 10,
-                            },
-                        }}
-                        autoplay={{ delay: 4500, disableOnInteraction: false }}
-                        modules={[EffectCoverflow, Navigation, Autoplay]}
-                        className="mySwiper"
-                        ref={swiperRef}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {videos.map((video, index) => (
-                            <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4 pt-10">
-                                <div className="rounded-2xl h-40 sm:h-72 relative overflow-hidden" onClick={() => handleVideoClick(video.id)}>
-                                {/* <div className="absolute inset-0 flex items-center justify-center">
-                                        <img
-                                            src="/images/play.png"
-                                            alt="Play Button"
-                                            className=" relative h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 opacity-80 transform cursor-pointer"
-                                            onClick={() => handleVideoClick(video.id)}
-                                        />
-                                    </div> */}
-                                    
-                                    <Image
-                                        src={video.img}
-                                        alt={video.title}
-                                        width={1920}
-                                        height={100}
-
-                                        objectFit="cover"
-                                        className="rounded-2xl cursor-pointer absolute"
+    return <>
+        <div className="bg-theme">
+            <div className="mx-auto px-4 sm:px-6 lg:px-16 py-12">
+                <h1 className="text-center text-yellow-500 text-3xl sm:text-5xl extrabold mb-0 sm:mb-6">
+                    Know More About Us
+                </h1>
+                <Swiper
+                    loop={true}
+                    breakpoints={{
+                        600: {
+                            slidesPerView: 1,
+                            spaceBetween: 10,
+                        },
+                        640: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 10,
+                        },
+                    }}
+                    autoplay={{ delay: 4500, disableOnInteraction: false }}
+                    modules={[EffectCoverflow, Navigation, Autoplay]}
+                    className="mySwiper"
+                    ref={swiperRef}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    {videos.map((video, index) => (
+                        <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4 pt-10">
+                            <div className="rounded-2xl h-40 sm:h-72 relative overflow-hidden" onClick={() => handleVideoClick(video.id)}>
+                            {/* <div className="absolute inset-0 flex items-center justify-center">
+                                    <img
+                                        src="/images/play.png"
+                                        alt="Play Button"
+                                        className=" relative h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 opacity-80 transform cursor-pointer"
                                         onClick={() => handleVideoClick(video.id)}
-                                    >
-                                        
-                                    </Image>
-                                   
-                   
-                                    
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                                    />
+                                </div> */}
+                                
+                                <Image
+                                    src={video.img}
+                                    alt={video.title}
+                                    width={1920}
+                                    height={100}
+                                    className="rounded-2xl cursor-pointer absolute"
+                                    onClick={() => handleVideoClick(video.id)}
+                                    style={{
+                                        maxWidth: "100%",
+                                        height: "auto",
+                                        objectFit: "cover"
+                                    }}>
+                                </Image>
+                               
+               
+                                
+                            </div>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
+        </div>
+        {isModalOpen && (
+            <div className="modal-overlay" onClick={handleCloseModal}>
+                <div className="modal-content">
+                    <ReactPlayer
+                        className="video-player"
+                        url={videoUrl(playingVideoId)}
+                        playing={true}
+                        controls={true}
+                        width="100%"
+                        height="100%"
+                        onEnded={() => setModalOpen(false)}
+                    />
                 </div>
             </div>
-            {isModalOpen && (
-                <div className="modal-overlay" onClick={handleCloseModal}>
-                    <div className="modal-content">
-                        <ReactPlayer
-                            className="video-player"
-                            url={videoUrl(playingVideoId)}
-                            playing={true}
-                            controls={true}
-                            width="100%"
-                            height="100%"
-                            onEnded={() => setModalOpen(false)}
-                        />
-                    </div>
-                </div>
-            )}
-        </>
-    );
+        )}
+    </>;
 }

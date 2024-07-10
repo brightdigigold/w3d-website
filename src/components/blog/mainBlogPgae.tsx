@@ -2,7 +2,7 @@
 import { getBlogPosts } from '@/components/sanity/getPost';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 interface Post {
   categories: { title: string }[];
@@ -55,7 +55,17 @@ function MainBlogPage() {
             <Link key={post.slug.current} href={`/blog/${post.slug.current}`} passHref>
               <div className='bg-header rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-lg'>
                 {post.thumbImage && (
-                  <Image src={post.thumbImage.asset.url} alt={post.title} className="inline-block" width={500} height={500} priority />
+                  <Image
+                    src={post.thumbImage.asset.url}
+                    alt={post.title}
+                    className="inline-block"
+                    width={500}
+                    height={500}
+                    priority
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                 )}
                 <h3 className='text-white py-2 text-sm md:text-lg text-center'>{post.title}</h3>
               </div>

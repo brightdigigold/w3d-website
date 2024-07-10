@@ -33,82 +33,83 @@ const features = [
   },
 ];
 import { Autoplay, Pagination } from "swiper/modules";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export default function Review() {
-  return (
-    <>
-      <div className="bg-themeBlue" >
-        <div className="mx-auto px-4 sm:px-6 lg:px-16 py-8">
-          <h1 className="text-center text-gray-800 text-3xl sm:text-5xl extrabold mb-12">
-            Feedback
-          </h1>
-          <Swiper
-             loop={features.length > 1}
-            breakpoints={{
-              600: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-              },
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 10,
-              },
-            }}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            modules={[Autoplay]}
-            className="mySwiper"
-          >
-            {features.map((feature, index) => (
-              <SwiperSlide
-                key={`${index}-Slider`}
-                className="relative swiper-slide p-4 pt-10"
-              >
-                <div className="bg-theme rounded-2xl border-b-2 border-blue-400  relative">
-                  <div className="bg-themeLight h-72 p-4">
-                    <div className="flex justify-center">
-                      <Image
-                        src={feature.img}
-                        className="rounded-full absolute -top-10 border border-blue-300"
-                        alt="insite"
-                        width={100}
-                        height={100}
-                      />
-                    </div>
-                    <p className="mt-16 text-center text-white extrabold text-sm">
-                      {feature.name}
-                    </p>
-                    <p className="mt-6 text-center text-white text-sm">
-                      {feature.pera}
-                    </p>
-                    <img
-                      alt="user"
-                      className="h-8 absolute bottom-2 right-6"
-                      src="/images/testimonial2.png"
-                    ></img>
-                    <img
-                      alt="user"
-                      className="h-8 absolute top-2 left-6 rotate-180"
-                      src="/images/testimonial2.png"
-                    ></img>
+  return <>
+    <div className="bg-themeBlue" >
+      <div className="mx-auto px-4 sm:px-6 lg:px-16 py-8">
+        <h1 className="text-center text-gray-800 text-3xl sm:text-5xl extrabold mb-12">
+          Feedback
+        </h1>
+        <Swiper
+           loop={features.length > 1}
+          breakpoints={{
+            600: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
+          className="mySwiper"
+        >
+          {features.map((feature, index) => (
+            <SwiperSlide
+              key={`${index}-Slider`}
+              className="relative swiper-slide p-4 pt-10"
+            >
+              <div className="bg-theme rounded-2xl border-b-2 border-blue-400  relative">
+                <div className="bg-themeLight h-72 p-4">
+                  <div className="flex justify-center">
+                    <Image
+                      src={feature.img}
+                      className="rounded-full absolute -top-10 border border-blue-300"
+                      alt="insite"
+                      width={100}
+                      height={100}
+                      style={{
+                        maxWidth: "100%",
+                        height: "auto"
+                      }} />
                   </div>
+                  <p className="mt-16 text-center text-white extrabold text-sm">
+                    {feature.name}
+                  </p>
+                  <p className="mt-6 text-center text-white text-sm">
+                    {feature.pera}
+                  </p>
+                  <img
+                    alt="user"
+                    className="h-8 absolute bottom-2 right-6"
+                    src="/images/testimonial2.png"
+                  ></img>
+                  <img
+                    alt="user"
+                    className="h-8 absolute top-2 left-6 rotate-180"
+                    src="/images/testimonial2.png"
+                  ></img>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
-    </>
-  );
+    </div>
+  </>;
 }

@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper/modules";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const features = [
   {
@@ -47,11 +47,16 @@ export default function OfferSlider() {
             <Image
               src={feature.img}
               alt="Bdg offer"
-              width={3000} // Specify the width of your image here
-              height={300} // Specify the height of your image here
-              layout="responsive" 
-              // This will make the image responsive
-            />
+              width={5467}
+              height={1735}
+              // sizes="100vw"
+              layout="responsive"
+              priority
+              // style={{
+              //   width: "100%",
+              //   height: "auto"
+              // }} 
+              />
           </SwiperSlide>
         ))}
       </Swiper>

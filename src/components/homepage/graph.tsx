@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const Graph = () => {
   return (
@@ -20,8 +20,11 @@ const Graph = () => {
           alt="Growth Graph"
           width={400}
           height={400}
-          layout="responsive"
-        />
+          sizes="100vw"
+          style={{
+            width: "100%",
+            height: "auto"
+          }} />
       </div>
 
     </div>

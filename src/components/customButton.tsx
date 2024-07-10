@@ -1,6 +1,6 @@
 "use client";
 import { customButtonProps } from "@/types";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { FaDoorClosed } from "react-icons/fa";
 
 const CustomButton = ({
@@ -27,7 +27,10 @@ const CustomButton = ({
             alt="right icon"
             fill
             className="object-contain"
-          />
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </div>
       )}
     </button>

@@ -3,7 +3,7 @@ import { funcForDecrypt } from "@/components/helperFunctions";
 import Link from "next/link";
 import React, { useEffect, useState, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { api } from "@/api/DashboardServices";
 import CustomButton from "../customButton";
 interface CartSideBarProps {
@@ -96,7 +96,10 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
                 alt={productsDetailById.imageAlt}
                 height={100}
                 width={120}
-              />
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </div>
             <div>
               <p className="text-green-400 text-2xl ml-6">Added to cart</p>
@@ -140,7 +143,10 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
                               alt="coin image"
                               width={100}
                               height={90}
-                            />
+                              style={{
+                                maxWidth: "100%",
+                                height: "auto"
+                              }} />
                           </div>
                           <div className="mt-2 text-xs sm:text-base text-white">
                             {item.name}

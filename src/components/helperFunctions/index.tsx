@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js";
 import React from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 
 export function classNames(...classes: string[]) {
@@ -83,7 +83,10 @@ export const Card = ({ title, description, imageUrl, linkTo }: any) => {
           alt={title}
           width={30}
           height={30}
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
         <div className="font-bold text-base mt-2 text-white">{title}</div>
         <div
           className="px-4 py-2 text-center text-white"

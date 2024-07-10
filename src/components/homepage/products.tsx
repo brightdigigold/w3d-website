@@ -8,7 +8,7 @@ import OtpModal from "../modals/otpModal";
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { selectUser } from "@/redux/userDetailsSlice";
 import SetProfileForNewUser from "../setProfile";
 import { setShowProfileForm } from "@/redux/authSlice";

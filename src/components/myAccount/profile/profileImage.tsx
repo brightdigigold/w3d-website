@@ -4,7 +4,7 @@ import { fetchUserDetails, selectUser } from "@/redux/userDetailsSlice";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { CameraIcon } from "@heroicons/react/20/solid";
 
 const ProfileImage = () => {
@@ -78,7 +78,10 @@ const ProfileImage = () => {
           width={150}
           height={150}
           className="my-4 rounded-full mx-auto h-40 w-40 flex items-center justify-center border-2 border-sky-200"
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
         <label
           htmlFor="file"
           className="absolute bottom-0 left-28 sm:left-28 shadow shadow-gray-200 text-themeBlueLight focus:outline-none p-2 bg-theme rounded-full"

@@ -23,7 +23,7 @@ import ProductDescription from "../ProductDetails/productDescription";
 import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
 import CustomButton from "@/components/customButton";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { MdInfo } from 'react-icons/md';
 
 

@@ -10,7 +10,7 @@ import LoginAside from "../authSection/loginAside";
 import ProductItem from "./productItem";
 import Loading from "@/app/loading";
 import useFetchProductCoins from "../../hooks/useFetchProductCoins";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import TabButton from "./tabComponent";
 import VaultBalance from "./vaultBalance";
 import { selectGoldVaultBalance, selectSilverVaultBalance, selectLoading } from "@/redux/vaultSlice";

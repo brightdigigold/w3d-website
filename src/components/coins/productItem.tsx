@@ -1,7 +1,7 @@
 import { setShowProfileForm } from '@/redux/authSlice';
 import { RootState } from '@/redux/store';
 import { selectUser } from '@/redux/userDetailsSlice';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -47,7 +47,10 @@ const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLogin
                             alt="Bright digi gold coins"
                             width={150}
                             height={90}
-                        />
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto"
+                            }} />
                     </div>
                     <div className="mt-2 text-xs sm:text-base text-white">
                         {item.name}
@@ -80,7 +83,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLogin
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
 export default ProductItem;

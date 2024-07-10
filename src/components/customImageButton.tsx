@@ -1,6 +1,6 @@
 "use client";
 import { customImageButtonProps } from "@/types";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { FaDoorClosed } from "react-icons/fa";
 
 const CustomImageButton = ({
