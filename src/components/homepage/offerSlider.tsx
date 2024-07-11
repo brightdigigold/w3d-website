@@ -9,7 +9,7 @@ import Image from "next/image";
 
 const features = [
   {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/offer1.jpg",
+    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1+(1).webp",
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/offer2.jpg",

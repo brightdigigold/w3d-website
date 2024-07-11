@@ -19,6 +19,9 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
     mixpanel.init(`${process.env.MIX_PANNEL_TOKEN}`, { track_pageview: true });
   }, [])
 
+  // https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1+(1).webp
+
+
   return (
     <html lang="en">
       <head>
