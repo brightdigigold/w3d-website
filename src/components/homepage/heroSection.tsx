@@ -92,13 +92,13 @@ const HeroSection = () => {
             <div className="hidden lg:block mt-10">
               <motion.h1
                 variants={fadeIn("right", "spring", 0.2, 0.2)}
-                className="h1_text text-white bold leading-tight mb-12 "
+                className="h1_text text-white mb-12 "
               >
                 <span className="text-themeBlueLight extrabold">
                   Start Your Savings
                 </span>
                 <br />
-                <span className="font-thin flex items-center">
+                <span className="font-thin flex items-center bold leading-tight ">
                   With Just{" "}
                   <span className="mt-2 ml-2">
                     <Image
@@ -106,6 +106,8 @@ const HeroSection = () => {
                       src="/Rupees.Webp"
                       width={45}
                       height={45}
+                      priority={true}
+                      loading="eager"
                     />
                   </span>
                   10 <span className="text-gold01">.</span>

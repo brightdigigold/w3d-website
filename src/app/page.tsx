@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      {/* <OfferSlider /> */}
+      <OfferSlider />
       <Suspense fallback={<Loading />}>
         <Promotional />
         <Products />
