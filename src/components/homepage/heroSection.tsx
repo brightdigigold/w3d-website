@@ -92,7 +92,7 @@ const HeroSection = () => {
             <div className="hidden lg:block mt-10">
               <motion.h1
                 variants={fadeIn("right", "spring", 0.2, 0.2)}
-                className="text-6xl text-white bold leading-tight mb-12 "
+                className="h1_text text-white bold leading-tight mb-12 "
               >
                 <span className="text-themeBlueLight extrabold">
                   Start Your Savings
@@ -125,12 +125,12 @@ const HeroSection = () => {
                   </p>
                 </div>
 
-                {/* <p className="text-white leading-8 mb-4 mt-6 text-lg pr-28">
+                <p className="text-white leading-8 mb-4 mt-6 text-lg pr-28">
                   We at Bright DiGi Gold invite you to embark on a journey of
                   effortless digital savings. In just a few clicks make your
                   savings grow in Digital Gold and Silver.  Your gateway to
                   hassle-free savings is here.
-                </p> */}
+                </p>
                 <div className="flex items-center">
                   <p className="text-xl bold text-white">Trusted By</p>
                   <Image
