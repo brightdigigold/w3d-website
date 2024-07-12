@@ -9,10 +9,13 @@ import Image from "next/image";
 
 const features = [
   {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1+(1).webp",
+    // img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1+(1).webp",
+    img: "/offer1.webp",
+
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/offer2.jpg",
+    // img: "/offer21.jpg",
   },
 ];
 
@@ -47,16 +50,17 @@ export default function OfferSlider() {
             <Image
               src={feature.img}
               alt="Bdg offer"
-              width={5467}
-              height={1735}
+              width={1261}
+              height={400}
               // sizes="100vw"
               layout="responsive"
-              priority
-              // style={{
-              //   width: "100%",
-              //   height: "auto"
-              // }} 
-              />
+              priority={index === 0}
+              loading="eager"
+            // style={{
+            //   width: "100%",
+            //   height: "auto"
+            // }} 
+            />
           </SwiperSlide>
         ))}
       </Swiper>

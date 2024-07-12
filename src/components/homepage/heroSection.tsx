@@ -20,7 +20,6 @@ import NextImage from "../nextImage";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
 
-
 const DynamicImage = dynamic(() => import('next/image'), { ssr: false });
 
 const HeroSection = () => {
@@ -80,51 +79,15 @@ const HeroSection = () => {
     functionToFetchWalletData()
   }, [dispatch]);
 
-
-
-  return <>
-    <div className="bg-theme pt-28 py-10" >
+  return (
+    <div className="bg-theme pt-28 py-10">
       {otpModal && <OtpModal />}
-
       <motion.div
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-16">
-          {/* <div className="relative">
-            <Image
-              src="/bdgwhite5.webp"
-              alt="Your Company"
-              width={270}
-              height={270}
-              className="absolute opacity-20 hidden sm:block custom-image"
-              priority={true}
-              quality={100}
-              sizes="100vw"
-              style={{
-                width: "100%",
-                height: "auto"
-              }} />
-          </div> */}
-
-          <div className="relative">
-            <DynamicImage
-              src="/bdgwhite1.webp"
-              alt="Your Company"
-              width={620}
-              height={620}
-              className="absolute opacity-20 hidden sm:block custom-image"
-              priority={true}
-              quality={100}
-              sizes="100vw"
-              style={{
-                width: "100%",
-                height: "auto"
-              }}
-            />
-          </div>
-
           <div className="grid lg:grid-cols-2 gap-4">
             <div className="hidden lg:block mt-10">
               <motion.h1
@@ -135,16 +98,25 @@ const HeroSection = () => {
                   Start Your Savings
                 </span>
                 <br />
-                <span className="font-thin flex items-center gap-2">
-                  With Just <span className="text-gold01 extrabold mt-3">
-                    <NextImage alt="rupees icon" src="/Rupees.png" width={45} height={45} />
-                  </span>10
+                <span className="font-thin flex items-center">
+                  With Just{" "}
+                  <span className="mt-2 ml-2">
+                    <Image
+                      alt="rupees icon"
+                      src="/Rupees.Webp"
+                      width={45}
+                      height={45}
+                    />
+                  </span>
+                  10 <span className="text-gold01">.</span>
                 </span>
               </motion.h1>
               <motion.div variants={textVariant(1.1)}>
                 <div className="inline-block items-center border-gold rounded-lg px-2 py-1">
-                  <img
-                    className="h-6 inline-block"
+                  <Image
+                    width={40}
+                    height={40}
+                    className=" inline-block"
                     src="/Goldbarbanner.png"
                     alt="Digital Gold Bar"
                   />
@@ -153,46 +125,49 @@ const HeroSection = () => {
                   </p>
                 </div>
 
-                <p className="text-white leading-8  mb-4 mt-6 text-lg pr-28">
+                {/* <p className="text-white leading-8 mb-4 mt-6 text-lg pr-28">
                   We at Bright DiGi Gold invite you to embark on a journey of
                   effortless digital savings. In just a few clicks make your
                   savings grow in Digital Gold and Silver.  Your gateway to
                   hassle-free savings is here.
-                </p>
+                </p> */}
                 <div className="flex items-center">
                   <p className="text-xl bold text-white">Trusted By</p>
-                  <img
-                    className="h-14 ml-2 mt-2"
-                    src="/Startup India.svg"
+                  <Image
+                    width={180}
+                    height={140}
+                    className="ml-2 mt-2"
+                    src="/Startup_India.svg"
                     alt="Startupindia logo"
                   />
                 </div>
 
                 <div className="flex gap-5 mt-8 relative">
-                  <Link target="_blank"
+                  <Link
+                    target="_blank"
                     href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                     className="cursor-pointer"
                   >
-
                     <NextImage
                       src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
                       alt="google play button"
-                      width={18 * 12}
-                      height={9 * 10}
+                      width={216}
+                      height={90}
                       style={{
                         width: "auto",
                         height: "auto",
                       }}
                     />
                   </Link>
-                  <Link target="_blank"
+                  <Link
+                    target="_blank"
                     href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                     className="cursor-pointer"
                   >
                     <NextImage
                       src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
-                      width={18 * 12}
-                      height={9 * 10}
+                      width={216}
+                      height={90}
                       alt="app store button"
                       style={{
                         width: "auto",
@@ -213,9 +188,8 @@ const HeroSection = () => {
           )}
         </div>
       </motion.div>
-
     </div>
-  </>;
+  );
 };
 
 export default HeroSection;

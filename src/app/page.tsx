@@ -1,4 +1,3 @@
-
 import dynamic from 'next/dynamic';
 import { Suspense } from "react";
 import Loading from "./loading";
@@ -20,7 +19,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <OfferSlider />
+      {/* <OfferSlider /> */}
       <Suspense fallback={<Loading />}>
         <Promotional />
         <Products />
