@@ -55,7 +55,7 @@ export default function OfferSlider() {
               // sizes="100vw"
               layout="responsive"
               priority={index === 0}
-              loading="eager"
+              loading={index === 0 ? "eager" : "lazy"}
             // style={{
             //   width: "100%",
             //   height: "auto"
