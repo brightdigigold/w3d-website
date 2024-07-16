@@ -52,7 +52,7 @@ export default function OfferSlider() {
               alt="Bdg offer"
               width={1261}
               height={400}
-              // sizes="100vw"
+              sizes="100vw"
               layout="responsive"
               priority={index === 0}
               loading={index === 0 ? "eager" : "lazy"}

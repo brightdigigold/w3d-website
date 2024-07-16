@@ -45,12 +45,13 @@ import { useSpring, animated } from 'react-spring';
 import ShowVaultBuySell from "./showVaultBuySell";
 import { useRouter } from "next/navigation";
 import UpiModal from "../myAccount/payoutOptions/addNewUpiId";
-import NextImage from "../nextImage";
+// import NextImage from "../nextImage";
 import coupon from '../../../public/coupon.png';
 import Link from "next/link";
 import { isMobile } from 'react-device-detect';
 import { GoogleTagManager } from "@next/third-parties/google";
 import { RootState } from "@/redux/store";
+import Image from "next/image";
 
 const BuySell = () => {
   const router = useRouter()
@@ -553,7 +554,7 @@ const BuySell = () => {
                 </div>
                 <div>
                   <div className="text-white pl-4 mt-2">
-                    <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/LivePrice.gif" alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} width={1} height={1} priority={true} />
+                    <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/LivePrice.gif" alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} width={1} height={1} priority={true} />
                     <span className="pl-1 bold">
                       {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
                     </span>
@@ -626,11 +627,11 @@ const BuySell = () => {
                 >
                   {metalType === "gold" ? (
                     <>
-                      <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GoldStackAnimation.gif" alt="Gold Bar Animation" width={300} height={300} priority={true} />
+                      <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GoldStackAnimation.gif" alt="Gold Bar Animation" width={300} height={300} priority={true} />
                     </>
                   ) : (
                     <>
-                      <NextImage src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/SilverStacksanimation.gif" alt="Silver Bar Animation" width={300} height={300} priority={true} />
+                      <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/SilverStacksanimation.gif" alt="Silver Bar Animation" width={300} height={300} priority={true} />
                     </>
                   )}
                 </div>
@@ -765,7 +766,7 @@ const BuySell = () => {
                       <div className="flex justify-between mt-6"></div>
                       <div className="py-2 px-4 rounded-lg bg-themeLight flex items-center justify-between">
                         <div className="flex items-center">
-                          <NextImage src={coupon} alt="Benefits" style={{ width: "35px", height: "35px" }} />
+                          <Image src={coupon} alt="Benefits" style={{ width: "35px", height: "35px" }} />
                           <span className="text-white text-lg leading-4 ml-2">
                             {isAnyCouponApplied ? `Coupon Applied ${appliedCouponCode}` : "Apply Coupon"}
                           </span>
@@ -822,7 +823,7 @@ const BuySell = () => {
           href={isMobile ? 'https://brightdigigold.page.link/y1E4' : "https://play.google.com/store/apps/details?id=com.brightdigigold.customer"}
           className="cursor-pointer"
         >
-          <NextImage
+          <Image
             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
             width={16 * 10}
             height={9 * 10}
@@ -833,7 +834,7 @@ const BuySell = () => {
           href={isMobile ? 'https://brightdigigold.page.link/y1E4' : "https://play.google.com/store/apps/details?id=com.brightdigigold.customer"}
           className="cursor-pointer"
         >
-          <NextImage
+          <Image
             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
             width={16 * 10}
             height={9 * 10}

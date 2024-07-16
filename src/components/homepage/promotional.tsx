@@ -16,13 +16,13 @@ export default function Promotional() {
         <div className="grid">
           <motion.div variants={fadeIn("right", "spring", 0.5, 1)}>
             <Image
-              className="z-10 w-full"
+              // className="z-10 w-full"
               src="/Web Banner New App .png"
               alt="App Banner"
-              width={1920}
-              height={400}
+              width={1500}
+              height={600}
               style={{
-                maxWidth: "100%",
+                width: "100%",
                 height: "auto"
               }} />
           </motion.div>

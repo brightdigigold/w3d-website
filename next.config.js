@@ -50,17 +50,33 @@ const nextConfig = {
   swcMinify: true,
 
   images: {
-    domains: [
-      "localhost",
-      "brightdigigold.s3.ap-south-1.amazonaws.com",
-      "cdn.sanity.io",
-      "d2fbpyhlah02sy.cloudfront.net",
-      "cdn-icons-png.flaticon.com",
-      "www.brightdigigold.com",
+    remotePatterns: [
+      { protocol: "https", hostname: "localhost", pathname: "**" },
+      {
+        protocol: "https",
+        hostname: "brightdigigold.s3.ap-south-1.amazonaws.com",
+        pathname: "**",
+      },
+      { protocol: "https", hostname: "cdn.sanity.io", pathname: "**" },
+      {
+        protocol: "https",
+        hostname: "d2fbpyhlah02sy.cloudfront.net",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn-icons-png.flaticon.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.brightdigigold.com",
+        pathname: "**",
+      },
     ],
   },
 
-  productionBrowserSourceMaps: true, 
+  productionBrowserSourceMaps: true,
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

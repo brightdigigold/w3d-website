@@ -126,13 +126,14 @@ const HeroSection = () => {
                     Best Platform to Buy & Sell 24K Digital Gold
                   </p>
                 </div>
-
-                <p className="text-white leading-8 mb-4 mt-6 text-lg pr-28">
-                  We at Bright DiGi Gold invite you to embark on a journey of
-                  effortless digital savings. In just a few clicks make your
-                  savings grow in Digital Gold and Silver.  Your gateway to
-                  hassle-free savings is here.
-                </p>
+                <div className="mb-4 mt-6  pr-28">
+                  <p className="text-white leading-8 text-lg">
+                    We at Bright DiGi Gold invite you to embark on a journey of
+                    effortless digital savings. In just a few clicks make your
+                    savings grow in Digital Gold and Silver.  Your gateway to
+                    hassle-free savings is here.
+                  </p>
+                </div>
                 <div className="flex items-center">
                   <p className="text-xl bold text-white">Trusted By</p>
                   <Image
@@ -153,8 +154,8 @@ const HeroSection = () => {
                     <NextImage
                       src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
                       alt="google play button"
-                      width={216}
-                      height={90}
+                      width={256}
+                      height={79}
                       style={{
                         width: "auto",
                         height: "auto",
@@ -168,8 +169,8 @@ const HeroSection = () => {
                   >
                     <NextImage
                       src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
-                      width={216}
-                      height={90}
+                      width={256}
+                      height={79}
                       alt="app store button"
                       style={{
                         width: "auto",
