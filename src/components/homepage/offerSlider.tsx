@@ -39,7 +39,7 @@ export default function OfferSlider() {
           },
         }}
         autoplay={{
-          delay: 0,
+          delay: 2500,
           disableOnInteraction: false,
         }}
         modules={[Autoplay]}
