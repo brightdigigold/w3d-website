@@ -19,9 +19,6 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
     mixpanel.init(`${process.env.MIX_PANNEL_TOKEN}`, { track_pageview: true });
   }, [])
 
-  // https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1+(1).webp
-
-
   return (
     <html lang="en">
       <head>
@@ -30,6 +27,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
         <link rel="preload" href="/font/Lato-Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preload" href="/bdgwhite1.webp" as="image" />
+        <link rel="preload" href="/offer1.webp" as="image" />
         <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" />
         <link rel="dns-prefetch" href="https://nkdqpbbn.apicdn.sanity.io" />
       </head>

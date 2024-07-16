@@ -9,15 +9,15 @@ import Image from "next/image";
 
 const features = [
   {
-    // img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1+(1).webp",
-    img: "/offer1.webp",
-
+    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1.webp",
+    // img: "/offer1.webp",
   },
   {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/offer2.jpg",
     // img: "/offer21.jpg",
   },
 ];
+
 
 export default function OfferSlider() {
   return (
@@ -39,7 +39,7 @@ export default function OfferSlider() {
           },
         }}
         autoplay={{
-          delay: 2500,
+          delay: 0,
           disableOnInteraction: false,
         }}
         modules={[Autoplay]}
@@ -53,13 +53,12 @@ export default function OfferSlider() {
               width={1261}
               height={400}
               sizes="100vw"
-              layout="responsive"
               priority={index === 0}
               loading={index === 0 ? "eager" : "lazy"}
-            // style={{
-            //   width: "100%",
-            //   height: "auto"
-            // }} 
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
             />
           </SwiperSlide>
         ))}
