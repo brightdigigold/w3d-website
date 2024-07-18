@@ -2,6 +2,7 @@
 import { Metadata } from "next";
 import React from "react";
 import PrivacyPolicy from "@/components/privacyPolicy/privacyPolicy";
+import Image from "next/image";
 
 const page = () => {
   return (
@@ -12,7 +13,7 @@ const page = () => {
             <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white text-center">
               Privacy Policy
             </h1>
-            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Privacy+Policy.gif" className="" />
+            <Image src="/PrivacyPolicy.Webp" alt="privacy policy image" className="" width={500} height={500} />
           </div>
         </div>
       </div>

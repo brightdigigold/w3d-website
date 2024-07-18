@@ -2,6 +2,7 @@
 import React from "react";
 import { Metadata } from "next";
 import ShippingPolicy from "@/components/shippingPolicy/shippingPolicy";
+import Image from "next/image";
 
 const page = () => {
   return (
@@ -13,7 +14,7 @@ const page = () => {
               <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
                 Shipping Policy
               </h1>
-              <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" className="" />
+              <Image src="/ShippingPolicy.Webp" alt="shiping policy image" className="" width={500} height={500} />
             </div>
           </div>
         </div>

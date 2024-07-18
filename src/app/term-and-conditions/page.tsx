@@ -2,6 +2,7 @@
 import TermsAndCondition from "@/components/termsAndCondition/termsAndCondition";
 import { Metadata } from "next";
 import React from "react";
+import Image from "next/image";
 
 const page = () => {
   return (
@@ -13,7 +14,7 @@ const page = () => {
               <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
                 Terms &<br /> Conditions
               </h1>
-              <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/T+%26+C+Policy.gif" className="" />
+              <Image src="/termsAndConditions.Webp" alt="terms and conditions" width={500} height={500} />
             </div>
           </div>
         </div>
