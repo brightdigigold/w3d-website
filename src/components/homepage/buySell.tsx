@@ -348,7 +348,7 @@ const BuySell = () => {
       dispatch(setShowProfileForm(true));
       return;
     }
-    
+
     if (!enteredAmount) {
       setValidationError("Please enter amount");
       return;
@@ -554,7 +554,7 @@ const BuySell = () => {
                 </div>
                 <div>
                   <div className="text-white pl-4 mt-2">
-                    <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/LivePrice.gif" alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} width={1} height={1} priority={true} />
+                    <Image src="/LivePrice.Webp" alt="Live Price" className="inline-block" width={30} height={25} priority={true} />
                     <span className="pl-1 bold">
                       {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
                     </span>
@@ -622,17 +622,28 @@ const BuySell = () => {
                   </span>
                 </div>
               </div>
-              <div className="mt-4 sm:mt-4 w-full 2xl:w-4/5 float-left ">
-                <div className="flex justify-end 2xl:justify-center pr-4 sm:pr-12 2xl:pr-4"
-                >
+              <div className="mt-4 sm:mt-4 w-full 2xl:w-4/5 float-left">
+                <div className="flex justify-end 2xl:justify-center pr-4 sm:pr-12 2xl:pr-4">
                   {metalType === "gold" ? (
-                    <>
-                      <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GoldStackAnimation.gif" alt="Gold Bar Animation" width={300} height={300} priority={true} />
-                    </>
+                    <Image
+                      src="/GoldStackAnimation110.Webp"
+                      alt="Gold Bar Animation"
+                      width={250}
+                      height={150}
+                      priority={true}
+                      layout="intrinsic"
+                      sizes="(max-width: 250px) 100vw, 250px"
+                    />
                   ) : (
-                    <>
-                      <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/SilverStacksanimation.gif" alt="Silver Bar Animation" width={300} height={300} priority={true} />
-                    </>
+                    <Image
+                      src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/SilverStacksanimation.gif"
+                      alt="Silver Bar Animation"
+                      width={500}
+                      height={300}
+                      priority={true}
+                      layout="intrinsic"
+                      sizes="(max-width: 500px) 100vw, 500px"
+                    />
                   )}
                 </div>
                 <Timer />
@@ -757,7 +768,17 @@ const BuySell = () => {
                   alt="Secure"
                 />
               </span>
-              <img src="/brink.png" className="h-4 sm:h-7 mt-2 mx-auto" alt="Brinks" />
+              {/* <img src="/brink.png" className="h-4 sm:h-7 mt-2 mx-auto" alt="Brinks" /> */}
+              <Image
+                src="/brink.png"
+                alt="Brinks"
+                className="mx-auto mt-2"
+                width={267} // width corresponding to h-7 (assuming a default font size of 4rem for h-7)
+                height={28} // height corresponding to h-4 (assuming a default font size of 1rem for h-4)
+                priority={true}
+                layout="intrinsic"
+                sizes="(max-width: 267px) 100vw, 267px"
+              />
 
               <div>
                 <animated.div style={style}>

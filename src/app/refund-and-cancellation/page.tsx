@@ -12,7 +12,7 @@ const page = () => {
               Refund & <br />
               Cancellations
             </h1>
-            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Refund+Policy.gif" className="" />
+            <img src="/RefundPolicy.Webp" className="" />
           </div>
           <RefundAndCancellation />
         </div>
