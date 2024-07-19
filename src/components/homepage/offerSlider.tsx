@@ -13,8 +13,8 @@ const features = [
     // img: "/offer1.webp",
   },
   {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/offer2.jpg",
-    // img: "/offer21.jpg",
+    // img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/offer2.jpg",
+    img: "/offer2.Webp",
   },
 ];
 
