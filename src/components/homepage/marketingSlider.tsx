@@ -89,8 +89,8 @@ export default function Marketing() {
                   <Image
                     src={item.img}
                     alt={item.alt}
-                    width={400}
-                    height={400}
+                    width={1200}
+                    height={1200}
                     sizes="100vw"
                     style={{
                       width: "100%",

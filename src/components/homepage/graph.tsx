@@ -18,8 +18,8 @@ const Graph = () => {
         <Image
           src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GrowthGraph.gif"
           alt="Growth Graph"
-          width={400}
-          height={400}
+          width={1200}
+          height={675}
           sizes="100vw"
           style={{
             width: "100%",
