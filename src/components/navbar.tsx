@@ -23,6 +23,8 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import mixpanel from "mixpanel-browser";
 import SetProfileForNewUser from "./setProfile";
+import logoSrc from '../../public/Logo1.png';
+import Image from "next/image";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -115,7 +117,7 @@ const Navbar = () => {
               </div>
               <div className="flex flex-1 items-center justify-center xl:items-stretch xl:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link href="/" prefetch={true}>
+                  {/* <Link href="/" prefetch={true}>
                     <img
                       className="h-12 sm:h-16"
                       src={new URL(
@@ -124,6 +126,21 @@ const Navbar = () => {
                       ).toString()}
                       alt="Bright Digi Gold Logo"
                     />
+                  </Link> */}
+
+                  <Link href="/" legacyBehavior prefetch={true}>
+                    <a className="flex items-center justify-center">
+                      <Image
+                        src={logoSrc}
+                        alt="Bright Digi Gold Logo"
+                        className="h-12 sm:h-16"
+                        width={154} // width corresponding to sm:h-16
+                        height={64} // height corresponding to h-12
+                        priority={true}
+                        layout="intrinsic"
+                        sizes="(max-width: 64px) 100vw, 64px"
+                      />
+                    </a>
                   </Link>
                 </div>
               </div>

@@ -770,7 +770,7 @@ const BuySell = () => {
               </span>
               {/* <img src="/brink.png" className="h-4 sm:h-7 mt-2 mx-auto" alt="Brinks" /> */}
               <Image
-                src="/brink.png"
+                src="/brink1.png"
                 alt="Brinks"
                 className="mx-auto mt-2"
                 width={267} // width corresponding to h-7 (assuming a default font size of 4rem for h-7)
