@@ -86,11 +86,11 @@ const Products = () => {
             <div className="">
               <img
                 alt="products"
-                className="h-28 sm:h-40 mx-auto mt-10"
+                className="h-28 sm:h-40 md:h-48 lg:h-52 xl:h-60  mx-auto mt-10"
                 src="https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"
               />
             </div>
-            <p className="mt-6 text-center font-bold text-xs sm:text-base text-white">
+            <p className="mt-6 text-center bold text-xs sm:text-base text-white">
               {/* 1 Gram Gold Coin */}
               5 Gram Gold Coin
             </p>
@@ -128,7 +128,7 @@ const Products = () => {
             variants={fadeIn("right", "spring", 0.5, 0.5)}
             className="bg-themeLight rounded-lg shadow-xl p-4 relative hover:shadow-lg hover:shadow-gray-100 product001"
           >
-            <div className="relative bg-red-400">
+            <div className="relative">
               {/* <img
                 alt="products"
                 className=" absolute left-0"
@@ -151,11 +151,11 @@ const Products = () => {
             <div className="">
               <img
                 alt="products"
-                className="h-28 sm:h-40 mx-auto mt-10"
+                className="h-28 sm:h-40 md:h-48 lg:h-52 xl:h-60  mx-auto mt-10"
                 src="/BanyanTree.png"
               />
             </div>
-            <p className="mt-6 text-center font-bold text-xs sm:text-base text-white">
+            <p className="mt-6 text-center bold text-xs sm:text-base text-white">
               10 Gram banyan Tree
             </p>
 
@@ -207,11 +207,11 @@ const Products = () => {
             <div className="">
               <img
                 alt="products"
-                className="h-28 sm:h-40 mx-auto mt-10"
+                className="h-28 sm:h-40 md:h-48 lg:h-52 xl:h-60  mx-auto mt-10"
                 src="/goldcoin.png"
               />
             </div>
-            <p className="mt-6 text-center font-bold text-xs sm:text-base text-white">
+            <p className="mt-6 text-center bold text-xs sm:text-base text-white">
               10 Gram Gold Coin
             </p>
 
@@ -261,11 +261,11 @@ const Products = () => {
             <div className="">
               <img
                 alt="products"
-                className="h-28 sm:h-40 mx-auto mt-10"
+                className="h-28 sm:h-40 md:h-48 lg:h-52 xl:h-60  mx-auto mt-10"
                 src="/BanyanTree.png"
               />
             </div>
-            <p className="mt-6 text-center font-bold text-xs sm:text-base text-white">
+            <p className="mt-6 text-center bold text-xs sm:text-base text-white">
               100 Gram banyan Tree
             </p>
 
