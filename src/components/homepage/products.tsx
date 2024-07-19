@@ -128,7 +128,7 @@ const Products = () => {
             variants={fadeIn("right", "spring", 0.5, 0.5)}
             className="bg-themeLight rounded-lg shadow-xl p-4 relative hover:shadow-lg hover:shadow-gray-100 product001"
           >
-            <div className="relative">
+            <div className="relative bg-red-400">
               {/* <img
                 alt="products"
                 className=" absolute left-0"
@@ -136,13 +136,15 @@ const Products = () => {
               /> */}
               <img
                 alt="products"
-                className=" absolute right-0"
-                src="/Star_3.png"
+                className="absolute right-0"
+                src="/Star_3.Webp"
+              // width={100}
+              // height={100}
               />
               <img
                 alt="products"
                 className=" absolute right-0"
-                src="/Star_4.png"
+                src="/Star_4.Webp"
               />
             </div>
 
@@ -247,12 +249,12 @@ const Products = () => {
               <img
                 alt="products"
                 className=" absolute right-0"
-                src="/Star_3.png"
+                src="/Star_3.Webp"
               />
               <img
                 alt="products"
                 className=" absolute right-0"
-                src="/Star_4.png"
+                src="/Star_4.Webp"
               />
             </div>
 
