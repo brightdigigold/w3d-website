@@ -12,6 +12,7 @@ import Image from "next/image";
 import { selectUser } from "@/redux/userDetailsSlice";
 import SetProfileForNewUser from "../setProfile";
 import { setShowProfileForm } from "@/redux/authSlice";
+import BanyanTree from "../../../public/BanyanTree.webp"
 
 const Products = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
@@ -80,20 +81,29 @@ const Products = () => {
                 className=" absolute right-0"
                 src="/Light_3.png"
               />
-
             </div>
 
-            <div className="">
-              <img
+            <div className="text-center mx-auto mt-10">
+              <Image
+                src={"https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"}
                 alt="products"
-                className="h-28 sm:h-40 md:h-48 lg:h-52 xl:h-60  mx-auto mt-10"
-                src="https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"
+                priority={true}
+                layout="responsive"
+                width={516}
+                height={512}
+                sizes="
+        (max-width: 640px) 100vw, /* sm breakpoint */
+        (max-width: 768px) 100vw, /* md breakpoint */
+        (max-width: 1024px) 100vw, /* lg breakpoint */
+        (max-width: 1280px) 100vw, /* xl breakpoint */
+        100vw
+      "
+                className="mx-auto"
               />
+              <p className="mt-6 text-xs sm:text-base md:text-sm lg:text-md xl:text-lg text-white bold">
+                5 Gram Gold Coin
+              </p>
             </div>
-            <p className="mt-6 text-center bold text-xs sm:text-base text-white">
-              {/* 1 Gram Gold Coin */}
-              5 Gram Gold Coin
-            </p>
 
             <button
               onClick={() => {
@@ -148,16 +158,27 @@ const Products = () => {
               />
             </div>
 
-            <div className="">
-              <img
+            <div className="text-center mx-auto mt-10">
+              <Image
+                src={"https://brightdigigold.s3.ap-south-1.amazonaws.com/BanyanTree.webp"}
                 alt="products"
-                className="h-28 sm:h-40 md:h-48 lg:h-52 xl:h-60  mx-auto mt-10"
-                src="/BanyanTree.png"
+                priority={true}
+                layout="responsive"
+                width={516}
+                height={512}
+                sizes="
+        (max-width: 640px) 100vw, /* sm breakpoint */
+        (max-width: 768px) 100vw, /* md breakpoint */
+        (max-width: 1024px) 100vw, /* lg breakpoint */
+        (max-width: 1280px) 100vw, /* xl breakpoint */
+        100vw
+      "
+                className="mx-auto"
               />
+              <p className="mt-6 text-xs sm:text-base md:text-sm lg:text-md xl:text-lg text-white bold">
+                10 Gram Banyan Tree
+              </p>
             </div>
-            <p className="mt-6 text-center bold text-xs sm:text-base text-white">
-              10 Gram banyan Tree
-            </p>
 
             <button onClick={() => {
 
@@ -204,16 +225,27 @@ const Products = () => {
               />
             </div>
 
-            <div className="">
-              <img
+            <div className="text-center mx-auto mt-10">
+              <Image
+                src={"https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"}
                 alt="products"
-                className="h-28 sm:h-40 md:h-48 lg:h-52 xl:h-60  mx-auto mt-10"
-                src="/goldcoin.png"
+                priority={true}
+                layout="responsive"
+                width={516}
+                height={512}
+                sizes="
+        (max-width: 640px) 100vw, /* sm breakpoint */
+        (max-width: 768px) 100vw, /* md breakpoint */
+        (max-width: 1024px) 100vw, /* lg breakpoint */
+        (max-width: 1280px) 100vw, /* xl breakpoint */
+        100vw
+      "
+                className="mx-auto"
               />
+              <p className="mt-6 text-xs sm:text-base md:text-sm lg:text-md xl:text-lg text-white bold">
+                10 Gram Gold Coin
+              </p>
             </div>
-            <p className="mt-6 text-center bold text-xs sm:text-base text-white">
-              10 Gram Gold Coin
-            </p>
 
             <button onClick={() => {
 
@@ -258,16 +290,27 @@ const Products = () => {
               />
             </div>
 
-            <div className="">
-              <img
+            <div className="text-center mx-auto mt-10">
+              <Image
+                src={"https://brightdigigold.s3.ap-south-1.amazonaws.com/BanyanTree.webp"}
                 alt="products"
-                className="h-28 sm:h-40 md:h-48 lg:h-52 xl:h-60  mx-auto mt-10"
-                src="/BanyanTree.png"
+                priority={true}
+                layout="responsive"
+                width={516}
+                height={512}
+                sizes="
+        (max-width: 640px) 100vw, /* sm breakpoint */
+        (max-width: 768px) 100vw, /* md breakpoint */
+        (max-width: 1024px) 100vw, /* lg breakpoint */
+        (max-width: 1280px) 100vw, /* xl breakpoint */
+        100vw
+      "
+                className="mx-auto"
               />
+              <p className="mt-6 text-xs sm:text-base md:text-sm lg:text-md xl:text-lg text-white bold">
+                100 Gram Banyan Tree
+              </p>
             </div>
-            <p className="mt-6 text-center bold text-xs sm:text-base text-white">
-              100 Gram banyan Tree
-            </p>
 
             <button onClick={() => {
               if (isloggedIn) {
