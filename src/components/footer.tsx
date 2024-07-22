@@ -88,14 +88,8 @@ const Footer = () => {
                           src="/goldenlogo.png"
                           alt="gold-logo"
                           layout="responsive"
-                          width={833} // Adjust this width according to the actual aspect ratio
-                          height={512} // Adjust this height according to the actual aspect ratio
-                          sizes="
-                         (max-width: 640px) 100vw, /* sm breakpoint */
-                         (max-width: 768px) 100vw, /* md breakpoint */
-                         (max-width: 1024px) 100vw, /* lg breakpoint */
-                         100vw"
-                          priority
+                          width={833}
+                          height={512}
                           className="w-full px-8 sm:px-4 md:px-10 lg:px-4"
                         />
                       </Link>
