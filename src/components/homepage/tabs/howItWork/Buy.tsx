@@ -24,30 +24,22 @@ const BuyTab: FC<{}> = () => {
             />
           </motion.div>
           <motion.div variants={fadeIn("right", "spring", 0.2, 0.25)}>
-            <p className="text-dark-blue text-md sm:text-lg font-bold text-center my-2">
+            <p className="text-dark-blue text-md sm:text-lg bold text-center my-2">
               Step 1
             </p>
-            {/* <div className="mx-auto flex justify-center">
-              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 flex justify-center items-center">
-                <img
-                  src="/buy01.png"
-                  alt="sell digital gold online"
-                ></img>
-              </div>
-            </div> */}
             <div className="mx-auto flex justify-center">
-              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 flex justify-center items-center">
+              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 md:h-18 md:w-18 lg:h-20 lg:w-20 xl:h-22 xl:w-22 2xl:h-32 2xl:w-32 flex justify-center items-center">
                 <Image
-                  src="/buy01.png"
+                  src={"/buy01.png"}
                   alt="sell digital gold online"
                   layout="intrinsic"
-                  width={64}
-                  height={32}
-                  // priority
+                  width={128}
+                  height={65}
+                  priority
                 />
               </div>
             </div>
-            <p className="text-center font-extrabold text-lg sm:text-xl my-2">
+            <p className="text-center  md:bold extrabold text-lg sm:text-xl my-2">
               Sign Up/ Login
             </p>
             <p className="text-center text-sm sm:text-lg my-2 px-4">
@@ -56,18 +48,21 @@ const BuyTab: FC<{}> = () => {
           </motion.div>
 
           <motion.div variants={fadeIn("right", "spring", 0.5, 1.25)}>
-            <p className="text-dark-blue text-md sm:text-lg font-bold text-center my-2">
+            <p className="text-dark-blue text-md sm:text-lg bold text-center my-2">
               Step 2
             </p>
             <div className="mx-auto flex justify-center">
-              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 flex justify-center items-center">
-                <img
-                  src="/buy02.png"
+              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 md:h-18 md:w-18 lg:h-20 lg:w-20 xl:h-22 xl:w-22 2xl:h-32 2xl:w-32 flex justify-center items-center">
+                <Image
+                  src={"/buy021.png"}
                   alt="24k gold price in india"
+                  layout="intrinsic"
+                  width={128}
+                  height={94}
                 />
               </div>
             </div>
-            <p className="text-center font-extrabold text-lg sm:text-xl my-2">
+            <p className="text-center extrabold text-lg sm:text-xl my-2">
               Make Payment
             </p>
             <p className="text-center text-sm sm:text-lg my-2 px-4">
@@ -76,27 +71,22 @@ const BuyTab: FC<{}> = () => {
           </motion.div>
 
           <motion.div variants={fadeIn("right", "spring", 0.75, 1.25)}>
-            <p className="text-dark-blue text-md sm:text-lg font-bold text-center my-2">
+            <p className="text-dark-blue text-md sm:text-lg bold text-center my-2">
               Step 3
             </p>
-            {/* <div className="mx-auto flex justify-center">
-              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 flex justify-center items-center">
-                <img src="/buy03.png" alt="24k gold price"></img>
-              </div>
-            </div> */}
             <div className="mx-auto flex justify-center">
-              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 flex justify-center items-center">
+              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 md:h-18 md:w-18 lg:h-20 lg:w-20 xl:h-22 xl:w-22 2xl:h-32 2xl:w-32 flex justify-center items-center">
                 <Image
-                  src="/buy03.png"
+                  src={"/buy031.png"}
                   alt="24k gold price"
                   layout="intrinsic"
-                  width={68} 
-                  height={73} 
-                  // priority
+                  width={64}
+                  height={68}
+                  priority
                 />
               </div>
             </div>
-            <p className="text-center font-extrabold text-lg sm:text-xl my-2">
+            <p className="text-center extrabold text-lg sm:text-xl my-2">
               Vault Updated
             </p>
             <p className="text-center text-sm sm:text-lg my-2 px-4">
