@@ -22,7 +22,6 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
   return (
     <html lang="en">
       <head>
-      <link rel="preload" href="../../public/font/NunitoSans_Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/font/NunitoSans_Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/font/Lato-Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />

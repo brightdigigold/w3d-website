@@ -1,6 +1,7 @@
 import React, { FC, Fragment } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../../../utils/motion";
+import Image from "next/image";
 
 const BuyTab: FC<{}> = () => {
 
@@ -26,12 +27,24 @@ const BuyTab: FC<{}> = () => {
             <p className="text-dark-blue text-md sm:text-lg font-bold text-center my-2">
               Step 1
             </p>
-            <div className="mx-auto flex justify-center">
+            {/* <div className="mx-auto flex justify-center">
               <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 flex justify-center items-center">
                 <img
                   src="/buy01.png"
                   alt="sell digital gold online"
                 ></img>
+              </div>
+            </div> */}
+            <div className="mx-auto flex justify-center">
+              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 flex justify-center items-center">
+                <Image
+                  src="/buy01.png"
+                  alt="sell digital gold online"
+                  layout="intrinsic"
+                  width={64}
+                  height={32}
+                  // priority
+                />
               </div>
             </div>
             <p className="text-center font-extrabold text-lg sm:text-xl my-2">
@@ -51,7 +64,7 @@ const BuyTab: FC<{}> = () => {
                 <img
                   src="/buy02.png"
                   alt="24k gold price in india"
-                ></img>
+                />
               </div>
             </div>
             <p className="text-center font-extrabold text-lg sm:text-xl my-2">
@@ -66,9 +79,21 @@ const BuyTab: FC<{}> = () => {
             <p className="text-dark-blue text-md sm:text-lg font-bold text-center my-2">
               Step 3
             </p>
-            <div className="mx-auto flex justify-center">
+            {/* <div className="mx-auto flex justify-center">
               <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 flex justify-center items-center">
                 <img src="/buy03.png" alt="24k gold price"></img>
+              </div>
+            </div> */}
+            <div className="mx-auto flex justify-center">
+              <div className="z-10 my-2 bg-theme p-4 rounded-full shadow-2xl h-16 w-16 flex justify-center items-center">
+                <Image
+                  src="/buy03.png"
+                  alt="24k gold price"
+                  layout="intrinsic"
+                  width={68} 
+                  height={73} 
+                  // priority
+                />
               </div>
             </div>
             <p className="text-center font-extrabold text-lg sm:text-xl my-2">

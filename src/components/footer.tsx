@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import LoginAside from "./authSection/loginAside";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Footer = () => {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -82,13 +83,29 @@ const Footer = () => {
                 <div className="grid grid-cols-4 gap-4 lg:gap-4">
                   <div className="mx-auto md:mx-0 w-full lg:pr-4 xl:pr-4 col-span-4 md:col-span-2 lg:col-span-1">
                     <div className=" grid grid-cols-8 gap-6 md:gap-0 place-items-end">
-                      <Link className="col-span-5 md:col-span-8" href="/">
+                      <Link href="/" className="col-span-5 md:col-span-8">
+                        <Image
+                          src="/goldenlogo.png"
+                          alt="gold-logo"
+                          layout="responsive"
+                          width={833} // Adjust this width according to the actual aspect ratio
+                          height={512} // Adjust this height according to the actual aspect ratio
+                          sizes="
+                         (max-width: 640px) 100vw, /* sm breakpoint */
+                         (max-width: 768px) 100vw, /* md breakpoint */
+                         (max-width: 1024px) 100vw, /* lg breakpoint */
+                         100vw"
+                          priority
+                          className="w-full px-8 sm:px-4 md:px-10 lg:px-4"
+                        />
+                      </Link>
+                      {/* <Link className="col-span-5 md:col-span-8" href="/">
                         <img
                           alt="gold-logo"
                           className=" w-full px-8 sm:px-4 md:px-10 lg:px-4"
                           src="/goldenlogo.png"
                         />
-                      </Link>
+                      </Link> */}
                       <div className="col-span-3 md:col-span-8 md:flex gap-8 md:gap-4 justify-around lg:justify-between mx-0 sm:mx-4 md:mt-10 relative">
                         <Link
                           href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
