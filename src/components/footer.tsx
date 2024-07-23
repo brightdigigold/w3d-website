@@ -105,21 +105,26 @@ const Footer = () => {
                           href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                           className="cursor-pointer"
                         >
-                          <img
+                          <Image
                             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
-                            className="pb-4 md:pb-0"
                             alt="google play button"
+                            width={536}
+                            height={166}
+                            priority
+                            sizes="(max-width: 536px) 100vw, 536px"
                           />
                         </Link>
                         <Link
                           href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                           className="cursor-pointer"
                         >
-
-                          <img
+                          <Image
                             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
-                            className=""
                             alt="app store button"
+                            width={536}
+                            height={166}
+                            priority
+                            sizes="(max-width: 536px) 100vw, 536px"
                           />
                         </Link>
                       </div>
