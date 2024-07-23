@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import BuySell from "./buySell";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -16,16 +16,17 @@ import { RootState } from "@/redux/store";
 import OtpModal from "../modals/otpModal";
 import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
-import NextImage from "../nextImage";
 import Image from "next/image";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const DynamicImage = dynamic(() => import('next/image'), { ssr: false });
+const DynamicImage = dynamic(() => import("next/image"), { ssr: false });
 
 const HeroSection = () => {
   const dispatch = useDispatch();
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
-  const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
+  const showProfileForm = useSelector(
+    (state: RootState) => state.auth.showProfileForm
+  );
 
   const onClose = () => {
     dispatch(setShowProfileForm(false));
@@ -67,16 +68,16 @@ const HeroSection = () => {
     checkUserIsNew();
   }, []);
 
-  useEffect(() => { }, [otpModal]);
+  useEffect(() => {}, [otpModal]);
 
   const functionToFetchWalletData = () => {
-    if (localStorage.getItem('token') != null) {
+    if (localStorage.getItem("token") != null) {
       dispatch(fetchWalletData() as any);
     }
   };
 
   useEffect(() => {
-    functionToFetchWalletData()
+    functionToFetchWalletData();
   }, [dispatch]);
 
   return (
@@ -92,13 +93,14 @@ const HeroSection = () => {
             <div className="hidden lg:block mt-10">
               <motion.h1
                 variants={fadeIn("right", "spring", 0.2, 0.2)}
-                className="h1_text text-white mb-12 "
+                className=" text-white mb-12"
+                style={{ fontSize: "4rem", lineHeight: "2.5rem" }}
               >
                 <span className="text-themeBlueLight extrabold">
                   Start Your Savings
                 </span>
                 <br />
-                <span className="font-thin flex items-center bold leading-tight ">
+                <span className="font-thin flex items-center bold leading-tight">
                   With Just{" "}
                   <span className="mt-2 ml-2">
                     <Image
@@ -118,15 +120,16 @@ const HeroSection = () => {
                   <Image
                     width={40}
                     height={40}
-                    className=" inline-block"
+                    className="inline-block"
                     src="/Goldbarbanner.png"
                     alt="Digital Gold Bar"
+                    priority={true}
                   />
                   <p className="text-gold01 p-1 px-3 ml-3 lg:text-lg xl:text-xl bold inline-block">
                     Best Platform to Buy & Sell 24K Digital Gold
                   </p>
                 </div>
-                <div className="mb-4 mt-6  pr-28">
+                <div className="mb-4 mt-6 pr-28">
                   <p className="text-white leading-8 text-lg">
                     We at Bright DiGi Gold invite you to embark on a journey of
                     effortless digital savings. In just a few clicks make your
@@ -142,6 +145,7 @@ const HeroSection = () => {
                     className="ml-2 mt-2"
                     src="/Startup_India.svg"
                     alt="Startupindia logo"
+                    priority={true}
                   />
                 </div>
 
@@ -151,15 +155,13 @@ const HeroSection = () => {
                     href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                     className="cursor-pointer"
                   >
-                    <NextImage
+                    <Image
                       src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
                       alt="google play button"
                       width={256}
                       height={79}
-                      style={{
-                        width: "auto",
-                        height: "auto",
-                      }}
+                      priority
+                      sizes="(max-width: 128px) 100vw, 128px"
                     />
                   </Link>
                   <Link
@@ -167,15 +169,13 @@ const HeroSection = () => {
                     href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                     className="cursor-pointer"
                   >
-                    <NextImage
+                    <Image
                       src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
                       width={256}
                       height={79}
                       alt="app store button"
-                      style={{
-                        width: "auto",
-                        height: "auto",
-                      }}
+                      priority
+                      sizes="(max-width: 128px) 100vw, 128px"
                     />
                   </Link>
                 </div>
