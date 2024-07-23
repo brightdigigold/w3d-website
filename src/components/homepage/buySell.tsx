@@ -1,4 +1,3 @@
-"use client";
 import { ArrowUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -45,7 +44,6 @@ import { useSpring, animated } from 'react-spring';
 import ShowVaultBuySell from "./showVaultBuySell";
 import { useRouter } from "next/navigation";
 import UpiModal from "../myAccount/payoutOptions/addNewUpiId";
-// import NextImage from "../nextImage";
 import coupon from '../../../public/coupon.png';
 import Link from "next/link";
 import { isMobile } from 'react-device-detect';
@@ -90,7 +88,6 @@ const BuySell = () => {
   }
 
   const previewModal = async () => {
-
     Notiflix.Loading.custom({
       svgSize: "180px",
       customSvgCode:
@@ -225,11 +222,6 @@ const BuySell = () => {
     dispatch(clearCoupon());
   };
 
-  // const toggleCoupon = () => {
-  //   setShowCoupon(!showCoupon);
-  //   dispatch(setCouponError(""));
-  // };
-
   const handleTabBuyAndSell = (tab: "buy" | "sell") => {
     setActiveTab(tab);
     dispatch(setEnteredAmount(0));
@@ -243,8 +235,6 @@ const BuySell = () => {
     dispatch(clearCoupon());
     setActiveTabPurchase(tab);
     setTransactionTypeForQuickBuySell(tab);
-    // dispatch(setTransactionType(tab));
-    // dispatch(setEnteredAmount(tab === "rupees" ? totalAmount : ParseFloat(metalQuantity, 4)));
     setValidationError("");
   };
 
@@ -266,8 +256,6 @@ const BuySell = () => {
   );
 
   const handleEnteredAmountChange = (e: any) => {
-    // e.preventDefault();
-
     dispatch(clearCoupon());
     setActiveTabPurchase('rupees')
     dispatch(setTransactionType('rupees'))
@@ -276,10 +264,6 @@ const BuySell = () => {
       setValidationError("Please enter numbers only.");
       return;
     }
-    // if (transactionType === 'rupees' && e.target.value.includes('.')) {
-    //   setValidationError("Decimal values are not allowed for rupees");
-    //   return; // Exit the function early
-    // }
     if (isAnyCouponApplied) {
       if (enteredValue < 500) {
         dispatch(clearCoupon());
@@ -303,7 +287,6 @@ const BuySell = () => {
   };
 
   const handleEnteredAmountChangeGrams = (e: any) => {
-    // e.preventDefault();
     dispatch(clearCoupon());
     setActiveTabPurchase('grams')
     dispatch(setTransactionType('grams'));
@@ -322,7 +305,6 @@ const BuySell = () => {
     }
     setValidationError("");
 
-
     if (Number(e.target.value) > ParseFloat(actualPurchasingInGm, 4)) {
       setValidationError(
         `We appreciate your trust to buy  ${metalType} on our platform, but our current limit is ₹2 lakhs only. Please change the amount.`
@@ -334,7 +316,6 @@ const BuySell = () => {
   };
 
   const handleBuyClick = () => {
-
     if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
       return;
@@ -363,7 +344,6 @@ const BuySell = () => {
   const handleSellClick = (e: any) => {
     setValidationError("");
 
-
     if (!isloggedIn) {
       setOpenLoginAside(true);
       return;
@@ -378,7 +358,6 @@ const BuySell = () => {
       setValidationError(`Minimum Sell amount is  Rs.${100}`);
       return;
     }
-
 
     if (!user.data.isKycDone) {
       Swal.fire({
@@ -400,7 +379,6 @@ const BuySell = () => {
     previewModal();
   };
 
-
   const QuickBuySellButtons = ({ amounts, unit, onClickHandler }: any) => (
     <div className={`mt-4 flex justify-between ${amounts == 500 ? 'pb-2' : ''}`}>
       {amounts.map((amount: any) => (
@@ -418,10 +396,10 @@ const BuySell = () => {
             dispatch(setTransactionType(unit));
             dispatch(setEnteredAmount(amount));
           }}
-          className="bg-themeLight001 border bold border-blue-200 rounded-md py-1 px-2 sm:px-4 text-white text-sm relative" // Added relative positioning
+          className="bg-themeLight001 border bold border-blue-200 rounded-md py-1 px-2 sm:px-4 text-white text-sm relative"
         >
           {unit === "rupees" ? `₹${amount}` : `${amount}gm`}
-          {purchaseType === "buy" && amount === 500 && ( // Conditional rendering for the "POPULAR" tag
+          {purchaseType === "buy" && amount === 500 && (
             <span className="absolute bottom-[-16px] left-0 bg-themeBlue text-black semibold px-0.5 sm:px-1 py-0 sm:py-0.5 text-xxs sm:text-xs rounded">
               POPULAR
             </span>
@@ -430,7 +408,6 @@ const BuySell = () => {
       ))}
     </div>
   );
-
 
   useEffect(() => {
     if (isgold && activeTab == "buy") {
@@ -443,7 +420,6 @@ const BuySell = () => {
       dispatch(setMetalPrice(silverData.salePrice));
     }
   }, [isgold, activeTab, toggleMetal]);
-
 
   const openModal = () => {
     if (isLoggedInForTempleReceipt && devotee_isNewUser) {
@@ -468,7 +444,6 @@ const BuySell = () => {
     setModalOpen(false);
     setModalCouponOpen(false);
   };
-
 
   const [style, api] = useSpring(() => ({
     opacity: 0,
@@ -507,7 +482,7 @@ const BuySell = () => {
           />
         )}
         <div className="block xl:pl-24 ">
-          <div className="tab-bg  rounded-lg  relative">
+          <div className="tab-bg rounded-lg relative">
             <div className="grid grid-cols-2">
               <div
                 className={`text-center py-3 border-r-2 border-slate-500 extrabold cursor-pointer ${activeTab === "buy"
@@ -626,13 +601,13 @@ const BuySell = () => {
                 <div className="flex justify-end 2xl:justify-center pr-4 sm:pr-12 2xl:pr-4">
                   {metalType === "gold" ? (
                     <Image
-                      src="/GoldStackAnimation110.Webp"
+                      src="/GoldStackAnimation1101.Webp"
                       alt="Gold Bar Animation"
-                      width={250}
-                      height={150}
+                      width={206}
+                      height={138}
                       priority={true}
                       layout="intrinsic"
-                      sizes="(max-width: 250px) 100vw, 250px"
+                      sizes="(max-width: 206px) 100vw, 206px"
                     />
                   ) : (
                     <Image
@@ -687,8 +662,6 @@ const BuySell = () => {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => { handleEnteredAmountChange(e) }}
                     onFocus={(e: React.FocusEvent<HTMLInputElement>) => { e.preventDefault() }}
                     onScroll={(e: React.UIEvent<HTMLElement>) => { e.preventDefault() }}
-                    // onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
-                    // step="0.0001"
                     value={
                       transactionType === "rupees"
                         ? enteredAmount === 0
@@ -697,22 +670,19 @@ const BuySell = () => {
                         : totalAmount
                     }
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                      // Prevent the input of a decimal point if purchase type is rupees
                       if (activeTabPurchase === "rupees" && e.key === ".") {
                         e.preventDefault();
                       }
-                      // Prevent entering negative values
                       if (e.key === "-" || e.key === "e" || e.key === "E") {
                         e.preventDefault();
                       }
                       if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-                        e.preventDefault(); // Prevent the default action
+                        e.preventDefault();
                       }
                     }}
                   />
                 </div>
                 <div className="relative rounded-md shadow-sm">
-
                   <input
                     type="number"
                     inputMode="numeric"
@@ -724,7 +694,7 @@ const BuySell = () => {
                     onWheel={(e: React.WheelEvent<HTMLInputElement>) => { e.preventDefault() }}
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                       if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-                        e.preventDefault(); // Prevent the default action
+                        e.preventDefault();
                       }
                     }}
                     className={`bg-transparent w-full pr-8 sm:pr-14 py-1  focus:outline-none text-gray-100 text-right ${activeTabPurchase === "grams" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"}`}
@@ -733,7 +703,6 @@ const BuySell = () => {
                         ? enteredAmount
                         : ParseFloat(metalQuantity, 4)
                     }
-                  // readOnly
                   />
                   <div className={`pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 ${activeTabPurchase === "grams" ? "text-sm sm:text-2xl" : "text-xs sm:text-xl"}`}>
                     gm
@@ -759,22 +728,20 @@ const BuySell = () => {
 
               <span className="text-center text-xxs sm:text-xs flex justify-center items-center mt-6 text-gray-400">
                 Your Assets will be Saved in Safe & Secured Vault
-                <img
+                <Image
                   className="h-5 ml-2"
-                  src={new URL(
-                    "../../../public/secure.png",
-                    import.meta.url
-                  ).toString()}
+                  src="/secure.png"
+                  width={20}
+                  height={20}
                   alt="Secure"
                 />
               </span>
-              {/* <img src="/brink.png" className="h-4 sm:h-7 mt-2 mx-auto" alt="Brinks" /> */}
               <Image
                 src="/brink1.png"
                 alt="Brinks"
                 className="mx-auto mt-2"
-                width={267} // width corresponding to h-7 (assuming a default font size of 4rem for h-7)
-                height={28} // height corresponding to h-4 (assuming a default font size of 1rem for h-4)
+                width={267}
+                height={28}
                 priority={true}
                 layout="intrinsic"
                 sizes="(max-width: 267px) 100vw, 267px"
@@ -846,8 +813,8 @@ const BuySell = () => {
         >
           <Image
             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/google-play-button.png"
-            width={16 * 10}
-            height={9 * 10}
+            width={160}
+            height={90}
             alt="google play button"
           />
         </Link>
@@ -857,8 +824,8 @@ const BuySell = () => {
         >
           <Image
             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/app-store-button+(2).png"
-            width={16 * 10}
-            height={9 * 10}
+            width={160}
+            height={90}
             alt="app store button"
           />
         </Link>
@@ -866,4 +833,5 @@ const BuySell = () => {
     </>
   );
 };
+
 export default BuySell;

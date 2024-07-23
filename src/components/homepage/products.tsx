@@ -1,8 +1,8 @@
-"use client";
+'use client'
 import Link from "next/link";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { fadeIn, staggerContainer } from "../../utils/motion";
+import { fadeIn } from "../../utils/motion";
 import LoginAside from "../authSection/loginAside";
 import OtpModal from "../modals/otpModal";
 import { RootState } from "@/redux/store";
@@ -12,7 +12,6 @@ import Image from "next/image";
 import { selectUser } from "@/redux/userDetailsSlice";
 import SetProfileForNewUser from "../setProfile";
 import { setShowProfileForm } from "@/redux/authSlice";
-import BanyanTree from "../../../public/BanyanTree.webp"
 
 const Products = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
@@ -34,15 +33,13 @@ const Products = () => {
   };
 
   return (
-    <div className="bg-theme" >
-
+    <div className="bg-theme">
       <motion.div
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
         className="mx-auto px-4 sm:px-6 lg:px-16 py-16"
       >
-
         <div className="flex justify-between items-center">
           {openLoginAside && (
             <LoginAside
@@ -70,34 +67,34 @@ const Products = () => {
             className="bg-themeLight rounded-lg shadow-xl p-4 relative hover:shadow-lg hover:shadow-gray-100 product001"
           >
             <div className="relative">
-
-              <img
+              <Image
+                src="/Light_21.png"
                 alt="products"
-                className=" absolute right-0"
-                src="/Light_2.png"
+                width={250}
+                height={150}
+                // layout="fill"
+                objectFit="cover"
+                className="absolute right-0"
               />
-              <img
+              <Image
+                src="/Light_31.png"
                 alt="products"
-                className=" absolute right-0"
-                src="/Light_3.png"
+                width={250}
+                height={150}
+                // layout="fill"
+                objectFit="cover"
+                className="absolute right-0"
               />
             </div>
 
             <div className="text-center mx-auto mt-10">
               <Image
-                src={"https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"}
+                src="https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"
                 alt="products"
-                priority={true}
                 layout="responsive"
-                width={516}
-                height={512}
-                sizes="
-        (max-width: 640px) 100vw, /* sm breakpoint */
-        (max-width: 768px) 100vw, /* md breakpoint */
-        (max-width: 1024px) 100vw, /* lg breakpoint */
-        (max-width: 1280px) 100vw, /* xl breakpoint */
-        100vw
-      "
+                width={250}
+                height={150}
+                sizes="(max-width: 250px) 100vw, 250px"
                 className="mx-auto"
               />
               <p className="mt-6 text-xs sm:text-base md:text-sm lg:text-md xl:text-lg text-white bold">
@@ -107,72 +104,46 @@ const Products = () => {
 
             <button
               onClick={() => {
-
                 if (isloggedIn) {
-                  router.push(`/coins/5-Gram-Gold-Coin`)
-                }
-                else if (!isloggedIn && !isLoggedInForTempleReceipt) {
+                  router.push(`/coins/5-Gram-Gold-Coin`);
+                } else if (!isloggedIn && !isLoggedInForTempleReceipt) {
                   handleLoginClick();
-                }
-                else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                  dispatch(setShowProfileForm(true));
+                } else if (!user.data.isBasicDetailsCompleted) {
                   dispatch(setShowProfileForm(true));
                 }
-                else if (!user.data.isBasicDetailsCompleted) {
-                  dispatch(setShowProfileForm(true));
-                }
-
-                // if (!isloggedIn) {
-                //   handleLoginClick();
-                // } else {
-                //   // router.push(`/coins/1-Gram-Gold-Coin`)
-                //   router.push(`/coins/5-Gram-Gold-Coin`)
-                // }
               }}
-              // href={`/coins/1-Gram-Gold-Coin`}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
               View
             </button>
           </motion.div>
+
           <motion.div
             variants={fadeIn("right", "spring", 0.5, 0.5)}
             className="bg-themeLight rounded-lg shadow-xl p-4 relative hover:shadow-lg hover:shadow-gray-100 product001"
           >
             <div className="relative">
-              {/* <img
-                alt="products"
-                className=" absolute left-0"
-                src="/Star_1.png"
-              /> */}
-              <img
-                alt="products"
-                className="absolute right-0"
+              <Image
                 src="/Star_3.Webp"
-              // width={100}
-              // height={100}
-              />
-              <img
                 alt="products"
-                className=" absolute right-0"
-                src="/Star_4.Webp"
+                width={250}
+                height={150}
+                // layout="fill"
+                objectFit="cover"
+                className="absolute right-0"
               />
             </div>
 
             <div className="text-center mx-auto mt-10">
               <Image
-                src={"https://brightdigigold.s3.ap-south-1.amazonaws.com/BanyanTree.webp"}
+                src="/BanyanTree1.png"
                 alt="products"
-                priority={true}
                 layout="responsive"
-                width={516}
-                height={512}
-                sizes="
-        (max-width: 640px) 100vw, /* sm breakpoint */
-        (max-width: 768px) 100vw, /* md breakpoint */
-        (max-width: 1024px) 100vw, /* lg breakpoint */
-        (max-width: 1280px) 100vw, /* xl breakpoint */
-        100vw
-      "
+                width={250}
+                height={150}
+                sizes="(max-width: 250px) 100vw, 250px"
                 className="mx-auto"
               />
               <p className="mt-6 text-xs sm:text-base md:text-sm lg:text-md xl:text-lg text-white bold">
@@ -180,27 +151,18 @@ const Products = () => {
               </p>
             </div>
 
-            <button onClick={() => {
-
-              if (isloggedIn) {
-                router.push(`/coins/10-Gram-Banyan-Tree-Silver-Coin`)
-              }
-              else if (!isloggedIn && !isLoggedInForTempleReceipt) {
-                handleLoginClick();
-              }
-              else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
-                dispatch(setShowProfileForm(true));
-              }
-              else if (!user.data.isBasicDetailsCompleted) {
-                dispatch(setShowProfileForm(true));
-              }
-              // if (!isloggedIn) {
-              //   handleLoginClick();
-              // } else {
-              //   router.push(`/coins/10-Gram-Banyan-Tree-Silver-Coin`)
-              // }
-            }}
-              // href={`/coins/10-Gram-Banyan-Tree-Silver-Coin`}
+            <button
+              onClick={() => {
+                if (isloggedIn) {
+                  router.push(`/coins/10-Gram-Banyan-Tree-Silver-Coin`);
+                } else if (!isloggedIn && !isLoggedInForTempleReceipt) {
+                  handleLoginClick();
+                } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                  dispatch(setShowProfileForm(true));
+                } else if (!user.data.isBasicDetailsCompleted) {
+                  dispatch(setShowProfileForm(true));
+                }
+              }}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
               View
@@ -212,34 +174,34 @@ const Products = () => {
             className="bg-themeLight rounded-lg shadow-xl p-4 relative hover:shadow-lg hover:shadow-gray-100 product001"
           >
             <div className="relative">
-
-              <img
+              <Image
+                src="/Light_21.png"
                 alt="products"
-                className=" absolute right-0"
-                src="/Light_2.png"
+                width={250}
+                height={150}
+                // layout="fill"
+                objectFit="cover"
+                className="absolute right-0"
               />
-              <img
+              <Image
+                src="/Light_31.png"
                 alt="products"
-                className=" absolute right-0"
-                src="/Light_3.png"
+                width={250}
+                height={150}
+                // layout="fill"
+                objectFit="cover"
+                className="absolute right-0"
               />
             </div>
 
             <div className="text-center mx-auto mt-10">
               <Image
-                src={"https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"}
+                src="https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"
                 alt="products"
-                priority={true}
                 layout="responsive"
-                width={516}
-                height={512}
-                sizes="
-        (max-width: 640px) 100vw, /* sm breakpoint */
-        (max-width: 768px) 100vw, /* md breakpoint */
-        (max-width: 1024px) 100vw, /* lg breakpoint */
-        (max-width: 1280px) 100vw, /* xl breakpoint */
-        100vw
-      "
+                width={250}
+                height={150}
+                sizes="(max-width: 250px) 100vw, 250px"
                 className="mx-auto"
               />
               <p className="mt-6 text-xs sm:text-base md:text-sm lg:text-md xl:text-lg text-white bold">
@@ -247,64 +209,48 @@ const Products = () => {
               </p>
             </div>
 
-            <button onClick={() => {
-
-              if (isloggedIn) {
-                router.push(`/coins/10-Gram-Gold-Coin`)
-              }
-              else if (!isloggedIn && !isLoggedInForTempleReceipt) {
-                handleLoginClick();
-              }
-              else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
-                dispatch(setShowProfileForm(true));
-              }
-              else if (!user.data.isBasicDetailsCompleted) {
-                dispatch(setShowProfileForm(true));
-              }
-
-              // if (!isloggedIn) {
-              //   handleLoginClick();
-              // } else {
-              //   router.push(`/coins/10-Gram-Gold-Coin`)
-              // }
-            }}
+            <button
+              onClick={() => {
+                if (isloggedIn) {
+                  router.push(`/coins/10-Gram-Gold-Coin`);
+                } else if (!isloggedIn && !isLoggedInForTempleReceipt) {
+                  handleLoginClick();
+                } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                  dispatch(setShowProfileForm(true));
+                } else if (!user.data.isBasicDetailsCompleted) {
+                  dispatch(setShowProfileForm(true));
+                }
+              }}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
               View
             </button>
           </motion.div>
+
           <motion.div
             variants={fadeIn("right", "spring", 1.0, 1.0)}
             className="bg-themeLight rounded-lg shadow-xl p-4 relative hover:shadow-lg hover:shadow-gray-100 product001"
           >
             <div className="relative">
-              <img
-                alt="products"
-                className=" absolute right-0"
+              <Image
                 src="/Star_3.Webp"
-              />
-              <img
                 alt="products"
-                className=" absolute right-0"
-                src="/Star_4.Webp"
+                width={250}
+                height={150}
+                // layout="fill"
+                objectFit="cover"
+                className="absolute right-0"
               />
             </div>
 
             <div className="text-center mx-auto mt-10">
               <Image
-                src={"https://brightdigigold.s3.ap-south-1.amazonaws.com/BanyanTree.webp"}
+                src="https://brightdigigold.s3.ap-south-1.amazonaws.com/BanyanTree.webp"
                 alt="products"
-                priority={true}
                 layout="responsive"
-                width={516}
-                height={512}
-                sizes="
-        (max-width: 640px) 100vw, /* sm breakpoint */
-        (max-width: 768px) 100vw, /* md breakpoint */
-        (max-width: 1024px) 100vw, /* lg breakpoint */
-        (max-width: 1280px) 100vw, /* xl breakpoint */
-        100vw
-      "
+                width={250}
+                height={150}
+                sizes="(max-width: 250px) 100vw, 250px"
                 className="mx-auto"
               />
               <p className="mt-6 text-xs sm:text-base md:text-sm lg:text-md xl:text-lg text-white bold">
@@ -312,25 +258,18 @@ const Products = () => {
               </p>
             </div>
 
-            <button onClick={() => {
-              if (isloggedIn) {
-                router.push(`/coins/100-Gram-Banyan-Tree-Silver-Coin`)
-              }
-              else if (!isloggedIn && !isLoggedInForTempleReceipt) {
-                handleLoginClick();
-              }
-              else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
-                dispatch(setShowProfileForm(true));
-              }
-              else if (!user.data.isBasicDetailsCompleted) {
-                dispatch(setShowProfileForm(true));
-              }
-              // if (!isloggedIn) {
-              //   handleLoginClick();
-              // } else {
-              //   router.push(`/coins/100-Gram-Banyan-Tree-Silver-Coin`)
-              // }
-            }}
+            <button
+              onClick={() => {
+                if (isloggedIn) {
+                  router.push(`/coins/100-Gram-Banyan-Tree-Silver-Coin`);
+                } else if (!isloggedIn && !isLoggedInForTempleReceipt) {
+                  handleLoginClick();
+                } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                  dispatch(setShowProfileForm(true));
+                } else if (!user.data.isBasicDetailsCompleted) {
+                  dispatch(setShowProfileForm(true));
+                }
+              }}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
               View
