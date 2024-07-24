@@ -2,6 +2,7 @@
 import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/24/outline";
+import useDetectMobileOS from "../hooks/useDetectMobileOS"
 import Link from "next/link";
 import { classNames } from "./helperFunctions";
 import { RootState } from "@/redux/store";
@@ -31,6 +32,7 @@ const Navbar = () => {
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
+  const os = useDetectMobileOS();
   const pathname = usePathname();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
@@ -59,8 +61,6 @@ const Navbar = () => {
   // logoutProfile();
 
   const handleLoginClick = () => {
-    console.log("====", isLoggedInForTempleReceipt && devotee_isNewUser)
-
     if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
     } else {
@@ -75,6 +75,8 @@ const Navbar = () => {
   const onClose = () => {
     dispatch(setShowProfileForm(false));
   };
+
+  console.log('os=====>', os);
 
   return (
     <Disclosure as="nav" className="bg-header fixed top-0 w-full z-[49]">
@@ -110,7 +112,7 @@ const Navbar = () => {
                   <span className="sr-only">Open main menu</span>
 
                   <Bars3Icon
-                    className="block h-6 w-6 text-yellow-400"
+                    className="block h-8 w-8 text-yellow-400"
                     aria-hidden="true"
                   />
                 </Disclosure.Button>
@@ -228,18 +230,45 @@ const Navbar = () => {
                 <div className="hidden xl:ml-6 xl:block">
                   <div className="flex space-x-4"></div>
                 </div>
+                {os === 'Android' && <Link
+                  className="text-gold01  rounded-md text-md px-1 py-2 extrabold xl:hidden "
+                  href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
+                  aria-label="User Profile"
+                >
+                  <img
+                    src="/google-play.png"
+                    alt="Play Store icon"
+                    className="h-6"
+                  />
+                </Link>}
+
+                {os === 'iOS' && (
+                  <Link
+                    className="text-gold01  rounded-md text-md px-1 py-2 extrabold xl:hidden"
+                    href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
+                    aria-label="User Profile"
+                  >
+                    <img
+                      src="/app-storeIcon.png"
+                      alt="Play Store icon"
+                      className="h-6"
+                    />
+                  </Link>
+                )}
+
                 {isloggedIn && (
                   <Link
                     href="/cart"
                     prefetch={true}
-                    className="text-gray-300 rounded-md text-md extrabold xl:hidden"
+                    className="text-gray-300 rounded-md text-md px-1 py-2 extrabold xl:hidden"
                   >
-                    <img src="/images/cart.png" alt="cart pic" className="h-6 ml-2" />
+                    <img src="/images/cart.png" alt="cart pic" className="h-6" />
                   </Link>
                 )}
+
                 {!isloggedIn && (
                   <Link
-                    className=" text-gold01  rounded-md text-md extrabold ml-2 xl:hidden"
+                    className="text-gold01  rounded-md text-md px-1 py-2 extrabold xl:hidden"
                     href="#"
                     aria-label="User Profile"
                   >
@@ -247,12 +276,12 @@ const Navbar = () => {
                       onClick={() => {
                         handleLoginClick();
                       }}
-                      className="h-6"
+                      className="h-7"
                     />
                   </Link>
                 )}
 
-                <Menu as="div" className="relative ml-3">
+                <Menu as="div" className="relative">
                   <Menu.Button
                     onClick={() => {
                       close();
@@ -272,7 +301,7 @@ const Navbar = () => {
                             close();
                             setDropdownOpen(false);
                           }}
-                          className="h-8"
+                          className="h-7"
                         />
                       </Link>
                     )}

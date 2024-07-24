@@ -68,7 +68,7 @@ const HeroSection = () => {
     checkUserIsNew();
   }, []);
 
-  useEffect(() => {}, [otpModal]);
+  useEffect(() => { }, [otpModal]);
 
   const functionToFetchWalletData = () => {
     if (localStorage.getItem("token") != null) {
@@ -89,6 +89,18 @@ const HeroSection = () => {
         viewport={{ once: false, amount: 0.25 }}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-16">
+          <div className="relative">
+            <Image
+              src="/bdgwhite5.webp"
+              alt="Your Company"
+              width={270}
+              height={270}
+              className="absolute opacity-20 hidden sm:block custom-image"
+              priority={true}
+              quality={100}
+              layout="responsive"
+            />
+          </div>
           <div className="grid lg:grid-cols-2 gap-4">
             <div className="hidden lg:block mt-10">
               <motion.h1
