@@ -601,7 +601,7 @@ const BuySell = () => {
                 <div className="flex justify-end 2xl:justify-center pr-4 sm:pr-12 2xl:pr-4">
                   {metalType === "gold" ? (
                     <Image
-                      src="/GoldStackAnimation1101.Webp"
+                      src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/GoldStackAnimation.gif"
                       alt="Gold Bar Animation"
                       width={206}
                       height={138}

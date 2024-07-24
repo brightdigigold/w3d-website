@@ -17,28 +17,28 @@ type TabsType = {
 const tabs: TabsType = [
   {
     label: "Buy",
-    img: "/buytab.Webp",
+    img: "/buytab.WebP",
     alt: "buy digital gold online",
     index: 1,
     Component: BuyTab,
   },
   {
     label: "Sell",
-    img: "/selltab.Webp",
+    img: "/selltab.WebP",
     alt: "sell digital gold online",
     index: 2,
     Component: SellTab,
   },
   {
     label: "Gift",
-    img: "/gifttab.Webp",
+    img: "/gifttab.WebP",
     alt: "Digital Gold Gift",
     index: 3,
     Component: GiftTab,
   },
   {
     label: "Delivery",
-    img: "/deliverytab.Webp",
+    img: "/deliverytab.WebP",
     alt: "Digital Gold to Physical Gold",
     index: 4,
     Component: DeliveryTab,
