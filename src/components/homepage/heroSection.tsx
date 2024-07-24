@@ -116,8 +116,8 @@ const HeroSection = () => {
                   With Just{" "}
                   <span className="mt-2 ml-2">
                     <Image
+                      src="/Rupees.png"
                       alt="rupees icon"
-                      src="/Rupees.Webp"
                       width={45}
                       height={45}
                       priority={true}
