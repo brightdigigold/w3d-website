@@ -31,6 +31,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
         <link rel="preload" as="image" href="https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1.webp" />
         <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" />
         <link rel="dns-prefetch" href="https://nkdqpbbn.apicdn.sanity.io" />
+        <meta name="google-site-verification" content="CRfShAmCXUTnCd9sfyEoPmBFHZvDQh2TC8UI4fZFPdw" />
       </head>
       <body>
         <Provider store={store}>
