@@ -97,7 +97,7 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
     { setSubmitting, resetForm }: any
   ) => {
     setIsSubmitting(true);
-      Notiflix.Loading.init({ svgColor: "rgba(241,230,230,0.985)" });
+    Notiflix.Loading.init({ svgColor: "rgba(241,230,230,0.985)" });
 
     const dataToBeEncrypted = {
       mobile_number: values.mobile_number,
@@ -355,18 +355,6 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
                     />
                   </div>
 
-                  {/* <div className={style.user_mobile_no}>
-                  <label>Referral Code</label>
-                  <br />
-                  <input
-                    name="referCode"
-                    type="text"
-                    placeholder="Enter your Refer code."
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.referCode}
-                  />
-                </div> */}
                   <div className="flex items-center mt-3">
                     <input
                       className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background  rounded-lg focus:outline-none "

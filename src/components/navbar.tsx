@@ -76,8 +76,6 @@ const Navbar = () => {
     dispatch(setShowProfileForm(false));
   };
 
-  console.log('os=====>', os);
-
   return (
     <Disclosure as="nav" className="bg-header fixed top-0 w-full z-[49]">
       {({ open, close }) => (

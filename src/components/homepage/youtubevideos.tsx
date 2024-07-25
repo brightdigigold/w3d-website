@@ -1,13 +1,14 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import ReactPlayer from "react-player";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import Image from "next/image";
+import type { Swiper as SwiperType } from 'swiper';
+import { motion } from 'framer-motion';
 
 export default function Videos() {
     const [videos, setVideos] = useState([
@@ -17,7 +18,7 @@ export default function Videos() {
         { id: "5bKB71zRMbE", title: "How to get delivery of your gold ?", img: "/How to get Delivery of Gold Coin.jpg" },
         { id: "bCigluS2tRU", title: "How to earn rewards ?", img: "/How to Earn and Use Rewards.jpg" },
     ]);
-    const [playingVideoId, setPlayingVideoId] = useState(null);
+    const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
     const [isModalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
@@ -28,31 +29,40 @@ export default function Videos() {
         setVideos(updatedVideos);
     }, []);
 
-    const videoUrl = id => `https://www.youtube.com/watch?v=${id}`;
+    const videoUrl = (id: string) => `https://www.youtube.com/watch?v=${id}`;
 
-    const handleVideoClick = id => {
+    const handleVideoClick = (id: string) => {
         setPlayingVideoId(id);
         setModalOpen(true);
     };
 
-    const swiperRef = useRef<any>(null);
+    const swiperRef = useRef<SwiperType | null>(null);
 
-    const handleMouseEnter: any = () => {
-        if (swiperRef.current && swiperRef.current.swiper.autoplay.running) {
-            swiperRef.current.swiper.autoplay.stop();
+    const handleMouseEnter = () => {
+        console.log('Mouse entered swiper area');
+        if (swiperRef.current && swiperRef.current.autoplay.running) {
+            swiperRef.current.autoplay.stop();
+            console.log('Swiper autoplay stopped');
         }
     };
 
     const handleMouseLeave = () => {
-        if (swiperRef.current && !swiperRef.current.swiper.autoplay.running) {
-            swiperRef.current.swiper.autoplay.start();
+        console.log('Mouse left swiper area');
+        if (swiperRef.current && !swiperRef.current.autoplay.running) {
+            swiperRef.current.autoplay.start();
+            console.log('Swiper autoplay started');
         }
     };
 
-    const handleCloseModal = (event) => {
+    const handleCloseModal = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (event.target === event.currentTarget) {
             setModalOpen(false);
         }
+    };
+
+    const slideVariants = {
+        hidden: { opacity: 0, scale: 0.9 },
+        visible: { opacity: 1, scale: 1 },
     };
 
     return (
@@ -83,29 +93,35 @@ export default function Videos() {
                             },
                         }}
                         autoplay={{ delay: 4500, disableOnInteraction: false }}
-                        modules={[EffectCoverflow, Navigation, Autoplay]}
+                        modules={[Navigation, Autoplay]}
                         className="mySwiper"
-                        ref={swiperRef}
+                        onSwiper={(swiper) => (swiperRef.current = swiper)}
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                     >
                         {videos.map((video, index) => (
                             <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4 pt-10">
-                                <div className="rounded-2xl h-40 sm:h-72 relative overflow-hidden" onClick={() => handleVideoClick(video.id)}>
+                                <motion.div 
+                                    className="rounded-2xl h-40 sm:h-72 relative overflow-hidden cursor-pointer"
+                                    onClick={() => handleVideoClick(video.id)}
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={slideVariants}
+                                    transition={{ duration: 0.5 }}
+                                >
                                     <Image
                                         src={video.img}
                                         alt={video.title}
                                         width={1920}
                                         height={100}
-                                        className="rounded-2xl cursor-pointer absolute"
-                                        onClick={() => handleVideoClick(video.id)}
+                                        className="rounded-2xl absolute"
                                         style={{
                                             maxWidth: "100%",
                                             height: "auto",
                                             objectFit: "cover"
                                         }}
                                     />
-                                </div>
+                                </motion.div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -113,10 +129,10 @@ export default function Videos() {
             </div>
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={handleCloseModal}>
-                    <div className=" p-1 rounded-md relative w-full max-w-4xl mx-4">
+                    <div className="p-1 rounded-md relative w-full max-w-4xl mx-4">
                         <ReactPlayer
                             className="video-player"
-                            url={videoUrl(playingVideoId)}
+                            url={videoUrl(playingVideoId as string)}
                             playing={true}
                             controls={true}
                             width="100%"
