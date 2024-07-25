@@ -12,11 +12,11 @@ import Image from "next/image";
 
 export default function Videos() {
     const [videos, setVideos] = useState([
-        { id: "JhuNd_fs5Oo", title: "Why Bright Digi Gold ?", img: "/images/whybdg.jpg" },
-        { id: "r2dZ_py_0yc", title: "How to Buy Gold ?", img: "/images/buygold.png" },
-        { id: "aV1XiNM5uHw", title: "How to Sell Gold ?", img: "/images/sellbanner.png" },
-        { id: "5bKB71zRMbE", title: "How to get delivery of your gold ?", img: "/images/delivery.png" },
-        { id: "bCigluS2tRU", title: "How to earn rewards ?", img: "/images/rewards.png" },
+        { id: "JhuNd_fs5Oo", title: "Why Bright Digi Gold ?", img: "/Why Bright DiGi Gold.jpg" },
+        { id: "r2dZ_py_0yc", title: "How to Buy Gold ?", img: "/How to Buy Gold.jpg" },
+        { id: "aV1XiNM5uHw", title: "How to Sell Gold ?", img: "/How to sell or Withdraw Gold.jpg" },
+        { id: "5bKB71zRMbE", title: "How to get delivery of your gold ?", img: "/How to get Delivery of Gold Coin.jpg" },
+        { id: "bCigluS2tRU", title: "How to earn rewards ?", img: "/How to Earn and Use Rewards.jpg" },
     ]);
     const [playingVideoId, setPlayingVideoId] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
@@ -38,7 +38,7 @@ export default function Videos() {
 
     const swiperRef = useRef<any>(null);
 
-    const handleMouseEnter:any = () => {
+    const handleMouseEnter: any = () => {
         if (swiperRef.current && swiperRef.current.swiper.autoplay.running) {
             swiperRef.current.swiper.autoplay.stop();
         }
@@ -92,15 +92,6 @@ export default function Videos() {
                     {videos.map((video, index) => (
                         <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4 pt-10">
                             <div className="rounded-2xl h-40 sm:h-72 relative overflow-hidden" onClick={() => handleVideoClick(video.id)}>
-                            {/* <div className="absolute inset-0 flex items-center justify-center">
-                                    <img
-                                        src="/images/play.png"
-                                        alt="Play Button"
-                                        className=" relative h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 opacity-80 transform cursor-pointer"
-                                        onClick={() => handleVideoClick(video.id)}
-                                    />
-                                </div> */}
-                                
                                 <Image
                                     src={video.img}
                                     alt={video.title}
@@ -114,9 +105,6 @@ export default function Videos() {
                                         objectFit: "cover"
                                     }}>
                                 </Image>
-                               
-               
-                                
                             </div>
                         </SwiperSlide>
                     ))}
