@@ -1,9 +1,11 @@
+'use client'
 import { AesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import RedirectTimer from "@/components/redirectTimer";
+import { fetchTransactionData } from "@/api/DashboardServices";
 
 // interface TransactionData {
 //   data: {
@@ -24,33 +26,7 @@ import RedirectTimer from "@/components/redirectTimer";
 //   };
 // }
 
-async function fetchTransactionData(id: string, token: string): Promise<any> {
-  const configHeaders = {
-    headers: {
-      authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  };
 
-  const data = {
-    id,
-  };
-
-  const resAfterEncrypt = await AesEncrypt(data);
-
-  const body = {
-    payload: resAfterEncrypt,
-  };
-
-  try {
-    const response = await axios.post(`${process.env.baseUrl}/user/order/detailsById?`, body, configHeaders);
-    const decryptedData = await funcForDecrypt(response.data.payload);
-    return JSON.parse(decryptedData);
-  } catch (error) {
-    console.error("Error fetching transaction data", error);
-    return null;
-  }
-}
 
 interface PageProps {
   params: { id: string };

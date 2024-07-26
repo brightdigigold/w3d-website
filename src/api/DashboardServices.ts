@@ -1,4 +1,4 @@
-import { AesDecrypt, funcForDecrypt } from "@/components/helperFunctions";
+import { AesDecrypt, AesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
 import axios from "axios";
 
 export const api = axios.create({
@@ -123,3 +123,32 @@ export const apiForWallet = async () => {
     alert(error); // You might want to handle or log the error accordingly
   }
 };
+
+
+export async function fetchTransactionData(id: string, token: string): Promise<any> {
+  const configHeaders = {
+    headers: {
+      authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  const data = {
+    id,
+  };
+
+  const resAfterEncrypt = await AesEncrypt(data);
+
+  const body = {
+    payload: resAfterEncrypt,
+  };
+
+  try {
+    const response = await axios.post(`${process.env.baseUrl}/user/order/detailsById?`, body, configHeaders);
+    const decryptedData = await funcForDecrypt(response.data.payload);
+    return JSON.parse(decryptedData);
+  } catch (error) {
+    console.error("Error fetching transaction data", error);
+    return null;
+  }
+}
