@@ -126,7 +126,7 @@ const Products = () => {
           >
             <div className="relative">
               <Image
-                src="/Star_3.WebP"
+                src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Star_3.webp"
                 alt="products"
                 width={250}
                 height={150}
@@ -233,7 +233,7 @@ const Products = () => {
           >
             <div className="relative">
               <Image
-                src="/Star_3.WebP"
+                src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Star_3.webp"
                 alt="products"
                 width={250}
                 height={150}
