@@ -75,7 +75,7 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
   return (
     <aside
     ref={sidebarRef}
-      className={`fixed top-0 right-0 h-full lg:w-6/12 md:w-8/12 sm:w-8/12 bg-theme shadow-lg transform translate-x-${
+      className={`fixed top-0 right-0 h-full lg:w-4/12 md:w-8/12 sm:w-8/12 bg-theme shadow-lg transform translate-x-${
         isOpen ? "0" : "full"
       } transition-transform ease-in-out z-50`}
       style={{ zIndex: 1000, maxHeight: "100vh", overflowY: "auto" }}
@@ -153,13 +153,13 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
                           </div>
                           <div className="text-themeBlueLight text-xs sm:text-lg items-center">
                             Making charges
-                            <span className="text-base sm:text-2xl font-bold ml-1">
+                            <span className="text-base sm:text-2xl bold ml-1">
                               ₹{item.makingcharges}
                             </span>
                           </div>
                           <Link
                             href={`/coins/${item.slug}`}
-                            className="my-2 bg-themeBlue text-black rounded-2xl font-extrabold w-3/4 py-2 block"
+                            className="my-2 bg-themeBlue text-black rounded-2xl extrabold w-3/4 py-2 block"
                           >
                             VIEW
                           </Link>
@@ -174,7 +174,7 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
         </div>
         <div className="text-center pb-12">
           <Link
-            className="cursor-pointer font-semibold bg-themeBlue text-black w-1/2 text-center py-2 px-10 rounded-xl"
+            className="cursor-pointer semibold bg-themeBlue text-black w-1/2 text-center py-2 px-10 rounded-xl"
             href="/cart"
           >
             <CustomButton
