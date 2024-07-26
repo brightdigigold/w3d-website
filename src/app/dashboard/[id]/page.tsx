@@ -60,6 +60,8 @@ const Page = async ({ params }: PageProps) => {
   const token = localStorage.getItem("token"); // Retrieve token in a secure way, e.g., from cookies or session
   const data = await fetchTransactionData(params.id, token!);
 
+  console.log('data====>', data);
+
   return (
     <div className="px-4">
       <div className="min-h-screen flex items-center justify-center">
