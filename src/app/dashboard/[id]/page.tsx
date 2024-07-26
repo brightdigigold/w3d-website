@@ -9,9 +9,9 @@ interface PageProps {
 }
 
 const Page = async ({ params }: PageProps) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token"); 
   const data = await fetchTransactionData(params.id, token!);
-  console.log("data:--->>", data)
+  console.log("data:--->>",data)
 
   return (
     <div className="px-4">
@@ -93,14 +93,14 @@ const Page = async ({ params }: PageProps) => {
               } rounded-bl-md rounded-br-md`}
           >
             {data?.data?.transactionStatus === "SUCCESS" && (
-              <Link href={`${data?.data?.order_id?.invoiceUrl}`}>
+              <Link target="_blank" href={`${data?.data?.order_id?.invoiceUrl}`}>
                 <button className="rounded-full px-4 py-2 text-white flex items-center bg-theme text-sm mx-auto">
                   Download Invoice
                   <ArrowDownIcon className="text-gold01 h-4 gap-2" />
                 </button>
               </Link>
             )}
-            <RedirectTimer />
+            <RedirectTimer /> 
           </div>
         </div>
       </div>

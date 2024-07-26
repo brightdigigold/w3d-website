@@ -108,7 +108,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
               <img src="/secure.png" className="ml-1 inline-block h-5" />
             </p>
           </div>
-          {purpose === 'login' ? <> <h1 className="text-2xl font-bold mb-0 text-white text-left">
+          {purpose === 'login' ? <> <h1 className="text-2xl bold mb-0 text-white text-left">
             Login/Sign Up
           </h1>
             <h3 className="text-lg mb-4 text-white text-left">
@@ -141,7 +141,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                     <br />
                     <input
                       name="mobile_number"
-                      className="text-gray-100  tracking-widest placeholder:text-gray-500 font-semibold border-1 rounded mt-2 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
+                      className="text-gray-100  tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-2 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
                       type="numeric"
                       inputMode="numeric"
                       minLength={10}
@@ -201,7 +201,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                         marginTop: 0,
                       }}
                     >
-                      <span className="text-red-600 text-md font-bold">
+                      <span className="text-red-600 text-md bold">
                         {errors.termsAndConditions}
                       </span>
                     </div>
