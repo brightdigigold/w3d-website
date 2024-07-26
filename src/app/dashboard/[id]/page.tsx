@@ -12,7 +12,7 @@ interface TransactionData {
     transactionStatus: string;
     message: string;
     createdAt: string;
-    initializeTransactionData:{};
+    initializeTransactionData: {};
     order_id: {
       orderType: string;
       itemType: string;
@@ -66,8 +66,8 @@ const Page: React.FC<PageProps> = async ({ params }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token") || ""; // Adjust token retrieval method
-      const data = await fetchTransactionData(params.id, token);
+      const token = localStorage.getItem("token")
+      const data = await fetchTransactionData(params.id, token!);
       setDataOfTransaction(data);
     };
 
@@ -100,6 +100,8 @@ const Page: React.FC<PageProps> = async ({ params }) => {
       });
     }
   }, [dataOfTransaction, params.id]);
+
+  console.log('dataOfTransaction===>', dataOfTransaction)
 
   return (
     <div className="px-4">
@@ -171,15 +173,14 @@ const Page: React.FC<PageProps> = async ({ params }) => {
             </div>
           </div>
           <div
-            className={`p-4 mx-6 ${
-              dataOfTransaction?.data?.transactionStatus === "SUCCESS"
-                ? "bg-green-500"
-                : dataOfTransaction?.data?.transactionStatus === "FAILED"
+            className={`p-4 mx-6 ${dataOfTransaction?.data?.transactionStatus === "SUCCESS"
+              ? "bg-green-500"
+              : dataOfTransaction?.data?.transactionStatus === "FAILED"
                 ? "bg-red-500"
                 : dataOfTransaction?.data?.transactionStatus === "PENDING"
-                ? "bg-yellow-500"
-                : "bg-red-500"
-            } rounded-bl-md rounded-br-md`}
+                  ? "bg-yellow-500"
+                  : "bg-red-500"
+              } rounded-bl-md rounded-br-md`}
           >
             {dataOfTransaction?.data?.transactionStatus === "SUCCESS" && (
               <Link target="_blank" href={`${dataOfTransaction?.data?.order_id?.invoiceUrl}`}>
