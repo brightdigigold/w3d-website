@@ -529,7 +529,7 @@ const BuySell = () => {
                 </div>
                 <div>
                   <div className="text-white pl-4 mt-2">
-                    <Image src="/LivePrice.Webp" alt="Live Price" className="inline-block" width={30} height={25} priority={true} />
+                    <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/LivePrice.webp" alt="Live Price" className="inline-block" width={30} height={25} priority={true} />
                     <span className="pl-1 bold">
                       {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
                     </span>
