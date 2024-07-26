@@ -247,7 +247,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
                 }}
                 className={styles.p1}
               >
-                <img src="/Blog.png" className="h-10 w-10 bg-red-500" />
+                <img src="/Blog.png" className="h-10 w-10" />
                 Blogs
               </div>
             </Link>
