@@ -91,9 +91,9 @@ const Products = () => {
               <Image
                 src="https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"
                 alt="products"
-                layout="responsive"
+                layout="intrinsic"
                 width={250}
-                height={150}
+                height={250}
                 sizes="(max-width: 250px) 100vw, 250px"
                 className="mx-auto"
               />
@@ -116,7 +116,7 @@ const Products = () => {
               }}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
-              View
+              <p className="text-xl semibold">View</p>
             </button>
           </motion.div>
 
@@ -140,9 +140,9 @@ const Products = () => {
               <Image
                 src="/BanyanTree1.png"
                 alt="products"
-                layout="responsive"
+                layout="intrinsic"
                 width={250}
-                height={150}
+                height={250}
                 sizes="(max-width: 250px) 100vw, 250px"
                 className="mx-auto"
               />
@@ -165,7 +165,7 @@ const Products = () => {
               }}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
-              View
+              <p className="text-xl semibold">View</p>
             </button>
           </motion.div>
 
@@ -178,7 +178,7 @@ const Products = () => {
                 src="/Light_21.png"
                 alt="products"
                 width={250}
-                height={150}
+                height={250}
                 // layout="fill"
                 objectFit="cover"
                 className="absolute right-0"
@@ -198,9 +198,9 @@ const Products = () => {
               <Image
                 src="https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"
                 alt="products"
-                layout="responsive"
+                layout="intrinsic"
                 width={250}
-                height={150}
+                height={250}
                 sizes="(max-width: 250px) 100vw, 250px"
                 className="mx-auto"
               />
@@ -223,7 +223,7 @@ const Products = () => {
               }}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
-              View
+              <p className="text-xl semibold">View</p>
             </button>
           </motion.div>
 
@@ -236,7 +236,7 @@ const Products = () => {
                 src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Star_3.webp"
                 alt="products"
                 width={250}
-                height={150}
+                height={250}
                 // layout="fill"
                 objectFit="cover"
                 className="absolute right-0"
@@ -247,9 +247,9 @@ const Products = () => {
               <Image
                 src="https://brightdigigold.s3.ap-south-1.amazonaws.com/BanyanTree.webp"
                 alt="products"
-                layout="responsive"
+                layout="intrinsic"
                 width={250}
-                height={150}
+                height={250}
                 sizes="(max-width: 250px) 100vw, 250px"
                 className="mx-auto"
               />
@@ -272,7 +272,7 @@ const Products = () => {
               }}
               className="bg-themeBlue w-full block rounded-full py-2 mt-6 text-center"
             >
-              View
+              <p className="text-xl semibold">View</p>
             </button>
           </motion.div>
         </div>
