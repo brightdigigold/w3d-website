@@ -74,10 +74,9 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
 
   return (
     <aside
-    ref={sidebarRef}
-      className={`fixed top-0 right-0 h-full lg:w-4/12 md:w-8/12 sm:w-8/12 bg-theme shadow-lg transform translate-x-${
-        isOpen ? "0" : "full"
-      } transition-transform ease-in-out z-50`}
+      ref={sidebarRef}
+      className={`fixed top-0 right-0 h-full lg:w-4/12 md:w-8/12 sm:w-8/12 bg-theme shadow-lg transform translate-x-${isOpen ? "0" : "full"
+        } transition-transform ease-in-out z-50`}
       style={{ zIndex: 1000, maxHeight: "100vh", overflowY: "auto" }}
     >
       <div className="grid h-screen mt-12 w-full">
@@ -128,11 +127,10 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
                         style={{
                           backgroundSize: "cover",
                           backgroundPosition: "bottom",
-                          backgroundImage: `url(${
-                            item.iteamtype.toLowerCase() === "gold"
-                              ? "/images/goldpart.png"
-                              : "/images/silverpart.png"
-                          })`,
+                          backgroundImage: `url(${item.iteamtype.toLowerCase() === "gold"
+                            ? "/images/goldpart.png"
+                            : "/images/silverpart.png"
+                            })`,
                         }}
                         className=""
                       >
@@ -141,8 +139,9 @@ const CartSideBar: React.FC<CartSideBarProps> = ({
                             <Image
                               src={item.image.image}
                               alt="coin image"
-                              width={100}
-                              height={90}
+                              width={256}
+                              height={256}
+                              layout="intrinsic"
                               style={{
                                 maxWidth: "100%",
                                 height: "auto"
