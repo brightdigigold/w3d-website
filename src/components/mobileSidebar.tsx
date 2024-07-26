@@ -20,7 +20,7 @@ interface SidebarAsideProps {
   onClose: () => any;
 }
 
-const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
+const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -112,16 +112,13 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
             </div>
           </div>
           <div className="space-y-1 px-2 pb-3 ">
-
             {isloggedIn && (
               <Link href="/myAccount" prefetch={true}>
                 <div
-                  onClick={() => {
-                    onClose();
-                  }}
+                  onClick={() => onClose()}
                   className={styles.p1}
                 >
-                  <img src="/bankmenu.png" className="h-5 w-9 mt-2" />
+                  <Image src="/bankmenu.png" alt="Add Bank" width={36} height={20} className="h-5 w-9 mt-2" />
                   <p className="mt-2">Add Bank</p>
                 </div>
               </Link>
@@ -129,122 +126,69 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
             {isloggedIn && (
               <Link href="/myAccount" prefetch={true}>
                 <div
-                  onClick={() => {
-                    onClose();
-                  }}
+                  onClick={() => onClose()}
                   className={styles.p1}
                 >
-                  <img src="/locationmenu.png" className="h-6 w-10" />
+                  <Image src="/locationmenu.png" alt="Add Address" width={40} height={24} className="h-6 w-10" />
                   Add Address
                 </div>
               </Link>
             )}
-
             <Link target="_blank" href="/term-and-conditions" prefetch={true}>
-              <div
-                onClick={() => {
-                  onClose();
-                }}
-                className={styles.p1}
-              >
-                <img src="/terms and conditionsmenu.png" className="h-5 w-9" />{" "}
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="/terms and conditionsmenu.png" alt="Terms of Uses" width={36} height={20} className="h-5 w-9" />
                 Terms of Uses
               </div>
             </Link>
-
             <Link target="_blank" href="/privacy-policy" prefetch={true}>
-              <div
-                onClick={() => {
-                  onClose();
-                }}
-                className={styles.p1}
-              >
-                <img src="/Privacy Policymenu.png" className="h-6 w-9" />
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="/Privacy Policymenu.png" alt="Privacy Policy" width={40} height={24} className="h-6 w-9" />
                 Privacy Policy
               </div>
             </Link>
-
             <Link href="/faqs" prefetch={true}>
-              <div
-                onClick={() => {
-                  onClose();
-                }}
-                className={styles.p1}
-              >
-                <img src="/FAQmenu.png" className="h-5" /> FAQ
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="/FAQmenu.png" alt="FAQ" width={20} height={24} className="h-6 w-9" />
+                FAQ
               </div>
             </Link>
-
             <Link href="/about" prefetch={true}>
-              <div
-                onClick={() => {
-                  onClose();
-                }}
-                className={styles.p1}
-              >
-                <img src="/About us.png" className="h-5" /> About Us
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="/About us.png" alt="About Us" width={20} height={20} className="h-6 w-9" />
+                About Us
               </div>
             </Link>
-
             <Link target="_blank" href="/refund-and-cancellation" prefetch={true}>
-              <div
-                onClick={() => {
-                  onClose();
-                }}
-                className={styles.p1}
-              >
-                <img src="/refundmenu.png" className="h-5" /> Refund &
-                Cancellation
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="/refundmenu.png" alt="Refund & Cancellation" width={20} height={20} className="h-6 w-9" />
+                Refund & Cancellation
               </div>
             </Link>
-
             <Link target="_blank" href="/shipping-policy" prefetch={true}>
-              <div
-                onClick={() => {
-                  onClose();
-                }}
-                className={styles.p1}
-              >
-                <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" className="h-6 w-8" />
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" alt="Shipping Policy" width={32} height={24} className="h-6 w-9" />
                 Shipping Policy
               </div>
             </Link>
-
             <Link href="/contact" prefetch={true}>
-              <div
-                onClick={() => {
-                  onClose();
-                }}
-                className={styles.p1}
-              >
-                <img src="/images/contacts.png" className="h-5 w-8" />
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="/images/contacts.png" alt="Contact Us" width={32} height={20} className="h-6 w-9" />
                 Contact Us
               </div>
             </Link>
-
-            <div
-              onClick={handleLoginClick}
-              className={styles.p1}
-            >
-              <img src="/receipt.png" className="h-5 w-7" />
+            <div onClick={handleLoginClick} className={styles.p1}>
+              <Image src="/receipt.png" alt="Receipt" width={28} height={20} className="h-6 w-9" />
               Receipt
             </div>
-
-            <Link href="/blog" prefetch={true} className="">
-              <div
-                onClick={() => {
-                  onClose();
-                }}
-                className={styles.p1}
-              >
-                <img src="/Blog.png" className="h-10 w-10" />
+            <Link href="/blog" prefetch={true}>
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="/Blog.png" alt="Blogs" width={40} height={40} className="h-10 w-10" />
                 Blogs
               </div>
             </Link>
-
-            <div className="absolute bottom-3 mx-auto items-center">
-              <p className=" flex items-center justify-center text-white px-3 py-2">
-                Made with <img src="/heart.png" className="h-5" /> in India
+            <div className="absolute bottom-3 w-full text-center">
+              <p className="flex items-center justify-center text-white px-3 py-2">
+                Made with <Image src="/heart.png" alt="heart" width={20} height={20} className="h-5" /> in India
               </p>
             </div>
           </div>
@@ -252,11 +196,11 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
       </div>
     </div>
   );
-};
+});
 
 const styles = {
-  p0: "hidden xl:block text-lg  semibold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md px-5 py-2",
-  p1: "block flex items-center gap-3 rounded-md px-2 py-2 text-sm  semibold text-white",
+  p0: "hidden xl:block text-lg semibold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md px-5 py-2",
+  p1: "block flex items-center gap-3 rounded-md px-2 py-2 text-sm semibold text-white",
 };
 
 export default SidebarAside;
