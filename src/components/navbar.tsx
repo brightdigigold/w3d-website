@@ -117,17 +117,6 @@ const Navbar = () => {
               </div>
               <div className="flex flex-1 items-center justify-center xl:items-stretch xl:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  {/* <Link href="/" prefetch={true}>
-                    <img
-                      className="h-12 sm:h-16"
-                      src={new URL(
-                        "../../public/Logo.png",
-                        import.meta.url
-                      ).toString()}
-                      alt="Bright Digi Gold Logo"
-                    />
-                  </Link> */}
-
                   <Link href="/" legacyBehavior prefetch={true}>
                     <a className="flex items-center justify-center">
                       <Image
