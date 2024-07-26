@@ -1,42 +1,16 @@
 'use client'
-import { AesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
 import RedirectTimer from "@/components/redirectTimer";
 import { fetchTransactionData } from "@/api/DashboardServices";
-
-// interface TransactionData {
-//   data: {
-//     transactionStatus: string;
-//     message: string;
-//     createdAt: string;
-//     initializeTransactionData: {};
-//     order_id: {
-//       orderType: string;
-//       itemType: string;
-//       invoiceUrl: string;
-//       gram: number;
-//     };
-//     transactionData: {
-//       payment_status: string;
-//     };
-//     amount: number;
-//   };
-// }
-
-
-
 interface PageProps {
   params: { id: string };
 }
 
 const Page = async ({ params }: PageProps) => {
-  const token = localStorage.getItem("token"); // Retrieve token in a secure way, e.g., from cookies or session
+  const token = localStorage.getItem("token"); 
   const data = await fetchTransactionData(params.id, token!);
-
-  console.log('data====>', data);
 
   return (
     <div className="px-4">
@@ -125,7 +99,7 @@ const Page = async ({ params }: PageProps) => {
                 </button>
               </Link>
             )}
-            <RedirectTimer /> {/* Include the client component here */}
+            <RedirectTimer /> 
           </div>
         </div>
       </div>
