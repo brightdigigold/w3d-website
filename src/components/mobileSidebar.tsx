@@ -118,25 +118,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
             </div>
           </div>
           <div className="space-y-1 px-2 pb-3 ">
-            {/* <Link href="/">
-              <div onClick={onClose} className={styles.p1}>
-                <IoMdHome size={28} className="text-blue-400" />
-                Home
-              </div>
-            </Link> */}
 
-            {/* {isloggedIn && (
-              <Link href="/myAccount">
-                <div
-                  onClick={() => {
-                    onClose();
-                  }}
-                  className={styles.p1}
-                >
-                  <img src="/menusell.png" className="h-5" /> Withdraw
-                </div>
-              </Link>
-            )} */}
             {isloggedIn && (
               <Link href="/myAccount" prefetch={true}>
                 <div
@@ -145,7 +127,8 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
                   }}
                   className={styles.p1}
                 >
-                  <img src="/bankmenu.png" className="h-5" /> Add Bank
+                  <img src="/bankmenu.png" className="h-5 w-9 mt-2" />
+                  <p className="mt-2">Add Bank</p>
                 </div>
               </Link>
             )}
@@ -157,7 +140,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
                   }}
                   className={styles.p1}
                 >
-                  <img src="/locationmenu.png" className="h-5" />
+                  <img src="/locationmenu.png" className="h-6 w-10" />
                   Add Address
                 </div>
               </Link>
@@ -170,7 +153,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
                 }}
                 className={styles.p1}
               >
-                <img src="/terms and conditionsmenu.png" className="h-5" />{" "}
+                <img src="/terms and conditionsmenu.png" className="h-5 w-9" />{" "}
                 Terms of Uses
               </div>
             </Link>
@@ -182,7 +165,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
                 }}
                 className={styles.p1}
               >
-                <img src="/Privacy Policymenu.png" className="h-5" />
+                <img src="/Privacy Policymenu.png" className="h-6 w-9" />
                 Privacy Policy
               </div>
             </Link>
@@ -251,20 +234,20 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
               onClick={handleLoginClick}
               className={styles.p1}
             >
-              <img src="/images/contacts.png" className="h-5 w-8" />
+              <img src="/receipt.png" className="h-5 w-7" />
 
               Receipt
             </div>
             {/* </Link> */}
 
-            <Link href="/blog" prefetch={true}>
+            <Link href="/blog" prefetch={true} className="">
               <div
                 onClick={() => {
                   onClose();
                 }}
                 className={styles.p1}
               >
-                <img src="/Blog.png" className="h-12 w-10" />
+                <img src="/Blog.png" className="h-10 w-10 bg-red-500" />
                 Blogs
               </div>
             </Link>
@@ -281,7 +264,8 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
   );
 };
 const styles = {
-  p0: "hidden xl:block text-lg  font-semibold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md px-5 py-2",
-  p1: "block flex items-center gap-3 rounded-md px-3 py-2 text-sm  font-semibold text-white",
+  p0: "hidden xl:block text-lg  semibold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md px-5 py-2",
+  p1: "block flex items-center gap-3 rounded-md px-2 py-2 text-sm  semibold text-white",
 };
 export default SidebarAside;
+
