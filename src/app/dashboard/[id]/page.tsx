@@ -82,6 +82,8 @@ function page({ params }: any) {
     }
   }, [dataOfTransaction]);
 
+  console.log("dataOfTransaction?.data?.transactionStatus", dataOfTransaction?.data?.transactionStatus)
+
   return (
     <div className="px-4">
       <div className="min-h-screen flex items-center justify-center">
@@ -97,7 +99,7 @@ function page({ params }: any) {
               {dataOfTransaction?.data?.transactionStatus ===
                 "SUCCESS" ? (
                 <img
-                  src="/lottie/Successfully Done.gif"
+                  src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Successfully+Done.gif"
                   className=" absolute h-36 -top-16 "
                 />) : <img
                 src="https://brightdigigold.s3.ap-south-1.amazonaws.com/oops.gif"

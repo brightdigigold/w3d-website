@@ -20,6 +20,7 @@ interface SidebarAsideProps {
   onClose: () => any;
 }
 
+
 const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const router = useRouter();
