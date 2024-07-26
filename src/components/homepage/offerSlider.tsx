@@ -13,7 +13,7 @@ const features = [
     blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSDIAAAABJLUvAQC4A1tXJAAAQU1EVgAA3YAAAADUAAABf///tA==",
   },
   {
-    img: "/offer2.Webp",
+    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/offer2.webp",
     blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSDIAAAABJLUvAQC4A1tXJAAAQU1EVgAA3YAAAADUAAABf///tA==",
   },
 ];
