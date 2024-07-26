@@ -14,7 +14,6 @@ import {
 import { useRouter } from "next/navigation";
 import { resetUserDetails, selectUser } from "@/redux/userDetailsSlice";
 import LoginAside from "./authSection/loginAside";
-// import { resetUserDetails } from "@/redux/userDetailsSlice";
 
 interface SidebarAsideProps {
   isOpen: boolean;
@@ -27,13 +26,12 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const cancelButtonRef = useRef(null);
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
         onClose();
       }
     };
@@ -44,7 +42,6 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen, onClose]);
-
 
   const logoutProfile = () => {
     localStorage.removeItem("mobile_number");
@@ -58,16 +55,13 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
     router.push("/");
   };
 
-  // logoutProfile();
-
   const [openLoginAside, setOpenLoginAside] = useState(false);
 
   const handleLoginClick = () => {
     if (isloggedIn) {
       router.push('/downloadReceipt');
       onClose();
-    }
-    else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+    } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
     } else {
       setOpenLoginAside(!openLoginAside);
@@ -224,21 +218,17 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
                 className={styles.p1}
               >
                 <img src="/images/contacts.png" className="h-5 w-8" />
-
                 Contact Us
               </div>
             </Link>
 
-            {/* <Link href="/#" prefetch={true}> */}
             <div
               onClick={handleLoginClick}
               className={styles.p1}
             >
               <img src="/receipt.png" className="h-5 w-7" />
-
               Receipt
             </div>
-            {/* </Link> */}
 
             <Link href="/blog" prefetch={true} className="">
               <div
@@ -252,7 +242,7 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
               </div>
             </Link>
 
-            <div className=" absolute bottom-3">
+            <div className="absolute bottom-3 mx-auto items-center">
               <p className=" flex items-center justify-center text-white px-3 py-2">
                 Made with <img src="/heart.png" className="h-5" /> in India
               </p>
@@ -263,9 +253,10 @@ const SidebarAside = ({ isOpen, onClose }: SidebarAsideProps) => {
     </div>
   );
 };
+
 const styles = {
   p0: "hidden xl:block text-lg  semibold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md px-5 py-2",
   p1: "block flex items-center gap-3 rounded-md px-2 py-2 text-sm  semibold text-white",
 };
-export default SidebarAside;
 
+export default SidebarAside;
