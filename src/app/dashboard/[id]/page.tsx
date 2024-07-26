@@ -5,7 +5,8 @@ import axios from "axios";
 import mixpanel from "mixpanel-browser";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import Image from "next/image";
+// import React, { useEffect, useState } from "react";
 
 interface TransactionData {
   data: {
@@ -60,53 +61,60 @@ interface PageProps {
 }
 
 const Page: React.FC<PageProps> = async ({ params }) => {
-  const [dataOfTransaction, setDataOfTransaction] = useState<TransactionData | null>(null);
+  // const [dataOfTransaction, setDataOfTransaction] = useState<TransactionData | null>(null);
   const router = useRouter();
-  const [remainingTime, setRemainingTime] = useState(5);
+  // const [remainingTime, setRemainingTime] = useState(5);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("token")
-      const data = await fetchTransactionData(params.id, token!);
-      setDataOfTransaction(data);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const token = localStorage.getItem("token")
+  //     const data = await fetchTransactionData(params.id, token!);
+  //     setDataOfTransaction(data);
+  //   };
 
-    fetchData();
-  }, [params.id]);
+  //   fetchData();
+  // }, [params.id]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRemainingTime((prevTime) => prevTime - 1);
-    }, 1000);
+  const token = localStorage.getItem("token")
 
-    const timeout = setTimeout(() => {
-      clearInterval(interval);
-      router.push("/dashboard");
-    }, 5000);
+  const data = await fetchTransactionData(params.id, token!);
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [router]);
+  console.log('data: ====>', data);
 
-  useEffect(() => {
-    if (dataOfTransaction?.data?.transactionStatus === "SUCCESS") {
-      mixpanel.track('Order Success', {
-        order_id: params.id,
-        item_type: dataOfTransaction.data.order_id.itemType,
-        order_type: dataOfTransaction.data.order_id.orderType,
-        amount: dataOfTransaction.data.amount,
-      });
-    }
-  }, [dataOfTransaction, params.id]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setRemainingTime((prevTime) => prevTime - 1);
+  //   }, 1000);
 
-  console.log('dataOfTransaction===>', dataOfTransaction)
+  //   const timeout = setTimeout(() => {
+  //     clearInterval(interval);
+  //     router.push("/dashboard");
+  //   }, 5000);
+
+  //   return () => {
+  //     clearInterval(interval);
+  //     clearTimeout(timeout);
+  //   };
+  // }, [router]);
+
+  // useEffect(() => {
+  //   if (dataOfTransaction?.data?.transactionStatus === "SUCCESS") {
+  //     mixpanel.track('Order Success', {
+  //       order_id: params.id,
+  //       item_type: dataOfTransaction.data.order_id.itemType,
+  //       order_type: dataOfTransaction.data.order_id.orderType,
+  //       amount: dataOfTransaction.data.amount,
+  //     });
+  //   }
+  // }, [dataOfTransaction, params.id]);
+
+  // console.log('dataOfTransaction===>', dataOfTransaction)
 
   return (
+    <>
     <div className="px-4">
       <div className="min-h-screen flex items-center justify-center">
-        <NextImage
+        <Image
           className="absolute -bottom-12 -left-20 opacity-30"
           src="/bdgwhite.png"
           alt="Bright Digi Gold"
@@ -116,7 +124,7 @@ const Page: React.FC<PageProps> = async ({ params }) => {
         <div className="w-[580px] z-[20]">
           <div className="coins_background shadow-md rounded-md mb-100 text-center text-white py-12 relative">
             <div className="flex justify-center">
-              {dataOfTransaction?.data?.transactionStatus === "SUCCESS" ? (
+              {/* {dataOfTransaction?.data?.transactionStatus === "SUCCESS" ? (
                 <img
                   src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Successfully+Done.gif"
                   className="absolute h-36 -top-16"
@@ -127,8 +135,8 @@ const Page: React.FC<PageProps> = async ({ params }) => {
                   className="absolute h-36 -top-16"
                 />
               )}
-            </div>
-            {dataOfTransaction?.data?.order_id?.orderType === "BUY" &&
+            </div> */}
+            {/* {dataOfTransaction?.data?.order_id?.orderType === "BUY" &&
               dataOfTransaction.data.order_id.itemType === "GOLD" && (
                 <p className="text-2xl italic pt-16">
                   24k <span className="text-gold01">Gold</span> Purchase
@@ -171,8 +179,8 @@ const Page: React.FC<PageProps> = async ({ params }) => {
               <p>₹ {dataOfTransaction?.data?.amount}</p>
               <p className="pl-3">{dataOfTransaction?.data?.order_id?.gram} gm</p>
             </div>
-          </div>
-          <div
+          </div> */}
+          {/* <div
             className={`p-4 mx-6 ${dataOfTransaction?.data?.transactionStatus === "SUCCESS"
               ? "bg-green-500"
               : dataOfTransaction?.data?.transactionStatus === "FAILED"
@@ -189,12 +197,16 @@ const Page: React.FC<PageProps> = async ({ params }) => {
                   <ArrowDownIcon className="text-gold01 h-4 gap-2" />
                 </button>
               </Link>
-            )}
-            <p className="text-blue-200">Redirecting to dashboard in {remainingTime} seconds...</p>
-          </div>
+            )} */}
+            <p className="text-blue-200">Redirecting to dashboard in 10 seconds...</p>
+          {/* </div> */}
         </div>
       </div>
+      </div>
+      </div>
+
     </div>
+    </>
   );
 };
 
