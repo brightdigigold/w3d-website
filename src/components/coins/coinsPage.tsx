@@ -77,7 +77,7 @@ const Coins = () => {
               <div>
                 <Image className="px-0 py-0 sm:py-2 h-7 w-9" src="/images/vault.png" alt="vault" height={110} width={84}  />
               </div>
-              <div className="text-yellow-600 font-bold text-xxs sm:text-base flex justify-between">
+              <div className="text-yellow-600 bold text-xxs sm:text-base flex justify-between">
                 <div className="flex items-center">
                   <div className="flex flex-col border-r-2 border-slate-400 pr-2">
                     <p className="text-gray-800">GOLD</p>

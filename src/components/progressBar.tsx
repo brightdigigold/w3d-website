@@ -112,14 +112,14 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <NextImage src='https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/LivePrice.gif' alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} width={1} height={1} priority={true} />
-            <div className="text-black text-xs sm:text-sm font-semibold">
+            <div className="text-black text-xs sm:text-sm semibold">
               {fromCart === true
                 ? getMetalPrice()
                 : `${displayMetalType.toUpperCase()} : ${getMetalPrice()}`}
             </div>
           </div>
         </div>
-        <div className="text-black text-xs sm:text-sm font-semibold">
+        <div className="text-black text-xs sm:text-sm semibold">
           Expire in {formatTime(time)}
         </div>
       </div>
