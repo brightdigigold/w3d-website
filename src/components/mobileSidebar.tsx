@@ -71,8 +71,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
   return (
     <div
       ref={sidebarRef}
-      className={`fixed top-0 left-0 h-full w-2/3 loginGrad shadow-lg transform overflow-scroll translate-x-${isOpen ? "0" : "full"
-        } transition-transform ease-in-out z-[999]`}
+      className={`fixed top-0 left-0 h-full w-2/3 loginGrad shadow-lg transform transition-transform ease-in-out duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'} z-[999]`}
     >
       {openLoginAside && (
         <LoginAside
@@ -136,7 +135,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
             )}
             <Link target="_blank" href="/term-and-conditions" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
-                <Image src="/terms and conditionsmenu.png" alt="Terms of Uses" width={36} height={20} className="h-5 w-9" />
+                <Image src="/terms and conditionsmenu.png" alt="Terms of Uses" width={36} height={20} className="h-6 w-9" />
                 Terms of Uses
               </div>
             </Link>
