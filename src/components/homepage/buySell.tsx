@@ -714,6 +714,24 @@ const BuySell = () => {
               ) : (
                 ""
               )}
+
+
+
+              {actualAmount >= 10 && (
+                <div className="flex justify-center items-center relative">
+                  <span className="text-themeBlueLight text-sm mt-4 text-center rotating-text relative">
+                    <span className="silver-shine">
+                      Congratulations you will get {ParseFloat(metalQuantity, 4)}
+                    </span>
+                    <span className="text-white extrabold"> Silver</span> for free.
+                  </span>
+                </div>
+              )}
+
+
+
+
+
               <div className="text-white text-md mt-4">
                 {purchaseType === "buy" ? "Quick Buy" : "Quick Sell"}
               </div>

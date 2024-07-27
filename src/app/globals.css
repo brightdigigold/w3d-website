@@ -409,6 +409,15 @@ input:checked + .slider ~ .text-gold {
   font-weight: bold !important;
 }
 
+
+
+
+
+/* Shimmer Effect */
+
+
+
+
 .swiper-button-prev,
 .swiper-rtl .swiper-button-next {
   left: 1px !important;
@@ -532,6 +541,24 @@ input:checked + .slider ~ .text-gold {
     rgba(255, 255, 20, 1),
     55%,
     rgba(240, 164, 48, 1)
+  );
+  background-size: 260% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShine 2.5s ease-out infinite alternate;
+  font-weight: 900;
+}
+
+
+.silver-shine {
+  background: linear-gradient(
+    110deg,
+    #cde8f1,
+    45%,
+    rgb(228, 228, 215),
+    55%,
+    rgb(150, 146, 140)
   );
   background-size: 260% auto;
   -webkit-background-clip: text;
