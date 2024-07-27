@@ -7,6 +7,12 @@ import { Provider } from "react-redux";
 import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
 import dynamic from 'next/dynamic';
+import { Poppins } from '@next/font/google';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ["400", "500", "600", "700"],
+});
 
 const DynamicImage = dynamic(() => import('next/image'), { ssr: false });
 const Navbar = dynamic(() => import('@/components/navbar'), { ssr: false });
@@ -36,10 +42,12 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
       <body>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <Navbar />
-            <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
-            {children}
-            <Footer />
+            <div className={poppins.className}>
+              <Navbar />
+              <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
+              {children}
+              <Footer />
+            </div>
           </PersistGate>
         </Provider>
       </body>
