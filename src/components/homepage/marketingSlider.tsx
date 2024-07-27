@@ -10,10 +10,12 @@ import { RootState } from "@/redux/store";
 import LoginAside from "../authSection/loginAside";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-
+import { selectUser } from "@/redux/userDetailsSlice";
 
 export default function Marketing() {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const user = useSelector(selectUser);
+  const userType = user.data.type;
   const [openLoginAside, setOpenLoginAside] = useState(false);
   const router = useRouter();
 
@@ -52,73 +54,77 @@ export default function Marketing() {
     },
   ];
 
+  const filteredFeatures = userType === "temple"
+    ? features.filter(item => item.name !== "Start Gifting" && item.name !== "Gold KYC")
+    : features;
+
   const handleLinkClick = (item: any) => {
-    if (!isloggedIn && (item.name === "Start Gifting" && item.name === "Gold KYC")) {
+    if (!isloggedIn && (item.name === "Start Gifting" || item.name === "Gold KYC")) {
       setOpenLoginAside(true);
     } else {
       router.push(item.href);
     }
   };
 
-
-  return <>
-    <div className="bg-theme" >
-      {openLoginAside && (
-        <LoginAside
-          isOpen={openLoginAside}
-          onClose={() => setOpenLoginAside(false)}
-          purpose=""
-        />
-      )}
-      <div className="mx-auto backSlider px-4 sm:px-6 lg:px-16 pb-16">
-        <Swiper
-          loop={features.length > 1} // Enable loop mode only if there are enough slides
-          spaceBetween={30}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          pagination
-          modules={[Autoplay, Pagination]}
-          className="mySwiper"
-        >
-          {features.map((item, index) => (
-            <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4">
-              <div className="grid lg:grid-cols-2 gap-6 place-items-center">
-                <div className="relative mx-auto xl:h-96 pt-10 lg:pt-0 " style={{ width: "70%", height: "auto" }}>
-                  <Image
-                    src={item.img}
-                    alt={item.alt}
-                    width={1200}
-                    height={1200}
-                    sizes="100vw"
-                    style={{
-                      width: "100%",
-                      height: "auto"
-                    }} />
-                </div>
-                <div>
-                  <h1 className="text-gold01 text-3xl sm:text-5xl extrabold mb-8">
-                    {item.name}
-                  </h1>
-                  <p className="w-full lg:w-3/4 text-white text-lg sm:text-2xl">
-                    {item.pera}
-                  </p>
-                  <div className=" mt-12 flex md:block justify-center">
-                    <button
-                      className="bg-themeBlue rounded-lg py-3 px-8 extrabold text-center"
-                      onClick={() => handleLinkClick(item)}
-                    >
-                      {item.linkName}
-                    </button>
+  return (
+    <>
+      <div className="bg-theme">
+        {openLoginAside && (
+          <LoginAside
+            isOpen={openLoginAside}
+            onClose={() => setOpenLoginAside(false)}
+            purpose=""
+          />
+        )}
+        <div className="mx-auto backSlider px-4 sm:px-6 lg:px-16 pb-16">
+          <Swiper
+            loop={filteredFeatures.length > 1} // Enable loop mode only if there are enough slides
+            spaceBetween={30}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            pagination
+            modules={[Autoplay, Pagination]}
+            className="mySwiper"
+          >
+            {filteredFeatures.map((item, index) => (
+              <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide p-4">
+                <div className="grid lg:grid-cols-2 gap-6 place-items-center">
+                  <div className="relative mx-auto xl:h-96 pt-10 lg:pt-0" style={{ width: "70%", height: "auto" }}>
+                    <Image
+                      src={item.img}
+                      alt={item.alt}
+                      width={1200}
+                      height={1200}
+                      sizes="100vw"
+                      style={{
+                        width: "100%",
+                        height: "auto"
+                      }} />
+                  </div>
+                  <div>
+                    <h1 className="text-gold01 text-3xl sm:text-5xl extrabold mb-8">
+                      {item.name}
+                    </h1>
+                    <p className="w-full lg:w-3/4 text-white text-lg sm:text-2xl">
+                      {item.pera}
+                    </p>
+                    <div className=" mt-12 flex md:block justify-center">
+                      <button
+                        className="bg-themeBlue rounded-lg py-3 px-8 extrabold text-center"
+                        onClick={() => handleLinkClick(item)}
+                      >
+                        {item.linkName}
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
-    </div>
-  </>;
+    </>
+  );
 }
-
