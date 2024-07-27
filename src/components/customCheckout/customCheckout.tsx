@@ -93,8 +93,8 @@ const CustomCheckout = ({ data }: any) => {
 
     const checkoutOptions = {
       paymentSessionId: sessionId,
-      // redirectTarget: "_self",
-      redirectTarget: "_blank",
+      redirectTarget: "_self",
+      // redirectTarget: "_blank",
     };
     cashfree.checkout(checkoutOptions);
   };
