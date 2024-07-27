@@ -80,6 +80,28 @@ const HeroSection = () => {
     functionToFetchWalletData();
   }, [dispatch]);
 
+
+  const line = "We at Bright DiGi Gold invite you to embark on a journey of effortless digital savings. In just a few clicks make your savings grow in Digital Gold and Silver.  Your gateway to hassle-free savings is here."
+
+  const sentence = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.02,
+        staggerChildren: 0.03,
+      },
+    },
+  }
+
+  const letter = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+    },
+  }
+
   return (
     <div className="bg-theme pt-28 py-10">
       {otpModal && <OtpModal />}
@@ -142,12 +164,25 @@ const HeroSection = () => {
                   </p>
                 </div>
                 <div className="mb-4 mt-6 pr-28">
-                  <p className="text-white leading-8 text-lg">
+                  <motion.h3 className="load-screen--message text-white leading-8 text-lg"
+                    variants={sentence}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {line.split("").map((char: any, index: any) => {
+                      return (
+                        <motion.span key={char + "-" + index} variants={letter}>
+                          {char}
+                        </motion.span>
+                      )
+                    })}
+                  </motion.h3>
+                  {/* <p className="text-white leading-8 text-lg">
                     We at Bright DiGi Gold invite you to embark on a journey of
                     effortless digital savings. In just a few clicks make your
                     savings grow in Digital Gold and Silver.  Your gateway to
                     hassle-free savings is here.
-                  </p>
+                  </p> */}
                 </div>
                 <div className="flex items-center">
                   <p className="text-xl bold text-white">Trusted By</p>

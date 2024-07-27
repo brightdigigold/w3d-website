@@ -78,7 +78,7 @@ export default function Marketing() {
         )}
         <div className="mx-auto backSlider px-4 sm:px-6 lg:px-16 pb-16">
           <Swiper
-            loop={filteredFeatures.length > 1} // Enable loop mode only if there are enough slides
+            loop={filteredFeatures.length > 1} 
             spaceBetween={30}
             autoplay={{
               delay: 5000,
