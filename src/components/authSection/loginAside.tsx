@@ -101,7 +101,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
             <FaTimes className="text-themeBlueLight" />
           </button>
           <div className=" text-center text-white pb-16">
-            <img src="/Logo1.png" className=" h-20 mx-auto mb-8 mt-8" />
+            <img src="/Bdglogo.png" className=" h-20 mx-auto mb-8 mt-8" />
             <p className=" text-2xl mb-2">Start Savings Today</p>
             <p className="">
               Safe.Secure.Certified

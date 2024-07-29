@@ -119,10 +119,10 @@ const Navbar = () => {
                   <Link href="/" legacyBehavior prefetch={true}>
                     <a className="flex items-center justify-center">
                       <Image
-                        src="/images/logo.png"
+                        src="/BdgLogo.png"
                         alt="Bright Digi Gold Logo"
-                        className="h-12 sm:h-16"
-                        width={154}
+                        className="h-12 sm:h-16 w-24 sm:w-36"
+                        width={144}
                         height={64}
                         priority={true}
                         layout="intrinsic"
@@ -235,7 +235,7 @@ const Navbar = () => {
                     aria-label="User Profile"
                   >
                     <img
-                      src="/app-storeIcon.png"
+                      src="/app store icon.png"
                       alt="Play Store icon"
                       className="h-6"
                     />

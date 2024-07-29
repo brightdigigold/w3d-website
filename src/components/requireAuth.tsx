@@ -13,18 +13,39 @@ const RequireAuth = ({ children }) => {
 
     console.log("pathname", window.location.pathname)
 
+
     useEffect(() => {
 
-        if (!isloggedIn && !isLoggedInForTempleReceipt) {
-            router.replace('/');
-        } else if (isLoggedInForTempleReceipt && purpose === 'receipt' && path == '/downloadReceipt') {
-            router.replace('/downloadReceipt');
-        } else if (!isloggedIn) {
-            router.replace('/')
-        } else {
+        if (isloggedIn) {
+            // console.log('You are from 20');
             router.replace(window.location.pathname);
+            return;
         }
-    }, []);
+
+        if (isLoggedInForTempleReceipt && purpose === 'receipt' && path == '/downloadReceipt') {
+            // console.log('You are from 26');
+            router.replace('/downloadReceipt');
+            return;
+        }
+
+        if (isLoggedInForTempleReceipt && purpose === 'receipt') {
+            // console.log('You are from 31');
+            router.replace('/downloadReceipt');
+            return;
+        }
+
+        if (!isloggedIn && !isLoggedInForTempleReceipt) {
+            // console.log('You are from 38');
+            router.replace('/');
+            return;
+        }
+
+        if (!isloggedIn) {
+            // console.log('You are from 44');
+            router.replace('/');
+            return;
+        }
+    }, [isloggedIn, isLoggedInForTempleReceipt, purpose, path, router]);
 
     return children;
 };
