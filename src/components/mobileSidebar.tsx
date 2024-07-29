@@ -180,7 +180,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
               <Image src="/receipt.png" alt="Receipt" width={28} height={20} className="h-6 w-9" />
               Receipt
             </div>
-            <Link href="/blog" prefetch={true}>
+            <Link href="/digital-gold-blog" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
                 <Image src="/Blog.png" alt="Blogs" width={40} height={40} className="h-10 w-10" />
                 Blogs

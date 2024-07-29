@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { client } from '@/utils/sanityClient';
 import PostDisplay from '@/components/blog/blogDetailsPage';
 

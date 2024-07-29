@@ -52,7 +52,7 @@ function MainBlogPage() {
       <div className='px-4 sm:px-6 md:px-8 lg:px-10'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 xl:gap-16 my-6'>
           {filteredPosts.map(post => (
-            <Link key={post.slug.current} href={`/blog/${post.slug.current}`} passHref>
+            <Link key={post.slug.current} href={`/digital-gold-blog/${post.slug.current}`} passHref>
               <div className='bg-header rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-lg'>
                 {post.thumbImage && (
                   <Image

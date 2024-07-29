@@ -35,7 +35,7 @@ export default function Blog() {
   return <>
     <div className="bg-theme" >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        <Link href="/blog" className="cursor-pointer">
+        <Link href="/digital-gold-blog" className="cursor-pointer">
           <h1 className="text-center text-yellow-500 text-3xl sm:text-5xl extrabold mb-0 sm:mb-6">
             Our Blogs
           </h1>
@@ -85,7 +85,7 @@ export default function Blog() {
               className="relative swiper-slide p-0 sm:p-4 pt-10"
             >
               <div className="border border-1 rounded-b-2xl rounded-t-xl">
-                <Link href={`/blog/${feature.slug.current}`} passHref>
+                <Link href={`/digital-gold-blog/${feature.slug.current}`} passHref>
                   <div className="rounded-2xl h-44 sm:h-72 relative">
                     <div className="flex justify-center">
                       <Image
