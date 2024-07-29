@@ -142,14 +142,12 @@ const Navbar = () => {
                   Coins
                 </Link>
               </div>
-              <div className={clsx('mb-0', { 'border-b-4 border-yellow-500 rounded-md': pathname == '/about', })}>
-                <Link className={styles.p0} href="/about" prefetch={true}>
+              <div className={clsx('mb-0', { 'border-b-4 border-yellow-500 rounded-md': pathname == '/about-us', })}>
+                <Link className={styles.p0} href="/about-us" prefetch={true}>
                   About
                 </Link>
               </div>
-              {/* <Link className={styles.p0} href="/contact-us" prefetch={true}>
-                Contact Us
-              </Link> */}
+              
               {isloggedIn && (
                 <>
                   <div className={clsx({ 'border-b-4 border-yellow-500 rounded-md': pathname == '/dashboard', })}>

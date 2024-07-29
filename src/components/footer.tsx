@@ -186,7 +186,7 @@ const Footer = () => {
                       </Link>
                     </li>
                     <li className="mb-4">
-                      <Link className="text-white" href="/about">
+                      <Link className="text-white" href="/about-us">
                         About Us
                       </Link>
                     </li>
@@ -373,7 +373,7 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li className="mb-4">
-                    <Link className="text-white" href="/about">
+                    <Link className="text-white" href="/about-us">
                       About Us
                     </Link>
                   </li>
