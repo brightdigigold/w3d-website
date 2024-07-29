@@ -147,7 +147,7 @@ const Navbar = () => {
                   About
                 </Link>
               </div>
-              {/* <Link className={styles.p0} href="/contact" prefetch={true}>
+              {/* <Link className={styles.p0} href="/contact-us" prefetch={true}>
                 Contact Us
               </Link> */}
               {isloggedIn && (

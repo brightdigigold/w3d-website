@@ -223,7 +223,7 @@ const Footer = () => {
                   </ul>
                   <ul className="mt-6 col-span-2 md:col-span-1">
                     <li className="mb-4">
-                      <Link className="text-white" href="/contact">
+                      <Link className="text-white" href="/contact-us">
                         Contact Us
                       </Link>
                     </li>
@@ -410,7 +410,7 @@ const Footer = () => {
                 </ul>
                 <ul className="mt-6 col-span-2 md:col-span-1">
                   <li className="mb-4">
-                    <Link className="text-white" href="/contact">
+                    <Link className="text-white" href="/contact-us">
                       Contact Us
                     </Link>
                   </li>

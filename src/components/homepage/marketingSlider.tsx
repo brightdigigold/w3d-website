@@ -42,7 +42,7 @@ export default function Marketing() {
       name: "Customer Support",
       pera: "Trust us to be your reliable partner for your financial journey. Our robust customer support is always there to assist you.",
       linkName: "Contact Us",
-      href: "/contact",
+      href: "/contact-us",
     },
     {
       img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/homepagedelivery.gif",
@@ -78,7 +78,7 @@ export default function Marketing() {
         )}
         <div className="mx-auto backSlider px-4 sm:px-6 lg:px-16 pb-16">
           <Swiper
-            loop={filteredFeatures.length > 1} 
+            loop={filteredFeatures.length > 1}
             spaceBetween={30}
             autoplay={{
               delay: 5000,
