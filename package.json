@@ -14,6 +14,7 @@
     "@cashfreepayments/cashfree-js": "^1.0.4",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.1.1",
+    "@next/font": "^14.2.5",
     "@next/third-parties": "^14.1.0",
     "@reduxjs/toolkit": "^1.9.7",
     "@sanity/block-content-to-react": "^3.0.0",

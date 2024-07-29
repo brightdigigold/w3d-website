@@ -120,11 +120,11 @@ const Navbar = () => {
                   <Link href="/" legacyBehavior prefetch={true}>
                     <a className="flex items-center justify-center">
                       <Image
-                        src={logoSrc}
+                        src="/images/logo.png"
                         alt="Bright Digi Gold Logo"
                         className="h-12 sm:h-16"
-                        width={154} // width corresponding to sm:h-16
-                        height={64} // height corresponding to h-12
+                        width={154}
+                        height={64}
                         priority={true}
                         layout="intrinsic"
                         sizes="(max-width: 64px) 100vw, 64px"
