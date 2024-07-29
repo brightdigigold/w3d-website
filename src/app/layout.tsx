@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
 import dynamic from 'next/dynamic';
-import { Poppins } from '@next/font/google';
+import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
   subsets: ['latin'],

@@ -17,17 +17,17 @@ const page = () => {
 export default page
 
 export const metadata: Metadata = {
-  title: "Contact us - Bright DiGi Gold  ",
+  title: "Contact us - Bright DiGi Gold",
   description:
     "Reach Us at 501, 5th Floor World Trade Centre, Babar Road, New Delhi-110001 Bright Digital Gold Pvt Ltd.  ",
-    openGraph: {
-      images: [
-        {
-          url: "https://brightdigigold.s3.ap-south-1.amazonaws.com/contactus.png",
-          width: "100%",
-          height: "100%",
-          alt: 'Contact us',
-        },
-      ],
-    },
+  openGraph: {
+    images: [
+      {
+        url: "https://brightdigigold.s3.ap-south-1.amazonaws.com/contactus.png",
+        width: "100%",
+        height: "100%",
+        alt: 'Contact us',
+      },
+    ],
+  },
 };
