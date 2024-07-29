@@ -1,10 +1,9 @@
 'use client'
-import NextImage from '@/components/nextImage';
 import PortableText from '@/components/sanity/showBlogsDetails';
 import BlogDetailsById from '@/components/sanity/showBlogsDetails';
 import { client } from '@/utils/sanityClient';
 import { useEffect, useState } from 'react';
-
+import Image from 'next/image';
 interface BlockSpan {
     _key: string;
     _type: string;
@@ -83,10 +82,10 @@ const PostDisplay = ({ slug }) => {
     return (
         <div className='mt-28 text-white container'>
             <h1 className='text-3xl text-center m-8'>{post.title}</h1>
-            <NextImage src={post.mainImage.asset.url} alt={post.title} className="inline-block w-full h-auto" style={{ width: "auto", height: "auto" }} width={1} height={1} priority />
+            <Image src={post.mainImage.asset.url} alt={post.title} className="inline-block w-full h-auto" style={{ width: "auto", height: "auto" }} width={1} height={1} priority />
             <div className='grid grid-cols-2 py-5'>
                 <div className='flex items-center'>
-                    <NextImage src={post.author.image.asset.url} alt={post.author.name} className="inline-block" style={{ width: "full", height: "auto" }} width={50} height={20} priority />
+                    <Image src={post.author.image.asset.url} alt={post.author.name} className="inline-block" style={{ width: "full", height: "auto" }} width={50} height={20} priority />
                     <div className='ml-3'>{post.author.name}</div>
                 </div>
                 <div className='flex justify-end text-gray-400'>
