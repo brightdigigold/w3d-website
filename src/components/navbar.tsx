@@ -24,7 +24,6 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import mixpanel from "mixpanel-browser";
 import SetProfileForNewUser from "./setProfile";
-import logoSrc from '../../public/Logo1.png';
 import Image from "next/image";
 
 const Navbar = () => {

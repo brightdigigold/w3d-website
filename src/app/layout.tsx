@@ -11,7 +11,7 @@ import { Poppins } from '@next/font/google';
 
 const poppins = Poppins({
   subsets: ['latin'],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const DynamicImage = dynamic(() => import('next/image'), { ssr: false });
