@@ -715,7 +715,7 @@ const BuySell = () => {
                 ""
               )}
 
-              {actualAmount >= 10 && (
+              {/* {actualAmount >= 10 && (
                 <div className="flex justify-center items-center relative">
                   <span className="text-themeBlueLight mt-4 text-center rotating-text relative">
                     <span className="silver-shine poppins-regular text-sm">
@@ -724,7 +724,7 @@ const BuySell = () => {
                     <span className="text-white poppins-semibold"> Silver</span> for free.
                   </span>
                 </div>
-              )}
+              )} */}
 
               <div className="text-white text-md mt-4">
                 {purchaseType === "buy" ? "Quick Buy" : "Quick Sell"}
