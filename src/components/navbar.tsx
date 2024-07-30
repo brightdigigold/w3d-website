@@ -119,7 +119,7 @@ const Navbar = () => {
                   <Link href="/" legacyBehavior prefetch={true}>
                     <a className="flex items-center justify-center">
                       <Image
-                        src="/BdgLogo.png"
+                        src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png"
                         alt="Bright Digi Gold Logo"
                         className="h-12 sm:h-16 w-24 sm:w-36"
                         width={144}
