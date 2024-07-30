@@ -133,7 +133,7 @@ const AddressTab = () => {
       <div className="coins_background rounded-lg mt-4">
         <div className="border-b p-4 flex justify-between items-center">
           <div className="text-white flex items-center">
-            <img src="/location.png" className="h-5 inline-block pr-2" />
+            <img src="/location.png" alt="location icon" className="h-5 inline-block pr-2" />
             Address Details
           </div>
           <button

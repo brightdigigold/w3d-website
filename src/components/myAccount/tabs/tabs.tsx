@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Tab } from "@headlessui/react";
-import { classNames } from "@/components";
+import Image from "next/image";
 import KycTab from "../kyc/kyc";
 import PayoutOptionTab from "../payoutOptions/payoutOption";
 import ProfileTab from "../profile/profile";
@@ -13,14 +12,6 @@ import {
   selectGoldVaultBalance,
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
-import NextImage from "@/components/nextImage";
-
-const data = [
-  { id: 1, name: "PROFILE", img: "/24K guaranteed .png" },
-  { id: 2, name: "KYC", img: "/kycprofile.png" },
-  { id: 3, name: "WITHDRAW", img: "/menusell.png" },
-  { id: 4, name: "ADDRESS", img: "/location.png" },
-];
 
 const MyAccountTabs = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -34,7 +25,7 @@ const MyAccountTabs = () => {
 
   return (
     <div className="w-full relative">
-      <NextImage
+      <Image
         className=" absolute top-0 left-0 opacity-50"
         src="/bdgwhite.png"
         width={500} height={500}
@@ -50,7 +41,7 @@ const MyAccountTabs = () => {
 
         <div className="flex justify-center lg:justify-end items-center gap-2 sm:gap-16 text-sm sm:text-base">
           <div className="flex items-center gap-4 border-1 p-2 rounded-md sm:mb-0">
-            <img src="/Goldbarbanner.png" className="h-4 sm:h-8" />
+            <img src="/Goldbarbanner.png" alt="gold banner" className="h-4 sm:h-8" />
             <p className=" flex flex-col">
               <span className="font-thin text-gray-400">Gold Balance</span>
               <span className="font-bold text-xs sm:text-base text-gray-100">
@@ -59,7 +50,7 @@ const MyAccountTabs = () => {
             </p>
           </div>
           <div className="flex items-center gap-4 border-1 p-2 rounded-md">
-            <img src="/Silverbar.png" className="h-4 sm:h-8" />
+            <img src="/Silverbar.png" alt="silver banner" className="h-4 sm:h-8" />
             <p className=" flex flex-col">
               <span className="font-thin text-gray-400">Silver Balance</span>
               <span className="font-bold text-xs sm:text-base text-gray-100">

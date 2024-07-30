@@ -37,6 +37,7 @@ const Vault = () => {
               <div className="flex items-center gap-1">
                 <img
                   src="/Goldbarbanner.png"
+                  alt="gold banner"
                   className="h-4 sm:h-8 xl:h-12 inline-block mr-2"
                 />
                 <div>
@@ -47,6 +48,7 @@ const Vault = () => {
               <div className="flex items-center gap-1">
                 <img
                   src="/Silverbar.png"
+                  alt="silver banner"
                   className="h-4 sm:h-8 xl:h-12 inline-block mr-2"
                 />
                 <div>
@@ -67,6 +69,7 @@ const Vault = () => {
               <div className="flex items-center gap-1">
                 <img
                   src="/Goldbarbanner.png"
+                  alt="gold banner"
                   className="h-4 sm:h-8 xl:h-12 inline-block mr-2"
                 />
                 <div>
@@ -77,6 +80,7 @@ const Vault = () => {
               <div className="flex items-center gap-1">
                 <img
                   src="/Silverbar.png"
+                  alt="silver banner"
                   className="h-4 sm:h-8 xl:h-12 inline-block mr-2"
                 />
                 <div>
