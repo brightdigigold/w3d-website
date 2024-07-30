@@ -19,6 +19,7 @@ export default function Promotional() {
               // className="z-10 w-full"
               src="/Web Banner New App .png"
               alt="App Banner"
+              layout="responsive"
               width={1500}
               height={600}
               style={{

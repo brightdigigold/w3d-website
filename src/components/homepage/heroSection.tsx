@@ -112,7 +112,7 @@ const HeroSection = () => {
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-16">
           <div className="relative">
-            <Image
+            {/* <Image
               src="/bdgwhite5.webp"
               alt="Your Company"
               width={270}
@@ -121,7 +121,7 @@ const HeroSection = () => {
               priority={true}
               quality={100}
               layout="responsive"
-            />
+            /> */}
           </div>
           <div className="grid lg:grid-cols-2 gap-4">
             <div className="hidden lg:block mt-10">
