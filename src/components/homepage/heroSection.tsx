@@ -117,7 +117,7 @@ const HeroSection = () => {
               alt="Your Company"
               width={270}
               height={270}
-              className="absolute opacity-20 hidden sm:block custom-image"
+              className="absolute opacity-40 hidden sm:block custom-image"
               priority={true}
               quality={100}
               layout="responsive"

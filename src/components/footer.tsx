@@ -216,7 +216,7 @@ const Footer = () => {
                           className="text-white"
                           href="#"
                         >
-                          Receipt
+                          Donation Receipt
                         </Link>
                       </div>
                     </li>
@@ -403,7 +403,7 @@ const Footer = () => {
                         className="text-white"
                         href="#"
                       >
-                        Receipt
+                        Donation Receipt
                       </Link>
                     </div>
                   </li>

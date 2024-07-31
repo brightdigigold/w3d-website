@@ -30,12 +30,10 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
       <head>
         <link rel="preload" href="/font/NunitoSans_Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/font/Lato-Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preload" href="/bdgwhite1.webp" as="image" />
-        <link rel="preload" href="/offer1.webp" as="image" />
-        <link rel="preload" as="image" href="/offer2.Webp" />
+        <link rel="preload" as="image" href="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp" />
         <link rel="preload" as="image" href="https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1.webp" />
         <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://nkdqpbbn.apicdn.sanity.io" />
         <meta name="google-site-verification" content="CRfShAmCXUTnCd9sfyEoPmBFHZvDQh2TC8UI4fZFPdw" />
       </head>
