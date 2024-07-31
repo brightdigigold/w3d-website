@@ -56,6 +56,8 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
     router.push("/");
   };
 
+  // logoutProfile()
+
   const [openLoginAside, setOpenLoginAside] = useState(false);
 
   const handleLoginClick = () => {

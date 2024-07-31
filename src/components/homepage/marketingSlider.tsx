@@ -11,13 +11,19 @@ import LoginAside from "../authSection/loginAside";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { selectUser } from "@/redux/userDetailsSlice";
+import { useDispatch } from "react-redux";
+import { setShowProfileForm } from '@/redux/authSlice';
+
 
 export default function Marketing() {
-  const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
+  const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const user = useSelector(selectUser);
   const userType = user.data.type;
   const [openLoginAside, setOpenLoginAside] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const features = [
     {
@@ -58,13 +64,36 @@ export default function Marketing() {
     ? features.filter(item => item.name !== "Start Gifting" && item.name !== "Gold KYC")
     : features;
 
+  // const handleLinkClick = (item: any) => {
+  //   if (!isloggedIn && (item.name === "Start Gifting" || item.name === "Gold KYC")) {
+  //     setOpenLoginAside(true);
+  //   } else {
+  //     router.push(item.href);
+  //   }
+  // };
+
   const handleLinkClick = (item: any) => {
-    if (!isloggedIn && (item.name === "Start Gifting" || item.name === "Gold KYC")) {
+    if (item.name === "Customer Support") {
+      // Open the login aside if the user is not logged in and clicks on "Start Gifting" or "Gold KYC"
+      router.push(item.href);
+    } else if (isLoggedIn) {
+      // If the user is logged in, navigate to the item's href or specific path
+      router.push(item.href);
+    } else if (!isLoggedIn && !isLoggedInForTempleReceipt) {
+      // Handle login click if the user is not logged in and not logged in for temple receipt
       setOpenLoginAside(true);
+    } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+      // Show the profile form if the user is logged in for temple receipt and is a new user
+      dispatch(setShowProfileForm(true));
+    } else if (!user.data.isBasicDetailsCompleted) {
+      // Show the profile form if the user's basic details are not completed
+      dispatch(setShowProfileForm(true));
     } else {
+      // Fallback action if none of the conditions are met, navigate to item's href
       router.push(item.href);
     }
   };
+
 
   return (
     <>
@@ -73,7 +102,7 @@ export default function Marketing() {
           <LoginAside
             isOpen={openLoginAside}
             onClose={() => setOpenLoginAside(false)}
-            purpose=""
+            purpose="login"
           />
         )}
         <div className="mx-auto backSlider px-4 sm:px-6 lg:px-16 pb-16">
