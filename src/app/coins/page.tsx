@@ -12,12 +12,10 @@ const page = () => {
           alt="gold and silver coin banner"
           className="rounded-b"
           width={1600}
-          height={300}
+          height={700}
           priority={true}
-          style={{
-            maxWidth: "100%",
-            height: "auto"
-          }} />
+          layout='intrinsic'
+           />
       </div>
       <h1 className="text-white text-2xl sm:text-4xl extrabold text-center mt-8">Our Coins</h1>
       <Coins />
