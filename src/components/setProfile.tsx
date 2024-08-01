@@ -114,6 +114,11 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
       // const formData = new FormData()
       // formData.append('payload', resAfterEncrypt)
       const token = localStorage.getItem("token");
+      Notiflix.Loading.custom({
+        svgSize: "180px",
+        customSvgCode:
+          '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>',
+      });
 
       const configHeaders = {
         headers: {
