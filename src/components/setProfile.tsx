@@ -124,7 +124,9 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
         headers: {
           authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
-          // onUploadProgress: Notiflix.Loading.circle(),
+        },
+        onUploadProgress: () => {
+          Notiflix.Loading.circle();
         },
       };
       const body = {
