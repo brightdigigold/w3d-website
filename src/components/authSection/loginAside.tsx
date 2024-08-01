@@ -4,6 +4,7 @@ import { setShowOTPmodal, setPurpose } from "@/redux/authSlice";
 import axios, { AxiosRequestConfig } from "axios";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
+import Notiflix from "notiflix";
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -16,7 +17,6 @@ interface LoginAsideProps {
 }
 
 const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
-  console.log("purpose", purpose)
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch();
@@ -62,6 +62,9 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
           headers: {
             "Content-Type": "application/json",
           },
+          onUploadProgress: () => {
+            Notiflix.Loading.circle();
+          },
         };
         const result = await axios.post(
           `${process.env.baseUrl}/auth/send/otp`,
@@ -75,14 +78,17 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
           dispatch(setShowOTPmodal(true));
         }
         setSubmitting(false);
+        Notiflix.Loading.remove();
         onClose();
       } else {
         setSubmitting(false);
+        Notiflix.Loading.remove();
       }
     } catch (error) {
       // Handle error
       // alert(error);
       setSubmitting(false);
+      Notiflix.Loading.remove();
     }
   };
 
