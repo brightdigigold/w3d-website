@@ -125,7 +125,9 @@ const BuySell = () => {
       headers: {
         authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
-        // onUploadProgress: Notiflix.Loading.circle()
+      },
+      onUploadProgress: () => {
+        Notiflix.Loading.circle();
       },
     };
     axios
@@ -171,8 +173,6 @@ const BuySell = () => {
             }
           });
 
-        } else if (response.messageCode == "SESSION_EXPIRED") {
-          // setKycError(response.message);
         } else if (response.messageCode == "SESSION_EXPIRED") {
           Swal.fire({
             html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,

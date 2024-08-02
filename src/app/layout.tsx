@@ -14,16 +14,16 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const DynamicImage = dynamic(() => import('next/image'), { ssr: false });
 const Navbar = dynamic(() => import('@/components/navbar'), { ssr: false });
 const Footer = dynamic(() => import('@/components/footer'), { ssr: false });
 
 let persistor = persistStore(store);
-export default function RootLayout({ children, }: { children: React.ReactNode; }) {
+
+export default function RootLayout({ children }) {
 
   useEffect(() => {
     mixpanel.init(`${process.env.MIX_PANNEL_TOKEN}`, { track_pageview: true });
-  }, [])
+  }, []);
 
   return (
     <html lang="en">
@@ -39,15 +39,15 @@ export default function RootLayout({ children, }: { children: React.ReactNode; }
       </head>
       <body>
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
+          <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
             <div className={poppins.className}>
               <Navbar />
-              <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
               {children}
               <Footer />
             </div>
           </PersistGate>
         </Provider>
+        <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
       </body>
     </html>
   );

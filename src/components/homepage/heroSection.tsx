@@ -117,17 +117,23 @@ const HeroSection = () => {
               alt="Your Company"
               width={270}
               height={270}
-              className="absolute opacity-40 hidden sm:block custom-image"
+              style={{
+                position: "absolute",
+                marginTop: "246px",
+                marginLeft: "76px",
+                maxWidth: "620px",
+                height: "auto",
+                opacity: "0.4"
+              }}
               priority={true}
-              quality={100}
-              layout="responsive"
+              layout="intrinsic"
             />
           </div>
           <div className="grid lg:grid-cols-2 gap-4">
             <div className="hidden lg:block mt-10">
               <motion.h1
                 variants={fadeIn("right", "spring", 0.2, 0.2)}
-                className=" text-white mb-12"
+                className="text-white mb-12"
                 style={{ fontSize: "4rem", lineHeight: "2.5rem" }}
               >
                 <span className="text-themeBlueLight extrabold">
@@ -177,12 +183,6 @@ const HeroSection = () => {
                       )
                     })}
                   </motion.h3>
-                  {/* <p className="text-white leading-8 text-lg">
-                    We at Bright DiGi Gold invite you to embark on a journey of
-                    effortless digital savings. In just a few clicks make your
-                    savings grow in Digital Gold and Silver.  Your gateway to
-                    hassle-free savings is here.
-                  </p> */}
                 </div>
                 <div className="flex items-center">
                   <p className="text-xl bold text-white">Trusted By</p>

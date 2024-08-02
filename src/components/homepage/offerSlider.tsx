@@ -57,10 +57,11 @@ export default function OfferSlider() {
                 alt="Bdg offer"
                 width={1261}
                 height={400}
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1261px"
+                // sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1261px"
                 priority={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
                 placeholder="blur"
+                layout="intrinsic"
                 blurDataURL={feature.blurDataURL}
                 style={{
                   width: "100%",
