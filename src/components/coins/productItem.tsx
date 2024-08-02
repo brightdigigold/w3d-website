@@ -2,8 +2,9 @@ import { setShowProfileForm } from '@/redux/authSlice';
 import { RootState } from '@/redux/store';
 import { selectUser } from '@/redux/userDetailsSlice';
 import Image from "next/image";
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Notiflix from 'notiflix';
 
 export interface Product {
     slug: string;
@@ -25,6 +26,29 @@ const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLogin
     const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
     const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
     const user = useSelector(selectUser);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleViewClick = async () => {
+        setIsLoading(true);
+        Notiflix.Loading.pulse('Loading...');
+        try {
+            if (isLoggedIn) {
+                router.push(`/coins/${item.slug}`);
+            }
+            else if (!isLoggedIn && !isLoggedInForTempleReceipt) {
+                handleLoginClick();
+            }
+            else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+                dispatch(setShowProfileForm(true));
+            }
+            else if (!user.data.isBasicDetailsCompleted) {
+                dispatch(setShowProfileForm(true));
+            }
+        } finally {
+            setIsLoading(false);
+            Notiflix.Loading.remove();
+        }
+    };
 
     return (
         <div
@@ -62,21 +86,9 @@ const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLogin
                         </span>
                     </div>
                     <button
-                        onClick={() => {
-                            if (isLoggedIn) {
-                                router.push(`/coins/${item.slug}`);
-                            }
-                            else if (!isLoggedIn && !isLoggedInForTempleReceipt) {
-                                handleLoginClick();
-                            }
-                            else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
-                                dispatch(setShowProfileForm(true));
-                            }
-                            else if (!user.data.isBasicDetailsCompleted) {
-                                dispatch(setShowProfileForm(true));
-                            }
-                        }}
-                        className="my-2 bg-themeBlue rounded-2xl extrabold w-3/4 py-2 block"
+                        onClick={handleViewClick}
+                        className="my-2 bg-themeBlue rounded-2xl extrabold w-3/4 py-2 block justify-center items-center"
+                        disabled={isLoading}
                     >
                         VIEW
                     </button>
