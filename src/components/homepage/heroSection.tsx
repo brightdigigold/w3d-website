@@ -17,9 +17,6 @@ import OtpModal from "../modals/otpModal";
 import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import Image from "next/image";
-import dynamic from "next/dynamic";
-
-const DynamicImage = dynamic(() => import("next/image"), { ssr: false });
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -111,25 +108,26 @@ const HeroSection = () => {
         viewport={{ once: false, amount: 0.25 }}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="relative">
+          <div className="relative" style={{ width: '100%', height: 'auto' }}>
             <Image
               src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
               alt="Your Company"
+              layout="responsive"
               width={270}
               height={270}
+              className="hidden sm:block"
               style={{
                 position: "absolute",
-                marginTop: "206px",
-                marginLeft: "176px",
+                top: "206px",
+                left: "176px",
                 maxWidth: "620px",
                 height: "auto",
-                opacity: "0.3"
+                opacity: 0.3,
               }}
               priority={true}
-              className="sm:block"
-              layout="responsive"
             />
           </div>
+
           <div className="grid lg:grid-cols-2 gap-4">
             <div className="hidden lg:block mt-10">
               <motion.h1
