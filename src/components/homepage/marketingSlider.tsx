@@ -64,14 +64,6 @@ export default function Marketing() {
     ? features.filter(item => item.name !== "Start Gifting" && item.name !== "Gold KYC")
     : features;
 
-  // const handleLinkClick = (item: any) => {
-  //   if (!isloggedIn && (item.name === "Start Gifting" || item.name === "Gold KYC")) {
-  //     setOpenLoginAside(true);
-  //   } else {
-  //     router.push(item.href);
-  //   }
-  // };
-
   const handleLinkClick = (item: any) => {
     if (item.name === "Customer Support") {
       // Open the login aside if the user is not logged in and clicks on "Start Gifting" or "Gold KYC"

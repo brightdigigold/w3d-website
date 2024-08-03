@@ -524,8 +524,8 @@ const BuySell = () => {
                   <label className="toggle-button">
                     <input type="checkbox" />
                     <div className="slider"></div>
-                    <div className="text-gold text-gold1">Silver</div>
-                    <div className="text-silver text-silver1">Gold</div>
+                    <div className="text-gold">Silver</div>
+                    <div className="text-silver">Gold</div>
                   </label>
                 </div>
                 <div>

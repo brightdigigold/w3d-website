@@ -53,6 +53,16 @@ body {
   background: #092637;
 }
 
+.text-xxs {
+  font-size: 10px;
+}
+.bg-themeBlue {
+  background: #cde8f1;
+}
+.text-themeBlueLight {
+  color: #cde8f1;
+}
+
 .poppins-regular {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
@@ -78,40 +88,6 @@ body {
   font-weight: 800;
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: transparent; /* Change this if you want a different background */
-  padding: 20px;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 960px;
-  position: relative; /* Position relative for absolute positioning of the close button */
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: none;
-  background: white;
-  font-size: 24px;
-  cursor: pointer;
-}
-
 .video-player {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -125,12 +101,6 @@ body {
   background: #cde8f1;
   border-radius: 10px;
 } */
-
-.swiper-pagination-bullet {
-  height: 12px !important;
-  width: 12px !important;
-  background-color: #a6d7f1 !important;
-}
 
 .bold {
   font-family: Lato-Bold;
@@ -150,12 +120,6 @@ body {
   background: rgb(0 0 0 / 20%);
 }
 
-.swiper-pagination-fraction,
-.swiper-pagination-custom,
-.swiper-horizontal > .swiper-pagination-bullets,
-.swiper-pagination-bullets.swiper-pagination-horizontal {
-  bottom: -3px !important;
-}
 .bg-theme {
   background: #092637;
 }
@@ -196,12 +160,6 @@ body {
   background-color: #324f61;
 }
 
-.swal2-modal {
-  background: #081a24 !important;
-  color: #fff !important;
-  box-shadow: 0px 0px 2px #ccc !important;
-}
-
 .swalButtonsNo {
   padding: 3px 20px !important;
   text-align: center;
@@ -225,11 +183,6 @@ body {
   color: #000 !important;
 }
 
-.swal2-confirm {
-  background: #cde8f1 !important;
-  color: #000 !important;
-}
-
 .border-gold {
   border: 1px solid #fef468;
 }
@@ -245,12 +198,15 @@ body {
   );
   color: #ff6b6b;
 }
+
 .border-1 {
   border: 1px solid #cde8f1;
 }
+
 .couponText {
   color: #063b5b;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -261,8 +217,11 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 /* Firefox */
+/* Standard appearance property */
 input[type="number"] {
-  -moz-appearance: textfield;
+  -moz-appearance: textfield; /* Firefox */
+  -webkit-appearance: none; /* Chrome, Safari, and Opera */
+  appearance: none; /* Standard syntax */
 }
 
 /* toggle button */
@@ -285,28 +244,8 @@ input[type="number"] {
 .swiper-3d .swiper-slide-shadow-right {
   background-image: none !important;
 }
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #f9cd23;
-  /* background-color: ; */
-  transition: 0.5s;
-  border-radius: 34px;
-  overflow: hidden;
-}
+
 /* Add these styles to your CSS */
-.swal2-container {
-  overflow: visible;
-}
-
-.swal2-popup {
-  overflow: visible !important;
-}
-
 .swal2-image-custom {
   position: absolute;
   top: -100px; /* Adjust to position half outside the modal. Negative value pulls it upwards */
@@ -330,23 +269,26 @@ input[type="number"] {
 
 /* Custom styles for SweetAlert2 */
 .swal2-popup-custom {
-  /* background-color: #f0f0f0; Light grey background */
   background-color: #11354b;
 }
 
 .swal2-title-custom {
-  color: white; /* Dark grey color for the title */
+  color: white; 
 }
 
-.swal2-confirm-custom {
-  background-color: #3085d6; /* Blue background for the confirm button */
-  color: white; /* White text color */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f9cd23;
+  transition: 0.5s;
+  border-radius: 34px;
+  overflow: hidden;
 }
 
-.swal2-confirm-custom {
-  background-color: #3085d6; /* Blue background for the confirm button */
-  color: white; /* White text color */
-}
 .slider:before {
   position: absolute;
   content: "";
@@ -366,15 +308,7 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(118px);
 }
-.text-xxs {
-  font-size: 10px;
-}
-.bg-themeBlue {
-  background: #cde8f1;
-}
-.text-themeBlueLight {
-  color: #cde8f1;
-}
+
 .text-silver,
 .text-gold {
   position: absolute;
@@ -405,9 +339,7 @@ input:checked + .slider:before {
 .otpInput input {
   border: 1px solid #cde8f1 !important;
 }
-.swiper-button-prev,
-.swiper-button-next {
-}
+
 input:checked + .slider ~ .text-silver {
   opacity: 0;
 }
@@ -428,51 +360,6 @@ input:checked + .slider ~ .text-gold {
   background-size: cover;
 }
 
-.client_grad {
-  background: linear-gradient(178deg, #fff, hsla(0, 0%, 100%, 0.71));
-}
-.swiper-button-prev:after,
-.swiper-rtl .swiper-button-next:after {
-  font-size: 12px !important;
-  font-weight: bold !important;
-}
-
-
-
-
-
-/* Shimmer Effect */
-
-
-
-
-.swiper-button-prev,
-.swiper-rtl .swiper-button-next {
-  left: 1px !important;
-  background: rgba(44, 123, 172, 0.2);
-  border-radius: 50%;
-  height: 30px !important;
-  width: 30px !important;
-  right: auto;
-}
-.swiper-button-next,
-.swiper-rtl .swiper-button-prev {
-  right: 1px !important;
-  background: rgba(44, 123, 172, 0.2);
-  border-radius: 50%;
-  height: 30px !important;
-  width: 30px !important;
-  right: auto;
-}
-
-.swiper-button-next:after,
-.swiper-rtl .swiper-button-prev:after {
-  font-size: 12px !important;
-  font-weight: bold !important;
-}
-.rdrDefinedRangesWrapper {
-  display: none !important;
-}
 .tabs-component1 [role="tablist"] {
   display: flex;
   flex-wrap: wrap;
@@ -504,13 +391,6 @@ input:checked + .slider ~ .text-gold {
   opacity: 0.5;
 }
 
-.tabs-component1 [role="tablist"] button.active,
-.tabs-component1 [role="tablist"] button:focus,
-.tabs-component1 [role="tablist"] button:hover {
-  /* border-width: 1px; */
-  /* border-color: #ffcb00; */
-}
-
 .tabs-component1 [role="tablist"] button.active {
   color: #b7d0df;
   opacity: 1;
@@ -538,13 +418,6 @@ input:checked + .slider ~ .text-gold {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   margin: 0;
-}
-
-.tabs-component1.vertical [role="tablist"] button.active,
-.tabs-component1.vertical [role="tablist"] button:focus,
-.tabs-component1.vertical [role="tablist"] button:hover {
-  /* border-color: #e9ecef transparent #e9ecef #b41c1c; */
-  /* border-bottom: 1px solid; */
 }
 
 .container {
@@ -578,7 +451,6 @@ input:checked + .slider ~ .text-gold {
   font-weight: 900;
 }
 
-
 .silver-shine {
   background: linear-gradient(
     110deg,
@@ -610,8 +482,8 @@ input:checked + .slider ~ .text-gold {
 .loginGrad {
   background: linear-gradient(0.69deg, #154c6d 0.62%, #12242e 101.27%);
 }
+
 .bg-contact {
-  /* background: #17435e; */
   background: linear-gradient(0.69deg, #154c6d 0.62%, #12242e 101.27%);
 }
 
@@ -627,15 +499,10 @@ input:checked + .slider ~ .text-gold {
 input.inputBox {
   font-size: 16px;
   padding: 2px 2px 1px 2px;
-  /* border-radius: 3px; */
-  /* border: 2px solid #eae205; */
   background-color: #092637;
   text-align: center;
 }
 
-.caret-transparent::before {
-  caret-color: transparent;
-}
 @media (max-width: 480px) {
   .mySwiperblog {
     height: 150px !important;
@@ -666,20 +533,15 @@ input.inputBox {
 .progress-bar-container {
   border-width: "6px solid red";
   position: relative;
-  /* border-radius: 6px; */
   width: 100%;
-  height: 40px; /* Set the height of your progress bar container */
-  background-color: #cde8f1; /* Set the background color of your progress bar container */
+  height: 40px; 
+  background-color: #cde8f1;
 }
 
 .progress-bar {
-  /* position: relative; */
   border-width: "2px solid red";
-  /* border-radius: 6px; */
   height: 100%;
-  /* background: rgba(248, 95, 95, 0.5); */
   background: #c5c5c7;
-  /* background-color: #174560; Set the background color of your progress bar */
 }
 
 .inner-content {
@@ -739,8 +601,8 @@ input.inputBox {
   .toggle-button {
     position: relative;
     display: inline-block;
-    width: 155px;
-    height: 36px;
+    width: 130px;
+    height: 42px;
     /* margin-left: 10px; */
   }
 
@@ -767,13 +629,20 @@ input.inputBox {
   .slider:before {
     position: absolute;
     content: "";
-    height: 30px;
-    width: 30px;
+    height: 36px;
+    width: 36px;
     left: 4px;
     bottom: 3px;
     background-color: #ffffff; /* Set initial color to Silver */
     transition: 0.5s;
     border-radius: 50%;
+  }
+  input:checked + .slider {
+    background-color: #c0c0c0; /* Change background color to Silver when checked */
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(88px);
   }
 }
 
@@ -841,70 +710,6 @@ input.inputBox {
   }
 }
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 360px;
-  background: #04283d;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 145%;
-  left: 50%;
-  margin-left: -180px;
-  opacity: 0;
-  transition: opacity 0.3s;
-
-  border: 2px solid transparent; /* Make the static border transparent */
-  animation: borderFlash 2s linear infinite;
-}
-
-@keyframes borderFlash {
-  0%,
-  100% {
-    box-shadow: 0 0 0 3px rgb(214, 214, 112), 0 0 0 0 transparent,
-      0 0 0 0 transparent, 0 0 0 0 transparent;
-  }
-  25% {
-    box-shadow: 0 0 0 0 transparent, 0 0 0 3px rgb(214, 214, 98),
-      0 0 0 0 transparent, 0 0 0 0 transparent;
-  }
-  50% {
-    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent,
-      0 0 0 3px rgb(207, 207, 85), 0 0 0 0 transparent;
-  }
-  75% {
-    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent,
-      0 0 0 3px yellow;
-  }
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
-
-body.modal-open {
-  position: fixed;
-  width: 100%;
-}
-
-/* Custom CSS or TailwindCSS @media queries */
-@media (max-width: 640px) {
-  /* Example for smaller devices */
-  .custom-button-container {
-    padding: 4px 4px; /* Smaller padding */
-    font-size: 12px; /* Smaller font size */
-  }
-}
-
 .fade-section {
   transition: opacity 0.5s ease-in-out;
 }
@@ -912,45 +717,4 @@ body.modal-open {
 .disabled {
   pointer-events: none; /* This disables clicking */
   opacity: 0.5; /* This makes the button appear disabled or faded */
-}
-
-.custom-image {
-  width: 100%;
-  max-width: 620px;
-  height: auto;
-}
-
-@media (min-width: 768px) {
-  /* iPad in landscape mode */
-  .custom-image {
-    /* margin-top: 128px; */
-    /* margin-left: -126px; */
-    max-width: 320px;
-    height: auto;
-    /* background-color: red; */
-  }
-}
-
-
-
-@media (min-width: 1024px) {
-  /* Laptop and above */
-  .custom-image {
-    margin-top: 128px;
-    margin-left: 176px;
-    max-width: 620px;
-    height: auto;
-    /* background-color: green; */
-  }
-}
-
-@media (min-width: 1440px) {
-  /* Above Laptop */
-  .custom-image {
-    margin-top: 186px;
-    margin-left: 438px; /* Different margin for larger screens */
-    max-width: 620px;
-    height: auto;
-    /* background-color: black; */
-  }
 }

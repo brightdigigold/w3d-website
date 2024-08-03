@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
       <body>
         <Provider store={store}>
           <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-            <div className={poppins.className}>
+            <div className={`${poppins.className}`}>
               <Navbar />
               {children}
               <Footer />
