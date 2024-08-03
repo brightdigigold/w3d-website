@@ -1,4 +1,5 @@
 import { ArrowUpIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import { FaChevronDown } from 'react-icons/fa';
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -481,8 +482,8 @@ const BuySell = () => {
             onClose={toggleOpenUpiModal}
           />
         )}
-        <div className="block xl:pl-24 ">
-          <div className="tab-bg rounded-lg relative">
+        <div className="block mx-auto xl:pl-24 2xl:pl-32 ">
+          <div className="tab-bg rounded-lg relative ">
             <div className="grid grid-cols-2">
               <div
                 className={`text-center py-3 border-r-2 border-slate-500 extrabold cursor-pointer ${activeTab === "buy"
@@ -514,10 +515,10 @@ const BuySell = () => {
                 SELL
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-2 items-end">
-              <div className="w-full ">
+            <div className="grid grid-cols-2">
+              <div className="pl-3">
                 <div
-                  className="toggle_button_spacing pl-1 mt-4"
+                  className="mt-4 "
                   onChange={toggleMetal}
                 >
                   <label className="toggle-button">
@@ -528,14 +529,18 @@ const BuySell = () => {
                   </label>
                 </div>
                 <div>
-                  <div className="text-white pl-4 mt-2">
-                    <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/LivePrice.webp" alt="Live Price" className="inline-block" width={30} height={25} priority={true} />
-                    <span className="pl-1 bold">
-                      {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
-                    </span>
+                  <div className="text-white mt-2 xl:mt-3 flex items-center">
+                    <div>
+                      <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/LivePrice.webp" alt="Live Price" width={30} height={25} priority={true} layout="intrinsic" />
+                    </div>
+                    <div>
+                      <span className="pl-1 xl:pl-2 bold text-md 2xl:text-lg">
+                        {metalType === "gold" ? "GOLD PRICE" : "SILVER PRICE"}
+                      </span>
+                    </div>
                   </div>
-                  <div className="text-shine text-base sm:text-xl bold pt-0 py-2 pl-4 items-center  flex">
-                    <span className="sm:text-2xl pr-0.5">₹</span>
+                  <div className="flex text-shine text-base sm:text-xl 2xl:text-2xl bold items-center 2xl:mt-2">
+                    <span className="sm:text-2xl 2xl:text-3xl bold pr-0.5">₹</span>
                     {isgold ? (
                       <>
                         {activeTab === "buy" ? (
@@ -554,17 +559,15 @@ const BuySell = () => {
                       </>
                     )}
                     /gm
-                    <div className="text-xs">
-                      {purchaseType === "buy" ? <span className="pl-1 text-xxs sm:text-xs mt-1">+3% GST</span> : ""}
-                    </div>
+                    {purchaseType === "buy" ? <span className="pl-1 text-xxs sm:text-xs mt-1 2xl:text-sm">+3% GST</span> : null}
                   </div>
-                  <p className="text-xs text-gray-400 pl-4">
+                  <p className="text-xs text-gray-400 2xl:text-lg mt-1 2xl:mt-2">
                     {metalType == "gold" ? "24k 99.9% Pure Gold" : "99.99% Pure Silver"}
                   </p>
-                  <span className="text-xxs sm:text-xs font-base pl-4 flex">
+                  <span className="text-xxs sm:text-xs font-base flex mt-1 xl:mt-2">
                     {isgold ? (
                       <div
-                        className={`${goldData.percentage >= 0
+                        className={`flex items-center ${goldData.percentage >= 0
                           ? "text-green-500"
                           : "text-red-500"
                           }`}
@@ -572,42 +575,46 @@ const BuySell = () => {
                         {goldData.percentage >= 0 ? (
                           <ArrowUpIcon className="h-4 inline-block text-green-500" />
                         ) : (
-                          <ChevronDownIcon className="h-4 inline-block text-red-500" />
+                          <FaChevronDown className="h-4 xl: 2xl:w-6 inline-block text-red-500" />
                         )}
-                        {goldData.percentage} %
+                        <div className="ml-1 2xl:text-lg">
+                          {goldData.percentage} %
+                        </div>
                       </div>
                     ) : (
                       <div
-                        className={`${silverData.percentage >= 0
+                        className={`flex items-center ${silverData.percentage >= 0
                           ? "text-green-500"
                           : "text-red-500"
                           }`}
                       >
                         {silverData.percentage >= 0 ? (
-                          <ArrowUpIcon className="h-4 inline-block" />
+                          <ArrowUpIcon className="h-4 inline-block text-green-500" />
                         ) : (
-                          <ChevronDownIcon className="h-4 inline-block" />
+                          <FaChevronDown className="h-4 xl: 2xl:w-6 inline-block text-red-500" />
                         )}
-                        {silverData.percentage} %
+                        <div className="ml-1 2xl:text-lg">
+                          {silverData.percentage} %
+                        </div>
                       </div>
                     )}
-                    <span className="text-7x sm:text-xs text-white ml-2 inline-block">
+                    <span className="text-7x sm:text-xs 2xl:text-sm text-white ml-2">
                       Since Yesterday
                     </span>
                   </span>
                 </div>
               </div>
-              <div className="mt-4 sm:mt-4 w-full 2xl:w-4/5 float-left">
-                <div className="flex justify-end 2xl:justify-center pr-4 sm:pr-12 2xl:pr-4">
+              <div className="mt-4 sm:mt-4 w-full float-left">
+                <div className="flex justify-center">
                   {metalType === "gold" ? (
                     <Image
                       src="https://brightdigigold.s3.ap-south-1.amazonaws.com/GoldStackAnimation.webp"
                       alt="Gold Bar Animation"
-                      width={206}
-                      height={138}
+                      width={500}
+                      height={300}
                       priority={true}
                       layout="intrinsic"
-                      sizes="(max-width: 206px) 100vw, 206px"
+                    // sizes="(max-width: 500px) 100vw, 500px"
                     />
                   ) : (
                     <Image

@@ -119,14 +119,15 @@ const HeroSection = () => {
               height={270}
               style={{
                 position: "absolute",
-                marginTop: "246px",
-                marginLeft: "76px",
+                marginTop: "206px",
+                marginLeft: "176px",
                 maxWidth: "620px",
                 height: "auto",
-                opacity: "0.4"
+                opacity: "0.3"
               }}
               priority={true}
-              layout="intrinsic"
+              className="sm:block"
+              layout="responsive"
             />
           </div>
           <div className="grid lg:grid-cols-2 gap-4">
@@ -170,7 +171,7 @@ const HeroSection = () => {
                   </p>
                 </div>
                 <div className="mb-4 mt-6 pr-28">
-                  <motion.h3 className="load-screen--message text-white leading-8 text-lg"
+                  <motion.h3 className="load-screen--message text-white leading-8 text-lg text-justify"
                     variants={sentence}
                     initial="hidden"
                     animate="visible"

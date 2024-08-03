@@ -271,7 +271,7 @@ input[type="number"] {
   display: inline-block;
   width: 168px;
   height: 46px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .toggle-button input {
@@ -741,7 +741,7 @@ input.inputBox {
     display: inline-block;
     width: 155px;
     height: 36px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
   }
 
   .toggle-button input {
