@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import { funForAesEncrypt, funcForDecrypt } from "../helperFunctions";
 import axios from "axios";
 import { load } from "@cashfreepayments/cashfree-js";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Loading from "@/app/loading";
 
 const CustomCheckout = ({ data }: any) => {

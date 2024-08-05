@@ -314,3 +314,16 @@ const styles = {
 };
 
 export default page;
+
+
+{/* <div className="flex justify-center items-center">
+        <Image
+          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/ProductBannerNEW.jpg"
+          alt="gold and silver coin banner"
+          className="rounded-b"
+          width={1600}
+          height={700}
+          priority={true}
+          layout='intrinsic'
+           />
+      </div> */}

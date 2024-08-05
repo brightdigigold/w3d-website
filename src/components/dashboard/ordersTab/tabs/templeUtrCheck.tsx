@@ -25,7 +25,7 @@ const TempleUtrCheck = () => {
 
     const formik = useFormik({
         initialValues: {
-            utr: "453525325220",
+            utr: "",
         },
         validationSchema,
         onSubmit: async (values) => {
