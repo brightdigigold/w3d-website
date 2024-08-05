@@ -718,3 +718,16 @@ input.inputBox {
   pointer-events: none; /* This disables clicking */
   opacity: 0.5; /* This makes the button appear disabled or faded */
 }
+
+.delivery-text {
+  font-size: 50px;
+}
+
+@media (max-width: 768px) {
+  .delivery-text {
+    font-size: 30px;
+    background-color: red !important;
+  }
+}
+
+
