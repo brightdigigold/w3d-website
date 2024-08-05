@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       document.removeEventListener('contextmenu', disableContextMenu);
     };
 
-    
+
   }, []);
 
   useEffect(() => {
@@ -43,17 +43,17 @@ export default function RootLayout({ children }) {
       }
     };
     document.addEventListener('keydown', disableKeyShortcuts);
-  
+
     return () => {
       document.removeEventListener('keydown', disableKeyShortcuts);
     };
   }, []);
-  
+
 
   return (
     <html lang="en">
       <head>
-        
+
         <link rel="preload" href="/font/NunitoSans_Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/font/Lato-Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" as="image" href="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp" />
