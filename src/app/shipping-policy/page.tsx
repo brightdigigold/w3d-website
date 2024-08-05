@@ -14,7 +14,7 @@ const page = () => {
               <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
                 Shipping Policy
               </h1>
-              <Image src="/ShippingPolicy.Webp" alt="shiping policy image" className="" width={500} height={500} />
+              <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/ShippingPolicy.webp" alt="shiping policy image" className="" width={500} height={500} />
             </div>
           </div>
         </div>
