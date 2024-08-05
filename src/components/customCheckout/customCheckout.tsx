@@ -63,6 +63,7 @@ const CustomCheckout = ({ data }: any) => {
           setLoading(false);
         }
       } catch (error) {
+        console.log(error)
         alert(error);
       } finally {
         setLoading(false);
