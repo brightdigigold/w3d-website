@@ -13,7 +13,7 @@ const page = () => {
             <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white text-center">
               Privacy Policy
             </h1>
-            <Image src="/PrivacyPolicy.Webp" alt="privacy policy image" className="" width={500} height={500} />
+            <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/PrivacyPolicy.webp" alt="privacy policy image" className="" width={500} height={500} />
           </div>
         </div>
       </div>
