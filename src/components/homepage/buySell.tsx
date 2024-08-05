@@ -722,7 +722,7 @@ const BuySell = () => {
                 null
               )}
 
-              {actualAmount >= 10 && (
+              {metalType === "gold" && actualAmount >= 10 && (
                 <div className="flex justify-center items-center relative">
                   <span className="text-themeBlueLight mt-4 text-center rotating-text relative">
                     <span className="silver-shine poppins-regular text-sm">
