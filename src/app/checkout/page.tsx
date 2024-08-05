@@ -20,7 +20,6 @@ const page = () => {
             width={270}
             height={270}
           />
-
           <CustomCheckout data={data} />
         </div>
       </div>

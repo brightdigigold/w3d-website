@@ -35,9 +35,11 @@ const CustomCheckout = ({ data }: any) => {
   };
 
   useEffect(() => {
-    setPaymentMethod((finalAmount <= 100000) ? UPI_PAYMENT : "")
+    setLoading(true);
 
     const fetchData = async () => {
+      setLoading(true);
+
       try {
         setLoading(true);
         const decryptedData = await funcForDecrypt(data);
@@ -62,8 +64,9 @@ const CustomCheckout = ({ data }: any) => {
           setCartPayment(true);
           setLoading(false);
         }
+        setPaymentMethod((finalAmount <= 100000) ? UPI_PAYMENT : "")
       } catch (error) {
-        console.log("==>",error)
+        console.log("==>", error)
         alert(error);
       } finally {
         setLoading(false);
@@ -79,8 +82,8 @@ const CustomCheckout = ({ data }: any) => {
 
   const initializeSDK = async () => {
     cashfree = await load({
-      mode: "production",
-      // mode: "sandbox",
+      // mode: "production",
+      mode: "sandbox",
     });
   };
   initializeSDK();
