@@ -14,7 +14,7 @@ const page = () => {
               <h1 className="text-2xl sm:text-7xl mb-4 extrabold text-white">
                 Terms &<br /> Conditions
               </h1>
-              <Image src="/termsAndConditions.Webp" alt="terms and conditions" width={500} height={500} />
+              <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/termsAndConditions.webp" alt="terms and conditions" width={500} height={500} />
             </div>
           </div>
         </div>
