@@ -6,25 +6,25 @@ import Image from "next/image";
 const Page = () => {
   return (
     <div className='pb-28 xl:pb-8 '>
-      <div className='flex bg-[#C8E9F2] justify-between mx-auto max-w-[1600px]'>
+      <div className='flex bg-[#C8E9F2] justify-between mx-auto '>
         <Image
           src="/gaytri.png"
-          alt="gold and silver coin banner "
-          className="rounded-b md:mt-4"
+          alt="gold and silver coin banner"
+          className="rounded-b md:mt-4 ml-10"
           width={476}
-          height={0}
+          height={456}
           priority={true}
-          layout='intrinsic'
+          style={{ maxWidth: '100%', height: 'auto' }}
         />
         <div className='grid place-items-center'>
           <div className='2xl:mt-44'>
-            <div className="text-black text-center pt-1 poppins-bold text-5xl">
+            <div className="text-black text-center pt-1 poppins-bold text-6xl">
               GET FREE DELIVERY
             </div>
-            <p className='text-black text-center pt-1 poppins-semibold text-4xl'>
+            <p className='text-black text-center pt-1 poppins-semibold text-5xl'>
               of Gold and Silver Coins
             </p>
-            <p className='text-black text-center pt-1 text-3xl'>
+            <p className='text-black text-center pt-1 text-4xl'>
               at your Doorstep
             </p>
           </div>
@@ -32,7 +32,7 @@ const Page = () => {
         <img
           src="/Coins stand (1).png"
           alt="gold and silver coin banner"
-          className="rounded-b mt-64 h-2/6 w-2/6 mr-5"
+          className="rounded-b mt-52 h-2/6 w-2/6 mr-10"
         />
       </div>
       <h1 className="text-white text-2xl sm:text-4xl pb-8 extrabold text-center mt-8">
