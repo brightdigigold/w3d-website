@@ -36,18 +36,18 @@ export default function RootLayout({ children }) {
 
   }, []);
 
-  useEffect(() => {
-    const disableKeyShortcuts = (e) => {
-      if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-        e.preventDefault();
-      }
-    };
-    document.addEventListener('keydown', disableKeyShortcuts);
+  // useEffect(() => {
+  //   const disableKeyShortcuts = (e) => {
+  //     if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+  //       e.preventDefault();
+  //     }
+  //   };
+  //   document.addEventListener('keydown', disableKeyShortcuts);
 
-    return () => {
-      document.removeEventListener('keydown', disableKeyShortcuts);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener('keydown', disableKeyShortcuts);
+  //   };
+  // }, []);
 
 
   return (

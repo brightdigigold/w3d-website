@@ -14,11 +14,11 @@ const page = () => {
         <div className="min-h-screen bg-theme flex items-center justify-center">
           <NextImage
             className=" absolute -bottom-12 -left-20 opacity-30"
-            src="/bdgwhite.png"
+            src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
             alt="digital gold"
             // priority
-            width={400}
-            height={300}
+            width={270}
+            height={270}
           />
 
           <CustomCheckout data={data} />
