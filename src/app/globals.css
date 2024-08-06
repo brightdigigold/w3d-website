@@ -731,3 +731,124 @@ input.inputBox {
 }
 
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: transparent; /* Change this if you want a different background */
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 960px;
+  position: relative; /* Position relative for absolute positioning of the close button */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.swiper-pagination-bullet {
+  height: 12px !important;
+  width: 12px !important;
+  background-color: #a6d7f1 !important;
+}
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: -3px !important;
+}
+
+
+.swal2-modal {
+  background: #081a24 !important;
+  color: #fff !important;
+  box-shadow: 0px 0px 2px #ccc !important;
+}
+
+/* Custom CSS or TailwindCSS @media queries */
+@media (max-width: 640px) {
+  /* Example for smaller devices */
+  .custom-button-container {
+    padding: 4px 4px; /* Smaller padding */
+    font-size: 12px; /* Smaller font size */
+  }
+}
+
+
+body.modal-open {
+  position: fixed;
+  width: 100%;
+}
+
+.swal2-container {
+  overflow: visible;
+}
+
+.swal2-popup {
+  overflow: visible !important;
+}
+
+.client_grad {
+  background: linear-gradient(178deg, #fff, hsla(0, 0%, 100%, 0.71));
+}
+
+
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+/* Shimmer Effect */
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+  left: 1px !important;
+  background: rgba(44, 123, 172, 0.2);
+  border-radius: 50%;
+  height: 30px !important;
+  width: 30px !important;
+  right: auto;
+}
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: 1px !important;
+  background: rgba(44, 123, 172, 0.2);
+  border-radius: 50%;
+  height: 30px !important;
+  width: 30px !important;
+  right: auto;
+}
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.rdrDefinedRangesWrapper {
+  display: none !important;
+}
+
+
+.caret-transparent::before {
+  caret-color: transparent;
+}
