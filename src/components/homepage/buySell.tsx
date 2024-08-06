@@ -482,6 +482,7 @@ const BuySell = () => {
             onClose={toggleOpenUpiModal}
           />
         )}
+        
         <div className="block mx-auto xl:pl-24 2xl:pl-32 ">
           <div className="tab-bg rounded-lg relative ">
             <div className="grid grid-cols-2">
@@ -722,7 +723,7 @@ const BuySell = () => {
                 null
               )}
 
-              {/* {actualAmount >= 10 && (
+              {metalType === 'gold' && totalAmount >= 10 && (
                 <div className="flex justify-center items-center relative">
                   <span className="text-themeBlueLight mt-4 text-center rotating-text relative">
                     <span className="silver-shine poppins-regular text-sm">
@@ -731,7 +732,7 @@ const BuySell = () => {
                     <span className="text-white poppins-semibold"> Silver</span> for free.
                   </span>
                 </div>
-              )} */}
+              )}
 
               <div className="text-white text-md mt-4">
                 {purchaseType === "buy" ? "Quick Buy" : "Quick Sell"}
