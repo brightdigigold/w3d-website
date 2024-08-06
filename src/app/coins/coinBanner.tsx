@@ -4,7 +4,7 @@ import Image from 'next/image'
 const CoinBanner = () => {
     return (
         <div className='flex bg-[#C8E9F2] justify-between mx-auto '>
-            <div className='w-1/4 mt-6'>
+            <div className='w-1/4  mt-24 lg:mt-12'>
                 <Image
                     src="/gaytri.png"
                     alt="gold and silver coin banner"
@@ -17,7 +17,7 @@ const CoinBanner = () => {
                 />
             </div>
             <div className="grid place-items-center">
-                <div className="2xl:mt-44">
+                <div className=" mt-48">
                     <div className="text-black text-center pt-1 poppins-bold">
                         <p className="text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
                             GET FREE DELIVERY
