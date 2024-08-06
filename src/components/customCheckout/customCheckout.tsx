@@ -7,7 +7,7 @@ import axios from "axios";
 import { load } from "@cashfreepayments/cashfree-js";
 import Loading from "@/app/loading";
 
-const CustomCheckout = ({ data }: any) => {
+const CustomCheckout = async ({ data }: any) => {
   const orderIdRef = useRef(null);
   const [payload, setpayload] = useState({});
   const token = localStorage.getItem("token");
@@ -30,56 +30,50 @@ const CustomCheckout = ({ data }: any) => {
 
 
   const handleButtonClick = (buttonIndex: any) => {
-    // Select the clicked button
     setSelectedButton(buttonIndex);
   };
 
-  useEffect(() => {
+  const fetchandsetdata = async () => {
+    let decryptedData: any
+    let itemMode: any, totalAmount: any
+
+
+    if (data) {
+      setLoading(true);
+      decryptedData = await funcForDecrypt(data);
+      if (decryptedData) {
+        setpayload({ ...JSON.parse(decryptedData) });
+        itemMode = JSON.parse(decryptedData)?.itemMode;
+        totalAmount = JSON.parse(decryptedData)?.totalAmount;
+        setfinalAmount(totalAmount);
+      }
+      if (itemMode === "DIGITAL") {
+        setDigitalPayment(true);
+      } else if (itemMode === "PHYSICAL") {
+        setPhysicalPayment(true);
+      } else {
+        setfinalAmount(totalAmount?.finalAmount);
+        setCartPayment(true);
+      }
+      setLoading(false);
+    }
     setPaymentMethod((finalAmount <= 100000) ? UPI_PAYMENT : "")
 
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const decryptedData = await funcForDecrypt(data);
-        // console.log(
-        //   "decryptedData from custom checkout",
-        //   JSON.parse(decryptedData)
-        // );
-        setpayload({ ...JSON.parse(decryptedData) });
-        // const { ...itemMode } = JSON.parse(decryptedData);
-        const { itemMode, totalAmount } = JSON.parse(decryptedData);
+  }
 
-        if (itemMode === "DIGITAL") {
-          setfinalAmount(totalAmount);
-          setDigitalPayment(true);
-          setLoading(false);
-        } else if (itemMode === "PHYSICAL") {
-          setfinalAmount(totalAmount);
-          setPhysicalPayment(true);
-          setLoading(false);
-        } else {
-          setfinalAmount(totalAmount.finalAmount);
-          setCartPayment(true);
-          setLoading(false);
-        }
-      } catch (error) {
-        alert(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [data, finalAmount]);
+  useEffect(() => {
+    fetchandsetdata()
+  }, [data]);
 
   if (loading) {
     return <Loading />;
   }
 
+
   const initializeSDK = async () => {
     cashfree = await load({
-      // mode: "production",
-      mode: "sandbox",
+      mode: "production",
+      // mode: "sandbox",
     });
   };
   initializeSDK();
@@ -193,9 +187,7 @@ const CustomCheckout = ({ data }: any) => {
       )
       .then(async (resAfterBuyReq) => {
         const decryptedData = await funcForDecrypt(resAfterBuyReq.data.payload);
-
         // console.log('decrypted data',decryptedData)
-
         if (JSON.parse(decryptedData).status) {
           orderIdRef.current = JSON.parse(decryptedData).data.order.order_id;
           let sessionId =
@@ -226,8 +218,6 @@ const CustomCheckout = ({ data }: any) => {
       checkoutCart({ ...payload, paymentType: paymentMethod });
     }
   };
-
-
 
   return (
     <div className="bg-themeLight01 shadow-md rounded-md w-[580px] mb-100 z-10 relative">
