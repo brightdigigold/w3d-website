@@ -32,8 +32,6 @@ export default function RootLayout({ children }) {
     return () => {
       document.removeEventListener('contextmenu', disableContextMenu);
     };
-
-
   }, []);
 
   // useEffect(() => {

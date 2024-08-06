@@ -14,7 +14,7 @@ const RedirectTimer: React.FC = () => {
     const timeout = setTimeout(() => {
       clearInterval(interval);
       router.push("/dashboard");
-    }, 10000);
+    }, 5000);
 
     return () => {
       clearInterval(interval);

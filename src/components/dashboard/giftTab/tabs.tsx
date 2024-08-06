@@ -582,7 +582,7 @@ const GiftTab = () => {
                           className="text-white text-lg p-2 px-4 rounded-lg bg-theme border-1 w-full focus:outline-none focus:bg-transparent outline-none"
                         />
                         <ErrorMessage
-                          name="giftedUsers"
+                          name="textMsg"
                           component="div"
                           className="text-red-500"
                         />
