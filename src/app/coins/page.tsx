@@ -21,8 +21,8 @@ const Page = () => {
           />
         </div>
 
-        <div className="grid place-items-center mt-8">
-          <div className="text-black text-center pt-1 poppins-bold">
+        <div className="grid place-items-center mt-8 fade-in-up">
+          <div className="text-black text-center pt-1 poppins-bold ">
             <h1 className="text-4xl">
               GET FREE DELIVERY
             </h1>

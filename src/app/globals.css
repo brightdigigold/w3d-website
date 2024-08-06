@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 @font-face {
   font-family: NunitoSans-Regular;
@@ -48,7 +48,7 @@
   src: url(../../public/font/Lato-Regular.ttf) format("truetype");
 }
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-family: Lato-Regular;
   background: #092637;
 }
@@ -64,27 +64,27 @@ body {
 }
 
 .poppins-regular {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
 }
 
 .poppins-medium {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
 
 .poppins-semibold {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
 }
 
 .poppins-bold {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
 }
 
 .poppins-extraBold {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 800;
 }
 
@@ -273,7 +273,7 @@ input[type="number"] {
 }
 
 .swal2-title-custom {
-  color: white; 
+  color: white;
 }
 
 .slider {
@@ -534,7 +534,7 @@ input.inputBox {
   border-width: "6px solid red";
   position: relative;
   width: 100%;
-  height: 40px; 
+  height: 40px;
   background-color: #cde8f1;
 }
 
@@ -640,7 +640,7 @@ input.inputBox {
   input:checked + .slider {
     background-color: #c0c0c0; /* Change background color to Silver when checked */
   }
-  
+
   input:checked + .slider:before {
     transform: translateX(88px);
   }
@@ -730,7 +730,6 @@ input.inputBox {
   }
 }
 
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -778,7 +777,6 @@ input.inputBox {
   bottom: -3px !important;
 }
 
-
 .swal2-modal {
   background: #081a24 !important;
   color: #fff !important;
@@ -793,7 +791,6 @@ input.inputBox {
     font-size: 12px; /* Smaller font size */
   }
 }
-
 
 body.modal-open {
   position: fixed;
@@ -811,7 +808,6 @@ body.modal-open {
 .client_grad {
   background: linear-gradient(178deg, #fff, hsla(0, 0%, 100%, 0.71));
 }
-
 
 .swiper-button-prev:after,
 .swiper-rtl .swiper-button-next:after {
@@ -848,7 +844,21 @@ body.modal-open {
   display: none !important;
 }
 
-
 .caret-transparent::before {
   caret-color: transparent;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 1.5s ease-out forwards;
 }
