@@ -82,7 +82,7 @@ const PostDisplay = ({ slug }) => {
     return (
         <div className='mt-28 text-white container'>
             <h1 className='text-3xl text-center m-8'>{post.title}</h1>
-            <Image src={post.mainImage.asset.url} alt={post.title} className="inline-block w-full h-auto" style={{ width: "auto", height: "auto" }} width={1} height={1} priority />
+            <img src={post.mainImage.asset.url} alt={post.title} className="inline-block w-full h-auto" style={{ width: "auto", height: "auto" }}  />
             <div className='grid grid-cols-2 py-5'>
                 <div className='flex items-center'>
                     <Image src={post.author.image.asset.url} alt={post.author.name} className="inline-block" style={{ width: "full", height: "auto" }} width={50} height={20} priority />
