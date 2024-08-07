@@ -9,23 +9,14 @@ import Image from "next/image";
 
 const features = [
   {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1.webp",
-    blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSDIAAAABJLUvAQC4A1tXJAAAQU1EVgAA3YAAAADUAAABf///tA==",
-  },
-  {
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/offer2.webp",
     blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSDIAAAABJLUvAQC4A1tXJAAAQU1EVgAA3YAAAADUAAABf///tA==",
-  },
+  }
 ];
 
 export default function OfferSlider() {
   return (
     <>
-      <link
-        rel="preload"
-        as="image"
-        href="https://brightdigigold.s3.ap-south-1.amazonaws.com/offer1.webp"
-      />
       <div className="relative">
         <Swiper
           loop={features.length > 1}
