@@ -219,8 +219,10 @@ const CustomCheckout = async ({ data }: any) => {
     }
   };
 
+  // bg-themeLight01
+
   return (
-    <div className="bg-themeLight01 shadow-md rounded-md w-[580px] mb-100 z-10 relative">
+    <div className="shadow-md rounded-md w-[580px] mb-100 z-10 relative">
       <div className="mb-6 mt-4 px-2 sm:px-0">
         <ProgressBar
           purchaseType="buy"
@@ -243,7 +245,7 @@ const CustomCheckout = async ({ data }: any) => {
                     setPaymentMethodError("");
                   }}
                   className={`flex bg-themeLight01 border-2 border-[bg-themeLightBlue] ${selectedButton === 1 ? "border-2 border-yellow-600" : ""
-                    }  items-center p-2 sm:p-4 rounded`}
+                    }  items-center p-4 sm:p-4 rounded`}
                 >
                   <img src="/upi.png" className="h-8 w-13 pr-4" />
                   <span className={styles.p0}>UPI</span>

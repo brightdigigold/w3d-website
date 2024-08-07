@@ -97,7 +97,7 @@ const Navbar = () => {
             <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
           )}
 
-          <div className="mx-auto px-2 sm:px-6 xl:px-16 py-2 z-10">
+          <div className="mx-auto sm:px-6 xl:px-16 sm:py-2 z-10">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center xl:hidden justify-between">
                 {/* Mobile menu button*/}

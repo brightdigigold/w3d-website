@@ -28,13 +28,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" />
+        <link rel="preload" as="image" href="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp" />
+        <link rel="dns-prefetch" href="https://nkdqpbbn.apicdn.sanity.io" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://api.brightdigigold.com" />
         <link rel="preload" href="/font/NunitoSans_Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/font/Lato-Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
-        <link rel="preload" as="image" href="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp" />
-        <link rel="dns-prefetch" href="https://brightdigigold.s3.ap-south-1.amazonaws.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://nkdqpbbn.apicdn.sanity.io" />
-        <link rel="dns-prefetch" href="https://api.brightdigigold.com" />
         <meta name="google-site-verification" content="CRfShAmCXUTnCd9sfyEoPmBFHZvDQh2TC8UI4fZFPdw" />
       </head>
       <body>
