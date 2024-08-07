@@ -482,7 +482,7 @@ const BuySell = () => {
             onClose={toggleOpenUpiModal}
           />
         )}
-        
+
         <div className="block mx-auto xl:pl-24 2xl:pl-32 ">
           <div className="tab-bg rounded-lg relative ">
             <div className="grid grid-cols-2">
@@ -756,17 +756,18 @@ const BuySell = () => {
                   alt="Secure"
                 />
               </span>
-              <Image
-                src="/brink1.png"
-                alt="Brinks"
-                className="mx-auto mt-2"
-                width={267}
-                height={28}
-                priority={true}
-                layout="intrinsic"
-                sizes="(max-width: 267px) 100vw, 267px"
-              />
-
+              <div className="flex items-center justify-center mt-2 gap-3">
+                <p className="text-center text-white poppins-semibold text-xl tracking-wider">Secured With</p>
+                <Image
+                  src="/brinks.png"
+                  alt="Brinks"
+                  width={127}
+                  height={28}
+                  priority={true}
+                  layout="intrinsic"
+                  sizes="(max-width: 267px) 100vw, 267px"
+                />
+              </div>
               <div>
                 <animated.div style={style}>
                   {isgold && purchaseType === 'buy' && (
