@@ -72,8 +72,8 @@ const CustomCheckout = async ({ data }: any) => {
 
   const initializeSDK = async () => {
     cashfree = await load({
-      mode: "production",
-      // mode: "sandbox",
+      // mode: "production",
+      mode: "sandbox",
     });
   };
   initializeSDK();
@@ -222,7 +222,7 @@ const CustomCheckout = async ({ data }: any) => {
   // bg-themeLight01
 
   return (
-    <div className="shadow-md rounded-md w-[580px] mb-100 z-10 relative">
+    <div className="bg-themeLight01 shadow-md rounded-md w-[580px] mb-100 z-10 relative">
       <div className="mb-6 mt-4 px-2 sm:px-0">
         <ProgressBar
           purchaseType="buy"
