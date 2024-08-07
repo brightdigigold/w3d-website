@@ -1,8 +1,8 @@
 "use client";
 import CustomCheckout from "@/components/customCheckout/customCheckout";
-import NextImage from "@/components/nextImage";
 import RequireAuth from "@/components/requireAuth";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const page = () => {
   const searchParams = useSearchParams();
@@ -12,8 +12,8 @@ const page = () => {
     <RequireAuth>
       <div className="">
         <div className="min-h-screen bg-theme flex items-center justify-center">
-          <NextImage
-            className=" absolute  opacity-30"
+          <Image
+            className=" absolute  opacity-10"
             src="/bdgwhite.png"
             alt="digital gold"
             // priority
