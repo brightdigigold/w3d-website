@@ -45,6 +45,7 @@ export default function OfferSlider() {
       <div className="relative">
         <Swiper
           loop={features.length > 1}
+          speed={2000}  // Adjust this value for smoother transitions
           breakpoints={{
             640: {
               slidesPerView: 1,
@@ -60,7 +61,7 @@ export default function OfferSlider() {
             },
           }}
           autoplay={{
-            delay: 2500,
+            delay: 3500,
             disableOnInteraction: false,
           }}
           modules={[Autoplay]}
@@ -77,6 +78,7 @@ export default function OfferSlider() {
                 alt="Bdg offer"
                 width={1250}
                 height={500}
+                className=""
                 priority={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
                 placeholder="blur"
@@ -102,6 +104,7 @@ export default function OfferSlider() {
           object-fit: cover;
           max-width: 100%;
           height: auto;
+          transition: transform 2s ease-in-out;
         }
       `}</style>
     </>
