@@ -229,8 +229,10 @@ const Navbar = () => {
                 <div className="hidden xl:ml-6 xl:block">
                   <div className="flex space-x-4"></div>
                 </div>
-                {os === 'Android' && <Link
-                  className="text-gold01  rounded-md text-md px-1 py-2 extrabold xl:hidden "
+                {os === 'Android' && 
+                <Link
+                  className="text-gold01 rounded-md text-md px-1 py-2 extrabold xl:hidden "
+                  target="_blank"
                   href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
                   aria-label="User Profile"
                 >
@@ -244,6 +246,7 @@ const Navbar = () => {
                 {os === 'iOS' && (
                   <Link
                     className="text-gold01  rounded-md text-md px-1 py-2 extrabold xl:hidden"
+                    target="_blank"
                     href="https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173"
                     aria-label="User Profile"
                   >

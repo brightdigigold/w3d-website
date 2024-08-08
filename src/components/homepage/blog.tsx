@@ -86,7 +86,7 @@ export default function Blog() {
             >
               <div className="border border-1 rounded-b-2xl rounded-t-xl">
                 <Link href={`/digital-gold-blog/${feature.slug.current}`} passHref>
-                  <div className="rounded-2xl h-44 sm:h-72 relative">
+                  <div className="rounded-2xl h-56 sm:h-72 relative">
                     <div className="flex justify-center">
                       <Image
                         src={feature.thumbImage?.asset?.url}

@@ -76,15 +76,16 @@ const GiftTab = () => {
   }, [isgold, activeTab, toggleMetal]);
 
   const handleTabRupeesAndGrams = (tab: "rupees" | "grams") => {
+    setValidationError("");
     setActiveTabGift(tab);
     // setactiveTab(tab);
     // dispatch(setTransactionType(tab));
     // dispatch(setEnteredAmount(tab === "rupees" ? totalAmount : metalQuantity));
-    setValidationError("");
   };
 
   const handleEnteredAmountChanges = (e: any) => {
     e.preventDefault();
+    setValidationError("");
     setActiveTabGift("rupees");
 
     // setactiveTab("rupees");
@@ -105,9 +106,9 @@ const GiftTab = () => {
       }
     } else {
       if (activeTabGift === "rupees") {
-        if (enteredValue > 50 * silverData.salePrice) {
+        if (enteredValue > 100 * silverData.salePrice) {
           setValidationError(
-            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is ₹${50 * silverData.salePrice
+            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is ₹${100 * silverData.salePrice
             } only. Please change the amount.`
           );
           return;
@@ -130,7 +131,7 @@ const GiftTab = () => {
       if (activeTabGift === "grams") {
         if (Number(e.target.value) > 5) {
           setValidationError(
-            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is 5gm only. Please change the amount.`
+            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting gold is 5gm only. Please change the amount.`
           );
           return;
         } else {
@@ -139,9 +140,9 @@ const GiftTab = () => {
       }
     } else {
       if (activeTabGift === "grams") {
-        if (Number(e.target.value) > 50) {
+        if (Number(e.target.value) > 100) {
           setValidationError(
-            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is 50gm only. Please change the amount.`
+            `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is 100gm only. Please change the amount.`
           );
           return;
         } else {
@@ -194,7 +195,7 @@ const GiftTab = () => {
     }
 
     if (
-      validationError == "" &&
+      // validationError == "" &&
       metalQuantity !== undefined &&
       metalQuantity > 0
     ) {
@@ -227,6 +228,8 @@ const GiftTab = () => {
         const decryptedData = await AesDecrypt(response.data.payload);
         const result = JSON.parse(decryptedData);
         if (result.status) {
+          setValidationError("")
+          dispatch(setEnteredAmount(0));
           setOtpModalShow(true);
         }
       } catch (error: any) {
@@ -582,7 +585,7 @@ const GiftTab = () => {
                           className="text-white text-lg p-2 px-4 rounded-lg bg-theme border-1 w-full focus:outline-none focus:bg-transparent outline-none"
                         />
                         <ErrorMessage
-                          name="giftedUsers"
+                          name="textMsg"
                           component="div"
                           className="text-red-500"
                         />
