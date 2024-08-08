@@ -6,15 +6,40 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper/modules";
 import Image from "next/image";
+import useDetectMobileOS from "@/hooks/useDetectMobileOS";
+import clsx from "clsx";
 
-const features = [
+// Define the type for the feature object
+interface Feature {
+  img: string;
+  blurDataURL: string;
+  redirectIOS?: string;
+  redirectAndroid?: string;
+}
+
+const features: Feature[] = [
   {
-    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/offer2.webp",
+    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/promoBannerThree.jpg",
     blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSDIAAAABJLUvAQC4A1tXJAAAQU1EVgAA3YAAAADUAAABf///tA==",
-  }
+    redirectIOS: "https://apps.apple.com/in/app/bright-digi-gold-buy-24k-gold/id1640972173",
+    redirectAndroid: "https://play.google.com/store/apps/details?id=com.brightdigigold.customer",
+  },
+  {
+    img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/promoBannerTwoNew.jpg",
+    blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSDIAAAABJLUvAQC4A1tXJAAAQU1EVgAA3YAAAADUAAABf///tA==",
+  },
 ];
 
 export default function OfferSlider() {
+  const os = useDetectMobileOS();
+
+  const handleBannerClick = (feature: Feature) => {
+    const url = os === 'iOS' ? feature.redirectIOS : feature.redirectAndroid;
+    if (url) {
+      window.open(url, '_blank');
+    }
+  };
+
   return (
     <>
       <div className="relative">
@@ -42,13 +67,16 @@ export default function OfferSlider() {
           className="mySwiper"
         >
           {features.map((feature, index) => (
-            <SwiperSlide key={`${index}-Slider`} className="relative swiper-slide">
+            <SwiperSlide
+              key={`${index}-Slider`}
+              className={clsx('relative swiper-slide', { 'cursor-pointer': index === 0 })}
+              onClick={() => index === 0 && handleBannerClick(feature)}
+            >
               <Image
                 src={feature.img}
                 alt="Bdg offer"
-                width={1261}
-                height={400}
-                // sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, 1261px"
+                width={1250}
+                height={500}
                 priority={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
                 placeholder="blur"
@@ -79,6 +107,3 @@ export default function OfferSlider() {
     </>
   );
 }
-
-
-// img: "/offer2.Webp",
