@@ -62,7 +62,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
 
   const handleLoginClick = () => {
     if (isloggedIn) {
-      router.push('/downloadReceipt');
+      router.push('/donation-receipt');
       onClose();
     } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
@@ -180,7 +180,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
             </Link>
             <div onClick={handleLoginClick} className={styles.p1}>
               <Image src="/receipt.png" alt="Receipt" width={28} height={20} className="h-6 w-9" />
-              Receipt
+              Donation Receipt
             </div>
             <Link href="/digital-gold-blog" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
