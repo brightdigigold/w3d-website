@@ -77,11 +77,8 @@ const ProfileImage = () => {
           alt="profile image"
           width={150}
           height={150}
-          className="my-4 rounded-full mx-auto h-40 w-40 flex items-center justify-center border-2 border-sky-200"
-          style={{
-            maxWidth: "100%",
-            height: "auto"
-          }} />
+          className="my-4 rounded-full mx-auto h-40 w-40 sm:h-56 sm:w-56 flex items-center justify-center border-2 border-sky-200"
+          />
         <label
           htmlFor="file"
           className="absolute bottom-0 left-28 sm:left-28 shadow shadow-gray-200 text-themeBlueLight focus:outline-none p-2 bg-theme rounded-full"
