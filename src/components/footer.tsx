@@ -27,7 +27,7 @@ const Footer = () => {
     if (!isloggedIn && !isLoggedInForTempleReceipt) {
       setOpenLoginAside(!openLoginAside);
     } else {
-      router.push('/downloadReceipt');
+      router.push('/donation-receipt');
     }
   };
 
