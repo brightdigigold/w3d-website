@@ -286,6 +286,7 @@ const GiftTab = () => {
           body,
           configHeaders
         );
+        
         const decryptedData = await AesDecrypt(response.data.payload);
         const result = JSON.parse(decryptedData);
 
@@ -313,8 +314,6 @@ const GiftTab = () => {
           });
         }
       } catch (error: any) {
-        // setOtpModalShow(false);
-        dispatch(setEnteredAmount(0));
         const decryptedData = await AesDecrypt(error?.response?.data?.payload);
         const result = JSON.parse(decryptedData);
         setOtpError(result.message);
