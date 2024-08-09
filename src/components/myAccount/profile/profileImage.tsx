@@ -77,7 +77,7 @@ const ProfileImage = () => {
           alt="profile image"
           width={150}
           height={150}
-          className="my-4 rounded-full mx-auto h-40 w-40 sm:h-56 sm:w-56 flex items-center justify-center border-2 border-sky-200"
+          className="my-4 rounded-full mx-auto h-44 w-44 flex items-center justify-center border-2 border-sky-200"
           />
         <label
           htmlFor="file"
