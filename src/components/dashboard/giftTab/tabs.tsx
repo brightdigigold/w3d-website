@@ -183,7 +183,7 @@ const GiftTab = () => {
   });
 
   const onSubmit = async (
-    values: { giftedUsers: any; textMsg: any },
+    values: { giftedUsers: any; textMsg: string },
     { resetForm }: any
   ) => {
     if (!enteredAmount) {
@@ -229,7 +229,7 @@ const GiftTab = () => {
         const result = JSON.parse(decryptedData);
         if (result.status) {
           setValidationError("")
-          dispatch(setEnteredAmount(0));
+          // dispatch(setEnteredAmount(0));
           setOtpModalShow(true);
         }
       } catch (error: any) {
@@ -247,10 +247,7 @@ const GiftTab = () => {
         setSubmitting(false);
         resetForm();
       }
-    } else {
-      // log("gramError or rupeeError is there");
-      // setCommonError("Please enter Rs. or Grams");
-    }
+    } 
   };
 
   function handleOTPChange(otp: React.SetStateAction<string>) {
