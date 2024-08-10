@@ -104,9 +104,10 @@ const GiftTab = () => {
           dispatch(setEnteredAmount(+enteredValue));
         }
       }
+
     } else {
       if (activeTabGift === "rupees") {
-        if (enteredValue > 100 * silverData.salePrice) {
+        if (enteredValue > (100 * silverData.salePrice)) {
           setValidationError(
             `We appreciate your trust to Gift  ${metalType} on our platform, but our current limit for gifting is ₹${100 * silverData.salePrice
             } only. Please change the amount.`
