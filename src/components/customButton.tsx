@@ -1,7 +1,7 @@
 "use client";
 import { customButtonProps } from "@/types";
 import Image from "next/image";
-import { FaDoorClosed } from "react-icons/fa";
+import { ImSpinner8 } from "react-icons/im"; // Spinner icon
 
 const CustomButton = ({
   title,
@@ -9,28 +9,35 @@ const CustomButton = ({
   handleClick,
   btnType,
   textStyles,
-  rightIcon,
+  Icon,
   isDisabled,
+  loading, // Add loading prop
 }: customButtonProps) => {
   return (
     <button
-      disabled={isDisabled}
+      disabled={isDisabled || loading} // Disable the button if loading
       type={btnType || "button"}
-      className={`custom-btn ${containerStyles}`}
+      className={`flex justify-center ${containerStyles}`} // Flexbox centering horizontally
       onClick={handleClick}
+      style={{ minWidth: '120px', padding: '10px' }} // Set a min-width and padding for consistent button size
     >
-      <span className={`flex-1 ${textStyles}`}>{title}</span>
-      {rightIcon && (
-        <div className="relative w-6 h-6">
+      {loading ? (
+        <ImSpinner8 className="animate-spin text-xl mt-4" /> // Centered spinner horizontally
+      ) : (
+        <span className={`text-center ${textStyles}`}>{title}</span> // Centered text when not loading
+      )}
+      {Icon && !loading && (
+        <div className="relative w-6 h-6 ml-2">
           <Image
-            src={rightIcon}
-            alt="right icon"
+            src={Icon}
+            alt="Icon"
             fill
             className="object-contain"
             style={{
               maxWidth: "100%",
-              height: "auto"
-            }} />
+              height: "auto",
+            }}
+          />
         </div>
       )}
     </button>
@@ -38,3 +45,37 @@ const CustomButton = ({
 };
 
 export default CustomButton;
+
+// "use client";
+// import { customButtonProps } from "@/types";
+// import { ImSpinner8 } from "react-icons/im"; // Spinner icon
+
+// const CustomButton = ({
+//   title,
+//   containerStyles,
+//   handleClick,
+//   btnType,
+//   textStyles,
+//   isDisabled,
+//   loading, // Add loading prop
+// }: customButtonProps) => {
+//   return (
+//     <button
+//       disabled={isDisabled || loading} // Disable the button if loading
+//       type={btnType || "button"}
+//       className={`flex justify-center ${containerStyles}`} // Flexbox centering horizontally
+//       onClick={handleClick}
+//       style={{ minWidth: '120px', padding: '10px' }} // Set a min-width and padding for consistent button size
+//     >
+//       {loading ? (
+//         <ImSpinner8 className="animate-spin text-xl mt-4" /> // Centered spinner horizontally
+//       ) : (
+//         <span className={`text-center ${textStyles}`}>{title}</span> // Centered text when not loading
+//       )}
+//     </button>
+//   );
+// };
+
+// export default CustomButton;
+
+

@@ -57,6 +57,7 @@ import AddAddressModel from "../modals/addAddressModel";
 const Cart = () => {
   const user = useSelector(selectUser);
   const { _id } = user.data;
+  const token = localStorage.getItem("token");
   const router = useRouter();
   const dispatch = useDispatch();
   const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -90,6 +91,7 @@ const Cart = () => {
   const silverData = useSelector((state: RootState) => state.silver);
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
+  const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [maxCoinError, setMaxCoinError] = useState<String>("");
   const [openConvertMetalModal, setOpenConvertMetalModal] = useState<boolean>(false);
@@ -101,11 +103,11 @@ const Cart = () => {
   const openConvertMetalModalHandler = (metalTypeToConvert: string) => {
     const vaultBalanceOfMetal = metalTypeToConvert === 'GOLD' ? goldVaultBalance : silverVaultBalance;
     const payloadLengthOfMetal = metalTypeToConvert === 'GOLD' ? goldPayload.length : silverPayload.length;
-  
+
     setOpenConvertMetalModal(!(vaultBalanceOfMetal === 0 || payloadLengthOfMetal === 0));
   };
 
-    
+
   const handleSelectAddress = (addressId: string) => {
     setSelectedAddressId(addressId);
   };
@@ -234,7 +236,6 @@ const Cart = () => {
 
   const getAllProductsOfCart = async () => {
     try {
-      const token = localStorage.getItem("token");
       const configHeaders = {
         headers: {
           authorization: `Bearer ${token}`,
@@ -322,7 +323,6 @@ const Cart = () => {
     setMaxCoinError("");
 
     try {
-      const token = localStorage.getItem("token");
       const dataToBeDecrypt = {
         user_id: _id,
         count: quantityChange,
@@ -379,7 +379,7 @@ const Cart = () => {
       await handleCartAction(productId, "ADD", quantity);
     } else {
       setMaxCoinError(
-        `You can only purchase ${quantity} coins. Insufficient stock.`
+        `You can only purchase ${quantity - 1} coins. Insufficient stock.`
       );
     }
   };
@@ -397,47 +397,94 @@ const Cart = () => {
     await handleCartAction(productId, "DELETE", quantity);
   };
 
-  const checkoutCart = () => {
-    if (addressList && addressList.length == 0) {
-      Swal.fire({
-        title: "Oops...!",
-        titleText: "No address found!",
-        padding: "2em",
-        html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
-        showCancelButton: true,
-        confirmButtonText: "Add Address",
-        denyButtonText: `Don't save`,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // router.push("/myAccount");
-          setShowAddNewAddress(true);
-        }
-      });
-      return;
-    }
+  const handleProceed = async () => {
+    try {
+      const dataToBeEncrypt = {
+        goldCoins: goldPayload,
+        silverCoins: silverPayload,
+      };
+      const resAfterEncryptData = await funForAesEncrypt(dataToBeEncrypt);
 
-    if (isGoldVault || isSilverVault) {
-      if (!user.data.isKycDone) {
+      const payloadToSend = {
+        payload: resAfterEncryptData,
+      };
+
+      const configHeaders = {
+        headers: {
+          authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await axios.post(`${process.env.baseUrl}/user/ecom/placecart/orderCheck`, payloadToSend, configHeaders);
+      const decryptedData = await funcForDecrypt(response.data.payload);
+      const finalData = JSON.parse(decryptedData);
+      console.log("decrypted data: ", finalData);
+      return finalData;
+
+    } catch (error) {
+      Swal.fire({
+        html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
+  };
+
+  const checkoutCart = async () => {
+    setLoading(true);
+    try {
+      if (addressList && addressList.length == 0) {
         Swal.fire({
           title: "Oops...!",
-          titleText:
-            "It seems your KYC is pending. Please complete your KYC first.",
+          titleText: "No address found!",
           padding: "2em",
-          html: `<img src="/lottie/oops.gif" class="swal2-image-custom" alt="Successfully Done">`,
+          html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
           showCancelButton: true,
-          confirmButtonText: "Complete Your KYC",
+          confirmButtonText: "Add Address",
           denyButtonText: `Don't save`,
         }).then((result) => {
           if (result.isConfirmed) {
-            router.push("/myAccount");
+            setShowAddNewAddress(true);
           }
         });
         return;
-      } else {
-        router.push(`/checkout?data=${encryptedPayload}`);
       }
+
+      if (isGoldVault || isSilverVault) {
+        if (!user.data.isKycDone) {
+          Swal.fire({
+            title: "Oops...!",
+            titleText:
+              "It seems your KYC is pending. Please complete your KYC first.",
+            padding: "2em",
+            html: `<img src="/lottie/oops.gif" class="swal2-image-custom" alt="Successfully Done">`,
+            showCancelButton: true,
+            confirmButtonText: "Complete Your KYC",
+            denyButtonText: `Don't save`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/myAccount");
+            }
+          });
+          return;
+        } else {
+          const finalData = await handleProceed();
+          if (finalData && finalData.status) {
+            router.push(`/checkout?data=${encryptedPayload}`);
+          }
+        }
+      } else {
+        const finalData = await handleProceed();
+        if (finalData && finalData.status) {
+          router.push(`/checkout?data=${encryptedPayload}`);
+        }
+      }
+    } catch (error) {
+      console.error("Error during checkout:", error);
+    } finally {
+      setLoading(false);
     }
-    router.push(`/checkout?data=${encryptedPayload}`);
   };
 
   const renderPriceBreakdownItemCart = ({
@@ -526,7 +573,7 @@ const Cart = () => {
       >
         Cart
       </h1>
-      <div className="grid grid-cols-3 gap-6 px-4 sm:px-6 lg:px-16 pt-6 pb-24 justify-between">
+      <div className="grid grid-cols-3 gap-6 px-2 sm:px-6 lg:px-16 pt-6 pb-24 justify-between">
         <div className="bg-themeLight rounded-xl col-span-3 xl:col-span-2">
           <div className="flex flex-col sm:flex-row justify-between sm:justify-around items-center p-4">
             <div>
@@ -591,28 +638,28 @@ const Cart = () => {
               <CustomButton title="SILVER" containerStyles="px-3" />
             </div>
           </div>
-          <div className="py-2 mt-3 p-3 ">
+          <div className="mt-3 p-2 sm:p-3">
             {/* Render your cart items using ProductList state */}
             {cartProducts?.map((product) => (
               <div
                 key={product?.product._id}
                 className="rounded-xl bg-themeLight mb-3 sm:p-4 p-3 shadow-black shadow-sm"
               >
-                <div className="md:flex justify-between gap-2 items-center">
-                  <div className=" flex gap-4 items-center">
+                <div className="flex justify-between gap-2 items-center">
+                  <div className="flex gap-3 sm:gap-4 items-center">
                     <div>
                       <img
                         src={product?.product?.image?.image}
-                        className="h-12 w-12 sm:h-32 sm:w-32"
+                        className="h-14 w-14 sm:h-32 sm:w-32"
                         alt="vault"
                       />
                     </div>
                     <div>
                       <div>
-                        <p className="bold text-xxs sm:text-xl text-gray-200">
+                        <p className="poppins-semibold text-sm sm:text-xl text-gray-200">
                           {product?.product?.name}
                         </p>
-                        <p className="text-xxs sm:text-lg text-gray-300">
+                        <p className="text-xs sm:text-lg text-gray-300">
                           Making Charges :
                           <span className="text-gray-300">
                             ₹{product?.product?.makingcharges}
@@ -633,8 +680,8 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex  items-center justify-end pt-2 md:pt-0">
-                    <div className="flex items-center rounded-lg bg-themeLight">
+                  <div className="items-center justify-end pt-2 md:pt-0">
+                    <div className="flex items-center rounded-lg bg-themeLight px-2 py-2 shadow-black shadow-sm">
                       <div
                         onClick={(event: any) => {
                           event.preventDefault();
@@ -643,11 +690,11 @@ const Cart = () => {
                             product?.product?.count
                           );
                         }}
-                        className="sm:p-2 sm:m-3 p-[2px] m-[2px] rounded-lg bg-themeLight text-red-500 cursor-pointer"
+                        className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-red-500 cursor-pointer"
                       >
                         <IoMdRemove />
                       </div>
-                      <div className="mx-1 sm:mx-2 text-xs sm:text-lg">
+                      <div className="mx-2 sm:mx-2 text-xs sm:text-lg">
                         {product?.product?.count}
                       </div>
                       <div
@@ -659,19 +706,19 @@ const Cart = () => {
                             product?.product?.sku
                           );
                         }}
-                        className="sm:p-2 sm:m-3 p-1 m-1 rounded-lg bg-themeLight text-green-400 cursor-pointer"
+                        className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-green-400 cursor-pointer"
                       >
                         <IoMdAdd />
                       </div>
                     </div>
-                    <div className="px-2 flex justify-end">
+                    <div className="py-3 flex justify-end">
                       <div>
                         <MdDelete
                           onClick={(event: any) => {
                             event.preventDefault();
                             deleteFromCart(product?.product?.sku);
                           }}
-                          className="cursor-pointer justify-end text-red-400 text-2xl sm:text-xl md:text-4xl lg:text-4xl xl:text-4xl"
+                          className="cursor-pointer justify-end text-red-400 text-3xl sm:text-xl md:text-4xl lg:text-4xl"
                         />
                       </div>
                     </div>
@@ -776,18 +823,18 @@ const Cart = () => {
               </p>
             </div>
             <div>
-              {/* <Link href={`/cart/checkout?data=${encryptedPayload}`}> */}
               <CustomButton
                 btnType="button"
                 title="PROCEED"
-                containerStyles="inline-flex w-full justify-center rounded-xl bg-themeBlue px-5 py-4 text-base bold text-black ring-1 ring-inset sm:mt-0 sm:w-auto"
+                loading={loading}
+                containerStyles="inline-flex justify-center rounded-xl bg-themeBlue px-5 py-4 text-base bold text-black ring-1 ring-inset sm:mt-0 sm:w-auto"
                 handleClick={() => {
                   checkoutCart();
                 }}
               />
-              {/* </Link> */}
             </div>
           </div>
+
         </div>
         <div className="text-white col-span-3 xl:col-span-1 coins_background w-full p-3 fixed left-0 bottom-0 block lg:hidden z-[48] rounded-t-lg">
           {!isOpened && (
@@ -899,6 +946,7 @@ const Cart = () => {
               <CustomButton
                 btnType="button"
                 title="PROCEED"
+                loading={loading}
                 containerStyles="inline-flex w-full justify-center rounded-xl bg-themeBlue px-5 py-3 text-base extrabold text-black ring-1 ring-inset sm:mt-0 sm:w-auto"
                 handleClick={() => {
                   checkoutCart();
