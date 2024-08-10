@@ -26,17 +26,16 @@ const CoinBanner = () => {
                     <p className="text-black text-center pt-1 poppins-semibold text-xl sm:text-xl md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl fade-in-up">
                         of Gold and Silver Coins
                     </p>
-                    <p className="text-black text-center pt-1 text-xl sm:text-sm md:text-md lg:text-xl xl:text-2xl 2xl:text-3xl fade-in-up">
+                    <p className="text-black text-center pt-1 poppins-semibold text-xl sm:text-sm md:text-md lg:text-xl xl:text-2xl 2xl:text-3xl fade-in-up">
                         at your Doorstep
                     </p>
                 </div>
             </div>
 
-
             <img
                 src="/Coins stand (1).png"
                 alt="gold and silver coin banner"
-                className="rounded-b mt-52 h-2/6 w-2/6 mr-10"
+                className="rounded-b mt-52 h-2/6 w-2/6 mr-6"
             />
         </div>
     )
