@@ -6,6 +6,7 @@ import { UserReward } from "@/types";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import { useDispatch } from "react-redux";
 import mixpanel from "mixpanel-browser";
+import moment from 'moment';
 
 const Redeem = (refreshOnGiftSent: any) => {
   const [userRewards, setUserRewards] = useState<UserReward[]>([]);
@@ -74,6 +75,7 @@ const Redeem = (refreshOnGiftSent: any) => {
       }
     });
   };
+  
 
   const handleMetalChange = (e: any) => {
     setMetal(e.target.value);
@@ -205,6 +207,8 @@ const Redeem = (refreshOnGiftSent: any) => {
     getRewards(metal, status, page, size);
   }, [refreshOnGiftSent]);
 
+  
+
   return (
     <div className="w-full rounded">
       <div className=" col-span-2 p-4 rounded-lg bg-themeLight text-white">
@@ -304,6 +308,9 @@ const Redeem = (refreshOnGiftSent: any) => {
                         {userRewards?.itemType}
                       </div>
                       <div>{userRewards?.description}</div>
+                      <div>{moment(userRewards?.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</div>
+
+
                     </div>
                     <div className="ml-8">
                       {userRewards.status == "PENDING" && (
