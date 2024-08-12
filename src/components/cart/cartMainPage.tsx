@@ -14,7 +14,6 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdDelete } from "react-icons/md";
 import { RootState } from "@/redux/store";
 import ConvertMetalModal from "@/components/modals/convertMetalModal";
 import {
@@ -46,13 +45,16 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProgressBar from "@/components/progressBar";
 import Swal from "sweetalert2";
 import Link from "next/link";
-import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import { getUserAddressList } from "@/api/DashboardServices";
 import { FaChevronCircleDown } from "react-icons/fa";
 import AddressComponent from "./addressComponent";
 import { Address } from "@/types";
 import { useRouter } from "next/navigation";
 import AddAddressModel from "../modals/addAddressModel";
+import CartHeader from "./cartHeader";
+import VaultConversionSection from "./vaultConversionSection";
+import CartItemsList from "./cartItemsList";
+import PriceBreakdown from "./priceBreakDown";
 
 const Cart = () => {
   const user = useSelector(selectUser);
@@ -550,6 +552,7 @@ const Cart = () => {
     setShowAddNewAddress(false);
   };
 
+
   return (
     <div className="text-white">
       {openConvertMetalModal && (
@@ -567,166 +570,26 @@ const Cart = () => {
         />
       )}
 
-      <h1
-        className="text-center text-2xl sm:text-4xl extrabold text-white"
-        style={{ textRendering: "optimizeLegibility" }}
-      >
-        Cart
-      </h1>
-      <div className="grid grid-cols-3 gap-6 px-2 sm:px-6 lg:px-16 pt-6 pb-24 justify-between">
+      <CartHeader />
+      <div className="grid grid-cols-3 gap-6 px-4 sm:px-6 lg:px-16 pt-6 pb-24 justify-between">
         <div className="bg-themeLight rounded-xl col-span-3 xl:col-span-2">
-          <div className="flex flex-col sm:flex-row justify-between sm:justify-around items-center p-4">
-            <div>
-              <p className="text-semibold text-xl mb-3 sm:mb-0">
-                Convert From Vault
-              </p>
-            </div>
-            <div className="">
-              <div className="flex items-center bg-themeBlue rounded-xl p-2">
-                <div className="">
-                  <img
-                    src={"../../images/vault.png"}
-                    alt="digital gold bar"
-                    className={`sm:px-1 py-1 sm:py-2 h-10 sm:h-16 cursor-pointer`}
-                  />
-                </div>
-                <div className="grid grid-cols-2 justify-between ">
-                  <div className="px-2 border-r-2 border-gray-400">
-                    <div className="text-sm sm:text-lg bold text-black">
-                      GOLD
-                    </div>
-                    <div className="text-yellow-600 bold text-xs sm:text-lg">
-                      {goldVaultBalance} gms
-                    </div>
-                  </div>
-                  <div className="px-4">
-                    <div className="text-sm sm:text-lg bold text-black">
-                      SILVER
-                    </div>
-                    <div className="text-yellow-600 bold text-xs sm:text-lg">
-                      {silverVaultBalance} gms
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-row justify-around items-center pt-3 pb-5 border-b-2 rounded-lg border-yellow-600">
-            <div
-              onClick={() => {
-                // setOpenConvertMetalModal(true);
-                setMetalTypeToConvert("GOLD");
-                openConvertMetalModalHandler('GOLD');
-              }}
-              className="flex border-2 border-yellow-400 rounded-full p-3 items-center cursor-pointer"
-            >
-              <img src="/Goldbarbanner.png" className="h-5" style={{ width: "auto" }} alt="vault" />
+          {/* vault conversion */}
+          <VaultConversionSection
+            goldVaultBalance={goldVaultBalance}
+            silverVaultBalance={silverVaultBalance}
+            setMetalTypeToConvert={setMetalTypeToConvert}
+            openConvertMetalModalHandler={openConvertMetalModalHandler}
+          />
 
-              <CustomButton title="GOLD" containerStyles="px-3" />
-            </div>
-            <div
-              onClick={() => {
-                // setOpenConvertMetalModal(true);
-                setMetalTypeToConvert("SILVER");
-                openConvertMetalModalHandler('SILVER');
-              }}
-              className="flex border-2 border-yellow-400 rounded-full p-3 items-center cursor-pointer"
-            >
-              {/* <img src={"/Silverbar.png"} className="h-5" alt="vault" /> */}
-              <img src={"Silverbar.png"} className="h-5" style={{ width: "auto" }} alt="vault" />
-
-              <CustomButton title="SILVER" containerStyles="px-3" />
-            </div>
-          </div>
-          <div className="mt-3 p-2 sm:p-3">
-            {/* Render your cart items using ProductList state */}
-            {cartProducts?.map((product) => (
-              <div
-                key={product?.product._id}
-                className="rounded-xl bg-themeLight mb-3 sm:p-4 p-3 shadow-black shadow-sm"
-              >
-                <div className="flex justify-between gap-2 items-center">
-                  <div className="flex gap-3 sm:gap-4 items-center">
-                    <div>
-                      <img
-                        src={product?.product?.image?.image}
-                        className="h-14 w-14 sm:h-32 sm:w-32"
-                        alt="vault"
-                      />
-                    </div>
-                    <div>
-                      <div>
-                        <p className="poppins-semibold text-sm sm:text-xl text-gray-200">
-                          {product?.product?.name}
-                        </p>
-                        <p className="text-xs sm:text-lg text-gray-300">
-                          Making Charges :
-                          <span className="text-gray-300">
-                            ₹{product?.product?.makingcharges}
-                          </span>
-                        </p>
-                        <p className="text-xxs sm:text-lg text-gray-300">
-                          Metal Purity :
-                          <span className="text-gray-300">
-                            {product?.product?.purity}
-                          </span>
-                        </p>
-                        <p className="text-xxs sm:text-lg text-gray-300">
-                          Dimension :
-                          <span className="text-gray-300">
-                            {product?.product?.dimension}{" "}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="items-center justify-end pt-2 md:pt-0">
-                    <div className="flex items-center rounded-lg bg-themeLight px-2 py-2 shadow-black shadow-sm">
-                      <div
-                        onClick={(event: any) => {
-                          event.preventDefault();
-                          decreaseQty(
-                            product?.product?.sku,
-                            product?.product?.count
-                          );
-                        }}
-                        className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-red-500 cursor-pointer"
-                      >
-                        <IoMdRemove />
-                      </div>
-                      <div className="mx-2 sm:mx-2 text-xs sm:text-lg">
-                        {product?.product?.count}
-                      </div>
-                      <div
-                        onClick={(event: any) => {
-                          event.preventDefault();
-                          increaseQty(
-                            product?.product?.maxForCart,
-                            product?.product?.coinHave,
-                            product?.product?.sku
-                          );
-                        }}
-                        className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-green-400 cursor-pointer"
-                      >
-                        <IoMdAdd />
-                      </div>
-                    </div>
-                    <div className="py-3 flex justify-end">
-                      <div>
-                        <MdDelete
-                          onClick={(event: any) => {
-                            event.preventDefault();
-                            deleteFromCart(product?.product?.sku);
-                          }}
-                          className="cursor-pointer justify-end text-red-400 text-3xl sm:text-xl md:text-4xl lg:text-4xl"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-            {maxCoinError && <p className="text-red-600">{maxCoinError}</p>}
+          {/* Render your cart items using ProductList state */}
+          <div className="py-2 mt-3 p-3 ">
+            <CartItemsList
+              cartProducts={cartProducts}
+              increaseQty={increaseQty}
+              decreaseQty={decreaseQty}
+              deleteFromCart={deleteFromCart}
+              maxCoinError={maxCoinError}
+            />
           </div>
         </div>
         {/* payments disclosure */}
@@ -735,107 +598,27 @@ const Cart = () => {
             addressList={addressList}
             onSelectAddress={handleSelectAddress}
           />
-          <div className="flex items-center text-xl extrabold tracking-widest sm:tracking-wider">
-            <AiOutlineShoppingCart className="text-yellow-400" size={28} />
-            <p className="pl-3 ">Price Breakdown</p>
-          </div>
-          {(goldPayload.length > 0 || silverPayload.length > 0) && (
-            <div className="mt-3 text-xs sm:text-sm">
-              {goldPayload.length > 0 && (
-                <>
-                  {renderPriceBreakdownItemCart({
-                    imageUrl: "/coin1.png",
-                    label: "Total Gold Coins",
-                    value: totalGoldCoins,
-                  })}
-                  {renderPriceBreakdownItemCart({
-                    label: "Total Gold Weight",
-                    value: totalGoldWeight + " gms",
-                  })}
-                  {isGoldVault &&
-                    renderPriceBreakdownItemCart({
-                      label: "Gold Vault Used",
-                      value: goldVaultWeightUsed + " gms",
-                    })}
-                  {isGoldVault &&
-                    renderPriceBreakdownItemCart({
-                      label: "Total Purchasing Gold Weight",
-                      value: purchasedGoldWeight + " gms",
-                    })}
-                  {renderPriceBreakdownItemCart({
-                    label: "Total Gold Coin Price (Incl. 3% GST)",
-                    value: "₹ " + amountWithTaxGold,
-                  })}
-
-                </>
-              )}
-              <div className="mt-1">
-                {silverPayload.length > 0 && (
-                  <>
-                    {renderPriceBreakdownItemCart({
-                      imageUrl: "/Rectangle.png",
-                      label: "Total Silver Coins",
-                      value: totalSilverCoins,
-                    })}
-                    {renderPriceBreakdownItemCart({
-                      label: "Total Silver Weight",
-                      value: totalSilverWeight + " gms",
-                    })}
-                    {isSilverVault &&
-                      renderPriceBreakdownItemCart({
-                        label: "Silver Vault Used",
-                        value: silverVaultWeightUsed + " gms",
-                      })}
-                    {isSilverVault &&
-                      renderPriceBreakdownItemCart({
-                        label: "Total Purchasing Silver Weight",
-                        value: purchasedSilverWeight + " gms",
-                      })}
-                    {renderPriceBreakdownItemCart({
-                      label: "Total Silver Coin Price (Incl. 3% GST)",
-                      value: "₹ " + amountWithTaxSilver,
-                    })}
-                  </>
-                )}
-                {renderPriceBreakdownItemCart({
-                  label: 'Total Making Charges (Incl. 18% GST)',
-                  value: "₹ " + totalMakingCharges
-                })}
-              </div>
-            </div>
-          )}
-
-          <div className="my-8">
-            <ProgressBar
-              fromCart={true}
-              metalTypeForProgressBar={"both"}
-              displayMetalType={"both"}
-            />
-          </div>
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="text-gray-100 text-md">Total Amount</p>
-              <p className="text-gray-100 text-xl sm:text-2xl extrabold tracking-wide">
-                {finalAmount.toLocaleString("en-IN")}
-                <span className="text-gray-400 text-sm ml-1 font-thin tracking-tighter">
-                  Incl. (GST)
-                </span>
-              </p>
-            </div>
-            <div>
-              <CustomButton
-                btnType="button"
-                title="PROCEED"
-                loading={loading}
-                containerStyles="inline-flex justify-center rounded-xl bg-themeBlue px-5 py-4 text-base bold text-black ring-1 ring-inset sm:mt-0 sm:w-auto"
-                handleClick={() => {
-                  checkoutCart();
-                }}
-              />
-            </div>
-          </div>
-
+          <PriceBreakdown
+            goldPayload={goldPayload}
+            silverPayload={silverPayload}
+            totalGoldCoins={totalGoldCoins}
+            totalSilverCoins={totalSilverCoins}
+            totalGoldWeight={totalGoldWeight}
+            totalSilverWeight={totalSilverWeight}
+            amountWithTaxGold={amountWithTaxGold}
+            amountWithTaxSilver={amountWithTaxSilver}
+            totalMakingCharges={totalMakingCharges}
+            finalAmount={finalAmount}
+            isGoldVault={isGoldVault}
+            goldVaultWeightUsed={goldVaultWeightUsed}
+            purchasedGoldWeight={purchasedGoldWeight}
+            isSilverVault={isSilverVault}
+            silverVaultWeightUsed={silverVaultWeightUsed}
+            purchasedSilverWeight={purchasedSilverWeight}
+            loading={loading}
+            checkoutCart={checkoutCart} />
         </div>
+
         <div className="text-white col-span-3 xl:col-span-1 coins_background w-full p-3 fixed left-0 bottom-0 block lg:hidden z-[48] rounded-t-lg">
           {!isOpened && (
             <AddressComponent
@@ -876,7 +659,6 @@ const Cart = () => {
                         label: "Total Gold Coin Price (Incl. 3% GST)",
                         value: "₹ " + amountWithTaxGold.toLocaleString("en-IN"),
                       })}
-                      {/* {renderPriceBreakdownItemCart({ label: 'Total Making Charges (Incl. 18% GST)', value: "₹ " + totalGoldMakingCharges })} */}
                     </>
                   )}
                   <div className="mt-3">
@@ -927,7 +709,6 @@ const Cart = () => {
           </div>
           <div className="flex justify-between items-center">
             <div>
-              {/* <p className="text-gray-100 text-md">Total Amount</p> */}
               <p className="text-gray-100 text-xl sm:text-2xl extrabold tracking-wide">
                 {finalAmount.toLocaleString("en-IN")}
                 <span className="text-gray-400 text-sm ml-1 font-thin tracking-tighter">
@@ -942,7 +723,6 @@ const Cart = () => {
               </p>
             </div>
             <div>
-              {/* <Link href={`/cart/checkout?data=${encryptedPayload}`}> */}
               <CustomButton
                 btnType="button"
                 title="PROCEED"
@@ -952,7 +732,6 @@ const Cart = () => {
                   checkoutCart();
                 }}
               />
-              {/* </Link> */}
             </div>
           </div>
         </div>
