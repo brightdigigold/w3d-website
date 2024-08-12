@@ -65,32 +65,32 @@ const Cart = () => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [encryptedPayload, setEncryptedPayload] = useState<string>("");
   const cart = useSelector((state: RootState) => state.cart);
-  const cartProducts = useSelector((state: RootState) => state.cart.products);
-  const totalGoldWeight = useSelector((state: RootState) => state.cart.totalGoldWeight);
-  const totalSilverWeight = useSelector((state: RootState) => state.cart.totalSilverWeight);
-  const totalMakingCharges = useSelector((state: RootState) => state.cart.totalMakingCharges);
-  const totalGoldMakingCharges = useSelector((state: RootState) => state.cart.totalMakingChargesGold);
-  const totalMakingChargesSilver = useSelector((state: RootState) => state.cart.totalMakingChargesSilver);
-  const totalGoldCoins = useSelector((state: RootState) => state.cart.totalGoldCoins);
-  const totalSilverCoins = useSelector((state: RootState) => state.cart.totalSilverCoins);
-  const totalMakingWithoutTax = useSelector((state: RootState) => state.cart.totalMakingWithoutTax);
-  const isGoldVault = useSelector((state: RootState) => state.cart.useVaultBalanceGold);
-  const isSilverVault = useSelector((state: RootState) => state.cart.useVaultBalanceSilver);
-  const goldVaultWeightUsed = useSelector((state: RootState) => state.cart.goldVaultWeightUsed);
-  const silverVaultWeightUsed = useSelector((state: RootState) => state.cart.silverVaultWeightUsed);
-  const purchasedGoldWeight = useSelector((state: RootState) => state.cart.purchasedGoldWeight);
-  const purchasedSilverWeight = useSelector((state: RootState) => state.cart.purchasedSilverWeight);
-  const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
-  const liveSilverPrice = useSelector((state: RootState) => state.cart.liveSilverPrice);
-  const goldGstForCart = useSelector((state: RootState) => state.cart.goldGstForCart);
-  const silverGstForCart = useSelector((state: RootState) => state.cart.silverGstForCart);
-  const amountWithTaxGold = useSelector((state: RootState) => state.cart.amountWithTaxGold);
-  const amountWithoutTaxGold = useSelector((state: RootState) => state.cart.amountWithoutTaxGold);
-  const amountWithTaxSilver = useSelector((state: RootState) => state.cart.amountWithTaxSilver);
-  const amountWithoutTaxSilver = useSelector((state: RootState) => state.cart.amountWithoutTaxSilver);
-  const finalAmount = useSelector((state: RootState) => state.cart.finalAmount);
   const goldData = useSelector((state: RootState) => state.gold);
   const silverData = useSelector((state: RootState) => state.silver);
+  const cartProducts = useSelector((state: RootState) => state.cart.products);
+  const finalAmount = useSelector((state: RootState) => state.cart.finalAmount);
+  const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
+  const totalGoldCoins = useSelector((state: RootState) => state.cart.totalGoldCoins);
+  const goldGstForCart = useSelector((state: RootState) => state.cart.goldGstForCart);
+  const liveSilverPrice = useSelector((state: RootState) => state.cart.liveSilverPrice);
+  const totalGoldWeight = useSelector((state: RootState) => state.cart.totalGoldWeight);
+  const isGoldVault = useSelector((state: RootState) => state.cart.useVaultBalanceGold);
+  const silverGstForCart = useSelector((state: RootState) => state.cart.silverGstForCart);
+  const totalSilverCoins = useSelector((state: RootState) => state.cart.totalSilverCoins);
+  const isSilverVault = useSelector((state: RootState) => state.cart.useVaultBalanceSilver);
+  const totalSilverWeight = useSelector((state: RootState) => state.cart.totalSilverWeight);
+  const amountWithTaxGold = useSelector((state: RootState) => state.cart.amountWithTaxGold);
+  const totalMakingCharges = useSelector((state: RootState) => state.cart.totalMakingCharges);
+  const amountWithTaxSilver = useSelector((state: RootState) => state.cart.amountWithTaxSilver);
+  const goldVaultWeightUsed = useSelector((state: RootState) => state.cart.goldVaultWeightUsed);
+  const purchasedGoldWeight = useSelector((state: RootState) => state.cart.purchasedGoldWeight);
+  const amountWithoutTaxGold = useSelector((state: RootState) => state.cart.amountWithoutTaxGold);
+  const totalMakingWithoutTax = useSelector((state: RootState) => state.cart.totalMakingWithoutTax);
+  const silverVaultWeightUsed = useSelector((state: RootState) => state.cart.silverVaultWeightUsed);
+  const purchasedSilverWeight = useSelector((state: RootState) => state.cart.purchasedSilverWeight);
+  const totalGoldMakingCharges = useSelector((state: RootState) => state.cart.totalMakingChargesGold);
+  const amountWithoutTaxSilver = useSelector((state: RootState) => state.cart.amountWithoutTaxSilver);
+  const totalMakingChargesSilver = useSelector((state: RootState) => state.cart.totalMakingChargesSilver);
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
   const [loading, setLoading] = useState(false);
@@ -109,11 +109,9 @@ const Cart = () => {
     setOpenConvertMetalModal(!(vaultBalanceOfMetal === 0 || payloadLengthOfMetal === 0));
   };
 
-
   const handleSelectAddress = (addressId: string) => {
     setSelectedAddressId(addressId);
   };
-
 
   const ViewBreakUp = () => {
     setIsOpened((wasOpened) => !wasOpened);
@@ -208,13 +206,7 @@ const Cart = () => {
     dispatch(setLiveSilverPrice(silverData.totalPrice));
     dispatch(calculatePurchasedGoldWeight());
     dispatch(calculatePurchasedSilverWeight());
-  }, [
-    cart.products,
-    liveGoldPrice,
-    liveSilverPrice,
-    isGoldVault,
-    isSilverVault,
-  ]);
+  }, [cart.products, liveGoldPrice, liveSilverPrice, isGoldVault, isSilverVault,]);
 
   const closeConvertMetalHandler = () => {
     setOpenConvertMetalModal(false);
