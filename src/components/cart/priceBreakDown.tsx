@@ -76,6 +76,4 @@ const PriceBreakdownItem = ({ label, value, imageUrl }: { label: any; value: any
     </div>
 );
 
-
-
 export default PriceBreakdown

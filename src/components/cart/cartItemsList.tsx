@@ -1,20 +1,44 @@
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
 
-const CartItemsList = ({ cartProducts, increaseQty, decreaseQty, deleteFromCart, maxCoinError }) => (
-    <div className="mt-3 p-2 sm:p-3">
-        {cartProducts?.map((product) => (
-            <CartItem
-                key={product?.product._id}
-                product={product}
-                increaseQty={increaseQty}
-                decreaseQty={decreaseQty}
-                deleteFromCart={deleteFromCart}
-            />
-        ))}
-        {maxCoinError && <p className="text-red-600">{maxCoinError}</p>}
-    </div>
-);
+const CartItemsList = ({ cartProducts, increaseQty, decreaseQty, deleteFromCart, maxCoinError }) => {
+    
+    // Trigger toast notification for errors
+    useEffect(() => {
+        if (maxCoinError) {
+            toast.error(maxCoinError, {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                pauseOnFocusLoss: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            });
+        }
+    }, [maxCoinError]);
+
+    return (
+        <div className="mt-3 p-2 sm:p-3">
+            {cartProducts?.map((product) => (
+                <CartItem
+                    key={product?.product._id}
+                    product={product}
+                    increaseQty={increaseQty}
+                    decreaseQty={decreaseQty}
+                    deleteFromCart={deleteFromCart}
+                />
+            ))}
+            <ToastContainer />
+        </div>
+    );
+};
 
 const CartItem = ({ product, increaseQty, decreaseQty, deleteFromCart }) => (
     <div className="rounded-xl bg-themeLight mb-3 sm:p-4 p-3 shadow-black shadow-sm">
@@ -54,4 +78,4 @@ const CartItemActions = ({ product, increaseQty, decreaseQty, deleteFromCart }) 
     </div>
 );
 
-export default CartItemsList
+export default CartItemsList;
