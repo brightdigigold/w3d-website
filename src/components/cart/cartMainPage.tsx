@@ -48,7 +48,7 @@ import Link from "next/link";
 import { getUserAddressList } from "@/api/DashboardServices";
 import { FaChevronCircleDown } from "react-icons/fa";
 import AddressComponent from "./addressComponent";
-import { Address } from "@/types";
+import { Address, CartProduct, Product } from "@/types";
 import { useRouter } from "next/navigation";
 import AddAddressModel from "../modals/addAddressModel";
 import CartHeader from "./cartHeader";
@@ -56,6 +56,10 @@ import VaultConversionSection from "./vaultConversionSection";
 import CartItemsList from "./cartItemsList";
 import PriceBreakdown from "./priceBreakDown";
 import { toast } from "react-toastify";
+
+interface CartItem {
+  product: Product;
+}
 
 const Cart = () => {
   const user = useSelector(selectUser);
@@ -245,28 +249,42 @@ const Cart = () => {
       const finalResult = JSON.parse(decryptedData);
       console.log("items in cart:", finalResult);
 
-      // Validate the cart items against available stock
-      const validatedCartProducts = validateCartData(finalResult.data.cartProductForWeb);
+      // Validate the cart items against available stock and remove items with zero stock
+      const validatedCartProducts = await validateCartData(finalResult.data.cartProductForWeb);
 
       // Dispatch the validated cart products to the Redux store
       dispatch(setCartProducts(validatedCartProducts));
+
 
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
 
-  const validateCartData = (cartData: any[]) => {
+  const validateCartData = async (cartData: CartItem[]): Promise<CartProduct[]> => {
     let error = "";
-    const validatedData = cartData.map((item) => {
+    const validatedData: CartProduct[] = [];
+  
+    for (const item of cartData) {
       if (item.product.count > item.product.coinHave) {
         // Adjust the count to the maximum available stock
         item.product.count = item.product.coinHave;
         error = `The quantity for ${item.product.name} has been adjusted to ${item.product.coinHave} due to limited stock.`;
       }
-      return item;
-    });
-
+  
+      if (item.product.coinHave > 0) {
+        // Push the validated item as a CartProduct
+        validatedData.push({
+          product: {
+            ...item.product,
+          },
+        });
+      } else {
+        // Remove item from cart if stock is zero
+        await deleteFromCart(item.product.sku);
+      }
+    }
+  
     // Trigger toast notification if an error is found
     if (error) {
       toast.error(error, {
@@ -281,11 +299,10 @@ const Cart = () => {
         theme: "colored",
       });
     }
-
+  
     return validatedData;
   };
-
-
+  
   useEffect(() => {
     dispatch(setTotalGoldWeight(totalGoldWeight));
     dispatch(setTotalSilverWeight(totalSilverWeight));
@@ -347,7 +364,7 @@ const Cart = () => {
   }, [dataToEncrept]);
 
   const handleCartAction = async (
-    productId: any,
+    productId: string,
     action_type: string,
     quantityChange: number
   ) => {
@@ -384,7 +401,7 @@ const Cart = () => {
       const decryptedData = await funcForDecrypt(response.data.payload);
 
       if (JSON.parse(decryptedData).status) {
-        getAllProductsOfCart();
+        await getAllProductsOfCart(); // Refresh the cart after action
       }
     } catch (error) {
       Swal.fire({
@@ -394,6 +411,7 @@ const Cart = () => {
       });
     }
   };
+
 
   const increaseQty = async (maxForCart: number, coinHave: number, productId: string, currentCount: number) => {
     if (currentCount >= maxForCart) {
