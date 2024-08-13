@@ -259,14 +259,14 @@ const Cart = () => {
   };
 
   const validateCartData = async (cartData: CartItem[]): Promise<CartProduct[]> => {
-    let adjustmentNeeded = false;
+    let error = ""
     const validatedData: CartProduct[] = [];
 
     for (const item of cartData) {
       if (item.product.count > item.product.coinHave) {
         // Adjust the count to the maximum available stock
         item.product.count = item.product.coinHave;
-        adjustmentNeeded = true;
+        error = "Your cart has been adjusted according to our stock availability.";
       }
 
       if (item.product.coinHave > 0) {
@@ -282,10 +282,10 @@ const Cart = () => {
     }
 
     // html: "Your cart has been adjusted according to our stock availability.",
-    if (adjustmentNeeded) {
+    if (error) {
       Swal.fire({
         title: "Stock Adjustment",
-        html: "Your cart has been adjusted according to our stock availability.",
+        html: error,
       })
     }
 
