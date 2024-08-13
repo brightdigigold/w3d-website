@@ -287,75 +287,15 @@ const Cart = () => {
 
     if (error) {
       Swal.fire({
-        title: "Oops...!",
-        titleText: error,
+        title: "",
+        html: "Your cart has been adjusted according to our stock availability.",
         padding: "2em",
-        html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="removing cart item">`,
+        // html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="removing cart item">`,
       });
     }
 
     return validatedData;
   };
-
-  useEffect(() => {
-    dispatch(setTotalGoldWeight(totalGoldWeight));
-    dispatch(setTotalSilverWeight(totalSilverWeight));
-    dispatch(setTotalMakingChargesGold(totalGoldMakingCharges));
-    dispatch(setTotalMakingChargesSilver(totalMakingChargesSilver));
-    dispatch(setTotalMakingCharges(totalMakingCharges));
-    dispatch(setTotalMakingWithoutTax(totalMakingWithoutTax));
-    dispatch(setGoldVaultBalance(goldVaultBalance));
-    dispatch(setSilverVaultBalance(silverVaultBalance));
-    dispatch(setAmountWithTaxSilver(amountWithTaxSilver));
-    dispatch(setAmountWithoutTaxSilver(amountWithoutTaxSilver));
-    dispatch(setAmountWithTaxGold(amountWithTaxGold));
-    dispatch(setAmountWithoutTaxGold(amountWithoutTaxGold));
-    dispatch(calculateFinalAmount());
-    dispatch(setFinalAmount(finalAmount));
-  }, [isGoldVault, isSilverVault]);
-
-  const dataToEncrept = {
-    orderType: "CART",
-    goldCoins: goldPayload,
-    silverCoins: silverPayload,
-    liveGoldPrice: liveGoldPrice,
-    liveSilverPrice: liveSilverPrice,
-    isSilverVault: isSilverVault,
-    isGoldVault: isGoldVault,
-    paymentType: "",
-    vaultUsedWeight: {
-      Gold: isGoldVault ? goldVaultWeightUsed : 0,
-      Silver: isSilverVault ? silverVaultWeightUsed : 0,
-    },
-    fromApp: false,
-    addressId: selectedAddressId,
-    totalWeight: {
-      totalGoldWeight: totalGoldWeight,
-      totalSilverWeight: totalSilverWeight,
-      purchasedGoldWeight: !isGoldVault ? totalGoldWeight : purchasedGoldWeight,
-      purchasedSilverWeight: !isSilverVault
-        ? totalSilverWeight
-        : purchasedSilverWeight,
-    },
-    totalAmount: {
-      amountWithTaxGold: amountWithTaxGold,
-      amountWithoutTaxGold: amountWithoutTaxGold,
-      amountWithTaxSilver: amountWithTaxSilver,
-      amountWithoutTaxSilver: amountWithoutTaxSilver,
-      totalMakingWithoutTax: totalMakingWithoutTax,
-      totalMakingCharges: totalMakingCharges,
-      finalAmount: finalAmount,
-    },
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const resAfterEncryptData = await funForAesEncrypt(dataToEncrept);
-      setEncryptedPayload(resAfterEncryptData);
-    };
-
-    fetchData();
-  }, [dataToEncrept]);
 
   const handleCartAction = async (
     productId: string,
@@ -429,6 +369,68 @@ const Cart = () => {
   const deleteFromCart = async (productId: any) => {
     await handleCartAction(productId, "DELETE", quantity);
   };
+
+  useEffect(() => {
+    dispatch(setTotalGoldWeight(totalGoldWeight));
+    dispatch(setTotalSilverWeight(totalSilverWeight));
+    dispatch(setTotalMakingChargesGold(totalGoldMakingCharges));
+    dispatch(setTotalMakingChargesSilver(totalMakingChargesSilver));
+    dispatch(setTotalMakingCharges(totalMakingCharges));
+    dispatch(setTotalMakingWithoutTax(totalMakingWithoutTax));
+    dispatch(setGoldVaultBalance(goldVaultBalance));
+    dispatch(setSilverVaultBalance(silverVaultBalance));
+    dispatch(setAmountWithTaxSilver(amountWithTaxSilver));
+    dispatch(setAmountWithoutTaxSilver(amountWithoutTaxSilver));
+    dispatch(setAmountWithTaxGold(amountWithTaxGold));
+    dispatch(setAmountWithoutTaxGold(amountWithoutTaxGold));
+    dispatch(calculateFinalAmount());
+    dispatch(setFinalAmount(finalAmount));
+  }, [isGoldVault, isSilverVault]);
+
+  const dataToEncrept = {
+    orderType: "CART",
+    goldCoins: goldPayload,
+    silverCoins: silverPayload,
+    liveGoldPrice: liveGoldPrice,
+    liveSilverPrice: liveSilverPrice,
+    isSilverVault: isSilverVault,
+    isGoldVault: isGoldVault,
+    paymentType: "",
+    vaultUsedWeight: {
+      Gold: isGoldVault ? goldVaultWeightUsed : 0,
+      Silver: isSilverVault ? silverVaultWeightUsed : 0,
+    },
+    fromApp: false,
+    addressId: selectedAddressId,
+    totalWeight: {
+      totalGoldWeight: totalGoldWeight,
+      totalSilverWeight: totalSilverWeight,
+      purchasedGoldWeight: !isGoldVault ? totalGoldWeight : purchasedGoldWeight,
+      purchasedSilverWeight: !isSilverVault
+        ? totalSilverWeight
+        : purchasedSilverWeight,
+    },
+    totalAmount: {
+      amountWithTaxGold: amountWithTaxGold,
+      amountWithoutTaxGold: amountWithoutTaxGold,
+      amountWithTaxSilver: amountWithTaxSilver,
+      amountWithoutTaxSilver: amountWithoutTaxSilver,
+      totalMakingWithoutTax: totalMakingWithoutTax,
+      totalMakingCharges: totalMakingCharges,
+      finalAmount: finalAmount,
+    },
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const resAfterEncryptData = await funForAesEncrypt(dataToEncrept);
+      setEncryptedPayload(resAfterEncryptData);
+    };
+
+    fetchData();
+  }, [dataToEncrept]);
+
+ 
 
   const handleProceed = async () => {
     try {
