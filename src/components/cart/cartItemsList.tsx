@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from "react";
 
 const CartItemsList = ({ cartProducts, increaseQty, decreaseQty, deleteFromCart, maxCoinError }) => {
+    console.log("maxCoinError",  maxCoinError)
     
     // Trigger toast notification for errors
     useEffect(() => {

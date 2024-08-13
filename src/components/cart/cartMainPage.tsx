@@ -264,14 +264,14 @@ const Cart = () => {
   const validateCartData = async (cartData: CartItem[]): Promise<CartProduct[]> => {
     let error = "";
     const validatedData: CartProduct[] = [];
-  
+
     for (const item of cartData) {
       if (item.product.count > item.product.coinHave) {
         // Adjust the count to the maximum available stock
         item.product.count = item.product.coinHave;
         error = `The quantity for ${item.product.name} has been adjusted to ${item.product.coinHave} due to limited stock.`;
       }
-  
+
       if (item.product.coinHave > 0) {
         // Push the validated item as a CartProduct
         validatedData.push({
@@ -284,25 +284,19 @@ const Cart = () => {
         await deleteFromCart(item.product.sku);
       }
     }
-  
-    // Trigger toast notification if an error is found
+
     if (error) {
-      toast.error(error, {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        pauseOnFocusLoss: true,
-        progress: undefined,
-        theme: "colored",
+      Swal.fire({
+        title: "Oops...!",
+        titleText: error,
+        padding: "2em",
+        html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="removing cart item">`,
       });
     }
-  
+
     return validatedData;
   };
-  
+
   useEffect(() => {
     dispatch(setTotalGoldWeight(totalGoldWeight));
     dispatch(setTotalSilverWeight(totalSilverWeight));
