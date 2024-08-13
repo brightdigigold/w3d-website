@@ -63,19 +63,20 @@ const CartItemDetails = ({ product }) => (
 
 const CartItemActions = ({ product, increaseQty, decreaseQty, deleteFromCart }) => (
     <div className="items-center justify-end pt-2 md:pt-0">
-        <div className="flex items-center rounded-lg bg-themeLight px-2 py-2 shadow-black shadow-sm">
-            <div className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-red-500 cursor-pointer" onClick={() => decreaseQty(product?.product?.sku, product?.product?.count)}>
-                <IoMdRemove />
-            </div>
-            <div className="mx-2 sm:mx-2 text-xs sm:text-lg">{product?.product?.count}</div>
-            <div className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-green-400 cursor-pointer" onClick={() => increaseQty(product?.product?.maxForCart, product?.product?.coinHave, product?.product?.sku)}>
-                <IoMdAdd />
-            </div>
+      <div className="flex items-center rounded-lg bg-themeLight px-2 py-2 shadow-black shadow-sm">
+        <div className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-red-500 cursor-pointer" onClick={() => decreaseQty(product?.product?.sku, product?.product?.count)}>
+          <IoMdRemove />
         </div>
-        <div className="py-3 flex justify-end">
-            <MdDelete className="cursor-pointer justify-end text-red-400 text-3xl sm:text-xl md:text-4xl lg:text-4xl" onClick={() => deleteFromCart(product?.product?.sku)} />
+        <div className="mx-2 sm:mx-2 text-xs sm:text-lg">{product?.product?.count}</div>
+        <div className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-green-400 cursor-pointer" onClick={() => increaseQty(product?.product?.maxForCart, product?.product?.coinHave, product?.product?.sku, product?.product?.count)}>
+          <IoMdAdd />
         </div>
+      </div>
+      <div className="py-3 flex justify-end">
+        <MdDelete className="cursor-pointer justify-end text-red-400 text-3xl sm:text-xl md:text-4xl lg:text-4xl" onClick={() => deleteFromCart(product?.product?.sku)} />
+      </div>
     </div>
-);
+  );
+  
 
 export default CartItemsList;

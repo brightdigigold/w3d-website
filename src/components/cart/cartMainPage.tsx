@@ -55,6 +55,7 @@ import CartHeader from "./cartHeader";
 import VaultConversionSection from "./vaultConversionSection";
 import CartItemsList from "./cartItemsList";
 import PriceBreakdown from "./priceBreakDown";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const user = useSelector(selectUser);
@@ -242,12 +243,48 @@ const Cart = () => {
       );
       const decryptedData = AesDecrypt(response.data.payload);
       const finalResult = JSON.parse(decryptedData);
-      // Assuming finalResult contains an array of products
-      dispatch(setCartProducts(finalResult.data.cartProductForWeb));
+      console.log("items in cart:", finalResult);
+
+      // Validate the cart items against available stock
+      const validatedCartProducts = validateCartData(finalResult.data.cartProductForWeb);
+
+      // Dispatch the validated cart products to the Redux store
+      dispatch(setCartProducts(validatedCartProducts));
+
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
+
+  const validateCartData = (cartData: any[]) => {
+    let error = "";
+    const validatedData = cartData.map((item) => {
+      if (item.product.count > item.product.coinHave) {
+        // Adjust the count to the maximum available stock
+        item.product.count = item.product.coinHave;
+        error = `The quantity for ${item.product.name} has been adjusted to ${item.product.coinHave} due to limited stock.`;
+      }
+      return item;
+    });
+
+    // Trigger toast notification if an error is found
+    if (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        pauseOnFocusLoss: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+
+    return validatedData;
+  };
+
 
   useEffect(() => {
     dispatch(setTotalGoldWeight(totalGoldWeight));
@@ -358,27 +395,17 @@ const Cart = () => {
     }
   };
 
-  const increaseQty = async (
-    maxForCart: number,
-    coinHave: number,
-    productId: any
-  ) => {
-
-    if (quantity >= maxForCart) {
-      setMaxCoinError(
-        `You can only purchase ${maxForCart} coins of this item.`
-      );
-    } else if (quantity <= coinHave) {
-      setQuantity((prevQuantity) => prevQuantity + 1);
-      await handleCartAction(productId, "ADD", quantity);
+  const increaseQty = async (maxForCart: number, coinHave: number, productId: string, currentCount: number) => {
+    if (currentCount >= maxForCart) {
+      setMaxCoinError(`You can only purchase ${maxForCart} coins of this item.`);
+    } else if (currentCount < coinHave) {
+      await handleCartAction(productId, "ADD", currentCount + 1);
     } else {
-      setMaxCoinError(
-        `You can only purchase ${quantity - 1} coins. Insufficient stock.`
-      );
+      setMaxCoinError(`You can only purchase ${coinHave} coins. Insufficient stock.`);
     }
   };
 
-  const decreaseQty = async (productId: any, productCount: any) => {
+  const decreaseQty = async (productId: string, productCount: number) => {
     if (productCount > 1) {
       setQuantity(quantity - 1);
       await handleCartAction(productId, "SUBTRACT", quantity);
