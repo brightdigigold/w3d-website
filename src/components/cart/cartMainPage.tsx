@@ -247,33 +247,29 @@ const Cart = () => {
       );
       const decryptedData = AesDecrypt(response.data.payload);
       const finalResult = JSON.parse(decryptedData);
-      console.log("items in cart:", finalResult);
 
-      // Validate the cart items against available stock and remove items with zero stock
+      // Validate cart data only when initially loading the cart
+      console.log("Cart data orginal", finalResult)
       const validatedCartProducts = await validateCartData(finalResult.data.cartProductForWeb);
 
-      // Dispatch the validated cart products to the Redux store
       dispatch(setCartProducts(validatedCartProducts));
-
-
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
 
   const validateCartData = async (cartData: CartItem[]): Promise<CartProduct[]> => {
-    let error = "";
+    let adjustmentNeeded = false;
     const validatedData: CartProduct[] = [];
 
     for (const item of cartData) {
       if (item.product.count > item.product.coinHave) {
         // Adjust the count to the maximum available stock
         item.product.count = item.product.coinHave;
-        error = `The quantity for ${item.product.name} has been adjusted to ${item.product.coinHave} due to limited stock.`;
+        adjustmentNeeded = true;
       }
 
       if (item.product.coinHave > 0) {
-        // Push the validated item as a CartProduct
         validatedData.push({
           product: {
             ...item.product,
@@ -285,13 +281,12 @@ const Cart = () => {
       }
     }
 
-    if (error) {
+    // html: "Your cart has been adjusted according to our stock availability.",
+    if (adjustmentNeeded) {
       Swal.fire({
-        title: "",
+        title: "Stock Adjustment",
         html: "Your cart has been adjusted according to our stock availability.",
-        padding: "2em",
-        // html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="removing cart item">`,
-      });
+      })
     }
 
     return validatedData;
@@ -305,7 +300,7 @@ const Cart = () => {
     setMaxCoinError("");
 
     try {
-      const dataToBeDecrypt = {
+      const dataToBeEncrypt = {
         user_id: _id,
         count: quantityChange,
         product_Id: productId,
@@ -313,7 +308,7 @@ const Cart = () => {
         from_App: false,
       };
 
-      const resAfterEncryptData = await funForAesEncrypt(dataToBeDecrypt);
+      const resAfterEncryptData = await funForAesEncrypt(dataToBeEncrypt);
 
       const payloadToSend = {
         payload: resAfterEncryptData,
@@ -335,7 +330,8 @@ const Cart = () => {
       const decryptedData = await funcForDecrypt(response.data.payload);
 
       if (JSON.parse(decryptedData).status) {
-        await getAllProductsOfCart(); // Refresh the cart after action
+        // Just refresh the cart products without re-validating them
+        await getAllProductsOfCart();
       }
     } catch (error) {
       Swal.fire({
@@ -345,7 +341,6 @@ const Cart = () => {
       });
     }
   };
-
 
   const increaseQty = async (maxForCart: number, coinHave: number, productId: string, currentCount: number) => {
     if (currentCount >= maxForCart) {
@@ -359,16 +354,16 @@ const Cart = () => {
 
   const decreaseQty = async (productId: string, productCount: number) => {
     if (productCount > 1) {
-      setQuantity(quantity - 1);
-      await handleCartAction(productId, "SUBTRACT", quantity);
+      await handleCartAction(productId, "SUBTRACT", productCount - 1);
     } else {
       setMaxCoinError("Quantity cannot be less than 1.");
     }
   };
 
   const deleteFromCart = async (productId: any) => {
-    await handleCartAction(productId, "DELETE", quantity);
+    await handleCartAction(productId, "DELETE", 1);
   };
+
 
   useEffect(() => {
     dispatch(setTotalGoldWeight(totalGoldWeight));
@@ -430,7 +425,7 @@ const Cart = () => {
     fetchData();
   }, [dataToEncrept]);
 
- 
+
 
   const handleProceed = async () => {
     try {
