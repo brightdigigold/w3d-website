@@ -560,6 +560,7 @@ const Cart = () => {
               onSelectAddress={handleSelectAddress}
             />
           )}
+
           <CartFooter
             finalAmount={finalAmount}
             loading={loading}
@@ -590,7 +591,7 @@ const Cart = () => {
               displayMetalType={"both"}
             />
           </div>
-          
+
           <div className="flex justify-between items-center">
             <div>
               <p className="text-gray-100 text-xl sm:text-2xl extrabold tracking-wide">

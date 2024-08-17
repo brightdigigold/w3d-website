@@ -11,7 +11,6 @@ import Link from "next/link";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import SimpleImageSlider from "react-simple-image-slider";
-import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import CustomImageButton from "@/components/customImageButton";
 import { SelectGoldData, SelectSilverData } from "@/redux/metalSlice";
@@ -22,13 +21,9 @@ import { useAddToCart } from "@/hooks/useAddToCart";
 import ProductDescription from "../ProductDetails/productDescription";
 import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
-import CustomButton from "@/components/customButton";
-import Image from "next/image";
-import { MdInfo } from 'react-icons/md';
-
-
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
+  console.log("params: " , slug);
   const user = useSelector(selectUser);
   const router = useRouter();
   const id = slug;

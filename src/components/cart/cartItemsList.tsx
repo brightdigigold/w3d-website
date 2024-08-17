@@ -1,12 +1,14 @@
+"use client"
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const CartItemsList = ({ cartProducts, increaseQty, decreaseQty, deleteFromCart, maxCoinError }) => {
-    console.log("maxCoinError",  maxCoinError)
-    
+    console.log("cartProducts", cartProducts)
+
     // Trigger toast notification for errors
     useEffect(() => {
         if (maxCoinError) {
@@ -41,17 +43,27 @@ const CartItemsList = ({ cartProducts, increaseQty, decreaseQty, deleteFromCart,
     );
 };
 
-const CartItem = ({ product, increaseQty, decreaseQty, deleteFromCart }) => (
-    <div className="rounded-xl bg-themeLight mb-3 sm:p-4 p-3 shadow-black shadow-sm">
-        <div className="flex justify-between">
-            <div className="flex gap-2 items-center">
-                <img src={product?.product?.image?.image} className="h-14 w-14 sm:h-32 sm:w-32" alt="vault" />
-                <CartItemDetails product={product} />
+const CartItem = ({ product, increaseQty, decreaseQty, deleteFromCart }) => {
+    const router = useRouter()
+
+    const handleCoinDetails = (name: string) => {
+        let slug: string;
+        slug = name.replace(/\s+/g, '-');;
+        router.push(`/coins/${slug}`)
+    }
+
+    return (
+        <div className="rounded-xl bg-themeLight mb-3 sm:p-4 p-3 shadow-black shadow-sm cursor-pointer" onClick={() => { handleCoinDetails(product.product.name) }}>
+            <div className="flex justify-between">
+                <div className="flex gap-2 items-center">
+                    <img src={product?.product?.image?.image} className="h-14 w-14 sm:h-32 sm:w-32" alt="vault" />
+                    <CartItemDetails product={product} />
+                </div>
+                <CartItemActions product={product} increaseQty={increaseQty} decreaseQty={decreaseQty} deleteFromCart={deleteFromCart} />
             </div>
-            <CartItemActions product={product} increaseQty={increaseQty} decreaseQty={decreaseQty} deleteFromCart={deleteFromCart} />
         </div>
-    </div>
-);
+    )
+};
 
 const CartItemDetails = ({ product }) => (
     <div>
@@ -64,20 +76,20 @@ const CartItemDetails = ({ product }) => (
 
 const CartItemActions = ({ product, increaseQty, decreaseQty, deleteFromCart }) => (
     <div className="items-center justify-end pt-2 md:pt-0">
-      <div className="flex items-center rounded-lg bg-themeLight px-2 py-2 shadow-black shadow-sm">
-        <div className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-red-500 cursor-pointer" onClick={() => decreaseQty(product?.product?.sku, product?.product?.count)}>
-          <IoMdRemove />
+        <div className="flex items-center rounded-lg bg-themeLight px-2 py-2 shadow-black shadow-sm">
+            <div className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-red-500 cursor-pointer" onClick={() => decreaseQty(product?.product?.sku, product?.product?.count)}>
+                <IoMdRemove />
+            </div>
+            <div className="mx-2 sm:mx-2 text-xs sm:text-lg">{product?.product?.count}</div>
+            <div className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-green-400 cursor-pointer" onClick={() => increaseQty(product?.product?.maxForCart, product?.product?.coinHave, product?.product?.sku, product?.product?.count)}>
+                <IoMdAdd />
+            </div>
         </div>
-        <div className="mx-2 sm:mx-2 text-xs sm:text-lg">{product?.product?.count}</div>
-        <div className="px-[6px] py-[4px] sm:p-2 rounded-md bg-themeLight text-green-400 cursor-pointer" onClick={() => increaseQty(product?.product?.maxForCart, product?.product?.coinHave, product?.product?.sku, product?.product?.count)}>
-          <IoMdAdd />
+        <div className="py-3 flex justify-end">
+            <MdDelete className="cursor-pointer justify-end text-red-400 text-3xl sm:text-xl md:text-4xl lg:text-4xl" onClick={() => deleteFromCart(product?.product?.sku)} />
         </div>
-      </div>
-      <div className="py-3 flex justify-end">
-        <MdDelete className="cursor-pointer justify-end text-red-400 text-3xl sm:text-xl md:text-4xl lg:text-4xl" onClick={() => deleteFromCart(product?.product?.sku)} />
-      </div>
     </div>
-  );
-  
+);
+
 
 export default CartItemsList;
