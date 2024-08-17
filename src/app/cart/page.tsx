@@ -1,5 +1,5 @@
 
-import Cart from "@/components/cart/cartMainPage";
+import Cart from "@/components/cart/cart";
 import RequireAuth from "@/components/requireAuth";
 import { Metadata } from "next";
 import React from "react";
