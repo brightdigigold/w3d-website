@@ -87,7 +87,7 @@ export const Card = ({ title, description, imageUrl, linkTo }: any) => {
             maxWidth: "100%",
             height: "auto"
           }} />
-        <div className="font-bold text-base mt-2 text-white">{title}</div>
+        <div className="bold text-base mt-2 text-white">{title}</div>
         <div
           className="px-4 py-2 text-center text-white"
           dangerouslySetInnerHTML={{ __html: formattedDescription }}
@@ -212,7 +212,7 @@ export const renderPriceBreakdownItemCart = ({
         <span className="tracking-wide text-gray-300">{label}</span>
       </div>
       <div>
-        <span className="text-gray-100 font-extrabold tracking-wide">
+        <span className="text-gray-100 extrabold tracking-wide">
           {value}
         </span>
       </div>

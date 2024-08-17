@@ -26,7 +26,7 @@ const CartItemsList = ({ cartProducts, increaseQty, decreaseQty, deleteFromCart,
     }, [maxCoinError]);
 
     return (
-        <div className="mt-3 p-2 sm:p-3">
+        <div className="mt-3">
             {cartProducts?.map((product) => (
                 <CartItem
                     key={product?.product._id}

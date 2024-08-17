@@ -5,6 +5,7 @@ import {
   ParseFloat,
   funForAesEncrypt,
   funcForDecrypt,
+  renderPriceBreakdownItemCart,
 } from "@/components/helperFunctions";
 import { selectUser } from "@/redux/userDetailsSlice";
 import {
@@ -56,12 +57,15 @@ import VaultConversionSection from "./vaultConversionSection";
 import CartItemsList from "./cartItemsList";
 import PriceBreakdown from "./priceBreakDown";
 import { toast } from "react-toastify";
+import { useCartTotals } from "@/hooks/useCartTotals";
+import CartFooter from "./cartFooter";
 
 interface CartItem {
   product: Product;
 }
 
 const Cart = () => {
+  useCartTotals();
   const user = useSelector(selectUser);
   const { _id } = user.data;
   const token = localStorage.getItem("token");
@@ -137,74 +141,10 @@ const Cart = () => {
     dispatch(setUseVaultBalanceSilver(false));
     dispatch(setGoldVaultBalance(goldVaultBalance));
     dispatch(setSilverVaultBalance(silverVaultBalance));
-    calculateTotals();
     updateAddressList();
   }, []);
 
-  const calculateTotals = () => {
-    let totalGoldWeight = 0;
-    let totalSilverWeight = 0;
-    let totalGoldMakingCharges = 0;
-    let totalSilverMakingCharges = 0;
-    let totalMakingCharges = 0;
-    let totalMakingWithoutTax = 0;
-    let silverGstForCart = 0;
-    let amountWithTaxSilver = 0;
-    let amountWithoutTaxSilver = 0;
-    let GoldGstForCart = 0;
-    let amountWithTaxGold = 0;
-    let amountWithoutTaxGold = 0;
-    let finalAmount = 0;
-    let totalGoldCoins = 0;
-    let totalSilverCoins = 0;
-    let totalGstForMakingCharges = 0;
-
-    cartProducts.forEach((item) => {
-      const itemWeight = item?.product?.count * item?.product?.weight;
-      const itemMakingCharges = +item?.product?.makingcharges;
-
-      if (item?.product?.iteamtype === "GOLD") {
-        totalGoldWeight += itemWeight;
-        totalGoldMakingCharges += itemMakingCharges;
-        totalGoldCoins += item?.product?.count;
-      } else if (item?.product?.iteamtype === "SILVER") {
-        totalSilverWeight += itemWeight;
-        totalSilverMakingCharges += itemMakingCharges;
-        totalSilverCoins += item?.product?.count;
-      }
-      totalMakingCharges += itemMakingCharges * item?.product?.count;
-      totalGstForMakingCharges = ParseFloat((totalMakingCharges * 0.18), 2);
-      totalMakingWithoutTax = ParseFloat(totalMakingCharges - totalGstForMakingCharges, 2)
-      amountWithoutTaxSilver = ParseFloat(liveSilverPrice * totalSilverWeight, 2);
-      silverGstForCart = ParseFloat(totalSilverWeight * liveSilverPrice * 0.03, 2);
-      amountWithTaxSilver = ParseFloat(totalSilverWeight * liveSilverPrice + silverGstForCart, 2);
-      amountWithoutTaxGold = ParseFloat(liveGoldPrice * totalGoldWeight, 2);
-      GoldGstForCart = ParseFloat(totalGoldWeight * liveGoldPrice * 0.03, 2);
-      amountWithTaxGold = ParseFloat(totalGoldWeight * liveGoldPrice + GoldGstForCart, 2);
-      // finalAmount = ParseFloat(amountWithTaxGold + amountWithTaxSilver + totalMakingCharges, 2);
-    });
-
-    // Dispatch actions to update the state in the Redux store
-    dispatch(setTotalGoldWeight(totalGoldWeight));
-    dispatch(setTotalSilverWeight(totalSilverWeight));
-    dispatch(setTotalMakingChargesGold(totalGoldMakingCharges));
-    dispatch(setTotalMakingChargesSilver(totalSilverMakingCharges));
-    dispatch(setTotalMakingCharges(totalMakingCharges));
-    dispatch(setTotalMakingWithoutTax(totalMakingWithoutTax));
-    dispatch(setGoldVaultBalance(goldVaultBalance));
-    dispatch(setSilverVaultBalance(silverVaultBalance));
-    dispatch(setAmountWithTaxSilver(amountWithTaxSilver));
-    dispatch(setAmountWithoutTaxSilver(amountWithoutTaxSilver));
-    dispatch(setAmountWithTaxGold(amountWithTaxGold));
-    dispatch(setAmountWithoutTaxGold(amountWithoutTaxGold));
-    dispatch(calculateFinalAmount());
-    // dispatch(setFinalAmount(finalAmount));
-    dispatch(setTotalGoldCoins(totalGoldCoins));
-    dispatch(setTotalSilverCoins(totalSilverCoins));
-  };
-
   useEffect(() => {
-    calculateTotals();
     dispatch(setGoldVaultBalance(goldVaultBalance));
     dispatch(setSilverVaultBalance(silverVaultBalance));
     dispatch(setLiveGoldPrice(goldData.totalPrice));
@@ -517,41 +457,7 @@ const Cart = () => {
     }
   };
 
-  const renderPriceBreakdownItemCart = ({
-    label,
-    value,
-    index,
-    imageUrl,
-  }: any) => (
-    <div className="py-1">
-      <div className="justify-between flex items-center">
-        <div key={index} className="mb-1 flex items-center">
-          {imageUrl && (
-            <div className="mr-1">
-              <img src={imageUrl} alt={label} className="w-10 h-10" />
-            </div>
-          )}
-          <span className="tracking-wide text-gray-300">{label}</span>
-        </div>
-        <div>
-          <span className="text-blue-100 tracking-wide bold">
-            {value.toLocaleString("en-IN")}
-          </span>
-        </div>
-      </div>
-      <hr
-        className="my-0 border-t border-gray-400 mt-1"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #d2d6dc 50%, transparent 50%)",
-          backgroundSize: "0.4rem 2px",
-          backgroundRepeat: "repeat-x",
-          border: "none",
-          height: "1px",
-        }}
-      />
-    </div>
-  );
+
 
   if (!cartProducts.length) {
     return (
@@ -654,80 +560,29 @@ const Cart = () => {
               onSelectAddress={handleSelectAddress}
             />
           )}
-          {isOpened && (
-            <div className=" overflow-y-scroll">
-              <div className="flex items-center text-xl extrabold tracking-widest sm:tracking-wider">
-                <AiOutlineShoppingCart className="text-yellow-400" size={28} />
-                <p className="px-2">Price Breakdown</p>
-              </div>
-              {(goldPayload.length > 0 || silverPayload.length > 0) && (
-                <div className="mt-3 text-xs sm:text-base">
-                  {goldPayload.length > 0 && (
-                    <>
-                      {renderPriceBreakdownItemCart({
-                        imageUrl: "/coin1.png",
-                        label: "Total Gold Coins",
-                        value: totalGoldCoins,
-                      })}
-                      {renderPriceBreakdownItemCart({
-                        label: "Total Gold Weight",
-                        value: totalGoldWeight + " gm",
-                      })}
-                      {isGoldVault &&
-                        renderPriceBreakdownItemCart({
-                          label: "Gold Vault Used",
-                          value: goldVaultWeightUsed + " gm",
-                        })}
-                      {isGoldVault &&
-                        renderPriceBreakdownItemCart({
-                          label: "Total Purchasing Gold Weight",
-                          value: purchasedGoldWeight + " gm",
-                        })}
-                      {renderPriceBreakdownItemCart({
-                        label: "Total Gold Coin Price (Incl. 3% GST)",
-                        value: "₹ " + amountWithTaxGold.toLocaleString("en-IN"),
-                      })}
-                    </>
-                  )}
-                  <div className="mt-3">
-                    {silverPayload.length > 0 && (
-                      <>
-                        {renderPriceBreakdownItemCart({
-                          imageUrl: "/Rectangle.png",
-                          label: "Total Silver Coins",
-                          value: totalSilverCoins,
-                        })}
-                        {renderPriceBreakdownItemCart({
-                          label: "Total Silver Weight",
-                          value: totalSilverWeight + " gm",
-                        })}
-                        {isSilverVault &&
-                          renderPriceBreakdownItemCart({
-                            label: "Silver Vault Used",
-                            value: silverVaultWeightUsed + " gm",
-                          })}
-                        {isSilverVault &&
-                          renderPriceBreakdownItemCart({
-                            label: "Total Purchasing Silver Weight",
-                            value: purchasedSilverWeight + " gm",
-                          })}
-                        {renderPriceBreakdownItemCart({
-                          label: "Total Silver Coin Price (Incl. 3% GST)",
-                          value:
-                            "₹ " + amountWithTaxSilver.toLocaleString("en-IN"),
-                        })}
-                        {renderPriceBreakdownItemCart({
-                          label: "Total Making Charges (Incl. 18% GST)",
-                          value:
-                            "₹ " + totalMakingCharges.toLocaleString("en-IN"),
-                        })}
-                      </>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
+          <CartFooter
+            finalAmount={finalAmount}
+            loading={loading}
+            isOpened={isOpened}
+            setIsOpened={setIsOpened}
+            checkoutCart={checkoutCart}
+            goldPayload={goldPayload}
+            silverPayload={silverPayload}
+            totalGoldCoins={totalGoldCoins}
+            totalSilverCoins={totalSilverCoins}
+            totalGoldWeight={totalGoldWeight}
+            totalSilverWeight={totalSilverWeight}
+            isGoldVault={isGoldVault}
+            goldVaultWeightUsed={goldVaultWeightUsed}
+            purchasedGoldWeight={purchasedGoldWeight}
+            amountWithTaxGold={amountWithTaxGold}
+            isSilverVault={isSilverVault}
+            silverVaultWeightUsed={silverVaultWeightUsed}
+            purchasedSilverWeight={purchasedSilverWeight}
+            amountWithTaxSilver={amountWithTaxSilver}
+            totalMakingCharges={totalMakingCharges}
+          />
+
           <div className="my-5">
             <ProgressBar
               fromCart={true}
@@ -735,6 +590,7 @@ const Cart = () => {
               displayMetalType={"both"}
             />
           </div>
+          
           <div className="flex justify-between items-center">
             <div>
               <p className="text-gray-100 text-xl sm:text-2xl extrabold tracking-wide">
