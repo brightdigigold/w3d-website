@@ -212,6 +212,8 @@ const Cart = () => {
         // Adjust the count to the maximum available stock
         item.product.count = item.product.coinHave;
         error = "Your cart has been adjusted according to our stock availability.";
+
+        await handleCartAction(item.product.sku, "SUBTRACT", item.product.count);
       }
 
       if (item.product.coinHave > 0) {
@@ -295,7 +297,7 @@ const Cart = () => {
     } else {
       setMaxCoinError(`You can only purchase ${coinHave} coins. Insufficient stock.`);
     }
-  }, 300);
+  }, 100);
 
   const decreaseQty = debounce(async (productId: string, productCount: number) => {
     if (productCount > 1) {
@@ -303,7 +305,7 @@ const Cart = () => {
     } else {
       setMaxCoinError("Quantity cannot be less than 1.");
     }
-  }, 300);
+  }, 100);
 
   const deleteFromCart = async (productId: any) => {
     await handleCartAction(productId, "DELETE", 1);
