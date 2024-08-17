@@ -53,9 +53,9 @@ const CartItem = ({ product, increaseQty, decreaseQty, deleteFromCart }) => {
     }
 
     return (
-        <div className="rounded-xl bg-themeLight mb-3 sm:p-4 p-3 shadow-black shadow-sm cursor-pointer" onClick={() => { handleCoinDetails(product.product.name) }}>
+        <div className="rounded-xl bg-themeLight mb-3 sm:p-4 p-3 shadow-black shadow-sm">
             <div className="flex justify-between">
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-2 items-center cursor-pointer" onClick={() => { handleCoinDetails(product.product.name) }}>
                     <img src={product?.product?.image?.image} className="h-14 w-14 sm:h-32 sm:w-32" alt="vault" />
                     <CartItemDetails product={product} />
                 </div>
