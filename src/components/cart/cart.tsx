@@ -13,7 +13,7 @@ import {
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import ConvertMetalModal from "@/components/modals/convertMetalModal";
@@ -59,6 +59,7 @@ import PriceBreakdown from "./priceBreakDown";
 import { toast } from "react-toastify";
 import { useCartTotals } from "@/hooks/useCartTotals";
 import CartFooter from "./cartFooter";
+import { debounce } from 'lodash';
 
 interface CartItem {
   product: Product;
@@ -157,21 +158,25 @@ const Cart = () => {
     setOpenConvertMetalModal(false);
   };
 
-  const goldPayload = cart.products
-    .filter((item) => item?.product?.iteamtype === "GOLD")
-    .map((item) => ({
-      makingcharge: item?.product?.makingcharges,
-      productId: item?.product?.sku,
-      count: item?.product?.count,
-    }));
+  const goldPayload = useMemo(() => {
+    return cart.products
+      .filter((item) => item?.product?.iteamtype === "GOLD")
+      .map((item) => ({
+        makingcharge: item?.product?.makingcharges,
+        productId: item?.product?.sku,
+        count: item?.product?.count,
+      }));
+  }, [cart.products]);
 
-  const silverPayload = cart.products
-    .filter((item) => item?.product?.iteamtype === "SILVER")
-    .map((item) => ({
-      makingcharge: item?.product?.makingcharges,
-      productId: item?.product?.sku,
-      count: item?.product?.count,
-    }));
+  const silverPayload = useMemo(() => {
+    return cart.products
+      .filter((item) => item?.product?.iteamtype === "SILVER")
+      .map((item) => ({
+        makingcharge: item?.product?.makingcharges,
+        productId: item?.product?.sku,
+        count: item?.product?.count,
+      }));
+  }, [cart.products]);
 
   const getAllProductsOfCart = async () => {
     try {
@@ -282,7 +287,7 @@ const Cart = () => {
     }
   };
 
-  const increaseQty = async (maxForCart: number, coinHave: number, productId: string, currentCount: number) => {
+  const increaseQty = debounce(async (maxForCart: number, coinHave: number, productId: string, currentCount: number) => {
     if (currentCount >= maxForCart) {
       setMaxCoinError(`You can only purchase ${maxForCart} coins of this item.`);
     } else if (currentCount < coinHave) {
@@ -290,15 +295,15 @@ const Cart = () => {
     } else {
       setMaxCoinError(`You can only purchase ${coinHave} coins. Insufficient stock.`);
     }
-  };
+  }, 300);
 
-  const decreaseQty = async (productId: string, productCount: number) => {
+  const decreaseQty = debounce(async (productId: string, productCount: number) => {
     if (productCount > 1) {
       await handleCartAction(productId, "SUBTRACT", productCount - 1);
     } else {
       setMaxCoinError("Quantity cannot be less than 1.");
     }
-  };
+  }, 300);
 
   const deleteFromCart = async (productId: any) => {
     await handleCartAction(productId, "DELETE", 1);
@@ -490,11 +495,13 @@ const Cart = () => {
   return (
     <div className="text-white">
       {openConvertMetalModal && (
-        <ConvertMetalModal
-          metalTypeToConvert={metalTypeToConvert}
-          openModalOfCoin={openConvertMetalModal}
-          closeModalOfCoin={closeConvertMetalHandler}
-        />
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <ConvertMetalModal
+            metalTypeToConvert={metalTypeToConvert}
+            openModalOfCoin={openConvertMetalModal}
+            closeModalOfCoin={closeConvertMetalHandler}
+          />
+        </React.Suspense>
       )}
 
       {showAddNewAddress && (
