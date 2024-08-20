@@ -2,10 +2,8 @@
 import CustomButton from "@/components/customButton";
 import {
   AesDecrypt,
-  ParseFloat,
   funForAesEncrypt,
   funcForDecrypt,
-  renderPriceBreakdownItemCart,
 } from "@/components/helperFunctions";
 import { selectUser } from "@/redux/userDetailsSlice";
 import {
@@ -42,7 +40,6 @@ import {
   calculatePurchasedSilverWeight,
   setUseVaultBalanceGold
 } from "@/redux/cartSlice";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProgressBar from "@/components/progressBar";
 import Swal from "sweetalert2";
 import Link from "next/link";
@@ -104,7 +101,6 @@ const Cart = () => {
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
   const [loading, setLoading] = useState(false);
-  const [quantity, setQuantity] = useState<number>(1);
   const [maxCoinError, setMaxCoinError] = useState<String>("");
   const [openConvertMetalModal, setOpenConvertMetalModal] = useState<boolean>(false);
   const [metalTypeToConvert, setMetalTypeToConvert] = useState<String>("GOLD");
