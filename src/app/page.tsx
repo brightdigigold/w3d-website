@@ -88,7 +88,7 @@ export default function Home() {
           <img
             src="/images/abhinav.png"
             alt="gold and silver coin banner"
-            className="rounded-b  mx-auto mt-8 p-4"
+            className="rounded-b  mx-auto mt-8"
           />
         </div>
         <div className="hidden sm:block">
