@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 import { funForAesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
 
 interface UseAddToCartHook {
-    addToCart: (action_type: string) => Promise<void>;
+    addToCart: (action_type: string, quantity: number, productId: string) => Promise<void>;
     isLoading: boolean;
     error: string | null;
     isSuccess: boolean;
@@ -13,16 +13,14 @@ interface UseAddToCartHook {
 
 export const useAddToCart = (
     _id: string,
-    quantity: number,
-    productId: string,
-    refetch: () => void,
-    onSuccessfulAdd: () => void
+    refetch?: () => void,
+    onSuccessfulAdd?: () => void
 ): UseAddToCartHook => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
-    const addToCart = async (action_type: string) => {
+    const addToCart = async (action_type: string, quantity: number, productId: string) => {
         setIsLoading(true);
         setError(null);
         setIsSuccess(false);
@@ -57,8 +55,8 @@ export const useAddToCart = (
 
             if (parsedData.status) {
                 setIsSuccess(true);
-                onSuccessfulAdd();
-                refetch();
+                if (onSuccessfulAdd) onSuccessfulAdd(); // Check if onSuccessfulAdd is defined before calling
+                if (refetch) refetch(); // Check if refetch is defined before calling
             } else {
                 setError('Failed to add to cart');
             }
@@ -76,3 +74,4 @@ export const useAddToCart = (
 
     return { addToCart, isLoading, error, isSuccess };
 };
+
