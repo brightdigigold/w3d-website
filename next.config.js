@@ -40,7 +40,8 @@ const nextConfig = {
   },
 
   env: {
-    baseUrl: "https://devapi.brightdigigold.com",
+    // baseUrl: "https://devapi.brightdigigold.com",
+    baseUrl: "https://api.brightdigigold.com",
     // baseUrl: "http://localhost:3032",0
     cashfree: "sandbox",
     GOOGLE_TAG: "GTM-5JFBNN5",

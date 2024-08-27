@@ -25,7 +25,7 @@ export default function Home() {
       </div> */}
 
 
-<div className='pb-2 xl:pb-8 '>
+      <div className=' '>
         <div className='bg-gradient-to-b from-gray-50 via-[rgb(57,94,128)] to-[rgb(4,67,86)] sm:hidden'>
           <div className=' w-2/3 mx-auto'>
 
@@ -57,7 +57,8 @@ export default function Home() {
 
 
       </div>
-      <div className='pb-2 xl:pb-8 '>
+      {/* pb-2 xl:pb-8  */}
+      <div className=''>
         <div className='bg-[#C8E9F2] mx-auto sm:hidden'>
           <div className='  w-2/3 mx-auto'>
 
