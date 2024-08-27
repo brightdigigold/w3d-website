@@ -100,7 +100,7 @@ export default function Blog() {
                             height: "auto"
                           }} />
                       </div>
-                      <p className="text-white text-center text-lg poppins-regular line-clamp-1">{feature?.title}</p>
+                      <p className="text-white text-center text-lg poppins-regular line-clamp-1 sm:line-clamp-2">{feature?.title}</p>
                     </div>
                   </Link>
                 </div>
