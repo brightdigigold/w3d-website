@@ -27,22 +27,22 @@ export default function Home() {
 
 <div className='pb-2 xl:pb-8 '>
         <div className='bg-gradient-to-b from-gray-50 via-[rgb(57,94,128)] to-[rgb(4,67,86)] sm:hidden'>
-          <div className='mx-auto'>
+          <div className=' w-2/3 mx-auto'>
 
             <img
               src="/images/gayatrib.png"
               alt="gold and silver coin banner"
-              className="mx-auto pt-5"
+              className="mx-auto pt-5 h"
             />
           </div>
 
           <div className="grid place-items-center mt-8 fade-in-up">
             <div className="text-gold01 text-center pt-1 poppins-bold ">
-              <h1 className="text-4xl">
+              <h1 className="text-2xl">
                 DOUBLE THE JOY
               </h1>
             </div>
-            <h4 className="text-white text-center pt-5 poppins-semibold text-2xl">
+            <h4 className="text-white text-center pt-3 poppins-semibold text-xl">
               Buy Gold and Get Silver Free Of Same Weight
             </h4>
 
@@ -59,7 +59,7 @@ export default function Home() {
       </div>
       <div className='pb-2 xl:pb-8 '>
         <div className='bg-[#C8E9F2] mx-auto sm:hidden'>
-          <div className='mx-auto'>
+          <div className='  w-2/3 mx-auto'>
 
             <img
               src="/images/homeappbanner.png"
@@ -70,11 +70,11 @@ export default function Home() {
 
           <div className="grid place-items-center mt-8 fade-in-up">
             <div className="text-black text-center pt-1 poppins-bold ">
-              <h1 className="text-4xl">
+              <h1 className="text-3xl">
                 AUTOMATE YOUR
               </h1>
             </div>
-            <h4 className="text-black text-center pt-1 poppins-semibold text-3xl">
+            <h4 className="text-black text-center pt-1 poppins-semibold text-2xl">
               GOLD SAVINGS
             </h4>
             <img
