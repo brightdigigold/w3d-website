@@ -23,7 +23,7 @@ import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
-  console.log("params: " , slug);
+  // console.log("params: " , slug);
   const user = useSelector(selectUser);
   const router = useRouter();
   const id = slug;
@@ -33,7 +33,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const { productsDetailById, productId, isLoading, error } = useFetchProductDetailsById(id);
   const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
   const onSuccessfulAdd = () => setOpenCartSidebar(true);
-  const { addToCart, isSuccess, } = useAddToCart(_id, quantity, productId, onSuccessfulAdd, refetch,);
+  const { addToCart, isSuccess, } = useAddToCart(_id, refetch, onSuccessfulAdd);
   const [cartQuantity, setCartQuantity] = useState<number>(1);
   const goldData = useSelector(SelectGoldData);
   const silverData = useSelector(SelectSilverData);
@@ -100,10 +100,10 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     setOpenLoginAside(!openLoginAside);
   };
 
-  const addToCartHandler = async (action_type: string) => {
+  const addToCartHandler = async (action_type: string,) => {
     if (isloggedIn) {
       setMaxCoinError("");
-      await addToCart(action_type);
+      await addToCart(action_type, quantity ,productId);
       // refetch();
     } else {
       handleLoginClick();
