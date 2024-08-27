@@ -26,13 +26,13 @@ export default function Home() {
 
 
 <div className='pb-2 xl:pb-8 '>
-        <div className='bg-gradient-to-b from-white via-[rgb(105,153,199)] to-[rgb(7,93,118)] sm:hidden'>
+        <div className='bg-gradient-to-b from-gray-50 via-[rgb(57,94,128)] to-[rgb(4,67,86)] sm:hidden'>
           <div className='mx-auto'>
 
             <img
-              src="/images/GayatriBhardwaj.png"
+              src="/images/gayatrib.png"
               alt="gold and silver coin banner"
-              className="mx-auto pt-24"
+              className="mx-auto pt-5"
             />
           </div>
 
@@ -42,8 +42,8 @@ export default function Home() {
                 DOUBLE THE JOY
               </h1>
             </div>
-            <h4 className="text-white text-center pt-5 poppins-semibold text-3xl">
-              BUY GOLD AND GET SILVER FREE OF SAME WEIGHT
+            <h4 className="text-white text-center pt-5 poppins-semibold text-2xl">
+              Buy Gold and Get Silver Free Of Same Weight
             </h4>
 
           </div>
@@ -64,7 +64,7 @@ export default function Home() {
             <img
               src="/images/homeappbanner.png"
               alt="gold and silver coin banner"
-              className="mx-auto pt-24"
+              className="mx-auto pt-5"
             />
           </div>
 
