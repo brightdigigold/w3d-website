@@ -12,6 +12,8 @@ const Page = async ({ params }: PageProps) => {
   const token = localStorage.getItem("token"); 
   const data = await fetchTransactionData(params.id, token!);
 
+  console.log("data===>------->", data);
+
   return (
     <div className="px-4">
       <div className="min-h-screen flex items-center justify-center">

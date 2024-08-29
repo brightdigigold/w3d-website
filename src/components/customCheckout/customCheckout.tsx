@@ -6,8 +6,10 @@ import { funForAesEncrypt, funcForDecrypt } from "../helperFunctions";
 import axios from "axios";
 import { load } from "@cashfreepayments/cashfree-js";
 import Loading from "@/app/loading";
+import { useRouter } from "next/navigation";
 
 const CustomCheckout = async ({ data }: any) => {
+  const router = useRouter();
   const orderIdRef = useRef(null);
   const [payload, setpayload] = useState({});
   const token = localStorage.getItem("token");
@@ -72,8 +74,8 @@ const CustomCheckout = async ({ data }: any) => {
 
   const initializeSDK = async () => {
     cashfree = await load({
-      mode: "production",
-      // mode: "sandbox",
+      // mode: "production",
+      mode: "sandbox",
     });
   };
   initializeSDK();
@@ -84,6 +86,10 @@ const CustomCheckout = async ({ data }: any) => {
       // Display an error message to the user
       alert("Invalid amount. Cannot proceed with the payment.");
       return; // Exit the function early
+    }
+
+    if(!sessionId) {
+      router.push("/")
     }
 
     const checkoutOptions = {
