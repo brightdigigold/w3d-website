@@ -15,7 +15,7 @@ const Mission = () => {
         <div className="mx-auto px-4 sm:px-6 lg:px-16 relative">
           <NextImage
             className=" absolute top-32 -left-20 opacity-20"
-            src="/bdgwhite.png"
+            src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
             alt="Bright Digi Gold Vision"
             width={500} height={300}
           />

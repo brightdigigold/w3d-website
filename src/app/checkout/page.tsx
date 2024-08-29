@@ -14,13 +14,12 @@ const page = () => {
         <div className="min-h-screen bg-theme flex items-center justify-center">
           <Image
             className=" absolute  opacity-10"
-            src="/bdgwhite.png"
+            src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
             alt="digital gold"
             // priority
             width={400}
             height={300}
           />
-
           <CustomCheckout data={data} />
         </div>
       </div>

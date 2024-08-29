@@ -25,12 +25,14 @@ const MyAccountTabs = () => {
 
   return (
     <div className="w-full relative">
-      <Image
-        className=" absolute top-0 left-0 opacity-50"
-        src="/bdgwhite.png"
-        width={500} height={500}
-        alt="Bright Digi Gold"
-      />
+      <div className="flex justify-center items-center ">
+        <Image
+          className="absolute top-72 opacity-30 sm:pr-20"
+          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
+          width={500} height={500}
+          alt="Bright Digi Gold"
+        />
+      </div>
       <div className="mb-12 grid lg:grid-cols-2 justify-center items-center">
         <div className="sm:flex items-center">
           <ProfileImage />

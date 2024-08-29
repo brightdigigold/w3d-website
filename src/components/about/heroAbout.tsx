@@ -5,9 +5,9 @@ import { fadeIn, textVariant } from "../../utils/motion";
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import OtpModal from "../modals/otpModal";
-import NextImage from "../nextImage";
 import LoginAside from "../authSection/loginAside";
 import SetProfileForNewUser from "../setProfile";
+import Image from "next/image";
 import { selectIsloggedIn, setShowProfileForm } from "@/redux/authSlice";
 
 const HeroAbout = () => {
@@ -27,9 +27,9 @@ const HeroAbout = () => {
       {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login" />}
 
       <div className="mx-auto px-4 sm:px-6 lg:px-16">
-        <NextImage
+        <Image
           className=" absolute top-48 -left-20 opacity-20 z-10"
-          src="/bdgwhite.png"
+          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
           alt="Bright Digi Gold"
           width={500} height={500}
         />

@@ -17,7 +17,7 @@ const Page = async ({ params }: PageProps) => {
       <div className="min-h-screen flex items-center justify-center">
         <Image
           className="absolute -bottom-12 -left-20 opacity-30"
-          src="/bdgwhite.png"
+          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
           alt="Bright Digi Gold"
           width={500}
           height={500}

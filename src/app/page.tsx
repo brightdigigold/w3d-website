@@ -21,10 +21,7 @@ export default function Home() {
       <HeroSection />
       {/* <div className="hidden sm:block">
         <OfferSlider />
-
       </div> */}
-
-
       <div className=' '>
         <div className='bg-gradient-to-b from-gray-50 via-[rgb(57,94,128)] to-[rgb(4,67,86)] sm:hidden'>
           <div className=' w-2/3 mx-auto'>
@@ -45,7 +42,6 @@ export default function Home() {
             <h4 className="text-white text-center pt-3 poppins-semibold text-xl">
               Buy Gold and Get Silver Free Of Same Weight
             </h4>
-
           </div>
 
           <img
@@ -54,7 +50,6 @@ export default function Home() {
             className="rounded-b  mx-auto mt-8 p-4"
           />
         </div>
-
 
       </div>
       {/* pb-2 xl:pb-8  */}
@@ -93,9 +88,7 @@ export default function Home() {
         </div>
         <div className="hidden sm:block">
           <OfferSlider />
-
         </div>
-
       </div>
       <Suspense fallback={<Loading />}>
         <Promotional />
@@ -116,7 +109,4 @@ export const metadata: Metadata = {
   title: "Bright DiGi Gold | Best Digital Gold Platform To Buy 24K Gold",
   description:
     "Bright DiGi Gold Digital Gold is a trusted platform to buy 24k digital gold starting from ₹10. A safe and secure online way to save and invest in digital gold.",
-
-
-
 };
