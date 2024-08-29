@@ -1,4 +1,3 @@
-'use client'
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -17,9 +16,11 @@ const Page: React.FC<PageProps> = ({ params }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const token = localStorage.getItem("token");
+  console.log("token: ", token);
+  
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem("token");
       if (!token) {
         setError("No token found");
         setLoading(false);
@@ -28,8 +29,10 @@ const Page: React.FC<PageProps> = ({ params }) => {
 
       try {
         const transactionData = await fetchTransactionData(params.id, token);
+        console.log("Transaction Data:", transactionData); // Debugging
         setData(transactionData);
       } catch (err) {
+        console.error("Error fetching data:", err); // Debugging
         setError("Error fetching transaction data");
       } finally {
         setLoading(false);
@@ -39,7 +42,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
     fetchData();
   }, [params.id]);
 
-  console.log("data----", data);
+  console.log("Fetching data", data);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -114,13 +117,14 @@ const Page: React.FC<PageProps> = ({ params }) => {
             </div>
           </div>
           <div
-            className={`p-4 mx-6 ${data?.data?.transactionStatus === "SUCCESS"
+            className={`p-4 mx-6 ${
+              data?.data?.transactionStatus === "SUCCESS"
                 ? "bg-green-500"
                 : data?.data?.transactionStatus === "FAILED"
-                  ? "bg-red-500"
-                  : data?.data?.transactionStatus === "PENDING"
-                    ? "bg-yellow-500"
-                    : "bg-red-500"
+                ? "bg-red-500"
+                : data?.data?.transactionStatus === "PENDING"
+                ? "bg-yellow-500"
+                : "bg-red-500"
               } rounded-bl-md rounded-br-md`}
           >
             {data?.data?.transactionStatus === "SUCCESS" && (
@@ -131,7 +135,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
                 </button>
               </Link>
             )}
-            <RedirectTimer />
+            <RedirectTimer /> 
           </div>
         </div>
       </div>
