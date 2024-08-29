@@ -1,18 +1,47 @@
-'use client'
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import RedirectTimer from "@/components/redirectTimer";
 import { fetchTransactionData } from "@/api/DashboardServices";
+
 interface PageProps {
   params: { id: string };
 }
 
-const Page = async ({ params }: PageProps) => {
-  const token = localStorage.getItem("token"); 
-  const data = await fetchTransactionData(params.id, token!);
+const Page: React.FC<PageProps> = ({ params }) => {
+  const router = useRouter();
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  console.log("data===>------->", data);
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("No token found");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const transactionData = await fetchTransactionData(params.id, token);
+        setData(transactionData);
+      } catch (err) {
+        setError("Error fetching transaction data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [params.id]);
+
+  console.log("data----", data);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="px-4">
@@ -85,12 +114,12 @@ const Page = async ({ params }: PageProps) => {
           </div>
           <div
             className={`p-4 mx-6 ${data?.data?.transactionStatus === "SUCCESS"
-              ? "bg-green-500"
-              : data?.data?.transactionStatus === "FAILED"
-                ? "bg-red-500"
-                : data?.data?.transactionStatus === "PENDING"
-                  ? "bg-yellow-500"
-                  : "bg-red-500"
+                ? "bg-green-500"
+                : data?.data?.transactionStatus === "FAILED"
+                  ? "bg-red-500"
+                  : data?.data?.transactionStatus === "PENDING"
+                    ? "bg-yellow-500"
+                    : "bg-red-500"
               } rounded-bl-md rounded-br-md`}
           >
             {data?.data?.transactionStatus === "SUCCESS" && (
@@ -101,7 +130,7 @@ const Page = async ({ params }: PageProps) => {
                 </button>
               </Link>
             )}
-            <RedirectTimer /> 
+            <RedirectTimer />
           </div>
         </div>
       </div>
