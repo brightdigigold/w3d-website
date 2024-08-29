@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const RedirectTimer: React.FC = () => {
   const router = useRouter();
-  const [remainingTime, setRemainingTime] = useState(10);
+  const [remainingTime, setRemainingTime] = useState(5);
 
   useEffect(() => {
     const interval = setInterval(() => {
