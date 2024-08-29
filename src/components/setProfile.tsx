@@ -152,7 +152,7 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
         dispatch(setIsLoggedIn(true));
         dispatch(setShowOTPmodal(false));
         dispatch(setDevoteeIsNewUser(false));
-        router.push("/");
+        // router.push("/");
         onClose();
         dispatch(fetchUserDetails() as any);
         Swal.fire({

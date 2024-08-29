@@ -5,6 +5,9 @@ import { client } from '@/utils/sanityClient';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import OtpModal from '../modals/otpModal';
 
 interface BlockSpan {
     _key: string;
@@ -59,6 +62,7 @@ interface RelatedPost {
 }
 
 const PostDisplay = ({ slug }) => {
+    const otpModal = useSelector((state: RootState) => state.auth.otpModal);
     const [post, setPost] = useState<PostDisplayDetails | null>(null);
     const [relatedPosts, setRelatedPosts] = useState<RelatedPost[]>([]);
 
@@ -100,7 +104,7 @@ const PostDisplay = ({ slug }) => {
             }`;
             const data = await client.fetch(query);
             const shuffledPosts = data.sort(() => 0.5 - Math.random());
-            setRelatedPosts(shuffledPosts.slice(0, 10)); 
+            setRelatedPosts(shuffledPosts.slice(0, 10));
         };
 
         fetchPost();
@@ -111,6 +115,7 @@ const PostDisplay = ({ slug }) => {
 
     return (
         <div className="mt-28 text-white container mx-auto px-4">
+            {otpModal && <OtpModal />}
             <div className="lg:flex lg:gap-8">
                 {/* Main Content */}
                 <div className="lg:flex-1">

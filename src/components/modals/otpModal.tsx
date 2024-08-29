@@ -108,7 +108,7 @@ export default function OtpModal() {
             }
             mixpanel.identify(mobile_number);
             dispatch(setShowOTPmodal(false));
-            router.push("/");
+            // router.push("/");
           } else {
             dispatch(setShowOTPmodal(false));
             dispatch(setIsLoggedInForTempleReceipt(true));

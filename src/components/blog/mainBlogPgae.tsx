@@ -3,7 +3,9 @@ import { getBlogPosts } from '@/components/sanity/getPost';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import Image from "next/image";
-
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import OtpModal from '../modals/otpModal';
 interface Post {
   categories: { title: string }[];
   slug: {
@@ -20,6 +22,7 @@ interface Post {
 }
 
 function MainBlogPage() {
+  const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const [posts, setPosts] = useState<Post[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -37,6 +40,7 @@ function MainBlogPage() {
 
   return (
     <div className='container'>
+      {otpModal && <OtpModal />}
       {/* Category Selector */}
       <div className='flex px-8 m-2 items-center '>
         <p className='text-white text-sm md:text-lg m-2 text-center'>Select Category</p>
@@ -67,7 +71,7 @@ function MainBlogPage() {
                       height: "auto"
                     }} />
                 )}
-                <h3 className='text-white py-2 text-sm md:text-lg text-center'>{post.title}</h3>
+                <h3 className='text-white py-1 px-2 text-sm md:text-lg text-center line-clamp-2 poppins-regular'>{post.title}</h3>
               </div>
             </Link>
           ))}
