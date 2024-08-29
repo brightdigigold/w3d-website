@@ -104,10 +104,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 width={150}
                 height={150}
                 className="my-4 rounded-full mx-auto h-40 w-40 flex items-center justify-center border-2 border-sky-200"
-                style={{
-                  maxWidth: "100%",
-                  height: "auto"
-                }} />
+              />
               <p className="text-lg md:text-xl xl:text-4xl text-white ml-0 sm:ml-8 text-center mb-4 sm:mb-0">
                 {user?.data?.name}
               </p>
