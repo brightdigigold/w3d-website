@@ -27,12 +27,12 @@ const HeroAbout = () => {
       {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login" />}
 
       <div className="mx-auto px-4 sm:px-6 lg:px-16">
-        <Image
+        {/* <Image
           className=" absolute top-48 -left-20 opacity-20 z-10"
           src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
           alt="Bright Digi Gold"
           width={500} height={500}
-        />
+        /> */}
         <div className="grid gap-4">
           <motion.div
             initial="hidden"

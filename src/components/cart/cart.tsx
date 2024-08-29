@@ -53,12 +53,10 @@ import CartHeader from "./cartHeader";
 import VaultConversionSection from "./vaultConversionSection";
 import CartItemsList from "./cartItemsList";
 import PriceBreakdown from "./priceBreakDown";
-import { toast } from "react-toastify";
 import { useCartTotals } from "@/hooks/useCartTotals";
 import CartFooter from "./cartFooter";
 import { debounce } from 'lodash';
 import { useAddToCart } from "@/hooks/useAddToCart";
-import useFetchProductCart from "@/hooks/useFetchProductCart";
 
 interface CartItem {
   product: Product;
@@ -69,8 +67,6 @@ const Cart = () => {
   const user = useSelector(selectUser);
   const { _id } = user.data;
   const { addToCart, isLoading, error, isSuccess } = useAddToCart(_id);
-  const { coinsInCart, errorCart, isLoadingCart, refetch } = useFetchProductCart(_id);
-  console.log("coinsInCart ----", coinsInCart)
   const token = localStorage.getItem("token");
   const router = useRouter();
   const dispatch = useDispatch();
@@ -112,8 +108,6 @@ const Cart = () => {
   const [addressList, setaddressList] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState<String>("");
   const [showAddNewAddress, setShowAddNewAddress] = useState<boolean>(false);
-  const [alertShown, setAlertShown] = useState<boolean>(false);
-
 
   const openConvertMetalModalHandler = (metalTypeToConvert: string) => {
     const vaultBalanceOfMetal = metalTypeToConvert === 'GOLD' ? goldVaultBalance : silverVaultBalance;
@@ -243,49 +237,6 @@ const Cart = () => {
   }, []);
 
 
-  // const validateCartData = async (cartData: CartItem[]): Promise<CartProduct[]> => {
-  //   let adjustmentsMade = false;
-  //   const validatedData: CartProduct[] = [];
-  //   const updateRequests: Promise<void>[] = [];
-  //   const deleteRequests: Promise<void>[] = [];
-
-  //   for (const item of cartData) {
-  //     if (item.product.inStock === true) {
-  //       if (item.product.count > item.product.coinHave) {
-  //         item.product.count = item.product.coinHave;
-  //         adjustmentsMade = true;
-  //         updateRequests.push(addToCart("UpdateCart", item.product.count, item.product.sku,));
-  //       } else {
-  //         // Add item to validated data if it's still in stock and valid
-  //         validatedData.push({
-  //           product: {
-  //             ...item.product,
-  //           },
-  //         });
-  //       }
-  //     } else {
-  //       adjustmentsMade = true;
-  //       // Queue the delete API call for items out of stock
-  //       deleteRequests.push(deleteFromCart(item.product.sku));
-  //     }
-  //   }
-
-  //   // Execute all queued update and delete requests
-  //   await Promise.all([...updateRequests, ...deleteRequests]);
-
-  //   // Show the alert only once after processing all items
-  //   if (adjustmentsMade) {
-  //     Swal.fire({
-  //       title: "Cart Updated",
-  //       text: "Your cart has been updated according to our stock availability.",
-  //       icon: "success",
-  //     });
-  //   }
-
-  //   return validatedData;
-  // };
-
-
   const deleteFromCart = async (productId: string): Promise<void> => {
     try {
       await handleCartAction(productId, "DELETE", 1);
@@ -366,11 +317,6 @@ const Cart = () => {
       setMaxCoinError("Quantity cannot be less than 1.");
     }
   }, 300);
-
-  // const deleteFromCart = async (productId: any) => {
-  //   await handleCartAction(productId, "DELETE", 1);
-  // };
-
 
   useEffect(() => {
     dispatch(setTotalGoldWeight(totalGoldWeight));

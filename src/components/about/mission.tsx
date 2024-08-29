@@ -2,8 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/motion";
-import NextImage from "../nextImage";
-
+import Image from "next/image";
 const Mission = () => {
   return (
     <div className="bg-theme py-10">
@@ -13,12 +12,12 @@ const Mission = () => {
         viewport={{ once: false, amount: 0.25 }}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-16 relative">
-          <NextImage
+          {/* <Image
             className=" absolute top-32 -left-20 opacity-20"
             src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
             alt="Bright Digi Gold Vision"
             width={500} height={300}
-          />
+          /> */}
           <div className="grid sm:grid-cols-2 gap-4 place-items-center">
             <h1 className="col-span-2 text-3xl sm:text-5xl text-gold01 text-center extrabold leading-tight mb-0 sm:mb-6">
               Our Vision
