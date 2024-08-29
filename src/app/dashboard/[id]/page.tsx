@@ -1,3 +1,4 @@
+'use client'
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -18,7 +19,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
 
   const token = localStorage.getItem("token");
   console.log("token: ", token);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       if (!token) {
