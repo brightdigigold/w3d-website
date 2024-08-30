@@ -9,6 +9,11 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+import { HiOutlineUser, HiOutlineHome } from 'react-icons/hi';
+import { UserIcon } from "@heroicons/react/20/solid";
+import { HomeIcon } from "@heroicons/react/24/outline";
+import { FaBuilding } from 'react-icons/fa';
+import clsx from "clsx";
 
 interface LoginAsideProps {
   isOpen: boolean;
@@ -19,6 +24,8 @@ interface LoginAsideProps {
 const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [submitting, setSubmitting] = useState(false);
+  const [personalOrCorporate, setPersonalOrCorporate] = useState<"personal" | "corporate" | null>(null);
+  console.log("personalOrCorporate", personalOrCorporate)
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -102,12 +109,12 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         <div className="w-full px-6">
           <button
             onClick={onClose}
-            className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer"
+            className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer "
           >
-            <FaTimes className="text-themeBlueLight" />
+            <FaTimes className="text-themeBlueLight border-1 rounded-full hover:text-red-400 transition-colors duration-300 ease-out " />
           </button>
-          <div className=" text-center text-white pb-16">
-            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className=" h-20 mx-auto mb-8 mt-8" />
+          <div className=" text-center text-white pb-4">
+            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mb-6" />
             <p className=" text-2xl mb-2">Start Savings Today</p>
             <p className="">
               Safe.Secure.Certified
@@ -117,11 +124,11 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
           {purpose === 'login' ? <> <h1 className="text-2xl bold mb-0 text-white text-left">
             Login/Sign Up
           </h1>
-            <h3 className="text-lg mb-4 text-white text-left">
+            <h3 className="text-md mb-4 text-white text-left">
               Login to start
               <span className="text-yellow-400 ml-1">SAVINGS</span>
             </h3></> : null}
-          <div className="mb-4 pt-4">
+          <div className="">
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -142,7 +149,18 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                     handleSubmit();
                   }}
                 >
-                  <div className="">
+                  <div className="flex items-center mt-12">
+                    <div onClick={() => { setPersonalOrCorporate("personal") }} className="cursor-pointer">
+                      <UserIcon className={clsx('h-9 w-9 mx-auto', `${personalOrCorporate == "personal" ? "text-yellow-400" : "text-white"}`)} />
+                      <div className={clsx('text-center poppins-medium py-2 tracking-wide', `${personalOrCorporate == "personal" ? "text-yellow-400" : "text-white"}`)}>PERSONAL</div>
+                    </div>
+                    <div onClick={() => { setPersonalOrCorporate("corporate") }} className="cursor-pointer">
+                      <FaBuilding size={30} color={`${personalOrCorporate == "corporate" ? "#FACC15" : "#fff"}`} className={clsx('mx-auto', `${personalOrCorporate == "corporate" ? "yellow" : "white"}`)} />
+                      <div className={clsx('text-center poppins-medium tracking-wide px-4 mt-2', `${personalOrCorporate == "corporate" ? "text-yellow-400" : "text-white"}`)}>CORPORATE</div>
+                    </div>
+                  </div>
+                  {/* <p className="text-red-600 text-md bold">Please Select Personal or Corporate</p> */}
+                  <div className="mt-2">
                     <label className="text-white mb-2">Mobile Number</label>
                     <br />
                     <input
