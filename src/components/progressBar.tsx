@@ -6,8 +6,8 @@ import { metalPrice } from "@/api/DashboardServices";
 import { setGoldData, setSilverData } from "@/redux/metalSlice";
 import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
 import { setMetalPrice } from "@/redux/shopSlice";
-import NextImage from "./nextImage";
 import LivePrice from '../../public/lottie/LivePrice.gif'
+import Image from "next/image";
 
 interface ProgressBarProps {
   purchaseType?: string;
@@ -111,7 +111,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       <div className="inner-content">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <NextImage src='https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/LivePrice.gif' alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} width={1} height={1} priority={true} />
+            <Image src='https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/LivePrice.gif' alt="Live Price" className="inline-block" style={{ width: "30px", height: "auto" }} width={1} height={1} priority={true} />
             <div className="text-black text-xs sm:text-sm semibold">
               {fromCart === true
                 ? getMetalPrice()
