@@ -111,7 +111,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
             onClick={onClose}
             className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer "
           >
-            <FaTimes className="text-themeBlueLight border-1 rounded-full hover:text-red-400 transition-colors duration-300 ease-out " />
+            <FaTimes size={28} className="text-themeBlueLight p-0.5 border-1 rounded-full hover:text-red-400 transition-colors duration-300 ease-out " />
           </button>
           <div className=" text-center text-white pb-4">
             <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mb-6" />
@@ -149,7 +149,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                     handleSubmit();
                   }}
                 >
-                  <div className="flex items-center mt-12">
+                  <div className="flex items-center mt-12 gap-4">
                     <div onClick={() => { setPersonalOrCorporate("personal") }} className="cursor-pointer">
                       <UserIcon className={clsx('h-9 w-9 mx-auto', `${personalOrCorporate == "personal" ? "text-yellow-400" : "text-white"}`)} />
                       <div className={clsx('text-center poppins-medium py-2 tracking-wide', `${personalOrCorporate == "personal" ? "text-yellow-400" : "text-white"}`)}>PERSONAL</div>
