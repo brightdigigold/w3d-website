@@ -137,7 +137,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
             >
               <FaTimes size={28} className="text-themeBlueLight p-0.5 border-1 rounded-full hover:text-red-400 transition-colors duration-300 ease-out " />
             </button>
-            <div className="text-center text-white pb-4 mt-10">
+            <div className="text-center text-white pb-4 mt-8">
               <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mb-6" />
               <p className=" text-2xl mb-2">Start Savings Today</p>
               <p className="">
@@ -148,7 +148,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
             {purpose === 'login' ? <> <h1 className="text-2xl bold mb-0 text-white text-left px-4 mt-10">
               Login/Sign Up
             </h1>
-              <h3 className="text-md mb-4 text-white text-left px-4">
+              <h3 className="text-md mb-4 text-white text-left px-4 mt-1">
                 Login to start
                 <span className="text-yellow-400 ml-1">SAVINGS</span>
               </h3></> : null}
@@ -187,12 +187,12 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                     <div className="text-red-600 text-md bold px-4">{errors.personalOrCorporate}</div>
                   )}
                   <div className="mt-4 px-4">
-                    <label className="text-white mb-2">Mobile Number</label>
+                    <label className="text-white">Mobile Number</label>
                     <br />
                     <input
                       name="mobile_number"
-                      className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-2 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
-                      type="numeric"
+                      className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
+                      type="text"
                       inputMode="numeric"
                       minLength={10}
                       maxLength={10}
