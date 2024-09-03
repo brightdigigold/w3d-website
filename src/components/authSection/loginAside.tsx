@@ -26,7 +26,8 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [submitting, setSubmitting] = useState(false);
   const [personalOrCorporate, setPersonalOrCorporate] = useState<"personal" | "corporate" | null>(null);
-  console.log("personalOrCorporate", personalOrCorporate)
+
+  // console.log("personalOrCorporate", personalOrCorporate)
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -60,6 +61,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const initialValues = {
     mobile_number: "",
     termsAndConditions: false,
+    personalOrCorporate: null,
     buttonType: "",
   };
 
@@ -77,6 +79,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
       .matches(phoneRegex, "Invalid Number, Kindly enter a valid number")
       .min(10, "Please enter a 10-digit mobile number")
       .max(10, "Too long"),
+    personalOrCorporate: Yup.string().required("Please select Personal or Corporate"),
   });
 
   const onSubmit = async (values: any) => {
@@ -152,7 +155,6 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                 Login to start
                 <span className="text-yellow-400 ml-1">SAVINGS</span>
               </h3></> : null}
-            <div className="">
               <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -174,17 +176,19 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                     }}
                   >
                     <div className="flex items-center mt-12 gap-4">
-                      <div onClick={() => { setPersonalOrCorporate("personal") }} className="cursor-pointer">
-                        <UserIcon className={clsx('h-9 w-9 mx-auto', `${personalOrCorporate == "personal" ? "text-yellow-400" : "text-white"}`)} />
-                        <div className={clsx('text-center poppins-medium py-2 tracking-wide', `${personalOrCorporate == "personal" ? "text-yellow-400" : "text-white"}`)}>PERSONAL</div>
+                      <div onClick={() => setFieldValue("personalOrCorporate", "personal")} className="cursor-pointer">
+                        <UserIcon className={clsx('h-9 w-9 mx-auto', values.personalOrCorporate === "personal" ? "text-yellow-400" : "text-white")} />
+                        <div className={clsx('text-center poppins-medium py-2 tracking-wide', values.personalOrCorporate === "personal" ? "text-yellow-400" : "text-white")}>PERSONAL</div>
                       </div>
-                      <div onClick={() => { setPersonalOrCorporate("corporate") }} className="cursor-pointer">
-                        <FaBuilding size={30} color={`${personalOrCorporate == "corporate" ? "#FACC15" : "#fff"}`} className={clsx('mx-auto', `${personalOrCorporate == "corporate" ? "yellow" : "white"}`)} />
-                        <div className={clsx('text-center poppins-medium tracking-wide px-4 mt-2', `${personalOrCorporate == "corporate" ? "text-yellow-400" : "text-white"}`)}>CORPORATE</div>
+                      <div onClick={() => setFieldValue("personalOrCorporate", "corporate")} className="cursor-pointer">
+                        <FaBuilding size={30} className={clsx('mx-auto', values.personalOrCorporate === "corporate" ? "text-yellow-400" : "text-white")} />
+                        <div className={clsx('text-center poppins-medium tracking-wide px-4 mt-2', values.personalOrCorporate === "corporate" ? "text-yellow-400" : "text-white")}>CORPORATE</div>
                       </div>
                     </div>
-                    {/* <p className="text-red-600 text-md bold">Please Select Personal or Corporate</p> */}
-                    <div className="mt-2">
+                    {errors.personalOrCorporate && touched.personalOrCorporate && (
+                      <div className="text-red-600 text-md bold">{errors.personalOrCorporate}</div>
+                    )}
+                    <div className="mt-4">
                       <label className="text-white mb-2">Mobile Number</label>
                       <br />
                       <input
@@ -204,20 +208,12 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                         value={values.mobile_number}
                       />
                       {touched.mobile_number && errors.mobile_number ? (
-                        <div
-                          style={{
-                            color: "#ab0000",
-                            marginLeft: 5,
-                            fontWeight: "bold",
-                            marginTop: 8,
-                            fontSize: 15,
-                          }}
-                        >
+                        <div className="text-red-600 text-md bold"  >
                           {errors.mobile_number}
                         </div>
                       ) : null}
                     </div>
-                    <div className="items-center mt-20 mb-2 flex">
+                    <div className="items-center mt-20 flex">
                       {purpose === "login" ? <input
                         className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background  rounded-lg focus:outline-none "
                         id="termsAndConditions"
@@ -241,17 +237,8 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                       </div> : null}
                     </div>
                     {touched.termsAndConditions && errors.termsAndConditions ? (
-                      <div
-                        style={{
-                          color: "black",
-                          marginLeft: 4,
-                          fontWeight: "bold",
-                          marginTop: 0,
-                        }}
-                      >
-                        <span className="text-red-600 text-md bold">
-                          {errors.termsAndConditions}
-                        </span>
+                      <div className="text-red-600 text-md bold">
+                        {errors.termsAndConditions}
                       </div>
                     ) : null}
                     <div className="">
@@ -273,7 +260,6 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
