@@ -25,9 +25,6 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [submitting, setSubmitting] = useState(false);
-  const [personalOrCorporate, setPersonalOrCorporate] = useState<"personal" | "corporate" | null>(null);
-
-  // console.log("personalOrCorporate", personalOrCorporate)
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -39,6 +36,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
     toggleBodyScroll(isOpen);
     return () => toggleBodyScroll(false);
   }, [isOpen]);
+
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -128,19 +126,18 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   return (
     <div ref={modalRef} className={`modal-class ${isOpen ? 'open-class' : ''}`}>
       <div
-        className={`fixed top-0 right-0 h-full w-full lg:w-4/12 md:w-7/12 sm:w-8/12 loginGrad shadow-lg transform overflow-y-scroll translate-x-${isOpen ? "0" : "full"
-          } transition-transform ease-in-out z-50`}
+        className={`fixed top-0 right-0 h-full w-full lg:w-4/12 md:w-7/12 sm:w-8/12 loginGrad shadow-lg transform translate-x-${isOpen ? "0" : "full"} transition-transform ease-in-out z-50 bg-black`}
         style={{ zIndex: 1000 }}
       >
-        <div className="grid h-screen place-items-center w-full">
-          <div className="w-full px-6">
+        <div className="grid place-items-center w-full">
+          <div className="w-full">
             <button
               onClick={onClose}
               className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer "
             >
               <FaTimes size={28} className="text-themeBlueLight p-0.5 border-1 rounded-full hover:text-red-400 transition-colors duration-300 ease-out " />
             </button>
-            <div className=" text-center text-white pb-4">
+            <div className="text-center text-white pb-4 mt-10">
               <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mb-6" />
               <p className=" text-2xl mb-2">Start Savings Today</p>
               <p className="">
@@ -148,72 +145,74 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                 <img src="/secure.png" className="ml-1 inline-block h-5" />
               </p>
             </div>
-            {purpose === 'login' ? <> <h1 className="text-2xl bold mb-0 text-white text-left">
+            {purpose === 'login' ? <> <h1 className="text-2xl bold mb-0 text-white text-left px-4 mt-10">
               Login/Sign Up
             </h1>
-              <h3 className="text-md mb-4 text-white text-left">
+              <h3 className="text-md mb-4 text-white text-left px-4">
                 Login to start
                 <span className="text-yellow-400 ml-1">SAVINGS</span>
               </h3></> : null}
-              <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmit}
-              >
-                {({
-                  values,
-                  errors,
-                  touched,
-                  setFieldValue,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                }) => (
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      handleSubmit();
-                    }}
-                  >
-                    <div className="flex items-center mt-12 gap-4">
-                      <div onClick={() => setFieldValue("personalOrCorporate", "personal")} className="cursor-pointer">
-                        <UserIcon className={clsx('h-9 w-9 mx-auto', values.personalOrCorporate === "personal" ? "text-yellow-400" : "text-white")} />
-                        <div className={clsx('text-center poppins-medium py-2 tracking-wide', values.personalOrCorporate === "personal" ? "text-yellow-400" : "text-white")}>PERSONAL</div>
-                      </div>
-                      <div onClick={() => setFieldValue("personalOrCorporate", "corporate")} className="cursor-pointer">
-                        <FaBuilding size={30} className={clsx('mx-auto', values.personalOrCorporate === "corporate" ? "text-yellow-400" : "text-white")} />
-                        <div className={clsx('text-center poppins-medium tracking-wide px-4 mt-2', values.personalOrCorporate === "corporate" ? "text-yellow-400" : "text-white")}>CORPORATE</div>
-                      </div>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                setFieldValue,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+              }) => (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit();
+                  }}
+                  className="flex flex-col justify-between h-full mt-8"
+                >
+                  <div className="flex items-center gap-6 px-4">
+                    <div onClick={() => setFieldValue("personalOrCorporate", "personal")} className="cursor-pointer">
+                      <UserIcon className={clsx('h-9 w-9 mx-auto', values.personalOrCorporate === "personal" ? "text-yellow-400" : "text-white")} />
+                      <div className={clsx('text-center poppins-medium py-2 tracking-wide', values.personalOrCorporate === "personal" ? "text-yellow-400" : "text-white")}>PERSONAL</div>
                     </div>
-                    {errors.personalOrCorporate && touched.personalOrCorporate && (
-                      <div className="text-red-600 text-md bold">{errors.personalOrCorporate}</div>
-                    )}
-                    <div className="mt-4">
-                      <label className="text-white mb-2">Mobile Number</label>
-                      <br />
-                      <input
-                        name="mobile_number"
-                        className="text-gray-100  tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-2 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
-                        type="numeric"
-                        inputMode="numeric"
-                        minLength={10}
-                        maxLength={10}
-                        placeholder="Enter Mobile Number"
-                        onChange={(event) => {
-                          const { name, value } = event.target;
-                          const updatedValue = value.replace(/[^0-9]/g, "");
-                          setFieldValue("mobile_number", updatedValue);
-                        }}
-                        onBlur={handleBlur}
-                        value={values.mobile_number}
-                      />
-                      {touched.mobile_number && errors.mobile_number ? (
-                        <div className="text-red-600 text-md bold"  >
-                          {errors.mobile_number}
-                        </div>
-                      ) : null}
+                    <div onClick={() => setFieldValue("personalOrCorporate", "corporate")} className="cursor-pointer">
+                      <FaBuilding size={30} className={clsx('mx-auto', values.personalOrCorporate === "corporate" ? "text-yellow-400" : "text-white")} />
+                      <div className={clsx('text-center poppins-medium tracking-wide px-4 mt-2', values.personalOrCorporate === "corporate" ? "text-yellow-400" : "text-white")}>CORPORATE</div>
                     </div>
-                    <div className="items-center mt-20 flex">
+                  </div>
+                  {errors.personalOrCorporate && touched.personalOrCorporate && (
+                    <div className="text-red-600 text-md bold px-4">{errors.personalOrCorporate}</div>
+                  )}
+                  <div className="mt-4 px-4">
+                    <label className="text-white mb-2">Mobile Number</label>
+                    <br />
+                    <input
+                      name="mobile_number"
+                      className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-2 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
+                      type="numeric"
+                      inputMode="numeric"
+                      minLength={10}
+                      maxLength={10}
+                      placeholder="Enter Mobile Number"
+                      onChange={(event) => {
+                        const { name, value } = event.target;
+                        const updatedValue = value.replace(/[^0-9]/g, "");
+                        setFieldValue("mobile_number", updatedValue);
+                      }}
+                      onBlur={handleBlur}
+                      value={values.mobile_number}
+                    />
+                    {touched.mobile_number && errors.mobile_number ? (
+                      <div className="text-red-600 text-md bold"  >
+                        {errors.mobile_number}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div className="bottom-2 absolute w-full px-4">
+                    <div className="items-center flex">
                       {purpose === "login" ? <input
                         className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background  rounded-lg focus:outline-none "
                         id="termsAndConditions"
@@ -223,7 +222,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       /> : null}
-                      {purpose === "login" ? <div className="ml-2 items-center text-white">
+                      {purpose === "login" ? <div className="ml-2 items-center text-white ">
                         I agree to these
                         <span>
                           <button
@@ -253,13 +252,14 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                         SEND OTP
                       </button>
                     </div>
-                  </form>
-                )}
-              </Formik>
-            </div>
+                  </div>
+                </form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
