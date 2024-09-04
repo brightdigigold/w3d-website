@@ -132,9 +132,9 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
           <div className="w-full ">
             <button
               onClick={onClose}
-              className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer"
+              className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer "
             >
-              <FaTimes className="text-themeBlueLight" />
+              <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
             </button>
             <div className=" text-center text-white pb-1">
               <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className=" h-20 mx-auto mb-4 mt-8" />
@@ -186,7 +186,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                     {errors.personalOrCorporate && touched.personalOrCorporate && (
                       <div className="text-red-600 text-md bold px-4">{errors.personalOrCorporate}</div>
                     )}
-                    <div className="mt-4 px-4">
+                    <div className="mt-6 px-4">
                       <label className="text-white text-lg">Mobile Number</label>
                       <br />
                       <input
