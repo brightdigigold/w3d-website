@@ -192,7 +192,6 @@ const Cart = () => {
       const finalResult = JSON.parse(decryptedData);
 
       // Validate cart data only when initially loading the cart
-      console.log("Cart data orginal", finalResult)
       const validatedCartProducts = await validateCartData(finalResult.data.cartProductForWeb);
 
       dispatch(setCartProducts(validatedCartProducts));

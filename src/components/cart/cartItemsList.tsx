@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const CartItemsList = ({ cartProducts, increaseQty, decreaseQty, deleteFromCart, maxCoinError }) => {
-    console.log("cartProducts", cartProducts)
 
     // Trigger toast notification for errors
     useEffect(() => {
