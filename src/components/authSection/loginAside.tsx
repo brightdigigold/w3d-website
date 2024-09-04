@@ -9,9 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { HiOutlineUser, HiOutlineHome } from 'react-icons/hi';
 import { UserIcon } from "@heroicons/react/20/solid";
-import { HomeIcon } from "@heroicons/react/24/outline";
 import { FaBuilding } from 'react-icons/fa';
 import clsx from "clsx";
 
