@@ -42,7 +42,7 @@ export function AesEncrypt(data: any) {
 }
 
 export const funcForDecrypt = async (dataToBeDecrypt: any) => {
-  const response = await AesDecrypt(dataToBeDecrypt);
+  const response =  AesDecrypt(dataToBeDecrypt);
   //
   return response;
 };

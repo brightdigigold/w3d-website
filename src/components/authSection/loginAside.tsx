@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import { UserIcon } from "@heroicons/react/20/solid";
 import { FaBuilding } from 'react-icons/fa';
 import clsx from "clsx";
+import { postWithEncryption } from "@/api/postMethodHelper";
 
 interface LoginAsideProps {
   isOpen: boolean;
@@ -57,16 +58,12 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const initialValues = {
     mobile_number: "",
     termsAndConditions: false,
-    personalOrCorporate: null,
-    buttonType: "",
+    type: "",
+    country_iso: '91',
+    isCountryIsoRequired: false,
   };
 
   const validationSchema = Yup.object({
-    // termsAndConditions: Yup.boolean().oneOf(
-    //   [true],
-    //   "Terms and conditions are Required"
-    // ),
-
     termsAndConditions: purpose === 'login' ? Yup.boolean()
       .oneOf([true], "Terms and conditions are required") : Yup.boolean(),
     mobile_number: Yup.string()
@@ -75,47 +72,34 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
       .matches(phoneRegex, "Invalid Number, Kindly enter a valid number")
       .min(10, "Please enter a 10-digit mobile number")
       .max(10, "Too long"),
-    personalOrCorporate: Yup.string().required("Please select Personal or Corporate"),
+    type: Yup.string().required("Please select Personal or Corporate"),
   });
 
   const onSubmit = async (values: any) => {
-    values.buttonType = "OtpLogin"
+    // console.log("onSubmit", values);
     try {
       setSubmitting(true);
-      if (values.buttonType == "OtpLogin") {
-        const resAfterEncrypt = await AesEncrypt(values);
-        const body = {
-          payload: resAfterEncrypt,
-        };
-        const header: AxiosRequestConfig = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          onUploadProgress: () => {
-            Notiflix.Loading.circle();
-          },
-        };
-        const result = await axios.post(
-          `${process.env.baseUrl}/auth/send/otp`,
-          body,
-          header
-        );
-        const decryptedData = await AesDecrypt(result.data.payload);
-        if (JSON.parse(decryptedData).status) {
-          localStorage.setItem("mobile_number", values.mobile_number);
-          dispatch(setPurpose(purpose));
-          dispatch(setShowOTPmodal(true));
+      const result = await postWithEncryption(
+        `${process.env.baseUrl}/auth/send/otp`,
+        values,
+        {
+          onUploadProgress: () => Notiflix.Loading.circle(),
         }
-        setSubmitting(false);
-        Notiflix.Loading.remove();
-        onClose();
-      } else {
-        setSubmitting(false);
-        Notiflix.Loading.remove();
+      );
+
+      if (!result.isError && result.data.status) {
+        localStorage.setItem("mobile_number", values.mobile_number);
+        dispatch(setPurpose(purpose));
+        dispatch(setShowOTPmodal(true));
+      } else if (result.isError) {
+        // Handle error case
+        Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
       }
+      onClose();
     } catch (error) {
-      // Handle error
-      // alert(error);
+      // This block may not be needed unless you want to handle non-Axios errors
+      Notiflix.Report.failure('Error', 'Something went wrong!', 'OK');
+    } finally {
       setSubmitting(false);
       Notiflix.Loading.remove();
     }
@@ -137,17 +121,17 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
               <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
             </button>
             <div className=" text-center text-white pb-1">
-              <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className=" h-20 mx-auto mb-4 mt-8" />
-              <p className=" text-2xl mb-2">Start Savings Today</p>
+              <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-8" />
+              <p className=" text-2xl mb-1 mt-10 md:mt-4">Start Savings Today</p>
               <p className="">
                 Safe.Secure.Certified
                 <img src="/secure.png" className="ml-1 inline-block h-5" />
               </p>
             </div>
-            {purpose === 'login' ? <> <h1 className="text-2xl bold mb-0 text-white text-left px-4 mt-4">
+            {purpose === 'login' ? <> <h1 className="text-3xl sm:text-2xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
               Login/Sign Up
             </h1>
-              <h3 className="text-xl mb-4 text-white text-left px-4">
+              <h3 className="text-xl mb-4 text-white px-4 text-center md:text-left">
                 Login to start
                 <span className="text-yellow-400 ml-1">SAVINGS</span>
               </h3></> : null}
@@ -173,18 +157,18 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                     }}
                     className=""
                   >
-                    <div className="flex items-center gap-6 px-4">
-                      <div onClick={() => setFieldValue("personalOrCorporate", "personal")} className="cursor-pointer">
-                        <UserIcon className={clsx('h-9 w-9 mx-auto', values.personalOrCorporate === "personal" ? "text-yellow-400" : "text-white")} />
-                        <div className={clsx('text-center poppins-medium py-2 tracking-wide', values.personalOrCorporate === "personal" ? "text-yellow-400" : "text-white")}>PERSONAL</div>
+                    <div className="flex gap-6 px-4 mt-3 md:mt-0 justify-center">
+                      <div onClick={() => setFieldValue("type", "user")} className="cursor-pointer">
+                        <UserIcon className={clsx('h-20 w-23 mx-auto p-1', values.type === "user" ? "text-yellow-400 border-2 border-yellow-400 rounded-full p-2" : "text-white border-2 rounded-full")} />
+                        <div className={clsx('text-center poppins-medium py-2 tracking-wide', values.type === "user" ? "text-yellow-400" : "text-white ")}>PERSONAL</div>
                       </div>
-                      <div onClick={() => setFieldValue("personalOrCorporate", "corporate")} className="cursor-pointer">
-                        <FaBuilding size={30} className={clsx('mx-auto', values.personalOrCorporate === "corporate" ? "text-yellow-400" : "text-white")} />
-                        <div className={clsx('text-center poppins-medium tracking-wide px-4 mt-2', values.personalOrCorporate === "corporate" ? "text-yellow-400" : "text-white")}>CORPORATE</div>
+                      <div onClick={() => setFieldValue("type", "corporate")} className="cursor-pointer">
+                        <FaBuilding size={80} className={clsx('mx-auto', values.type === "corporate" ? "text-yellow-400 border-2 border-yellow-400 rounded-full p-2" : "text-white border-2 border-white rounded-full p-2")} />
+                        <div className={clsx('text-center poppins-medium tracking-wide px-4 mt-2', values.type === "corporate" ? "text-yellow-400" : "text-white")}>CORPORATE</div>
                       </div>
                     </div>
-                    {errors.personalOrCorporate && touched.personalOrCorporate && (
-                      <div className="text-red-600 text-md bold px-4">{errors.personalOrCorporate}</div>
+                    {errors.type && touched.type && (
+                      <div className="text-red-600 text-md bold px-4 text-center">{errors.type}</div>
                     )}
                     <div className="mt-6 px-4">
                       <label className="text-white text-lg">Mobile Number</label>
@@ -244,9 +228,9 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                         <button
                           type="submit"
                           className="bg-themeBlue px-2 py-2 rounded-full w-full mt-2 mb-2 extrabold"
-                          onClick={() => {
-                            values.buttonType = "OtpLogin";
-                          }}
+                          // onClick={() => {
+                          //   values.buttonType = "OtpLogin";
+                          // }}
                           disabled={submitting}
                         >
                           SEND OTP
