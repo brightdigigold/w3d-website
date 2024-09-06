@@ -1,5 +1,5 @@
 "use client";
-import { setShowOTPmodal, setPurpose, setOtpMsg } from "@/redux/authSlice";
+import { setShowOTPmodal, setPurpose, setOtpMsg, SetUserType } from "@/redux/authSlice";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import Notiflix from "notiflix";
@@ -75,7 +75,8 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   });
 
   const onSubmit = async (values: any) => {
-    // console.log("onSubmit", values);
+    console.log("onSubmit", values, values.type);
+    dispatch(SetUserType(values.type));
     try {
       setSubmitting(true);
       // Notiflix.Loading.circle();
@@ -254,3 +255,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 };
 
 export default LoginAside;
+function UserType(arg0: string): any {
+  throw new Error("Function not implemented.");
+}
+

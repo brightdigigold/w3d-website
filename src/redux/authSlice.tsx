@@ -4,23 +4,27 @@ import { RootState } from './store';
 interface AuthState {
   profileFilled: boolean;
   showProfileForm: boolean;
+  showProfileFormCorporate: boolean;
   otpModal: boolean;
   isLoggedIn: boolean;
   isLoggedInForTempleReceipt: boolean;
   purpoes: string;
   devotee_isNewUser: boolean;
   otpMsg: string;
+  UserType: 'user' | 'corporate' | 'temple' | '';
 }
 
 const initialState: AuthState = {
   profileFilled: false,
   showProfileForm: false,
+  showProfileFormCorporate: false,
   otpModal: false,
   isLoggedIn: false,
   isLoggedInForTempleReceipt: false,
   purpoes: 'login',
   devotee_isNewUser: false,
   otpMsg: "",
+  UserType: '',
 };
 
 const authSlice = createSlice({
@@ -32,6 +36,9 @@ const authSlice = createSlice({
     },
     setShowProfileForm: (state, action: PayloadAction<boolean>) => {
       state.showProfileForm = action.payload;
+    },
+    setShowProfileFormCorporate: (state, action: PayloadAction<boolean>) => {
+      state.showProfileFormCorporate = action.payload;
     },
     setShowOTPmodal: (state, action: PayloadAction<boolean>) => {
       state.otpModal = action.payload;
@@ -51,10 +58,13 @@ const authSlice = createSlice({
     setOtpMsg: (state, action: PayloadAction<string>) => {
       state.otpMsg = action.payload;
     },
+    SetUserType: (state, action: PayloadAction<'' | 'user' | 'corporate' | 'temple'>) => {
+      state.UserType = action.payload;
+    },
   },
 });
 
-export const { profileFilled, setShowProfileForm, setShowOTPmodal, setIsLoggedIn, setPurpose, setDevoteeIsNewUser, setIsLoggedInForTempleReceipt,setOtpMsg } = authSlice.actions;
+export const { profileFilled, setShowProfileForm, setShowOTPmodal, setIsLoggedIn, setPurpose, setDevoteeIsNewUser, setIsLoggedInForTempleReceipt, setOtpMsg, SetUserType, setShowProfileFormCorporate } = authSlice.actions;
 export const selectIsloggedIn = ((state: RootState) => state.auth.isLoggedIn);
 
 export default authSlice.reducer;

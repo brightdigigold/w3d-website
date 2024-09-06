@@ -30,6 +30,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const showProfileForm = useSelector((state: RootState) => state.auth.showProfileForm);
+  const showProfileFormCorporate = useSelector((state: RootState) => state.auth.showProfileFormCorporate);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const os = useDetectMobileOS();
   const pathname = usePathname();
@@ -95,6 +96,10 @@ const Navbar = () => {
 
           {showProfileForm && (
             <SetProfileForNewUser isOpen={showProfileForm} onClose={onClose} />
+          )}
+
+          {showProfileFormCorporate && (
+            <h1 className="text-white text-3xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi rerum adipisci saepe, facere aliquam sed fugit consequatur esse atque beatae!</h1>
           )}
 
           <div className="mx-auto sm:px-6 xl:px-16 sm:py-2 z-10">
@@ -229,19 +234,19 @@ const Navbar = () => {
                 <div className="hidden xl:ml-6 xl:block">
                   <div className="flex space-x-4"></div>
                 </div>
-                {os === 'Android' && 
-                <Link
-                  className="text-gold01 rounded-md text-md px-1 py-2 extrabold xl:hidden "
-                  target="_blank"
-                  href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
-                  aria-label="User Profile"
-                >
-                  <img
-                    src="/google-play.png"
-                    alt="Play Store icon"
-                    className="h-6"
-                  />
-                </Link>}
+                {os === 'Android' &&
+                  <Link
+                    className="text-gold01 rounded-md text-md px-1 py-2 extrabold xl:hidden "
+                    target="_blank"
+                    href="https://play.google.com/store/apps/details?id=com.brightdigigold.customer"
+                    aria-label="User Profile"
+                  >
+                    <img
+                      src="/google-play.png"
+                      alt="Play Store icon"
+                      className="h-6"
+                    />
+                  </Link>}
 
                 {os === 'iOS' && (
                   <Link

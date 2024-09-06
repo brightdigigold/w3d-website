@@ -11,7 +11,6 @@ import Link from "next/link";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import SimpleImageSlider from "react-simple-image-slider";
-import { useRouter } from "next/navigation";
 import CustomImageButton from "@/components/customImageButton";
 import { SelectGoldData, SelectSilverData } from "@/redux/metalSlice";
 import CheckPinCode from "../ProductDetails/checkPinCode";
@@ -25,7 +24,6 @@ import { useDispatch } from "react-redux";
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   // console.log("params: " , slug);
   const user = useSelector(selectUser);
-  const router = useRouter();
   const id = slug;
   const { _id } = user.data;
   const dispatch = useDispatch();

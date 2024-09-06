@@ -10,6 +10,7 @@ import {
   setIsLoggedIn,
   setShowOTPmodal,
   setShowProfileForm,
+  setShowProfileFormCorporate,
   setDevoteeIsNewUser,
   setIsLoggedInForTempleReceipt
 } from "@/redux/authSlice";
@@ -25,6 +26,8 @@ import mixpanel from "mixpanel-browser";
 export default function OtpModal() {
   const purpoes = useSelector((state: RootState) => state.auth.purpoes);
   const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
+  const userType = useSelector((state: RootState) => state.auth.UserType);
+  console.log("userType", userType);
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
@@ -32,7 +35,7 @@ export default function OtpModal() {
   const [submitting, setSubmitting] = useState(false);
   const [otpError, setOtpError] = useState("");
   const dispatch: AppDispatch = useDispatch();
-  const [resendTimer, setResendTimer] = useState(4);
+  const [resendTimer, setResendTimer] = useState(60);
   const [resendDisabled, setResendDisabled] = useState(false);
   const mobile_number = localStorage.getItem("mobile_number")?.toString();
 
@@ -82,7 +85,6 @@ export default function OtpModal() {
 
   const handleSubmit = async () => {
     // const mobile_number = localStorage.getItem("mobile_number");
-    // setShowMobileNumber(mobile_number);
     if (otp.length < 6) {
       setOtpError("Please Fill the OTP");
     } else {
@@ -94,7 +96,7 @@ export default function OtpModal() {
 
       try {
         setSubmitting(true);
-        const resAfterEncrypt = await AesEncrypt(data);
+        const resAfterEncrypt = AesEncrypt(data);
 
         const body = {
           payload: resAfterEncrypt,
@@ -110,10 +112,11 @@ export default function OtpModal() {
           body,
           header
         );
-        const decryptedData = await AesDecrypt(response.data.payload);
+        const decryptedData = AesDecrypt(response.data.payload);
         const result = JSON.parse(decryptedData);
+        console.log("decrypted data from otp modal", result);
         if (result.status === true) {
-          localStorage.setItem("token", result?.data?.otpVarifiedToken);
+          localStorage.setItem("token", result.data.otpVarifiedToken);
           if (purpoes === 'login') {
             dispatch(fetchUserDetails());
             dispatch(setIsLoggedIn(true));
@@ -121,7 +124,11 @@ export default function OtpModal() {
             if (result.data.isNewUser) {
               mixpanel.identify(mobile_number);
               mixpanel.track('New User Login(web)');
-              dispatch(setShowProfileForm(true));
+              if (userType === "user") {
+                dispatch(setShowProfileForm(true));
+              } else {
+                dispatch(setShowProfileFormCorporate(true));
+              }
             }
             mixpanel.identify(mobile_number);
             dispatch(setShowOTPmodal(false));
@@ -324,8 +331,7 @@ export default function OtpModal() {
                       loading={submitting}
                       title="Submit"
                       btnType="submit"
-                      // w-40 text-md text-black bg-themeBlue focus:outline-none rounded-full border border-gray-200 bold focus:z-10
-                      containerStyles="bg-themeBlue rounded-full border border-gray-200 bold h-22"
+                      containerStyles="bg-themeBlue rounded-full border border-gray-200 bold h-22 focus:outline-none focus:z-10"
                       handleClick={() => {
                         handleSubmit();
                       }}
