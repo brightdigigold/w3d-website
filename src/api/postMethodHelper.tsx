@@ -4,7 +4,7 @@ import Notiflix from 'notiflix';
 
 export const postMethodHelperWithEncryption = async (url: string, data: any, headers: AxiosRequestConfig = {}) => {
     try {
-        Notiflix.Loading.circle();
+        // Notiflix.Loading.circle();
         const encryptedData = AesEncrypt(data);
         // Create request body and header
         const body = {

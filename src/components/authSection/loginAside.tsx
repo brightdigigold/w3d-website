@@ -11,6 +11,7 @@ import { UserIcon } from "@heroicons/react/20/solid";
 import { FaBuilding } from 'react-icons/fa';
 import clsx from "clsx";
 import { postMethodHelperWithEncryption } from "@/api/postMethodHelper";
+import CustomButton from "../customButton";
 interface LoginAsideProps {
   isOpen: boolean;
   onClose: () => any;
@@ -77,12 +78,13 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
     // console.log("onSubmit", values);
     try {
       setSubmitting(true);
+      // Notiflix.Loading.circle();
       const result = await postMethodHelperWithEncryption(
         `${process.env.baseUrl}/auth/send/otp`,
         values,
-        {
-          onUploadProgress: () => Notiflix.Loading.circle(),
-        }
+        // {
+        //   onUploadProgress: () => Notiflix.Loading.circle(),
+        // }
       );
 
       if (!result.isError && result.data.status) {
@@ -90,6 +92,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         dispatch(setPurpose(purpose));
         dispatch(setShowOTPmodal(true));
         dispatch(setOtpMsg(result.data.message));
+        setSubmitting(false);
         onClose();
       } else if (result.isError) {
         // Handle error case
@@ -99,6 +102,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
     } catch (error) {
       // This block may not be needed unless you want to handle non-Axios errors
       Notiflix.Report.failure('Error', 'Something went wrong!', 'OK');
+      setSubmitting(false);
     } finally {
       setSubmitting(false);
       Notiflix.Loading.remove();
@@ -228,16 +232,14 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                         </div>
                       ) : null}
                       <div className="">
-                        <button
-                          type="submit"
-                          className="bg-themeBlue px-2 py-2 rounded-full w-full mt-2 mb-2 extrabold"
-                          // onClick={() => {
-                          //   values.buttonType = "OtpLogin";
-                          // }}
-                          disabled={submitting}
-                        >
-                          SEND OTP
-                        </button>
+                        <CustomButton
+                          btnType="submit"
+                          title="SEND OTP"
+                          loading={submitting}
+                          containerStyles="bg-themeBlue px-2 py-2 rounded-full w-full mt-2 mb-2 extrabold"
+                          isDisabled={submitting}
+                          handleClick={() => { handleSubmit() }}
+                        />
                       </div>
                     </div>
                   </form>
@@ -248,7 +250,6 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         </div>
       </div>
     </div>
-
   );
 };
 
