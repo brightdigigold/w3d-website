@@ -156,16 +156,15 @@ export default function OtpModal() {
         const decryptedData = await AesDecrypt(error?.response?.data?.payload);
         const result = JSON.parse(decryptedData);
         Swal.fire({
-          // icon: "error",
           html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
           title: "Oops...",
           titleText: result.message,
         });
         setOtp("");
         setOtpError("");
-        // setSubmitting(false);
+        setSubmitting(false);
       } finally {
-        // setSubmitting(false);
+        setSubmitting(false);
       }
     }
   };
