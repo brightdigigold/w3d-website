@@ -2,7 +2,7 @@ import { AesDecrypt, AesEncrypt } from '@/components/helperFunctions';
 import axios, { AxiosRequestConfig } from 'axios';
 import Notiflix from 'notiflix';
 
-export const postWithEncryption = async (url: string, data: any, headers: AxiosRequestConfig = {}) => {
+export const postMethodHelperWithEncryption = async (url: string, data: any, headers: AxiosRequestConfig = {}) => {
     try {
         Notiflix.Loading.circle();
         const encryptedData = AesEncrypt(data);
@@ -21,6 +21,7 @@ export const postWithEncryption = async (url: string, data: any, headers: AxiosR
         const response = await axios.post(url, body, config);
         // Decrypt the response
         const decryptedResponse = JSON.parse(AesDecrypt(response.data.payload));
+        console.log("decryptedResponse", decryptedResponse);
         // Return structured success response
         return {
             data: decryptedResponse,

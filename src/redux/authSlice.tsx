@@ -9,6 +9,7 @@ interface AuthState {
   isLoggedInForTempleReceipt: boolean;
   purpoes: string;
   devotee_isNewUser: boolean;
+  otpMsg: string;
 }
 
 const initialState: AuthState = {
@@ -19,6 +20,7 @@ const initialState: AuthState = {
   isLoggedInForTempleReceipt: false,
   purpoes: 'login',
   devotee_isNewUser: false,
+  otpMsg: "",
 };
 
 const authSlice = createSlice({
@@ -45,11 +47,14 @@ const authSlice = createSlice({
     },
     setPurpose: (state, action: PayloadAction<string>) => {
       state.purpoes = action.payload;
-    }
+    },
+    setOtpMsg: (state, action: PayloadAction<string>) => {
+      state.otpMsg = action.payload;
+    },
   },
 });
 
-export const { profileFilled, setShowProfileForm, setShowOTPmodal, setIsLoggedIn, setPurpose, setDevoteeIsNewUser, setIsLoggedInForTempleReceipt } = authSlice.actions;
+export const { profileFilled, setShowProfileForm, setShowOTPmodal, setIsLoggedIn, setPurpose, setDevoteeIsNewUser, setIsLoggedInForTempleReceipt,setOtpMsg } = authSlice.actions;
 export const selectIsloggedIn = ((state: RootState) => state.auth.isLoggedIn);
 
 export default authSlice.reducer;

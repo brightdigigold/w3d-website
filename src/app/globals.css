@@ -715,6 +715,16 @@ input.inputBox {
   }
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 .fade-section {
   transition: opacity 0.5s ease-in-out;
 }
@@ -871,3 +881,7 @@ body.modal-open {
 .fade-in-up {
   animation: fadeInUp 1.5s ease-out forwards;
 }
+
+
+
+

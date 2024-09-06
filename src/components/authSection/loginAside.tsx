@@ -1,7 +1,5 @@
 "use client";
-import { AesDecrypt, AesEncrypt } from "@/components/helperFunctions";
-import { setShowOTPmodal, setPurpose } from "@/redux/authSlice";
-import axios, { AxiosRequestConfig } from "axios";
+import { setShowOTPmodal, setPurpose, setOtpMsg } from "@/redux/authSlice";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import Notiflix from "notiflix";
@@ -12,8 +10,7 @@ import * as Yup from "yup";
 import { UserIcon } from "@heroicons/react/20/solid";
 import { FaBuilding } from 'react-icons/fa';
 import clsx from "clsx";
-import { postWithEncryption } from "@/api/postMethodHelper";
-
+import { postMethodHelperWithEncryption } from "@/api/postMethodHelper";
 interface LoginAsideProps {
   isOpen: boolean;
   onClose: () => any;
@@ -79,7 +76,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
     // console.log("onSubmit", values);
     try {
       setSubmitting(true);
-      const result = await postWithEncryption(
+      const result = await postMethodHelperWithEncryption(
         `${process.env.baseUrl}/auth/send/otp`,
         values,
         {
@@ -91,6 +88,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         localStorage.setItem("mobile_number", values.mobile_number);
         dispatch(setPurpose(purpose));
         dispatch(setShowOTPmodal(true));
+        dispatch(setOtpMsg(result.data.message));
       } else if (result.isError) {
         // Handle error case
         Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');

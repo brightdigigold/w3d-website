@@ -24,6 +24,7 @@ import mixpanel from "mixpanel-browser";
 
 export default function OtpModal() {
   const purpoes = useSelector((state: RootState) => state.auth.purpoes);
+  const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
@@ -31,7 +32,7 @@ export default function OtpModal() {
   const [submitting, setSubmitting] = useState(false);
   const [otpError, setOtpError] = useState("");
   const dispatch: AppDispatch = useDispatch();
-  const [resendTimer, setResendTimer] = useState(120);
+  const [resendTimer, setResendTimer] = useState(4);
   const [resendDisabled, setResendDisabled] = useState(false);
   const mobile_number = localStorage.getItem("mobile_number")?.toString();
 
@@ -48,6 +49,22 @@ export default function OtpModal() {
       clearInterval(countdown);
     };
   }, [resendTimer]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        handleSubmit();
+      }
+    };
+
+    // Attach the event listener
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup the event listener when component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [otp]);
 
   const startResendTimer = () => {
     setResendTimer(120);
@@ -141,12 +158,14 @@ export default function OtpModal() {
         Swal.fire({
           // icon: "error",
           html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
-
           title: "Oops...",
           titleText: result.message,
         });
         setOtp("");
         setOtpError("");
+        // setSubmitting(false);
+      } finally {
+        // setSubmitting(false);
       }
     }
   };
@@ -156,9 +175,7 @@ export default function OtpModal() {
       const data = {
         mobile_number: localStorage.getItem("mobile_number"),
       };
-
       Notiflix.Loading.init({ svgColor: "rgba(241,230,230,0.985)" });
-
       const resAfterEncrypt = await AesEncrypt(data);
       const body = {
         payload: resAfterEncrypt,
@@ -217,7 +234,7 @@ export default function OtpModal() {
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
         <div className="fixed inset-0 z-[50] w-screen overflow-y-auto">
-          <div className="flex min-h-full z-[50] items-center justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex min-h-full z-[50] items-center justify-center text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -228,14 +245,14 @@ export default function OtpModal() {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-theme text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div className="bg-theme px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                <div className="px-5 pt-5 sm:p-6 sm:pb-3">
                   <div>
-                    <img src="/LogoOtp.png" className="h-16 mb-6 mx-auto" />
+                    <img src="/LogoOtp.png" className="h-16 mb-4 mx-auto" />
                   </div>
-                  {/* <h1 className="text-gold01 extrabold text-5xl text-center mb-3">
-                    OTP
-                  </h1> */}
-                  <div className="sm:flex sm:items-start justify-center">
+                  <p className="text-green-600 sm:text-sm text-xs text-center sm:mb-3">
+                    {otpMsg}
+                  </p>
+                  <div className="flex flex-col justify-center">
                     <div className="mt-3 items-center text-center sm:ml-4 sm:mt-0 sm:text-left">
                       <Dialog.Title
                         as="h3"
@@ -275,46 +292,45 @@ export default function OtpModal() {
                         {otpError && (
                           <div className="text-red-600">{otpError}</div>
                         )}
-
-                        <div className="flex flex-col justify-start w-48 h-18 mt-2 ml-2">
-                          <div className="flex items-center">
-                            {resendTimer > 0 && (
-                              <span className="mr-2 text-yellow-400">
-                                Resend OTP in{" "}
-                                {`${Math.floor(resendTimer / 60)
-                                  .toString()
-                                  .padStart(2, "0")}:${(resendTimer % 60)
-                                    .toString()
-                                    .padStart(2, "0")}`}
-                              </span>
-                            )}
-
-                            {!resendTimer && (
-                              <CustomButton
-                                btnType="submit"
-                                title="Resend OTP"
-                                containerStyles={`text-yellow-400 ${resendDisabled ? "cursor-not-allowed" : ""
-                                  }`}
-                                handleClick={() => resendOtp()}
-                                isDisabled={resendDisabled}
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <div className=" flex justify-center">
-                          <button
-                            data-modal-hide="popup-modal"
-                            type="submit"
-                            className="mt-4 w-40 text-md text-black bg-themeBlue focus:outline-none rounded-full border border-gray-200 bold px-5 py-2.5 focus:z-10"
-                            onClick={() => {
-                              handleSubmit();
-                            }}
-                          >
-                            Submit
-                          </button>
-                        </div>
                       </div>
                     </div>
+                    <div className="m-2">
+                      {resendTimer > 0 && (
+                        <span className=" text-yellow-400 sm:ml-5">
+                          Resend OTP in{" "}
+                          {`${Math.floor(resendTimer / 60)
+                            .toString()
+                            .padStart(2, "0")}:${(resendTimer % 60)
+                              .toString()
+                              .padStart(2, "0")}`}
+                        </span>
+                      )}
+
+                      {!resendTimer && (
+                        <CustomButton
+                          btnType="submit"
+                          title="Resend OTP"
+                          noPadding={true}
+                          containerStyles={`text-yellow-400 ${resendDisabled ? "cursor-not-allowed" : ""
+                            }`}
+                          handleClick={() => resendOtp()}
+                          isDisabled={resendDisabled}
+                        />
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center">
+                    <CustomButton
+                      loading={submitting}
+                      title="Submit"
+                      btnType="submit"
+                      // w-40 text-md text-black bg-themeBlue focus:outline-none rounded-full border border-gray-200 bold focus:z-10
+                      containerStyles="bg-themeBlue rounded-full border border-gray-200 bold h-22"
+                      handleClick={() => {
+                        handleSubmit();
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">

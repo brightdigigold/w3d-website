@@ -9,6 +9,7 @@ export interface customButtonProps {
   Icon?: string;
   isDisabled?: boolean;
   loading?: boolean;
+  noPadding?: boolean;
 }
 
 export interface customImageButtonProps {
