@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
 import dynamic from 'next/dynamic';
 import { Poppins } from "next/font/google";
+import { initializeNotiflix } from "@/utils/customNotiflix";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -20,8 +21,8 @@ const Footer = dynamic(() => import('@/components/footer'), { ssr: false });
 let persistor = persistStore(store);
 
 export default function RootLayout({ children }) {
-
   useEffect(() => {
+    initializeNotiflix();
     mixpanel.init(`${process.env.MIX_PANNEL_TOKEN}`, { track_pageview: true });
   }, []);
 

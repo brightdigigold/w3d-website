@@ -882,6 +882,32 @@ body.modal-open {
   animation: fadeInUp 1.5s ease-out forwards;
 }
 
+/* custom notiflix */
+
+/* Customize the Notiflix error icon */
+.notiflix-report-icon .notiflix-svg {
+  width: 50px !important;   /* Custom icon size */
+  height: 50px !important;  /* Custom icon size */
+}
+
+/* Customize the background of the Notiflix failure report */
+.notiflix-report-failure {
+  background: url('/path/to/your/custom/background.jpg') no-repeat center center;
+  background-size: cover;
+  border-radius: 10px; /* Rounded corners for custom background */
+}
+
+/* Further customization for the text */
+.notiflix-report-content {
+  color: #333;  /* Custom text color */
+  font-size: 16px;
+}
+
+.notiflix-report-title {
+  font-size: 20px;  /* Custom title size */
+  color: #721c24;  /* Custom title color */
+}
+
 
 
 

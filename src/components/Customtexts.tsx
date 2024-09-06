@@ -30,6 +30,7 @@ export const TypingTextservice = (title: any) => (
     ))}
   </motion.p>
 );
+
 export const TitleText = (title: any, textStyles: any) => (
   <motion.h2
     variants={textVariant2}

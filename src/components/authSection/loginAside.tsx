@@ -21,6 +21,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string>()
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -34,18 +35,18 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   }, [isOpen]);
 
 
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: any) => {
+  //     if (modalRef.current && !modalRef.current.contains(event.target)) {
+  //       onClose();
+  //     }
+  //   };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [modalRef, onClose]);
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, [modalRef, onClose]);
 
   const handleTermsClick = () => {
     router.push("/term-and-conditions")
@@ -89,11 +90,12 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         dispatch(setPurpose(purpose));
         dispatch(setShowOTPmodal(true));
         dispatch(setOtpMsg(result.data.message));
+        onClose();
       } else if (result.isError) {
         // Handle error case
-        Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
+        setError(result?.errorMsg)
+        // Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
       }
-      onClose();
     } catch (error) {
       // This block may not be needed unless you want to handle non-Axios errors
       Notiflix.Report.failure('Error', 'Something went wrong!', 'OK');
@@ -183,6 +185,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                           const { name, value } = event.target;
                           const updatedValue = value.replace(/[^0-9]/g, "");
                           setFieldValue("mobile_number", updatedValue);
+                          setError('')
                         }}
                         onBlur={handleBlur}
                         value={values.mobile_number}
@@ -192,18 +195,20 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                           {errors.mobile_number}
                         </div>
                       ) : null}
+                      {error && <div className="text-red-600 mt-0.5 bold tracking-wide">{error}</div>}
                     </div>
                     <div className="bottom-2 absolute w-full px-4">
                       <div className="items-center flex">
-                        {purpose === "login" ? <input
-                          className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background  rounded-lg focus:outline-none "
-                          id="termsAndConditions"
-                          type="checkbox"
-                          name="termsAndConditions"
-                          checked={values.termsAndConditions}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        /> : null}
+                        {purpose === "login" ?
+                          <input
+                            className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background  rounded-lg focus:outline-none "
+                            id="termsAndConditions"
+                            type="checkbox"
+                            name="termsAndConditions"
+                            checked={values.termsAndConditions}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          /> : null}
                         {purpose === "login" ? <div className="ml-2 items-center text-white ">
                           I agree to these
                           <span>
