@@ -25,6 +25,7 @@ import clsx from 'clsx';
 import mixpanel from "mixpanel-browser";
 import SetProfileForNewUser from "./setProfile";
 import Image from "next/image";
+import SetProfileCorporate from "./setProfileCorporate";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -99,7 +100,7 @@ const Navbar = () => {
           )}
 
           {showProfileFormCorporate && (
-            <h1 className="text-white text-3xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi rerum adipisci saepe, facere aliquam sed fugit consequatur esse atque beatae!</h1>
+            <SetProfileCorporate />
           )}
 
           <div className="mx-auto sm:px-6 xl:px-16 sm:py-2 z-10">
