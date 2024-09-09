@@ -176,7 +176,7 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
         });
       }
     } catch (error: any) {
-      let decryptedData = await AesDecrypt(error.response.data.payload);
+      let decryptedData = AesDecrypt(error.response.data.payload);
       let finalResult = JSON.parse(decryptedData);
       Swal.fire({
         html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
