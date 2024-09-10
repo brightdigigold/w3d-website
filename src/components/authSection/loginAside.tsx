@@ -293,6 +293,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                                 <button
                                   onClick={() => {
                                     setCorporateLoginOrSignUp('signup');
+                                    setFieldValue("termsAndConditions", false);
                                     setFieldValue('mobile_number', "");
                                     setError(null);
                                     setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
@@ -342,6 +343,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                                 <button
                                   onClick={() => {
                                     setCorporateLoginOrSignUp('login');
+                                    setFieldValue("termsAndConditions", false);
                                     setFieldValue('GST_number', "");
                                     setError(null);
                                     setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
