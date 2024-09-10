@@ -427,11 +427,6 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                           {errors.termsAndConditions}
                         </div>
                       ) : null}
-                      {/* {error && (
-                        <div className="text-red-600 mt-0.5 bold tracking-wide">
-                          {error}
-                        </div>
-                      )} */}
                       <CustomButton
                         btnType="submit"
                         title="SEND OTP"
