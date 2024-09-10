@@ -5,13 +5,14 @@ import { useRouter } from "next/navigation";
 import Notiflix from "notiflix";
 import React, { useEffect, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import * as Yup from 'yup';
 import { UserIcon } from "@heroicons/react/20/solid";
 import { FaBuilding } from 'react-icons/fa';
 import clsx from "clsx";
 import { postMethodHelperWithEncryption } from "@/api/postMethodHelper";
 import CustomButton from "../customButton";
+import { RootState } from "@/redux/store";
 interface LoginAsideProps {
   isOpen: boolean;
   onClose: () => any;
@@ -20,9 +21,11 @@ interface LoginAsideProps {
 
 const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const userType = useSelector((state: RootState) => state.auth.UserType);
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  const [corporateLoginOrSignUp, setCorporateLoginOrSignUp] = useState<"login" | "signup" | null>("login");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string>()
+  const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -56,33 +59,53 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 
   const initialValues = {
     mobile_number: "",
+    GST_number: "",
     termsAndConditions: false,
-    type: "",
+    type: "user",
     country_iso: '91',
     isCountryIsoRequired: false,
+    mode: "",
   };
 
   const validationSchema = Yup.object({
-    termsAndConditions: purpose === 'login' ? Yup.boolean()
-      .oneOf([true], "Terms and conditions are required") : Yup.boolean(),
-    mobile_number: Yup.string()
-      .required("Mobile number is required")
-      .matches(/^[6789][0-9]{9}$/, "Mobile No. is not valid")
-      .matches(phoneRegex, "Invalid Number, Kindly enter a valid number")
-      .min(10, "Please enter a 10-digit mobile number")
-      .max(10, "Too long"),
+    termsAndConditions: Yup.boolean().oneOf([true], "Terms and conditions are required"),
+
     type: Yup.string().required("Please select Personal or Corporate"),
+
+    mobile_number: (userType === "corporate" && corporateLoginOrSignUp === 'login') || (userType === "user")
+      ? Yup.string()
+        .required("Mobile number is required")
+        .matches(/^[6789][0-9]{9}$/, "Mobile No. is not valid")
+        .matches(phoneRegex, "Invalid Number, Kindly enter a valid number")
+        .min(10, "Please enter a 10-digit mobile number")
+        .max(10, "Too long")
+      : Yup.string(),
+
+    GST_number: (userType === 'corporate' && corporateLoginOrSignUp === 'signup')
+      ? Yup.string()
+        .required("GST number is required")
+        .min(5, 'GST number must be greater than 5 characters')
+        .max(15, "GST number cannot be more than 15 characters")
+        .matches(/^[a-zA-Z0-9]*$/, "GST number can only contain letters and numbers")
+      : Yup.string()
   });
 
+
   const onSubmit = async (values: any) => {
-    console.log("onSubmit", values, values.type);
+    console.log("onSubmit", values);
     dispatch(SetUserType(values.type));
+    const updatedValues = {
+      ...values,
+      mode: corporateLoginOrSignUp, // Add or update the mode field
+    };
+
+    console.log("Updated Values", updatedValues);
     try {
       setSubmitting(true);
       // Notiflix.Loading.circle();
       const result = await postMethodHelperWithEncryption(
         `${process.env.baseUrl}/auth/send/otp`,
-        values,
+        updatedValues,
         // {
         //   onUploadProgress: () => Notiflix.Loading.circle(),
         // }
@@ -154,6 +177,8 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                   handleChange,
                   handleBlur,
                   handleSubmit,
+                  setFieldError,
+                  setTouched,
                 }) => (
                   <form
                     onSubmit={(e) => {
@@ -163,85 +188,256 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                     className=""
                   >
                     <div className="flex gap-6 px-4 mt-3 md:mt-0 justify-center">
-                      <div onClick={() => setFieldValue("type", "user")} className="cursor-pointer">
-                        <UserIcon className={clsx('h-20 w-23 mx-auto p-1', values.type === "user" ? "text-yellow-400 border-2 border-yellow-400 rounded-full p-2" : "text-white border-2 rounded-full")} />
-                        <div className={clsx('text-center poppins-medium py-2 tracking-wide', values.type === "user" ? "text-yellow-400" : "text-white ")}>PERSONAL</div>
+                      <div
+                        onClick={() => {
+                          setFieldValue("type", "user");
+                          dispatch(SetUserType("user"));
+                          setCorporateLoginOrSignUp('login');
+                          setFieldValue("termsAndConditions", false);
+                          setFieldError('termsAndConditions', '');
+                          setFieldError('GST_number', '');
+                          setFieldError('mobile_number', '');
+                          setFieldValue("mobile_number", '');
+                          setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
+                          setError(null);
+                        }}
+                        className="cursor-pointer"
+                      >
+                        <UserIcon
+                          className={clsx(
+                            'h-20 w-23 mx-auto p-1',
+                            values.type === "user" ? "text-yellow-400 border-2 border-yellow-400 rounded-full p-2" : "text-white border-2 rounded-full"
+                          )}
+                        />
+                        <div
+                          className={clsx(
+                            'text-center poppins-medium py-2 tracking-wide',
+                            values.type === "user" ? "text-yellow-400" : "text-white"
+                          )}
+                        >
+                          PERSONAL
+                        </div>
                       </div>
-                      <div onClick={() => setFieldValue("type", "corporate")} className="cursor-pointer">
-                        <FaBuilding size={80} className={clsx('mx-auto', values.type === "corporate" ? "text-yellow-400 border-2 border-yellow-400 rounded-full p-2" : "text-white border-2 border-white rounded-full p-2")} />
-                        <div className={clsx('text-center poppins-medium tracking-wide px-4 mt-2', values.type === "corporate" ? "text-yellow-400" : "text-white")}>CORPORATE</div>
+                      <div
+                        onClick={() => {
+                          setFieldValue("type", "corporate");
+                          dispatch(SetUserType("corporate"));
+                          setCorporateLoginOrSignUp('login');
+                          setFieldValue("termsAndConditions", false);
+                          setFieldError('termsAndConditions', '');
+                          setFieldError('GST_number', '');
+                          setFieldError('mobile_number', '');
+                          setFieldValue("mobile_number", '');
+                          setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
+                          setError(null);
+                        }}
+                        className="cursor-pointer"
+                      >
+                        <FaBuilding
+                          size={80}
+                          className={clsx(
+                            'mx-auto',
+                            values.type === "corporate" ? "text-yellow-400 border-2 border-yellow-400 rounded-full p-2" : "text-white border-2 border-white rounded-full p-2"
+                          )}
+                        />
+                        <div
+                          className={clsx(
+                            'text-center poppins-medium tracking-wide px-4 mt-2',
+                            values.type === "corporate" ? "text-yellow-400" : "text-white"
+                          )}
+                        >
+                          CORPORATE
+                        </div>
                       </div>
                     </div>
                     {errors.type && touched.type && (
                       <div className="text-red-600 text-md bold px-4 text-center">{errors.type}</div>
                     )}
-                    <div className="mt-6 px-4">
-                      <label className="text-white text-lg">Mobile Number</label>
-                      <br />
-                      <input
-                        name="mobile_number"
-                        className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
-                        type="text"
-                        inputMode="numeric"
-                        minLength={10}
-                        maxLength={10}
-                        placeholder="Enter Mobile Number"
-                        onChange={(event) => {
-                          const { name, value } = event.target;
-                          const updatedValue = value.replace(/[^0-9]/g, "");
-                          setFieldValue("mobile_number", updatedValue);
-                          setError('')
-                        }}
-                        onBlur={handleBlur}
-                        value={values.mobile_number}
-                      />
-                      {touched.mobile_number && errors.mobile_number ? (
-                        <div className="text-red-600 text-md bold"  >
-                          {errors.mobile_number}
-                        </div>
-                      ) : null}
-                      {error && <div className="text-red-600 mt-0.5 bold tracking-wide">{error}</div>}
-                    </div>
+
+                    {values.type === "corporate" && (
+                      <div className="mt-6 px-4">
+                        {corporateLoginOrSignUp === "login" && (
+                          <>
+                            <label className="text-white text-lg">Mobile Number</label>
+                            <br />
+                            <input
+                              name="mobile_number"
+                              className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
+                              type="text"
+                              inputMode="numeric"
+                              minLength={10}
+                              maxLength={10}
+                              placeholder="Enter Mobile Number"
+                              onChange={(event) => {
+                                const { name, value } = event.target;
+                                const updatedValue = value.replace(/[^0-9]/g, "");
+                                setFieldValue("mobile_number", updatedValue);
+                                setError(null);
+                              }}
+                              onBlur={handleBlur}
+                              value={values.mobile_number}
+                            />
+                            {touched.mobile_number && errors.mobile_number && (
+                              <div className="text-red-600 text-md bold">
+                                {errors.mobile_number}
+                              </div>
+                            )}
+                            {error && (
+                              <div className="text-red-600 mt-0.5 bold tracking-wide">
+                                {error}
+                              </div>
+                            )}
+                            <div className="mt-1">
+                              <p className="text-white">
+                                Don’t have an account?
+                                <button
+                                  onClick={() => {
+                                    setCorporateLoginOrSignUp('signup');
+                                    setFieldValue('mobile_number', "");
+                                    setError(null);
+                                    setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
+                                  }}
+                                  type="button"
+                                  className="text-yellow-400 underline tracking-wider cursor-pointer poppins-bold ml-1"
+                                >
+                                  Sign Up
+                                </button>
+                              </p>
+                            </div>
+                          </>
+                        )}
+
+                        {corporateLoginOrSignUp === "signup" && (
+                          <>
+                            <label className="text-white text-lg">GST Number</label>
+                            <br />
+                            <input
+                              name="GST_number"
+                              className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
+                              type="text"
+                              maxLength={15}
+                              placeholder="Enter GST Number"
+                              onChange={(event) => {
+                                const { name, value } = event.target;
+                                const updatedValue = value.replace(/[^a-zA-Z0-9]/g, ""); // Allow only letters and numbers
+                                setFieldValue(name, updatedValue);
+                                setError('');
+                              }}
+                              onBlur={handleBlur}
+                              value={values.GST_number}
+                            />
+                            {touched.GST_number && errors.GST_number && (
+                              <div className="text-red-600 text-md bold">
+                                {errors.GST_number}
+                              </div>
+                            )}
+                            {error && (
+                              <div className="text-red-600 mt-0.5 bold tracking-wide">
+                                {error}
+                              </div>
+                            )}
+                            <div className="mt-1">
+                              <p className="text-white">
+                                Already have an account?
+                                <button
+                                  onClick={() => {
+                                    setCorporateLoginOrSignUp('login');
+                                    setFieldValue('GST_number', "");
+                                    setError(null);
+                                    setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
+                                  }}
+                                  type="button"
+                                  className="text-yellow-400 underline tracking-wider cursor-pointer poppins-bold ml-1"
+                                >
+                                  Login
+                                </button>
+                              </p>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    )}
+
+                    {values.type !== "corporate" && (
+                      <div className="mt-6 px-4">
+                        <label className="text-white text-lg">Mobile Number</label>
+                        <br />
+                        <input
+                          name="mobile_number"
+                          className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
+                          type="text"
+                          inputMode="numeric"
+                          minLength={10}
+                          maxLength={10}
+                          placeholder="Enter Mobile Number"
+                          onChange={(event) => {
+                            const { name, value } = event.target;
+                            const updatedValue = value.replace(/[^0-9]/g, "");
+                            setFieldValue("mobile_number", updatedValue);
+                            setError('');
+                          }}
+                          onBlur={handleBlur}
+                          value={values.mobile_number}
+                        />
+                        {touched.mobile_number && errors.mobile_number && (
+                          <div className="text-red-600 text-md bold">
+                            {errors.mobile_number}
+                          </div>
+                        )}
+                        {error && (
+                          <div className="text-red-600 mt-0.5 bold tracking-wide">
+                            {error}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                     <div className="bottom-2 absolute w-full px-4">
                       <div className="items-center flex">
-                        {purpose === "login" ?
-                          <input
-                            className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background  rounded-lg focus:outline-none "
-                            id="termsAndConditions"
-                            type="checkbox"
-                            name="termsAndConditions"
-                            checked={values.termsAndConditions}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                          /> : null}
-                        {purpose === "login" ? <div className="ml-2 items-center text-white ">
-                          I agree to these
-                          <span>
-                            <button
-                              type="button"
-                              onClick={handleTermsClick}
-                              className="text-yellow-400 underline pl-2"
-                            >
-                              T & C
-                            </button>
-                          </span>
-                        </div> : null}
+                        {purpose === "login" ? (
+                          <>
+                            <input
+                              className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
+                              id="termsAndConditions"
+                              type="checkbox"
+                              name="termsAndConditions"
+                              checked={values.termsAndConditions}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                            />
+                            <div className="ml-2 items-center text-white">
+                              I agree to these
+                              <span>
+                                <button
+                                  type="button"
+                                  onClick={handleTermsClick}
+                                  className="text-yellow-400 underline pl-2"
+                                >
+                                  T & C
+                                </button>
+                              </span>
+                            </div>
+                          </>
+                        ) : null}
                       </div>
                       {touched.termsAndConditions && errors.termsAndConditions ? (
                         <div className="text-red-600 text-md bold">
                           {errors.termsAndConditions}
                         </div>
                       ) : null}
-                      <div className="">
-                        <CustomButton
-                          btnType="submit"
-                          title="SEND OTP"
-                          loading={submitting}
-                          containerStyles="bg-themeBlue px-2 py-2 rounded-full w-full mt-2 mb-2 extrabold"
-                          isDisabled={submitting}
-                          handleClick={() => { handleSubmit() }}
-                        />
-                      </div>
+                      {/* {error && (
+                        <div className="text-red-600 mt-0.5 bold tracking-wide">
+                          {error}
+                        </div>
+                      )} */}
+                      <CustomButton
+                        btnType="submit"
+                        title="SEND OTP"
+                        loading={submitting}
+                        containerStyles="bg-themeBlue px-2 py-2 rounded-full w-full mt-2 mb-2 extrabold"
+                        isDisabled={submitting}
+                        handleClick={() => { handleSubmit() }}
+                      />
                     </div>
                   </form>
                 )}
@@ -255,7 +451,4 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 };
 
 export default LoginAside;
-function UserType(arg0: string): any {
-  throw new Error("Function not implemented.");
-}
 

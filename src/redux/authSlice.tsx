@@ -24,7 +24,7 @@ const initialState: AuthState = {
   purpoes: 'login',
   devotee_isNewUser: false,
   otpMsg: "",
-  UserType: '',
+  UserType: 'user',
 };
 
 const authSlice = createSlice({
