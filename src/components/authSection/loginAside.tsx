@@ -1,5 +1,5 @@
 "use client";
-import { setShowOTPmodal, setPurpose, setOtpMsg, SetUserType, setCorporateBusinessDetails } from "@/redux/authSlice";
+import { setShowOTPmodal, setPurpose, setOtpMsg, SetUserType, setCorporateBusinessDetails, setCorporateAuthenticationMode } from "@/redux/authSlice";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import Notiflix from "notiflix";
@@ -94,18 +94,19 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const onSubmit = async (values: any) => {
     console.log("onSubmit", values);
     dispatch(SetUserType(values.type));
+
     const updatedValues = {
       ...values,
       mode: corporateLoginOrSignUp,
     };
 
-    const apiEndPoint = corporateLoginOrSignUp === "login" ? "auth/send/otp" : "auth/gst/send/otp"
+    const apiEndPoint = corporateLoginOrSignUp === "login" ? "auth/send/otp" : "auth/gst/send/otp";
 
     console.log("Updated Values", updatedValues);
+
     try {
       setSubmitting(true);
       // Notiflix.Loading.circle();
-      console.log("${process.env.baseUrl} ${apiEndPoint}", `${process.env.baseUrl}/${apiEndPoint}`)
       const result = await postMethodHelperWithEncryption(
         `${process.env.baseUrl}/${apiEndPoint}`,
         updatedValues,
@@ -117,7 +118,12 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
       if (!result.isError && result.data.status) {
         localStorage.setItem("mobile_number", values.mobile_number);
         dispatch(setPurpose(purpose));
-        dispatch(setCorporateBusinessDetails(result.data.data));
+        if (corporateLoginOrSignUp !== null) {
+          dispatch(setCorporateAuthenticationMode(corporateLoginOrSignUp));
+        }
+        if (corporateLoginOrSignUp === "signup") {
+          dispatch(setCorporateBusinessDetails(result.data.data));
+        }
         dispatch(setShowOTPmodal(true));
         dispatch(setOtpMsg(result.data.message));
         setSubmitting(false);
@@ -136,6 +142,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
       Notiflix.Loading.remove();
     }
   };
+
 
   return (
     <div ref={modalRef} className={`modal-class ${isOpen ? 'open-class' : ''}`}>

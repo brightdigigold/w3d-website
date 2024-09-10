@@ -9,8 +9,6 @@ interface CorporateBusinessDetails {
   pan?: string;
   tradeName?: string;
 }
-
-
 interface AuthState {
   profileFilled: boolean;
   showProfileForm: boolean;
@@ -23,6 +21,7 @@ interface AuthState {
   otpMsg: string;
   UserType: 'user' | 'corporate' | 'temple' | '';
   corporateBusinessDetails: CorporateBusinessDetails | null;
+  corporateAuthenticationMode: "login" | "signup" | null;
 }
 
 const initialState: AuthState = {
@@ -37,6 +36,7 @@ const initialState: AuthState = {
   otpMsg: "",
   UserType: 'user',
   corporateBusinessDetails: null,
+  corporateAuthenticationMode: null,
 };
 
 const authSlice = createSlice({
@@ -73,13 +73,16 @@ const authSlice = createSlice({
     SetUserType: (state, action: PayloadAction<'' | 'user' | 'corporate' | 'temple'>) => {
       state.UserType = action.payload;
     },
+    setCorporateAuthenticationMode: (state, action: PayloadAction<'login' | 'signup'>) => {
+      state.corporateAuthenticationMode = action.payload;
+    },
     setCorporateBusinessDetails: (state, action: PayloadAction<CorporateBusinessDetails>) => {
       state.corporateBusinessDetails = action.payload;
     },
   },
 });
 
-export const { profileFilled, setShowProfileForm, setShowOTPmodal, setIsLoggedIn, setPurpose, setDevoteeIsNewUser, setIsLoggedInForTempleReceipt, setOtpMsg, SetUserType, setShowProfileFormCorporate, setCorporateBusinessDetails } = authSlice.actions;
+export const { profileFilled, setShowProfileForm, setShowOTPmodal, setIsLoggedIn, setPurpose, setDevoteeIsNewUser, setIsLoggedInForTempleReceipt, setOtpMsg, SetUserType, setShowProfileFormCorporate, setCorporateBusinessDetails, setCorporateAuthenticationMode } = authSlice.actions;
 export const selectIsloggedIn = ((state: RootState) => state.auth.isLoggedIn);
 
 export default authSlice.reducer;

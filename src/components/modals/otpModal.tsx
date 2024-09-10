@@ -25,10 +25,11 @@ import mixpanel from "mixpanel-browser";
 
 export default function OtpModal() {
   const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
+  const corporateAuthenticationMode = useSelector((state: RootState) => state.auth.corporateAuthenticationMode);
   const purpoes = useSelector((state: RootState) => state.auth.purpoes);
   const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
   const userType = useSelector((state: RootState) => state.auth.UserType);
-  console.log("corporateBusinessDetails", corporateBusinessDetails);
+  console.log("corporateBusinessDetails", { corporateBusinessDetails, corporateAuthenticationMode });
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
