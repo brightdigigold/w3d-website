@@ -185,11 +185,48 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 Blogs
               </div>
             </Link>
-            <div className="absolute bottom-3 w-full text-center">
+            <div className=" absolute bottom-3  flex justify-center items-center w-full space-x-4">
+              <Link target="_blank" href="https://www.facebook.com/brightdigigold">
+                <img
+                  src="/socail1.png"
+                  alt="socail1"
+                  className="h-5"
+                />
+              </Link>
+              <Link target="_blank" href="https://www.instagram.com/brightdigigold/">
+                <img
+                  src="/socail2.png"
+                  alt="socail2"
+                  className="h-5"
+                />
+              </Link>
+              <Link target="_blank" href="https://www.linkedin.com/company/brightdigigold/mycompany/">
+                <img
+                  src="/socail3.png"
+                  alt="socail3"
+                  className="h-5"
+                />
+              </Link>
+              <Link target="_blank" href="https://twitter.com/BrightDiGiGold">
+                <img
+                  src="/Twitter.png"
+                  alt="socail3"
+                  className="h-5"
+                />
+              </Link>
+              <Link target="_blank" href="https://www.youtube.com/@brightdigigold">
+                <img
+                  src="/socail5.png"
+                  alt="youtube"
+                  className="h-5"
+                />
+              </Link>
+            </div>
+            {/* <div className="absolute bottom-3 w-full text-center">
               <p className="flex items-center justify-center text-white px-3 py-2">
                 Made with <Image src="/heart.png" alt="heart" width={20} height={20} className="h-5" /> in India
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

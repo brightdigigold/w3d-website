@@ -355,10 +355,10 @@ const Footer = () => {
                         </Link>
                       </li>
                       <li className="mb-8">
-                        <Link href="#">
+                        <Link target="_blank" href="https://www.youtube.com/@brightdigigold">
                           <img
                             src="/socail5.png"
-                            alt="socail4"
+                            alt="youtube"
                             className="h-6"
                           />
                         </Link>
