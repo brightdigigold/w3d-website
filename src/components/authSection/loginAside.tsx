@@ -59,7 +59,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 
   const initialValues = {
     mobile_number: "",
-    gstNumber: "",
+    gstNumber: "07AADCD4946L1ZC",
     termsAndConditions: false,
     type: "user",
     country_iso: '91',
@@ -81,10 +81,10 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         .max(10, "Too long")
       : Yup.string(),
 
-      gstNumber: (userType === 'corporate' && corporateLoginOrSignUp === 'signup')
+    gstNumber: (userType === 'corporate' && corporateLoginOrSignUp === 'signup')
       ? Yup.string()
         .required("GST number is required")
-        .min(5, 'GST number must be greater than 5 characters')
+        .min(15, 'GST number must be of 15 characters')
         .max(15, "GST number cannot be more than 15 characters")
         .matches(/^[a-zA-Z0-9]*$/, "GST number can only contain letters and numbers")
       : Yup.string()
