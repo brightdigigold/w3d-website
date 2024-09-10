@@ -59,7 +59,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 
   const initialValues = {
     mobile_number: "",
-    GST_number: "",
+    gstNumber: "",
     termsAndConditions: false,
     type: "user",
     country_iso: '91',
@@ -81,7 +81,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         .max(10, "Too long")
       : Yup.string(),
 
-    GST_number: (userType === 'corporate' && corporateLoginOrSignUp === 'signup')
+      gstNumber: (userType === 'corporate' && corporateLoginOrSignUp === 'signup')
       ? Yup.string()
         .required("GST number is required")
         .min(5, 'GST number must be greater than 5 characters')
@@ -96,15 +96,18 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
     dispatch(SetUserType(values.type));
     const updatedValues = {
       ...values,
-      mode: corporateLoginOrSignUp, // Add or update the mode field
+      mode: corporateLoginOrSignUp,
     };
+
+    const apiEndPoint = corporateLoginOrSignUp === "login" ? "auth/send/otp" : "auth/gst/send/otp"
 
     console.log("Updated Values", updatedValues);
     try {
       setSubmitting(true);
       // Notiflix.Loading.circle();
+      console.log("${process.env.baseUrl} ${apiEndPoint}", `${process.env.baseUrl}/${apiEndPoint}`)
       const result = await postMethodHelperWithEncryption(
-        `${process.env.baseUrl}/auth/send/otp`,
+        `${process.env.baseUrl}/${apiEndPoint}`,
         updatedValues,
         // {
         //   onUploadProgress: () => Notiflix.Loading.circle(),
@@ -195,10 +198,10 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                           setCorporateLoginOrSignUp('login');
                           setFieldValue("termsAndConditions", false);
                           setFieldError('termsAndConditions', '');
-                          setFieldError('GST_number', '');
+                          setFieldError('gstNumber', '');
                           setFieldError('mobile_number', '');
                           setFieldValue("mobile_number", '');
-                          setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
+                          setTouched({ ...touched, type: false, termsAndConditions: false, gstNumber: false, mobile_number: false });
                           setError(null);
                         }}
                         className="cursor-pointer"
@@ -225,10 +228,10 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                           setCorporateLoginOrSignUp('login');
                           setFieldValue("termsAndConditions", false);
                           setFieldError('termsAndConditions', '');
-                          setFieldError('GST_number', '');
+                          setFieldError('gstNumber', '');
                           setFieldError('mobile_number', '');
                           setFieldValue("mobile_number", '');
-                          setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
+                          setTouched({ ...touched, type: false, termsAndConditions: false, gstNumber: false, mobile_number: false });
                           setError(null);
                         }}
                         className="cursor-pointer"
@@ -296,7 +299,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                                     setFieldValue("termsAndConditions", false);
                                     setFieldValue('mobile_number', "");
                                     setError(null);
-                                    setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
+                                    setTouched({ ...touched, type: false, termsAndConditions: false, gstNumber: false, mobile_number: false });
                                   }}
                                   type="button"
                                   className="text-yellow-400 underline tracking-wider cursor-pointer poppins-bold ml-1"
@@ -313,7 +316,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                             <label className="text-white text-lg">GST Number</label>
                             <br />
                             <input
-                              name="GST_number"
+                              name="gstNumber"
                               className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
                               type="text"
                               maxLength={15}
@@ -325,11 +328,11 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                                 setError('');
                               }}
                               onBlur={handleBlur}
-                              value={values.GST_number}
+                              value={values.gstNumber}
                             />
-                            {touched.GST_number && errors.GST_number && (
+                            {touched.gstNumber && errors.gstNumber && (
                               <div className="text-red-600 text-md bold">
-                                {errors.GST_number}
+                                {errors.gstNumber}
                               </div>
                             )}
                             {error && (
@@ -344,9 +347,9 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                                   onClick={() => {
                                     setCorporateLoginOrSignUp('login');
                                     setFieldValue("termsAndConditions", false);
-                                    setFieldValue('GST_number', "");
+                                    setFieldValue('gstNumber', "");
                                     setError(null);
-                                    setTouched({ ...touched, type: false, termsAndConditions: false, GST_number: false, mobile_number: false });
+                                    setTouched({ ...touched, type: false, termsAndConditions: false, gstNumber: false, mobile_number: false });
                                   }}
                                   type="button"
                                   className="text-yellow-400 underline tracking-wider cursor-pointer poppins-bold ml-1"
