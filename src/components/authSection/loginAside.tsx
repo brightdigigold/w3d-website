@@ -1,5 +1,5 @@
 "use client";
-import { setShowOTPmodal, setPurpose, setOtpMsg, SetUserType } from "@/redux/authSlice";
+import { setShowOTPmodal, setPurpose, setOtpMsg, SetUserType, setCorporateBusinessDetails } from "@/redux/authSlice";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import Notiflix from "notiflix";
@@ -117,6 +117,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
       if (!result.isError && result.data.status) {
         localStorage.setItem("mobile_number", values.mobile_number);
         dispatch(setPurpose(purpose));
+        dispatch(setCorporateBusinessDetails(result.data.data));
         dispatch(setShowOTPmodal(true));
         dispatch(setOtpMsg(result.data.message));
         setSubmitting(false);
