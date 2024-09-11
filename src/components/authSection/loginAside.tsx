@@ -1,5 +1,5 @@
 "use client";
-import { setShowOTPmodal, setPurpose, setOtpMsg, SetUserType, setCorporateBusinessDetails, setCorporateAuthenticationMode } from "@/redux/authSlice";
+import { setShowOTPmodal, setPurpose, setOtpMsg, SetUserType, setCorporateBusinessDetails, setAuthenticationMode } from "@/redux/authSlice";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import Notiflix from "notiflix";
@@ -23,13 +23,14 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const userType = useSelector((state: RootState) => state.auth.UserType);
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-  const [corporateLoginOrSignUp, setCorporateLoginOrSignUp] = useState<"login" | "signup" | null>("login");
+  const [corporateLoginOrSignUp, setCorporateLoginOrSignUp] = useState<"corporateLogin" | "corporateSignUp" | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
+    dispatch(setAuthenticationMode('personalLogin'));
     const toggleBodyScroll = (shouldLock: boolean) => {
       document.body.style.overflow = shouldLock ? 'hidden' : 'auto';
     };
@@ -67,12 +68,14 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
     mode: "",
   };
 
+  // console.log("purpose", purpose);
+
   const validationSchema = Yup.object({
-    termsAndConditions: Yup.boolean().oneOf([true], "Terms and conditions are required"),
+    termsAndConditions: purpose === 'login' ? Yup.boolean().oneOf([true], "Terms and conditions are required") : Yup.string(),
 
     type: Yup.string().required("Please select Personal or Corporate"),
 
-    mobile_number: (userType === "corporate" && corporateLoginOrSignUp === 'login') || (userType === "user")
+    mobile_number: (userType === "corporate" && corporateLoginOrSignUp === 'corporateLogin') || (userType === "user")
       ? Yup.string()
         .required("Mobile number is required")
         .matches(/^[6789][0-9]{9}$/, "Mobile No. is not valid")
@@ -81,7 +84,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         .max(10, "Too long")
       : Yup.string(),
 
-    gstNumber: (userType === 'corporate' && corporateLoginOrSignUp === 'signup')
+    gstNumber: (userType === 'corporate' && corporateLoginOrSignUp === 'corporateSignUp')
       ? Yup.string()
         .required("GST number is required")
         .min(15, 'GST number must be of 15 characters')
@@ -100,7 +103,11 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
       mode: corporateLoginOrSignUp,
     };
 
-    const apiEndPoint = corporateLoginOrSignUp === "login" ? "auth/send/otp" : "auth/gst/send/otp";
+    // console.log("userType", userType)
+
+    const apiEndPoint = (userType == "user" || userType == "temple" || corporateLoginOrSignUp == "corporateLogin") ? "auth/send/otp" : "auth/gst/send/otp";
+    // corporateLoginOrSignUp === "corporateLogin" ? "auth/send/otp" : "auth/gst/send/otp";
+
 
     console.log("Updated Values", updatedValues);
 
@@ -119,9 +126,9 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         localStorage.setItem("mobile_number", values.mobile_number);
         dispatch(setPurpose(purpose));
         if (corporateLoginOrSignUp !== null) {
-          dispatch(setCorporateAuthenticationMode(corporateLoginOrSignUp));
+          dispatch(setAuthenticationMode(corporateLoginOrSignUp));
         }
-        if (corporateLoginOrSignUp === "signup") {
+        if (corporateLoginOrSignUp === "corporateSignUp") {
           dispatch(setCorporateBusinessDetails(result.data.data));
         }
         dispatch(setShowOTPmodal(true));
@@ -203,7 +210,8 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                         onClick={() => {
                           setFieldValue("type", "user");
                           dispatch(SetUserType("user"));
-                          setCorporateLoginOrSignUp('login');
+                          dispatch(setAuthenticationMode("personalLogin"));
+                          // setCorporateLoginOrSignUp('corporateSignUp');
                           setFieldValue("termsAndConditions", false);
                           setFieldError('termsAndConditions', '');
                           setFieldError('gstNumber', '');
@@ -233,7 +241,8 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                         onClick={() => {
                           setFieldValue("type", "corporate");
                           dispatch(SetUserType("corporate"));
-                          setCorporateLoginOrSignUp('login');
+                          dispatch(setAuthenticationMode("corporateLogin"));
+                          setCorporateLoginOrSignUp('corporateLogin');
                           setFieldValue("termsAndConditions", false);
                           setFieldError('termsAndConditions', '');
                           setFieldError('gstNumber', '');
@@ -267,7 +276,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 
                     {values.type === "corporate" && (
                       <div className="mt-6 px-4">
-                        {corporateLoginOrSignUp === "login" && (
+                        {corporateLoginOrSignUp === "corporateLogin" && (
                           <>
                             <label className="text-white text-lg">Mobile Number</label>
                             <br />
@@ -303,7 +312,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                                 Don’t have an account?
                                 <button
                                   onClick={() => {
-                                    setCorporateLoginOrSignUp('signup');
+                                    setCorporateLoginOrSignUp('corporateSignUp');
                                     setFieldValue("termsAndConditions", false);
                                     setFieldValue('mobile_number', "");
                                     setError(null);
@@ -319,7 +328,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                           </>
                         )}
 
-                        {corporateLoginOrSignUp === "signup" && (
+                        {corporateLoginOrSignUp === "corporateSignUp" && (
                           <>
                             <label className="text-white text-lg">GST Number</label>
                             <br />
@@ -353,7 +362,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                                 Already have an account?
                                 <button
                                   onClick={() => {
-                                    setCorporateLoginOrSignUp('login');
+                                    setCorporateLoginOrSignUp('corporateLogin');
                                     setFieldValue("termsAndConditions", false);
                                     setFieldValue('gstNumber', "");
                                     setError(null);

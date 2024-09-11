@@ -21,7 +21,7 @@ interface AuthState {
   otpMsg: string;
   UserType: 'user' | 'corporate' | 'temple' | '';
   corporateBusinessDetails: CorporateBusinessDetails | null;
-  corporateAuthenticationMode: "login" | "signup" | null;
+  authenticationMode: "personalLogin" | "corporateLogin" | "corporateSignUp" | null;
 }
 
 const initialState: AuthState = {
@@ -36,7 +36,7 @@ const initialState: AuthState = {
   otpMsg: "",
   UserType: 'user',
   corporateBusinessDetails: null,
-  corporateAuthenticationMode: null,
+  authenticationMode: "personalLogin",
 };
 
 const authSlice = createSlice({
@@ -73,16 +73,16 @@ const authSlice = createSlice({
     SetUserType: (state, action: PayloadAction<'' | 'user' | 'corporate' | 'temple'>) => {
       state.UserType = action.payload;
     },
-    setCorporateAuthenticationMode: (state, action: PayloadAction<'login' | 'signup'>) => {
-      state.corporateAuthenticationMode = action.payload;
+    setAuthenticationMode: (state, action: PayloadAction<"personalLogin" | "corporateLogin" | "corporateSignUp" | null>) => {
+      state.authenticationMode = action.payload;
     },
-    setCorporateBusinessDetails: (state, action: PayloadAction<CorporateBusinessDetails>) => {
+    setCorporateBusinessDetails: (state, action: PayloadAction<CorporateBusinessDetails | null>) => {
       state.corporateBusinessDetails = action.payload;
     },
   },
 });
 
-export const { profileFilled, setShowProfileForm, setShowOTPmodal, setIsLoggedIn, setPurpose, setDevoteeIsNewUser, setIsLoggedInForTempleReceipt, setOtpMsg, SetUserType, setShowProfileFormCorporate, setCorporateBusinessDetails, setCorporateAuthenticationMode } = authSlice.actions;
+export const { profileFilled, setShowProfileForm, setShowOTPmodal, setIsLoggedIn, setPurpose, setDevoteeIsNewUser, setIsLoggedInForTempleReceipt, setOtpMsg, SetUserType, setShowProfileFormCorporate, setCorporateBusinessDetails, setAuthenticationMode } = authSlice.actions;
 export const selectIsloggedIn = ((state: RootState) => state.auth.isLoggedIn);
 
 export default authSlice.reducer;

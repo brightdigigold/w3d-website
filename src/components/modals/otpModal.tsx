@@ -12,7 +12,8 @@ import {
   setShowProfileForm,
   setShowProfileFormCorporate,
   setDevoteeIsNewUser,
-  setIsLoggedInForTempleReceipt
+  setIsLoggedInForTempleReceipt,
+  setCorporateBusinessDetails
 } from "@/redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -25,11 +26,11 @@ import mixpanel from "mixpanel-browser";
 
 export default function OtpModal() {
   const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
-  const corporateAuthenticationMode = useSelector((state: RootState) => state.auth.corporateAuthenticationMode);
+  const authenticationMode = useSelector((state: RootState) => state.auth.authenticationMode);
   const purpose = useSelector((state: RootState) => state.auth.purpose);
   const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
   const userType = useSelector((state: RootState) => state.auth.UserType);
-  console.log("corporateBusinessDetails", { corporateBusinessDetails, corporateAuthenticationMode,  });
+  console.log("Details On otp page", { corporateBusinessDetails, authenticationMode, userType });
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
@@ -87,6 +88,7 @@ export default function OtpModal() {
 
   const handleSubmit = async () => {
     // const mobile_number = localStorage.getItem("mobile_number");
+    const apiEndPoint = authenticationMode === "corporateSignUp" ? "auth/gst/verify/otp" : "auth/verify/otp";
     if (otp.length < 6) {
       setOtpError("Please Fill the OTP");
     } else {
@@ -110,7 +112,7 @@ export default function OtpModal() {
         };
 
         const response = await axios.post(
-          `${process.env.baseUrl}/auth/verify/otp`,
+          `${process.env.baseUrl}/${apiEndPoint}`,
           body,
           header
         );
@@ -346,6 +348,7 @@ export default function OtpModal() {
                     className="mt-3 inline-flex absolute top-5 right-5 justify-center rounded-full bg-transparent p-2 text-sm bold text-white shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
                     onClick={() => {
                       setOpen(false);
+                      dispatch(setCorporateBusinessDetails(null));
                       dispatch(setShowOTPmodal(false));
                     }}
                     ref={cancelButtonRef}

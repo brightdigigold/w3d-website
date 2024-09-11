@@ -19,7 +19,7 @@ const Footer = () => {
   const [openLoginAside, setOpenLoginAside] = useState(false);
   const router = useRouter();
 
-  const handleLinkClick = (linkName) => {
+  const handleLinkClick = (linkName: string) => {
     setActiveLink(linkName);
   };
 
