@@ -16,7 +16,7 @@ interface AuthState {
   otpModal: boolean;
   isLoggedIn: boolean;
   isLoggedInForTempleReceipt: boolean;
-  purpoes: string;
+  purpose: string;
   devotee_isNewUser: boolean;
   otpMsg: string;
   UserType: 'user' | 'corporate' | 'temple' | '';
@@ -31,7 +31,7 @@ const initialState: AuthState = {
   otpModal: false,
   isLoggedIn: false,
   isLoggedInForTempleReceipt: false,
-  purpoes: 'login',
+  purpose: 'login',
   devotee_isNewUser: false,
   otpMsg: "",
   UserType: 'user',
@@ -65,7 +65,7 @@ const authSlice = createSlice({
       state.isLoggedInForTempleReceipt = action.payload;
     },
     setPurpose: (state, action: PayloadAction<string>) => {
-      state.purpoes = action.payload;
+      state.purpose = action.payload;
     },
     setOtpMsg: (state, action: PayloadAction<string>) => {
       state.otpMsg = action.payload;

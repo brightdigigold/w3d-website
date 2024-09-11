@@ -8,7 +8,7 @@ const RequireAuth = ({ children }) => {
     const router = useRouter();
     const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
     const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
-    const purpose = useSelector((state: RootState) => state.auth.purpoes);
+    const purpose = useSelector((state: RootState) => state.auth.purpose);
     const path = window.location.pathname
 
 

@@ -26,10 +26,10 @@ import mixpanel from "mixpanel-browser";
 export default function OtpModal() {
   const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
   const corporateAuthenticationMode = useSelector((state: RootState) => state.auth.corporateAuthenticationMode);
-  const purpoes = useSelector((state: RootState) => state.auth.purpoes);
+  const purpose = useSelector((state: RootState) => state.auth.purpose);
   const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
   const userType = useSelector((state: RootState) => state.auth.UserType);
-  console.log("corporateBusinessDetails", { corporateBusinessDetails, corporateAuthenticationMode });
+  console.log("corporateBusinessDetails", { corporateBusinessDetails, corporateAuthenticationMode,  });
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
@@ -119,7 +119,7 @@ export default function OtpModal() {
         console.log("decrypted data from otp modal", result);
         if (result.status === true) {
           localStorage.setItem("token", result.data.otpVarifiedToken);
-          if (purpoes === 'login') {
+          if (purpose === 'login') {
             dispatch(fetchUserDetails());
             dispatch(setIsLoggedIn(true));
             dispatch(fetchWalletData() as any);
