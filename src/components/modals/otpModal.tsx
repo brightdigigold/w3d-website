@@ -90,14 +90,34 @@ export default function OtpModal() {
   const handleSubmit = async () => {
     // const mobile_number = localStorage.getItem("mobile_number");
     const apiEndPoint = authenticationMode === "corporateSignUp" ? "auth/gst/verify/otp" : "auth/verify/otp";
-    if (otp.length < 6) {
-      setOtpError("Please Fill the OTP");
+    console.log("API endpoint", apiEndPoint);
+    const otpLength = authenticationMode === "corporateSignUp" ? 4 : 6;
+    if (otp.length < otpLength) {
+      setOtpError("Please fill the OTP");
     } else {
-      const data = {
+      // const data = {
+      //   mobile_number: localStorage.getItem("mobile_number"),
+      //   otp: otp,
+      //   skipMobileNumber: false,
+      // };
+
+      const userData = {
         mobile_number: localStorage.getItem("mobile_number"),
         otp: otp,
         skipMobileNumber: false,
-      };
+      }
+
+      const corporateData = {
+        dateOfBirth: corporateBusinessDetails?.dateOfBirth,
+        gstMobile: corporateBusinessDetails?.gstMobile,
+        gstNumber: corporateBusinessDetails?.gstNumber,
+        legalName: corporateBusinessDetails?.legalName,
+        pan: corporateBusinessDetails?.pan,
+        tradeName: corporateBusinessDetails?.tradeName,
+        otp: otp,
+      }
+
+      const data = authenticationMode === "corporateSignUp" ? corporateData : userData;
 
       try {
         setSubmitting(true);
@@ -276,13 +296,13 @@ export default function OtpModal() {
                           value={otp}
                           inputType="number"
                           onChange={setOtp}
-                          numInputs={6}
+                          numInputs={authenticationMode === "corporateSignUp" ? 4 : 6}
                           containerStyle={{
                             padding: "2px",
                             margin: "0 auto",
                             borderRadius: "8px",
                             display: "flex",
-                            justifyContent: "space-around",
+                            justifyContent: authenticationMode === "corporateSignUp" ? "" : "space-around",
                           }}
                           shouldAutoFocus={true}
                           renderSeparator={<span> </span>}
