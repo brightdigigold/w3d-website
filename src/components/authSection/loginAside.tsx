@@ -95,21 +95,22 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 
 
   const onSubmit = async (values: any) => {
-    console.log("onSubmit", values);
+    // console.log("onSubmit", values);
     dispatch(SetUserType(values.type));
 
     const updatedValues = {
       ...values,
-      mode: corporateLoginOrSignUp,
+      mode: corporateLoginOrSignUp === "corporateLogin" ? "login" : "signup",
     };
 
     // console.log("userType", userType)
 
-    const apiEndPoint = (userType == "user" || userType == "temple" || corporateLoginOrSignUp == "corporateLogin") ? "auth/send/otp" : "auth/gst/send/otp";
+    const apiEndPoint = corporateLoginOrSignUp != 'corporateSignUp' ? "auth/send/otp" : "auth/gst/send/otp"
+    // (userType == "user" || userType == "temple" || corporateLoginOrSignUp == "corporateLogin") ? "auth/send/otp" : "auth/gst/send/otp";
     // corporateLoginOrSignUp === "corporateLogin" ? "auth/send/otp" : "auth/gst/send/otp";
 
-
-    console.log("Updated Values", updatedValues);
+    // console.log("api: " , apiEndPoint);
+    // console.log("Updated Values =========>", updatedValues);
 
     try {
       setSubmitting(true);
@@ -124,6 +125,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 
       if (!result.isError && result.data.status) {
         localStorage.setItem("mobile_number", values.mobile_number);
+        console.log("result.isError", result.data)
         dispatch(setPurpose(purpose));
         if (corporateLoginOrSignUp !== null) {
           dispatch(setAuthenticationMode(corporateLoginOrSignUp));
