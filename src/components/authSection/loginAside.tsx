@@ -205,7 +205,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                     }}
                     className=""
                   >
-                    <div className="flex gap-6 px-4 mt-3 md:mt-0 justify-center">
+                    {purpose !== "receipt" && <div className="flex gap-6 px-4 mt-3 md:mt-0 justify-center">
                       <div
                         onClick={() => {
                           setFieldValue("type", "user");
@@ -269,7 +269,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
                           CORPORATE
                         </div>
                       </div>
-                    </div>
+                    </div>}
                     {errors.type && touched.type && (
                       <div className="text-red-600 text-md bold px-4 text-center">{errors.type}</div>
                     )}
