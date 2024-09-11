@@ -13,7 +13,8 @@ import {
   setShowProfileFormCorporate,
   setDevoteeIsNewUser,
   setIsLoggedInForTempleReceipt,
-  setCorporateBusinessDetails
+  setCorporateBusinessDetails,
+  SetUserType
 } from "@/redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -145,13 +146,13 @@ export default function OtpModal() {
 
             if (result.data.isNewUser) {
               dispatch(setDevoteeIsNewUser(true));
-              router.push("/downloadReceipt");
+              router.push("/donation-receipt");
             } else {
               dispatch(setIsLoggedIn(true));
               dispatch(fetchUserDetails());
               dispatch(fetchWalletData() as any);
               dispatch(setDevoteeIsNewUser(false));
-              router.push("/downloadReceipt");
+              router.push("/donation-receipt");
             }
           }
         } else {
@@ -348,6 +349,7 @@ export default function OtpModal() {
                     className="mt-3 inline-flex absolute top-5 right-5 justify-center rounded-full bg-transparent p-2 text-sm bold text-white shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
                     onClick={() => {
                       setOpen(false);
+                      dispatch(SetUserType('user'));
                       dispatch(setCorporateBusinessDetails(null));
                       dispatch(setShowOTPmodal(false));
                     }}

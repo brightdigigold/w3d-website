@@ -19,13 +19,13 @@ const RequireAuth = ({ children }) => {
             return;
         }
 
-        if (isLoggedInForTempleReceipt && purpose === 'receipt' && path == '/downloadReceipt') {
-            router.replace('/downloadReceipt');
+        if (isLoggedInForTempleReceipt && purpose === 'receipt' && path == '/donation-receipt') {
+            router.replace('/donation-receipt');
             return;
         }
 
         if (isLoggedInForTempleReceipt && purpose === 'receipt') {
-            router.replace('/downloadReceipt');
+            router.replace('/donation-receipt');
             return;
         }
 
