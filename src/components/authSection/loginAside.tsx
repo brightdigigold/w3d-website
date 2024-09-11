@@ -127,7 +127,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         localStorage.setItem("mobile_number", values.mobile_number);
         console.log("result.isError", result.data)
         dispatch(setPurpose(purpose));
-        if (corporateLoginOrSignUp !== null) {
+        if (corporateLoginOrSignUp != null) {
           dispatch(setAuthenticationMode(corporateLoginOrSignUp));
         }
         if (corporateLoginOrSignUp === "corporateSignUp") {

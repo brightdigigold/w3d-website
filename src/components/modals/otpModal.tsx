@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import OtpInput from "react-otp-input";
 import Swal from "sweetalert2";
-import { AesDecrypt, AesEncrypt } from "../helperFunctions";
+import { AesDecrypt, AesEncrypt, funcForDecrypt } from "../helperFunctions";
 import axios, { AxiosProgressEvent, AxiosRequestConfig } from "axios";
 import { useRouter } from "next/navigation";
 import {
@@ -31,7 +31,7 @@ export default function OtpModal() {
   const purpose = useSelector((state: RootState) => state.auth.purpose);
   const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
   const userType = useSelector((state: RootState) => state.auth.UserType);
-  console.log("Details On otp page", { corporateBusinessDetails, authenticationMode, userType });
+  // console.log("Details On otp page", { corporateBusinessDetails, authenticationMode, userType });
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
@@ -92,6 +92,8 @@ export default function OtpModal() {
     const apiEndPoint = authenticationMode === "corporateSignUp" ? "auth/gst/verify/otp" : "auth/verify/otp";
     console.log("API endpoint", apiEndPoint);
     const otpLength = authenticationMode === "corporateSignUp" ? 4 : 6;
+    console.log("Details On otp page on handle submit", { corporateBusinessDetails, authenticationMode, userType });
+
     if (otp.length < otpLength) {
       setOtpError("Please fill the OTP");
     } else {
@@ -137,12 +139,24 @@ export default function OtpModal() {
           body,
           header
         );
-        const decryptedData = AesDecrypt(response.data.payload);
+        const decryptedData = await funcForDecrypt(response.data.payload);
         const result = JSON.parse(decryptedData);
         console.log("decrypted data from otp modal", result);
-        if (result.status === true) {
-          localStorage.setItem("token", result.data.otpVarifiedToken);
-          if (purpose === 'login') {
+        if (result.status) {
+          authenticationMode != "corporateSignUp" ? localStorage.setItem("token", result.data.otpVarifiedToken) : undefined;
+          // console.log("Authentication token", localStorage.getItem("token"))
+          if (authenticationMode === "corporateSignUp") {
+            console.log("from corporateSignUp")
+            dispatch(setShowProfileFormCorporate(true));
+            mixpanel.identify(mobile_number);
+            mixpanel.track('New Corporate SignUp(web)');
+          } else if (authenticationMode === "corporateLogin") {
+            console.log("from corporateLogin");
+            dispatch(fetchUserDetails());
+            dispatch(setIsLoggedIn(true));
+            dispatch(fetchWalletData() as any);
+            mixpanel.track('New Corporate Login(web)');
+          } else if (purpose === 'login') {
             dispatch(fetchUserDetails());
             dispatch(setIsLoggedIn(true));
             dispatch(fetchWalletData() as any);
@@ -159,11 +173,11 @@ export default function OtpModal() {
             dispatch(setShowOTPmodal(false));
             // router.push("/");
           } else {
+            console.log("freom last else ============")
             dispatch(setShowOTPmodal(false));
             dispatch(setIsLoggedInForTempleReceipt(true));
             mixpanel.track('To download receipt');
             console.log(".>>>>>>>>", result.data.isNewUser);
-
             if (result.data.isNewUser) {
               dispatch(setDevoteeIsNewUser(true));
               router.push("/donation-receipt");
@@ -185,7 +199,8 @@ export default function OtpModal() {
         }
         setSubmitting(false);
       } catch (error: any) {
-        const decryptedData = await AesDecrypt(error?.response?.data?.payload);
+        dispatch(setShowOTPmodal(false));
+        const decryptedData = AesDecrypt(error?.response?.data?.payload);
         const result = JSON.parse(decryptedData);
         Swal.fire({
           html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
@@ -197,6 +212,7 @@ export default function OtpModal() {
         setSubmitting(false);
       } finally {
         setSubmitting(false);
+        dispatch(setShowOTPmodal(false));
       }
     }
   };
