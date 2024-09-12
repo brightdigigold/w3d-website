@@ -57,7 +57,7 @@ const SetProfileCorporate = () => {
             <button onClick={() => dispatch(setShowProfileFormCorporate(false))} className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer ">
                 <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
             </button>
-            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-8" />
+            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-5" />
             <div className='flex h-screen w-full'>
                 <form onSubmit={handleSubmit(onSubmit)} className='text-gray-200 w-full'>
                     <div className='px-4'>
@@ -114,24 +114,28 @@ const SetProfileCorporate = () => {
                         </div>
                     </div>
                     <div className="bottom-1 absolute w-full px-4">
-                        <div className="">
-                            <input
-                                className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
-                                id="termsAndConditions"
-                                type="checkbox"
-                                {...register('termsAndConditions')}
-                            />
-                            <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-sm">
-                                By continuing, I confirm that I am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
-                            </label>
-                            {errors.termsAndConditions && <p className='text-red-600 text-sm'>{errors.termsAndConditions.message}</p>}
+                        <div className="flex">
+                            <div>
+                                <input
+                                    className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
+                                    id="termsAndConditions"
+                                    type="checkbox"
+                                    {...register('termsAndConditions')}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-sm">
+                                    By continuing, I confirm that I am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
+                                </label>
+                            </div>
                         </div>
+                        {errors.termsAndConditions && <p className='text-red-600 text-sm ml-4'>{errors.termsAndConditions.message}</p>}
                         <button
                             type="submit"
                             title="SEND OTP"
                             className="bg-themeBlue px-4 py-2 rounded-full w-full mt-2 mb-2 extrabold text-black"
                         >
-                            Submit
+                            SEND OTP
                         </button>
                     </div>
                 </form>
@@ -141,9 +145,9 @@ const SetProfileCorporate = () => {
 };
 
 const styles = {
-    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-1.5 text-gray-100 tracking-widest placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
+    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-2 text-gray-100 tracking-widest placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
     p1: 'bold tracking-wide pb-0.5',
-    p2: 'flex flex-col pb-1.5'
+    p2: 'flex flex-col pb-2'
 };
 
 export default SetProfileCorporate;
