@@ -91,6 +91,7 @@ const SetProfileCorporate = () => {
                             <label className={styles.p1}>Name</label>
                             <input
                                 className={styles.p0}
+                                placeholder="NAME"
                                 {...register('name', { required: 'Name is required' })}
                             />
                             {errors.name && <p className='text-red-600 text-sm '>{errors.name.message}</p>}
@@ -99,6 +100,11 @@ const SetProfileCorporate = () => {
                         <div className={styles.p2}>
                             <label className={styles.p1}>Mobile Number</label>
                             <input
+                                type="number"
+                                inputMode="numeric"
+                                minLength={10}
+                                maxLength={10}
+                                placeholder="MOBILE NUMBER"
                                 className={styles.p0}
                                 {...register('mobileNumber', { required: 'Mobile Number is required' })}
                             />
@@ -109,6 +115,7 @@ const SetProfileCorporate = () => {
                             <label className={styles.p1}>Email Address</label>
                             <input
                                 className={styles.p0}
+                                placeholder="EMAIL ADDRESS"
                                 {...register('gmail', { required: 'Gmail is required' })}
                             />
                             {errors.gmail && <p className='text-red-600 text-sm '>{errors.gmail.message}</p>}
@@ -148,7 +155,7 @@ const SetProfileCorporate = () => {
 }
 
 const styles = {
-    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md py-1.5 text-gray-100 tracking-widest placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
+    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md py-1.5 text-gray-100 tracking-wider placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
     p1: 'bold tracking-wide pb-0.5',
     p2: 'flex flex-col pb-2'
 };
