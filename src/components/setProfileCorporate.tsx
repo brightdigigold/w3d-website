@@ -13,12 +13,16 @@ const schema = Yup.object().shape({
     legalName: Yup.string().required('Name is required'),
     pan: Yup.string().required('PAN is required'),
     tradeName: Yup.string().required('Trade Name is required'),
-    mobileNumber: Yup.string()
+    mobile_number: Yup.string()
         .matches(/^[6789][0-9]{9}$/, 'Mobile No. is not valid')
         .matches(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, 'Enter a valid Mobile Number')
         .required('Mobile Number is required'),
     gmail: Yup.string().email('Invalid email address').required('Gmail is required'),
     termsAndConditions: Yup.boolean().oneOf([true], 'You must accept the terms and conditions'),
+    type: Yup.string().required('User type Name is required'),
+    mode: Yup.string().required('Mode Name is required'),
+    country_iso: Yup.string().required('County ISO is required'),
+    isCountryIsoRequired: Yup.boolean().required('County ISO is required'),
 });
 
 const SetProfileCorporate = () => {
@@ -33,8 +37,12 @@ const SetProfileCorporate = () => {
             pan: 'GTEPK8368A',
             tradeName: 'ZOMATP PRIVATE LIMITED',
             gmail: '',
-            mobileNumber: "",
+            mobile_number: "",
             termsAndConditions: false,
+            type: "user",
+            country_iso: '91',
+            isCountryIsoRequired: true,
+            mode: "signUp",
         }
     });
 
@@ -90,9 +98,9 @@ const SetProfileCorporate = () => {
                                 inputMode="numeric"
                                 placeholder="MOBILE NUMBER"
                                 className={styles.p0}
-                                {...register('mobileNumber')}
+                                {...register('mobile_number')}
                             />
-                            {errors.mobileNumber && <p className='text-red-600 text-sm'>{errors.mobileNumber.message}</p>}
+                            {errors.mobile_number && <p className='text-red-600 text-sm'>{errors.mobile_number.message}</p>}
                         </div>
 
                         <div className={styles.p2}>
