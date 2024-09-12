@@ -51,6 +51,7 @@ import { isMobile } from 'react-device-detect';
 import { GoogleTagManager } from "@next/third-parties/google";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
+import SetProfileCorporate from "../setProfileCorporate";
 
 const BuySell = () => {
   const router = useRouter()
@@ -466,6 +467,7 @@ const BuySell = () => {
     <>
       <div className="">
         <GoogleTagManager gtmId="GTM-5JFBNN5" />
+        <SetProfileCorporate />
         {openLoginAside && (
           <LoginAside
             isOpen={openLoginAside}

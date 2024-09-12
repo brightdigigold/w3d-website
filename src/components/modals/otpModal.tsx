@@ -139,6 +139,7 @@ export default function OtpModal() {
           authenticationMode != "corporateSignUp" ? localStorage.setItem("token", result.data.otpVarifiedToken) : undefined;
           // console.log("Authentication token", localStorage.getItem("token"))
           if (authenticationMode === "corporateSignUp") {
+            console.log("Authentication")
             dispatch(setShowProfileFormCorporate(true));
             mixpanel.identify(mobile_number);
             mixpanel.track('New Corporate SignUp(web)');

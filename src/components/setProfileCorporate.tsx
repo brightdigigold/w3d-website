@@ -1,8 +1,7 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaTimes } from 'react-icons/fa';
-import CustomButton from './customButton';
 import { useDispatch } from 'react-redux';
 import { setShowProfileFormCorporate } from '@/redux/authSlice';
 
@@ -11,10 +10,9 @@ const schema = Yup.object().shape({
     dateOfBirth: Yup.string().required('Date of Birth is required'),
     gstMobile: Yup.string().required('GST Mobile is required'),
     gstNumber: Yup.string().required('GST Number is required'),
-    legalName: Yup.string().required('Legal Name is required'),
+    legalName: Yup.string().required('Name is required'),
     pan: Yup.string().required('PAN is required'),
     tradeName: Yup.string().required('Trade Name is required'),
-    name: Yup.string().required('Name is required'),
     mobileNumber: Yup.string()
         .matches(/^[6789][0-9]{9}$/, 'Mobile No. is not valid')
         .matches(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, 'Enter a valid Mobile Number')
@@ -24,8 +22,8 @@ const schema = Yup.object().shape({
 });
 
 const SetProfileCorporate = () => {
-    const dispatch = useDispatch()
-    const { register, handleSubmit, control, formState: { errors } } = useForm({
+    const dispatch = useDispatch();
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
             dateOfBirth: '01/07/2017',
@@ -33,16 +31,17 @@ const SetProfileCorporate = () => {
             gstNumber: '07AADCD4946L1ZC',
             legalName: '',
             pan: 'GTEPK8368A',
-            tradeName: '',
-            name: '',
+            tradeName: 'ZOMATP PRIVATE LIMITED',
             gmail: '',
             mobileNumber: "",
             termsAndConditions: false,
         }
     });
 
-    const onSubmit = (data) => {
+    // Update onSubmit to receive form data
+    const onSubmit = async (data) => {
         console.log('Form submitted with data:', data);
+        // Process form data here
     };
 
     return (
@@ -106,7 +105,7 @@ const SetProfileCorporate = () => {
                             {errors.legalName && <p className='text-red-600 text-sm'>{errors.legalName.message}</p>}
                         </div>
                     </div>
-                    <div className="bottom-2 absolute w-full px-4">
+                    <div className="bottom-1 absolute w-full px-4">
                         <div className="">
                             <input
                                 className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
@@ -124,7 +123,7 @@ const SetProfileCorporate = () => {
                             title="SEND OTP"
                             className="bg-themeBlue px-4 py-2 rounded-full w-full mt-2 mb-2 extrabold text-black"
                         >
-                            SEND OTP
+                            Submit
                         </button>
                     </div>
                 </form>
@@ -134,9 +133,9 @@ const SetProfileCorporate = () => {
 };
 
 const styles = {
-    p0: "hidden xl:block text-md bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-2 text-gray-100 tracking-wider placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
+    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-1.5 text-gray-100 tracking-widest placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
     p1: 'bold tracking-wide pb-0.5',
-    p2: 'flex flex-col pb-2.5'
+    p2: 'flex flex-col pb-1.5'
 };
 
 export default SetProfileCorporate;
