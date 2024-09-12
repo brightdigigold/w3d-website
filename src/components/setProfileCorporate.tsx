@@ -134,9 +134,9 @@ const SetProfileCorporate = () => {
 };
 
 const styles = {
-    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-1 text-gray-100 tracking-wider placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
+    p0: "hidden xl:block text-md bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-2 text-gray-100 tracking-wider placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
     p1: 'bold tracking-wide pb-0.5',
-    p2: 'flex flex-col pb-2'
+    p2: 'flex flex-col pb-2.5'
 };
 
 export default SetProfileCorporate;
