@@ -31,7 +31,6 @@ export default function OtpModal() {
   const purpose = useSelector((state: RootState) => state.auth.purpose);
   const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
   const userType = useSelector((state: RootState) => state.auth.UserType);
-  // console.log("Details On otp page", { corporateBusinessDetails, authenticationMode, userType });
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
@@ -90,18 +89,12 @@ export default function OtpModal() {
   const handleSubmit = async () => {
     // const mobile_number = localStorage.getItem("mobile_number");
     const apiEndPoint = authenticationMode === "corporateSignUp" ? "auth/gst/verify/otp" : "auth/verify/otp";
-    console.log("API endpoint", apiEndPoint);
     const otpLength = authenticationMode === "corporateSignUp" ? 4 : 6;
-    console.log("Details On otp page on handle submit", { corporateBusinessDetails, authenticationMode, userType });
+    // console.log("Details On otp page on handle submit", { corporateBusinessDetails, authenticationMode, userType });
 
     if (otp.length < otpLength) {
       setOtpError("Please fill the OTP");
     } else {
-      // const data = {
-      //   mobile_number: localStorage.getItem("mobile_number"),
-      //   otp: otp,
-      //   skipMobileNumber: false,
-      // };
 
       const userData = {
         mobile_number: localStorage.getItem("mobile_number"),
@@ -141,17 +134,15 @@ export default function OtpModal() {
         );
         const decryptedData = await funcForDecrypt(response.data.payload);
         const result = JSON.parse(decryptedData);
-        console.log("decrypted data from otp modal", result);
+        // console.log("decrypted data from otp modal", result);
         if (result.status) {
           authenticationMode != "corporateSignUp" ? localStorage.setItem("token", result.data.otpVarifiedToken) : undefined;
           // console.log("Authentication token", localStorage.getItem("token"))
           if (authenticationMode === "corporateSignUp") {
-            console.log("from corporateSignUp")
             dispatch(setShowProfileFormCorporate(true));
             mixpanel.identify(mobile_number);
             mixpanel.track('New Corporate SignUp(web)');
           } else if (authenticationMode === "corporateLogin") {
-            console.log("from corporateLogin");
             dispatch(fetchUserDetails());
             dispatch(setIsLoggedIn(true));
             dispatch(fetchWalletData() as any);
@@ -173,11 +164,10 @@ export default function OtpModal() {
             dispatch(setShowOTPmodal(false));
             // router.push("/");
           } else {
-            console.log("freom last else ============")
             dispatch(setShowOTPmodal(false));
             dispatch(setIsLoggedInForTempleReceipt(true));
             mixpanel.track('To download receipt');
-            console.log(".>>>>>>>>", result.data.isNewUser);
+            // console.log(".>>>>>>>>", result.data.isNewUser);
             if (result.data.isNewUser) {
               dispatch(setDevoteeIsNewUser(true));
               router.push("/donation-receipt");
