@@ -63,11 +63,12 @@ const SetProfileCorporate = () => {
                 <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
             </button>
             <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-8" />
+            {/* <p className='text-center text-gray-300 my-3 bold text-lg'>Set Up Your Profile</p> */}
             <div className='flex h-screen w-full'>
                 <form onSubmit={handleSubmit(onSubmit)} className='text-gray-200 w-full'>
                     <div className='px-4'>
-                        <div className='flex flex-col pb-4'>
-                            <label className={styles.p1}>GST Number:</label>
+                        <div className={styles.p2}>
+                            <label className={styles.p1}>GST Number</label>
                             <input
                                 className={styles.p0}
                                 {...register('gstNumber', { required: 'GST Number is required' })}
@@ -76,8 +77,8 @@ const SetProfileCorporate = () => {
                             {errors.gstNumber && <p className='text-red-600'>{errors.gstNumber.message}</p>}
                         </div>
 
-                        <div className='flex flex-col pb-4'>
-                            <label className={styles.p1}>PAN:</label>
+                        <div className={styles.p2}>
+                            <label className={styles.p1}>PAN</label>
                             <input
                                 className={styles.p0}
                                 {...register('pan', { required: 'PAN is required' })}
@@ -86,7 +87,7 @@ const SetProfileCorporate = () => {
                             {errors.pan && <p className='text-red-600'>{errors.pan.message}</p>}
                         </div>
 
-                        <div className='flex flex-col pb-4'>
+                        <div className={styles.p2}>
                             <label className={styles.p1}>Name</label>
                             <input
                                 className={styles.p0}
@@ -95,7 +96,7 @@ const SetProfileCorporate = () => {
                             {errors.tradeName && <p>{errors.tradeName.message}</p>}
                         </div>
 
-                        <div className='flex flex-col pb-4'>
+                        <div className={styles.p2}>
                             <label className={styles.p1}>Mobile Number</label>
                             <input
                                 className={styles.p0}
@@ -104,7 +105,7 @@ const SetProfileCorporate = () => {
                             {errors.tradeName && <p>{errors.tradeName.message}</p>}
                         </div>
 
-                        <div className='flex flex-col pb-4'>
+                        <div className={styles.p2}>
                             <label className={styles.p1}>Email Address</label>
                             <input
                                 className={styles.p0}
@@ -142,8 +143,9 @@ const SetProfileCorporate = () => {
 }
 
 const styles = {
-    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-2 text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
+    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-2 text-gray-100 tracking-widest placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
     p1: 'bold tracking-wide pb-0.5',
+    p2: 'flex flex-col pb-2'
 };
 
 export default SetProfileCorporate
