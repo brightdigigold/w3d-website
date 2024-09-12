@@ -1,7 +1,7 @@
-import { setShowProfileFormCorporate } from '@/redux/authSlice'
+import { setShowProfileFormCorporate } from '@/redux/authSlice';
 import { AppDispatch } from '@/redux/store';
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { FaTimes } from 'react-icons/fa';
 import CustomButton from './customButton';
@@ -17,11 +17,11 @@ interface FormValues {
     mobileNumber: string;
     gmail: string;
     mobile_number: string;
-    termsAndConditions: false,
-    type: string,
-    country_iso: '91',
-    isCountryIsoRequired: false,
-    mode: string,
+    termsAndConditions: boolean;
+    type: string;
+    country_iso: '91';
+    isCountryIsoRequired: boolean;
+    mode: string;
 }
 
 const SetProfileCorporate = () => {
@@ -32,6 +32,7 @@ const SetProfileCorporate = () => {
     }
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
+        mode: 'onSubmit', // Validate only on form submission
         defaultValues: {
             dateOfBirth: '01/07/2017',
             gstMobile: '9582967915',
@@ -41,7 +42,7 @@ const SetProfileCorporate = () => {
             tradeName: '',
             name: '',
             gmail: '',
-            mobile_number: "",
+            mobileNumber: "",
             termsAndConditions: false,
             type: "user",
             country_iso: '91',
@@ -58,12 +59,11 @@ const SetProfileCorporate = () => {
         <aside id="default-sidebar" className="bg-theme fixed top-0 right-0 z-40 lg:w-4/12 md:w-5/12 sm:w-6/12 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
             <button
                 onClick={handleClose}
-                className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer "
+                className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer"
             >
                 <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
             </button>
-            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-8" />
-            {/* <p className='text-center text-gray-300 my-3 bold text-lg'>Set Up Your Profile</p> */}
+            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-6" />
             <div className='flex h-screen w-full'>
                 <form onSubmit={handleSubmit(onSubmit)} className='text-gray-200 w-full'>
                     <div className='px-4'>
@@ -91,9 +91,9 @@ const SetProfileCorporate = () => {
                             <label className={styles.p1}>Name</label>
                             <input
                                 className={styles.p0}
-                                {...register('name', { required: 'Trade Name is required' })}
+                                {...register('name', { required: 'Name is required' })}
                             />
-                            {errors.tradeName && <p>{errors.tradeName.message}</p>}
+                            {errors.name && <p className='text-red-600 text-sm '>{errors.name.message}</p>}
                         </div>
 
                         <div className={styles.p2}>
@@ -102,7 +102,7 @@ const SetProfileCorporate = () => {
                                 className={styles.p0}
                                 {...register('mobileNumber', { required: 'Mobile Number is required' })}
                             />
-                            {errors.tradeName && <p>{errors.tradeName.message}</p>}
+                            {errors.mobileNumber && <p className='text-red-600 text-sm '>{errors.mobileNumber.message}</p>}
                         </div>
 
                         <div className={styles.p2}>
@@ -111,23 +111,28 @@ const SetProfileCorporate = () => {
                                 className={styles.p0}
                                 {...register('gmail', { required: 'Gmail is required' })}
                             />
-                            {errors.tradeName && <p>{errors.tradeName.message}</p>}
+                            {errors.gmail && <p className='text-red-600 text-sm '>{errors.gmail.message}</p>}
                         </div>
-                    </div>
-                    <div className="bottom-2 absolute w-full px-4">
-                        <div className="flex">
-                            <>
+
+                        <div className='flex mx-auto'>
+                            <div>
                                 <input
-                                    className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
+                                    className="cursor-pointer w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
                                     id="termsAndConditions"
                                     type="checkbox"
-                                    name="termsAndConditions"
+                                    {...register('termsAndConditions', { required: 'You must accept the terms and conditions' })}
                                 />
-                                <p className="ml-2 text-white text-justify">
-                                    By continuing, i confirm that i am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
-                                </p>
-                            </>
+                            </div>
+                            <div>
+                                <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-sm">
+                                    By continuing, I confirm that I am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
+                                </label>
+                            </div>
                         </div>
+                        {errors.termsAndConditions && <p className='text-red-600 text-sm ml-4'>{errors.termsAndConditions.message}</p>}
+
+                    </div>
+                    <div className="bottom-2 absolute w-full px-4">
                         <button
                             type="submit"
                             title="SEND OTP"
@@ -143,9 +148,9 @@ const SetProfileCorporate = () => {
 }
 
 const styles = {
-    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-2 text-gray-100 tracking-widest placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
+    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md py-1.5 text-gray-100 tracking-widest placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
     p1: 'bold tracking-wide pb-0.5',
     p2: 'flex flex-col pb-2'
 };
 
-export default SetProfileCorporate
+export default SetProfileCorporate;
