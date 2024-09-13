@@ -2,8 +2,10 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaTimes } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setShowProfileFormCorporate } from '@/redux/authSlice';
+import { useEffect } from 'react';
+import { RootState } from '@/redux/store';
 
 // Define the Yup validation schema
 const schema = Yup.object().shape({
@@ -27,6 +29,17 @@ const schema = Yup.object().shape({
 
 const SetProfileCorporate = () => {
     const dispatch = useDispatch();
+    const showProfileFormCorporate = useSelector((state: RootState) => state.auth.showProfileFormCorporate);
+
+    useEffect(() => {
+        const toggleBodyScroll = (shouldLock: boolean) => {
+            document.body.style.overflow = shouldLock ? 'hidden' : 'auto';
+        };
+
+        toggleBodyScroll(showProfileFormCorporate);
+        return () => toggleBodyScroll(false);
+    }, []);
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
@@ -45,6 +58,8 @@ const SetProfileCorporate = () => {
             mode: "signUp",
         }
     });
+
+
 
     // Update onSubmit to receive form data
     const onSubmit = async (data) => {
