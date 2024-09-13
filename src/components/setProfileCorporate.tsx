@@ -15,6 +15,7 @@ const schema = Yup.object().shape({
     legalName: Yup.string().required('Name is required'),
     pan: Yup.string().required('PAN is required'),
     tradeName: Yup.string().required('Trade Name is required'),
+    name: Yup.string().required('Name is required'),
     mobile_number: Yup.string()
         .matches(/^[6789][0-9]{9}$/, 'Mobile No. is not valid')
         .matches(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, 'Enter a valid Mobile Number')
@@ -30,8 +31,12 @@ const schema = Yup.object().shape({
 const SetProfileCorporate = () => {
     const dispatch = useDispatch();
     const showProfileFormCorporate = useSelector((state: RootState) => state.auth.showProfileFormCorporate);
+    const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
+    const userType = useSelector((state: RootState) => state.auth.UserType);
+
 
     useEffect(() => {
+        console.log("corporateBusinessDetails", corporateBusinessDetails)
         const toggleBodyScroll = (shouldLock: boolean) => {
             document.body.style.overflow = shouldLock ? 'hidden' : 'auto';
         };
@@ -43,23 +48,22 @@ const SetProfileCorporate = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
-            dateOfBirth: '01/07/2017',
-            gstMobile: '9582967915',
-            gstNumber: '07AADCD4946L1ZC',
-            legalName: '',
-            pan: 'GTEPK8368A',
-            tradeName: 'ZOMATP PRIVATE LIMITED',
+            dateOfBirth: corporateBusinessDetails?.dateOfBirth,
+            gstMobile: corporateBusinessDetails?.gstMobile,
+            gstNumber: corporateBusinessDetails?.gstNumber,
+            legalName: corporateBusinessDetails?.legalName,
+            pan: corporateBusinessDetails?.pan,
+            tradeName: corporateBusinessDetails?.tradeName,
+            name: '',
             gmail: '',
-            mobile_number: "",
+            mobile_number: '',
             termsAndConditions: false,
-            type: "user",
+            type: userType,
             country_iso: '91',
             isCountryIsoRequired: true,
             mode: "signUp",
         }
     });
-
-
 
     // Update onSubmit to receive form data
     const onSubmit = async (data) => {
@@ -123,9 +127,9 @@ const SetProfileCorporate = () => {
                             <input
                                 className={styles.p0}
                                 placeholder="NAME"
-                                {...register('legalName')}
+                                {...register('name')}
                             />
-                            {errors.legalName && <p className='text-red-600 text-sm'>{errors.legalName.message}</p>}
+                            {errors.name && <p className='text-red-600 text-sm'>{errors.name.message}</p>}
                         </div>
                     </div>
                     <div className="bottom-1 absolute w-full px-4">
