@@ -1,6 +1,7 @@
 "use client";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 import OtpInput from "react-otp-input";
 import Swal from "sweetalert2";
 import { AesDecrypt, AesEncrypt, funcForDecrypt } from "../helperFunctions";
@@ -18,7 +19,6 @@ import {
 } from "@/redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { XMarkIcon } from "@heroicons/react/20/solid";
 import { fetchUserDetails } from "@/redux/userDetailsSlice";
 import CustomButton from "../customButton";
 import Notiflix from "notiflix";
@@ -32,11 +32,11 @@ export default function OtpModal() {
   const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
   const userType = useSelector((state: RootState) => state.auth.UserType);
   const [open, setOpen] = useState(true);
+  const [otpError, setOtpError] = useState("");
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
-  const [otpError, setOtpError] = useState("");
   const dispatch: AppDispatch = useDispatch();
   const [resendTimer, setResendTimer] = useState(60);
   const [resendDisabled, setResendDisabled] = useState(false);
@@ -62,10 +62,8 @@ export default function OtpModal() {
         handleSubmit();
       }
     };
-
     // Attach the event listener
     document.addEventListener("keydown", handleKeyDown);
-
     // Cleanup the event listener when component unmounts
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
@@ -113,6 +111,7 @@ export default function OtpModal() {
       }
 
       const data = authenticationMode === "corporateSignUp" ? corporateData : userData;
+      console.log("data: ", data)
 
       try {
         setSubmitting(true);
@@ -303,13 +302,13 @@ export default function OtpModal() {
                           value={otp}
                           inputType="number"
                           onChange={setOtp}
-                          numInputs={authenticationMode === "corporateSignUp" ? 4 : 6}
+                          numInputs={userType === 'user' ? 6 : authenticationMode === "corporateSignUp" ? 4 : 6}
                           containerStyle={{
                             padding: "2px",
                             margin: "0 auto",
                             borderRadius: "8px",
                             display: "flex",
-                            justifyContent: authenticationMode === "corporateSignUp" ? "" : "space-around",
+                            justifyContent: userType === 'user' ? "space-around" : authenticationMode === "corporateSignUp" ? "" : "space-around",
                           }}
                           shouldAutoFocus={true}
                           renderSeparator={<span> </span>}

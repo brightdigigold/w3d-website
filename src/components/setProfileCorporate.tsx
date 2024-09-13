@@ -3,9 +3,17 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { setShowProfileFormCorporate } from '@/redux/authSlice';
-import { useEffect } from 'react';
+import { setOtpMsg, setShowOTPmodal, setShowProfileFormCorporate } from '@/redux/authSlice';
+import { useEffect, useRef, useState } from 'react';
 import { RootState } from '@/redux/store';
+import { postMethodHelperWithEncryption } from '@/api/postMethodHelper';
+import Notiflix from "notiflix";
+import OTPCorporateSignUp from './modals/otpCorporateSignUp';
+
+interface setCorporateProfile {
+    isOpen: boolean;
+    onClose: () => void;
+}
 
 // Define the Yup validation schema
 const schema = Yup.object().shape({
@@ -28,22 +36,29 @@ const schema = Yup.object().shape({
     isCountryIsoRequired: Yup.boolean().required('County ISO is required'),
 });
 
-const SetProfileCorporate = () => {
+
+
+// Updated SetProfileCorporate component
+const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
+    const modalRef = useRef<HTMLDivElement>(null);
     const showProfileFormCorporate = useSelector((state: RootState) => state.auth.showProfileFormCorporate);
     const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
     const userType = useSelector((state: RootState) => state.auth.UserType);
-
+    const [submitting, setSubmitting] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+    const [showCorporateOTPModal, setShowCorporateOTPModal] = useState<boolean>(false);
+    const [OTPMsg, setOTPMsg] = useState<string | null>(null);
 
     useEffect(() => {
-        console.log("corporateBusinessDetails", corporateBusinessDetails)
+        console.log("corporateBusinessDetails", corporateBusinessDetails);
         const toggleBodyScroll = (shouldLock: boolean) => {
             document.body.style.overflow = shouldLock ? 'hidden' : 'auto';
         };
 
         toggleBodyScroll(showProfileFormCorporate);
         return () => toggleBodyScroll(false);
-    }, []);
+    }, [showProfileFormCorporate]);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
@@ -66,100 +81,126 @@ const SetProfileCorporate = () => {
     });
 
     // Update onSubmit to receive form data
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: any) => {
         console.log('Form submitted with data:', data);
-        // Process form data here
+        try {
+            setSubmitting(true);
+            const result = await postMethodHelperWithEncryption(
+                `${process.env.baseUrl}/auth/send/otp`,
+                data,
+            );
+
+            if (!result.isError && result.data.status) {
+                console.log("result.isError", result.data);
+                setOTPMsg(result.data.message);
+                setShowCorporateOTPModal(true);
+                setSubmitting(false);
+            } else if (result.isError) {
+                setError(result?.errorMsg);
+                // Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
+            }
+        } catch (error) {
+            // This block may not be needed unless you want to handle non-Axios errors
+            Notiflix.Report.failure('Error', 'Something went wrong!', 'OK');
+            setSubmitting(false);
+        } finally {
+            setSubmitting(false);
+            Notiflix.Loading.remove();
+        }
     };
 
     return (
-        <aside id="default-sidebar" className="bg-theme fixed top-0 right-0 z-40 lg:w-4/12 md:w-5/12 sm:w-6/12 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-            <button onClick={() => dispatch(setShowProfileFormCorporate(false))} className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer ">
-                <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
-            </button>
-            <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-5" />
-            <div className='flex h-screen w-full'>
-                <form onSubmit={handleSubmit(onSubmit)} className='text-gray-200 w-full'>
-                    <div className='px-4'>
-                        <div className={styles.p2}>
-                            <label className={styles.p1}>GST Number</label>
-                            <input
-                                className={styles.p0}
-                                {...register('gstNumber')}
-                                readOnly
-                            />
-                            {errors.gstNumber && <p className='text-red-600'>{errors.gstNumber.message}</p>}
-                        </div>
-
-                        <div className={styles.p2}>
-                            <label className={styles.p1}>PAN</label>
-                            <input
-                                className={styles.p0}
-                                {...register('pan')}
-                                readOnly
-                            />
-                            {errors.pan && <p className='text-red-600'>{errors.pan.message}</p>}
-                        </div>
-
-                        <div className={styles.p2}>
-                            <label className={styles.p1}>Email Address</label>
-                            <input
-                                className={styles.p0}
-                                placeholder="EMAIL ADDRESS"
-                                {...register('gmail')}
-                            />
-                            {errors.gmail && <p className='text-red-600 text-sm'>{errors.gmail.message}</p>}
-                        </div>
-
-                        <div className={styles.p2}>
-                            <label className={styles.p1}>Mobile Number</label>
-                            <input
-                                type="text"
-                                inputMode="numeric"
-                                placeholder="MOBILE NUMBER"
-                                className={styles.p0}
-                                {...register('mobile_number')}
-                            />
-                            {errors.mobile_number && <p className='text-red-600 text-sm'>{errors.mobile_number.message}</p>}
-                        </div>
-
-                        <div className={styles.p2}>
-                            <label className={styles.p1}>Name</label>
-                            <input
-                                className={styles.p0}
-                                placeholder="NAME"
-                                {...register('name')}
-                            />
-                            {errors.name && <p className='text-red-600 text-sm'>{errors.name.message}</p>}
-                        </div>
-                    </div>
-                    <div className="bottom-1 absolute w-full px-4">
-                        <div className="flex">
-                            <div>
+        <div ref={modalRef} className={`modal-class ${isOpen ? 'open-class' : ''}`}>
+            <aside id="default-sidebar" className={`bg-theme fixed top-0 right-0 z-40 lg:w-4/12 md:w-5/12 sm:w-6/12 h-screen transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`} aria-label="Sidebar">
+                {showCorporateOTPModal && (<OTPCorporateSignUp OTPMsg={OTPMsg} />)}
+                <button type='button' onClick={onClose} className="absolute top-20 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer ">
+                    <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
+                </button>
+                <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-5" />
+                <div className='flex h-screen w-full'>
+                    <form onSubmit={handleSubmit(onSubmit)} className='text-gray-200 w-full'>
+                        <div className='px-4'>
+                            <div className={styles.p2}>
+                                <label className={styles.p1}>GST Number</label>
                                 <input
-                                    className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
-                                    id="termsAndConditions"
-                                    type="checkbox"
-                                    {...register('termsAndConditions')}
+                                    className={styles.p0}
+                                    {...register('gstNumber')}
+                                    readOnly
                                 />
+                                {errors.gstNumber && <p className='text-red-600'>{errors.gstNumber.message}</p>}
                             </div>
-                            <div>
-                                <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-sm">
-                                    By continuing, I confirm that I am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
-                                </label>
+
+                            <div className={styles.p2}>
+                                <label className={styles.p1}>PAN</label>
+                                <input
+                                    className={styles.p0}
+                                    {...register('pan')}
+                                    readOnly
+                                />
+                                {errors.pan && <p className='text-red-600'>{errors.pan.message}</p>}
+                            </div>
+
+                            <div className={styles.p2}>
+                                <label className={styles.p1}>Email Address</label>
+                                <input
+                                    className={styles.p0}
+                                    placeholder="EMAIL ADDRESS"
+                                    {...register('gmail')}
+                                />
+                                {errors.gmail && <p className='text-red-600 text-sm'>{errors.gmail.message}</p>}
+                            </div>
+
+                            <div className={styles.p2}>
+                                <label className={styles.p1}>Mobile Number</label>
+                                <input
+                                    type="text"
+                                    inputMode="numeric"
+                                    placeholder="MOBILE NUMBER"
+                                    className={styles.p0}
+                                    {...register('mobile_number')}
+                                />
+                                {errors.mobile_number && <p className='text-red-600 text-sm'>{errors.mobile_number.message}</p>}
+                            </div>
+
+                            <div className={styles.p2}>
+                                <label className={styles.p1}>Name</label>
+                                <input
+                                    className={styles.p0}
+                                    placeholder="NAME"
+                                    {...register('name')}
+                                />
+                                {errors.name && <p className='text-red-600 text-sm'>{errors.name.message}</p>}
                             </div>
                         </div>
-                        {errors.termsAndConditions && <p className='text-red-600 text-sm ml-4'>{errors.termsAndConditions.message}</p>}
-                        <button
-                            type="submit"
-                            title="SEND OTP"
-                            className="bg-themeBlue px-4 py-2 rounded-full w-full mt-2 mb-2 extrabold text-black"
-                        >
-                            SEND OTP
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </aside>
+                        <div className="bottom-1 absolute w-full px-4">
+                            <div className="flex">
+                                <div>
+                                    <input
+                                        className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
+                                        id="termsAndConditions"
+                                        type="checkbox"
+                                        {...register('termsAndConditions')}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-sm">
+                                        By continuing, I confirm that I am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
+                                    </label>
+                                </div>
+                            </div>
+                            {errors.termsAndConditions && <p className='text-red-600 text-sm ml-4'>{errors.termsAndConditions.message}</p>}
+                            <button
+                                type="submit"
+                                title="SEND OTP"
+                                className="bg-themeBlue px-4 py-2 rounded-full w-full mt-2 mb-2 extrabold text-black"
+                            >
+                                SEND OTP
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </aside>
+        </div>
     );
 };
 

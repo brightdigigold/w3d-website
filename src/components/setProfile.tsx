@@ -8,7 +8,6 @@ import {
 } from "@/redux/authSlice";
 import axios from "axios";
 import { ErrorMessage, Formik } from "formik";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { Calendar } from "react-date-range";
 import { FaCalendarAlt, FaTimes } from "react-icons/fa";
@@ -33,7 +32,6 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
   onClose,
 }) => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showCalendar, setshowCalendar] = useState(false);
   const [ageError, setAgeError] = useState("");

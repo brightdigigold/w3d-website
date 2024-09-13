@@ -14,6 +14,7 @@ import {
   setIsLoggedInForTempleReceipt,
   setShowOTPmodal,
   setShowProfileForm,
+  setShowProfileFormCorporate,
 } from "@/redux/authSlice";
 import { resetUserDetails } from "@/redux/userDetailsSlice";
 import SidebarAside from "./mobileSidebar";
@@ -77,6 +78,13 @@ const Navbar = () => {
     dispatch(setShowProfileForm(false));
   };
 
+  const onCloseCorporateProfileAside = () => {
+    console.log('onCloseCorporateProfileAside AKS')
+    dispatch(setShowProfileFormCorporate(false))
+  };
+
+  console.log("showProfileFormCorporate from navbar", showProfileFormCorporate)
+
   return (
     <Disclosure as="nav" className="bg-header fixed top-0 w-full z-[49] ">
       {({ open, close }) => (
@@ -100,7 +108,7 @@ const Navbar = () => {
           )}
 
           {showProfileFormCorporate && (
-            <SetProfileCorporate />
+            <SetProfileCorporate isOpen={showProfileFormCorporate} onClose={onCloseCorporateProfileAside} />
           )}
 
           <div className="mx-auto sm:px-6 xl:px-16 sm:py-2 z-10">

@@ -95,22 +95,15 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 
 
   const onSubmit = async (values: any) => {
-    // console.log("onSubmit", values);
     dispatch(SetUserType(values.type));
 
     const updatedValues = {
       ...values,
-      mode: corporateLoginOrSignUp === "corporateLogin" ? "login" : "signup",
+      mode: userType === 'user' ? 'login' : corporateLoginOrSignUp === "corporateLogin" ? "login" : "signup",
     };
 
-    // console.log("userType", userType)
-
-    const apiEndPoint = corporateLoginOrSignUp != 'corporateSignUp' ? "auth/send/otp" : "auth/gst/send/otp"
-    // (userType == "user" || userType == "temple" || corporateLoginOrSignUp == "corporateLogin") ? "auth/send/otp" : "auth/gst/send/otp";
-    // corporateLoginOrSignUp === "corporateLogin" ? "auth/send/otp" : "auth/gst/send/otp";
-
-    // console.log("api: " , apiEndPoint);
-    // console.log("Updated Values =========>", updatedValues);
+    const apiEndPoint =  userType === 'user' ? "auth/send/otp" : corporateLoginOrSignUp !== 'corporateSignUp' ? "auth/send/otp" : "auth/gst/send/otp"
+    console.log("apiEndPoint", { apiEndPoint, updatedValues })
 
     try {
       setSubmitting(true);
@@ -125,9 +118,9 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
 
       if (!result.isError && result.data.status) {
         localStorage.setItem("mobile_number", values.mobile_number);
-        console.log("result.isError", result.data)
+        // console.log("result.isError", result.data)
         dispatch(setPurpose(purpose));
-        if (corporateLoginOrSignUp != null) {
+        if (corporateLoginOrSignUp !== null) {
           dispatch(setAuthenticationMode(corporateLoginOrSignUp));
         }
         if (corporateLoginOrSignUp === "corporateSignUp") {
@@ -139,6 +132,7 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
         onClose();
       } else if (result.isError) {
         // Handle error case
+        console.log(result)
         setError(result?.errorMsg)
         // Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
       }
