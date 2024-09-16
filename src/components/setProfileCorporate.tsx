@@ -46,9 +46,13 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
     const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
     const userType = useSelector((state: RootState) => state.auth.UserType);
     const [submitting, setSubmitting] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
     const [showCorporateOTPModal, setShowCorporateOTPModal] = useState<boolean>(false);
     const [OTPMsg, setOTPMsg] = useState<string | null>(null);
+    const [otpDetails, setOtpDetails] = useState<any>(null);
+
+    const closeCorporateOTPModal = () => {
+        setShowCorporateOTPModal(false);
+    }
 
     useEffect(() => {
         console.log("corporateBusinessDetails", corporateBusinessDetails);
@@ -90,14 +94,26 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
                 data,
             );
 
+            console.log("result: ", result);
+
             if (!result.isError && result.data.status) {
                 console.log("result.isError", result.data);
                 setOTPMsg(result.data.message);
+                setOtpDetails({
+                    name: data.name,
+                    gmail: data.gmail,
+                    mobile_number: data.mobile_number,
+                    termsAndConditions: data.termsAndConditions,
+                    type: userType,
+                    country_iso: '91',
+                    isCountryIsoRequired: true,
+                    mode: "signUp",
+                });
                 setShowCorporateOTPModal(true);
                 setSubmitting(false);
             } else if (result.isError) {
-                setError(result?.errorMsg);
-                // Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
+                // setError(result?.errorMsg);
+                Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
             }
         } catch (error) {
             // This block may not be needed unless you want to handle non-Axios errors
@@ -112,7 +128,9 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
     return (
         <div ref={modalRef} className={`modal-class ${isOpen ? 'open-class' : ''}`}>
             <aside id="default-sidebar" className={`bg-theme fixed top-0 right-0 z-40 lg:w-4/12 md:w-5/12 sm:w-6/12 h-screen transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`} aria-label="Sidebar">
-                {showCorporateOTPModal && (<OTPCorporateSignUp OTPMsg={OTPMsg} />)}
+                {showCorporateOTPModal && otpDetails && (
+                    <OTPCorporateSignUp OTPMsg={OTPMsg} otpDetails={otpDetails} closeModal={closeCorporateOTPModal}/>
+                )}
                 <button type='button' onClick={onClose} className="absolute top-20 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer ">
                     <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
                 </button>

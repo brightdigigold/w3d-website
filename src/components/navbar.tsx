@@ -79,11 +79,8 @@ const Navbar = () => {
   };
 
   const onCloseCorporateProfileAside = () => {
-    console.log('onCloseCorporateProfileAside AKS')
     dispatch(setShowProfileFormCorporate(false))
   };
-
-  console.log("showProfileFormCorporate from navbar", showProfileFormCorporate)
 
   return (
     <Disclosure as="nav" className="bg-header fixed top-0 w-full z-[49] ">

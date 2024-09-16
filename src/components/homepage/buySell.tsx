@@ -468,7 +468,7 @@ const BuySell = () => {
     <>
       <div className="">
         <GoogleTagManager gtmId="GTM-5JFBNN5" />
-        <OTPCorporateSignUp OTPMsg={''} />
+        {/* <OTPCorporateSignUp OTPMsg={''} otpDetails={''} /> */}
         {openLoginAside && (
           <LoginAside
             isOpen={openLoginAside}

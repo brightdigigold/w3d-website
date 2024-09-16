@@ -7,11 +7,13 @@ import OtpInput from "react-otp-input";
 import CustomButton from '../customButton';
 import { useDispatch } from 'react-redux';
 import { postMethodHelperWithEncryption } from '@/api/postMethodHelper';
+import Notiflix from "notiflix";
 
-const OTPCorporateSignUp = ({ OTPMsg }) => {
+const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
     const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
     const dispatch = useDispatch();
     console.log("corporateBusinessDetails", corporateBusinessDetails);
+    console.log("otpDetails", otpDetails);
     const [otp, setOtp] = useState('');
     const cancelButtonRef = useRef(null);
     const [open, setOpen] = useState(true);
@@ -19,7 +21,33 @@ const OTPCorporateSignUp = ({ OTPMsg }) => {
     const [submitting, setSubmitting] = useState(false);
 
     const handleSubmit = async () => {
-        const corporateDetails = "corporateDetails"
+        const corporateDetails = {
+            // gmail: otpDetails?.gmail,
+            // name: otpDetails?.name,
+            mobile_number: otpDetails?.mobile_number,
+            skipMobileNumber: false,
+            isApp: false,
+            // mode: otpDetails?.mode,
+            type: otpDetails?.type,
+            // country_iso: otpDetails?.country_iso,
+            // isCountryIsoRequired: otpDetails?.isCountryIsoRequired,
+            // termsAndConditions: otpDetails?.termsAndConditions,
+            otp: otp,
+            gstData: {
+                dateOfBirth: corporateBusinessDetails?.dateOfBirth ? new Date(corporateBusinessDetails?.dateOfBirth).toISOString() : "",
+                // gstMobile: corporateBusinessDetails?.gstMobile,
+                name: otpDetails?.name,
+                email: otpDetails?.gmail,
+                gstNumber: corporateBusinessDetails?.gstNumber,
+                legalName: corporateBusinessDetails?.legalName,
+                pan: corporateBusinessDetails?.pan,
+                tradeName: corporateBusinessDetails?.tradeName,
+            }
+        }
+
+        console.log("corporateDetails from otp corporate modal ==================> ", corporateDetails)
+
+
         try {
             setSubmitting(true);
             const result = await postMethodHelperWithEncryption(
@@ -27,12 +55,12 @@ const OTPCorporateSignUp = ({ OTPMsg }) => {
                 corporateDetails,
             );
 
-            // console.log("decrypted data from otp modal", result);
+            console.log("decrypted data from otp modal", result);
             if (!result.isError && result.data.status) {
 
             } else {
                 setOtp("");
-
+                Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
             }
             setSubmitting(false);
         } catch (error: any) {
@@ -172,6 +200,7 @@ const OTPCorporateSignUp = ({ OTPMsg }) => {
                                         className="mt-3 inline-flex absolute top-5 right-5 justify-center rounded-full bg-transparent p-2 text-sm bold text-white shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
                                         onClick={() => {
                                             setOpen(false);
+                                            closeModal();
                                             // dispatch(SetUserType('user'));
                                             // dispatch(setCorporateBusinessDetails(null));
                                             // dispatch(setShowOTPmodal(false));
