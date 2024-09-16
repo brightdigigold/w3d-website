@@ -93,6 +93,7 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
 
             console.log("decrypted data from otp modal", result);
             if (!result.isError && result.data.status) {
+                console.log(" result.data.otpVarifiedToken",  result.data.otpVarifiedToken)
                 localStorage.setItem("token", result.data.otpVarifiedToken)
                 dispatch(setIsLoggedIn(true));
                 dispatch(setShowProfileFormCorporate(false));
