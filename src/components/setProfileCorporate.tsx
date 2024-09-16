@@ -3,7 +3,6 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOtpMsg, setShowOTPmodal, setShowProfileFormCorporate } from '@/redux/authSlice';
 import { useEffect, useRef, useState } from 'react';
 import { RootState } from '@/redux/store';
 import { postMethodHelperWithEncryption } from '@/api/postMethodHelper';
@@ -36,8 +35,6 @@ const schema = Yup.object().shape({
     isCountryIsoRequired: Yup.boolean().required('County ISO is required'),
 });
 
-
-
 // Updated SetProfileCorporate component
 const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
@@ -55,7 +52,6 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
     }
 
     useEffect(() => {
-        console.log("corporateBusinessDetails", corporateBusinessDetails);
         const toggleBodyScroll = (shouldLock: boolean) => {
             document.body.style.overflow = shouldLock ? 'hidden' : 'auto';
         };

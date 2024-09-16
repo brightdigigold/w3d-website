@@ -12,11 +12,12 @@ import { AesDecrypt, AesEncrypt } from '../helperFunctions';
 import axios, { AxiosProgressEvent } from 'axios';
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { setIsLoggedIn, setShowProfileFormCorporate } from '@/redux/authSlice';
 
 const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
     const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
     const dispatch = useDispatch();
-    // console.log("corporateBusinessDetails", corporateBusinessDetails);
+    console.log("corporateBusinessDetails", corporateBusinessDetails?.dateOfBirth);
     // console.log("otpDetails", otpDetails);
     const [otp, setOtp] = useState('');
     const cancelButtonRef = useRef(null);
@@ -41,6 +42,18 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
         };
     }, [resendTimer]);
 
+    const parseDate = (dateStr: string) => {
+        // Check if the dateStr is in 'dd/mm/yyyy' format
+        const parts = dateStr.split('/');
+        if (parts.length === 3) {
+            const [day, month, year] = parts;
+            // Return a Date object in 'yyyy-mm-dd' format
+            return new Date(`${year}-${month}-${day}`);
+        }
+        // If not in 'dd/mm/yyyy' format, try to parse it directly
+        return new Date(dateStr);
+    };
+
     const handleSubmit = async () => {
 
         if (otp.length < 6) {
@@ -59,8 +72,8 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
             // termsAndConditions: otpDetails?.termsAndConditions,
             otp: otp,
             gstData: {
-                dateOfBirth: corporateBusinessDetails?.dateOfBirth ? new Date(corporateBusinessDetails?.dateOfBirth).toISOString() : "",
-                // gstMobile: corporateBusinessDetails?.gstMobile,
+                dateOfBirth: parseDate(corporateBusinessDetails?.dateOfBirth!).toISOString(),               // dateOfBirth: corporateBusinessDetails?.dateOfBirth ? new Date(corporateBusinessDetails?.dateOfBirth).toISOString() : "",
+                gstMobile: corporateBusinessDetails?.gstMobile,
                 name: otpDetails?.name,
                 email: otpDetails?.gmail,
                 gstNumber: corporateBusinessDetails?.gstNumber,
@@ -80,7 +93,9 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
 
             console.log("decrypted data from otp modal", result);
             if (!result.isError && result.data.status) {
-
+                dispatch(setIsLoggedIn(true));
+                dispatch(setShowProfileFormCorporate(false));
+                closeModal();
             } else {
                 setOtp("");
                 Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
