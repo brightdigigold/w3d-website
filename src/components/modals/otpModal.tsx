@@ -111,7 +111,7 @@ export default function OtpModal() {
       }
 
       const data = authenticationMode === "corporateSignUp" ? corporateData : userData;
-      console.log("data: ", data)
+      // console.log("data: ", data)
 
       try {
         setSubmitting(true);

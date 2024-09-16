@@ -131,7 +131,7 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
                 {showCorporateOTPModal && otpDetails && (
                     <OTPCorporateSignUp OTPMsg={OTPMsg} otpDetails={otpDetails} closeModal={closeCorporateOTPModal}/>
                 )}
-                <button type='button' onClick={onClose} className="absolute top-20 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer ">
+                <button type='button' onClick={onClose} className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer ">
                     <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
                 </button>
                 <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-5" />

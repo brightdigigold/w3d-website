@@ -1,5 +1,5 @@
 import { RootState } from '@/redux/store';
-import React, { useState, useRef, Fragment } from 'react';
+import React, { useState, useRef, Fragment, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
@@ -8,22 +8,47 @@ import CustomButton from '../customButton';
 import { useDispatch } from 'react-redux';
 import { postMethodHelperWithEncryption } from '@/api/postMethodHelper';
 import Notiflix from "notiflix";
+import { AesDecrypt, AesEncrypt } from '../helperFunctions';
+import axios, { AxiosProgressEvent } from 'axios';
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
     const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
     const dispatch = useDispatch();
-    console.log("corporateBusinessDetails", corporateBusinessDetails);
-    console.log("otpDetails", otpDetails);
+    // console.log("corporateBusinessDetails", corporateBusinessDetails);
+    // console.log("otpDetails", otpDetails);
     const [otp, setOtp] = useState('');
     const cancelButtonRef = useRef(null);
+    const router = useRouter();
     const [open, setOpen] = useState(true);
     const [otpError, setOtpError] = useState("");
     const [submitting, setSubmitting] = useState(false);
+    const [resendTimer, setResendTimer] = useState(60);
+    const [resendDisabled, setResendDisabled] = useState(false);
+
+    useEffect(() => {
+        let countdown: string | number | NodeJS.Timeout | any;
+
+        if (resendTimer > 0) {
+            countdown = setInterval(() => {
+                setResendTimer((prev) => prev - 1);
+            }, 1000);
+        }
+
+        return () => {
+            clearInterval(countdown);
+        };
+    }, [resendTimer]);
 
     const handleSubmit = async () => {
+
+        if (otp.length < 6) {
+            setOtpError("Please fill the OTP");
+            return;
+        }
+
         const corporateDetails = {
-            // gmail: otpDetails?.gmail,
-            // name: otpDetails?.name,
             mobile_number: otpDetails?.mobile_number,
             skipMobileNumber: false,
             isApp: false,
@@ -46,8 +71,6 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
         }
 
         console.log("corporateDetails from otp corporate modal ==================> ", corporateDetails)
-
-
         try {
             setSubmitting(true);
             const result = await postMethodHelperWithEncryption(
@@ -70,7 +93,61 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
         } finally {
             setSubmitting(false);
         }
-    }
+    };
+
+    const startResendTimer = () => {
+        setResendTimer(120);
+        setResendDisabled(true);
+
+        const countdown = setInterval(() => {
+            setResendTimer((prev) => prev - 1);
+        }, 1000);
+
+        setTimeout(() => {
+            clearInterval(countdown);
+            setResendDisabled(false);
+        }, 200); // 2 minutes
+    };
+
+    const resendOtp = async () => {
+        try {
+            const data = {
+                mobile_number: otpDetails?.mobile_number,
+            };
+            Notiflix.Loading.init({ svgColor: "rgba(241,230,230,0.985)" });
+            const resAfterEncrypt = await AesEncrypt(data);
+            const body = {
+                payload: resAfterEncrypt,
+            };
+
+            const header = {
+                "Content-Type": "application/json",
+                onUploadProgress: (progressEvent: AxiosProgressEvent) => {
+                    Notiflix.Loading.circle();
+                },
+            };
+
+            const result = await axios.post(
+                `${process.env.baseUrl}/auth/send/otp`,
+                body,
+                header
+            );
+            const decryptedData = await AesDecrypt(result.data.payload);
+            if (JSON.parse(decryptedData).status) {
+                Notiflix.Loading.remove();
+                startResendTimer();
+                router.push("/");
+            }
+        } catch (error) {
+            // Handle errors here
+            Swal.fire({
+                html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
+                title: "An error occurred",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+    };
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -122,7 +199,7 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
                                             >
                                                 Enter OTP
                                             </Dialog.Title>
-                                            <div className="mt-2 otpInput">
+                                            <div className="mt-1 otpInput">
                                                 <OtpInput
                                                     value={otp}
                                                     inputType="number"
@@ -152,11 +229,11 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
                                                     renderInput={(props) => <input {...props} />}
                                                 />
                                                 {otpError && (
-                                                    <div className="text-red-600">{otpError}</div>
+                                                    <div className="text-red-600 ml-2">{otpError}</div>
                                                 )}
                                             </div>
                                         </div>
-                                        {/* <div className="m-2">
+                                        <div className="mx-2">
                                             {resendTimer > 0 && (
                                                 <span className=" text-yellow-400 sm:ml-5">
                                                     Resend OTP in{" "}
@@ -179,7 +256,7 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
                                                     isDisabled={resendDisabled}
                                                 />
                                             )}
-                                        </div> */}
+                                        </div>
                                     </div>
 
                                     <div className="flex justify-center">
