@@ -17,7 +17,7 @@ import { setIsLoggedIn, setShowProfileFormCorporate } from '@/redux/authSlice';
 const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
     const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
     const dispatch = useDispatch();
-    console.log("corporateBusinessDetails", corporateBusinessDetails?.dateOfBirth);
+    // console.log("corporateBusinessDetails", corporateBusinessDetails);
     // console.log("otpDetails", otpDetails);
     const [otp, setOtp] = useState('');
     const cancelButtonRef = useRef(null);
@@ -93,6 +93,7 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
 
             console.log("decrypted data from otp modal", result);
             if (!result.isError && result.data.status) {
+                localStorage.setItem("token", result.data.otpVarifiedToken)
                 dispatch(setIsLoggedIn(true));
                 dispatch(setShowProfileFormCorporate(false));
                 closeModal();
