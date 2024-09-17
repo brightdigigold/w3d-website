@@ -51,14 +51,11 @@ import { isMobile } from 'react-device-detect';
 import { GoogleTagManager } from "@next/third-parties/google";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
-import SetProfileCorporate from "../setProfileCorporate";
-import OTPCorporateSignUp from "../modals/otpCorporateSignUp";
 
 const BuySell = () => {
   const router = useRouter()
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  console.log("user: ", user.data.type)
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const [isgold, setIsGold] = useState<boolean>(true);
@@ -470,7 +467,6 @@ const BuySell = () => {
     <>
       <div className="">
         <GoogleTagManager gtmId="GTM-5JFBNN5" />
-        {/* <OTPCorporateSignUp OTPMsg={''} otpDetails={''} /> */}
         {openLoginAside && (
           <LoginAside
             isOpen={openLoginAside}
