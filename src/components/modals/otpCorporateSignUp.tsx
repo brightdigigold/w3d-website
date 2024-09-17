@@ -13,6 +13,7 @@ import axios, { AxiosProgressEvent } from 'axios';
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { setIsLoggedIn, setShowProfileFormCorporate } from '@/redux/authSlice';
+import { fetchUserDetails } from '@/redux/userDetailsSlice';
 
 const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
     const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
@@ -94,7 +95,8 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
             console.log("decrypted data from otp modal", result);
             if (!result.isError && result.data.status) {
                 console.log(" result.data.otpVarifiedToken",  result.data.data.otpVarifiedToken)
-                localStorage.setItem("token", result.data.data.otpVarifiedToken)
+                localStorage.setItem("token", result.data.data.otpVarifiedToken);
+                dispatch(fetchUserDetails() as any);
                 dispatch(setIsLoggedIn(true));
                 dispatch(setShowProfileFormCorporate(false));
                 closeModal();
