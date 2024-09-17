@@ -58,7 +58,7 @@ const BuySell = () => {
   const router = useRouter()
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  console.log("user: ", user)
+  console.log("user: ", user.data.type)
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const [isgold, setIsGold] = useState<boolean>(true);
@@ -727,7 +727,7 @@ const BuySell = () => {
                 null
               )}
 
-              {purchaseType === 'buy' && metalType === 'gold' && totalAmount >= 10 && (
+              {user.data.type !== "corporate" && purchaseType === 'buy' && metalType === 'gold' && totalAmount >= 10 && (
               <div className="flex justify-center items-center relative">
                 <span className="text-themeBlueLight mt-4 text-center rotating-text relative">
                   <span className="silver-shine poppins-regular text-sm">
