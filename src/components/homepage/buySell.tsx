@@ -58,6 +58,7 @@ const BuySell = () => {
   const router = useRouter()
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  console.log("user: ", user)
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const [isgold, setIsGold] = useState<boolean>(true);
