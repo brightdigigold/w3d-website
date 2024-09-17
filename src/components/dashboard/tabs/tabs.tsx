@@ -14,11 +14,12 @@ const data = [
 const DashboardTopTabs = () => {
   const user = useSelector(selectUser);
   const userType = user.data.type;
+  console.log('user', userType)
 
   return (
     <div className="w-full pt-32 pb-28 xl:pb-8">
       <Tab.Group defaultIndex={0}>
-        {userType !== "temple" || "corporate" && (
+        {userType !== "temple" && userType !== "corporate" && (
           <Tab.List className="flex space-x-1 rounded p-1 bg-themeLight mx-3">
             {data.map((category, index) => (
               <Tab
@@ -45,7 +46,7 @@ const DashboardTopTabs = () => {
           <Tab.Panel
             className={classNames("rounded-xl p-3", "focus:outline-none")}
           >
-            {userType !== "temple" ? <GiftTab /> : <p>Gifting is disabled for temple users.</p>}
+            {userType !== "temple" ? <GiftTab /> : <p className="text-center text-white bold">Gifting is disabled for temple users.</p>}
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
