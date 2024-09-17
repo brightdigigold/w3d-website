@@ -14,7 +14,6 @@ const data = [
 const DashboardTopTabs = () => {
   const user = useSelector(selectUser);
   const userType = user.data.type;
-  console.log('user', userType)
 
   return (
     <div className="w-full pt-32 pb-28 xl:pb-8">
