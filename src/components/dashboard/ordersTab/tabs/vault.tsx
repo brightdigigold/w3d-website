@@ -90,7 +90,7 @@ const Vault = () => {
               </div>
             </div>
           </div>
-        </div>) : <TempleUtrCheck />}
+        </div>) : userType === 'temple' ? <TempleUtrCheck /> : null}
         {error && <p className="text-white">{error}</p>}
       </div>
     </div>

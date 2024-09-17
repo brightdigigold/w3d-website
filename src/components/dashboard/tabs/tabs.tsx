@@ -18,7 +18,7 @@ const DashboardTopTabs = () => {
   return (
     <div className="w-full pt-32 pb-28 xl:pb-8">
       <Tab.Group defaultIndex={0}>
-        {userType !== "temple" && (
+        {userType !== "temple" || "corporate" && (
           <Tab.List className="flex space-x-1 rounded p-1 bg-themeLight mx-3">
             {data.map((category, index) => (
               <Tab

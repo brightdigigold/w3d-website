@@ -86,6 +86,7 @@ const BuySell = () => {
   const isloggedIn = useSelector(selectIsloggedIn);
   const [previewData, setPreviewData] = useState<[]>([]);
   const [OpenUpiModal, setOpenUpiModal] = useState<boolean>(false);
+  const userType = user.data.type;
 
   const toggleOpenUpiModal = () => {
     setOpenUpiModal(prev => !prev)
@@ -727,7 +728,7 @@ const BuySell = () => {
                 null
               )}
 
-              {user.data.type !== "corporate" && purchaseType === 'buy' && metalType === 'gold' && totalAmount >= 10 && (
+              {userType !== "corporate" && purchaseType === 'buy' && metalType === 'gold' && totalAmount >= 10 && (
               <div className="flex justify-center items-center relative">
                 <span className="text-themeBlueLight mt-4 text-center rotating-text relative">
                   <span className="silver-shine poppins-regular text-sm">
