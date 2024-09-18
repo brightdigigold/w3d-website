@@ -135,13 +135,14 @@ const ProfileInfo = () => {
               </p>
             </div>
           </>)}
+
           <div className="shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
               <PhoneIcon className="h-4" /> Mobile Number
             </div>
             <p className="">{user?.data?.mobile_number}</p>
           </div>
-          <div className="shadow shadow-gray-100 rounded p-3">
+          {userType !== "corporate" && <div className="shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
               <CalendarIcon className="h-4" /> Date of Birth
             </div>
@@ -152,13 +153,13 @@ const ProfileInfo = () => {
                 year: "numeric",
               })}
             </p>
-          </div>
-          <div className=" shadow shadow-gray-100 rounded p-3">
+          </div>}
+          {userType !== "corporate" && <div className=" shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
               <UserIcon className="h-4" /> Gender
             </div>
             <p>{user?.data?.gender?.toUpperCase()}</p>
-          </div>
+          </div>}
           <div className="shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
               <EnvelopeIcon className="h-4" /> Email ID
@@ -186,7 +187,6 @@ const ProfileInfo = () => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
