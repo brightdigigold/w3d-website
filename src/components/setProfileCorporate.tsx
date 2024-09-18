@@ -122,105 +122,112 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
     };
 
     return (
-        <div ref={modalRef} className={`modal-class ${isOpen ? 'open-class' : ''}`}>
-            <aside id="default-sidebar" className={`bg-theme fixed top-0 right-0 z-40 lg:w-4/12 md:w-5/12 sm:w-6/12 h-screen transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`} aria-label="Sidebar">
-                {showCorporateOTPModal && otpDetails && (
-                    <OTPCorporateSignUp OTPMsg={OTPMsg} otpDetails={otpDetails} closeModal={closeCorporateOTPModal}/>
-                )}
-                <button type='button' onClick={onClose} className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer ">
-                    <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
-                </button>
-                <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-5" />
-                <div className='flex h-screen w-full'>
-                    <form onSubmit={handleSubmit(onSubmit)} className='text-gray-200 w-full'>
-                        <div className='px-4'>
-                            <div className={styles.p2}>
-                                <label className={styles.p1}>GST Number</label>
-                                <input
-                                    className={styles.p0}
-                                    {...register('gstNumber')}
-                                    readOnly
-                                />
-                                {errors.gstNumber && <p className='text-red-600'>{errors.gstNumber.message}</p>}
-                            </div>
+        // <aside
+        //     className={`fixed top-0 right-0 h-full lg:w-4/12 md:w-5/12 sm:w-6/12 bg-theme shadow-lg transform translate-x-${isOpen ? "0" : "full"} transition-transform ease-in-out z-50`}
+        //     style={{ zIndex: 1000 }}
+        // >
+        <aside id="default-sidebar" className={`bg-theme fixed top-0 right-0 h-full w-full lg:w-4/12 md:w-5/12 sm:w-6/12  transition-transform-x-${isOpen ? '0' : 'full'}transition-transform ease-in-out z-50 `} style={{ zIndex: 1000 }}>
+            <div ref={modalRef} className="grid  h-screen place-items-center w-full">
+                <div className="flex flex-col h-full w-full">
+                    {showCorporateOTPModal && otpDetails && (
+                        <OTPCorporateSignUp OTPMsg={OTPMsg} otpDetails={otpDetails} closeModal={closeCorporateOTPModal} />
+                    )}
+                    <button type='button' onClick={onClose} className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer ">
+                        <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
+                    </button>
+                    <img
+                        src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png"
+                        className="h-12 sm:h-16 md:h-20 lg:h-20 mx-auto mt-2 sm:mt-8 md:mt-5"
+                    />
 
-                            <div className={styles.p2}>
-                                <label className={styles.p1}>PAN</label>
-                                <input
-                                    className={styles.p0}
-                                    {...register('pan')}
-                                    readOnly
-                                />
-                                {errors.pan && <p className='text-red-600'>{errors.pan.message}</p>}
-                            </div>
-
-                            <div className={styles.p2}>
-                                <label className={styles.p1}>Email Address</label>
-                                <input
-                                    className={styles.p0}
-                                    placeholder="EMAIL ADDRESS"
-                                    {...register('gmail')}
-                                />
-                                {errors.gmail && <p className='text-red-600 text-sm'>{errors.gmail.message}</p>}
-                            </div>
-
-                            <div className={styles.p2}>
-                                <label className={styles.p1}>Mobile Number</label>
-                                <input
-                                    type="text"
-                                    inputMode="numeric"
-                                    placeholder="MOBILE NUMBER"
-                                    className={styles.p0}
-                                    {...register('mobile_number')}
-                                />
-                                {errors.mobile_number && <p className='text-red-600 text-sm'>{errors.mobile_number.message}</p>}
-                            </div>
-
-                            <div className={styles.p2}>
-                                <label className={styles.p1}>Name</label>
-                                <input
-                                    className={styles.p0}
-                                    placeholder="NAME"
-                                    {...register('name')}
-                                />
-                                {errors.name && <p className='text-red-600 text-sm'>{errors.name.message}</p>}
-                            </div>
-                        </div>
-                        <div className="bottom-1 absolute w-full px-4">
-                            <div className="flex">
-                                <div>
+                    <div className='flex h-screen w-full'>
+                        <form onSubmit={handleSubmit(onSubmit)} className='text-gray-200 w-full mt-4'>
+                            <div className='px-4'>
+                                <div className="mb-3">
+                                    <label className="text-white">GST Number</label>
                                     <input
-                                        className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
-                                        id="termsAndConditions"
-                                        type="checkbox"
-                                        {...register('termsAndConditions')}
-                                    />
+                                        className="text-white placeholder:text-gray-500 tracking-widest bold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none"
+                                        {...register('gstNumber')}
+                                        readOnly />
+                                    {errors.gstNumber && <p className='text-red-600'>{errors.gstNumber.message}</p>}
                                 </div>
-                                <div>
-                                    <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-sm">
-                                        By continuing, I confirm that I am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
-                                    </label>
+
+                                <div className="mb-3">
+                                    <label className="text-white">PAN</label>
+                                    <input
+                                        className="text-white placeholder:text-gray-500 tracking-widest bold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none"
+                                        {...register('pan')}
+                                        readOnly />
+                                    {errors.pan && <p className='text-red-600'>{errors.pan.message}</p>}
+                                </div>
+
+                                <div className="mb-3">
+                                    <label className="text-white">Email Address</label>
+                                    <input
+                                        className="text-white placeholder:text-gray-500 tracking-widest bold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none"
+                                        placeholder="EMAIL ADDRESS"
+                                        {...register('gmail')} />
+                                    {errors.gmail && <p className='text-red-600 text-sm'>{errors.gmail.message}</p>}
+                                </div>
+
+                                <div className="mb-3">
+                                    <label className="text-white">Mobile Number</label>
+                                    <input
+                                        type="text"
+                                        inputMode="numeric"
+                                        placeholder="MOBILE NUMBER"
+                                        className="text-white placeholder:text-gray-500 tracking-widest bold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none"
+                                        {...register('mobile_number')} />
+                                    {errors.mobile_number && <p className='text-red-600 text-sm'>{errors.mobile_number.message}</p>}
+                                </div>
+
+                                <div className="mb-3">
+                                    <label className="text-white">Name</label>
+                                    <input
+                                        className="text-white placeholder:text-gray-500 tracking-widest bold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none"
+                                        placeholder="NAME"
+                                        {...register('name')} />
+                                    {errors.name && <p className='text-red-600 text-sm'>{errors.name.message}</p>}
                                 </div>
                             </div>
-                            {errors.termsAndConditions && <p className='text-red-600 text-sm ml-4'>{errors.termsAndConditions.message}</p>}
-                            <button
-                                type="submit"
-                                title="SEND OTP"
-                                className="bg-themeBlue px-4 py-2 rounded-full w-full mt-2 mb-2 extrabold text-black"
-                            >
-                                SEND OTP
-                            </button>
-                        </div>
-                    </form>
+                            <div className="bottom-1 absolute w-full px-4">
+                                <div className="flex">
+                                    <div>
+                                        <input
+                                            className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
+                                            id="termsAndConditions"
+                                            type="checkbox"
+                                            {...register('termsAndConditions')} />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-xs sm:text-sm">
+                                            By continuing, I confirm that I am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
+                                        </label>
+                                    </div>
+                                </div>
+                                {errors.termsAndConditions && <p className='text-red-600 text-sm ml-4'>{errors.termsAndConditions.message}</p>}
+                                <button
+                                    type="submit"
+                                    title="SEND OTP"
+                                    className="bg-themeBlue px-4 py-2 rounded-full w-full lg:w-full sm:w-full sm:mx-full mt-2 mb-2 extrabold text-black"
+                                >
+                                    SEND OTP
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </aside>
-        </div>
+
+            </div>
+        </aside>
+        // </aside>
+
     );
 };
 
 const styles = {
     p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-2 text-gray-100 tracking-widest placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
-    p1: 'bold tracking-wide pb-0.5',
+    p1: 'bold tracking-wide pb-0.5 text-white',
     p2: 'flex flex-col pb-2'
 };
 
