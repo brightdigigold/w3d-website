@@ -103,8 +103,6 @@ const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
     };
 
     const apiEndPoint =  userType === 'user' ? "auth/send/otp" : corporateLoginOrSignUp !== 'corporateSignUp' ? "auth/send/otp" : "auth/gst/send/otp"
-    console.log("apiEndPoint", { apiEndPoint, updatedValues })
-
     try {
       setSubmitting(true);
       // Notiflix.Loading.circle();
