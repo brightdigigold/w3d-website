@@ -63,19 +63,15 @@ const MyAccountTabs = () => {
           </div>
         </div>
       </div>
-      <div className=" grid lg:grid-cols-2 gap-4 z-40 relative">
+      <div className="grid lg:grid-cols-2 gap-4 z-40 relative">
         <div>
-          <div>
-            <p className="p-4 text-white">Personal Details</p>
-          </div>
-          {userType !== "corporate" ? <KycTab /> : null}
+          <p className="p-4 text-white">Personal Details</p>
+          {userType !== "corporate" && (<KycTab />)}
           <ProfileTab />
           <AddressTab />
         </div>
         <div>
-          <div>
-            <p className="p-4 text-white">Withdrawal Method</p>
-          </div>
+          <p className="p-4 text-white">Withdrawal Method</p>
           <PayoutOptionTab onCompleteKYC={handleCompleteKYC} />
         </div>
       </div>

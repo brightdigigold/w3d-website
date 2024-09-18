@@ -17,6 +17,7 @@ import {
   UserIcon,
 } from "@heroicons/react/20/solid";
 import EditProfileModel from "@/components/modals/editProfileModel";
+import clsx from "clsx";
 
 const ProfileInfo = () => {
   const user = useSelector(selectUser);
@@ -72,7 +73,7 @@ const ProfileInfo = () => {
   };
 
   return (
-    <div>
+    <div className={clsx({ 'mt-4': userType !== "corporate", })}>
       {openEditProfileModel && <EditProfileModel setOpenEditProfileModel={setOpenEditProfileModel} />}
       <div className="w-full text-white flex flex-col text-sm sm:text-base relative">
         <div className="border-b p-4 flex justify-between items-center">
@@ -88,17 +89,61 @@ const ProfileInfo = () => {
           </button>
         </div>
         <div className="p-4 grid sm:grid-cols-2 gap-4">
+          {userType === "corporate" && (<>
+            <div className="shadow shadow-gray-100 rounded p-3">
+              <div className="flex items-center gap-1 mb-3 text-gray-300">
+                <AiOutlineUser className="h-4" /> Name
+              </div>
+              <p>
+                {user.data.name}
+              </p>
+            </div>
+            <div className="shadow shadow-gray-100 rounded p-3">
+              <div className="flex items-center gap-1 mb-3 text-gray-300">
+                <CalendarIcon className="h-4" /> Date of Registration
+              </div>
+              <p>
+                {new Date(user?.data?.dateOfBirth).toLocaleDateString("en-IN", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </p>
+            </div>
+            <div className="shadow shadow-gray-100 rounded p-3">
+              <div className="flex items-center gap-1 mb-3 text-gray-300">
+                <AiOutlineFileText className="h-4" /> GST Number
+              </div>
+              <p>
+                {user.data.gst_number}
+              </p>
+            </div>
+            <div className="shadow shadow-gray-100 rounded p-3">
+              <div className="flex items-center gap-1 mb-3 text-gray-300">
+                <HiIdentification className="h-4" /> PAN Number
+              </div>
+              <p>
+                {user.data.name}
+              </p>
+            </div>
+            <div className="shadow shadow-gray-100 rounded p-3">
+              <div className="flex items-center gap-1 mb-3 text-gray-300">
+                <MdBusiness className="h-4" />Company Name
+              </div>
+              <p>
+                {user.data.legalName}
+              </p>
+            </div>
+          </>)}
           <div className="shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
-              <AiOutlineUser className="h-4" /> Name
+              <PhoneIcon className="h-4" /> Mobile Number
             </div>
-            <p>
-              {user.data.name}
-            </p>
+            <p className="">{user?.data?.mobile_number}</p>
           </div>
           <div className="shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
-              <CalendarIcon className="h-4" /> {userType !== "corporate" ? "Date of Birth" : "Date of Registration "}
+              <CalendarIcon className="h-4" /> Date of Birth
             </div>
             <p>
               {new Date(user?.data?.dateOfBirth).toLocaleDateString("en-IN", {
@@ -108,35 +153,11 @@ const ProfileInfo = () => {
               })}
             </p>
           </div>
-          <div className="shadow shadow-gray-100 rounded p-3">
+          <div className=" shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
-              <AiOutlineFileText className="h-4" /> GST Number
+              <UserIcon className="h-4" /> Gender
             </div>
-            <p>
-              {user.data.gst_number}
-            </p>
-          </div>
-          <div className="shadow shadow-gray-100 rounded p-3">
-            <div className="flex items-center gap-1 mb-3 text-gray-300">
-              <HiIdentification className="h-4" /> PAN Number
-            </div>
-            <p>
-              {user.data.name}
-            </p>
-          </div>
-          <div className="shadow shadow-gray-100 rounded p-3">
-            <div className="flex items-center gap-1 mb-3 text-gray-300">
-              <MdBusiness className="h-4" />Company Name
-            </div>
-            <p>
-              {user.data.legalName}
-            </p>
-          </div>
-          <div className="shadow shadow-gray-100 rounded p-3">
-            <div className="flex items-center gap-1 mb-3 text-gray-300">
-              <PhoneIcon className="h-4" /> Mobile Number
-            </div>
-            <p className="">{user?.data?.mobile_number}</p>
+            <p>{user?.data?.gender?.toUpperCase()}</p>
           </div>
           <div className="shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
@@ -165,12 +186,6 @@ const ProfileInfo = () => {
               </div>
             </div>
           </div>
-          {userType !== "corporate" && <div className=" shadow shadow-gray-100 rounded p-3">
-            <div className="flex items-center gap-1 mb-3 text-gray-300">
-              <UserIcon className="h-4" /> Gender
-            </div>
-            <p>{user?.data?.gender?.toUpperCase()}</p>
-          </div>}
 
         </div>
       </div>

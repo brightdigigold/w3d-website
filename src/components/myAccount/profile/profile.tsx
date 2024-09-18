@@ -15,7 +15,7 @@ const ProfileTab = () => {
 
   return (
     <>
-      <div className="coins_background rounded-lg w-full pb-4 mt-4">
+      <div className="coins_background rounded-lg w-full pb-4">
         {isEditing ? (
           <EditProfile
             onSaveDetails={handleSaveDetails}
