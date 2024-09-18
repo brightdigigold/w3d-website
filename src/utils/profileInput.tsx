@@ -54,16 +54,16 @@ const ProfileInput = ({
             className={styles.p2}
             {...extra}
           >
-            <option value="" disabled hidden>
+            <option value="" disabled hidden className="cursor-pointer">
               Select Gender
             </option>
-            <option value="male" className="text-black bg-slate-500 w-1/4">
+            <option value="male" className="text-white bg-slate-500 w-1/4">
               Male
             </option>
-            <option value="female" className="text-black bg-slate-500">
+            <option value="female" className="text-white bg-slate-500">
               Female
             </option>
-            <option value="other" className="text-black bg-slate-500">
+            <option value="other" className="text-white bg-slate-500">
               Other
             </option>
           </select>

@@ -11,10 +11,12 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import ProfileInput from "@/utils/profileInput";
 import Loading from "@/app/loading";
+import CustomButton from "../customButton";
 
 const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: any) => {
   const [open, setOpen] = useState(true);
   const user = useSelector(selectUser);
+  const userType = user.data.type;
   const dispatch: AppDispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const cancelButtonRef = useRef(null);
@@ -164,7 +166,7 @@ const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: 
         </Transition.Child>
 
         <div className="fixed inset-0 z-50 w-screen overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className=" flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -174,14 +176,11 @@ const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: 
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg  bg-theme px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-sm sm:p-6">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg  bg-theme px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-sm sm:p-6 bg-red-600">
                 <div className="w-full relative">
-                  {isSubmitting && <Loading />}
-                  <div className=" absolute top-4 right-4 text-gray-400 hover:text-gray-200 focus:outline-none">
-                  </div>
                   <ProfileInput
                     type="text"
-                    label="Full Name *"
+                    label={userType === "corporate" ? "Company Name *" : "Full Name *"}
                     name="name"
                     formik={formik}
                     readonly={!user.data.isKycDone ? false : true}
@@ -189,7 +188,7 @@ const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: 
 
                   <ProfileInput
                     type="text"
-                    label="Date of Birth *"
+                    label={userType === "corporate" ? "Date of Registration *" : "Date of Birth *"}
                     name="dateOfBirth"
                     placeholder="01/01/2000"
                     formik={formik}
@@ -197,13 +196,13 @@ const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: 
                     readonly={!user.data.isKycDone ? false : true}
                   />
 
-                  <ProfileInput
+                  {userType === "user" ? <ProfileInput
                     type="gender"
                     label="Gender"
                     name="gender"
                     formik={formik}
                     readonly={true}
-                  />
+                  /> : null}
 
                   <ProfileInput
                     type="email"
@@ -212,17 +211,6 @@ const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: 
                     formik={formik}
                     readonly={user.data?.isEmailVerified ? true : false}
                   />
-
-                  <div className="flex justify-center">
-                    <button
-                      className="bold py-2 bg-themeBlue rounded px-3 text-center inline-block"
-                      onClick={() => {
-                        formik.submitForm();
-                      }}
-                    >
-                      Save Details
-                    </button>
-                  </div>
                 </div>
                 <div className="mt-5 sm:mt-6">
                   <button
@@ -233,6 +221,18 @@ const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: 
                     <XMarkIcon className="h-5" />
                   </button>
                 </div>
+                <div className="flex justify-center">
+                    <CustomButton
+                      title="Save Details"
+                      btnType="submit"
+                      isDisabled={isSubmitting}
+                      loading={isSubmitting}
+                      containerStyles="bold py-2 bg-themeBlue rounded px-3 text-center inline-block"
+                      handleClick={() => {
+                        formik.submitForm();
+                      }}
+                    />
+                  </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
