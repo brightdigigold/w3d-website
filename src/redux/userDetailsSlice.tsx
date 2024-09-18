@@ -10,7 +10,7 @@ interface FetchUserDetailsResponse {
 
 // Define the initial state based on your user structure
 const initialState: UserState = {
-   
+
     data: {
         address: { line1: '', line2: '', pincode: null, state: '', city: '' },
         addresses: [],
@@ -31,9 +31,13 @@ const initialState: UserState = {
         isPanUploaded: false,
         isUpiVerified: false,
         kyc: { panNumber: '', aadhaarNumber: '' },
+        fromApp: false,
+        isNewUser: false,
+        legalName: '',
+        tradeName: '',
         mobile_number: '',
         name: '',
-        profile_image: '',
+        // profile_image: '',
         referralCode: '',
         referredBy: null,
         type: '',
@@ -45,6 +49,8 @@ const initialState: UserState = {
             gold: 0,
             silver: 0,
             totalAmount: 0,
+            createdAt: "",
+            updatedAt: '',
         },
         verificationToken: '',
         walletAmount: 0,
@@ -71,7 +77,7 @@ export const fetchUserDetails = createAsyncThunk(
             const decryptedData = await funcForDecrypt(data.payload);
             const userDetails: UserState = JSON.parse(decryptedData);
 
-            const finalUserDetails =  userDetails;
+            const finalUserDetails = userDetails;
 
             return { userDetails: finalUserDetails } as FetchUserDetailsResponse;
         } catch (error: any) {

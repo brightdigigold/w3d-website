@@ -2,7 +2,11 @@ import { selectUser } from "@/redux/userDetailsSlice";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { VscVerifiedFilled } from "react-icons/vsc";
+import { AiOutlineUser } from 'react-icons/ai';
+import { MdBusiness } from 'react-icons/md';
 import { MdScheduleSend } from "react-icons/md";
+import { AiOutlineFileText } from 'react-icons/ai';
+import { HiIdentification } from 'react-icons/hi';
 import Swal from "sweetalert2";
 import { AesDecrypt } from "@/components/helperFunctions";
 import {
@@ -14,11 +18,13 @@ import {
 } from "@heroicons/react/20/solid";
 import EditProfileModel from "@/components/modals/editProfileModel";
 
-const ProfileInfo = ({ onEditDetailsClick }: any) => {
+const ProfileInfo = () => {
   const user = useSelector(selectUser);
+  const userType = user.data.type;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [openEditProfileModel, setOpenEditProfileModel] = useState(false);
+  console.log("user", user);
 
   const EditProfileModelHandler = () => {
     setOpenEditProfileModel(!openEditProfileModel);
@@ -84,11 +90,54 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
         <div className="p-4 grid sm:grid-cols-2 gap-4">
           <div className="shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
+              <AiOutlineUser className="h-4" /> Name
+            </div>
+            <p>
+              {user.data.name}
+            </p>
+          </div>
+          <div className="shadow shadow-gray-100 rounded p-3">
+            <div className="flex items-center gap-1 mb-3 text-gray-300">
+              <CalendarIcon className="h-4" /> {userType !== "corporate" ? "Date of Birth" : "Date of Registration "}
+            </div>
+            <p>
+              {new Date(user?.data?.dateOfBirth).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })}
+            </p>
+          </div>
+          <div className="shadow shadow-gray-100 rounded p-3">
+            <div className="flex items-center gap-1 mb-3 text-gray-300">
+              <AiOutlineFileText className="h-4" /> GST Number
+            </div>
+            <p>
+              {user.data.gst_number}
+            </p>
+          </div>
+          <div className="shadow shadow-gray-100 rounded p-3">
+            <div className="flex items-center gap-1 mb-3 text-gray-300">
+              <HiIdentification className="h-4" /> PAN Number
+            </div>
+            <p>
+              {user.data.name}
+            </p>
+          </div>
+          <div className="shadow shadow-gray-100 rounded p-3">
+            <div className="flex items-center gap-1 mb-3 text-gray-300">
+              <MdBusiness className="h-4" />Company Name
+            </div>
+            <p>
+              {user.data.legalName}
+            </p>
+          </div>
+          <div className="shadow shadow-gray-100 rounded p-3">
+            <div className="flex items-center gap-1 mb-3 text-gray-300">
               <PhoneIcon className="h-4" /> Mobile Number
             </div>
             <p className="">{user?.data?.mobile_number}</p>
           </div>
-
           <div className="shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
               <EnvelopeIcon className="h-4" /> Email ID
@@ -116,24 +165,13 @@ const ProfileInfo = ({ onEditDetailsClick }: any) => {
               </div>
             </div>
           </div>
-          <div className=" shadow shadow-gray-100 rounded p-3">
+          {userType !== "corporate" && <div className=" shadow shadow-gray-100 rounded p-3">
             <div className="flex items-center gap-1 mb-3 text-gray-300">
               <UserIcon className="h-4" /> Gender
             </div>
             <p>{user?.data?.gender?.toUpperCase()}</p>
-          </div>
-          <div className="shadow shadow-gray-100 rounded p-3">
-            <div className="flex items-center gap-1 mb-3 text-gray-300">
-              <CalendarIcon className="h-4" /> Date of Birth
-            </div>
-            <p>
-              {new Date(user?.data?.dateOfBirth).toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })}
-            </p>
-          </div>
+          </div>}
+
         </div>
       </div>
     </div>

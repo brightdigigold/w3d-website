@@ -5,10 +5,6 @@ import { useState } from "react";
 const ProfileTab = () => {
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleEditDetailsClick = () => {
-    setIsEditing(true);
-  };
-
   const handleCancelEdit = () => {
     setIsEditing(false);
   };
@@ -26,7 +22,7 @@ const ProfileTab = () => {
             onCancel={handleCancelEdit}
           />
         ) : (
-          <ProfileInfo onEditDetailsClick={handleEditDetailsClick} />
+          <ProfileInfo />
         )}
       </div>
     </>

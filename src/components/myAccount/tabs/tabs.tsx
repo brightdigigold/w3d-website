@@ -16,6 +16,7 @@ import {
 const MyAccountTabs = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const user = useSelector(selectUser);
+  const userType = user.data.type;
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
 
@@ -67,7 +68,7 @@ const MyAccountTabs = () => {
           <div>
             <p className="p-4 text-white">Personal Details</p>
           </div>
-          <KycTab />
+          {userType !== "corporate" ? <KycTab /> : null}
           <ProfileTab />
           <AddressTab />
         </div>

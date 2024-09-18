@@ -186,6 +186,7 @@ export interface UserState {
     dateOfBirth: string;
     email: string;
     enabled: boolean;
+    fromApp: boolean;
     gender: string;
     gst_number: string;
     isAadhaarUploaded: boolean;
@@ -195,17 +196,20 @@ export interface UserState {
     isEmailVerified: boolean;
     isKycDone: boolean;
     isMobileVerified: boolean;
+    isNewUser: boolean;
     isPanUploaded: boolean;
     isUpiVerified: boolean;
     kyc: {
       panNumber: string;
       aadhaarNumber: string;
     };
+    legalName: string;
     mobile_number: string;
     name: string;
-    profile_image: string;
+    // profile_image: string;
     referralCode: string;
     referredBy: string | null;
+    tradeName: string;
     type: string;
     updatedAt: string;
     userId: string;
@@ -215,6 +219,8 @@ export interface UserState {
       gold: number;
       silver: number;
       totalAmount: number;
+      createdAt: string;
+      updatedAt: string;
     };
     verificationToken: string;
     walletAmount: number;
