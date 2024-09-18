@@ -10,10 +10,9 @@ import { AesDecrypt, AesEncrypt, } from "@/components/helperFunctions";
 import axios from "axios";
 import Swal from "sweetalert2";
 import ProfileInput from "@/utils/profileInput";
-import Loading from "@/app/loading";
 import CustomButton from "../customButton";
 
-const EditProfileModel = ({ setOpenEditProfileModel, onSaveDetails, onCancel }: any) => {
+const EditProfileModel = ({ setOpenEditProfileModel }: any) => {
   const [open, setOpen] = useState(true);
   const user = useSelector(selectUser);
   const userType = user.data.type;
