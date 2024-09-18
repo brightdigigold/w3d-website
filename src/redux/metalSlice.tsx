@@ -5,6 +5,12 @@ import { RootState } from './store';
 
 // Define the initial states
 const initialGoldState: GoldData = {
+  c_parity: 0,
+  c_saleParity: 0,
+  c_salePrice: 0,
+  c_totalPrice: 0,
+  createdAt: "",
+  isRealTime: true,
   mcx: 0,
   parity: 0,
   percentage: 0,
@@ -12,9 +18,18 @@ const initialGoldState: GoldData = {
   salePrice: 0,
   totalPrice: 0,
   up: false,
+  updatedAt: "",
+  __v: 0,
+  _id: ""
 };
 
 const initialSilverState: SilverData = {
+  c_parity: 0,
+  c_saleParity: 0,
+  c_salePrice: 0,
+  c_totalPrice: 0,
+  createdAt: "",
+  isRealTime: true,
   mcx: 0,
   parity: 0,
   percentage: 0,
@@ -22,6 +37,9 @@ const initialSilverState: SilverData = {
   salePrice: 0,
   totalPrice: 0,
   up: false,
+  updatedAt: "",
+  __v: 0,
+  _id: ""
 };
 
 const goldSlice = createSlice({

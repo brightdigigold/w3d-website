@@ -2,7 +2,7 @@ import { AesDecrypt, AesEncrypt, funcForDecrypt } from "@/components/helperFunct
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: `${process.env.baseUrl}`, // Replace with your API base URL
+  baseURL: `${process.env.baseUrl}`, 
 });
 
 export const metalPrice = async () => {
@@ -18,6 +18,7 @@ export const metalPrice = async () => {
     }
     const data = await response.json();
     const decryptedData = await funcForDecrypt(data.payload);
+    console.log("decryptedData", JSON.parse(decryptedData))
     return decryptedData;
   } catch (error: any | Error) {
     // alert(error);

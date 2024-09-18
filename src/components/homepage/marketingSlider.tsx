@@ -60,7 +60,7 @@ export default function Marketing() {
     },
   ];
 
-  const filteredFeatures = userType === "temple"
+  const filteredFeatures = userType === "temple" || userType === "corporate"
     ? features.filter(item => item.name !== "Start Gifting" && item.name !== "Gold KYC")
     : features;
 

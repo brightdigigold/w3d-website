@@ -27,12 +27,10 @@ import { fetchWalletData } from "@/redux/vaultSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { selectUser } from "@/redux/userDetailsSlice";
-import TempleUtrCheck from "./templeUtrCheck";
 
 const OrdersTabs = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const userType = user.data.type;
   const [userDetails, setUserDetails] = useState("");
   const [status, setStatus] = useState("ALL");
   const [isOpen, setIsOpen] = useState(false);

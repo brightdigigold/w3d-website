@@ -24,6 +24,11 @@ export interface customImageButtonProps {
 }
 
 export interface GoldData {
+  c_parity: number;
+  c_saleParity: number;
+  c_salePrice: number;
+  c_totalPrice: number;
+  isRealTime: true,
   mcx: number;
   parity: number;
   percentage: number;
@@ -31,9 +36,18 @@ export interface GoldData {
   salePrice: number;
   totalPrice: number;
   up: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  _id: string
 }
 
 export interface SilverData {
+  c_parity: number;
+  c_saleParity: number;
+  c_salePrice: number;
+  c_totalPrice: number;
+  isRealTime: true,
   mcx: number;
   parity: number;
   percentage: number;
@@ -41,6 +55,10 @@ export interface SilverData {
   salePrice: number;
   totalPrice: number;
   up: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  _id: string
 }
 
 export interface Coupon {
@@ -279,7 +297,9 @@ export interface CartState {
   goldGstForCart: number;
   silverGstForCart: number;
   liveGoldPrice: number;
+  liveGoldPurchasePrice: number;
   liveSilverPrice: number;
+  liveSilverPurchasePrice: number;
   finalAmount: number;
   totalMakingChargesGold: number;
   totalMakingChargesSilver: number;

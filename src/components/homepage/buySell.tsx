@@ -51,15 +51,18 @@ import { isMobile } from 'react-device-detect';
 import { GoogleTagManager } from "@next/third-parties/google";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
-import SetProfileCorporate from "../setProfileCorporate";
-import OTPCorporateSignUp from "../modals/otpCorporateSignUp";
 
 const BuySell = () => {
   const router = useRouter()
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const userType = user.data.type;
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
+  const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
+  const liveSilverPrice = useSelector((state: RootState) => state.cart.liveSilverPrice);
+  const liveSilverPurchasePrice = useSelector((state: RootState) => state.cart.liveSilverPurchasePrice);
+  const liveGoldPurchasePrice = useSelector((state: RootState) => state.cart.liveGoldPurchasePrice);
   const [isgold, setIsGold] = useState<boolean>(true);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
@@ -213,9 +216,12 @@ const BuySell = () => {
     dispatch(setPurchaseType("buy"));
     dispatch(setTransactionType("rupees"));
     dispatch(clearCoupon());
-    dispatch(setLiveGoldPrice(goldData.totalPrice));
-    dispatch(setLiveSilverPrice(silverData.totalPrice));
+    dispatch(setLiveGoldPrice(userType !== "corporate" ? goldData.totalPrice : goldData.c_totalPrice));
+    dispatch(setLiveSilverPrice(userType !== "corporate" ? silverData.totalPrice : silverData.c_totalPrice));
   }, []);
+
+  console.log("silverPrice", userType !== "corporate" ? silverData.totalPrice : silverData.c_totalPrice)
+  // console.log("livegoldprice", liveGoldPrice)
 
   const toggleMetal = () => {
     setIsGold(!isgold);
@@ -242,12 +248,12 @@ const BuySell = () => {
   };
 
   let goldPriceWithGST = ParseFloat(
-    `${goldData.totalPrice * 0.03 + goldData.totalPrice}`,
+    `${liveGoldPrice * 0.03 + liveGoldPrice}`,
     2
   );
 
   let silverPriceWithGST = ParseFloat(
-    `${silverData.totalPrice * 0.03 + silverData.totalPrice}`,
+    `${liveSilverPrice * 0.03 + liveSilverPrice}`,
     2
   );
 
@@ -414,13 +420,13 @@ const BuySell = () => {
 
   useEffect(() => {
     if (isgold && activeTab == "buy") {
-      dispatch(setMetalPrice(goldData.totalPrice));
+      dispatch(setMetalPrice(liveGoldPrice));
     } else if (isgold && activeTab == "sell") {
       dispatch(setMetalPrice(goldData.salePrice));
     } else if (!isgold && activeTab == "buy") {
-      dispatch(setMetalPrice(silverData.totalPrice));
+      dispatch(setMetalPrice(liveSilverPrice));
     } else {
-      dispatch(setMetalPrice(silverData.salePrice));
+      dispatch(setMetalPrice(liveSilverPurchasePrice));
     }
   }, [isgold, activeTab, toggleMetal]);
 
@@ -468,7 +474,6 @@ const BuySell = () => {
     <>
       <div className="">
         <GoogleTagManager gtmId="GTM-5JFBNN5" />
-        {/* <OTPCorporateSignUp OTPMsg={''} otpDetails={''} /> */}
         {openLoginAside && (
           <LoginAside
             isOpen={openLoginAside}
@@ -548,17 +553,17 @@ const BuySell = () => {
                     {isgold ? (
                       <>
                         {activeTab === "buy" ? (
-                          <span className="">{goldData.totalPrice}</span>
+                          <span className="">{liveGoldPrice}</span>
                         ) : (
-                          <span>{goldData.salePrice}</span>
+                          <span>{liveGoldPurchasePrice}</span>
                         )}
                       </>
                     ) : (
                       <>
                         {activeTab === "buy" ? (
-                          <div> {silverData.totalPrice}</div>
+                          <div> {liveSilverPrice}</div>
                         ) : (
-                          <div>{silverData.salePrice}</div>
+                          <div>{liveSilverPurchasePrice}</div>
                         )}
                       </>
                     )}
@@ -726,7 +731,7 @@ const BuySell = () => {
                 null
               )}
 
-              {purchaseType === 'buy' && metalType === 'gold' && totalAmount >= 10 && (
+              {userType !== "corporate" && purchaseType === 'buy' && metalType === 'gold' && totalAmount >= 10 && (
               <div className="flex justify-center items-center relative">
                 <span className="text-themeBlueLight mt-4 text-center rotating-text relative">
                   <span className="silver-shine poppins-regular text-sm">

@@ -4,10 +4,11 @@ import { RootState } from "@/redux/store";
 import { decrementTimer, resetTimer } from "@/redux/actionTypes";
 import { metalPrice } from "@/api/DashboardServices";
 import { setGoldData, setSilverData } from "@/redux/metalSlice";
-import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
+import { setLiveGoldPrice, setLiveGoldPurchasePrice, setLiveSilverPrice, setLiveSilverPurchasePrice } from "@/redux/cartSlice";
 import { setMetalPrice } from "@/redux/shopSlice";
 import LivePrice from '../../public/lottie/LivePrice.gif'
 import Image from "next/image";
+import { selectUser } from "@/redux/userDetailsSlice";
 
 interface ProgressBarProps {
   purchaseType?: string;
@@ -24,11 +25,17 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 }: ProgressBarProps) => {
   const time = useSelector((state: RootState) => state.time.time);
   const metalPricePerGram = useSelector((state: RootState) => state.shop.metalPrice);
+  const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
+  const liveGoldPurchasePrice = useSelector((state: RootState) => state.cart.liveGoldPurchasePrice);
+  const liveSilverPrice = useSelector((state: RootState) => state.cart.liveSilverPrice);
+  const liveSilverPurchasePrice = useSelector((state: RootState) => state.cart.liveSilverPurchasePrice);
   const goldData = useSelector((state: RootState) => state.gold);
   const silverData = useSelector((state: RootState) => state.silver);
   const dispatch = useDispatch();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const memoizedDispatch = useCallback(dispatch, []);
+  const user = useSelector(selectUser);
+  const userType = user.data.type;
 
   const calculateProgressBarWidth = useCallback(() => {
     const totalSeconds = 300;
@@ -48,13 +55,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     if (displayMetalType.toLowerCase() === "gold") {
       return (
         <span className="text-yellow-700 text-md">
-          Gold : ₹{purchaseType === "buy" ? goldData.totalPrice : goldData.salePrice}
+          Gold : ₹{purchaseType === "buy" ? liveGoldPrice : liveGoldPurchasePrice}
         </span>
       );
     } else if (displayMetalType === "silver") {
       return (
         <span className="text-gray-800 text-md">
-          Silver : ₹{purchaseType === "buy" ? silverData.totalPrice : silverData.salePrice}
+          Silver : ₹{purchaseType === "buy" ? liveSilverPrice : liveSilverPurchasePrice}
         </span>
       );
     } else {
@@ -62,24 +69,26 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       return (
         <>
           <span className="text-yellow-700 text-md mr-1">
-            Gold : ₹{goldData.totalPrice}
+            Gold : ₹{liveGoldPrice}
           </span>
           <span className="text-gray-800 text-md block sm:inline">
             {" "}
-            Silver : ₹{silverData.totalPrice}
+            Silver : ₹{liveSilverPrice}
           </span>
         </>
       );
     }
-  }, [displayMetalType, goldData.totalPrice, silverData.totalPrice]);
+  }, [displayMetalType, liveGoldPrice, liveSilverPrice]);
   const fetchDataOfMetals = useCallback(async () => {
     try {
       const response: any = await metalPrice(); // Assuming this returns a JSON string
       const metalPriceOfGoldSilver = JSON.parse(response);
       dispatch(setGoldData(metalPriceOfGoldSilver.data.gold[0]));
       dispatch(setSilverData(metalPriceOfGoldSilver.data.silver[0]));
-      dispatch(setLiveGoldPrice(metalPriceOfGoldSilver.data.gold[0].totalPrice))
-      dispatch(setLiveSilverPrice(metalPriceOfGoldSilver.data.silver[0].totalPrice))
+      dispatch(setLiveGoldPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].totalPrice : metalPriceOfGoldSilver.data.gold[0].c_totalPrice));
+      dispatch(setLiveSilverPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].totalPrice : metalPriceOfGoldSilver.data.silver[0].c_totalPrice));
+      dispatch(setLiveGoldPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].salePrice : metalPriceOfGoldSilver.data.gold[0].c_salePrice));
+      dispatch(setLiveSilverPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].salePrice : metalPriceOfGoldSilver.data.silver[0].c_salePrice));
       dispatch(setMetalPrice(metalPriceOfGoldSilver.data.gold[0].totalPrice));
     } catch (error) {
       // alert(error);
