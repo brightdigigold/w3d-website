@@ -297,7 +297,9 @@ export interface CartState {
   goldGstForCart: number;
   silverGstForCart: number;
   liveGoldPrice: number;
+  liveGoldPurchasePrice: number;
   liveSilverPrice: number;
+  liveSilverPurchasePrice: number;
   finalAmount: number;
   totalMakingChargesGold: number;
   totalMakingChargesSilver: number;

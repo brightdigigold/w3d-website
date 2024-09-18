@@ -42,6 +42,8 @@ export default function CoinModal({
   const fromCart = true;
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
+  const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
+  const liveSilverPrice = useSelector((state: RootState) => state.cart.liveSilverPrice);
   const [useWallet, setUseWallet] = useState(false);
   const goldData = useSelector((state: RootState) => state.gold);
   const silverData = useSelector((state: RootState) => state.silver);
@@ -114,8 +116,8 @@ export default function CoinModal({
         isVault: useWallet,
         currentMatelPrice:
           productsDetailById.iteamtype == "GOLD"
-            ? goldData.totalPrice
-            : silverData.totalPrice,
+            ? liveGoldPrice
+            : liveSilverPrice,
         fromApp: false,
         couponCode: null,
         product_quantity: totalCoins,

@@ -5,13 +5,16 @@ import { decrementTimer, resetTimer } from "@/redux/actionTypes";
 import { metalPrice } from "@/api/DashboardServices";
 import { setGoldData, setSilverData } from "@/redux/metalSlice";
 import { setMetalPrice } from "@/redux/shopSlice";
-import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
+import { setLiveGoldPrice, setLiveGoldPurchasePrice, setLiveSilverPrice, setLiveSilverPurchasePrice } from "@/redux/cartSlice";
+import { selectUser } from "@/redux/userDetailsSlice";
 
 const Timer: React.FC = () => {
   const time = useSelector((state: RootState) => state.time.time);
   const dispatch = useDispatch();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const metalType = useSelector((state: RootState) => state.shop.metalType);
+  const user = useSelector(selectUser);
+  const userType = user.data.type;
 
   const fetchDataOfMetals = useCallback(async () => {
     try {
@@ -19,8 +22,10 @@ const Timer: React.FC = () => {
       const metalPriceOfGoldSilver = JSON.parse(response);
       dispatch(setGoldData(metalPriceOfGoldSilver.data.gold[0]));
       dispatch(setSilverData(metalPriceOfGoldSilver.data.silver[0]));
-      dispatch(setLiveGoldPrice(metalPriceOfGoldSilver.data.gold[0].totalPrice))
-      dispatch(setLiveSilverPrice(metalPriceOfGoldSilver.data.silver[0].totalPrice))
+      dispatch(setLiveGoldPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].totalPrice : metalPriceOfGoldSilver.data.gold[0].c_totalPrice));
+      dispatch(setLiveGoldPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].salePrice : metalPriceOfGoldSilver.data.gold[0].c_salePrice));
+      dispatch(setLiveSilverPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].totalPrice: metalPriceOfGoldSilver.data.silver[0].c_totalPrice));
+      dispatch(setLiveSilverPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].salePrice : metalPriceOfGoldSilver.data.silver[0].c_salePrice));
       dispatch(setMetalPrice(metalPriceOfGoldSilver.data.gold[0].totalPrice));
     } catch (error) {
       // alert(error);

@@ -41,6 +41,8 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const [openCartSidebar, setOpenCartSidebar] = useState<boolean>(false);
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
+  const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
+  const liveSilverPrice = useSelector((state: RootState) => state.cart.liveSilverPrice);
 
   useEffect(() => {
     const productCount = getProductCountById(coinsInCart, productId);
@@ -112,10 +114,10 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     const { weight, iteamtype } = productsDetailById! || {};
     return ParseFloat(
       (weight * quantity) *
-      (iteamtype === "GOLD" ? goldData.totalPrice : silverData.totalPrice),
+      (iteamtype === "GOLD" ? liveGoldPrice : liveSilverPrice),
       2
     );
-  }, [productsDetailById, quantity, goldData.totalPrice, silverData.totalPrice]);
+  }, [productsDetailById, quantity, liveGoldPrice, liveSilverPrice]);
 
 
   if (!productsDetailById) {

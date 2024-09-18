@@ -21,7 +21,9 @@ const initialState: CartState = {
     goldGstForCart: 0,
     silverGstForCart: 0,
     liveGoldPrice: 0,
+    liveGoldPurchasePrice: 0,
     liveSilverPrice: 0,
+    liveSilverPurchasePrice: 0,
     finalAmount: 0,
     totalMakingChargesGold: 0,
     totalMakingChargesSilver: 0,
@@ -136,6 +138,12 @@ const cartSlice = createSlice({
         setLiveGoldPrice: (state, action: PayloadAction<number>) => {
             state.liveGoldPrice = action.payload;
         },
+        setLiveGoldPurchasePrice: (state, action: PayloadAction<number>) => {
+            state.liveGoldPurchasePrice = action.payload;
+        },
+        setLiveSilverPurchasePrice: (state, action: PayloadAction<number>) => {
+            state.liveSilverPurchasePrice = action.payload;
+        },
         setTotalMakingChargesGold: (state, action: PayloadAction<number>) => {
             state.totalMakingChargesGold = action.payload;
         },
@@ -186,7 +194,9 @@ export const {
     calculatePurchasedGoldWeight,
     calculatePurchasedSilverWeight,
     setLiveGoldPrice,
+    setLiveGoldPurchasePrice,
     setLiveSilverPrice,
+    setLiveSilverPurchasePrice,
     setFinalAmount,
     calculateFinalAmount,
     setTotalMakingChargesGold,

@@ -65,6 +65,7 @@ interface CartItem {
 const Cart = () => {
   useCartTotals();
   const user = useSelector(selectUser);
+  const userType = user.data.type;
   const { _id } = user.data;
   const { addToCart, isLoading, error, isSuccess } = useAddToCart(_id);
   const token = localStorage.getItem("token");
@@ -145,8 +146,10 @@ const Cart = () => {
   useEffect(() => {
     dispatch(setGoldVaultBalance(goldVaultBalance));
     dispatch(setSilverVaultBalance(silverVaultBalance));
-    dispatch(setLiveGoldPrice(goldData.totalPrice));
-    dispatch(setLiveSilverPrice(silverData.totalPrice));
+    // dispatch(setLiveGoldPrice(goldData.totalPrice));
+    // dispatch(setLiveSilverPrice(silverData.totalPrice));
+    dispatch(setLiveGoldPrice(userType !== "corporate" ? goldData.totalPrice : goldData.c_totalPrice));
+    dispatch(setLiveSilverPrice(userType !== "corporate" ? silverData.totalPrice : silverData.c_totalPrice));
     dispatch(calculatePurchasedGoldWeight());
     dispatch(calculatePurchasedSilverWeight());
   }, [cart.products, liveGoldPrice, liveSilverPrice, isGoldVault, isSilverVault,]);
