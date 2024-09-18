@@ -37,7 +37,7 @@ const initialState: UserState = {
         tradeName: '',
         mobile_number: '',
         name: '',
-        // profile_image: '',
+        profile_image: '',
         referralCode: '',
         referredBy: null,
         type: '',

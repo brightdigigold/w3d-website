@@ -206,7 +206,7 @@ export interface UserState {
     legalName: string;
     mobile_number: string;
     name: string;
-    // profile_image: string;
+    profile_image: string;
     referralCode: string;
     referredBy: string | null;
     tradeName: string;
