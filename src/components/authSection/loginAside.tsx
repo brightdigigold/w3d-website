@@ -19,6 +19,8 @@ interface LoginAsideProps {
 }
 
 const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement>(null);
   const userType = useSelector((state: RootState) => state.auth.UserType);
   const purpose = useSelector((state: RootState) => state.auth.purpose);
@@ -26,8 +28,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
   const [corporateLoginOrSignUp, setCorporateLoginOrSignUp] = useState<"corporateLogin" | "corporateSignUp" | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const errString = "You already have account on this number as a corporate please login!"
 
   console.log("purpose", purpose);
 
@@ -61,7 +62,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
   };
 
   const initialValues = {
-    mobile_number: "",
+    mobile_number: "8292966990",
     gstNumber: "07AADCD4946L1ZC",
     termsAndConditions: false,
     type: "user",
@@ -104,7 +105,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
       mode: userType === 'user' ? 'login' : corporateLoginOrSignUp === "corporateLogin" ? "login" : "signup",
     };
 
-    const apiEndPoint =  userType === 'user' ? "auth/send/otp" : corporateLoginOrSignUp !== 'corporateSignUp' ? "auth/send/otp" : "auth/gst/send/otp"
+    const apiEndPoint = userType === 'user' ? "auth/send/otp" : corporateLoginOrSignUp !== 'corporateSignUp' ? "auth/send/otp" : "auth/gst/send/otp"
     try {
       setSubmitting(true);
       // Notiflix.Loading.circle();
@@ -170,13 +171,14 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                 <img src="/secure.png" className="ml-1 inline-block h-5" />
               </p>
             </div>
-            {purpose === 'login' ? <> <h1 className="text-3xl sm:text-2xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
+            {purpose === 'login' && <> <h1 className="text-3xl sm:text-2xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
               Login/Sign Up
             </h1>
               <h3 className="text-xl mb-4 text-white px-4 text-center md:text-left">
                 Login to start
                 <span className="text-yellow-400 ml-1">SAVINGS</span>
-              </h3></> : null}
+              </h3></>}
+
             <div className="mb-4 pt-4">
               <Formik
                 initialValues={initialValues}
@@ -410,6 +412,8 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                       </div>
                     )}
 
+
+
                     <div className="bottom-2 absolute w-full px-4">
                       <div className="items-center flex">
                         {purpose === "login" ? (
@@ -443,18 +447,44 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                           {errors.termsAndConditions}
                         </div>
                       ) : null}
-                      <CustomButton
+
+
+                      {error !== errString ? (<CustomButton
                         btnType="submit"
                         title="SEND OTP"
                         loading={submitting}
                         containerStyles="bg-themeBlue px-2 py-2 rounded-full w-full mt-2 mb-2 extrabold"
                         isDisabled={submitting}
                         handleClick={() => { handleSubmit() }}
-                      />
+                      />) : (
+                        <div className="text-white semiBold text-center mx-auto my-auto">
+                          <p>Do You Want to continue login as Corporate</p>
+                          <CustomButton
+                            title="Continue Login"
+                            btnType="button"
+                            handleClick={() => {
+                              dispatch(setPurpose('login'));
+                              setFieldValue("type", "corporate");
+                              dispatch(SetUserType("corporate"));
+                              dispatch(setAuthenticationMode("corporateLogin"));
+                              setCorporateLoginOrSignUp('corporateLogin');
+                              setFieldValue("termsAndConditions", false);
+                              setFieldError('termsAndConditions', '');
+                              setFieldError('gstNumber', '');
+                              setFieldError('mobile_number', '');
+                              setFieldValue("mobile_number", '');
+                              setTouched({ ...touched, type: false, termsAndConditions: false, gstNumber: false, mobile_number: false });
+                              setError(null);
+                            }}
+                            containerStyles={'bg-themeBlue px-2 py-2 rounded-full w-full mt-2 mb-2 extrabold text-black bold'}
+                          />
+                        </div>
+                      )}
                     </div>
                   </form>
                 )}
               </Formik>
+
             </div>
           </div>
         </div>
