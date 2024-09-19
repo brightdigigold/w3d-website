@@ -18,7 +18,7 @@ export const metalPrice = async () => {
     }
     const data = await response.json();
     const decryptedData = await funcForDecrypt(data.payload);
-    console.log("decryptedData", JSON.parse(decryptedData))
+    // console.log("decryptedData", JSON.parse(decryptedData))
     return decryptedData;
   } catch (error: any | Error) {
     // alert(error);
@@ -98,7 +98,7 @@ export const fetchAllUPI = async () => {
     return { UpiList, BankList, decryptedDataList };
   } catch (error) {
     console.error(error);
-    return { UpiList: [], BankList: [], decryptedDataList: [] }; // Return empty arrays or handle error case accordingly.
+    return { UpiList: [], BankList: [], decryptedDataList: [] }; 
   }
 };
 
@@ -121,7 +121,7 @@ export const apiForWallet = async () => {
     const userWallet = JSON.parse(decryptedData).data;
     return userWallet;
   } catch (error) {
-    alert(error); // You might want to handle or log the error accordingly
+    alert(error); 
   }
 };
 
