@@ -156,7 +156,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
         style={{ zIndex: 1000 }}
       >
         <div className="grid h-screen  w-full">
-          <div className="w-full ">
+          <div className="w-full">
             <button
               onClick={onClose}
               className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer "
@@ -171,13 +171,15 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                 <img src="/secure.png" className="ml-1 inline-block h-5" />
               </p>
             </div>
-            {purpose === 'login' && <> <h1 className="text-3xl sm:text-2xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
-              Login/Sign Up
-            </h1>
+            {purpose === 'login' && <>
+              <h1 className="text-3xl sm:text-2xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
+                Login/Sign Up
+              </h1>
               <h3 className="text-xl mb-4 text-white px-4 text-center md:text-left">
                 Login to start
                 <span className="text-yellow-400 ml-1">SAVINGS</span>
-              </h3></>}
+              </h3>
+            </>}
 
             <div className="mb-4 pt-4">
               <Formik
