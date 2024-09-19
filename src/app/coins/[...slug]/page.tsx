@@ -131,7 +131,6 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
         <LoginAside
           isOpen={openLoginAside}
           onClose={() => setOpenLoginAside(false)}
-          purpose="login"
         />
       )}
 

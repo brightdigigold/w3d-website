@@ -61,7 +61,7 @@ const Coins = () => {
 
   return (
     <div className="">
-      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login" />}
+      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} />}
       {otpModal && <OtpModal />}
 
       <div className="container mx-auto">

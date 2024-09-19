@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import {
   setIsLoggedIn,
   setIsLoggedInForTempleReceipt,
+  setPurpose,
   setShowOTPmodal,
   setShowProfileForm,
   setShowProfileFormCorporate,
@@ -66,6 +67,7 @@ const Navbar = () => {
     if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
     } else {
+      dispatch(setPurpose('login'))
       setOpenLoginAside(!openLoginAside);
     }
   };
@@ -90,7 +92,6 @@ const Navbar = () => {
             <LoginAside
               isOpen={openLoginAside}
               onClose={() => setOpenLoginAside(false)}
-              purpose="login"
             />
           )}
           {openSidebarAside && (

@@ -45,7 +45,6 @@ const Products = () => {
             <LoginAside
               isOpen={openLoginAside}
               onClose={() => setOpenLoginAside(false)}
-              purpose="login"
             />
           )}
 

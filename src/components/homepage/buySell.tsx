@@ -478,7 +478,6 @@ const BuySell = () => {
           <LoginAside
             isOpen={openLoginAside}
             onClose={() => setOpenLoginAside(false)}
-            purpose="login"
           />
         )}
         {OpenUpiModal && (

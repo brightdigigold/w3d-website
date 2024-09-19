@@ -94,7 +94,6 @@ export default function Marketing() {
           <LoginAside
             isOpen={openLoginAside}
             onClose={() => setOpenLoginAside(false)}
-            purpose="login"
           />
         )}
         <div className="mx-auto backSlider px-4 sm:px-6 lg:px-16 pb-16">

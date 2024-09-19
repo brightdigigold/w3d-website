@@ -10,7 +10,6 @@ const page = () => {
       <LoginAside
         isOpen={openLoginAside}
         onClose={() => setOpenLoginAside(false)}
-        purpose=''
       />
     )}</div>
   )

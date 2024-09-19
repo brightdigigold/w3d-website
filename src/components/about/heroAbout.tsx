@@ -24,7 +24,7 @@ const HeroAbout = () => {
   return (
     <div className="bg-theme pt-24 sm:pt-36 py-10 relative" >
       {otpModal && <OtpModal />}
-      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} purpose="login" />}
+      {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} />}
 
       <div className="mx-auto px-4 sm:px-6 lg:px-16">
         {/* <Image

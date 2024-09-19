@@ -16,18 +16,20 @@ import { RootState } from "@/redux/store";
 interface LoginAsideProps {
   isOpen: boolean;
   onClose: () => any;
-  purpose: string;
 }
 
-const LoginAside = ({ isOpen, onClose, purpose }: LoginAsideProps) => {
+const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const userType = useSelector((state: RootState) => state.auth.UserType);
+  const purpose = useSelector((state: RootState) => state.auth.purpose);
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const [corporateLoginOrSignUp, setCorporateLoginOrSignUp] = useState<"corporateLogin" | "corporateSignUp" | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  console.log("purpose", purpose);
 
   useEffect(() => {
     dispatch(setAuthenticationMode('personalLogin'));

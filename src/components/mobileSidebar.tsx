@@ -80,7 +80,6 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
         <LoginAside
           isOpen={openLoginAside}
           onClose={() => setOpenLoginAside(false)}
-          purpose="receipt"
         />
       )}
       <div className="grid h-screen w-full">

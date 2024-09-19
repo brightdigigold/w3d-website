@@ -7,10 +7,11 @@ import {
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginAside from "./authSection/loginAside";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { setPurpose } from "@/redux/authSlice";
 
 const Footer = () => {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -18,6 +19,7 @@ const Footer = () => {
   const [activeLink, setActiveLink] = useState('home');
   const [openLoginAside, setOpenLoginAside] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleLinkClick = (linkName: string) => {
     setActiveLink(linkName);
@@ -25,6 +27,7 @@ const Footer = () => {
 
   const handleLoginClick = () => {
     if (!isloggedIn && !isLoggedInForTempleReceipt) {
+      dispatch(setPurpose('receipt'))
       setOpenLoginAside(!openLoginAside);
     } else {
       router.push('/donation-receipt');
@@ -37,7 +40,6 @@ const Footer = () => {
         <LoginAside
           isOpen={openLoginAside}
           onClose={() => setOpenLoginAside(false)}
-          purpose="receipt"
         />
       )}
       {isloggedIn ? (
