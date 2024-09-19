@@ -220,9 +220,6 @@ const BuySell = () => {
     dispatch(setLiveSilverPrice(userType !== "corporate" ? silverData.totalPrice : silverData.c_totalPrice));
   }, []);
 
-  console.log("silverPrice", userType !== "corporate" ? silverData.totalPrice : silverData.c_totalPrice)
-  // console.log("livegoldprice", liveGoldPrice)
-
   const toggleMetal = () => {
     setIsGold(!isgold);
     dispatch(setMetalType(!isgold ? "gold" : "silver"));
