@@ -1,17 +1,20 @@
 import { setAuthenticationMode, setCorporateBusinessDetails, setIsLoggedIn, setIsLoggedInForTempleReceipt, setShowOTPmodal, SetUserType } from '@/redux/authSlice';
 import { clearCoupon } from '@/redux/couponSlice';
+import { RootState } from '@/redux/store';
 import { resetUserDetails } from '@/redux/userDetailsSlice';
 import { resetVault } from '@/redux/vaultSlice';
 import mixpanel from 'mixpanel-browser';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes in milliseconds
-
 
 const InactivityHandler = () => {
     const router = useRouter()
     const dispatch = useDispatch();
+    const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
+
     const logoutProfile = () => {
         localStorage.removeItem("mobile_number");
         localStorage.removeItem("token");
@@ -39,7 +42,9 @@ const InactivityHandler = () => {
 
     // Function to log out the user
     const logoutUser = () => {
-        logoutProfile();
+        if (isloggedIn) {
+            logoutProfile();
+        } 
     };
 
     // Setup event listeners for user activity
