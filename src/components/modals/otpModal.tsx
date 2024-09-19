@@ -38,7 +38,7 @@ export default function OtpModal() {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const dispatch: AppDispatch = useDispatch();
-  const [resendTimer, setResendTimer] = useState(60);
+  const [resendTimer, setResendTimer] = useState(10);
   const [resendDisabled, setResendDisabled] = useState(false);
   const mobile_number = localStorage.getItem("mobile_number")?.toString();
 
@@ -284,7 +284,7 @@ export default function OtpModal() {
                     {otpMsg}
                   </p>
                   <div className="flex flex-col justify-center">
-                    <div className="mt-3 items-center text-center sm:ml-4 sm:mt-0 sm:text-left">
+                    <div className="mt-3 items-center  sm:ml-4 sm:mt-0 sm:text-left">
                       <Dialog.Title
                         as="h3"
                         className="text-base bold leading-6 text-white ml-2"
@@ -325,7 +325,7 @@ export default function OtpModal() {
                         )}
                       </div>
                     </div>
-                    <div className="m-2">
+                    <div className="sm:m-2 mx-1 my-1">
                       {resendTimer > 0 && (
                         <span className=" text-yellow-400 sm:ml-5">
                           Resend OTP in{" "}
@@ -342,7 +342,7 @@ export default function OtpModal() {
                           btnType="submit"
                           title="Resend OTP"
                           noPadding={true}
-                          containerStyles={`text-yellow-400 ${resendDisabled ? "cursor-not-allowed" : ""
+                          containerStyles={`text-yellow-400 underline ${resendDisabled ? "cursor-not-allowed" : ""
                             }`}
                           handleClick={() => resendOtp()}
                           isDisabled={resendDisabled}
@@ -366,7 +366,7 @@ export default function OtpModal() {
                 <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
-                    className="mt-3 inline-flex absolute top-5 right-5 justify-center rounded-full bg-transparent p-2 text-sm bold text-white shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
+                    className="mt-3 inline-flex absolute  top-2 sm:top-4 right-4 justify-center rounded-full bg-transparent p-2 text-sm bold text-white shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
                     onClick={() => {
                       setOpen(false);
                       dispatch(SetUserType('user'));

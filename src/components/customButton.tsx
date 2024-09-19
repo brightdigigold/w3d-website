@@ -12,7 +12,7 @@ const CustomButton = ({
   Icon,
   isDisabled,
   loading,
-  noPadding = false,
+  noPadding,
 }: customButtonProps) => {
   return (
     <button
