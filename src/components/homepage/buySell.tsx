@@ -56,7 +56,8 @@ const BuySell = () => {
   const router = useRouter()
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const userType = user.data.type;
+  // const userType = user.data.type;
+  const userType = useSelector((state: RootState) => state.auth.UserType);
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
@@ -210,15 +211,16 @@ const BuySell = () => {
   };
 
   useEffect(() => {
+    // console.log("userType", userType)
     dispatch(setMetalType("gold"));
     dispatch(setEnteredAmount(500));
     dispatch(setCouponError(""));
     dispatch(setPurchaseType("buy"));
     dispatch(setTransactionType("rupees"));
     dispatch(clearCoupon());
-    dispatch(setLiveGoldPrice(userType !== "corporate" ? goldData.totalPrice : goldData.c_totalPrice));
-    dispatch(setLiveSilverPrice(userType !== "corporate" ? silverData.totalPrice : silverData.c_totalPrice));
-  }, []);
+    dispatch(setLiveGoldPrice(userType == "corporate" ? goldData.c_totalPrice : goldData.totalPrice));
+    dispatch(setLiveSilverPrice(userType == "corporate" ? silverData.c_totalPrice : silverData.totalPrice));
+  }, [isloggedIn]);
 
   const toggleMetal = () => {
     setIsGold(!isgold);
@@ -633,7 +635,7 @@ const BuySell = () => {
                     />
                   )}
                 </div>
-                <Timer />
+                {/* <Timer /> */}
               </div>
             </div>
             <ShowVaultBuySell />
@@ -728,14 +730,14 @@ const BuySell = () => {
               )}
 
               {userType !== "corporate" && purchaseType === 'buy' && metalType === 'gold' && totalAmount >= 10 && (
-              <div className="flex justify-center items-center relative">
-                <span className="text-themeBlueLight mt-4 text-center rotating-text relative">
-                  <span className="silver-shine poppins-regular text-sm">
-                    Congratulations you will get {ParseFloat(metalQuantity, 4)}gm
+                <div className="flex justify-center items-center relative">
+                  <span className="text-themeBlueLight mt-4 text-center rotating-text relative">
+                    <span className="silver-shine poppins-regular text-sm">
+                      Congratulations you will get {ParseFloat(metalQuantity, 4)}gm
+                    </span>
+                    <span className="text-white poppins-semibold"> Silver</span> for free.
                   </span>
-                  <span className="text-white poppins-semibold"> Silver</span> for free.
-                </span>
-              </div>
+                </div>
               )}
 
               <div className="text-white text-md mt-4">

@@ -148,7 +148,7 @@ const Cart = () => {
     dispatch(setSilverVaultBalance(silverVaultBalance));
     // dispatch(setLiveGoldPrice(goldData.totalPrice));
     // dispatch(setLiveSilverPrice(silverData.totalPrice));
-    dispatch(setLiveGoldPrice(userType !== "corporate" ? goldData.totalPrice : goldData.c_totalPrice));
+    // dispatch(setLiveGoldPrice(userType !== "corporate" ? goldData.totalPrice : goldData.c_totalPrice));
     dispatch(setLiveSilverPrice(userType !== "corporate" ? silverData.totalPrice : silverData.c_totalPrice));
     dispatch(calculatePurchasedGoldWeight());
     dispatch(calculatePurchasedSilverWeight());

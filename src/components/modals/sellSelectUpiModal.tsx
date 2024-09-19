@@ -192,7 +192,7 @@ export default function SelectUpiModalForPayout({
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg coins_backgroun px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <p>
-                  <Timer />
+                  {/* <Timer /> */}
                 </p>
                 <div className="">
                   <div>
