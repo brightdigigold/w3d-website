@@ -280,9 +280,9 @@ export default function OtpModal() {
                   <div>
                     <img src="/LogoOtp.png" className="h-16 mb-4 mx-auto" />
                   </div>
-                  <p className="text-green-600 sm:text-sm text-xs text-center sm:mb-3">
+                  {authenticationMode === "corporateSignUp" && (<p className="text-green-600 sm:text-sm text-xs text-center sm:mb-3">
                     {otpMsg}
-                  </p>
+                  </p>)}
                   <div className="flex flex-col justify-center">
                     <div className="mt-3 items-center  sm:ml-4 sm:mt-0 sm:text-left">
                       <Dialog.Title
