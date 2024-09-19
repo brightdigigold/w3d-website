@@ -6,17 +6,12 @@ import mixpanel from 'mixpanel-browser';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-// import router from "next/navigation"
-// import { useNavigate } from 'react-router-dom'; // Assuming you're using react-router for navigation
-
 const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes in milliseconds
-
 
 
 const InactivityHandler = () => {
     const router = useRouter()
     const dispatch = useDispatch();
-    // const navigate = useNavigate(); // Hook to navigate to login page
     const logoutProfile = () => {
         localStorage.removeItem("mobile_number");
         localStorage.removeItem("token");
@@ -45,9 +40,6 @@ const InactivityHandler = () => {
     // Function to log out the user
     const logoutUser = () => {
         logoutProfile();
-        // localStorage.removeItem('token'); // Remove the token from local storage
-        // alert('You have been logged out due to inactivity.');
-        // router.push('/'); // Redirect to the login page
     };
 
     // Setup event listeners for user activity
