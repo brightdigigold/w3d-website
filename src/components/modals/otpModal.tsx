@@ -85,10 +85,8 @@ export default function OtpModal() {
   };
 
   const handleSubmit = async () => {
-    // const mobile_number = localStorage.getItem("mobile_number");
     const apiEndPoint = authenticationMode === "corporateSignUp" ? "auth/gst/verify/otp" : "auth/verify/otp";
     const otpLength = authenticationMode === "corporateSignUp" ? 4 : 6;
-    // console.log("Details On otp page on handle submit", { corporateBusinessDetails, authenticationMode, userType });
 
     if (otp.length < otpLength) {
       setOtpError("Please fill the OTP");
@@ -111,7 +109,6 @@ export default function OtpModal() {
       }
 
       const data = authenticationMode === "corporateSignUp" ? corporateData : userData;
-      // console.log("data: ", data)
 
       try {
         setSubmitting(true);
@@ -133,12 +130,9 @@ export default function OtpModal() {
         );
         const decryptedData = await funcForDecrypt(response.data.payload);
         const result = JSON.parse(decryptedData);
-        // console.log("decrypted data from otp modal", result);
         if (result.status) {
           authenticationMode != "corporateSignUp" ? localStorage.setItem("token", result.data.otpVarifiedToken) : undefined;
-          // console.log("Authentication token", localStorage.getItem("token"))
           if (authenticationMode === "corporateSignUp") {
-            console.log("Authentication")
             dispatch(setShowProfileFormCorporate(true));
             mixpanel.identify(mobile_number);
             mixpanel.track('New Corporate SignUp(web)');
