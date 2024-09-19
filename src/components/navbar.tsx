@@ -54,13 +54,13 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("isLogIn");
     mixpanel.reset();
+    dispatch(setIsLoggedIn(false));
+    dispatch(resetUserDetails());
     dispatch(setShowOTPmodal(false));
     dispatch(setIsLoggedInForTempleReceipt(false));
-    dispatch(setIsLoggedIn(false));
     dispatch(SetUserType(''));
     dispatch(setCorporateBusinessDetails(null));
     dispatch(setAuthenticationMode(null));
-    dispatch(resetUserDetails());
     dispatch(resetVault());
     dispatch(clearCoupon());
     router.push("/");

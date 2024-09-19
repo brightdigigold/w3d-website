@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
           <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
             <div className={`${poppins.className} `}>
               <Navbar />
-              {/* <InactivityHandler /> */}
+              <InactivityHandler />
               <main className=" ">
                 <div className="">
                   {children}

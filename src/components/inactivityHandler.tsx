@@ -1,15 +1,40 @@
+import { setAuthenticationMode, setCorporateBusinessDetails, setIsLoggedIn, setIsLoggedInForTempleReceipt, setShowOTPmodal, SetUserType } from '@/redux/authSlice';
+import { clearCoupon } from '@/redux/couponSlice';
+import { resetUserDetails } from '@/redux/userDetailsSlice';
+import { resetVault } from '@/redux/vaultSlice';
+import mixpanel from 'mixpanel-browser';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 // import router from "next/navigation"
 // import { useNavigate } from 'react-router-dom'; // Assuming you're using react-router for navigation
 
-const INACTIVITY_LIMIT = 30 * 1000
-// 30 * 60 * 1000; // 30 minutes in milliseconds
+const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes in milliseconds
+
+
 
 const InactivityHandler = () => {
     const router = useRouter()
+    const dispatch = useDispatch();
     // const navigate = useNavigate(); // Hook to navigate to login page
-    let inactivityTimer;
+    const logoutProfile = () => {
+        localStorage.removeItem("mobile_number");
+        localStorage.removeItem("token");
+        localStorage.removeItem("isLogIn");
+        mixpanel.reset();
+        dispatch(setIsLoggedIn(false));
+        dispatch(resetUserDetails());
+        dispatch(setShowOTPmodal(false));
+        dispatch(setIsLoggedInForTempleReceipt(false));
+        dispatch(SetUserType(''));
+        dispatch(setCorporateBusinessDetails(null));
+        dispatch(setAuthenticationMode(null));
+        dispatch(resetVault());
+        dispatch(clearCoupon());
+        router.push("/");
+    };
+
+    let inactivityTimer: any;
 
     // Function to reset the inactivity timer
     const resetInactivityTimer = useCallback(() => {
@@ -19,9 +44,10 @@ const InactivityHandler = () => {
 
     // Function to log out the user
     const logoutUser = () => {
-        localStorage.removeItem('token'); // Remove the token from local storage
-        alert('You have been logged out due to inactivity.');
-        router.push('/'); // Redirect to the login page
+        logoutProfile();
+        // localStorage.removeItem('token'); // Remove the token from local storage
+        // alert('You have been logged out due to inactivity.');
+        // router.push('/'); // Redirect to the login page
     };
 
     // Setup event listeners for user activity
