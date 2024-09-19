@@ -75,11 +75,9 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
   const handleLoginClick = () => {
     if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
-      // onClose();
     } else {
       dispatch(setPurpose('receipt'))
       setOpenLoginAside(!openLoginAside);
-      // onClose();
     }
   };
 
