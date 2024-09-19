@@ -421,7 +421,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                         {purpose === "login" ? (
                           <>
                             <input
-                              className="cursor-pointer placeholder:text-gray-500 w-4 h-5 text-theme coins_background rounded-lg focus:outline-none"
+                              className="cursor-pointer placeholder:text-gray-500 w-5 h-5 mb-1 sm:mb-0 ml-2 sm:ml-l  text-theme coins_background rounded-lg focus:outline-none"
                               id="termsAndConditions"
                               type="checkbox"
                               name="termsAndConditions"
@@ -429,7 +429,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                               onChange={handleChange}
                               onBlur={handleBlur}
                             />
-                            <div className="ml-2 items-center text-white">
+                            <div className="mb-1 sm:mb-0 ml-2 sm:ml-l items-center text-white">
                               I agree to these
                               <span>
                                 <button
