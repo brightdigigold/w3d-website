@@ -10,12 +10,15 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import {
+  setAuthenticationMode,
+  setCorporateBusinessDetails,
   setIsLoggedIn,
   setIsLoggedInForTempleReceipt,
   setPurpose,
   setShowOTPmodal,
   setShowProfileForm,
   setShowProfileFormCorporate,
+  SetUserType,
 } from "@/redux/authSlice";
 import { resetUserDetails } from "@/redux/userDetailsSlice";
 import SidebarAside from "./mobileSidebar";
@@ -54,7 +57,9 @@ const Navbar = () => {
     dispatch(setShowOTPmodal(false));
     dispatch(setIsLoggedInForTempleReceipt(false));
     dispatch(setIsLoggedIn(false));
-    dispatch(setShowProfileForm(false));
+    dispatch(SetUserType(''));
+    dispatch(setCorporateBusinessDetails(null));
+    dispatch(setAuthenticationMode(null));
     dispatch(resetUserDetails());
     dispatch(resetVault());
     dispatch(clearCoupon());

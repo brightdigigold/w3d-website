@@ -30,8 +30,6 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
   const [error, setError] = useState<string | null>(null);
   const errString = "You already have account on this number as a corporate please login!"
 
-  console.log("purpose", purpose);
-
   useEffect(() => {
     dispatch(setAuthenticationMode('personalLogin'));
     const toggleBodyScroll = (shouldLock: boolean) => {
@@ -133,7 +131,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
         onClose();
       } else if (result.isError) {
         // Handle error case
-        console.log(result)
+        // console.log(result)
         setError(result?.errorMsg)
         // Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
       }

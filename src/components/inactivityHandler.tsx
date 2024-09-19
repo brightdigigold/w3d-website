@@ -3,7 +3,7 @@ import React, { useEffect, useCallback } from 'react';
 // import router from "next/navigation"
 // import { useNavigate } from 'react-router-dom'; // Assuming you're using react-router for navigation
 
-const INACTIVITY_LIMIT = 60 * 1000
+const INACTIVITY_LIMIT = 30 * 1000
 // 30 * 60 * 1000; // 30 minutes in milliseconds
 
 const InactivityHandler = () => {
