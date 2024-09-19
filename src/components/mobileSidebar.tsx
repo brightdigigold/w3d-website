@@ -8,6 +8,7 @@ import Image from "next/image";
 import {
   setIsLoggedIn,
   setIsLoggedInForTempleReceipt,
+  setPurpose,
   setShowOTPmodal,
   setShowProfileForm,
 } from "@/redux/authSlice";
@@ -60,26 +61,40 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
 
   const [openLoginAside, setOpenLoginAside] = useState(false);
 
+  // const handleLoginClick = () => {
+  //   if (isloggedIn) {
+  //     router.push('/donation-receipt');
+  //     onClose();
+  //   } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+  //     dispatch(setShowProfileForm(true));
+  //   } else {
+  //     setOpenLoginAside(!openLoginAside);
+  //   }
+  // };
+
   const handleLoginClick = () => {
-    if (isloggedIn) {
-      router.push('/donation-receipt');
-      onClose();
-    } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
+    if (isLoggedInForTempleReceipt && devotee_isNewUser) {
       dispatch(setShowProfileForm(true));
+      // onClose();
     } else {
+      dispatch(setPurpose('receipt'))
       setOpenLoginAside(!openLoginAside);
+      // onClose();
     }
   };
 
   return (
     <div
       ref={sidebarRef}
-      className={`fixed top-0 left-0 h-full w-2/3 loginGrad shadow-lg transform transition-transform ease-in-out duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'} z-[999]`}
+      className={`fixed top-0 left-0 h-full w-3/4 loginGrad shadow-lg transform transition-transform ease-in-out duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'} z-[999]`}
     >
       {openLoginAside && (
         <LoginAside
           isOpen={openLoginAside}
-          onClose={() => setOpenLoginAside(false)}
+          onClose={() => {
+          setOpenLoginAside(false)
+          onClose();
+          }}
         />
       )}
       <div className="grid h-screen w-full">
@@ -132,13 +147,13 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 </div>
               </Link>
             )}
-            <Link target="_blank" href="/term-and-conditions" prefetch={true}>
+            <Link href="/term-and-conditions" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
                 <Image src="/terms and conditionsmenu.png" alt="Terms of Uses" width={36} height={20} className="h-6 w-9" />
                 Terms of Uses
               </div>
             </Link>
-            <Link target="_blank" href="/privacy-policy" prefetch={true}>
+            <Link  href="/privacy-policy" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
                 <Image src="/Privacy Policymenu.png" alt="Privacy Policy" width={40} height={24} className="h-6 w-9" />
                 Privacy Policy
@@ -156,13 +171,13 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 About Us
               </div>
             </Link>
-            <Link target="_blank" href="/refund-and-cancellation" prefetch={true}>
+            <Link  href="/refund-and-cancellation" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
                 <Image src="/refundmenu.png" alt="Refund & Cancellation" width={20} height={20} className="h-6 w-9" />
                 Refund & Cancellation
               </div>
             </Link>
-            <Link target="_blank" href="/shipping-policy" prefetch={true}>
+            <Link  href="/shipping-policy" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
                 <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" alt="Shipping Policy" width={32} height={24} className="h-6 w-9" />
                 Shipping Policy
@@ -184,36 +199,36 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 Blogs
               </div>
             </Link>
-            <div className=" absolute bottom-3  flex justify-center items-center w-full space-x-4">
-              <Link target="_blank" href="https://www.facebook.com/brightdigigold">
+            <div className=" absolute bottom-3  flex justify-between items-center w-full space-x-4 px-6">
+              <Link  href="https://www.facebook.com/brightdigigold">
                 <img
                   src="/socail1.png"
                   alt="socail1"
                   className="h-5"
                 />
               </Link>
-              <Link target="_blank" href="https://www.instagram.com/brightdigigold/">
+              <Link href="https://www.instagram.com/brightdigigold/">
                 <img
                   src="/socail2.png"
                   alt="socail2"
                   className="h-5"
                 />
               </Link>
-              <Link target="_blank" href="https://www.linkedin.com/company/brightdigigold/mycompany/">
+              <Link href="https://www.linkedin.com/company/brightdigigold/mycompany/">
                 <img
                   src="/socail3.png"
                   alt="socail3"
                   className="h-5"
                 />
               </Link>
-              <Link target="_blank" href="https://twitter.com/BrightDiGiGold">
+              <Link href="https://twitter.com/BrightDiGiGold">
                 <img
                   src="/Twitter.png"
                   alt="socail3"
                   className="h-5"
                 />
               </Link>
-              <Link target="_blank" href="https://www.youtube.com/@brightdigigold">
+              <Link href="https://www.youtube.com/@brightdigigold">
                 <img
                   src="/socail5.png"
                   alt="youtube"
