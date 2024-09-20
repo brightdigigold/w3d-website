@@ -143,16 +143,18 @@ const Cart = () => {
     updateAddressList();
   }, []);
 
+  // console.log("silverData.totalPrice", userType === "corporate" ? silverData.c_totalPrice : silverData.totalPrice)
+
   useEffect(() => {
     dispatch(setGoldVaultBalance(goldVaultBalance));
     dispatch(setSilverVaultBalance(silverVaultBalance));
     // dispatch(setLiveGoldPrice(goldData.totalPrice));
     // dispatch(setLiveSilverPrice(silverData.totalPrice));
-    // dispatch(setLiveGoldPrice(userType !== "corporate" ? goldData.totalPrice : goldData.c_totalPrice));
-    dispatch(setLiveSilverPrice(userType !== "corporate" ? silverData.totalPrice : silverData.c_totalPrice));
+    // dispatch(setLiveGoldPrice(userType == "corporate" ? goldData.c_totalPrice : goldData.totalPrice ));
+    // dispatch(setLiveSilverPrice(userType === "corporate" ? silverData.c_totalPrice : silverData.totalPrice));
     dispatch(calculatePurchasedGoldWeight());
     dispatch(calculatePurchasedSilverWeight());
-  }, [cart.products, liveGoldPrice, liveSilverPrice, isGoldVault, isSilverVault,]);
+  }, [cart.products, liveGoldPrice, liveSilverPrice, isGoldVault, isSilverVault, goldData, silverData]);
 
   const closeConvertMetalHandler = () => {
     setOpenConvertMetalModal(false);
