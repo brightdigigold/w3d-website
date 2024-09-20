@@ -3,7 +3,6 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import Timer from "../globalTimer";
 import {
   AesDecrypt,
   funForAesEncrypt,
@@ -36,8 +35,6 @@ export default function SelectUpiModalForPayout({
     setUpiId(e.target.value);
     setErrorMessage("");
   };
-
-  console.log("selected upi id", upiId);
 
   const fetchBankAndUPIDetails = async () => {
     try {
@@ -126,7 +123,6 @@ export default function SelectUpiModalForPayout({
           closeModal();
           dispatch(fetchWalletData() as any);
         }
-        // setPreviewData(JSON.parse(decryptedData).data);
       })
       .catch(async (errInBuyReq) => {
         const decryptedData = await funcForDecrypt(
