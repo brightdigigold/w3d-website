@@ -38,7 +38,7 @@ export default function OtpModal() {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const dispatch: AppDispatch = useDispatch();
-  const [resendTimer, setResendTimer] = useState(10);
+  const [resendTimer, setResendTimer] = useState(60);
   const [resendDisabled, setResendDisabled] = useState(false);
   const mobile_number = localStorage.getItem("mobile_number")?.toString();
 
