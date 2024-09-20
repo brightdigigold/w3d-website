@@ -24,6 +24,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   displayMetalType,
 }: ProgressBarProps) => {
   const time = useSelector((state: RootState) => state.time.time);
+  const userType = useSelector((state: RootState) => state.auth.UserType);
   const metalPricePerGram = useSelector((state: RootState) => state.shop.metalPrice);
   const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
   const liveGoldPurchasePrice = useSelector((state: RootState) => state.cart.liveGoldPurchasePrice);
@@ -34,8 +35,6 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   const dispatch = useDispatch();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const memoizedDispatch = useCallback(dispatch, []);
-  const user = useSelector(selectUser);
-  const userType = user.data.type;
 
   const calculateProgressBarWidth = useCallback(() => {
     const totalSeconds = 300;

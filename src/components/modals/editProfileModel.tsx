@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/store";
 import { fetchUserDetails, selectUser } from "@/redux/userDetailsSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,11 +13,11 @@ import ProfileInput from "@/utils/profileInput";
 import CustomButton from "../customButton";
 
 const EditProfileModel = ({ setOpenEditProfileModel }: any) => {
+  const userType = useSelector((state: RootState) => state.auth.UserType);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch: AppDispatch = useDispatch();
   const [open, setOpen] = useState(true);
   const user = useSelector(selectUser);
-  const userType = user.data.type;
-  const dispatch: AppDispatch = useDispatch();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const cancelButtonRef = useRef(null);
 
   const handleClose = () => {

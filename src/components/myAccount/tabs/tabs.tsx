@@ -12,11 +12,12 @@ import {
   selectGoldVaultBalance,
   selectSilverVaultBalance,
 } from "@/redux/vaultSlice";
+import { RootState } from "@/redux/store";
 
 const MyAccountTabs = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const user = useSelector(selectUser);
-  const userType = user.data.type;
+  const userType = useSelector((state: RootState) => state.auth.UserType);
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
 

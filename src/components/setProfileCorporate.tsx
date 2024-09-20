@@ -39,11 +39,11 @@ const schema = Yup.object().shape({
 const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
     const modalRef = useRef<HTMLDivElement>(null);
+    const userType = useSelector((state: RootState) => state.auth.UserType);
     const showProfileFormCorporate = useSelector((state: RootState) => state.auth.showProfileFormCorporate);
     const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
-    const userType = useSelector((state: RootState) => state.auth.UserType);
-    const [submitting, setSubmitting] = useState<boolean>(false);
     const [showCorporateOTPModal, setShowCorporateOTPModal] = useState<boolean>(false);
+    const [submitting, setSubmitting] = useState<boolean>(false);
     const [OTPMsg, setOTPMsg] = useState<string | null>(null);
     const [otpDetails, setOtpDetails] = useState<any>(null);
 

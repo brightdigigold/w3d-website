@@ -56,7 +56,6 @@ const BuySell = () => {
   const router = useRouter()
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  // const userType = user.data.type;
   const userType = useSelector((state: RootState) => state.auth.UserType);
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
@@ -635,7 +634,7 @@ const BuySell = () => {
                     />
                   )}
                 </div>
-                {/* <Timer /> */}
+                 <Timer />
               </div>
             </div>
             <ShowVaultBuySell />

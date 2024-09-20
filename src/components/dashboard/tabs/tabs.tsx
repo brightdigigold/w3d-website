@@ -4,7 +4,7 @@ import OrdersTabs from "../ordersTab/tabs/tabs";
 import GiftTab from "../giftTab/tabs";
 import { classNames } from "@/components";
 import { useSelector } from "react-redux";
-import { selectUser } from "@/redux/userDetailsSlice";
+import { RootState } from "@/redux/store";
 
 const data = [
   { id: 1, name: "Orders" },
@@ -12,8 +12,7 @@ const data = [
 ];
 
 const DashboardTopTabs = () => {
-  const user = useSelector(selectUser);
-  const userType = user.data.type;
+  const userType = useSelector((state: RootState) => state.auth.UserType);
 
   return (
     <div className="w-full pt-32 pb-28 xl:pb-8">

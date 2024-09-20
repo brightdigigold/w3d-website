@@ -10,18 +10,17 @@ import {
 import React, { memo } from "react";
 import { useSelector } from "react-redux";
 import ButtonLoader from "@/components/buttonLoader";
-import { selectUser } from "@/redux/userDetailsSlice";
 import TempleUtrCheck from "./templeUtrCheck";
+import { RootState } from "@/redux/store";
 
 const Vault = () => {
+  const userType = useSelector((state: RootState) => state.auth.UserType);
   const goldVaultBalance = useSelector(selectGoldVaultBalance);
   const giftedGoldWeight = useSelector(selectGiftedGoldWeight);
   const silverVaultBalance = useSelector(selectSilverVaultBalance);
   const giftedSilverWeight = useSelector(selectGiftedSilverWeight);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-  const user = useSelector(selectUser);
-  const userType = user.data.type
 
   return (
     <div className="w-full">

@@ -20,7 +20,7 @@ export default function Marketing() {
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
   const user = useSelector(selectUser);
-  const userType = user.data.type;
+  const userType = useSelector((state: RootState) => state.auth.UserType);
   const [openLoginAside, setOpenLoginAside] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();

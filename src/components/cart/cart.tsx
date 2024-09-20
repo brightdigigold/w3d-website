@@ -65,7 +65,7 @@ interface CartItem {
 const Cart = () => {
   useCartTotals();
   const user = useSelector(selectUser);
-  const userType = user.data.type;
+  const userType = useSelector((state: RootState) => state.auth.UserType);
   const { _id } = user.data;
   const { addToCart, isLoading, error, isSuccess } = useAddToCart(_id);
   const token = localStorage.getItem("token");

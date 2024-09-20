@@ -6,15 +6,13 @@ import { metalPrice } from "@/api/DashboardServices";
 import { setGoldData, setSilverData } from "@/redux/metalSlice";
 import { setMetalPrice } from "@/redux/shopSlice";
 import { setLiveGoldPrice, setLiveGoldPurchasePrice, setLiveSilverPrice, setLiveSilverPurchasePrice } from "@/redux/cartSlice";
-import { selectUser } from "@/redux/userDetailsSlice";
 
 const Timer: React.FC = () => {
   const time = useSelector((state: RootState) => state.time.time);
   const dispatch = useDispatch();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const metalType = useSelector((state: RootState) => state.shop.metalType);
-  const user = useSelector(selectUser);
-  const userType = user.data.type;
+  const userType = useSelector((state: RootState) => state.auth.UserType);
 
   const fetchDataOfMetals = useCallback(async () => {
     try {
