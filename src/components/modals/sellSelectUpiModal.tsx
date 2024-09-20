@@ -21,27 +21,10 @@ export default function SelectUpiModalForPayout({
   transactionId,
 }: any) {
   const dispatch = useDispatch();
-  const gst = useSelector((state: RootState) => state.shop.gst);
   const metalType = useSelector((state: RootState) => state.shop.metalType);
-  const metalPricePerGram = useSelector(
-    (state: RootState) => state.shop.metalPrice
-  );
-  const transactionType = useSelector(
-    (state: RootState) => state.shop.transactionType
-  );
-  const purchaseType = useSelector(
-    (state: RootState) => state.shop.purchaseType
-  );
-  const enteredAmount = useSelector(
-    (state: RootState) => state.shop.enteredAmount
-  );
-  const actualAmount = useSelector(
-    (state: RootState) => state.shop.actualAmount
-  );
-  const metalQuantity = useSelector(
-    (state: RootState) => state.shop.metalQuantity
-  );
-  const totalAmount = useSelector((state: RootState) => state.shop.totalAmount);
+  const purchaseType = useSelector((state: RootState) => state.shop.purchaseType);
+  const actualAmount = useSelector((state: RootState) => state.shop.actualAmount);
+  const metalQuantity = useSelector((state: RootState) => state.shop.metalQuantity);
   const [upiList, setUpiList] = useState([]);
   const [allUpiList, setAllUpiList] = useState([]);
   const [allBankList, setAllBankList] = useState<any[]>([]);
@@ -191,28 +174,26 @@ export default function SelectUpiModalForPayout({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg coins_backgroun px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                <p>
-                  {/* <Timer /> */}
-                </p>
+                <div className="mb-2 justify-center ">
+                  <Timer />
+                </div>
                 <div className="">
                   <div>
                     {allUpiList.map(({ value, _id }: any, key: number) => {
                       return (
-                        <div key={key} className="coins_backgroun">
-                          <div className="flex justify-content-between coins_backgroun align-items-center">
-                            <div>
-                              <input
-                                className="coins_backgroun "
-                                type="radio"
-                                onChange={selectUpiHandler}
-                                id="html"
-                                name="fav_language"
-                                value={_id}
-                              />
-                            </div>
-                            <div className="text-gray-400 pl-4" id={_id}>
-                              {AesDecrypt(value)}
-                            </div>
+                        <div key={key} className="flex items-center">
+                          <div>
+                            <input
+                              className="w-4 h-4 mt-1.5"
+                              type="radio"
+                              onChange={selectUpiHandler}
+                              id="html"
+                              name="fav_language"
+                              value={_id}
+                            />
+                          </div>
+                          <div className="text-gray-400 pl-3" id={_id}>
+                            {AesDecrypt(value)}
                           </div>
                         </div>
                       );
