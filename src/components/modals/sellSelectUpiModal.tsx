@@ -188,8 +188,8 @@ export default function SelectUpiModalForPayout({
                           onClick={() => selectUpiHandler({ target: { value: _id } })}
                         >
                           <input
-                            className="w-4 h-4 cursor-pointer"
-                            type="radio"
+                            className="w-4 h-4 cursor-pointer accent-green-800 focus:accent-green-600"
+                            type="checkbox"
                             id={_id}
                             name="fav_language"
                             value={_id}
@@ -214,8 +214,8 @@ export default function SelectUpiModalForPayout({
                             <div className="flex justify-between items-center shadow-black shadow-sm border border-gray-500 rounded-md cursor-pointer my-2 p-2 text-white">
                               <div className="flex items-center">
                                 <input
-                                  className="w-4 h-4 cursor-pointer"
-                                  type="radio"
+                                  className="w-4 h-4 cursor-pointer accent-green-800 focus:accent-green-700"
+                                  type="checkbox"
                                   onChange={selectUpiHandler}
                                   id="html"
                                   checked={upiId === item._id}
@@ -244,7 +244,7 @@ export default function SelectUpiModalForPayout({
                   </div>
                 </div>
                 {errorMessage && (
-                  <p className="text-red-600 text-md text-center">
+                  <p className="text-red-600 text-md text-center my-2">
                     {errorMessage}
                   </p>
                 )}
