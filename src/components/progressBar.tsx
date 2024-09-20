@@ -6,10 +6,7 @@ import { metalPrice } from "@/api/DashboardServices";
 import { setGoldData, setSilverData } from "@/redux/metalSlice";
 import { setLiveGoldPrice, setLiveGoldPurchasePrice, setLiveSilverPrice, setLiveSilverPurchasePrice } from "@/redux/cartSlice";
 import { setMetalPrice } from "@/redux/shopSlice";
-import LivePrice from '../../public/lottie/LivePrice.gif'
 import Image from "next/image";
-import { selectUser } from "@/redux/userDetailsSlice";
-
 interface ProgressBarProps {
   purchaseType?: string;
   metalTypeForProgressBar: string;
@@ -78,21 +75,21 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       );
     }
   }, [displayMetalType, liveGoldPrice, liveSilverPrice]);
-  // const fetchDataOfMetals = useCallback(async () => {
-  //   try {
-  //     const response: any = await metalPrice(); // Assuming this returns a JSON string
-  //     const metalPriceOfGoldSilver = JSON.parse(response);
-  //     dispatch(setGoldData(metalPriceOfGoldSilver.data.gold[0]));
-  //     dispatch(setSilverData(metalPriceOfGoldSilver.data.silver[0]));
-  //     dispatch(setLiveGoldPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].totalPrice : metalPriceOfGoldSilver.data.gold[0].c_totalPrice));
-  //     dispatch(setLiveSilverPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].totalPrice : metalPriceOfGoldSilver.data.silver[0].c_totalPrice));
-  //     dispatch(setLiveGoldPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].salePrice : metalPriceOfGoldSilver.data.gold[0].c_salePrice));
-  //     dispatch(setLiveSilverPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].salePrice : metalPriceOfGoldSilver.data.silver[0].c_salePrice));
-  //     dispatch(setMetalPrice(metalPriceOfGoldSilver.data.gold[0].totalPrice));
-  //   } catch (error) {
-  //     // alert(error);
-  //   }
-  // }, [dispatch]);
+  const fetchDataOfMetals = useCallback(async () => {
+    try {
+      const response: any = await metalPrice(); // Assuming this returns a JSON string
+      const metalPriceOfGoldSilver = JSON.parse(response);
+      dispatch(setGoldData(metalPriceOfGoldSilver.data.gold[0]));
+      dispatch(setSilverData(metalPriceOfGoldSilver.data.silver[0]));
+      dispatch(setLiveGoldPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].totalPrice : metalPriceOfGoldSilver.data.gold[0].c_totalPrice));
+      dispatch(setLiveSilverPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].totalPrice : metalPriceOfGoldSilver.data.silver[0].c_totalPrice));
+      dispatch(setLiveGoldPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].salePrice : metalPriceOfGoldSilver.data.gold[0].c_salePrice));
+      dispatch(setLiveSilverPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].salePrice : metalPriceOfGoldSilver.data.silver[0].c_salePrice));
+      dispatch(setMetalPrice(metalPriceOfGoldSilver.data.gold[0].totalPrice));
+    } catch (error) {
+      // alert(error);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
