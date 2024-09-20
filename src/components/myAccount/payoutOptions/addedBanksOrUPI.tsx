@@ -161,7 +161,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
         <div className="border-b p-4 flex justify-between items-center">
           <p className="text-white flex items-center">
             <img src="/upi.png" className="h-3 inline-block pr-2" />
-            Upi Details
+            UPI Details
           </p>
 
           <div
@@ -169,7 +169,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
             className=" flex items-center gap-1 text-gold01 cursor-pointer"
           >
             <PlusIcon className="h-5" />
-            Add Upi
+            Add UPI
           </div>
         </div>
 
