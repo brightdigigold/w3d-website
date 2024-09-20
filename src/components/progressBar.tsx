@@ -96,7 +96,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       if (time === 0) {
         clearInterval(intervalRef.current as unknown as number);
         intervalRef.current = null;
-        // fetchDataOfMetals()
+        fetchDataOfMetals()
         memoizedDispatch(resetTimer());
       } else {
         memoizedDispatch(decrementTimer());

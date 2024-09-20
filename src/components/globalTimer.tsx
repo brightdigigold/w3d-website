@@ -16,13 +16,14 @@ const Timer: React.FC = () => {
 
   const fetchDataOfMetals = useCallback(async () => {
     try {
-      const response: any = await metalPrice(); // Assuming this returns a JSON string
+      const response: any = await metalPrice(); 
       const metalPriceOfGoldSilver = JSON.parse(response);
+      // console.log("metalPriceOfGoldSilver", metalPriceOfGoldSilver)
       dispatch(setGoldData(metalPriceOfGoldSilver.data.gold[0]));
       dispatch(setSilverData(metalPriceOfGoldSilver.data.silver[0]));
       dispatch(setLiveGoldPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].totalPrice : metalPriceOfGoldSilver.data.gold[0].c_totalPrice));
       dispatch(setLiveGoldPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.gold[0].salePrice : metalPriceOfGoldSilver.data.gold[0].c_salePrice));
-      dispatch(setLiveSilverPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].totalPrice: metalPriceOfGoldSilver.data.silver[0].c_totalPrice));
+      dispatch(setLiveSilverPrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].totalPrice : metalPriceOfGoldSilver.data.silver[0].c_totalPrice));
       dispatch(setLiveSilverPurchasePrice(userType !== "corporate" ? metalPriceOfGoldSilver.data.silver[0].salePrice : metalPriceOfGoldSilver.data.silver[0].c_salePrice));
       dispatch(setMetalPrice(metalPriceOfGoldSilver.data.gold[0].totalPrice));
     } catch (error) {
@@ -71,21 +72,19 @@ const Timer: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-end 2xl:justify-center gap-2 pr-4 sm:pr-12 2xl:pr-4 mt-3">
-        <img src="/alarm-filled.png" alt="clock image" className="h-2 sm:h-4" />
-        {metalType === "gold" ? (
-          <p className="text-xxs sm:text-sm text-gold01">
-            <span className=" sm:inline">Gold Rate</span> expire in :{" "}
-            {formatTime(time)}
-          </p>
-        ) : (
-          <p className="text-xxs sm:text-sm text-gray-100">
-            <span className=" sm:inline">Silver Rate</span> expire in :{" "}
-            {formatTime(time)}
-          </p>
-        )}
-      </div>
+    <div className="flex items-center gap-2 ">
+      <img src="/alarm-filled.png" alt="clock image" className="h-2 sm:h-4" />
+      {metalType === "gold" ? (
+        <p className="text-xxs sm:text-sm text-gold01">
+          <span className=" sm:inline">Gold Rate</span> expire in :{" "}
+          {formatTime(time)}
+        </p>
+      ) : (
+        <p className="text-xxs sm:text-sm text-gray-100">
+          <span className=" sm:inline">Silver Rate</span> expire in :{" "}
+          {formatTime(time)}
+        </p>
+      )}
 
       {/* Button is commented out, but here if you need it */}
       {/* <button onClick={handleReset}>Reset Timer</button> */}

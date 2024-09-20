@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import { fetchAllUPI } from "@/api/DashboardServices";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import { useDispatch } from "react-redux";
+import ProgressBar from "../progressBar";
 
 export default function SelectUpiModalForPayout({
   isOpen,
@@ -35,6 +36,8 @@ export default function SelectUpiModalForPayout({
     setUpiId(e.target.value);
     setErrorMessage("");
   };
+
+  console.log("selected upi id", upiId);
 
   const fetchBankAndUPIDetails = async () => {
     try {
@@ -173,26 +176,27 @@ export default function SelectUpiModalForPayout({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg coins_backgroun px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                <div className="mb-2 justify-center ">
-                  <Timer />
-                </div>
-                <div className="">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg coins_backgroun text-left shadow-xl transition-all w-full sm:max-w-sm">
+                <p className="bold text-md text-center mt-3 sm:mt-2 tracking-wide text-white">Select Your Withdrawl Method</p>
+                <div className="px-4 my-4">
                   <div>
                     {allUpiList.map(({ value, _id }: any, key: number) => {
                       return (
-                        <div key={key} className="flex items-center">
-                          <div>
-                            <input
-                              className="w-4 h-4 mt-1.5"
-                              type="radio"
-                              onChange={selectUpiHandler}
-                              id="html"
-                              name="fav_language"
-                              value={_id}
-                            />
-                          </div>
-                          <div className="text-gray-400 pl-3" id={_id}>
+                        <div
+                          key={key}
+                          className="flex items-center border border-gray-500 shadow-black shadow-sm rounded-md cursor-pointer my-3 p-2 py-3"
+                          onClick={() => selectUpiHandler({ target: { value: _id } })}
+                        >
+                          <input
+                            className="w-4 h-4 cursor-pointer"
+                            type="radio"
+                            id={_id}
+                            name="fav_language"
+                            value={_id}
+                            checked={upiId === _id}
+                            onChange={selectUpiHandler}
+                          />
+                          <div className="text-gray-300 pl-2 tracking-wider">
                             {AesDecrypt(value)}
                           </div>
                         </div>
@@ -202,51 +206,39 @@ export default function SelectUpiModalForPayout({
                   <div>
                     {allBankList?.map((item, key) => {
                       return (
-                        <>
+                        <div
+                          key={key}
+                          onClick={() => selectUpiHandler({ target: { value: item._id } })}
+                        >
                           {item.documentType === "BANKACCOUNT" ? (
-                            <div className="text-white">
-                              <input
-                                type="radio"
-                                onChange={selectUpiHandler}
-                                id="html"
-                                name="fav_language"
-                                value={item._id}
-                              />
-                              <div className="">
-                                <div className="flex justify-between py-2">
-                                  <div className="">Account Holder Name</div>
-                                  <div className="">
-                                    {AesDecrypt(item.bankData.accountName)}
-                                  </div>
-                                </div>
-                                <hr className="border-gray-500" />
-                                <div className="flex justify-between py-2">
-                                  <div className="">Account Number</div>
-                                  <div className="">
+                            <div className="flex justify-between items-center shadow-black shadow-sm border border-gray-500 rounded-md cursor-pointer my-2 p-2 text-white">
+                              <div className="flex items-center">
+                                <input
+                                  className="w-4 h-4 cursor-pointer"
+                                  type="radio"
+                                  onChange={selectUpiHandler}
+                                  id="html"
+                                  checked={upiId === item._id}
+                                  name="fav_language"
+                                  value={item._id}
+                                />
+                                <div className="ml-2">Bank</div>
+                              </div>
+                              <div>
+                                <div className="flex justify-between items-center text-gray-300">
+                                  <div>
+                                    <div>
+                                      {AesDecrypt(item.bankData.bankName)}
+                                    </div>
                                     {AesDecrypt(item.bankData.accountNumber)}
                                   </div>
                                 </div>
-                                <hr className="border-gray-500" />
-                                <div className="flex justify-between py-2">
-                                  <div className="">Bank Name</div>
-                                  <div className="">
-                                    {AesDecrypt(item.bankData.bankName)}
-                                  </div>
-                                </div>
-                                <hr className="border-gray-500" />
-                                <div className="flex justify-between py-2">
-                                  <div className="">Bank IFSC</div>
-                                  <div className="">
-                                    {AesDecrypt(item.bankData.ifsc)}
-                                  </div>
-                                </div>
-                                <hr className="border-gray-500" />
                               </div>
                             </div>
                           ) : (
                             ""
                           )}
-                        </>
+                        </div>
                       );
                     })}
                   </div>
@@ -256,20 +248,24 @@ export default function SelectUpiModalForPayout({
                     {errorMessage}
                   </p>
                 )}
-                <div className=" px-4 pb-4 pt-5 sm:p-6 sm:pb-4"></div>
-                <div className="coins_backgroun px-4 m-2 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <ProgressBar
+                  fromCart={true}
+                  metalTypeForProgressBar={"both"}
+                  displayMetalType={metalType}
+                />
+                <div className="flex justify-end gap-4 coins_backgroun p-2">
                   <button
                     type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md ml-2 bg-themeBlue px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:mt-0 sm:w-auto"
+                    className="rounded-md bg-themeBlue px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-blue-100 sm:mt-0 sm:w-auto"
                     ref={cancelButtonRef}
                     onClick={() => closeModal()}
                   >
-                    Cancel
+                    CANCEL
                   </button>
                   {purchaseType === "sell" && (
                     <button
                       type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-themeBlue px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                      className="rounded-md bg-themeBlue px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-blue-100 sm:mt-0 sm:w-auto"
                       ref={cancelButtonRef}
                       onClick={() => sellHandler()}
                     >
