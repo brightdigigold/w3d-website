@@ -21,7 +21,7 @@ export const postMethodHelperWithEncryption = async (url: string, data: any, hea
         const response = await axios.post(url, body, config);
         // Decrypt the response
         const decryptedResponse = JSON.parse(AesDecrypt(response.data.payload));
-        console.log("decryptedResponse", decryptedResponse);
+        // console.log("decryptedResponse", decryptedResponse);
         // Return structured success response
         return {
             data: decryptedResponse,
