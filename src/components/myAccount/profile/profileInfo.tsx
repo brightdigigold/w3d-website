@@ -25,7 +25,7 @@ const ProfileInfo = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [openEditProfileModel, setOpenEditProfileModel] = useState(false);
-  // console.log("user", user);
+  console.log("user", user);
 
   const EditProfileModelHandler = () => {
     setOpenEditProfileModel(!openEditProfileModel);
@@ -123,7 +123,7 @@ const ProfileInfo = () => {
                 <HiIdentification className="h-4" /> PAN Number
               </div>
               <p>
-                {user.data.name}
+                {AesDecrypt(user.data.kyc.panNumber)}
               </p>
             </div>
             <div className="shadow shadow-gray-100 rounded p-3">
