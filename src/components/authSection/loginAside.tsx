@@ -164,8 +164,8 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
               <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
             </button>
             {os === "iOS" ? <div className=" text-center text-white pb-1">
-              <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-16 mx-auto mt-8 md:mt-8" />
-              <p className=" text-xl mb-1 mt-6 md:mt-4">Start Savings Today</p>
+              <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-12 mx-auto mt-6 md:mt-8" />
+              <p className=" text-lg mb-1 mt-4 md:mt-4">Start Savings Today</p>
               <p className="">
                 Safe.Secure.Certified
                 <img src="/secure.png" className="ml-1 inline-block h-5" />
