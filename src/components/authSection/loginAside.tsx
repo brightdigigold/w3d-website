@@ -13,6 +13,7 @@ import clsx from "clsx";
 import { postMethodHelperWithEncryption } from "@/api/postMethodHelper";
 import CustomButton from "../customButton";
 import { RootState } from "@/redux/store";
+import useDetectMobileOS from "@/hooks/useDetectMobileOS";
 interface LoginAsideProps {
   isOpen: boolean;
   onClose: () => any;
@@ -21,6 +22,7 @@ interface LoginAsideProps {
 const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const os = useDetectMobileOS();
   const modalRef = useRef<HTMLDivElement>(null);
   const userType = useSelector((state: RootState) => state.auth.UserType);
   const purpose = useSelector((state: RootState) => state.auth.purpose);
@@ -161,16 +163,24 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
             >
               <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />
             </button>
-            <div className=" text-center text-white pb-1">
-              <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-12 md:mt-8" />
-              <p className=" text-2xl mb-1 mt-10 md:mt-4">Start Savings Today</p>
+            {os === "iOS" ? <div className=" text-center text-white pb-1">
+              <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-16 mx-auto mt-8 md:mt-8" />
+              <p className=" text-xl mb-1 mt-6 md:mt-4">Start Savings Today</p>
               <p className="">
                 Safe.Secure.Certified
                 <img src="/secure.png" className="ml-1 inline-block h-5" />
               </p>
-            </div>
+            </div> :
+              <div className=" text-center text-white pb-1">
+                <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-10 md:mt-8" />
+                <p className=" text-2xl mb-1 mt-10 md:mt-4">Start Savings Today</p>
+                <p className="">
+                  Safe.Secure.Certified
+                  <img src="/secure.png" className="ml-1 inline-block h-5" />
+                </p>
+              </div>}
             {purpose === 'login' && <>
-              <h1 className="text-3xl sm:text-2xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
+              <h1 className="text-2xl sm:text-2xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
                 Login/Sign Up
               </h1>
               <h3 className="text-xl mb-4 text-white px-4 text-center md:text-left">
@@ -203,7 +213,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                     }}
                     className=""
                   >
-                    {purpose !== "receipt" && <div className="flex gap-6 px-4 mt-3 md:mt-0 justify-center">
+                    {purpose !== "receipt" && <div className="flex gap-6 px-4 mt-2 md:mt-0 justify-center">
                       <div
                         onClick={() => {
                           setFieldValue("type", "user");
