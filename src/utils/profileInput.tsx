@@ -94,7 +94,7 @@ const ProfileInput = ({
 const styles = {
   p0: "mb-4",
   p1: "block text-sm mb-0 text-white ",
-  p2: "mt-3 block w-full sm:w-1/2 placeholder:text-gray-500 text-white rounded bg-theme px-3 py-2 focus:outline-none  border-1  focus:ring-0 focus:border-b",
+  p2: "mt-3 block w-full placeholder:text-gray-500 text-white rounded bg-theme px-3 py-2 focus:outline-none  border-1  focus:ring-0 focus:border-b",
   p3: "text-red-500 text-sm",
   p4: "mt-0 text-black",
 };

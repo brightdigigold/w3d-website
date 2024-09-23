@@ -11,6 +11,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import ProfileInput from "@/utils/profileInput";
 import CustomButton from "../customButton";
+import { format } from 'date-fns';
+import { differenceInYears } from 'date-fns';
 
 const EditProfileModel = ({ setOpenEditProfileModel }: any) => {
   const userType = useSelector((state: RootState) => state.auth.UserType);
@@ -25,19 +27,17 @@ const EditProfileModel = ({ setOpenEditProfileModel }: any) => {
   };
 
   useEffect(() => {
+    // Format the date to YYYY-MM-DD
+    const formattedDate = user.data?.dateOfBirth
+      ? new Date(user.data.dateOfBirth).toISOString().split('T')[0]
+      : "";
+
     formik.setFieldValue("name", user.data?.name);
     formik.setFieldValue("email", user.data?.email);
     formik.setFieldValue("gender", user.data?.gender);
     formik.setFieldValue("gst_number", user.data?.gst_number);
-    formik.setFieldValue(
-      "dateOfBirth",
-      new Date(user.data?.dateOfBirth).toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
-    );
-  }, [fetchUserDetails]);
+    formik.setFieldValue("dateOfBirth", formattedDate); // Set the date in YYYY-MM-DD format
+  }, [user.data]);
 
   const fetchData = async () => {
     dispatch(fetchUserDetails());
@@ -46,7 +46,6 @@ const EditProfileModel = ({ setOpenEditProfileModel }: any) => {
   useEffect(() => {
     fetchData();
   }, [dispatch]);
-
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -59,24 +58,36 @@ const EditProfileModel = ({ setOpenEditProfileModel }: any) => {
     validate(values) {
       const errors: any = {};
       const isValidLength = /^.{2,50}$/;
-      //validation on name
+
+      // Validation for name
       if (!values.name) {
         errors.name = "Name Is Required!";
       } else if (!isValidLength.test(values.name)) {
         errors.name =
-          "Name should be greater than 2 character and less than 50 character";
+          "Name should be greater than 2 characters and less than 50 characters";
       } else if (!/^[A-Za-z][A-Za-z]/.test(values.name)) {
         errors.name = "Invalid name";
       }
 
-      //validation for Email
+      // Validation for email
       if (!values.email) {
-        errors.email = "Email Is Required";
+        errors.email = "Email is required";
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
       ) {
-        errors.email = "Please enter a valid Email address.";
+        errors.email = "Please enter a valid email address";
       }
+
+      // Validation for Date of Birth (18+ validation)
+      if (!values.dateOfBirth) {
+        errors.dateOfBirth = "Date of Birth is required";
+      } else {
+        const age = differenceInYears(new Date(), new Date(values.dateOfBirth));
+        if (age < 18) {
+          errors.dateOfBirth = "You must be at least 18 years old";
+        }
+      }
+
       return errors;
     },
 
@@ -186,12 +197,12 @@ const EditProfileModel = ({ setOpenEditProfileModel }: any) => {
                   />
 
                   <ProfileInput
-                    type="text"
+                    type="date"
                     label={userType === "corporate" ? "Date of Registration *" : "Date of Birth *"}
                     name="dateOfBirth"
                     placeholder="01/01/2000"
                     formik={formik}
-                    extra={{ max: "2005-01-01" }}
+                    extra={{ max: "2006-01-01" }}
                     readonly={!user.data.isKycDone ? false : true}
                   />
 
