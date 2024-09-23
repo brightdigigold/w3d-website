@@ -196,7 +196,7 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
                                             {...register('termsAndConditions')} />
                                     </div>
                                     <div>
-                                        <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-xxs sm:text-sm">
+                                        <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-xs sm:text-sm">
                                             By continuing, I confirm that I am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
                                         </label>
                                     </div>
@@ -216,8 +216,6 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
 
             </div>
         </aside>
-        // </aside>
-
     );
 };
 
