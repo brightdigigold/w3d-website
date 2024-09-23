@@ -20,6 +20,7 @@ import { useAddToCart } from "@/hooks/useAddToCart";
 import ProductDescription from "../ProductDetails/productDescription";
 import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
+import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   // console.log("params: " , slug);
@@ -40,9 +41,15 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
   const [openCartSidebar, setOpenCartSidebar] = useState<boolean>(false);
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const userType = useSelector((state: RootState) => state.auth.UserType);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
   const liveSilverPrice = useSelector((state: RootState) => state.cart.liveSilverPrice);
+
+  useEffect(() => {
+    dispatch(setLiveGoldPrice(userType == "corporate" ? goldData.c_totalPrice : goldData.totalPrice));
+    dispatch(setLiveSilverPrice(userType == "corporate" ? silverData.c_totalPrice : silverData.totalPrice));
+  }, [isloggedIn]);
 
   useEffect(() => {
     const productCount = getProductCountById(coinsInCart, productId);
@@ -103,7 +110,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const addToCartHandler = async (action_type: string,) => {
     if (isloggedIn) {
       setMaxCoinError("");
-      await addToCart(action_type, quantity ,productId);
+      await addToCart(action_type, quantity, productId);
       // refetch();
     } else {
       handleLoginClick();
@@ -119,14 +126,14 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     );
   }, [productsDetailById, quantity, liveGoldPrice, liveSilverPrice]);
 
+  console.log("liveGoldPrice", liveGoldPrice)
 
   if (!productsDetailById) {
     return <Loading />;
   }
 
   return (
-    <div className="container pt-32 py-16 text-white pb-28 xl:pb-8">
-
+    <div className="container pt-32  text-white pb-28 xl:pb-8">
       {openLoginAside && (
         <LoginAside
           isOpen={openLoginAside}

@@ -150,8 +150,8 @@ const Cart = () => {
     dispatch(setSilverVaultBalance(silverVaultBalance));
     // dispatch(setLiveGoldPrice(goldData.totalPrice));
     // dispatch(setLiveSilverPrice(silverData.totalPrice));
-    // dispatch(setLiveGoldPrice(userType == "corporate" ? goldData.c_totalPrice : goldData.totalPrice ));
-    // dispatch(setLiveSilverPrice(userType === "corporate" ? silverData.c_totalPrice : silverData.totalPrice));
+    dispatch(setLiveGoldPrice(userType == "corporate" ? goldData.c_totalPrice : goldData.totalPrice ));
+    dispatch(setLiveSilverPrice(userType === "corporate" ? silverData.c_totalPrice : silverData.totalPrice));
     dispatch(calculatePurchasedGoldWeight());
     dispatch(calculatePurchasedSilverWeight());
   }, [cart.products, liveGoldPrice, liveSilverPrice, isGoldVault, isSilverVault, goldData, silverData]);
