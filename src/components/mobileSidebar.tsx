@@ -15,6 +15,7 @@ import {
 import { useRouter } from "next/navigation";
 import { resetUserDetails, selectUser } from "@/redux/userDetailsSlice";
 import LoginAside from "./authSection/loginAside";
+import useDetectMobileOS from "@/hooks/useDetectMobileOS";
 
 interface SidebarAsideProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const router = useRouter();
   const dispatch = useDispatch();
+  const OS = useDetectMobileOS();
   const user = useSelector(selectUser);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const devotee_isNewUser = useSelector((state: RootState) => state.auth.devotee_isNewUser);
@@ -44,6 +46,17 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen, onClose]);
+
+
+  useEffect(() => {
+    const toggleBodyScroll = (shouldLock: boolean) => {
+      document.body.style.overflow = shouldLock ? 'hidden' : 'auto';
+    };
+
+    toggleBodyScroll(isOpen);
+    return () => toggleBodyScroll(false);
+  }, [isOpen]);
+
 
   const logoutProfile = () => {
     localStorage.removeItem("mobile_number");
@@ -90,8 +103,8 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
         <LoginAside
           isOpen={openLoginAside}
           onClose={() => {
-          setOpenLoginAside(false)
-          onClose();
+            setOpenLoginAside(false)
+            onClose();
           }}
         />
       )}
@@ -115,9 +128,9 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 alt="profile image"
                 width={150}
                 height={150}
-                className="my-4 rounded-full mx-auto h-40 w-40 flex items-center justify-center border-2 border-sky-200"
+                className={`${OS === 'iOS' ? "h-16 w-16" : "h-40 w-40"} my-4 rounded-full mx-auto  flex items-center justify-center border-2 border-sky-200`}
               />
-              <p className="text-lg md:text-xl xl:text-4xl text-white ml-0 sm:ml-8 text-center mb-4 sm:mb-0">
+              <p className="text-md md:text-xl xl:text-4xl text-white ml-0 sm:ml-8 text-center mb-3 sm:mb-0">
                 {user?.data?.name}
               </p>
             </div>
@@ -151,7 +164,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 Terms of Uses
               </div>
             </Link>
-            <Link  href="/privacy-policy" prefetch={true}>
+            <Link href="/privacy-policy" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
                 <Image src="/Privacy Policymenu.png" alt="Privacy Policy" width={40} height={24} className="h-6 w-9" />
                 Privacy Policy
@@ -169,13 +182,13 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 About Us
               </div>
             </Link>
-            <Link  href="/refund-and-cancellation" prefetch={true}>
+            <Link href="/refund-and-cancellation" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
                 <Image src="/refundmenu.png" alt="Refund & Cancellation" width={20} height={20} className="h-6 w-9" />
                 Refund & Cancellation
               </div>
             </Link>
-            <Link  href="/shipping-policy" prefetch={true}>
+            <Link href="/shipping-policy" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
                 <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" alt="Shipping Policy" width={32} height={24} className="h-6 w-9" />
                 Shipping Policy
@@ -198,7 +211,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
               </div>
             </Link>
             <div className=" absolute bottom-3  flex justify-between items-center w-full space-x-4 px-6">
-              <Link  href="https://www.facebook.com/brightdigigold">
+              <Link href="https://www.facebook.com/brightdigigold">
                 <img
                   src="/socail1.png"
                   alt="socail1"
