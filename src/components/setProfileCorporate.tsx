@@ -122,10 +122,6 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
     };
 
     return (
-        // <aside
-        //     className={`fixed top-0 right-0 h-full lg:w-4/12 md:w-5/12 sm:w-6/12 bg-theme shadow-lg transform translate-x-${isOpen ? "0" : "full"} transition-transform ease-in-out z-50`}
-        //     style={{ zIndex: 1000 }}
-        // >
         <aside id="default-sidebar" className={`bg-theme fixed top-0 right-0 h-full w-full lg:w-4/12 md:w-5/12 sm:w-6/12  transition-transform-x-${isOpen ? '0' : 'full'}transition-transform ease-in-out z-50 `} style={{ zIndex: 1000 }}>
             <div ref={modalRef} className="grid  h-screen place-items-center w-full">
                 <div className="flex flex-col h-full w-full">
@@ -137,11 +133,11 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
                     </button>
                     <img
                         src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png"
-                        className="h-12 sm:h-16 md:h-20 lg:h-20 mx-auto mt-2 sm:mt-8 md:mt-5"
+                        className="h-10 sm:h-16 md:h-20 lg:h-20 mx-auto mt-2 sm:mt-8 md:mt-5"
                     />
 
                     <div className='flex h-screen w-full'>
-                        <form onSubmit={handleSubmit(onSubmit)} className='text-gray-200 w-full mt-4'>
+                        <form onSubmit={handleSubmit(onSubmit)} className='text-gray-200 w-full sm:mt-4'>
                             <div className='px-4'>
                                 <div className="mb-3">
                                     <label className="text-white">GST Number</label>
@@ -187,7 +183,7 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
                                         className="text-white placeholder:text-gray-500 tracking-widest bold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none"
                                         placeholder="NAME"
                                         {...register('name')} />
-                                    {errors.name && <p className='text-red-600 text-sm'>{errors.name.message}</p>}
+                                    {errors.name && <p className='text-red-600 text-sm mb-2'>{errors.name.message}</p>}
                                 </div>
                             </div>
                             <div className="bottom-1 absolute w-full px-4">
@@ -200,7 +196,7 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
                                             {...register('termsAndConditions')} />
                                     </div>
                                     <div>
-                                        <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-xs sm:text-sm">
+                                        <label htmlFor="termsAndConditions" className="ml-2 text-white text-justify text-xxs sm:text-sm">
                                             By continuing, I confirm that I am authorized to act on behalf of the company and accept the E-sign disclosure and electronic communications consent.
                                         </label>
                                     </div>
@@ -223,12 +219,6 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
         // </aside>
 
     );
-};
-
-const styles = {
-    p0: "hidden xl:block bold text-gray-100 hover:bg-gray-800 hover:text-white rounded-md  py-2 text-gray-100 tracking-widest placeholder:text-gray-500 border-1 rounded w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none",
-    p1: 'bold tracking-wide pb-0.5 text-white',
-    p2: 'flex flex-col pb-2'
 };
 
 export default SetProfileCorporate;
