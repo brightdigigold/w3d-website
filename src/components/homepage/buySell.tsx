@@ -120,7 +120,6 @@ const BuySell = () => {
       activeLabel: transactionType,
     };
 
-    console.log("dataToBeDecrypt", dataToBeDecrypt)
     if (isAnyCouponApplied) {
       dataToBeDecrypt.couponCode = appliedCouponCode ? appliedCouponCode : "";
     }
