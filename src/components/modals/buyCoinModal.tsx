@@ -4,6 +4,8 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import CustomButton from "../customButton";
 import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 import {
+  AesDecrypt,
+  AesEncrypt,
   ParseFloat,
   funForAesEncrypt,
   funcForDecrypt,
@@ -124,8 +126,7 @@ export default function CoinModal({
         product_quantity: totalCoins,
         product_id: productsDetailById._id,
       };
-      console.log("dataToBeDecrypt", dataToBeDecrypt)
-      const resAfterEncryptData = await funForAesEncrypt(dataToBeDecrypt);
+      const resAfterEncryptData = AesEncrypt(dataToBeDecrypt);
       const payloadToSend = { payload: resAfterEncryptData };
       const token = localStorage.getItem("token");
       const configHeaders = {
@@ -140,26 +141,22 @@ export default function CoinModal({
         payloadToSend,
         configHeaders
       );
-      const decryptedData = await funcForDecrypt(resAfterPreview.data.payload);
+      const decryptedData = AesDecrypt(resAfterPreview.data.payload);
       // console.log(JSON.parse(decryptedData).data.preview)
       setPreviewData(JSON.parse(decryptedData).data.preview);
       setTransactionId(JSON.parse(decryptedData).data.transactionCache._id);
 
       setAmountWithoutTax(
-        JSON.parse(decryptedData).data.amountwithoutTax.toFixed(2)
+        ParseFloat(JSON.parse(decryptedData).data.amountwithoutTax, 2)
       );
     } catch (errInPreview: any) {
-      const decryptedData = await funcForDecrypt(
-        errInPreview.response?.data?.payload || ""
-      );
-      if (JSON.parse(decryptedData).messageCode === "SESSION_EXPIRED") {
-        // Handle session expiration
-      }
+      const decryptedData = AesDecrypt(errInPreview.response.data.payload);
+      const errorMessage = JSON.parse(decryptedData).message
       closeModalOfCoin();
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: JSON.parse(decryptedData).message,
+        text: errorMessage,
       });
     } finally {
       setLoading(false);
