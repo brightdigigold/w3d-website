@@ -150,7 +150,7 @@ export default function CoinModal({
         ParseFloat(JSON.parse(decryptedData).data.amountwithoutTax, 2)
       );
     } catch (errInPreview: any) {
-      const decryptedData = AesDecrypt(errInPreview.response.data.payload);
+      const decryptedData = AesDecrypt(errInPreview?.response?.data?.payload);
       const errorMessage = JSON.parse(decryptedData).message
       closeModalOfCoin();
       Swal.fire({
