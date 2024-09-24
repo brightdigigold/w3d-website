@@ -150,14 +150,47 @@ export default function CoinModal({
         ParseFloat(JSON.parse(decryptedData).data.amountwithoutTax, 2)
       );
     } catch (errInPreview: any) {
-      const decryptedData = AesDecrypt(errInPreview?.response?.data?.payload);
-      const errorMessage = JSON.parse(decryptedData).message
-      closeModalOfCoin();
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: errorMessage,
-      });
+      if (!errInPreview?.response?.data?.payload) {
+        return;
+      }
+      // Check if response and payload exist before attempting to decrypt
+      if (errInPreview?.response?.data?.payload) {
+        try {
+          const decryptedData = AesDecrypt(errInPreview.response.data.payload);
+
+          // Ensure decryptedData is valid before parsing
+          if (decryptedData) {
+            const errorMessage = JSON.parse(decryptedData).message;
+            closeModalOfCoin();
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: errorMessage,
+            });
+          } else {
+            console.error("Decryption returned no data:", decryptedData);
+            Swal.fire({
+              icon: "error",
+              title: "Decryption Error",
+              text: "An error occurred during decryption.",
+            });
+          }
+        } catch (decryptionError) {
+          console.error("Error during decryption:", decryptionError);
+          Swal.fire({
+            icon: "error",
+            title: "Decryption Error",
+            text: "An error occurred while decrypting the data.",
+          });
+        }
+      } else {
+        console.error("No payload found in error response:", errInPreview);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An unexpected error occurred. Please try again.",
+        });
+      }
     } finally {
       setLoading(false);
     }
