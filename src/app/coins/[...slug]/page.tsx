@@ -21,6 +21,8 @@ import ProductDescription from "../ProductDetails/productDescription";
 import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
 import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
+import Image from "next/image";
+import { indexOf } from "lodash";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
@@ -44,6 +46,15 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
   const liveGoldPrice = useSelector((state: RootState) => state.cart.liveGoldPrice);
   const liveSilverPrice = useSelector((state: RootState) => state.cart.liveSilverPrice);
+  // console.log("productsDetailById.image", productsDetailById.image);
+
+  // const imageIndex = (index: any) => {
+  //   return index
+  // }
+
+  
+  const [imageIndex, setimageIndex] = useState<string>()
+  console.log("imagesIndex", imageIndex)
 
   useEffect(() => {
     dispatch(setLiveGoldPrice(userType == "corporate" ? goldData.c_totalPrice : goldData.totalPrice));
@@ -127,9 +138,13 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
 
   // console.log("liveGoldPrice", liveGoldPrice)
 
+
   if (!productsDetailById) {
     return <Loading />;
   }
+
+
+
 
   return (
     <div className="px-12 pt-32  text-white pb-28 xl:pb-8">
@@ -160,8 +175,115 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
         />
       )}
 
-      <div className="grid xl:grid-cols-5 gap-12">
-        <div className="col-span-5 xl:col-span-2 relative">
+      <div className="bg-yellow-200 mb-10 grid grid-cols-12">
+        <div className="bg-slate-400 col-span-1 gap-3 flex flex-col items-center p-3">
+          <Image
+            src={productsDetailById.image[0]}
+            alt="product image"
+            width={100}
+            height={100}
+            layout="responsive"
+            onClick={() => {
+              // setimageIndex(indexOf(productsDetailById.image[0]))
+            }}
+          />
+          <Image
+            src={productsDetailById.image[1]}
+            alt="product image"
+            width={100}
+            height={100}
+            layout="responsive"
+          />
+          <Image
+            src={productsDetailById.image[2]}
+            alt="product image"
+            width={100}
+            height={100}
+            layout="responsive"
+          />
+          <Image
+            src={productsDetailById.image[3]}
+            alt="product image"
+            width={100}
+            height={100}
+            layout="responsive"
+          />
+          <Image
+            src={productsDetailById.image[1]}
+            alt="product image"
+            width={100}
+            height={100}
+            layout="responsive"
+          />
+        </div>
+        <div className="bg-green-300 col-span-5 mx-auto my-auto">
+          <SimpleImageSlider
+            width={500}
+            height={500}
+            images={productsDetailById.image}
+            showBullets={false}
+            style={{ backgroundColor: '#fff' }}
+            showNavs={false}
+            loop={true}
+            autoPlay={true}
+            bgColor="#red"
+            autoPlayDelay={2.0}
+            slideDuration={0.5}
+          />
+        </div>
+        <div className="bg-black col-span-6">
+          <div className="">
+            <div className="flex justify-between items-center">
+              <div>
+                <h1 className="mb-2 sm:text-lg extrabold">
+                  {productsDetailById.name}
+                </h1>
+                <div className="mb-2">
+                  Total Price{" "}
+                  <span className="text-yellow-500 text-base sm:text-xl bold">
+                    ₹ {totalPrice}
+                  </span>
+                  <span className="text-yellow-500 pl-1 text-xxs sm:text-xs mt-1">
+                    {" "}
+                    +3% GST
+                  </span>
+                </div>
+                <div className="text-base sm:text-lg bold text-blue-100 ">
+                  Making Charge ₹{productsDetailById.makingcharges}
+                </div>
+                {maxCoinError && <p className="text-red-600">{maxCoinError}</p>}
+              </div>
+              <div className="flex items-center rounded-lg bg-themeLight">
+                <div onClick={() => {
+                  decreaseQty();
+                }} className={styles.p1}>
+                  -
+                </div>
+                <div className="">{quantity}</div>
+                <div onClick={() => {
+                  increaseQty();
+                }} className={styles.p2}>
+                  +
+                </div>
+              </div>
+            </div>
+            {/*check pin code */}
+            <CheckPinCode />
+
+            {/*coin description */}
+            <ProductDescription
+              description={productsDetailById?.description}
+              weight={productsDetailById?.weight}
+              purity={productsDetailById?.purity}
+              dimension={productsDetailById?.dimension}
+              quality={productsDetailById?.quality}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="grid xl:grid-cols-5 gap-12 bg-red-500">
+        <div className="col-span-7 xl:col-span-2 relative bg-green-600">
           {/* Absolute positioning for out-of-stock image */}
           {!productsDetailById.inStock && (
             <div className="bg-red-600 absolute top-0 right-0 px-2  rounded-bl-lg">
@@ -257,7 +379,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
             </div>
           </div>
         </div>
-        <div className="col-span-5 xl:col-span-3">
+        <div className="col-span-3 xl:col-span-3 bg-black">
           <div className="flex justify-between items-center">
             <div>
               <h1 className="mb-2 sm:text-lg extrabold">
