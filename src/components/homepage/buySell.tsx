@@ -119,6 +119,8 @@ const BuySell = () => {
       fromApp: false,
       activeLabel: transactionType,
     };
+
+    console.log("dataToBeDecrypt", dataToBeDecrypt)
     if (isAnyCouponApplied) {
       dataToBeDecrypt.couponCode = appliedCouponCode ? appliedCouponCode : "";
     }
@@ -146,6 +148,7 @@ const BuySell = () => {
         const decryptedData = await funcForDecrypt(
           resAfterPreview.data.payload
         );
+        console.log("JSON.parse(decryptedData).data.preview", JSON.parse(decryptedData).data.preview)
         setPreviewData(JSON.parse(decryptedData).data.preview);
         setTransactionId(JSON.parse(decryptedData).data.transactionCache._id);
         if (JSON.parse(decryptedData).statusCode == 200) {
@@ -159,6 +162,7 @@ const BuySell = () => {
           errInPreview.response.data.payload
         );
         let response = JSON.parse(decryptedData);
+        console.log("response: ", response)
         if (response.messageCode == "TECHNICAL_ERROR") {
           Swal.fire({
             html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
@@ -420,7 +424,7 @@ const BuySell = () => {
     if (isgold && activeTab == "buy") {
       dispatch(setMetalPrice(liveGoldPrice));
     } else if (isgold && activeTab == "sell") {
-      dispatch(setMetalPrice(goldData.salePrice));
+      dispatch(setMetalPrice(liveGoldPurchasePrice));
     } else if (!isgold && activeTab == "buy") {
       dispatch(setMetalPrice(liveSilverPrice));
     } else {
@@ -776,7 +780,7 @@ const BuySell = () => {
                   sizes="(max-width: 267px) 100vw, 267px"
                 />
               </div>
-              
+
               {userType !== 'corporate' && <div>
                 <animated.div style={style}>
                   {isgold && purchaseType === 'buy' && (
