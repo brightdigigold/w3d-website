@@ -39,18 +39,14 @@ export default function Videos() {
     const swiperRef = useRef<SwiperType | null>(null);
 
     const handleMouseEnter = () => {
-        console.log('Mouse entered swiper area');
         if (swiperRef.current && swiperRef.current.autoplay.running) {
             swiperRef.current.autoplay.stop();
-            console.log('Swiper autoplay stopped');
         }
     };
 
     const handleMouseLeave = () => {
-        console.log('Mouse left swiper area');
         if (swiperRef.current && !swiperRef.current.autoplay.running) {
             swiperRef.current.autoplay.start();
-            console.log('Swiper autoplay started');
         }
     };
 

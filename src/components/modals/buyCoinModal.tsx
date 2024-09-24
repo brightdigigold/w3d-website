@@ -140,7 +140,7 @@ export default function CoinModal({
         configHeaders
       );
       const decryptedData = await funcForDecrypt(resAfterPreview.data.payload);
-      console.log(JSON.parse(decryptedData).data.preview)
+      // console.log(JSON.parse(decryptedData).data.preview)
       setPreviewData(JSON.parse(decryptedData).data.preview);
       setTransactionId(JSON.parse(decryptedData).data.transactionCache._id);
 

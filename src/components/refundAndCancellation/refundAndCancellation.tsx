@@ -17,8 +17,6 @@ const RefundAndCancellation = () => {
     getrefundsPosts().then(setRefunds);
   }, []);
 
-  // console.log('Refund', refunds);
-
   return (
     <div>
       <div className="text-gray-100">

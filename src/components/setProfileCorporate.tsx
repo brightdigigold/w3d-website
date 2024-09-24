@@ -82,7 +82,6 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
 
     // Update onSubmit to receive form data
     const onSubmit = async (data: any) => {
-        console.log('Form submitted with data:', data);
         try {
             setSubmitting(true);
             const result = await postMethodHelperWithEncryption(
@@ -90,10 +89,7 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
                 data,
             );
 
-            console.log("result: ", result);
-
             if (!result.isError && result.data.status) {
-                console.log("result.isError", result.data);
                 setOTPMsg(result.data.message);
                 setOtpDetails({
                     name: data.name,

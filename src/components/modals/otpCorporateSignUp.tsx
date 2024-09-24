@@ -18,8 +18,6 @@ import { fetchUserDetails } from '@/redux/userDetailsSlice';
 const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
     const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
     const dispatch = useDispatch();
-    // console.log("corporateBusinessDetails", corporateBusinessDetails);
-    // console.log("otpDetails", otpDetails);
     const [otp, setOtp] = useState('');
     const cancelButtonRef = useRef(null);
     const router = useRouter();
@@ -84,7 +82,6 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
             }
         }
 
-        console.log("corporateDetails from otp corporate modal ==================> ", corporateDetails)
         try {
             setSubmitting(true);
             const result = await postMethodHelperWithEncryption(
@@ -92,7 +89,6 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
                 corporateDetails,
             );
 
-            console.log("decrypted data from otp modal", result);
             if (!result.isError && result.data.status) {
                 localStorage.setItem("token", result.data.data.otpVarifiedToken);
                 dispatch(setIsLoggedIn(true));

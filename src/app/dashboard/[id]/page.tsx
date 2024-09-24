@@ -54,7 +54,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
   }, [params.id, token]);
 
   const handlePopState = () => {
-    console.log('Back button pressed');
+    // console.log('Back button pressed');
     // Handle back navigation here, if necessary
   };
 

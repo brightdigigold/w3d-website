@@ -23,7 +23,6 @@ import { useDispatch } from "react-redux";
 import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
-  // console.log("params: " , slug);
   const user = useSelector(selectUser);
   const id = slug;
   const { _id } = user.data;
@@ -126,7 +125,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     );
   }, [productsDetailById, quantity, liveGoldPrice, liveSilverPrice]);
 
-  console.log("liveGoldPrice", liveGoldPrice)
+  // console.log("liveGoldPrice", liveGoldPrice)
 
   if (!productsDetailById) {
     return <Loading />;

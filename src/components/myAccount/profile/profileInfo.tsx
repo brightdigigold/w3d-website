@@ -25,7 +25,6 @@ const ProfileInfo = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [openEditProfileModel, setOpenEditProfileModel] = useState(false);
-  // console.log("user", user);
 
   const EditProfileModelHandler = () => {
     setOpenEditProfileModel(!openEditProfileModel);

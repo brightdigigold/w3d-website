@@ -71,8 +71,6 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
     mode: "",
   };
 
-  // console.log("purpose", purpose);
-
   const validationSchema = Yup.object({
     termsAndConditions: purpose === 'login' ? Yup.boolean().oneOf([true], "Terms and conditions are required") : Yup.string(),
 
@@ -119,7 +117,6 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
 
       if (!result.isError && result.data.status) {
         localStorage.setItem("mobile_number", values.mobile_number);
-        // console.log("result.isError", result.data)
         dispatch(setPurpose(purpose));
         if (corporateLoginOrSignUp !== null) {
           dispatch(setAuthenticationMode(corporateLoginOrSignUp));
@@ -133,7 +130,6 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
         onClose();
       } else if (result.isError) {
         // Handle error case
-        // console.log(result)
         setError(result?.errorMsg)
         // Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
       }

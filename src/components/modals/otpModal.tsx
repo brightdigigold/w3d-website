@@ -161,7 +161,6 @@ export default function OtpModal() {
             dispatch(setShowOTPmodal(false));
             dispatch(setIsLoggedInForTempleReceipt(true));
             mixpanel.track('To download receipt');
-            // console.log(".>>>>>>>>", result.data.isNewUser);
             if (result.data.isNewUser) {
               dispatch(setDevoteeIsNewUser(true));
               router.push("/donation-receipt");

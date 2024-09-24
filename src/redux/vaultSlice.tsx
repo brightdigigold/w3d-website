@@ -12,8 +12,6 @@ const apiForWallet = async () => {
       },
     });
 
-    // console.log('response', response);
-
     if (!response.ok) {
       const res =  response
       throw new Error(`${response.status}`);

@@ -105,7 +105,6 @@ const CustomCheckout = async ({ data }: any) => {
     const payloadToSend = {
       payload: resAfterEncryptData,
     };
-    // console.log("====> ", data);
     const configHeaders = {
       headers: {
         authorization: `Bearer ${token}`,
@@ -193,7 +192,6 @@ const CustomCheckout = async ({ data }: any) => {
       )
       .then(async (resAfterBuyReq) => {
         const decryptedData = await funcForDecrypt(resAfterBuyReq.data.payload);
-        // console.log('decrypted data',decryptedData)
         if (JSON.parse(decryptedData).status) {
           orderIdRef.current = JSON.parse(decryptedData).data.order.order_id;
           let sessionId =

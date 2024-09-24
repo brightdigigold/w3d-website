@@ -406,7 +406,6 @@ const Cart = () => {
       const response = await axios.post(`${process.env.baseUrl}/user/ecom/placecart/orderCheck`, payloadToSend, configHeaders);
       const decryptedData = await funcForDecrypt(response.data.payload);
       const finalData = JSON.parse(decryptedData);
-      console.log("decrypted data: ", finalData);
       return finalData;
 
     } catch (error) {
