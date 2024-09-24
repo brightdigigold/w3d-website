@@ -50,19 +50,19 @@ const Navbar = () => {
   };
 
   const logoutProfile = () => {
-    localStorage.removeItem("mobile_number");
-    localStorage.removeItem("token");
-    localStorage.removeItem("isLogIn");
-    mixpanel.reset();
+    dispatch(SetUserType(''));
     dispatch(setIsLoggedIn(false));
     dispatch(resetUserDetails());
     dispatch(setShowOTPmodal(false));
     dispatch(setIsLoggedInForTempleReceipt(false));
-    dispatch(SetUserType(''));
     dispatch(setCorporateBusinessDetails(null));
     dispatch(setAuthenticationMode(null));
     dispatch(resetVault());
     dispatch(clearCoupon());
+    localStorage.removeItem("mobile_number");
+    localStorage.removeItem("token");
+    localStorage.removeItem("isLogIn");
+    mixpanel.reset();
     router.push("/");
   };
 

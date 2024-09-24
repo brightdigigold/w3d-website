@@ -154,7 +154,10 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
         <div className="grid h-screen  w-full">
           <div className="w-full">
             <button
-              onClick={onClose}
+              onClick={() => {
+                onClose();
+                dispatch(SetUserType(''));
+              }}
               className="absolute top-3 end-2.5 text-white hover:text-gold01 text-xl cursor-pointer "
             >
               <FaTimes size={28} className="text-themeBlueLight hover:text-red-500 border-1 rounded-full p-1 transition-colors duration-300 ease-in-out" />

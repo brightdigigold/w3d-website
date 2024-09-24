@@ -47,16 +47,16 @@ export default function OfferSlider() {
   return (
     <>
       {userType == "corporate" ?
-        (<div className="hidden sm:block">
+        <div className="hidden sm:block">
           <Image
             width={1250}
-            height={1250}
+            height={500}
             alt="gold and silver coin banner"
             src='https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/promoBannerTwoNew.jpg'
             layout='responsive'
           />
-        </div>) :
-        (<div className="relative">
+        </div> :
+        <div className="relative">
           <Swiper
             loop={features.length > 1}
             speed={2000}  // Adjust this value for smoother transitions
@@ -106,7 +106,7 @@ export default function OfferSlider() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>)}
+        </div>}
       <style jsx>{`
         .swiper-slide {
           display: flex;
