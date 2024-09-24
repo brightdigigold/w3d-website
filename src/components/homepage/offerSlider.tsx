@@ -8,6 +8,8 @@ import { Autoplay } from "swiper/modules";
 import Image from "next/image";
 import useDetectMobileOS from "@/hooks/useDetectMobileOS";
 import clsx from "clsx";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 // Define the type for the feature object
 interface Feature {
@@ -32,6 +34,8 @@ const features: Feature[] = [
 
 export default function OfferSlider() {
   const os = useDetectMobileOS();
+  const userType = useSelector((state: RootState) => state.auth.UserType);
+  // console.log("userType: ", userType);
 
   const handleBannerClick = (feature: Feature) => {
     const url = os === 'iOS' ? feature.redirectIOS : feature.redirectAndroid;
@@ -42,57 +46,67 @@ export default function OfferSlider() {
 
   return (
     <>
-      <div className="relative">
-        <Swiper
-          loop={features.length > 1}
-          speed={2000}  // Adjust this value for smoother transitions
-          breakpoints={{
-            640: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            1024: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-          }}
-          autoplay={{
-            delay: 3500,
-            disableOnInteraction: false,
-          }}
-          modules={[Autoplay]}
-          className="mySwiper"
-        >
-          {features.map((feature, index) => (
-            <SwiperSlide
-              key={`${index}-Slider`}
-              className={clsx('relative swiper-slide', { 'cursor-pointer': index === 0 })}
-              onClick={() => index === 0 && handleBannerClick(feature)}
-            >
-              <Image
-                src={feature.img}
-                alt="Bdg offer"
-                width={1250}
-                height={500}
-                className=""
-                priority={index === 0}
-                loading={index === 0 ? "eager" : "lazy"}
-                placeholder="blur"
-                layout="intrinsic"
-                blurDataURL={feature.blurDataURL}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                }}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      {userType == "corporate" ?
+        (<div className="hidden sm:block">
+          <Image
+            width={1250}
+            height={1250}
+            alt="gold and silver coin banner"
+            src='https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/promoBannerTwoNew.jpg'
+            layout='responsive'
+          />
+        </div>) :
+        (<div className="relative">
+          <Swiper
+            loop={features.length > 1}
+            speed={2000}  // Adjust this value for smoother transitions
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+              },
+              768: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+              },
+              1024: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+              },
+            }}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
+            className="mySwiper"
+          >
+            {features.map((feature, index) => (
+              <SwiperSlide
+                key={`${index}-Slider`}
+                className={clsx('relative swiper-slide', { 'cursor-pointer': index === 0 })}
+                onClick={() => index === 0 && handleBannerClick(feature)}
+              >
+                <Image
+                  src={feature.img}
+                  alt="Bdg offer"
+                  width={1250}
+                  height={500}
+                  className=""
+                  priority={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  placeholder="blur"
+                  layout="intrinsic"
+                  blurDataURL={feature.blurDataURL}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>)}
       <style jsx>{`
         .swiper-slide {
           display: flex;
