@@ -634,7 +634,7 @@ const BuySell = () => {
                     />
                   )}
                 </div>
-                 <Timer />
+                <Timer />
               </div>
             </div>
             <ShowVaultBuySell />
@@ -739,17 +739,20 @@ const BuySell = () => {
                 </div>
               )}
 
-              <div className="text-white text-md mt-4">
-                {purchaseType === "buy" ? "Quick Buy" : "Quick Sell"}
-              </div>
-              {activeTabPurchase === "rupees" ? (
-                <QuickBuySellButtons
-                  amounts={[100, 200, 500, 1000]}
-                  unit={activeTabPurchase}
-                />
-              ) : (
-                <QuickBuySellButtons amounts={[0.1, 0.5, 1, 2]} unit={activeTabPurchase} />
-              )}
+              {userType !== 'corporate' &&
+                <>
+                  <div className="text-white text-md mt-4">
+                    {purchaseType === "buy" ? "Quick Buy" : "Quick Sell"}
+                  </div>
+                  {activeTabPurchase === "rupees" ? (
+                    <QuickBuySellButtons
+                      amounts={[100, 200, 500, 1000]}
+                      unit={activeTabPurchase}
+                    />
+                  ) : (
+                    <QuickBuySellButtons amounts={[0.1, 0.5, 1, 2]} unit={activeTabPurchase} />
+                  )}
+                </>}
 
               <span className="text-center text-xxs sm:text-xs flex justify-center items-center mt-6 text-gray-400">
                 Your Assets will be Saved in Safe & Secured Vault
@@ -773,7 +776,8 @@ const BuySell = () => {
                   sizes="(max-width: 267px) 100vw, 267px"
                 />
               </div>
-              <div>
+              
+              {userType !== 'corporate' && <div>
                 <animated.div style={style}>
                   {isgold && purchaseType === 'buy' && (
                     <>
@@ -792,7 +796,7 @@ const BuySell = () => {
                     </>
                   )}
                 </animated.div>
-              </div>
+              </div>}
 
               <div className="mt-8" >
                 {purchaseType === "buy" && (
