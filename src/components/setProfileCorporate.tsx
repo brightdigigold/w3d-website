@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaTimes } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 import { RootState } from '@/redux/store';
 import { postMethodHelperWithEncryption } from '@/api/postMethodHelper';
@@ -37,7 +37,6 @@ const schema = Yup.object().shape({
 
 // Updated SetProfileCorporate component
 const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose }) => {
-    const dispatch = useDispatch();
     const modalRef = useRef<HTMLDivElement>(null);
     const userType = useSelector((state: RootState) => state.auth.UserType);
     const showProfileFormCorporate = useSelector((state: RootState) => state.auth.showProfileFormCorporate);

@@ -62,8 +62,8 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
   };
 
   const initialValues = {
-    mobile_number: "8292966990",
-    gstNumber: "07AADCD4946L1ZC",
+    mobile_number: "",
+    gstNumber: "",
     termsAndConditions: false,
     type: "user",
     country_iso: '91',

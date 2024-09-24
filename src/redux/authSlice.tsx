@@ -27,7 +27,7 @@ interface AuthState {
 const initialState: AuthState = {
   profileFilled: false,
   showProfileForm: false,
-  showProfileFormCorporate: true,
+  showProfileFormCorporate: false,
   otpModal: false,
   isLoggedIn: false,
   isLoggedInForTempleReceipt: false,

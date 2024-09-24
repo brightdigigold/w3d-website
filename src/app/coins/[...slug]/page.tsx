@@ -132,7 +132,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   }
 
   return (
-    <div className="container pt-32  text-white pb-28 xl:pb-8">
+    <div className="px-12 pt-32  text-white pb-28 xl:pb-8">
       {openLoginAside && (
         <LoginAside
           isOpen={openLoginAside}
@@ -184,6 +184,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               slideDuration={0.5}
             />
           </div>
+
           <div className="block sm:hidden bg-themeLight rounded p-4">
             <SimpleImageSlider
               width={240}
@@ -199,8 +200,8 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               slideDuration={0.5}
             />
           </div>
-          <div className="grid grid-cols-2 gap-3 items-center mt-2">
 
+          <div className="grid grid-cols-2 gap-3 items-center mt-2">
             {/* BUY NOW */}
             <div>
               <CustomImageButton
