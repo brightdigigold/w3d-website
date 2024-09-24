@@ -274,7 +274,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                 </span>
               </div>
               <div className="text-base sm:text-lg bold text-blue-100 ">
-                Making Charge ₹{productsDetailById.makingcharges}
+                Making Charge ₹{(productsDetailById.makingcharges)}
               </div>
               {maxCoinError && <p className="text-red-600">{maxCoinError}</p>}
             </div>

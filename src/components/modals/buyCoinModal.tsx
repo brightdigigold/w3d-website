@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import CustomButton from "../customButton";
 import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 import {
+  ParseFloat,
   funForAesEncrypt,
   funcForDecrypt,
   renderPriceBreakdownItem,
@@ -111,8 +112,8 @@ export default function CoinModal({
       const dataToBeDecrypt = {
         orderType: "PRODUCT",
         itemType: productsDetailById.iteamtype === "GOLD" ? "GOLD" : "SILVER",
-        amount: goldData.totalPrice,
-        gram: productsDetailById.weight,
+        amount: ParseFloat(((productsDetailById.makingcharges) * totalCoins), 2),
+        gram: (productsDetailById.weight * totalCoins),
         isVault: useWallet,
         currentMatelPrice:
           productsDetailById.iteamtype == "GOLD"
@@ -123,7 +124,7 @@ export default function CoinModal({
         product_quantity: totalCoins,
         product_id: productsDetailById._id,
       };
-
+      console.log("dataToBeDecrypt", dataToBeDecrypt)
       const resAfterEncryptData = await funForAesEncrypt(dataToBeDecrypt);
       const payloadToSend = { payload: resAfterEncryptData };
       const token = localStorage.getItem("token");
