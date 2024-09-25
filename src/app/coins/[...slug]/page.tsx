@@ -133,7 +133,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   }
 
   return (
-    <div className="px-12 pt-32  text-white pb-28 xl:pb-8">
+    <div className="pt-32  text-white pb-28 xl:pb-8">
       {openLoginAside && (
         <LoginAside
           isOpen={openLoginAside}

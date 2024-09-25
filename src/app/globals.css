@@ -921,6 +921,14 @@ body.modal-open {
   display: flex;
   flex-direction: column; /* Vertically aligned thumbnails by default */
   gap: 10px;
+  padding: 10px;
+}
+
+/* Thumbnail wrapper */
+.thumbnail-wrapper {
+  position: relative;
+  cursor: pointer;
+  padding: 10px;
 }
 
 /* Main media container */
@@ -930,6 +938,7 @@ body.modal-open {
   overflow: hidden;
   cursor: zoom-in;
   margin-bottom: 10px;
+  padding: 10px;
 }
 
 /* Main image or video */
@@ -944,14 +953,31 @@ body.modal-open {
   width: 80px;
   height: 80px;
   object-fit: cover;
-  cursor: pointer;
   border: 2px solid transparent;
   transition: border 0.3s ease;
+  padding: 5px;
 }
 
 /* Highlight the active thumbnail */
 .active-thumbnail {
   border: 2px solid #ff9900; /* Border when a thumbnail is active */
+}
+
+/* Play icon styling */
+.video-thumbnail {
+  position: relative;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
 }
 
 /* Hover zoom effect for the main image */
@@ -976,6 +1002,7 @@ body.modal-open {
   .thumbnail-image {
     width: 60px;
     height: 60px;
+    padding: 5px;
   }
 
   .main-media-container {
