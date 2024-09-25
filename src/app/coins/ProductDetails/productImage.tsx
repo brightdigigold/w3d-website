@@ -63,7 +63,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
             height="100%"
           />
         ) : (
-          <img src={mainMedia} alt="Main" className="main-media p-4" />
+          <img src={mainMedia} alt="Main" className="main-media " />
         )}
       </div>
     </div>
