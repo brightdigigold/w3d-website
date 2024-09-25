@@ -19,7 +19,7 @@ interface AuthState {
   purpose: string;
   devotee_isNewUser: boolean;
   otpMsg: string;
-  UserType: 'user' | 'corporate' | 'temple' | '';
+  UserType: 'user' | 'corporate' | 'temple' | '' | string;
   corporateBusinessDetails: CorporateBusinessDetails | null;
   authenticationMode: "personalLogin" | "corporateLogin" | "corporateSignUp" | null;
 }
@@ -70,7 +70,7 @@ const authSlice = createSlice({
     setOtpMsg: (state, action: PayloadAction<string>) => {
       state.otpMsg = action.payload;
     },
-    SetUserType: (state, action: PayloadAction<'' | 'user' | 'corporate' | 'temple'>) => {
+    SetUserType: (state, action: PayloadAction<'' | 'user' | 'corporate' | 'temple' | string>) => {
       state.UserType = action.payload;
     },
     setAuthenticationMode: (state, action: PayloadAction<"personalLogin" | "corporateLogin" | "corporateSignUp" | null>) => {

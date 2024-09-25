@@ -3,8 +3,11 @@ import { Tab } from "@headlessui/react";
 import OrdersTabs from "../ordersTab/tabs/tabs";
 import GiftTab from "../giftTab/tabs";
 import { classNames } from "@/components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { useEffect } from "react";
+import { selectUser } from "@/redux/userDetailsSlice";
+import { SetUserType } from "@/redux/authSlice";
 
 const data = [
   { id: 1, name: "Orders" },
@@ -12,7 +15,13 @@ const data = [
 ];
 
 const DashboardTopTabs = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const userType = useSelector((state: RootState) => state.auth.UserType);
+
+  useEffect(() => {
+    dispatch(SetUserType(user.data.type));
+  }, [])
 
   return (
     <div className="w-full pt-32 pb-28 xl:pb-8">

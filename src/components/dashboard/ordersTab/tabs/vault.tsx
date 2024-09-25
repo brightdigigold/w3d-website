@@ -22,6 +22,8 @@ const Vault = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
+  console.log("userType from vault", userType)
+
   return (
     <div className="w-full">
       {/* {loading && <Loading />} */}

@@ -19,7 +19,7 @@ import {
 } from "@/redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
-import { fetchUserDetails } from "@/redux/userDetailsSlice";
+import { fetchUserDetails, selectUser } from "@/redux/userDetailsSlice";
 import CustomButton from "../customButton";
 import Notiflix from "notiflix";
 import { fetchWalletData } from "@/redux/vaultSlice";
@@ -31,6 +31,7 @@ export default function OtpModal() {
   const purpose = useSelector((state: RootState) => state.auth.purpose);
   const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
   const userType = useSelector((state: RootState) => state.auth.UserType);
+  const user = useSelector(selectUser);
   const [open, setOpen] = useState(true);
   const [otpError, setOtpError] = useState("");
   const cancelButtonRef = useRef(null);
@@ -145,6 +146,7 @@ export default function OtpModal() {
             dispatch(fetchUserDetails());
             dispatch(setIsLoggedIn(true));
             dispatch(fetchWalletData() as any);
+            dispatch(SetUserType(user.data.type));
             if (result.data.isNewUser) {
               mixpanel.identify(mobile_number);
               mixpanel.track('New User Login(web)');
