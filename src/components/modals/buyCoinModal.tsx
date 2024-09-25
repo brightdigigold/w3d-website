@@ -168,7 +168,6 @@ export default function CoinModal({
               text: errorMessage,
             });
           } else {
-            console.error("Decryption returned no data:", decryptedData);
             Swal.fire({
               icon: "error",
               title: "Decryption Error",
@@ -176,7 +175,6 @@ export default function CoinModal({
             });
           }
         } catch (decryptionError) {
-          console.error("Error during decryption:", decryptionError);
           Swal.fire({
             icon: "error",
             title: "Decryption Error",

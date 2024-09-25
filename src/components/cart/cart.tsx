@@ -57,6 +57,7 @@ import { useCartTotals } from "@/hooks/useCartTotals";
 import CartFooter from "./cartFooter";
 import { debounce } from 'lodash';
 import { useAddToCart } from "@/hooks/useAddToCart";
+import Notiflix from "notiflix";
 
 interface CartItem {
   product: Product;
@@ -150,7 +151,7 @@ const Cart = () => {
     dispatch(setSilverVaultBalance(silverVaultBalance));
     // dispatch(setLiveGoldPrice(goldData.totalPrice));
     // dispatch(setLiveSilverPrice(silverData.totalPrice));
-    dispatch(setLiveGoldPrice(userType == "corporate" ? goldData.c_totalPrice : goldData.totalPrice ));
+    dispatch(setLiveGoldPrice(userType == "corporate" ? goldData.c_totalPrice : goldData.totalPrice));
     dispatch(setLiveSilverPrice(userType === "corporate" ? silverData.c_totalPrice : silverData.totalPrice));
     dispatch(calculatePurchasedGoldWeight());
     dispatch(calculatePurchasedSilverWeight());
@@ -170,6 +171,8 @@ const Cart = () => {
       }));
   }, [cart.products]);
 
+  console.log("goldPayload", goldPayload);
+
   const silverPayload = useMemo(() => {
     return cart.products
       .filter((item) => item?.product?.iteamtype === "SILVER")
@@ -179,6 +182,8 @@ const Cart = () => {
         count: item?.product?.count,
       }));
   }, [cart.products]);
+
+  console.log("silverPayload", silverPayload)
 
   const getAllProductsOfCart = async () => {
     setLoading(true);
@@ -419,6 +424,26 @@ const Cart = () => {
 
   const checkoutCart = async () => {
     setLoading(true);
+    console.log("userType", { userType, totalSilverWeight, totalGoldWeight })
+    if (userType === 'corporate') {
+      // Check for Silver weight
+      if (silverPayload.length > 0) {
+        if (totalSilverWeight < 500) {
+          Notiflix.Report.failure('Error', 'You cannot purchase less than 500g of silver.', 'OK');
+          setLoading(false);
+          return;
+        }
+      }
+      // Check for Gold weight
+      if (goldPayload.length > 0) {
+        if (totalGoldWeight < 10) {
+          Notiflix.Report.failure('Error', 'You cannot purchase less than 10g of gold.', 'OK');
+          setLoading(false);
+          return;
+        }
+      }
+    }
+
     try {
       if (addressList && addressList.length == 0) {
         Swal.fire({
