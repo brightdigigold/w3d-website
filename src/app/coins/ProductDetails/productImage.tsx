@@ -7,7 +7,8 @@ interface ImageGalleryProps {
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   const [mainMedia, setMainMedia] = useState(images[0]);
-  const [activeIndex, setActiveIndex] = useState(0); // Track which image or video is active
+  const [activeIndex, setActiveIndex] = useState(0); 
+//   console.log("images", images)
 
   // Function to determine if the media is a video
   const isVideo = (url: string) => {

@@ -1,27 +1,26 @@
-"use client";
-import Loading from "@/app/loading";
-import LoginAside from "@/components/authSection/loginAside";
-import CartSideBar from "@/components/cart/cartSidebar";
-import { ParseFloat } from "@/components/helperFunctions";
-import CoinModal from "@/components/modals/buyCoinModal";
-import OtpModal from "@/components/modals/otpModal";
-import { RootState } from "@/redux/store";
-import { selectUser } from "@/redux/userDetailsSlice";
-import Link from "next/link";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
-import SimpleImageSlider from "react-simple-image-slider";
-import CustomImageButton from "@/components/customImageButton";
-import { SelectGoldData, SelectSilverData } from "@/redux/metalSlice";
+'use client'
+import { useDispatch, useSelector } from "react-redux";
 import CheckPinCode from "../ProductDetails/checkPinCode";
-import useFetchProductDetailsById from "../../../hooks/useFetchProductDetailsById";
-import useFetchProductCart from "@/hooks/useFetchProductCart";
-import { useAddToCart } from "@/hooks/useAddToCart";
 import ProductDescription from "../ProductDetails/productDescription";
-import { setShowProfileForm } from "@/redux/authSlice";
-import { useDispatch } from "react-redux";
+import { selectUser } from "@/redux/userDetailsSlice";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { SelectGoldData, SelectSilverData } from "@/redux/metalSlice";
+import { useAddToCart } from "@/hooks/useAddToCart";
+import useFetchProductDetailsById from "@/hooks/useFetchProductDetailsById";
+import useFetchProductCart from "@/hooks/useFetchProductCart";
+import { RootState } from "@/redux/store";
 import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
+import { setShowProfileForm } from "@/redux/authSlice";
+import { ParseFloat } from "@/components/helperFunctions";
+// import { Loading } from "notiflix";
+import OtpModal from "@/components/modals/otpModal";
+import CartSideBar from "@/components/cart/cartSidebar";
+import CoinModal from "@/components/modals/buyCoinModal";
 import ImageGallery from "../ProductDetails/productImage";
+import CustomImageButton from "@/components/customImageButton";
+import Link from "next/link";
+import LoginAside from "@/components/authSection/loginAside";
+import Loading from "@/app/loading";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
@@ -111,7 +110,6 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     if (isloggedIn) {
       setMaxCoinError("");
       await addToCart(action_type, quantity, productId);
-      // refetch();
     } else {
       handleLoginClick();
     }
@@ -126,14 +124,12 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     );
   }, [productsDetailById, quantity, liveGoldPrice, liveSilverPrice]);
 
-  // console.log("liveGoldPrice", liveGoldPrice)
-
   if (!productsDetailById) {
     return <Loading />;
   }
 
   return (
-    <div className="pt-32  text-white pb-28 xl:pb-8">
+    <div className="pt-24 pb-8 xl:pb-8 text-white">
       {openLoginAside && (
         <LoginAside
           isOpen={openLoginAside}
@@ -161,143 +157,104 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
         />
       )}
 
-      <div className="grid xl:grid-cols-5 gap-12">
+      <div className="grid grid-cols-1 xl:grid-cols-5 gap-12 px-4 xl:px-0">
         <div className="col-span-5 xl:col-span-2 relative">
           {/* Absolute positioning for out-of-stock image */}
           {!productsDetailById.inStock && (
-            <div className="bg-red-600 absolute top-0 right-0 px-2  rounded-bl-lg">
+            <div className="absolute top-0 right-0 px-2 rounded-bl-lg">
               <p className="font-medium">Out Of Stock</p>
             </div>
           )}
 
-          <ImageGallery images={productsDetailById.image} />
-          {/* <div className="hidden sm:block bg-themeLight rounded p-4">
-            <SimpleImageSlider
-              width={400}
-              height={400}
-              images={productsDetailById.image}
-              showBullets={false}
-              style={{ margin: "0 auto" }}
-              showNavs={false}
-              loop={true}
-              autoPlay={true}
-              bgColor="#red"
-              autoPlayDelay={2.0}
-              slideDuration={0.5}
-            />
-          </div>
+          <ImageGallery images={productsDetailById.image}/>
 
-          <div className="block sm:hidden bg-themeLight rounded p-4">
-            <SimpleImageSlider
-              width={240}
-              height={240}
-              images={productsDetailById.image}
-              showBullets={false}
-              style={{ margin: "0 auto" }}
-              showNavs={false}
-              loop={true}
-              autoPlay={true}
-              bgColor="#red"
-              autoPlayDelay={2.0}
-              slideDuration={0.5}
-            />
-          </div> */}
+          <div className="grid grid-cols-3 items-center">
+            {/* Spacer */}
+            <div></div>
 
-          <div className="grid grid-cols-2 gap-3 items-center mt-2">
             {/* BUY NOW */}
-            <div>
+            <div className="">
               <CustomImageButton
                 img="/lottie/buynow.png"
                 isDisabled={!productsDetailById.inStock}
-                handleClick={() => {
-                  openCoinModalHandler();
-                }}
-                title={""}
+                handleClick={openCoinModalHandler}
+                title=""
               />
             </div>
-            <div className={`fade-section }`}>
-              <div>
-                {/* GO TO CART */}
-                {quantity === cartQuantity && (
-                  <div>
-                    <Link className="cursor-pointer" href="/cart">
-                      <CustomImageButton
-                        img="/lottie/Go to cart.gif"
-                        isDisabled={!productsDetailById.inStock}
-                        title="GO TO CART"
-                      />
-                    </Link>
-                  </div>
-                )}
 
-                {/* Update TO CART */}
-                {cartQuantity !== 0 && cartQuantity !== quantity && (
-                  <div>
+            <div>
+              {/* GO TO CART */}
+              {quantity === cartQuantity && (
+                <div>
+                  <Link className="cursor-pointer" href="/cart">
                     <CustomImageButton
-                      img="/lottie/updatenow.png"
+                      img="/lottie/Go to cart.gif"
                       isDisabled={!productsDetailById.inStock}
-                      handleClick={() => {
-                        addToCartHandler("UpdateCart");
-                      }}
-                      title="UPDATE CART"
+                      title="GO TO CART"
                     />
-                  </div>
-                )}
+                  </Link>
+                </div>
+              )}
 
-                {/* ADD TO CART */}
-                {cartQuantity === 0 && (
+              {/* UPDATE CART */}
+              {cartQuantity !== 0 && cartQuantity !== quantity && (
+                <div>
                   <CustomImageButton
-                    img="/lottie/addcart.gif"
+                    img="/lottie/updatenow.png"
                     isDisabled={!productsDetailById.inStock}
-                    handleClick={() => {
-                      addToCartHandler("AddToCart");
-                    }}
-                    title=""
+                    handleClick={() => addToCartHandler("UpdateCart")}
+                    title="UPDATE CART"
                   />
-                )}
-              </div>
+                </div>
+              )}
+
+              {/* ADD TO CART */}
+              {cartQuantity === 0 && (
+                <CustomImageButton
+                  img="/lottie/addcart.gif"
+                  isDisabled={!productsDetailById.inStock}
+                  handleClick={() => addToCartHandler("AddToCart")}
+                  title=""
+                />
+              )}
             </div>
           </div>
         </div>
-        <div className="col-span-5 xl:col-span-3">
+
+        <div className="col-span-5 xl:col-span-3 p-4 rounded-lg">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="mb-2 sm:text-lg extrabold">
-                {productsDetailById.name}
-              </h1>
-              <div className="mb-2">
+              <h1 className="mb-2 text-lg xl:text-2xl font-extrabold">{productsDetailById.name}</h1>
+              <div className="mb-2 text-sm xl:text-lg">
                 Total Price{" "}
-                <span className="text-yellow-500 text-base sm:text-xl bold">
-                  ₹ {totalPrice}
-                </span>
-                <span className="text-yellow-500 pl-1 text-xxs sm:text-xs mt-1">
-                  {" "}
-                  +3% GST
-                </span>
+                <span className="text-yellow-500 font-bold">₹ {totalPrice}</span>
+                <span className="text-yellow-500 pl-1 text-xs"> +3% GST</span>
               </div>
-              <div className="text-base sm:text-lg bold text-blue-100 ">
-                Making Charge ₹{(productsDetailById.makingcharges)}
-              </div>
+              <div className="text-base text-blue-100">Making Charge ₹{productsDetailById.makingcharges}</div>
               {maxCoinError && <p className="text-red-600">{maxCoinError}</p>}
             </div>
-            <div className="flex items-center rounded-lg bg-themeLight">
-              <div onClick={() => {
-                decreaseQty();
-              }} className={styles.p1}>
+
+            <div className="flex items-center">
+              <div
+                onClick={decreaseQty}
+                className={styles.p1}
+              >
                 -
               </div>
-              <div className="">{quantity}</div>
-              <div onClick={() => {
-                increaseQty();
-              }} className={styles.p2}>
+              <div className="px-4 text-lg">{quantity}</div>
+              <div
+                onClick={increaseQty}
+                className={styles.p2}
+              >
                 +
               </div>
             </div>
           </div>
-          {/*check pin code */}
+
+          {/* Pin Code Checker */}
           <CheckPinCode />
 
-          {/*coin description */}
+          {/* Product Description */}
           <ProductDescription
             description={productsDetailById?.description}
             weight={productsDetailById?.weight}
@@ -307,7 +264,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
           />
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
