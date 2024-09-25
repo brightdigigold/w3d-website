@@ -43,18 +43,18 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
   }, [isOpen]);
 
 
-  // useEffect(() => {
-  //   const handleClickOutside = (event: any) => {
-  //     if (modalRef.current && !modalRef.current.contains(event.target)) {
-  //       onClose();
-  //     }
-  //   };
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
 
-  //   document.addEventListener('mousedown', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, [modalRef, onClose]);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [modalRef, onClose]);
 
   const handleTermsClick = () => {
     router.push("/term-and-conditions")
