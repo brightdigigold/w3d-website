@@ -21,6 +21,7 @@ import ProductDescription from "../ProductDetails/productDescription";
 import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
 import { setLiveGoldPrice, setLiveSilverPrice } from "@/redux/cartSlice";
+import ImageGallery from "../ProductDetails/productImage";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const user = useSelector(selectUser);
@@ -169,7 +170,8 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
             </div>
           )}
 
-          <div className="hidden sm:block bg-themeLight rounded p-4">
+          <ImageGallery images={productsDetailById.image} />
+          {/* <div className="hidden sm:block bg-themeLight rounded p-4">
             <SimpleImageSlider
               width={400}
               height={400}
@@ -199,7 +201,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               autoPlayDelay={2.0}
               slideDuration={0.5}
             />
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-2 gap-3 items-center mt-2">
             {/* BUY NOW */}

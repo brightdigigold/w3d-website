@@ -724,7 +724,6 @@ input.inputBox {
   }
 }
 
-
 .fade-section {
   transition: opacity 0.5s ease-in-out;
 }
@@ -886,28 +885,102 @@ body.modal-open {
 
 /* Customize the Notiflix error icon */
 .notiflix-report-icon .notiflix-svg {
-  width: 50px !important;   /* Custom icon size */
-  height: 50px !important;  /* Custom icon size */
+  width: 50px !important; /* Custom icon size */
+  height: 50px !important; /* Custom icon size */
 }
 
 /* Customize the background of the Notiflix failure report */
 .notiflix-report-failure {
-  background: url('/path/to/your/custom/background.jpg') no-repeat center center;
+  background: url("/path/to/your/custom/background.jpg") no-repeat center center;
   background-size: cover;
   border-radius: 10px; /* Rounded corners for custom background */
 }
 
 /* Further customization for the text */
 .notiflix-report-content {
-  color: #333;  /* Custom text color */
+  color: #333; /* Custom text color */
   font-size: 16px;
 }
 
 .notiflix-report-title {
-  font-size: 20px;  /* Custom title size */
-  color: #721c24;  /* Custom title color */
+  font-size: 20px; /* Custom title size */
+  color: #721c24; /* Custom title color */
 }
 
+/* Container for the entire gallery */
+.gallery-container {
+  display: flex;
+  flex-direction: row; /* Default is side-by-side (desktop/tablets) */
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
 
+/* Thumbnails (default: vertical for desktop/tablets) */
+.thumbnails {
+  display: flex;
+  flex-direction: column; /* Vertically aligned thumbnails by default */
+  gap: 10px;
+}
 
+/* Main media container */
+.main-media-container {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  cursor: zoom-in;
+  margin-bottom: 10px;
+}
+
+/* Main image or video */
+.main-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Thumbnails */
+.thumbnail-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.3s ease;
+}
+
+/* Highlight the active thumbnail */
+.active-thumbnail {
+  border: 2px solid #ff9900; /* Border when a thumbnail is active */
+}
+
+/* Hover zoom effect for the main image */
+.main-media-container:hover .main-media {
+  transform: scale(1.2);
+}
+
+/* Responsive styling for mobile */
+@media (max-width: 768px) {
+  /* On mobile, show thumbnails below the main image horizontally */
+  .gallery-container {
+    flex-direction: column-reverse; /* Ensure thumbnails are below the main image */
+  }
+
+  .thumbnails {
+    flex-direction: row; /* Change thumbnails to horizontal */
+    gap: 5px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .thumbnail-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .main-media-container {
+    width: 300px;
+    height: 300px;
+  }
+}
 
