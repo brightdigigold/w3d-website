@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import OtpModal from "../modals/otpModal";
 import LoginAside from "../authSection/loginAside";
 import SetProfileForNewUser from "../setProfile";
-import Image from "next/image";
-import { selectIsloggedIn, setShowProfileForm } from "@/redux/authSlice";
+import { setShowProfileForm } from "@/redux/authSlice";
 
 const HeroAbout = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
