@@ -24,7 +24,7 @@ export default function DussheraBanner() {
                 onClick={handleBannerClick}
                 width={7500}
                 height={750}
-                className=""
+                className="cursor-pointer"
                 priority
                 loading="eager" 
                 layout="responsive"
