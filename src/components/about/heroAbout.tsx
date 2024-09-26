@@ -27,12 +27,6 @@ const HeroAbout = () => {
       {openLoginAside && <LoginAside isOpen={openLoginAside} onClose={() => setOpenLoginAside(false)} />}
 
       <div className="mx-auto px-4 sm:px-6 lg:px-16">
-        {/* <Image
-          className=" absolute top-48 -left-20 opacity-20 z-10"
-          src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
-          alt="Bright Digi Gold"
-          width={500} height={500}
-        /> */}
         <div className="grid gap-4">
           <motion.div
             initial="hidden"
@@ -40,26 +34,25 @@ const HeroAbout = () => {
             viewport={{ once: false, amount: 0.25 }}
             className=""
           >
-
             <div className="flex items-center justify-center px-4 lg:px-52">
               <motion.div variants={fadeIn("left", "spring", 0.2, 1)}>
                 <img
                   className="z-20 relative"
-                  src="/Login Screen.png"
+                  src="/Phone 1 Corporate Login.png"
                   alt="App login screen"
                 />
               </motion.div>
               <motion.div variants={textVariant(1.1)}>
                 <img
                   className="-mt-28 z-20 relative"
-                  src="/Home Screen.png"
+                  src='/Phone 2 Home Screen.png'
                   alt="app home screen"
                 />
               </motion.div>
               <motion.div variants={fadeIn("right", "spring", 0.2, 1)}>
                 <img
                   className="z-20 relative"
-                  src="/Coin Screen.png"
+                  src="/Phone 2 Home Screen.png"
                   alt="app coin screen"
                 />
               </motion.div>
