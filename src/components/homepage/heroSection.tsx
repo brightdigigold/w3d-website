@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BuySell from "./buySell";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -17,6 +17,7 @@ import OtpModal from "../modals/otpModal";
 import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import Image from "next/image";
+import { FaTimes } from "react-icons/fa";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -24,9 +25,41 @@ const HeroSection = () => {
   const showProfileForm = useSelector(
     (state: RootState) => state.auth.showProfileForm
   );
+  const [showNavratriModal, setShowNavratriModal] = useState(false);
 
   const onClose = () => {
     dispatch(setShowProfileForm(false));
+  };
+
+  // useEffect(() => {
+  //   // Check if the user has closed the modal before
+  //   const modalClosed = localStorage.getItem("navratriModalClosed");
+  //   if (!modalClosed) {
+  //     setShowNavratriModal(true); // Show the modal if not closed before
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("modalClosed"); // Remove flag on refresh or exit
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    const modalClosed = localStorage.getItem("modalClosed");
+    if (!modalClosed) {
+      setShowNavratriModal(true); // Show modal if it hasn't been closed manually
+    }
+
+    // Cleanup event listener when the component unmounts
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  const closeModal = () => {
+    setShowNavratriModal(false);
+    localStorage.setItem("navratriModalClosed", "true"); // Save the flag to localStorage
   };
 
   useEffect(() => {
@@ -77,8 +110,8 @@ const HeroSection = () => {
     functionToFetchWalletData();
   }, [dispatch]);
 
-
-  const line = "We at Bright DiGi Gold invite you to embark on a journey of effortless digital savings. In just a few clicks make your savings grow in Digital Gold and Silver.  Your gateway to hassle-free savings is here."
+  const line =
+    "We at Bright DiGi Gold invite you to embark on a journey of effortless digital savings. In just a few clicks make your savings grow in Digital Gold and Silver.  Your gateway to hassle-free savings is here.";
 
   const sentence = {
     hidden: { opacity: 1 },
@@ -89,7 +122,7 @@ const HeroSection = () => {
         staggerChildren: 0.03,
       },
     },
-  }
+  };
 
   const letter = {
     hidden: { opacity: 0, y: 50 },
@@ -97,18 +130,40 @@ const HeroSection = () => {
       opacity: 1,
       y: 0,
     },
-  }
+  };
 
   return (
     <div className="bg-theme mt-8">
       {otpModal && <OtpModal />}
+
+      {showNavratriModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="fixed inset-0 bg-black opacity-50"></div>
+          <div className="relative bg-white rounded-lg max-w-xl w-full">
+            <Image
+              src='/Navratri Giveaway Banner Popup.jpg'
+              alt="Navratri giveaway Popup"
+              width={950}
+              height={625}
+              objectFit="contain"
+            />
+            <button
+              onClick={closeModal}
+              className="absolute top-3 right-3 text-xl text-red-800"
+            >
+              <FaTimes size={32} className="border-2 border-red-500 rounded-full p-1 transition-colors duration-300 ease-in-out" />
+            </button>
+          </div>
+        </div>
+      )}
+
       <motion.div
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="relative" style={{ width: '100%', height: 'auto' }}>
+          <div className="relative" style={{ width: "100%", height: "auto" }}>
             <Image
               src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgwhite5.webp"
               alt="Your Company"
@@ -169,17 +224,21 @@ const HeroSection = () => {
                   </p>
                 </div>
                 <div className="mb-4 mt-6 pr-28">
-                  <motion.h3 className="load-screen--message text-white leading-8 text-lg text-justify"
+                  <motion.h3
+                    className="load-screen--message text-white leading-8 text-lg text-justify"
                     variants={sentence}
                     initial="hidden"
                     animate="visible"
                   >
                     {line.split("").map((char: any, index: any) => {
                       return (
-                        <motion.span key={char + "-" + index} variants={letter}>
+                        <motion.span
+                          key={char + "-" + index}
+                          variants={letter}
+                        >
                           {char}
                         </motion.span>
-                      )
+                      );
                     })}
                   </motion.h3>
                 </div>
