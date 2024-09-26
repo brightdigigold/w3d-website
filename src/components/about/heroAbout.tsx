@@ -52,7 +52,7 @@ const HeroAbout = () => {
               <motion.div variants={fadeIn("right", "spring", 0.2, 1)}>
                 <img
                   className="z-20 relative"
-                  src="/Phone 2 Home Screen.png"
+                  src="/Phone 3 Coin page.png"
                   alt="app coin screen"
                 />
               </motion.div>
