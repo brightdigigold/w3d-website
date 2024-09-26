@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import OtpModal from "../modals/otpModal";
 import LoginAside from "../authSection/loginAside";
 import SetProfileForNewUser from "../setProfile";
-import Image from "next/image";
-import { selectIsloggedIn, setShowProfileForm } from "@/redux/authSlice";
+import { setShowProfileForm } from "@/redux/authSlice";
 
 const HeroAbout = () => {
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
@@ -52,7 +51,7 @@ const HeroAbout = () => {
               <motion.div variants={fadeIn("right", "spring", 0.2, 1)}>
                 <img
                   className="z-20 relative"
-                  src="/Phone 2 Home Screen.png"
+                  src="/Phone 3 Coin page.png"
                   alt="app coin screen"
                 />
               </motion.div>

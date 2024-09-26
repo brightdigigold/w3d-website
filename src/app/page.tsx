@@ -20,6 +20,9 @@ const Review = dynamic(() => import('../components/homepage/reviews'), { suspens
 export default function Home() {
   return (
     <>
+      <div className="mt-16 sm:mt-20">
+        <DussheraBanner />
+      </div>
       <HeroSection />
       {/* <div className="hidden sm:block">
         <OfferSlider />
@@ -88,12 +91,11 @@ export default function Home() {
             className="rounded-b  mx-auto mt-8"
           />
         </div> */}
-        <AutosavebannerMobile/>
+        <AutosavebannerMobile />
         <div className="hidden sm:block">
           <OfferSlider />
         </div>
       </div>
-      <DussheraBanner />
       <Suspense fallback={<Loading />}>
         <Promotional />
         <Products />
