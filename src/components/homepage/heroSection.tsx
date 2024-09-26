@@ -137,8 +137,8 @@ const HeroSection = () => {
       {otpModal && <OtpModal />}
 
       {showNavratriModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="fixed inset-0 bg-black opacity-50"></div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center cursor-pointer">
+          <div className="fixed inset-0 bg-black opacity-70"></div>
           <div className="relative bg-white rounded-lg max-w-xl w-full">
             <Image
               src='/Navratri Giveaway Banner Popup.jpg'
@@ -146,6 +146,9 @@ const HeroSection = () => {
               width={950}
               height={625}
               objectFit="contain"
+              onClick={() => {
+                window.open("https://www.instagram.com/brightdigigold/", '_blank');
+              }}
             />
             <button
               onClick={closeModal}
