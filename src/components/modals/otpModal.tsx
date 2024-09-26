@@ -184,20 +184,15 @@ export default function OtpModal() {
         }
         setSubmitting(false);
       } catch (error: any) {
-        dispatch(setShowOTPmodal(false));
+        // dispatch(setShowOTPmodal(false));
         const decryptedData = AesDecrypt(error?.response?.data?.payload);
         const result = JSON.parse(decryptedData);
-        Swal.fire({
-          html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
-          title: "Oops...",
-          titleText: result.message,
-        });
         setOtp("");
-        setOtpError("");
+        setOtpError(result.message);
         setSubmitting(false);
       } finally {
         setSubmitting(false);
-        dispatch(setShowOTPmodal(false));
+        // dispatch(setShowOTPmodal(false));
       }
     }
   };
@@ -322,7 +317,7 @@ export default function OtpModal() {
                           renderInput={(props) => <input {...props} />}
                         />
                         {otpError && (
-                          <div className="text-red-600">{otpError}</div>
+                          <div className="text-red-600 ml-1 semibold">{otpError}</div>
                         )}
                       </div>
                     </div>
