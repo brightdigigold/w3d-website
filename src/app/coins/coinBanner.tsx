@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 const CoinBanner = () => {
     return (
-        <div className='flex bg-[#C8E9F2] justify-between mx-auto '>
-            <div className='w-1/4  mt-24 lg:mt-12'>
+        <div className='flex bg-[#C8E9F2] justify-between mx-auto mt-20'>
+            {/* <div className='w-1/4  mt-24 lg:mt-12'>
                 <Image
                     src="/gaytri.png"
                     alt="gold and silver coin banner"
@@ -36,6 +36,13 @@ const CoinBanner = () => {
                 src="/Coins stand (1).png"
                 alt="gold and silver coin banner"
                 className="rounded-b mt-52 h-2/6 w-2/6 mr-6"
+            /> */}
+            <Image
+                src="https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/Navratri+banner+coin+page+NEW.jpg"
+                alt="gold and silver coin banner"
+                width={2500}
+                height={1000}
+                layout='responsive'
             />
         </div>
     )

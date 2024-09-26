@@ -21,7 +21,7 @@ const Page = () => {
           />
         </div>
 
-        <div className="grid place-items-center mt-8 fade-in-up">
+        {/* <div className="grid place-items-center mt-8 fade-in-up">
           <div className="text-black text-center pt-1 poppins-bold ">
             <h1 className="text-4xl">
               GET FREE DELIVERY
@@ -32,6 +32,23 @@ const Page = () => {
           </h4>
           <h4 className="text-black text-center pt-1 text-2xl">
             at your Doorstep
+          </h4>
+        </div> */}
+
+        <div className="grid place-items-center mt-8 fade-in-up">
+          <div className="text-black text-center pt-1 poppins-extraBold ">
+            <h1 className="text-3xl tracking-normal">
+              OUR NEW RANGE
+            </h1>
+          </div>
+          <h4 className="text-black text-center pt-1 text-2xl">
+            Of Silver Coins
+          </h4>
+          <h4 className="text-black text-center pt-1 poppins-bold text-2xl tracking-wide">
+            GET FREE DELIVERY
+          </h4>
+          <h4 className="bg-black text-center text-[#C8E9F2] text-md px-2">
+            oF Gold and Silver Coins at Your Doorstep
           </h4>
         </div>
 
