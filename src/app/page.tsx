@@ -96,7 +96,6 @@ export default function Home() {
           <OfferSlider />
         </div>
       </div>
-      <DussheraBanner />
       <Suspense fallback={<Loading />}>
         <Promotional />
         <Products />
