@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import { Metadata } from "next";
 import { HeroSection, OfferSlider } from '@/components';
+import AutosavebannerMobile from '@/components/homepage/autosavebanner';
 
 const Promotional = dynamic(() => import('../components/homepage/promotional'), { suspense: true });
 const Products = dynamic(() => import('../components/homepage/products'), { suspense: true });
@@ -54,7 +55,7 @@ export default function Home() {
       </div>
       {/* pb-2 xl:pb-8  */}
       <div className=''>
-        <div className='bg-[#C8E9F2] mx-auto sm:hidden'>
+        {/* <div className='bg-[#C8E9F2] mx-auto sm:hidden'>
           <div className='  w-2/3 mx-auto'>
 
             <img
@@ -85,7 +86,8 @@ export default function Home() {
             alt="gold and silver coin banner"
             className="rounded-b  mx-auto mt-8"
           />
-        </div>
+        </div> */}
+        <AutosavebannerMobile/>
         <div className="hidden sm:block">
           <OfferSlider />
         </div>
