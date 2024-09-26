@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import { Metadata } from "next";
 import { HeroSection, OfferSlider } from '@/components';
+import DussheraBanner from '@/components/homepage/dussheraBanner';
 
 const Promotional = dynamic(() => import('../components/homepage/promotional'), { suspense: true });
 const Products = dynamic(() => import('../components/homepage/products'), { suspense: true });
@@ -90,6 +91,7 @@ export default function Home() {
           <OfferSlider />
         </div>
       </div>
+      <DussheraBanner />
       <Suspense fallback={<Loading />}>
         <Promotional />
         <Products />
