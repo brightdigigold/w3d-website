@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import { Poppins } from "next/font/google";
 import { initializeNotiflix } from "@/utils/customNotiflix";
 import InactivityHandler from "@/components/inactivityHandler";
+import DussheraBanner from "@/components/homepage/dussheraBanner";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
           <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
             <div className={`${poppins.className} `}>
               <Navbar />
+             
               <InactivityHandler />
               <main className=" ">
                 <div className="">
