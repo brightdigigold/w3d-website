@@ -52,11 +52,20 @@ const Page = () => {
           </h4>
         </div>
 
-        <img
+        {/* <img
           src="/Coins stand (1).png"
           alt="gold and silver coin banner"
           className="rounded-b  mx-auto mt-8 p-4"
-        />
+        /> */}
+
+        <div>
+          <Image
+            src='/NewNavratribannercoinStand.png'
+            alt=''
+            className='mt-8'
+            width={400}
+            height={400} />
+        </div>
       </div>
       <div className="hidden sm:block">
         <CoinBanner />
