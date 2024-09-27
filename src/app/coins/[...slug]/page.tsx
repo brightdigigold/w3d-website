@@ -104,7 +104,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const addToCartHandler = async (action_type: string,) => {
     if (isloggedIn) {
       setMaxCoinError("");
-      await addToCart(action_type, quantity ,productId);
+      await addToCart(action_type, quantity, productId);
       // refetch();
     } else {
       handleLoginClick();
@@ -120,6 +120,11 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     );
   }, [productsDetailById, quantity, goldData.totalPrice, silverData.totalPrice]);
 
+  useEffect(() => {
+    if (!_id) {
+      router.push('/')
+    }
+  }, [])
 
   if (!productsDetailById) {
     return <Loading />;
@@ -255,7 +260,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
 
 
 
-        
+
         <div className="col-span-5 xl:col-span-3">
           <div className="flex justify-between items-center">
             <div>
