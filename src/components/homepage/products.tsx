@@ -244,7 +244,7 @@ const Products = () => {
 
             <div className="text-center mx-auto mt-10">
               <Image
-                src="https://brightdigigold.s3.ap-south-1.amazonaws.com/BanyanTree.webp"
+                src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgCoins/Shree_Ram_Lalla_Colour_Coin_50gm-1727161170301.png"
                 alt="products"
                 layout="intrinsic"
                 width={250}
@@ -253,14 +253,14 @@ const Products = () => {
                 className="mx-auto"
               />
               <p className="mt-6 text-xs sm:text-base md:text-sm lg:text-md xl:text-lg text-white bold">
-                100 Gram Banyan Tree
+                20 Gram Ram Lalla Color Silver Coin
               </p>
             </div>
 
             <button
               onClick={() => {
                 if (isloggedIn) {
-                  router.push(`/coins/100-Gram-Banyan-Tree-Silver-Coin`);
+                  router.push(`/coins/20-Gram-Ram-Lalla-Color-Silver-Coin`);
                 } else if (!isloggedIn && !isLoggedInForTempleReceipt) {
                   handleLoginClick();
                 } else if (isLoggedInForTempleReceipt && devotee_isNewUser) {
