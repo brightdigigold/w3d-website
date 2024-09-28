@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { fetchAllUPI } from "@/api/DashboardServices";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import Notiflix from "notiflix";
+import CustomButton from "@/components/customButton";
 
 export default function UpiModal({
   toggled,
@@ -86,7 +87,7 @@ export default function UpiModal({
                 title: "Successfully Done",
                 // titleText: `${JSON.parse(decryptedData).message}`,
                 titleText: `Your UPI has been added successfully `,
-                timer: 2000,
+                timer: 2500,
               });
               setupiUpdated(true);
               setOpen(false);
@@ -180,13 +181,15 @@ export default function UpiModal({
                   </div>
                 </div>
                 <div className="bg-theme px-4 py-3 pb-6 flex  justify-center sm:px-6">
-                  <button
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-themeBlue px-3 py-2 text-sm font-semibold  shadow-sm  sm:mt-0 sm:w-auto"
-                    onClick={addNewUPI}
-                  >
-                    VERIFY AND ADD
-                  </button>
+                  <CustomButton
+                    btnType="button"
+                    title="VERIFY AND ADD"
+                    loading={isSubmitting}
+                    isDisabled={isSubmitting}
+                    containerStyles="mt-3 inline-flex w-full justify-center rounded-md bg-themeBlue px-3 py-2 text-sm font-semibold  shadow-sm  sm:mt-0 sm:w-auto"
+                    handleClick={addNewUPI}
+                  />
+                  
                   <button
                     type="submit"
                     className="mt-3 absolute top-5 bg-transparent right-5  justify-center rounded-full border-1 text-white p-2 text-sm font-semibold shadow-sm  sm:mt-0 sm:w-auto"
