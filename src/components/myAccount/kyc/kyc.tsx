@@ -206,10 +206,10 @@ const KycTab = () => {
           }
         }
         )
-        // resetForm();
+        resetForm();
       } finally {
         setIsSubmitting(false);
-        // resetForm();
+        resetForm();
       }
     },
   });
