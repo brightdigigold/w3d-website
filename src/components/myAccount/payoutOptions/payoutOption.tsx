@@ -1,5 +1,5 @@
 import { selectUser } from "@/redux/userDetailsSlice";
-import React, { FC, Fragment, useState } from "react";
+import React, { FC, Fragment, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import BankVerification from "./addedBanksOrUPI";
 import { CSSTransition } from "react-transition-group";
@@ -13,6 +13,9 @@ interface PayoutOptionTabProps {
 const PayoutOptionTab: FC<PayoutOptionTabProps> = ({ onCompleteKYC }) => {
   const user = useSelector(selectUser);
   const [toggleBankVerification, setToggleBankVerification] = useState(false);
+
+  // Create a ref for the element to be transitioned
+  const nodeRef = useRef(null);
 
   const toggleBankVerificationHandler = () => {
     setToggleBankVerification((prevToggle) => !prevToggle);
@@ -31,7 +34,7 @@ const PayoutOptionTab: FC<PayoutOptionTabProps> = ({ onCompleteKYC }) => {
 
               <div
                 onClick={toggleBankVerificationHandler}
-                className=" flex items-center gap-1 text-gold01 cursor-pointer"
+                className="flex items-center gap-1 text-gold01 cursor-pointer"
               >
                 <PlusIcon className="h-5" />
                 Add Bank
@@ -43,8 +46,9 @@ const PayoutOptionTab: FC<PayoutOptionTabProps> = ({ onCompleteKYC }) => {
             timeout={500}
             classNames="bank-verification"
             unmountOnExit
+            nodeRef={nodeRef} // Pass the ref here
           >
-            <div>
+            <div ref={nodeRef}>
               <AddNewBank
                 toggleBankVerificationHandler={toggleBankVerificationHandler}
               />

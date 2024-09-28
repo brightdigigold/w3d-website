@@ -1,4 +1,5 @@
 import { fetchAllUPI } from "@/api/DashboardServices";
+import CustomButton from "@/components/customButton";
 import {
   AesDecrypt,
   AesEncrypt,
@@ -14,8 +15,6 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bankList, setBankList] = useState<any[]>([]);
   const [checkingBankStatus, setCheckingBankStatus] = useState<boolean>();
-  const [otherBankName, setOtherBankName] = useState<boolean>(false);
-  const [bankName, setBankName] = useState();
 
   const fetchAllBankName = async () => {
     fetch(`${process.env.baseUrl}/public/bank/list`, {
@@ -35,8 +34,6 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
   }, []);
 
   const initialValues = {
-    // bankName: "",
-    // accountName: "",
     accountNumber: "",
     ConfirmAccountNumber: "",
     ifsc: "",
@@ -44,14 +41,6 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
   };
 
   const validationSchema = Yup.object().shape({
-    // bankName: Yup.string()
-    //   .required("Bank Name is required")
-    //   .matches(/^[a-zA-Z\s]+$/, "Invalid Bank Name"),
-    // accountName: Yup.string()
-    //   .required("Account Holders Name is required")
-    //   .min(3, "Name must be at least 3 characters")
-    //   .max(50, "Name cannot exceed 50 characters")
-    //   .matches(/^[a-zA-Z0-9\s]+$/, "Invalid Account Holder Name"),
     accountNumber: Yup.string()
       .required("Account Number is required")
       .min(9, "Account Number must be at least 9 characters")
@@ -87,7 +76,7 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
         body,
         configHeaders
       );
-      const decryptedData = await AesDecrypt(response.data.payload);
+      const decryptedData = AesDecrypt(response.data.payload);
       const finalResult = JSON.parse(decryptedData);
       if (finalResult.status) {
         setCheckingBankStatus(true);
@@ -105,7 +94,7 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
       toggleBankVerificationHandler();
     } catch (error: any) {
       // Notiflix.Loading.remove();
-      const decryptedData = await AesDecrypt(error.response.data.payload);
+      const decryptedData = AesDecrypt(error.response.data.payload);
       const finalResult = JSON.parse(decryptedData);
       console.error(error);
       Swal.fire({
@@ -140,98 +129,6 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
               e.preventDefault();
             }}
           >
-            {/* <div className="mt-2">
-              <label>Bank Name</label>
-              <br />
-              <select
-                className="mt-3 block w-full text-white rounded bg-theme px-3 py-2 focus:outline-none  border-1  pl-0 focus:ring-0 focus:border-b"
-                name="bankName"
-                value={bankName}
-                onChange={(data) => {
-                  // log('data', data.target.value);
-                  setFieldValue("bankName", data.target.value);
-                  if (data.target.value == "Others") {
-                    setOtherBankName(true);
-                  } else {
-                    setOtherBankName(false);
-                  }
-                }}
-                onBlur={handleBlur}
-              >
-                <option value="" selected disabled>
-                  Select Bank Name
-                </option>
-                {bankList.map((item, key) => {
-                  return (
-                    <>
-                      <option
-                        className="text-black"
-                        key={item._id}
-                        value={item.name}
-                        // onChange={setBankName(item.name)}
-                      >
-                        {item.name}
-                      </option>
-                    </>
-                  );
-                })}
-                ;
-              </select>
-              {!otherBankName && (
-                <ErrorMessage
-                  name="bankName"
-                  className="text-red-500"
-                  component="div"
-                />
-              )}
-            </div>
-            {otherBankName && (
-              <div className="mt-2">
-                <label>Bank Name</label>
-                <br />
-                <input
-                  className="mt-3 block w-full placeholder:text-gray-500 text-white rounded bg-theme px-3 py-2 focus:outline-none  border-1 focus:ring-0 focus:border-b"
-                  name="bankName"
-                  type="text"
-                  placeholder="Enter Bank Name"
-                  value={values.bankName === "Others" ? "" : values.bankName}
-                  onChange={(event) => {
-                    const { name, value } = event.target;
-                    const updatedValue = value.replace(/[^a-zA-Z\s]/g, "");
-                    setFieldValue("bankName", updatedValue);
-                  }}
-                  onBlur={handleBlur}
-                />
-                <ErrorMessage
-                  name="bankName"
-                  className="text-red-500"
-                  component="div"
-                />
-              </div>
-            )} */}
-            {/* <div className="mt-2">
-              <label>Account Holder’s Name</label>
-              <br />
-              <input
-                className="mt-3 block w-full placeholder:text-gray-500 text-white rounded bg-theme px-3 py-2 focus:outline-none  border-1 focus:ring-0 focus:border-b"
-                name="accountName"
-                type="text"
-                placeholder="Enter Your Name"
-                maxLength={50}
-                value={values.accountName}
-                onChange={(event) => {
-                  const { name, value } = event.target;
-                  const updatedValue = value.replace(/[^a-zA-Z\s]/g, "");
-                  setFieldValue("accountName", updatedValue);
-                }}
-                onBlur={handleBlur}
-              />
-              <ErrorMessage
-                name="accountName"
-                className="text-red-500"
-                component="div"
-              />
-            </div> */}
             <div className="mt-2">
               <label>Account Number</label>
               <br />
@@ -304,16 +201,16 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
             </div>
 
             <div className="flex justify-center mt-3">
-              <button
-                type="submit"
-                onClick={() => {
+              <CustomButton
+                btnType="submit"
+                title="Verify"
+                handleClick={() => {
                   handleSubmit();
                 }}
-                disabled={isSubmitting}
-                className="px-3 py-1 rounded bg-themeBlue font-semibold text-black"
-              >
-                Verify
-              </button>
+                loading={isSubmitting}
+                isDisabled={isSubmitting}
+                containerStyles="px-3 py-1 rounded bg-themeBlue font-semibold text-black"
+              />
             </div>
           </form>
         )}

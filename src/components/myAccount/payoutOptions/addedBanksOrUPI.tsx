@@ -61,11 +61,11 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
         })
         .then(async (result) => {
           if (result.isConfirmed) {
-              Notiflix.Loading.custom({svgSize:'180px',customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>'});
+            Notiflix.Loading.custom({ svgSize: '180px', customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>' });
             let dataToBeEncryptPayload = {
               id: deleteItem,
             };
-            const resAfterEncryptData = await AesEncrypt(
+            const resAfterEncryptData = AesEncrypt(
               dataToBeEncryptPayload
             );
             const payloadToSend = {
@@ -113,11 +113,11 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
         ) : (
           <div>
             {allBankList &&
-              allBankList.map((bank, key) => {
+              allBankList.map((bank, index) => {
                 return (
-                  <>
-                    {bank.documentType == "BANKACCOUNT" && (
-                      <div key={key}>
+                  <React.Fragment key={bank._id}> 
+                    {bank.documentType === "BANKACCOUNT" && (
+                      <div>
                         <div className="flex justify-between text-white pb-2">
                           <span className="">Account Holder's Name</span>
                           <span>{AesDecrypt(bank?.bankData?.accountName)}</span>
@@ -125,9 +125,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
                         <hr className="border-gray-500" />
                         <div className="flex justify-between text-white pb-2">
                           <span className="">Account Number</span>
-                          <span>
-                            {AesDecrypt(bank?.bankData?.accountNumber)}
-                          </span>
+                          <span>{AesDecrypt(bank?.bankData?.accountNumber)}</span>
                         </div>
                         <hr className="border-gray-500" />
                         <div className="flex justify-between text-white pb-2">
@@ -150,7 +148,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
                         </button>
                       </div>
                     )}
-                  </>
+                  </React.Fragment>
                 );
               })}
           </div>
@@ -188,17 +186,17 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
           ) : (
             <>
               {allBankList &&
-                allBankList.map((bank, key) => {
+                allBankList.map((bank, index) => {
                   return (
-                    <div className="relative">
-                      {bank.documentType == "UPI" && (
+                    <div className="relative" key={bank._id}> 
+                      {bank.documentType === "UPI" && (
                         <div
-                          className=" shadow shadow-gray-100 rounded p-2 mb-4"
-                          key={key}
+                          className="shadow shadow-gray-100 rounded p-2 mb-4"
+                          key={bank._id}  
                         >
                           <div className=" text-white pb-2">
                             <p className=" text-gray-300 flex items-center gap-1">
-                              <QrCodeIcon className=" h-4" /> UPI ID
+                              <QrCodeIcon className=" h-4" /> UPI ID {index}
                             </p>
                             <p>{AesDecrypt(bank?.value)}</p>
                           </div>
