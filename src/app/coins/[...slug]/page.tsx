@@ -45,6 +45,8 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
 
+  console.log("productsDetailById", productsDetailById)
+
   useEffect(() => {
     const productCount = getProductCountById(coinsInCart, productId);
     setQuantity(productCount === 0 ? 1 : productCount);
@@ -257,9 +259,6 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
             </div>
           </div>
         </div>
-
-
-
 
         <div className="col-span-5 xl:col-span-3">
           <div className="flex justify-between items-center">

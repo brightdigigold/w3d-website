@@ -42,6 +42,7 @@ export default function useFetchProductDetailsById(id: string) {
             if (response.status) {
                 const responseOfApi = await funcForDecrypt(response.data.payload);
                 const productDetails = JSON.parse(responseOfApi);
+                console.log("productDetails", productDetails)
                 const { ...finalData } = productDetails.data
                 setProductDetailById(finalData);
                 setproductId(productDetails.data.sku);
