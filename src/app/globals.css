@@ -913,7 +913,7 @@ body.modal-open {
   flex-direction: row; /* Default is side-by-side (desktop/tablets) */
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 /* Thumbnails (default: vertical for desktop/tablets) */
@@ -995,7 +995,7 @@ body.modal-open {
 
   .thumbnails {
     flex-direction: row; /* Change thumbnails to horizontal */
-    gap: 3px;
+    gap: 8px;
     justify-content: center;
     width: 100%;
   }
