@@ -113,7 +113,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
         ) : (
           <div>
             {allBankList &&
-              allBankList.map((bank, index) => {
+              allBankList.map((bank) => {
                 return (
                   <React.Fragment key={bank._id}> 
                     {bank.documentType === "BANKACCOUNT" && (
@@ -186,7 +186,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
           ) : (
             <>
               {allBankList &&
-                allBankList.map((bank, index) => {
+                allBankList.map((bank) => {
                   return (
                     <div className="relative" key={bank._id}> 
                       {bank.documentType === "UPI" && (
