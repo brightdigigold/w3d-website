@@ -26,7 +26,6 @@ const KycTab = () => {
   const [panNumber, setPanNumber] = useState<String>('');
   const dispatch = useDispatch<AppDispatch>();
   const [refresh, setrefresh] = useState(false);
-  const [loading, setloading] = useState<boolean>(false);
   const [enteredPanNumber, setEnteredPanNumber] = useState<String>('')
 
 
@@ -170,9 +169,10 @@ const KycTab = () => {
           configHeaders
         );
 
-        const decryptedData = await AesDecrypt(response.data.payload);
+        const decryptedData = AesDecrypt(response.data.payload);
 
         const finalResult = JSON.parse(decryptedData);
+        console.log("final result: ", finalResult)
         if (finalResult.status) {
           Swal.fire({
             html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
@@ -188,10 +188,10 @@ const KycTab = () => {
         }
         resetForm();
       } catch (error: any) {
-        const decryptedData = await AesDecrypt(error.response.data.payload);
+        const decryptedData = AesDecrypt(error.response.data.payload);
         const finalResult = JSON.parse(decryptedData);
         Swal.fire({
-          html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
+          html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done"><br><p>Name: ${finalResult?.data?.Name}</p>`,
           title: "Oops...",
           titleText: finalResult.message,
           showConfirmButton: finalResult.message === "Pan card number already Exist." ? false : true,
@@ -199,17 +199,17 @@ const KycTab = () => {
           cancelButtonColor: "#d33",
           confirmButtonText: finalResult.message === "Pan card number already Exist." ? "" : "Update",
           denyButtonText: "Cancel"
-          // timer: 3000,
-        }).then(async (result) => {
+        })
+        .then(async (result) => {
           if (result.isConfirmed) {
             updateDetails(finalResult?.data?.Name, finalResult?.data?.Dob);
           }
         }
         )
-        resetForm();
+        // resetForm();
       } finally {
         setIsSubmitting(false);
-        resetForm();
+        // resetForm();
       }
     },
   });
