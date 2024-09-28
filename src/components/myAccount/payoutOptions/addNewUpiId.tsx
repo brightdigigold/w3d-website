@@ -19,7 +19,6 @@ export default function UpiModal({
   const [upiId, setUpiId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [upiError, setUpiError] = useState("");
-  // const [upiUpdated, setupiUpdated] = useState(false)
 
   const fetchBankAndUPIDetails = async () => {
     try {
@@ -54,7 +53,7 @@ export default function UpiModal({
     setUpiId(updatedValue);
   };
 
-  const buyReqApiHandler = async () => {
+  const addNewUPI = async () => {
     if (validate()) {
       if (!isSubmitting) {
         Notiflix.Loading.custom({ svgSize: '180px', customSvgCode: '<object type="image/svg+xml" data="/svg/pageloader.svg">svg-animation</object>' });
@@ -113,7 +112,6 @@ export default function UpiModal({
             Swal.fire({
               // icon: "error",
               html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
-
               title: "Oops...",
               titleText: `${JSON.parse(decryptedData).message}`,
             });
@@ -123,8 +121,6 @@ export default function UpiModal({
             setIsSubmitting(false);
           });
       }
-    } else {
-      //   log("fields not validated ")
     }
   };
 
@@ -200,7 +196,7 @@ export default function UpiModal({
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-themeBlue px-3 py-2 text-sm font-semibold  shadow-sm  sm:mt-0 sm:w-auto"
-                    onClick={buyReqApiHandler}
+                    onClick={addNewUPI}
                   >
                     VERIFY AND ADD
                   </button>
