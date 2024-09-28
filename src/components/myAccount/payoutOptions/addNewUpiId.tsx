@@ -20,18 +20,6 @@ export default function UpiModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [upiError, setUpiError] = useState("");
 
-  const fetchBankAndUPIDetails = async () => {
-    try {
-      const { UpiList, BankList, decryptedDataList } = await fetchAllUPI();
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchBankAndUPIDetails();
-  }, [toggled]);
-
   const validate = () => {
     let upiErrorMess = "";
     if (!upiId) {
@@ -90,6 +78,7 @@ export default function UpiModal({
             );
 
             if (JSON.parse(decryptedData).status) {
+              await fetchAllUPI();
               Notiflix.Loading.remove();
               setUpiId("");
               Swal.fire({
@@ -102,7 +91,6 @@ export default function UpiModal({
               setupiUpdated(true);
               setOpen(false);
             }
-            // setPreviewData(JSON.parse(decryptedData).data);
           })
           .catch(async (errInBuyReq) => {
             Notiflix.Loading.remove();
@@ -110,7 +98,6 @@ export default function UpiModal({
               errInBuyReq?.response?.data?.payload
             );
             Swal.fire({
-              // icon: "error",
               html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Successfully Done">`,
               title: "Oops...",
               titleText: `${JSON.parse(decryptedData).message}`,

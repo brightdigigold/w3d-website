@@ -196,7 +196,7 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
                         >
                           <div className=" text-white pb-2">
                             <p className=" text-gray-300 flex items-center gap-1">
-                              <QrCodeIcon className=" h-4" /> UPI ID {index}
+                              <QrCodeIcon className=" h-4" /> UPI ID 
                             </p>
                             <p>{AesDecrypt(bank?.value)}</p>
                           </div>
