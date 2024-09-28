@@ -147,7 +147,6 @@ const BuySell = () => {
         const decryptedData = await funcForDecrypt(
           resAfterPreview.data.payload
         );
-        console.log("JSON.parse(decryptedData).data.preview", JSON.parse(decryptedData).data.preview)
         setPreviewData(JSON.parse(decryptedData).data.preview);
         setTransactionId(JSON.parse(decryptedData).data.transactionCache._id);
         if (JSON.parse(decryptedData).statusCode == 200) {
@@ -213,7 +212,6 @@ const BuySell = () => {
   };
 
   useEffect(() => {
-    // console.log("userType", userType)
     dispatch(setMetalType("gold"));
     dispatch(setEnteredAmount(500));
     dispatch(setCouponError(""));

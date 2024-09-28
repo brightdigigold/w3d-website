@@ -144,7 +144,6 @@ const Cart = () => {
     updateAddressList();
   }, []);
 
-  // console.log("silverData.totalPrice", userType === "corporate" ? silverData.c_totalPrice : silverData.totalPrice)
 
   useEffect(() => {
     dispatch(setGoldVaultBalance(goldVaultBalance));
@@ -171,7 +170,6 @@ const Cart = () => {
       }));
   }, [cart.products]);
 
-  console.log("goldPayload", goldPayload);
 
   const silverPayload = useMemo(() => {
     return cart.products
@@ -183,7 +181,6 @@ const Cart = () => {
       }));
   }, [cart.products]);
 
-  console.log("silverPayload", silverPayload)
 
   const getAllProductsOfCart = async () => {
     setLoading(true);
@@ -424,7 +421,6 @@ const Cart = () => {
 
   const checkoutCart = async () => {
     setLoading(true);
-    console.log("userType", { userType, totalSilverWeight, totalGoldWeight })
     if (userType === 'corporate') {
       // Check for Silver weight
       if (silverPayload.length > 0) {
@@ -497,8 +493,6 @@ const Cart = () => {
       setLoading(false);
     }
   };
-
-
 
   if (!cartProducts.length) {
     return (
