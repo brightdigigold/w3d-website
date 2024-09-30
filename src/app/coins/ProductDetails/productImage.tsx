@@ -2,40 +2,39 @@ import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 
 interface ImageGalleryProps {
-  images: string[];
+  images: (string | null)[]; // The array can contain null values
 }
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
-  const [mainMedia, setMainMedia] = useState(images[0]);
-  const [activeIndex, setActiveIndex] = useState(0); 
-//   console.log("images", images)
+  // Filter out null or invalid media URLs and set the first valid one as the main media
+  const validImages = images.filter(Boolean) as string[]; // Filters out null or undefined values
 
-  // Function to determine if the media is a video
-  const isVideo = (url: string) => {
-    return url.endsWith('.mp4');
-  };
+  const [mainMedia, setMainMedia] = useState(validImages[0]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  // Handle when a thumbnail is clicked
+  // Function to check if a media URL is a video
+  const isVideo = (url: string) => url.endsWith('.mp4');
+
+  // Handle thumbnail click
   const handleThumbnailClick = (media: string, index: number) => {
     setMainMedia(media);
-    setActiveIndex(index); // Update the active media index
+    setActiveIndex(index);
   };
 
   return (
     <div className="gallery-container">
       {/* Thumbnails */}
       <div className="thumbnails">
-        {images.map((media, index) => (
+        {validImages.map((media, index) => (
           <div
             key={index}
             className="thumbnail-wrapper"
             onClick={() => handleThumbnailClick(media, index)}
           >
-            {/* If it's a video, use the first image as the thumbnail and overlay the play icon */}
             {isVideo(media) ? (
               <div className="video-thumbnail">
                 <img
-                  src={images[0]} // Use first image as video thumbnail
+                  src={validImages[0]} // Use first image as video thumbnail
                   alt={`Video Thumbnail ${index}`}
                   className={`thumbnail-image ${activeIndex === index ? 'active-thumbnail' : ''}`}
                 />
@@ -55,15 +54,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
       {/* Main Media (Image or Video) */}
       <div className="main-media-container">
         {isVideo(mainMedia) ? (
-          <ReactPlayer
-            url={mainMedia}
-            loop={true}
-            playing={true}
-            width="100%"
-            height="100%"
-          />
+          <ReactPlayer url={mainMedia} loop playing width="100%" height="100%" />
         ) : (
-          <img src={mainMedia} alt="Main" className="main-media " />
+          <img src={mainMedia} alt="Main" className="main-media" />
         )}
       </div>
     </div>
