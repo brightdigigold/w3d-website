@@ -120,18 +120,18 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     );
   }, [productsDetailById, quantity, goldData.totalPrice, silverData.totalPrice]);
 
-  useEffect(() => {
-    if (!_id) {
-      router.push('/')
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!_id) {
+  //     router.push('/')
+  //   }
+  // }, [])
 
   if (!productsDetailById) {
     return <Loading />;
   }
 
   return (
-    <div className="container pt-32 py-16 text-white pb-28 xl:pb-8">
+    <div className="container pt-20 sm:pt-32  text-white pb-28 xl:pb-8">
 
       {openLoginAside && (
         <LoginAside
@@ -160,8 +160,8 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
         />
       )}
 
-      <div className="grid xl:grid-cols-5 gap-12">
-        <div className="col-span-5 xl:col-span-2 relative">
+      <div className="grid sm:grid-cols-5 gap-4">
+        <div className="relative col-span-2">
           {/* Absolute positioning for out-of-stock image */}
           {!productsDetailById.inStock && (
             <div className="bg-red-600 absolute top-0 right-0 px-2  rounded-bl-lg">
@@ -171,37 +171,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
 
           <ImageGallery images={productsDetailById.image} />
 
-          {/* <div className="hidden sm:block bg-themeLight rounded p-4">
-            <SimpleImageSlider
-              width={400}
-              height={400}
-              images={productsDetailById.image}
-              showBullets={false}
-              style={{ margin: "0 auto" }}
-              showNavs={false}
-              loop={true}
-              autoPlay={true}
-              bgColor="#red"
-              autoPlayDelay={2.0}
-              slideDuration={0.5}
-            />
-          </div>
-          <div className="block sm:hidden bg-themeLight rounded p-4">
-            <SimpleImageSlider
-              width={240}
-              height={240}
-              images={productsDetailById.image}
-              showBullets={false}
-              style={{ margin: "0 auto" }}
-              showNavs={false}
-              loop={true}
-              autoPlay={true}
-              bgColor="#red"
-              autoPlayDelay={2.0}
-              slideDuration={0.5}
-            />
-          </div> */}
-          <div className="grid grid-cols-2 gap-3 items-center mt-2">
+          <div className="grid grid-cols-2 gap-2 items-center mt-1">
             {/* BUY NOW */}
             <div>
               <CustomImageButton
@@ -258,7 +228,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
           </div>
         </div>
 
-        <div className="col-span-5 xl:col-span-3">
+        <div className="col-span-3">
           <div className="flex justify-between items-center">
             <div>
               <h1 className="mb-2 sm:text-lg extrabold">

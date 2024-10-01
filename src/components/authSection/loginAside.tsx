@@ -164,31 +164,31 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
             </button>
             {os === "iOS" ? <div className=" text-center text-white pb-1">
               <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-12 mx-auto mt-6 md:mt-8" />
-              <p className=" text-lg mb-1 mt-4 md:mt-4">Start Savings Today</p>
+              <p className=" text-xl mb-1 mt-4 md:mt-4">Start Savings Today</p>
               <p className="">
                 Safe.Secure.Certified
                 <img src="/secure.png" className="ml-1 inline-block h-5" />
               </p>
             </div> :
               <div className=" text-center text-white pb-1">
-                <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 mx-auto mt-10 md:mt-8" />
-                <p className=" text-2xl mb-1 mt-10 md:mt-4">Start Savings Today</p>
+                <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 sm:h-12 mx-auto mt-10 sm:mt-6 md:mt-8" />
+                <p className="text-2xl sm:text-sm mb-1 mt-10 md:mt-2">Start Savings Today</p>
                 <p className="">
                   Safe.Secure.Certified
                   <img src="/secure.png" className="ml-1 inline-block h-5" />
                 </p>
               </div>}
             {purpose === 'login' && <>
-              <h1 className="text-2xl sm:text-2xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
+              <h1 className="text-2xl sm:text-xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
                 Login/Sign Up
               </h1>
-              <h3 className="text-xl mb-4 text-white px-4 text-center md:text-left">
+              <h3 className="text-xl sm:text-sm mb-4 sm:mb-2 text-white px-4 text-center md:text-left">
                 Login to start
                 <span className="text-yellow-400 ml-1">SAVINGS</span>
               </h3>
             </>}
 
-            <div className="mb-4 pt-4">
+            <div className="mb-4 pt-4 sm:pt-1">
               <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -231,7 +231,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                       >
                         <UserIcon
                           className={clsx(
-                            'h-20 w-23 mx-auto p-1',
+                            'h-20 sm:h-12 w-23 mx-auto p-1',
                             values.type === "user" ? "text-yellow-400 border-2 border-yellow-400 rounded-full p-2" : "text-white border-2 rounded-full"
                           )}
                         />
@@ -261,9 +261,9 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                         className="cursor-pointer"
                       >
                         <FaBuilding
-                          size={80}
+                          // size={80}
                           className={clsx(
-                            'mx-auto',
+                            'mx-auto h-20 w-20 sm:h-12 sm:w-12',
                             values.type === "corporate" ? "text-yellow-400 border-2 border-yellow-400 rounded-full p-2" : "text-white border-2 border-white rounded-full p-2"
                           )}
                         />
@@ -282,14 +282,14 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                     )}
 
                     {values.type === "corporate" && (
-                      <div className="mt-6 px-4">
+                      <div className="mt-6 sm:mt-2 px-4">
                         {corporateLoginOrSignUp === "corporateLogin" && (
                           <>
-                            <label className="text-white text-lg">Mobile Number</label>
+                            <label className="text-white text-lg sm:textsm">Mobile Number</label>
                             <br />
                             <input
                               name="mobile_number"
-                              className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-1 w-full p-2 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
+                              className="text-gray-100 tracking-widest placeholder:text-gray-500 semibold border-1 rounded mt-1 w-full p-2 sm:p-1 coins_backgroun outline-none user-select-none focus:bg-transparent focus:outline-none"
                               type="text"
                               inputMode="numeric"
                               minLength={10}
@@ -305,12 +305,12 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                               value={values.mobile_number}
                             />
                             {touched.mobile_number && errors.mobile_number && (
-                              <div className="text-red-600 text-md bold">
+                              <div className="text-red-600 text-md sm:text-sm bold">
                                 {errors.mobile_number}
                               </div>
                             )}
                             {error && (
-                              <div className="text-red-600 mt-0.5 bold tracking-wide">
+                              <div className="text-red-600 mt-0.5 sm:bold sm:text-sm tracking-wide">
                                 {error}
                               </div>
                             )}
@@ -409,7 +409,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                           value={values.mobile_number}
                         />
                         {touched.mobile_number && errors.mobile_number && (
-                          <div className="text-red-600 text-md bold">
+                          <div className="text-red-600 text-md bold sm:text-sm">
                             {errors.mobile_number}
                           </div>
                         )}
@@ -420,8 +420,6 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                         )}
                       </div>
                     )}
-
-
 
                     <div className="bottom-2 absolute w-full px-4">
                       <div className="items-center flex">
@@ -453,11 +451,10 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                         ) : null}
                       </div>
                       {touched.termsAndConditions && errors.termsAndConditions ? (
-                        <div className="text-red-600 text-md bold">
+                        <div className="text-red-600 text-md sm:text-sm bold">
                           {errors.termsAndConditions}
                         </div>
                       ) : null}
-
 
                       {error !== errString ? (<CustomButton
                         btnType="submit"
