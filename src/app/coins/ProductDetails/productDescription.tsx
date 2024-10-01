@@ -4,7 +4,7 @@ const ProductDescription = ({description, weight, purity, dimension, quality}) =
 
     return (
         <div className="bg-themeLight px-4 py-4 rounded-md mt-4">
-            <p className="text-sm">{description}</p>
+            <p className="text-sm text-justify">{description}</p>
             <div className="grid grid-cols-4 mt-4">
                 <div className=" text-center px-2">
                     <img
