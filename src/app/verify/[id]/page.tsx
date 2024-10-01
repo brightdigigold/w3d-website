@@ -15,7 +15,7 @@ const page = ({ params }: any) => {
         fetch(`${process.env.baseUrl}/public/verify/${id}`)
             .then((response) => response.json())
             .then(async (data) => {
-                const decryptedData = await AesDecrypt(data.payload);
+                const decryptedData =  AesDecrypt(data.payload);
                 const parsedEmailData = JSON.parse(decryptedData);
                 if (parsedEmailData.status) {
                     setMessage(`${parsedEmailData.message}`);
@@ -24,7 +24,7 @@ const page = ({ params }: any) => {
                 }
             })
             .catch(async (error) => {
-                const decryptedData = await AesDecrypt(error.response.data.payload);
+                const decryptedData =  AesDecrypt(error.response.data.payload);
                 const parsedEmailData = JSON.parse(decryptedData);
                 setMessage(`${parsedEmailData.message}`);
             })

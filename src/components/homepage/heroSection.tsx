@@ -80,7 +80,7 @@ const HeroSection = () => {
             configHeaders
           );
           const data = await response.json();
-          const decryptedData = await AesDecrypt(data.payload);
+          const decryptedData = AesDecrypt(data.payload);
           const userdata = JSON.parse(decryptedData).data;
           if (userdata?.isBasicDetailsCompleted) {
             dispatch(setShowOTPmodal(false));
