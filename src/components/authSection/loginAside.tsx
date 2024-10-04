@@ -103,7 +103,10 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
       mode: userType === 'user' ? 'login' : corporateLoginOrSignUp === "corporateLogin" ? "login" : "signup",
     };
 
+    console.log("udate updated", updatedValues);
+
     const apiEndPoint = userType === 'user' ? "auth/send/otp" : corporateLoginOrSignUp !== 'corporateSignUp' ? "auth/send/otp" : "auth/gst/send/otp"
+    console.log("apiEndPoint", apiEndPoint)
     try {
       setSubmitting(true);
       // Notiflix.Loading.circle();
@@ -218,7 +221,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                           setFieldValue("type", "user");
                           dispatch(SetUserType("user"));
                           dispatch(setAuthenticationMode("personalLogin"));
-                          // setCorporateLoginOrSignUp('corporateSignUp');
+                          setCorporateLoginOrSignUp(null);
                           setFieldValue("termsAndConditions", false);
                           setFieldError('termsAndConditions', '');
                           setFieldError('gstNumber', '');

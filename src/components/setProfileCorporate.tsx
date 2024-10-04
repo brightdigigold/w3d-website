@@ -8,6 +8,7 @@ import { RootState } from '@/redux/store';
 import { postMethodHelperWithEncryption } from '@/api/postMethodHelper';
 import Notiflix from "notiflix";
 import OTPCorporateSignUp from './modals/otpCorporateSignUp';
+import CustomButton from './customButton';
 
 interface setCorporateProfile {
     isOpen: boolean;
@@ -197,18 +198,17 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
                                     </div>
                                 </div>
                                 {errors.termsAndConditions && <p className='text-red-600 text-sm ml-4'>{errors.termsAndConditions.message}</p>}
-                                <button
-                                    type="submit"
+                                <CustomButton
+                                    btnType="submit"
                                     title="SEND OTP"
-                                    className="bg-themeBlue px-4 py-2 rounded-full w-full lg:w-full sm:w-full sm:mx-full mt-2 mb-2 extrabold text-black"
-                                >
-                                    SEND OTP
-                                </button>
+                                    loading={submitting}
+                                    isDisabled={submitting}
+                                    containerStyles="bg-themeBlue px-4 py-2 rounded-full w-full lg:w-full sm:w-full sm:mx-full mt-2 mb-2 extrabold text-black"
+                                />
                             </div>
                         </form>
                     </div>
                 </div>
-
             </div>
         </aside>
     );
