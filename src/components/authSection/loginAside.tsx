@@ -172,14 +172,14 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
             </div> :
               <div className=" text-center text-white pb-1">
                 <img src="https://brightdigigold.s3.ap-south-1.amazonaws.com/bdgLogo.png" className="h-20 sm:h-12 mx-auto mt-10 sm:mt-6 md:mt-8" />
-                <p className="text-2xl sm:text-sm mb-1 mt-10 md:mt-2">Start Savings Today</p>
+                <p className="text-2xl sm:text-lg mb-1 mt-10 md:mt-2">Start Savings Today</p>
                 <p className="">
                   Safe.Secure.Certified
                   <img src="/secure.png" className="ml-1 inline-block h-5" />
                 </p>
               </div>}
             {purpose === 'login' && <>
-              <h1 className="text-2xl sm:text-xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
+              <h1 className="text-2xl text-[#d3ecf4] bold mb-0 px-4 mt-4 text-center md:text-left">
                 Login/Sign Up
               </h1>
               <h3 className="text-xl sm:text-sm mb-4 sm:mb-2 text-white px-4 text-center md:text-left">
@@ -212,7 +212,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                     }}
                     className=""
                   >
-                    {purpose !== "receipt" && <div className="flex gap-6 px-4 mt-2 md:mt-0 justify-center">
+                    {purpose !== "receipt" && <div className="flex gap-6 px-4 mt-4 md:mt-5 justify-center">
                       <div
                         onClick={() => {
                           setFieldValue("type", "user");
