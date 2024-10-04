@@ -78,7 +78,7 @@ export const fetchUserDetails = createAsyncThunk(
             const userDetails: UserState = JSON.parse(decryptedData);
 
             const finalUserDetails = userDetails;
-            console.log("finalUserDetails", finalUserDetails)
+            // console.log("finalUserDetails", finalUserDetails)
 
             return { userDetails: finalUserDetails } as FetchUserDetailsResponse;
         } catch (error: any) {
