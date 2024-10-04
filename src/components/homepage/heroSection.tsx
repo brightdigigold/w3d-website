@@ -143,8 +143,8 @@ const HeroSection = () => {
             <Image
               src='/Navratri Giveaway Banner Popup.jpg'
               alt="Navratri giveaway Popup"
-              width={950}
-              height={625}
+              width={576}
+              height={375}
               objectFit="contain"
               onClick={() => {
                 window.open("https://www.instagram.com/brightdigigold/", '_blank');

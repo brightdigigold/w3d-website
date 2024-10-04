@@ -139,10 +139,13 @@ export default function OtpModal() {
             dispatch(setShowProfileFormCorporate(true));
             mixpanel.identify(mobile_number);
             mixpanel.track('New Corporate SignUp(web)');
+            dispatch(setShowOTPmodal(false));
           } else if (authenticationMode === "corporateLogin") {
             fetchUserDetailsAndWalletData();
             dispatch(setIsLoggedIn(true));
+            dispatch(fetchWalletData() as any);
             mixpanel.track('Corporate Login(web)');
+            dispatch(setShowOTPmodal(false));
           } else if (purpose === 'login') {
             fetchUserDetailsAndWalletData();
             dispatch(SetUserType(user.data.type));

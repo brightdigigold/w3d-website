@@ -21,6 +21,8 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
     setActiveIndex(index);
   };
 
+  // console.log("mainMedia", mainMedia)
+
   return (
     <div className="gallery-container">
       {/* Thumbnails */}

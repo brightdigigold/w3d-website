@@ -45,7 +45,6 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
 
-
   useEffect(() => {
     const productCount = getProductCountById(coinsInCart, productId);
     setQuantity(productCount === 0 ? 1 : productCount);

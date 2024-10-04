@@ -95,6 +95,7 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
                 dispatch(profileFilled(true));
                 dispatch(fetchUserDetails() as any);
                 dispatch(setShowProfileFormCorporate(false));
+                setOpen(false);
                 closeModal();
             } else {
                 setOtp("");
