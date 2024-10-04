@@ -137,11 +137,13 @@ export default function OtpModal() {
             dispatch(setShowProfileFormCorporate(true));
             mixpanel.identify(mobile_number);
             mixpanel.track('New Corporate SignUp(web)');
+            dispatch(setShowOTPmodal(false));
           } else if (authenticationMode === "corporateLogin") {
             dispatch(fetchUserDetails());
             dispatch(setIsLoggedIn(true));
             dispatch(fetchWalletData() as any);
-            mixpanel.track('New Corporate Login(web)');
+            mixpanel.track('Corporate Login(web)');
+            dispatch(setShowOTPmodal(false));
           } else if (purpose === 'login') {
             dispatch(fetchUserDetails());
             dispatch(setIsLoggedIn(true));
@@ -203,7 +205,7 @@ export default function OtpModal() {
         mobile_number: localStorage.getItem("mobile_number"),
       };
       Notiflix.Loading.init({ svgColor: "rgba(241,230,230,0.985)" });
-      const resAfterEncrypt = await AesEncrypt(data);
+      const resAfterEncrypt = AesEncrypt(data);
       const body = {
         payload: resAfterEncrypt,
       };
