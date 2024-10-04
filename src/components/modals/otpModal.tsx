@@ -142,10 +142,10 @@ export default function OtpModal() {
             dispatch(setShowOTPmodal(false));
           } else if (authenticationMode === "corporateLogin") {
             fetchUserDetailsAndWalletData();
-            dispatch(setIsLoggedIn(true));
-            dispatch(fetchWalletData() as any);
+            // dispatch(setIsLoggedIn(true));
+            // dispatch(fetchWalletData() as any);
             mixpanel.track('Corporate Login(web)');
-            dispatch(setShowOTPmodal(false));
+            // dispatch(setShowOTPmodal(false));
           } else if (purpose === 'login') {
             fetchUserDetailsAndWalletData();
             dispatch(SetUserType(user.data.type));
@@ -159,7 +159,7 @@ export default function OtpModal() {
               }
             }
             mixpanel.identify(mobile_number);
-            dispatch(setShowOTPmodal(false));
+            // dispatch(setShowOTPmodal(false));
             // router.push("/");
           } else {
             dispatch(setShowOTPmodal(false));
@@ -199,36 +199,33 @@ export default function OtpModal() {
   };
 
   const fetchUserDetailsAndWalletData = async () => {
- 
-      try {
-        // Use Promise.all to fetch both user details and wallet data concurrently
-        setLoadingUserData(true);
-        await Promise.all([
-          dispatch(fetchUserDetails()).unwrap(),
-          dispatch(fetchWalletData()).unwrap()
-        ]);
-
-        // If both APIs succeed, proceed with the login process
-        Swal.fire({
-          title: 'Success!',
-          text: 'You have successfully logged in!',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-        console.log("user", user);
+    try {
+      setLoadingUserData(true);
+  
+      // Use Promise.all to execute both API requests concurrently
+      const [userDetailsResult, walletDataResult] = await Promise.all([
+        dispatch(fetchUserDetails()).unwrap(),
+        dispatch(fetchWalletData()).unwrap(),
+      ]);
+  
+      // If both API calls succeed, proceed with the login process
+      if (userDetailsResult && walletDataResult) {
+        dispatch(setShowOTPmodal(false));
         dispatch(setIsLoggedIn(true));
         setLoadingUserData(false);
-        router.push('/');
-      } catch (error) {
-        Swal.fire({
-          title: 'Error!',
-          text: 'An error occurred while logging in. Please try again.',
-          icon: 'error',
-          confirmButtonText: 'OK'
-        });
-        setLoadingUserData(false);
       }
+    } catch (error) {
+      // If any API call fails, prevent the login and show an error
+      setLoadingUserData(false);
+      Swal.fire({
+        title: 'Error!',
+        text: 'An error occurred while logging in. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
   };
+  
 
   const resendOtp = async () => {
     try {

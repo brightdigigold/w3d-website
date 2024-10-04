@@ -491,7 +491,6 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                   </form>
                 )}
               </Formik>
-
             </div>
           </div>
         </div>
