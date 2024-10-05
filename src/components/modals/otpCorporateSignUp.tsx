@@ -131,7 +131,7 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
                 mobile_number: otpDetails?.mobile_number,
             };
             Notiflix.Loading.init({ svgColor: "rgba(241,230,230,0.985)" });
-            const resAfterEncrypt = await AesEncrypt(data);
+            const resAfterEncrypt = AesEncrypt(data);
             const body = {
                 payload: resAfterEncrypt,
             };

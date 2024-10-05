@@ -103,6 +103,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
       mode: userType === 'user' ? 'login' : corporateLoginOrSignUp === "corporateLogin" ? "login" : "signup",
     };
 
+
     const apiEndPoint = userType === 'user' ? "auth/send/otp" : corporateLoginOrSignUp !== 'corporateSignUp' ? "auth/send/otp" : "auth/gst/send/otp"
     try {
       setSubmitting(true);
@@ -218,7 +219,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                           setFieldValue("type", "user");
                           dispatch(SetUserType("user"));
                           dispatch(setAuthenticationMode("personalLogin"));
-                          // setCorporateLoginOrSignUp('corporateSignUp');
+                          setCorporateLoginOrSignUp(null);
                           setFieldValue("termsAndConditions", false);
                           setFieldError('termsAndConditions', '');
                           setFieldError('gstNumber', '');
@@ -491,7 +492,6 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
                   </form>
                 )}
               </Formik>
-
             </div>
           </div>
         </div>

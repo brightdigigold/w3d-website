@@ -24,20 +24,22 @@ import CustomButton from "../customButton";
 import Notiflix from "notiflix";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import mixpanel from "mixpanel-browser";
+import Loading from "@/app/loading";
 
 export default function OtpModal() {
+  const user = useSelector(selectUser);
   const corporateBusinessDetails = useSelector((state: RootState) => state.auth.corporateBusinessDetails);
   const authenticationMode = useSelector((state: RootState) => state.auth.authenticationMode);
   const purpose = useSelector((state: RootState) => state.auth.purpose);
   const otpMsg = useSelector((state: RootState) => state.auth.otpMsg);
   const userType = useSelector((state: RootState) => state.auth.UserType);
-  const user = useSelector(selectUser);
   const [open, setOpen] = useState(true);
   const [otpError, setOtpError] = useState("");
   const cancelButtonRef = useRef(null);
   const [otp, setOtp] = useState("");
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
+  const [loadingUserData, setLoadingUserData] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const [resendTimer, setResendTimer] = useState(60);
   const [resendDisabled, setResendDisabled] = useState(false);
@@ -139,15 +141,13 @@ export default function OtpModal() {
             mixpanel.track('New Corporate SignUp(web)');
             dispatch(setShowOTPmodal(false));
           } else if (authenticationMode === "corporateLogin") {
-            dispatch(fetchUserDetails());
-            dispatch(setIsLoggedIn(true));
-            dispatch(fetchWalletData() as any);
+            fetchUserDetailsAndWalletData();
+            // dispatch(setIsLoggedIn(true));
+            // dispatch(fetchWalletData() as any);
             mixpanel.track('Corporate Login(web)');
-            dispatch(setShowOTPmodal(false));
+            // dispatch(setShowOTPmodal(false));
           } else if (purpose === 'login') {
-            dispatch(fetchUserDetails());
-            dispatch(setIsLoggedIn(true));
-            dispatch(fetchWalletData() as any);
+            fetchUserDetailsAndWalletData();
             dispatch(SetUserType(user.data.type));
             if (result.data.isNewUser) {
               mixpanel.identify(mobile_number);
@@ -159,7 +159,7 @@ export default function OtpModal() {
               }
             }
             mixpanel.identify(mobile_number);
-            dispatch(setShowOTPmodal(false));
+            // dispatch(setShowOTPmodal(false));
             // router.push("/");
           } else {
             dispatch(setShowOTPmodal(false));
@@ -170,8 +170,7 @@ export default function OtpModal() {
               router.push("/donation-receipt");
             } else {
               dispatch(setIsLoggedIn(true));
-              dispatch(fetchUserDetails());
-              dispatch(fetchWalletData() as any);
+              fetchUserDetailsAndWalletData();
               dispatch(setDevoteeIsNewUser(false));
               router.push("/donation-receipt");
             }
@@ -198,6 +197,35 @@ export default function OtpModal() {
       }
     }
   };
+
+  const fetchUserDetailsAndWalletData = async () => {
+    try {
+      setLoadingUserData(true);
+  
+      // Use Promise.all to execute both API requests concurrently
+      const [userDetailsResult, walletDataResult] = await Promise.all([
+        dispatch(fetchUserDetails()).unwrap(),
+        dispatch(fetchWalletData()).unwrap(),
+      ]);
+  
+      // If both API calls succeed, proceed with the login process
+      if (userDetailsResult && walletDataResult) {
+        dispatch(setShowOTPmodal(false));
+        dispatch(setIsLoggedIn(true));
+        setLoadingUserData(false);
+      }
+    } catch (error) {
+      // If any API call fails, prevent the login and show an error
+      setLoadingUserData(false);
+      Swal.fire({
+        title: 'Error!',
+        text: 'An error occurred while logging in. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+  };
+  
 
   const resendOtp = async () => {
     try {
@@ -238,6 +266,10 @@ export default function OtpModal() {
       });
     }
   };
+
+  if (loadingUserData) {
+    return <Loading />;
+  }
 
   return (
     <Transition.Root show={open} as={Fragment}>
