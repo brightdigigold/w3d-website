@@ -2,7 +2,7 @@ import { fetchCoupons } from "@/api/DashboardServices";
 import { useEffect, useState } from "react"
 
 export const useFetchCoupons = () => {
-    const [coupons, setCoupons] = useState([])
+    const [coupons, setCoupons] = useState<any []>([])
     useEffect(() => {
         const fetchCouponsData = async () => {
             try {

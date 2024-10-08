@@ -10,6 +10,7 @@ const initialCoupons: Coupon[] = [
     createdAt: "",
     description: "",
     expiryDate: "",
+    isVisible: false,
     itemType: "GOLD",
     maximum: 0,
     minimum: 0,
@@ -47,6 +48,7 @@ const couponSlice = createSlice({
       }>
     ) => {
       const { coupon, amount, transactionType, metalType, goldPrice } = action.payload;
+      console.log("Coupon=====>", coupon, amount, transactionType, metalType, goldPrice, coupon.minimum)
       let gst = ParseFloat((0.03 * amount * goldPrice), 2)
       // Check if amount is greater than or equal to the coupon's minimum value
       if (transactionType === 'rupees' && amount < coupon.minimum) {

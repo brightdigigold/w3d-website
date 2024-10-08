@@ -64,6 +64,7 @@ export interface SilverData {
 export interface Coupon {
   code: string;
   createdAt: string;
+  isVisible: boolean;
   description: string;
   expiryDate: string;
   itemType: string;
