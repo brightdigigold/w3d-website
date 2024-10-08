@@ -200,7 +200,7 @@ export default function ModalCoupon({ isOpen, onClose }: any) {
                       </div>
                     </div>
                   ))}
-                  {error && <div className="text-red-500 text-sm">{error}</div>}
+                  {error && <div className="text-red-600 text-sm sm:text-lg text-center">{error}</div>}
                 </div>
                 <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
