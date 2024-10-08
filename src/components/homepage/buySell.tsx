@@ -778,11 +778,11 @@ const BuySell = () => {
                 />
               </div>
 
-              {userType !== 'corporate' && <div>
+              {userType !== 'corporate' && <div className="cursor-pointer" onClick={openModal}>
                 <animated.div style={style}>
                   {isgold && purchaseType === 'buy' && (
                     <>
-                      <div className="flex justify-between mt-6"></div>
+                      <div className="flex justify-between mt-6" ></div>
                       <div className="py-2 px-4 rounded-lg bg-themeLight flex items-center justify-between">
                         <div className="flex items-center">
                           <Image src={coupon} alt="Benefits" style={{ width: "35px", height: "35px" }} />

@@ -10,7 +10,6 @@ import dynamic from 'next/dynamic';
 import { Poppins } from "next/font/google";
 import { initializeNotiflix } from "@/utils/customNotiflix";
 import InactivityHandler from "@/components/inactivityHandler";
-import DussheraBanner from "@/components/homepage/dussheraBanner";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -39,13 +38,27 @@ export default function RootLayout({ children }) {
         <link rel="preload" href="/font/NunitoSans_Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/font/Lato-Regular.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <meta name="google-site-verification" content="CRfShAmCXUTnCd9sfyEoPmBFHZvDQh2TC8UI4fZFPdw" />
+        <meta property="og:title" content="Bright DiGi Gold" />
+        <meta property="og:description" content="We at Bright DiGi Gold invite you to embark on a journey of effortless digital savings. In just a few clicks make your savings grow in Digital Gold and Silver.  Your gateway to hassle-free savings is here." />
+        <meta property="og:image" content="https://brightdigigold.s3.ap-south-1.amazonaws.com/OG.jpg" />
+        <meta property="og:url" content="https://www.brightdigigold.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Bright DiGi Gold" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        {/* <!-- Twitter Card Tags --> */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="https://x.com/BrightDiGiGold" />
+        <meta name="twitter:title" content="Bright DiGi Gold" />
+        <meta name="twitter:description" content="We at Bright DiGi Gold invite you to embark on a journey of effortless digital savings. In just a few clicks make your savings grow in Digital Gold and Silver.  Your gateway to hassle-free savings is here." />
+        <meta name="twitter:image" content="https://brightdigigold.s3.ap-south-1.amazonaws.com/OG.jpg" />
       </head>
       <body>
         <Provider store={store}>
           <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
             <div className={`${poppins.className} `}>
               <Navbar />
-             
               <InactivityHandler />
               <main className=" ">
                 <div className="">

@@ -249,7 +249,7 @@ const Footer = () => {
                         className="text-white"
                         href="/refund-and-cancellation"
                       >
-                        Refunds Policy
+                        Refund & Cancellation
                       </Link>
                     </li>
                   </ul>
@@ -436,7 +436,7 @@ const Footer = () => {
                       className="text-white"
                       href="/refund-and-cancellation"
                     >
-                      Refunds Policy
+                      Refund & Cancellation
                     </Link>
                   </li>
                 </ul>
