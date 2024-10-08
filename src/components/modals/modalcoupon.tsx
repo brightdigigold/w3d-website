@@ -98,6 +98,28 @@ export default function ModalCoupon({ isOpen, onClose }: any) {
     onClose(false);
   };
 
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEnteredCouponCode((event.target.value).toUpperCase());
+    setCouponError('');
+  };
+
+  const handleButtonClick = () => {
+    const couponToApply = coupons?.find(
+      (coupon: Coupon) => coupon.code === enteredCouponCode
+    );
+
+    if (couponToApply) {
+      handleApplyCoupon(couponToApply, enteredAmount);
+      setEnteredCouponCode(couponToApply.code);
+    } else {
+      if (!enteredCouponCode) {
+        setCouponError('Please enter a coupon code');
+      } else {
+        setCouponError('Please enter a valid coupon code');
+      }
+    }
+  };
+
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -148,36 +170,15 @@ export default function ModalCoupon({ isOpen, onClose }: any) {
                         placeholder="Enter Coupon Code"
                         autoComplete="off"
                         value={enteredCouponCode}
-                        onChange={(event) => {
-                          setEnteredCouponCode(event.target.value);
-                          setCouponError('');
-                        }}
+                        onChange={handleInputChange} 
                       />
                       <button
                         className="absolute right-3 rounded-md text-yellow-400 border border-yellow-400 px-5 py-1"
-                        onClick={() => {
-                          // Find the coupon with the entered code and make sure it's visible
-                          // const couponToApply = coupons?.find(
-                          //   (coupon: Coupon) => coupon.code === enteredCouponCode
-                          // );
-                          const couponToApply: Coupon = coupons?.find(
-                            (coupon: Coupon) => coupon.code === enteredCouponCode
-                          );
-
-                          if (couponToApply) {
-                            // Apply the coupon only if it exists and is visible
-                            handleApplyCoupon(couponToApply, enteredAmount);
-                            setEnteredCouponCode(couponToApply.code);
-                          } else {
-                            if (enteredCouponCode == undefined) {
-                              setCouponError('Please enter coupon code')
-                            }
-                            setCouponError('Please enter a valid coupon code')
-                          }
-                        }}
+                        onClick={handleButtonClick}
                       >
-                        {isAnyCouponApplied && appliedCouponCode === "GIIFT24XONEW" ? "Applied" : "Apply"}
+                        {isAnyCouponApplied && appliedCouponCode === enteredCouponCode ? "Applied" : "Apply"}
                       </button>
+                      {/* {couponError && <div className="text-red-600 text-sm sm:text-lg text-left">{couponError}</div>} */}
                     </div>
                   )}
                   {couponError && <div className="text-red-600 text-sm sm:text-lg text-left">{couponError}</div>}
