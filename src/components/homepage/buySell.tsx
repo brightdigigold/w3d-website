@@ -66,7 +66,7 @@ const BuySell = () => {
   const [isgold, setIsGold] = useState<boolean>(true);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [openLoginAside, setOpenLoginAside] = useState<boolean>(false);
-  const [isModalCouponOpen, setModalCouponOpen] = useState<boolean>(true);
+  const [isModalCouponOpen, setModalCouponOpen] = useState<boolean>(false);
   const [activeTabPurchase, setActiveTabPurchase] = useState<string>("rupees");
   const [transactionTypeForQuickBuySell, setTransactionTypeForQuickBuySell] = useState("rupees")
   const [activeTab, setActiveTab] = useState<string>("buy");
