@@ -121,8 +121,8 @@ export default function ModalCoupon({ isOpen, onClose }: any) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-theme px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-                <div className=" pb-4 pt-5 sm:p-6 sm:pb-4 relative">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-theme  text-left shadow-xl transition-all  sm:w-full sm:max-w-lg pb-4">
+                <div className="p-3 relative">
                   <p className="text-white text-center text-3xl sm:text-5xl extrabold mb-6">
                     Coupons
                   </p>
@@ -130,28 +130,28 @@ export default function ModalCoupon({ isOpen, onClose }: any) {
                     <Lottie
                       loop={false}
                       animationData={partyPopper}
-                      className=" absolute h-auto top-0 left-0"
+                      className="absolute h-auto top-0 left-0"
                       style={{ width: "100%", height: "100%" }}
                     />
                   )}
 
                   {coupons?.map((coupon: any) => (
-                    <div key={coupon._id} className="pb-6">
-                      <div className="grid grid-cols-9">
-                        <div className="col-span-3">
+                    <div key={coupon._id} className="p-2">
+                      <div className="grid grid-cols-4">
+                        <div className="col-span-1">
                           <img
                             className="cursor-pointer"
                             src="/coupon 499.png"
                             alt={`Coupon ${coupon.code}`}
                           />
                         </div>
-                        <div className="col-span-6 bg-white pr-1 sm:pr-3 rounded-tr-lg rounded-br-lg flex items-center">
+                        <div className="col-span-3 bg-white pr-1 sm:pr-3 rounded-tr-lg rounded-br-lg flex items-center">
                           <div className="w-full">
                             {/* Splitting description into two parts */}
                             {coupon.description && (
                               <>
                                 {/* Extracting first part from description */}
-                                <p className="couponText text-lg sm:text-3xl w-24 sm:w-40 leading-5 extrabold my-2">
+                                <p className="couponText text-lg sm:text-xl w-24 sm:w-40 leading-4 sm:leading-5 extrabold my-1 ">
                                   {coupon.description.split(",")[0]}
                                 </p>
                                 {/* Extracting remaining part from description */}
@@ -202,10 +202,10 @@ export default function ModalCoupon({ isOpen, onClose }: any) {
                   ))}
                   {error && <div className="text-red-500 text-sm">{error}</div>}
                 </div>
-                <div className=" px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
-                    className=" absolute top-5 right-5 mt-3 inline-flex justify-center bg-themeLight text-white rounded-full px-2 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300  sm:mt-0 sm:w-auto"
+                    className=" absolute top-0 sm:top-3 right-4 mt-3 inline-flex justify-center bg-themeLight text-white rounded-full px-2 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300  sm:mt-0 sm:w-auto"
                     ref={cancelButtonRef}
                     onClick={() => closeModal()}
                   >
