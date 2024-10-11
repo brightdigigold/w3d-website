@@ -172,7 +172,6 @@ const KycTab = () => {
         const decryptedData = AesDecrypt(response.data.payload);
 
         const finalResult = JSON.parse(decryptedData);
-        console.log("final result: ", finalResult)
         if (finalResult.status) {
           Swal.fire({
             html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
