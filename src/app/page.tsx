@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import { Metadata } from "next";
 import { HeroSection, OfferSlider } from '@/components';
-import DussheraBanner from '@/components/homepage/dussheraBanner';
 import AutosavebannerMobile from '@/components/homepage/autosavebanner';
 
 const Promotional = dynamic(() => import('../components/homepage/promotional'), { suspense: true });
@@ -20,9 +19,6 @@ const Review = dynamic(() => import('../components/homepage/reviews'), { suspens
 export default function Home() {
   return (
     <>
-      <div className="mt-16 sm:mt-20">
-        <DussheraBanner />
-      </div>
       <HeroSection />
       {/* <div className="hidden sm:block">
         <OfferSlider />
