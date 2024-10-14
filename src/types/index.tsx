@@ -235,6 +235,7 @@ export interface PreviewItem {
   value: string;
 }
 export interface AddressModalProps {
+  applyDiwaliOffer: boolean;
   previewData: PreviewItem[];
   openAddressModal: boolean;
   closeAddressModal: () => void;

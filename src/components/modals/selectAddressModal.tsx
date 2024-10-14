@@ -16,6 +16,7 @@ import EditAddressModel from "./editAddressModel";
 import { ArchiveBoxXMarkIcon } from "@heroicons/react/24/outline";
 
 export default function SelectAddress({
+  applyDiwaliOffer,
   totalAmountValue,
   transactionId,
   openAddressModal,
@@ -164,7 +165,8 @@ export default function SelectAddress({
     address_id: addressId,
     gst_number: "",
     totalAmount: +totalAmount,
-    couponCode:  null,
+    couponCode: applyDiwaliOffer ? "DIWALIOFFER" : null,
+    // couponCode:  null,
     // couponCode: appliedCouponCode,
     product_id: productsDetailById._id,
     itemMode: "PHYSICAL",

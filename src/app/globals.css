@@ -1020,3 +1020,57 @@ body.modal-open {
     /* background: #cde8f1; */
   }
 }
+
+/* Diwali code */
+.rotate-image {
+  transform: rotate(90deg);
+  transition: transform 0.5s ease-in-out;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 360px;
+  background: #04283d;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 145%;
+  left: 50%;
+  margin-left: -180px;
+  opacity: 0;
+  transition: opacity 0.3s;
+ 
+  border: 2px solid transparent; /* Make the static border transparent */
+  animation: borderFlash 2s linear infinite;
+}
+
+@keyframes borderFlash {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgb(214, 214, 112), 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent;
+  }
+  25% {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 3px rgb(214, 214, 98), 0 0 0 0 transparent, 0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 3px rgb(207, 207, 85), 0 0 0 0 transparent;
+  }
+  75% {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 3px yellow;
+  }
+}
+
+
+
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
