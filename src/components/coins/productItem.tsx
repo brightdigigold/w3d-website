@@ -66,6 +66,9 @@ const ProductItem: React.FC<ProductItemProps> = ({ item, isLoggedIn, handleLogin
             >
                 <div className="flex flex-col items-center px-2">
                     <div>
+                        {(item.slug == "5-Gram-Gold-Coin" || item.slug == "10-Gram-Gold-Coin") && <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+                            <img alt="offer image" src="/images/akshayTrityaOffer.gif" className='h-14 sm:h-20' />
+                        </div>}
                         <Image
                             src={item.image.image}
                             alt="Bright digi gold coins"
