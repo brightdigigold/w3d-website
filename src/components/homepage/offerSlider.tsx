@@ -45,7 +45,7 @@ export default function OfferSlider() {
   };
 
   return (
-    <>
+    <div className="mt-6">
       {userType == "corporate" ?
         <div className="hidden sm:block">
           <Image
@@ -121,6 +121,6 @@ export default function OfferSlider() {
           transition: transform 2s ease-in-out;
         }
       `}</style>
-    </>
+    </div>
   );
 }

@@ -23,7 +23,7 @@ export default function Home() {
       {/* <div className="hidden sm:block">
         <OfferSlider />
       </div> */}
-      <div className=' '>
+      <div className='mt-6'>
         <div className='bg-gradient-to-b from-gray-50 via-[rgb(57,94,128)] to-[rgb(4,67,86)] sm:hidden'>
           <div className=' w-2/3 mx-auto'>
 

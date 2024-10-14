@@ -60,11 +60,7 @@ export default function RootLayout({ children }) {
             <div className={`${poppins.className} `}>
               <Navbar />
               <InactivityHandler />
-              <main className=" ">
-                <div className="">
-                  {children}
-                </div>
-              </main>
+              {children}
               <Footer />
             </div>
           </PersistGate>
