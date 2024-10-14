@@ -87,6 +87,9 @@ const Products = () => {
             </div>
 
             <div className="text-center mx-auto mt-10">
+              <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+                <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
+              </div>
               <Image
                 src="https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"
                 alt="products"
@@ -194,6 +197,9 @@ const Products = () => {
             </div>
 
             <div className="text-center mx-auto mt-10">
+              <div className="absolute top-0 left-0 px-0  rounded-bl-lg">
+                <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} />
+              </div>
               <Image
                 src="https://d2fbpyhlah02sy.cloudfront.net/product/gold/2gm/Group+25.png"
                 alt="products"
