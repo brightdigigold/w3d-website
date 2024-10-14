@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import BuySell from "./buySell";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -17,7 +17,6 @@ import OtpModal from "../modals/otpModal";
 import SetProfileForNewUser from "../setProfile";
 import { fetchWalletData } from "@/redux/vaultSlice";
 import Image from "next/image";
-import { FaTimes } from "react-icons/fa";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -25,42 +24,11 @@ const HeroSection = () => {
   const showProfileForm = useSelector(
     (state: RootState) => state.auth.showProfileForm
   );
-  const [showNavratriModal, setShowNavratriModal] = useState(false);
 
   const onClose = () => {
     dispatch(setShowProfileForm(false));
   };
 
-  // useEffect(() => {
-  //   // Check if the user has closed the modal before
-  //   const modalClosed = localStorage.getItem("navratriModalClosed");
-  //   if (!modalClosed) {
-  //     setShowNavratriModal(true); // Show the modal if not closed before
-  //   }
-  // }, []);
-
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      localStorage.removeItem("modalClosed"); // Remove flag on refresh or exit
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    const modalClosed = localStorage.getItem("modalClosed");
-    if (!modalClosed) {
-      setShowNavratriModal(true); // Show modal if it hasn't been closed manually
-    }
-
-    // Cleanup event listener when the component unmounts
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-
-  const closeModal = () => {
-    setShowNavratriModal(false);
-    localStorage.setItem("navratriModalClosed", "true"); // Save the flag to localStorage
-  };
 
   useEffect(() => {
     const checkUserIsNew = async () => {
@@ -135,30 +103,6 @@ const HeroSection = () => {
   return (
     <div className="bg-theme mt-8">
       {otpModal && <OtpModal />}
-
-      {showNavratriModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center cursor-pointer">
-          <div className="fixed inset-0 bg-black opacity-70"></div>
-          <div className="relative bg-white rounded-lg max-w-xl w-full">
-            <Image
-              src='/Navratri Giveaway Banner Popup.jpg'
-              alt="Navratri giveaway Popup"
-              width={576}
-              height={375}
-              objectFit="contain"
-              onClick={() => {
-                window.open("https://www.instagram.com/brightdigigold/", '_blank');
-              }}
-            />
-            <button
-              onClick={closeModal}
-              className="absolute top-3 right-3 text-xl text-red-800"
-            >
-              <FaTimes size={32} className="border-2 border-red-500 rounded-full p-1 transition-colors duration-300 ease-in-out" />
-            </button>
-          </div>
-        </div>
-      )}
 
       <motion.div
         initial="hidden"
