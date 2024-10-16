@@ -110,6 +110,7 @@ const Cart = () => {
   const [addressList, setaddressList] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState<String>("");
   const [showAddNewAddress, setShowAddNewAddress] = useState<boolean>(false);
+  const MAX_AMOUNT = 1000000;
 
   const openConvertMetalModalHandler = (metalTypeToConvert: string) => {
     const vaultBalanceOfMetal = metalTypeToConvert === 'GOLD' ? goldVaultBalance : silverVaultBalance;
@@ -307,6 +308,7 @@ const Cart = () => {
   };
 
   const increaseQty = debounce(async (maxForCart: number, coinHave: number, productId: string, currentCount: number) => {
+    console.log("finalAmount: ==>>>", finalAmount);
     if (currentCount >= maxForCart) {
       setMaxCoinError(`You can only purchase ${maxForCart} coins of this item.`);
     } else if (currentCount < coinHave) {
@@ -438,6 +440,12 @@ const Cart = () => {
           return;
         }
       }
+    }
+
+    if (finalAmount > MAX_AMOUNT) {
+      Notiflix.Report.failure('Error', "Purchase limit exceeded! You cannot buy products worth more than 10 lakhs. Please reduce the quantity of coins to proceed.", 'OK');
+      setLoading(false);
+      return;
     }
 
     try {
