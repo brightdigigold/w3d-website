@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 import { postMethodHelperWithEncryption } from '@/api/postMethodHelper';
@@ -35,7 +35,6 @@ export const useAddToCart = (
                 from_App: false,
             };
 
-            console.log("dataToBeEncrypt", dataToBeEncrypt)
             const configHeaders = {
                 headers: {
                     authorization: `Bearer ${token}`,
@@ -55,7 +54,6 @@ export const useAddToCart = (
             } else if (result.isError) {
                 // Handle error case
                 setError(result?.errorMsg)
-                console.log("result", result)
                 Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
             }
         } catch (error: any) {
