@@ -210,6 +210,12 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 Blogs
               </div>
             </Link>
+            <Link target="_blank" href="https://gifting.brightdigigold.com/" prefetch={true}>
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="https://brightdigigold.s3.ap-south-1.amazonaws.com/Shipping+Policy.gif" alt="Refund & Cancellation" width={20} height={20} className="h-6 w-9" />
+                Corporate Gifting
+              </div>
+            </Link>
             <div className=" absolute bottom-3  flex justify-between items-center w-full space-x-4 px-6">
               <Link href="https://www.facebook.com/brightdigigold">
                 <img
