@@ -391,6 +391,11 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li className="mb-4">
+                    <Link className="text-white" target="_blank" href="https://gifting.brightdigigold.com/">
+                      Corporate Gifting
+                    </Link>
+                  </li>
+                  <li className="mb-4">
                     <Link className="text-white" href="/faqs">
                       FAQs
                     </Link>
@@ -403,18 +408,7 @@ const Footer = () => {
                       Blogs
                     </Link>
                   </li>
-                  <li className="mb-4">
-                    <div
-                      onClick={handleLoginClick}
-                    >
-                      <Link
-                        className="text-white"
-                        href="#"
-                      >
-                        Donation Receipt
-                      </Link>
-                    </div>
-                  </li>
+
                 </ul>
                 <ul className="mt-6 col-span-2 md:col-span-1">
                   <li className="mb-4">
@@ -444,6 +438,18 @@ const Footer = () => {
                     >
                       Refund & Cancellation
                     </Link>
+                  </li>
+                  <li className="mb-4">
+                    <div
+                      onClick={handleLoginClick}
+                    >
+                      <Link
+                        className="text-white"
+                        href="#"
+                      >
+                        Donation Receipt
+                      </Link>
+                    </div>
                   </li>
                 </ul>
                 <div className="grid gap-4 w-full mt-0 md:mt-6 col-span-4 lg:col-span-1">
