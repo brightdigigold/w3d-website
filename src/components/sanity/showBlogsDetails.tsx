@@ -30,12 +30,12 @@ const defaultSerializers = SanityBlockContent.defaultSerializers
 const customSerializers = {
   marks: {
     link: ({ mark, children }: { mark: any; children: React.ReactNode }) => (
-      <a href={mark.href} className='text-blue-600'>
+      <a href={mark.href} className='text-blue-600 bold'>
         {children}
       </a>
     ),
     strong: ({ children }: { children: React.ReactNode }) => (
-      <strong className='bold'>
+      <strong className='bold mb-5 text-white'>
         {children}
       </strong>
     ),
@@ -45,6 +45,12 @@ const customSerializers = {
       return <h4 className='text-yellow-400 poppins-semibold tracking-wide text-xl sm:text-2xl mt-3'>{props.children}</h4>;
     }
     return defaultSerializers.types.block(props);
+  },
+  list: (props: any) => {
+    return <ul className="list-disc pl-3 p-1">{props.children}</ul>;
+  },
+  listItem: (props: any) => {
+    return <li className=" text-lg">{props.children}</li>;
   },
 };
 

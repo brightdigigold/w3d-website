@@ -136,7 +136,7 @@ const PostDisplay = ({ slug }) => {
                     </div>
                     <div className='w-full sm:grid sm:grid-cols-6 gap-10'>
                         <div className='col-span-4'>
-                            <div className="text-justify pb-4 text-xl">
+                            <div className="text-justify pb-4 text-xl poppins-medium prose prose-bold:mb-10 text-white">
                                 {post.body && post.body.map((block, index) => (
                                     <PortableText key={index} content={block} />
                                 ))}
