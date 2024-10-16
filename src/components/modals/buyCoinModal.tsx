@@ -59,6 +59,8 @@ export default function CoinModal({
   const user = useSelector(selectUser);
   const router = useRouter();
 
+  // console.log("liveGoldPrice", liveGoldPrice);
+
   const getKeysToShow = () => {
     if (useWallet) {
       return [
@@ -129,6 +131,7 @@ export default function CoinModal({
         product_id: productsDetailById._id,
       };
       const resAfterEncryptData = AesEncrypt(dataToBeDecrypt);
+      console.log("dataToBeDecrypt", dataToBeDecrypt)
       const payloadToSend = { payload: resAfterEncryptData };
       const token = localStorage.getItem("token");
       const configHeaders = {
@@ -159,7 +162,7 @@ export default function CoinModal({
       if (errInPreview?.response?.data?.payload) {
         try {
           const decryptedData = AesDecrypt(errInPreview.response.data.payload);
-          console.log("Decrypted Datat", decryptedData)
+          console.log("Decrypted Datat", (JSON.parse(decryptedData)))
           // Ensure decryptedData is valid before parsing
           if (decryptedData) {
             const errorMessage = JSON.parse(decryptedData).message;
@@ -323,7 +326,7 @@ export default function CoinModal({
                           } */}
 
                           {applyDiwaliOffer &&
-                            <p className="text-green-600 text-sm sm:text-md mt-8">You will receive {productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver-Coin/s" : "5-Gram-Silver/s"} for free!!!</p>
+                            <p className="text-green-600 text-sm sm:text-md mt-8">You will receive {productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver-Coin(s)" : "5-Gram-Silver-Coin(s)"} for free!!!</p>
                           }
                           <div className={clsx(applyDiwaliOffer ? 'items-center w-full bg-[17455F] border-2 border-yellow-400 rounded-xl p-3' : 'items-center w-full bg-[17455F] border-2 border-yellow-400 rounded-xl p-3 my-8')}>
                             <div>

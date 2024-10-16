@@ -137,17 +137,21 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   }
 
   const diwaliOfferHandler = () => {
-    setapplyDiwaliOffer(true)
-    Swal.fire({
-      html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
-      title: `You will receive ${quantity} <br /> ${productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver" : "5-Gram-Silver"}-${quantity === 1 ? 'coin' : "Coins"} for free!`,
-      // text: "AKSHAYTRITYA OFFER APPLIED",
-      width: "450px",
-      padding: "2em",
-      showConfirmButton: false,
-      timer: 5000,
-    });
-  }
+    if (!applyDiwaliOffer) {
+      // If the offer is not applied, apply it and show the success alert
+      Swal.fire({
+        html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
+        title: `You will receive ${quantity} <br /> ${productsDetailById?.name === '10 Gram Gold Coin' ? '10-Gram-Silver' : '5-Gram-Silver'
+          }-${quantity === 1 ? 'coin' : 'Coins'} for free!`,
+        width: '450px',
+        padding: '2em',
+        showConfirmButton: false,
+        timer: 3500,
+      });
+    }
+    // Toggle the state
+    setapplyDiwaliOffer((prev) => !prev);
+  };
 
   return (
     <div className="container pt-20 sm:pt-32  text-white pb-28 xl:pb-8">
@@ -274,12 +278,10 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
             id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (
               <div className="text-center">
                 <CustomButton
-                  containerStyles=" px-3 extrabold cursor-pointer text-md bg-[#FFD835] text-black sm:mt-3 text-center py-2 rounded-3xl"
-                  isDisabled={!productsDetailById.inStock || applyDiwaliOffer}
-                  handleClick={() => {
-                    diwaliOfferHandler();
-                  }}
-                  title={!applyDiwaliOffer ? "APPLY DIWALI OFFER" : "OFFER APPLIED"}
+                  containerStyles="px-3 extrabold cursor-pointer text-md bg-[#FFD835] text-black sm:mt-3 text-center py-2 rounded-3xl"
+                  isDisabled={!productsDetailById.inStock}
+                  handleClick={diwaliOfferHandler}
+                  title={!applyDiwaliOffer ? 'APPLY DIWALI OFFER' : 'OFFER APPLIED'}
                 />
                 <div>
                   <div className="tooltip mt-2">
