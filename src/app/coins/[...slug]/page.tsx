@@ -22,6 +22,11 @@ import ProductDescription from "../ProductDetails/productDescription";
 import { setShowProfileForm } from "@/redux/authSlice";
 import { useDispatch } from "react-redux";
 import ImageGallery from "../ProductDetails/productImage";
+import Image from "next/image";
+import CustomButton from "@/components/customButton";
+import { MdInfo } from "react-icons/md";
+import Swal from "sweetalert2";
+import { numberToWords } from "@/utils/helperFunctions";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   // console.log("params: " , slug);
@@ -31,10 +36,10 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const { _id } = user.data;
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState<number>(1);
-  const { productsDetailById, productId, isLoading, error } = useFetchProductDetailsById(id);
+  const { productsDetailById, productId, isLoading, } = useFetchProductDetailsById(id);
   const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
   const onSuccessfulAdd = () => setOpenCartSidebar(true);
-  const { addToCart, isSuccess, } = useAddToCart(_id, refetch, onSuccessfulAdd);
+  const { addToCart, isSuccess, error} = useAddToCart(_id, refetch, onSuccessfulAdd);
   const [cartQuantity, setCartQuantity] = useState<number>(1);
   const goldData = useSelector(SelectGoldData);
   const silverData = useSelector(SelectSilverData);
@@ -44,6 +49,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const [openCartSidebar, setOpenCartSidebar] = useState<boolean>(false);
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const otpModal = useSelector((state: RootState) => state.auth.otpModal);
+  const [applyDiwaliOffer, setapplyDiwaliOffer] = useState(false);
 
   useEffect(() => {
     const productCount = getProductCountById(coinsInCart, productId);
@@ -52,6 +58,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   }, [coinsInCart]);
 
   const openCoinModalHandler = () => {
+    // console.log("isloggedIn", isloggedIn)
     if (isloggedIn) {
       setMaxCoinError("");
 
@@ -79,10 +86,10 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   };
 
   const increaseQty = useCallback(() => {
-    if (quantity <= 9 && productsDetailById?.coinHave !== undefined && productsDetailById?.coinHave > quantity) {
+    if (quantity <= 99 && productsDetailById?.coinHave !== undefined && productsDetailById?.coinHave > quantity) {
       setQuantity((prevQuantity) => prevQuantity + 1);
       setMaxCoinError("");
-    } else if (quantity <= 9 && productsDetailById?.coinHave === undefined) {
+    } else if (quantity <= 99 && productsDetailById?.coinHave === undefined) {
       setMaxCoinError("Oops! This Coin Is Not Available. Please Try Again After Some Time.");
     } else {
       setMaxCoinError(`You can only purchase ${quantity} coins.`);
@@ -130,6 +137,23 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
     return <Loading />;
   }
 
+  const diwaliOfferHandler = () => {
+    if (!applyDiwaliOffer) {
+      // If the offer is not applied, apply it and show the success alert
+      Swal.fire({
+        html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
+        title: `You will receive ${numberToWords(quantity)} <br /> ${productsDetailById?.name === '10 Gram Gold Coin' ? '10-Gram-Silver' : '5-Gram-Silver'
+          }-${quantity === 1 ? 'coin' : 'Coins'} for free!`,
+        width: '450px',
+        padding: '2em',
+        showConfirmButton: false,
+        timer: 3500,
+      });
+    }
+    // Toggle the state
+    setapplyDiwaliOffer((prev) => !prev);
+  };
+
   return (
     <div className="container pt-20 sm:pt-32  text-white pb-28 xl:pb-8">
 
@@ -153,6 +177,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
 
       {openCoinModal && (
         <CoinModal
+          applyDiwaliOffer={applyDiwaliOffer}
           totalCoins={quantity}
           productsDetailById={productsDetailById}
           openModalOfCoin={openCoinModal}
@@ -166,6 +191,25 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
           {!productsDetailById.inStock && (
             <div className="bg-red-600 absolute top-0 right-0 px-2  rounded-bl-lg">
               <p className="font-medium">Out Of Stock</p>
+            </div>
+          )}
+
+          {id == "5-Gram-Gold-Coin" && (
+            <div className="absolute top-0 right-0 px-0 rounded-bl-lg">
+              <Image
+                alt="offer image"
+                src="/images/akshayTrityaOffer.gif"
+                width={80}
+                height={80}
+                className="rotate-image"
+              />
+            </div>
+          )}
+
+
+          {id == "10-Gram-Gold-Coin" && (
+            <div className="absolute top-0 right-0 px-0  rounded-bl-lg">
+              <Image alt="offer image" src="/images/akshayTrityaOffer.gif" width={80} height={80} className="rotate-image" />
             </div>
           )}
 
@@ -183,7 +227,9 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                 title={""}
               />
             </div>
-            <div className={`fade-section }`}>
+
+            <div className={`fade-section ${applyDiwaliOffer ? 'disabled' : ''}`}>
+              {/* <div className={`fade-section }`}> */}
               <div>
                 {/* GO TO CART */}
                 {quantity === cartQuantity && (
@@ -191,7 +237,8 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                     <Link className="cursor-pointer" href="/cart">
                       <CustomImageButton
                         img="/lottie/Go to cart.gif"
-                        isDisabled={!productsDetailById.inStock}
+                        isDisabled={!productsDetailById.inStock || applyDiwaliOffer}
+                        // isDisabled={!productsDetailById.inStock}
                         title="GO TO CART"
                       />
                     </Link>
@@ -203,7 +250,8 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                   <div>
                     <CustomImageButton
                       img="/lottie/updatenow.png"
-                      isDisabled={!productsDetailById.inStock}
+                      isDisabled={!productsDetailById.inStock || applyDiwaliOffer}
+                      // isDisabled={!productsDetailById.inStock}
                       handleClick={() => {
                         addToCartHandler("UpdateCart");
                       }}
@@ -216,7 +264,8 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
                 {cartQuantity === 0 && (
                   <CustomImageButton
                     img="/lottie/addcart.gif"
-                    isDisabled={!productsDetailById.inStock}
+                    // isDisabled={!productsDetailById.inStock}
+                    isDisabled={!productsDetailById.inStock || applyDiwaliOffer}
                     handleClick={() => {
                       addToCartHandler("AddToCart");
                     }}
@@ -226,6 +275,30 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
               </div>
             </div>
           </div>
+          {
+            id == "5-Gram-Gold-Coin" || id == "10-Gram-Gold-Coin" ? (
+              <div className="text-center">
+                <CustomButton
+                  containerStyles="px-3 extrabold cursor-pointer text-md bg-[#FFD835] text-black sm:mt-3 text-center py-2 rounded-3xl"
+                  isDisabled={!productsDetailById.inStock}
+                  handleClick={diwaliOfferHandler}
+                  title={!applyDiwaliOffer ? 'APPLY DIWALI OFFER' : 'OFFER APPLIED'}
+                />
+                <div>
+                  <div className="tooltip mt-2">
+                    <MdInfo size={24} className="" color="yellow" />
+                    <span className="tooltiptext">
+                      <ul className="text-sm text-justify">
+                        <li className="m-2">1. When you purchase 5 GM Gold Coin(s), you will receive 5 GM Silver Coin(s). Similarly, if you purchase 10 GM Gold Coin(s), you will receive 10 GM Silver Coin(s).</li>
+                        <li className="m-2">2. The "Convert from Vault" option is not applicable to this offer.</li>
+                        <li className="m-2">3. You cannot use the Cart feature to avail this offer.</li>
+                      </ul>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ) : null
+          }
         </div>
 
         <div className="col-span-3">

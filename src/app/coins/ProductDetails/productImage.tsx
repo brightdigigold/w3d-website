@@ -14,14 +14,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
 
   // Function to check if a media URL is a video
   const isVideo = (url: string) => url.endsWith('.mp4');
+  // console.log("isVideo", images);
 
   // Handle thumbnail click
   const handleThumbnailClick = (media: string, index: number) => {
     setMainMedia(media);
     setActiveIndex(index);
   };
-
-  // console.log("mainMedia", mainMedia)
 
   return (
     <div className="gallery-container">

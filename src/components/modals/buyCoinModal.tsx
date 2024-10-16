@@ -23,20 +23,21 @@ import Swal from "sweetalert2";
 import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { selectUser } from "@/redux/userDetailsSlice";
+import clsx from "clsx";
 interface CoinModalProps {
   openModalOfCoin: boolean;
   closeModalOfCoin: () => void;
   productsDetailById: any;
   totalCoins: number;
-  // akshayTrityaOfferApplied: boolean;
+  applyDiwaliOffer: boolean;
 }
 
 export default function CoinModal({
+  applyDiwaliOffer,
   openModalOfCoin,
   closeModalOfCoin,
   productsDetailById,
   totalCoins,
-  // akshayTrityaOfferApplied
 }: CoinModalProps) {
   const [showAdditionalContent, setShowAdditionalContent] = useState(true);
   const cancelButtonRef = useRef(null);
@@ -57,6 +58,8 @@ export default function CoinModal({
   const [showLottie, setShowLottie] = useState(false);
   const user = useSelector(selectUser);
   const router = useRouter();
+
+  // console.log("liveGoldPrice", liveGoldPrice);
 
   const getKeysToShow = () => {
     if (useWallet) {
@@ -122,11 +125,13 @@ export default function CoinModal({
             ? liveGoldPrice
             : liveSilverPrice,
         fromApp: false,
-        couponCode: null,
+        couponCode: applyDiwaliOffer ? "DIWALI" : null,
+        // couponCode: null,
         product_quantity: totalCoins,
         product_id: productsDetailById._id,
       };
       const resAfterEncryptData = AesEncrypt(dataToBeDecrypt);
+      // console.log("dataToBeDecrypt", dataToBeDecrypt)
       const payloadToSend = { payload: resAfterEncryptData };
       const token = localStorage.getItem("token");
       const configHeaders = {
@@ -157,7 +162,7 @@ export default function CoinModal({
       if (errInPreview?.response?.data?.payload) {
         try {
           const decryptedData = AesDecrypt(errInPreview.response.data.payload);
-
+          console.log("Decrypted Datat", (JSON.parse(decryptedData)))
           // Ensure decryptedData is valid before parsing
           if (decryptedData) {
             const errorMessage = JSON.parse(decryptedData).message;
@@ -242,7 +247,7 @@ export default function CoinModal({
     return () => clearTimeout(timer);
   }, [useWallet]);
 
-  const isDisabled = (metalTypeForProgressBar === 'GOLD' && goldVaultBalance === 0) ||
+  const isDisabled = (applyDiwaliOffer) || (metalTypeForProgressBar === 'GOLD' && goldVaultBalance === 0) ||
     (metalTypeForProgressBar === 'SILVER' && silverVaultBalance === 0);
 
   return (
@@ -260,6 +265,7 @@ export default function CoinModal({
       >
         {openAddressModal && (
           <SelectAddress
+            applyDiwaliOffer={applyDiwaliOffer}
             totalAmountValue={totalAmountValue}
             transactionId={transactionId}
             previewData={previewData}
@@ -314,11 +320,19 @@ export default function CoinModal({
                           >
                             Convert From Vault
                           </Dialog.Title>
-                          <div className="items-center w-full bg-[17455F] border-2 border-yellow-400 rounded-xl my-8  p-3">
+                          {/* {applyDiwaliOffer && <><p className="text-red-600 mt-8 text-sm sm:text-md">You can't convert from vault as you applied DIWALI OFFER</p>
+                            <p className="text-green-600 text-sm sm:text-md">You will receive {productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver-Coin/s" : "5-Gram-Silver/s"} for free!!!</p>
+                          </>
+                          } */}
+
+                          {applyDiwaliOffer &&
+                            <p className="text-green-600 text-sm sm:text-md mt-8">You will receive {productsDetailById?.name === "10 Gram Gold Coin" ? "10-Gram-Silver-Coin(s)" : "5-Gram-Silver-Coin(s)"} for free!!!</p>
+                          }
+                          <div className={clsx(applyDiwaliOffer ? 'items-center w-full bg-[17455F] border-2 border-yellow-400 rounded-xl p-3' : 'items-center w-full bg-[17455F] border-2 border-yellow-400 rounded-xl p-3 my-8')}>
                             <div>
                               <div className="flex justify-between gap-4">
                                 <div className="mt-2 mb-2">
-                                  <div className="text-sm sm:text-base w-full tracking-[.1em] bold text-white">
+                                  <div className="text-xs sm:text-base w-full tracking-[.1em] bold text-white">
                                     Available Vault Balance :
                                   </div>
                                   <div className="flex items-center mt-2 bold text-white ">
@@ -362,7 +376,7 @@ export default function CoinModal({
                                     <img
                                       src={"../../images/vault.png"}
                                       alt="digital gold bar"
-                                      className={`px-1 py-2 h-12 w-16 sm:h-16  cursor-pointer`}
+                                      className={`px-1 py-2 h-14 w-16 sm:h-16  cursor-pointer`}
                                     />
                                   </div>
                                   <div className="px-2">
@@ -378,6 +392,7 @@ export default function CoinModal({
                                   </div>
                                 </div>
                               </div>
+                              {applyDiwaliOffer && <><p className="text-red-600 text-xs sm:text-md mt-1">You can't convert from vault as you applied DIWALI OFFER</p></>}
                             </div>
                           </div>
                         </div>

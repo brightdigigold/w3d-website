@@ -34,7 +34,8 @@ const storage = typeof window !== 'undefined' ? createWebStorage("local") : crea
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['shop', 'cart',],
+  blacklist: ['shop'],
+  // whitelist: ['vault', 'user', 'auth'], // Only persist these slices
 };
 
 const rootReducer = combineReducers({

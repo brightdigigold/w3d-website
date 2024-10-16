@@ -101,7 +101,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="bg-theme mt-8">
+    <div className="bg-theme mt-24 sm:mt-32">
       {otpModal && <OtpModal />}
 
       <motion.div

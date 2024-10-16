@@ -204,9 +204,15 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
               <Image src="/receipt.png" alt="Receipt" width={28} height={20} className="h-6 w-9" />
               Donation Receipt
             </div>
+            <Link target="_blank" href="https://gifting.brightdigigold.com/" prefetch={true}>
+              <div onClick={() => onClose()} className={styles.p1}>
+                <Image src="/Corporate gifting.png" alt="Refund & Cancellation" width={20} height={28} className="h-9 w-9" />
+                Corporate Gifting
+              </div>
+            </Link>
             <Link href="/digital-gold-blog" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
-                <Image src="/Blog.png" alt="Blogs" width={40} height={40} className="h-10 w-10" />
+                <Image src="/Blog.png" alt="Blogs" width={40} height={40} className="h-12 w-11" />
                 Blogs
               </div>
             </Link>
