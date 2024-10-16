@@ -1047,30 +1047,50 @@ body.modal-open {
   margin-left: -180px;
   opacity: 0;
   transition: opacity 0.3s;
- 
+
   border: 2px solid transparent; /* Make the static border transparent */
   animation: borderFlash 2s linear infinite;
 }
 
 @keyframes borderFlash {
-  0%, 100% {
-    box-shadow: 0 0 0 3px rgb(214, 214, 112), 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent;
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgb(214, 214, 112), 0 0 0 0 transparent,
+      0 0 0 0 transparent, 0 0 0 0 transparent;
   }
   25% {
-    box-shadow: 0 0 0 0 transparent, 0 0 0 3px rgb(214, 214, 98), 0 0 0 0 transparent, 0 0 0 0 transparent;
+    box-shadow: 0 0 0 0 transparent, 0 0 0 3px rgb(214, 214, 98),
+      0 0 0 0 transparent, 0 0 0 0 transparent;
   }
   50% {
-    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 3px rgb(207, 207, 85), 0 0 0 0 transparent;
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent,
+      0 0 0 3px rgb(207, 207, 85), 0 0 0 0 transparent;
   }
   75% {
-    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 3px yellow;
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 0 0 0 transparent,
+      0 0 0 3px yellow;
   }
 }
-
-
-
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
+
+/* Customizing the bullet points in Tailwind */
+.prose ul {
+  list-style-type: "★"; /* Use star symbol for bullets */
+  margin-left: 1.5rem; /* Custom left margin for the list */
+  color: red; /* Custom text color */
+}
+
+.prose ul li {
+  margin-bottom: 1rem; /* Add vertical spacing between list items */
+  color: white; /* Custom text color */
+}
+
+.prose ul li::marker {
+  color: #ffcc00; /* Custom color for the bullet */
+  font-size: 1.5rem; /* Custom bullet size */
+}
+
