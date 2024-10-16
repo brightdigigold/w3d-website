@@ -125,13 +125,13 @@ export default function CoinModal({
             ? liveGoldPrice
             : liveSilverPrice,
         fromApp: false,
-        couponCode: applyDiwaliOffer ? "DIWALIOFFER" : null,
+        couponCode: applyDiwaliOffer ? "DIWALI" : null,
         // couponCode: null,
         product_quantity: totalCoins,
         product_id: productsDetailById._id,
       };
       const resAfterEncryptData = AesEncrypt(dataToBeDecrypt);
-      console.log("dataToBeDecrypt", dataToBeDecrypt)
+      // console.log("dataToBeDecrypt", dataToBeDecrypt)
       const payloadToSend = { payload: resAfterEncryptData };
       const token = localStorage.getItem("token");
       const configHeaders = {
