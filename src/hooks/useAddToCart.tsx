@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 
-import { funForAesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
+import { postMethodHelperWithEncryption } from '@/api/postMethodHelper';
+import Notiflix from 'notiflix';
 
 interface UseAddToCartHook {
     addToCart: (action_type: string, quantity: number, productId: string) => Promise<void>;
@@ -35,8 +35,7 @@ export const useAddToCart = (
                 from_App: false,
             };
 
-            const encryptedData = await funForAesEncrypt(dataToBeEncrypt);
-            const payloadToSend = { payload: encryptedData };
+            console.log("dataToBeEncrypt", dataToBeEncrypt)
             const configHeaders = {
                 headers: {
                     authorization: `Bearer ${token}`,
@@ -44,28 +43,26 @@ export const useAddToCart = (
                 },
             };
 
-            const response = await axios.post(
+            const result = await postMethodHelperWithEncryption(
                 `${process.env.baseUrl}/user/ecom/create/cart`,
-                payloadToSend,
-                configHeaders
+                dataToBeEncrypt, configHeaders
             );
 
-            const decryptedData = await funcForDecrypt(response.data.payload);
-            const parsedData = JSON.parse(decryptedData);
-
-            if (parsedData.status) {
+            if (!result.isError && result.data.status) {
                 setIsSuccess(true);
                 if (onSuccessfulAdd) onSuccessfulAdd(); // Check if onSuccessfulAdd is defined before calling
                 if (refetch) refetch(); // Check if refetch is defined before calling
-            } else {
-                setError('Failed to add to cart');
+            } else if (result.isError) {
+                // Handle error case
+                setError(result?.errorMsg)
+                console.log("result", result)
+                Notiflix.Report.failure('Error', result?.errorMsg || 'An unexpected error occurred.', 'OK');
             }
         } catch (error: any) {
-            setError(error.message || 'An error occurred');
             Swal.fire({
                 html: `<img src="/lottie/oops.gif" class="swal2-image-customs" alt="Error">`,
                 title: "Oops...",
-                titleText: "Something went wrong!",
+                titleText: 'Something went wrong!',
             });
         } finally {
             setIsLoading(false);

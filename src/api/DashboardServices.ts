@@ -138,7 +138,7 @@ export async function fetchTransactionData(id: string, token: string): Promise<a
     id,
   };
 
-  const resAfterEncrypt = await AesEncrypt(data);
+  const resAfterEncrypt = AesEncrypt(data);
 
   const body = {
     payload: resAfterEncrypt,

@@ -26,6 +26,7 @@ import Image from "next/image";
 import CustomButton from "@/components/customButton";
 import { MdInfo } from "react-icons/md";
 import Swal from "sweetalert2";
+import { numberToWords } from "@/utils/helperFunctions";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   // console.log("params: " , slug);
@@ -35,10 +36,10 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   const { _id } = user.data;
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState<number>(1);
-  const { productsDetailById, productId, isLoading, error } = useFetchProductDetailsById(id);
+  const { productsDetailById, productId, isLoading, } = useFetchProductDetailsById(id);
   const { coinsInCart, isLoadingCart, errorCart, refetch } = useFetchProductCart(_id);
   const onSuccessfulAdd = () => setOpenCartSidebar(true);
-  const { addToCart, isSuccess, } = useAddToCart(_id, refetch, onSuccessfulAdd);
+  const { addToCart, isSuccess, error} = useAddToCart(_id, refetch, onSuccessfulAdd);
   const [cartQuantity, setCartQuantity] = useState<number>(1);
   const goldData = useSelector(SelectGoldData);
   const silverData = useSelector(SelectSilverData);
@@ -85,10 +86,10 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
   };
 
   const increaseQty = useCallback(() => {
-    if (quantity <= 9 && productsDetailById?.coinHave !== undefined && productsDetailById?.coinHave > quantity) {
+    if (quantity <= 99 && productsDetailById?.coinHave !== undefined && productsDetailById?.coinHave > quantity) {
       setQuantity((prevQuantity) => prevQuantity + 1);
       setMaxCoinError("");
-    } else if (quantity <= 9 && productsDetailById?.coinHave === undefined) {
+    } else if (quantity <= 99 && productsDetailById?.coinHave === undefined) {
       setMaxCoinError("Oops! This Coin Is Not Available. Please Try Again After Some Time.");
     } else {
       setMaxCoinError(`You can only purchase ${quantity} coins.`);
@@ -141,7 +142,7 @@ const page = ({ params: { slug } }: { params: { slug: string } }) => {
       // If the offer is not applied, apply it and show the success alert
       Swal.fire({
         html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,
-        title: `You will receive ${quantity} <br /> ${productsDetailById?.name === '10 Gram Gold Coin' ? '10-Gram-Silver' : '5-Gram-Silver'
+        title: `You will receive ${numberToWords(quantity)} <br /> ${productsDetailById?.name === '10 Gram Gold Coin' ? '10-Gram-Silver' : '5-Gram-Silver'
           }-${quantity === 1 ? 'coin' : 'Coins'} for free!`,
         width: '450px',
         padding: '2em',
