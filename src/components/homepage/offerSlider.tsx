@@ -10,6 +10,7 @@ import useDetectMobileOS from "@/hooks/useDetectMobileOS";
 import clsx from "clsx";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 // Define the type for the feature object
 interface Feature {
@@ -17,6 +18,7 @@ interface Feature {
   blurDataURL: string;
   redirectIOS?: string;
   redirectAndroid?: string;
+  redirectUrl?: string;
 }
 
 const features: Feature[] = [
@@ -30,16 +32,24 @@ const features: Feature[] = [
     img: "https://brightdigigold.s3.ap-south-1.amazonaws.com/banner/promoBannerTwoNew.jpg",
     blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSDIAAAABJLUvAQC4A1tXJAAAQU1EVgAA3YAAAADUAAABf///tA==",
   },
+  {
+    img: "/Diwali Dhamaka 5+5 offer banner (1) (1).jpg",
+    blurDataURL: "data:image/webp;base64,UklGRjIAAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSDIAAAABJLUvAQC4A1tXJAAAQU1EVgAA3YAAAADUAAABf///tA==",
+    redirectUrl: "/Coins",
+  },
 ];
 
 export default function OfferSlider() {
   const os = useDetectMobileOS();
+  const router = useRouter();
   const userType = useSelector((state: RootState) => state.auth.UserType);
   // console.log("userType: ", userType);
 
   const handleBannerClick = (feature: Feature) => {
     const url = os === 'iOS' ? feature.redirectIOS : feature.redirectAndroid;
-    if (url) {
+    if (feature.redirectUrl === "/Coins") {
+      router.push("/coins");
+    } else if (url) {
       window.open(url, '_blank');
     }
   };
@@ -84,8 +94,8 @@ export default function OfferSlider() {
             {features.map((feature, index) => (
               <SwiperSlide
                 key={`${index}-Slider`}
-                className={clsx('relative swiper-slide', { 'cursor-pointer': index === 0 })}
-                onClick={() => index === 0 && handleBannerClick(feature)}
+                className={clsx('relative swiper-slide max-h-full', { 'cursor-pointer': index === 0 || index === 2 })}
+                onClick={() => (index === 0 || index === 2) && handleBannerClick(feature)}
               >
                 <Image
                   src={feature.img}
@@ -117,7 +127,7 @@ export default function OfferSlider() {
         .swiper-slide img {
           object-fit: cover;
           max-width: 100%;
-          height: auto;
+          height: 80%;
           transition: transform 2s ease-in-out;
         }
       `}</style>
