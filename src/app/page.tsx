@@ -4,6 +4,7 @@ import Loading from "./loading";
 import { Metadata } from "next";
 import { HeroSection, OfferSlider } from '@/components';
 import AutosavebannerMobile from '@/components/homepage/autosavebanner';
+// import DiwaliOfferMobile from '@/components/homepage/diwaliOfferMobile';
 
 const Promotional = dynamic(() => import('../components/homepage/promotional'), { suspense: true });
 const Products = dynamic(() => import('../components/homepage/products'), { suspense: true });
@@ -15,6 +16,8 @@ const Graph = dynamic(() => import('../components/homepage/graph'), { suspense: 
 const Blog = dynamic(() => import('../components/homepage/blog'), { suspense: true });
 const Faq = dynamic(() => import('../components/homepage/faq'), { suspense: true });
 const Review = dynamic(() => import('../components/homepage/reviews'), { suspense: true });
+const DiwaliOfferMobile = dynamic(() => import('../components/homepage/diwaliOfferMobile'), { suspense: true });
+
 
 export default function Home() {
   return (
@@ -24,6 +27,9 @@ export default function Home() {
         <OfferSlider />
       </div> */}
       <div className='mt-6'>
+        <div className='block md:hidden'>
+          <DiwaliOfferMobile />
+        </div>
         <div className='bg-gradient-to-b from-gray-50 via-[rgb(57,94,128)] to-[rgb(4,67,86)] sm:hidden'>
           <div className=' w-2/3 mx-auto'>
 
