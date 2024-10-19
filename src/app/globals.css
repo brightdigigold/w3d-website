@@ -891,7 +891,7 @@ body.modal-open {
 
 /* Customize the background of the Notiflix failure report */
 .notiflix-report-failure {
-  background: url("/path/to/your/custom/background.jpg") no-repeat center center;
+  /* background: url("/path/to/your/custom/background.jpg") no-repeat center center; */
   background-size: cover;
   border-radius: 10px; /* Rounded corners for custom background */
 }
@@ -1093,4 +1093,3 @@ body.modal-open {
   color: #ffcc00; /* Custom color for the bullet */
   font-size: 1.5rem; /* Custom bullet size */
 }
-
