@@ -30,41 +30,41 @@ const HeroSection = () => {
   };
 
 
-  useEffect(() => {
-    const checkUserIsNew = async () => {
-      const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const checkUserIsNew = async () => {
+  //     const token = localStorage.getItem("token");
 
-      if (token) {
-        const configHeaders = {
-          headers: {
-            authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        };
+  //     if (token) {
+  //       const configHeaders = {
+  //         headers: {
+  //           authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       };
 
-        try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/auth/validate/token`,
-            configHeaders
-          );
-          const data = await response.json();
-          const decryptedData = AesDecrypt(data.payload);
-          const userdata = JSON.parse(decryptedData).data;
-          if (userdata?.isBasicDetailsCompleted) {
-            dispatch(setShowOTPmodal(false));
-            dispatch(profileFilled(true));
-            dispatch(fetchWalletData() as any);
-          } else {
-            dispatch(setShowProfileForm(false));
-          }
-        } catch (errorWhileCheckingIsUserNew) {
-          alert(errorWhileCheckingIsUserNew);
-        }
-      }
-    };
-    dispatch(setShowOTPmodal(false));
-    checkUserIsNew();
-  }, []);
+  //       try {
+  //         const response = await fetch(
+  //           `${process.env.NEXT_PUBLIC_BASE_URL}/auth/validate/token`,
+  //           configHeaders
+  //         );
+  //         const data = await response.json();
+  //         const decryptedData = AesDecrypt(data.payload);
+  //         const userdata = JSON.parse(decryptedData).data;
+  //         if (userdata?.isBasicDetailsCompleted) {
+  //           dispatch(setShowOTPmodal(false));
+  //           dispatch(profileFilled(true));
+  //           dispatch(fetchWalletData() as any);
+  //         } else {
+  //           dispatch(setShowProfileForm(false));
+  //         }
+  //       } catch (errorWhileCheckingIsUserNew) {
+  //         alert(errorWhileCheckingIsUserNew);
+  //       }
+  //     }
+  //   };
+  //   dispatch(setShowOTPmodal(false));
+  //   checkUserIsNew();
+  // }, []);
 
   useEffect(() => { }, [otpModal]);
 
