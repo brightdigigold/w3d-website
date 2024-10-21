@@ -2,7 +2,7 @@
 import Loading from "@/app/loading";
 import LoginAside from "@/components/authSection/loginAside";
 import CartSideBar from "@/components/cart/cartSidebar";
-import { ParseFloat } from "@/components/helperFunctions";
+import { numberToWords, ParseFloat } from "@/components/helperFunctions";
 import CoinModal from "@/components/modals/buyCoinModal";
 import OtpModal from "@/components/modals/otpModal";
 import { RootState } from "@/redux/store";
@@ -26,7 +26,6 @@ import Image from "next/image";
 import CustomButton from "@/components/customButton";
 import { MdInfo } from "react-icons/md";
 import Swal from "sweetalert2";
-import { numberToWords } from "@/utils/helperFunctions";
 
 const page = ({ params: { slug } }: { params: { slug: string } }) => {
   // console.log("params: " , slug);
