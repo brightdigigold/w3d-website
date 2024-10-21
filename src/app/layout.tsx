@@ -27,8 +27,6 @@ export default function RootLayout({ children }) {
     mixpanel.init(`${process.env.NEXT_PUBLIC_MIX_PANNEL_TOKEN}`, { track_pageview: true });
   }, []);
 
-  console.log("Root Layout mix panel token", process.env.NEXT_PUBLIC_MIX_PANNEL_TOKEN);
-  console.log("Root Layout google tag", process.env.NEXT_PUBLIC_GOOGLE_TAG)
 
   return (
     <html lang="en">
