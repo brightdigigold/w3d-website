@@ -35,7 +35,7 @@ const Redeem = (refreshOnGiftSent: any) => {
         };
         const token = localStorage.getItem("token");
         axios
-          .post(`${process.env.baseUrl}/user/redeem/reward`, payloadToSend, {
+          .post(`${process.env.NEXT_PUBLIC_BASE_URL}/user/redeem/reward`, payloadToSend, {
             headers: {
               "Content-Type": "application/json",
               authorization: `Bearer ${token}`,
@@ -111,7 +111,7 @@ const Redeem = (refreshOnGiftSent: any) => {
   ) => {
     const token = localStorage.getItem("token");
     fetch(
-      `${process.env.baseUrl}/user/rewards?page=${page}&limit=${size}&metal=${metal}&status=${status}`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/user/rewards?page=${page}&limit=${size}&metal=${metal}&status=${status}`,
       {
         headers: {
           authorization: `Bearer ${token}`,
@@ -160,7 +160,7 @@ const Redeem = (refreshOnGiftSent: any) => {
         const token = localStorage.getItem("token");
         axios
           .post(
-            `${process.env.baseUrl}/user/gifting/cancellation`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/user/gifting/cancellation`,
             payloadToSend,
             {
               headers: {

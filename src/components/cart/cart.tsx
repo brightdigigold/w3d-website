@@ -193,7 +193,7 @@ const Cart = () => {
         },
       };
       const response = await axios.get(
-        `${process.env.baseUrl}/user/ecom/getCartProduct/cart/${_id}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/ecom/getCartProduct/cart/${_id}`,
         configHeaders
       );
       const decryptedData = AesDecrypt(response.data.payload);
@@ -287,7 +287,7 @@ const Cart = () => {
       };
 
       const response = await axios.put(
-        `${process.env.baseUrl}/user/ecom/action/cart`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/ecom/action/cart`,
         payloadToSend,
         configHeaders
       );
@@ -407,7 +407,7 @@ const Cart = () => {
         },
       };
 
-      const response = await axios.post(`${process.env.baseUrl}/user/ecom/placecart/orderCheck`, payloadToSend, configHeaders);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/user/ecom/placecart/orderCheck`, payloadToSend, configHeaders);
       const decryptedData = await funcForDecrypt(response.data.payload);
       const finalData = JSON.parse(decryptedData);
       return finalData;

@@ -57,7 +57,7 @@ const useTransactionForm = () => {
             const data = { utr: values.utr };
             const resAfterEncrypt = await AesEncrypt(data);
             const response = await axios.post(
-                `${process.env.baseUrl}/user/receipt`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/user/receipt`,
                 { payload: resAfterEncrypt },
                 configHeaders
             );

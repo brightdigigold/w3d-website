@@ -12,7 +12,7 @@ const page = ({ params }: any) => {
     }, [])
 
     const verifyEmail = () => {
-        fetch(`${process.env.baseUrl}/public/verify/${id}`)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/public/verify/${id}`)
             .then((response) => response.json())
             .then(async (data) => {
                 const decryptedData =  AesDecrypt(data.payload);

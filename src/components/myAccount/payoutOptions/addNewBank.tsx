@@ -17,7 +17,7 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
   const [checkingBankStatus, setCheckingBankStatus] = useState<boolean>();
 
   const fetchAllBankName = async () => {
-    fetch(`${process.env.baseUrl}/public/bank/list`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/public/bank/list`, {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
@@ -72,7 +72,7 @@ const AddNewBank = ({ toggleBankVerificationHandler }: any) => {
         },
       };
       const response = await axios.post(
-        `${process.env.baseUrl}/user/bank/account`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/bank/account`,
         body,
         configHeaders
       );

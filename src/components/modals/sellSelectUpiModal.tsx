@@ -105,7 +105,7 @@ export default function SelectUpiModalForPayout({
     };
     axios
       .post(
-        `${process.env.baseUrl}/user/sale/order/request`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/sale/order/request`,
         payloadToSend,
         configHeaders
       )

@@ -109,7 +109,7 @@ const LoginAside = ({ isOpen, onClose }: LoginAsideProps) => {
       setSubmitting(true);
       // Notiflix.Loading.circle();
       const result = await postMethodHelperWithEncryption(
-        `${process.env.baseUrl}/${apiEndPoint}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/${apiEndPoint}`,
         updatedValues,
         // {
         //   onUploadProgress: () => Notiflix.Loading.circle(),

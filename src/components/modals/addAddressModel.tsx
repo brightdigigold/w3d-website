@@ -28,7 +28,7 @@ const AddAddressModel = ({ onCancel, onAddressListUpdate }: any) => {
           },
         };
         const response = await axios.get(
-          `${process.env.baseUrl}/user/ecom/pincode/${pincode}`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/ecom/pincode/${pincode}`,
           configHeaders
         );
         const decryptedData = AesDecrypt(response.data.payload);
@@ -53,7 +53,7 @@ const AddAddressModel = ({ onCancel, onAddressListUpdate }: any) => {
   };
 
   useEffect(() => {
-    fetch(`${process.env.baseUrl}/public/state/list`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/public/state/list`, {
       headers: { "content-type": "application/json" },
     })
       .then((response) => response.json())
@@ -102,7 +102,7 @@ const AddAddressModel = ({ onCancel, onAddressListUpdate }: any) => {
           },
         };
         const response = await axios.post(
-          `${process.env.baseUrl}/user/address/create`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/address/create`,
           body,
           configHeaders
         );

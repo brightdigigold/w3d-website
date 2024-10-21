@@ -69,7 +69,7 @@ export default function UpiModal({
 
         axios
           .post(
-            `${process.env.baseUrl}/user/kyc/upi/verify`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/user/kyc/upi/verify`,
             payloadToSend,
             configHeaders
           )

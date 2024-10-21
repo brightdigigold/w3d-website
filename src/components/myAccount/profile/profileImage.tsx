@@ -34,7 +34,7 @@ const ProfileImage = () => {
           },
         };
         const response = await axios.post(
-          `${process.env.baseUrl}/user/profile/image`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/profile/image`,
           formData,
           configHeaders
         );

@@ -42,7 +42,7 @@ const TempleUtrCheck = () => {
                 const resAfterEncrypt = AesEncrypt(data);
 
                 const response = await axios.post(
-                    `${process.env.baseUrl}/user/order/detailsByUTR`,
+                    `${process.env.NEXT_PUBLIC_BASE_URL}/user/order/detailsByUTR`,
                     { payload: resAfterEncrypt },
                     configHeaders
                 );

@@ -110,7 +110,7 @@ const OrdersTabs = () => {
         "Content-Type": "application/json",
       },
     };
-    fetch(`${process.env.baseUrl}/auth/validate/token`, configHeaders)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/validate/token`, configHeaders)
       .then((response) => response.json())
       .then(async (data) => {
         const decryptedData = await funcForDecrypt(data.payload);
@@ -150,7 +150,7 @@ const OrdersTabs = () => {
     };
     axios
       .post(
-        `${process.env.baseUrl}/user/order/history?page=${page}&limit=${size}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/order/history?page=${page}&limit=${size}`,
         body,
         configHeaders
       )

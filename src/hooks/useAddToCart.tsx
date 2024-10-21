@@ -43,7 +43,7 @@ export const useAddToCart = (
             };
 
             const result = await postMethodHelperWithEncryption(
-                `${process.env.baseUrl}/user/ecom/create/cart`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/user/ecom/create/cart`,
                 dataToBeEncrypt, configHeaders
             );
 

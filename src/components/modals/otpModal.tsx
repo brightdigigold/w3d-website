@@ -127,7 +127,7 @@ export default function OtpModal() {
         };
 
         const response = await axios.post(
-          `${process.env.baseUrl}/${apiEndPoint}`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/${apiEndPoint}`,
           body,
           header
         );
@@ -246,7 +246,7 @@ export default function OtpModal() {
       };
 
       const result = await axios.post(
-        `${process.env.baseUrl}/auth/send/otp`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send/otp`,
         body,
         header
       );

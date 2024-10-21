@@ -85,7 +85,7 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
         try {
             setSubmitting(true);
             const result = await postMethodHelperWithEncryption(
-                `${process.env.baseUrl}/auth/verify/otp`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/auth/verify/otp`,
                 corporateDetails,
             );
 
@@ -144,7 +144,7 @@ const OTPCorporateSignUp = ({ OTPMsg, otpDetails, closeModal }) => {
             };
 
             const result = await axios.post(
-                `${process.env.baseUrl}/auth/send/otp`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send/otp`,
                 body,
                 header
             );

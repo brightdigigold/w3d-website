@@ -85,7 +85,7 @@ const SetProfileCorporate: React.FC<setCorporateProfile> = ({ isOpen, onClose })
         try {
             setSubmitting(true);
             const result = await postMethodHelperWithEncryption(
-                `${process.env.baseUrl}/auth/send/otp`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/auth/send/otp`,
                 data,
             );
 

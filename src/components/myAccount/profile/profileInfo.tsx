@@ -40,10 +40,10 @@ const ProfileInfo = () => {
           "Content-Type": "application/json",
         },
       };
-      fetch(`${process.env.baseUrl}/user/validate/email`, configHeaders)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/user/validate/email`, configHeaders)
         .then((response) => response.json())
         .then(async (response) => {
-          const decryptedData = await AesDecrypt(response.payload);
+          const decryptedData = AesDecrypt(response.payload);
           const finalResult = JSON.parse(decryptedData);
           Swal.fire({
             html: `<img src="/lottie/Successfully Done.gif" class="swal2-image-custom" alt="Successfully Done">`,

@@ -113,7 +113,7 @@ const CustomCheckout = async ({ data }: any) => {
     };
     axios
       .post(
-        `${process.env.baseUrl}/user/ecom/placecart/order`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/ecom/placecart/order`,
         payloadToSend,
         configHeaders
       )
@@ -150,7 +150,7 @@ const CustomCheckout = async ({ data }: any) => {
     };
     axios
       .post(
-        `${process.env.baseUrl}/user/order/request`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/order/request`,
         payloadToSend,
         configHeaders
       )
@@ -186,7 +186,7 @@ const CustomCheckout = async ({ data }: any) => {
     };
     axios
       .post(
-        `${process.env.baseUrl}/user/order/request`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/order/request`,
         payloadToSend,
         configHeaders
       )

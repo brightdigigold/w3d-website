@@ -107,7 +107,7 @@ const EditProfileModel = ({ setOpenEditProfileModel }: any) => {
           },
         };
         const response = await axios.post(
-          `${process.env.baseUrl}/user/profile/details`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/profile/details`,
           body,
           configHeaders
         );

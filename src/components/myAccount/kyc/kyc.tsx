@@ -55,7 +55,7 @@ const KycTab = () => {
         payload: resAfterEncryptData,
       };
 
-      const response = await axios.put(`${process.env.baseUrl}/user/autoUpdate/Kyc`, payloadToSend, {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/user/autoUpdate/Kyc`, payloadToSend, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -164,7 +164,7 @@ const KycTab = () => {
           },
         };
         const response = await axios.post(
-          `${process.env.baseUrl}/user/kyc/verify`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/kyc/verify`,
           formData,
           configHeaders
         );

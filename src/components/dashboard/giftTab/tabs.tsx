@@ -221,7 +221,7 @@ const GiftTab = () => {
           },
         };
         const response = await axios.post(
-          `${process.env.baseUrl}/user/gifting/verify`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/gifting/verify`,
           body,
           configHeaders
         );
@@ -282,7 +282,7 @@ const GiftTab = () => {
           },
         };
         const response = await axios.post(
-          `${process.env.baseUrl}/user/gifting`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/gifting`,
           body,
           configHeaders
         );

@@ -72,7 +72,7 @@ const Faq = () => {
   };
 
   useEffect(() => {
-    fetch(`${process.env.baseUrl}/public/faqs`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/public/faqs`, {
       headers: { "content-type": "application/json" },
     })
       .then((response) => response.json())

@@ -142,7 +142,7 @@ export default function CoinModal({
       };
 
       const resAfterPreview = await axios.post(
-        `${process.env.baseUrl}/user/order/preview`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/order/preview`,
         payloadToSend,
         configHeaders
       );

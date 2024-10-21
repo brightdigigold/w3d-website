@@ -7,7 +7,7 @@ import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 const GiftFaq: React.FC = () => {
   const [accordionData, setAccordionData] = useState<any[]>([]);
   useEffect(() => {
-    fetch(`${process.env.baseUrl}/public/faqs?type=GIFT`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/public/faqs?type=GIFT`, {
       headers: { "content-type": "application/json" },
     })
       .then((response) => response.json())

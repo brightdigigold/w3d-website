@@ -91,7 +91,7 @@ const Contacts = () => {
         },
       };
       const response = await axios.post(
-        `${process.env.baseUrl}/data/contactus`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/data/contactus`,
         formData,
         configHeaders
       );

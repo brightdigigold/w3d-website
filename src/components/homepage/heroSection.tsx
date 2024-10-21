@@ -44,7 +44,7 @@ const HeroSection = () => {
 
         try {
           const response = await fetch(
-            `${process.env.baseUrl}/auth/validate/token`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/auth/validate/token`,
             configHeaders
           );
           const data = await response.json();

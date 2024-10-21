@@ -24,8 +24,11 @@ let persistor = persistStore(store);
 export default function RootLayout({ children }) {
   useEffect(() => {
     initializeNotiflix();
-    mixpanel.init(`${process.env.MIX_PANNEL_TOKEN}`, { track_pageview: true });
+    mixpanel.init(`${process.env.NEXT_PUBLIC_MIX_PANNEL_TOKEN}`, { track_pageview: true });
   }, []);
+
+  console.log("Root Layout mix panel token", process.env.NEXT_PUBLIC_MIX_PANNEL_TOKEN);
+  console.log("Root Layout google tag", process.env.NEXT_PUBLIC_GOOGLE_TAG)
 
   return (
     <html lang="en">
@@ -65,7 +68,7 @@ export default function RootLayout({ children }) {
             </div>
           </PersistGate>
         </Provider>
-        <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.GOOGLE_TAG}`} />
+        <script async src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GOOGLE_TAG}`} />
       </body>
     </html>
   );

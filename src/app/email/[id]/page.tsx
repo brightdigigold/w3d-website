@@ -16,10 +16,10 @@ const PageEmailVerify = ({ id }: any) => {
   }, [])
 
   const verifyEmail = () => {
-    fetch(`${process.env.baseUrl}/public/verify/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/public/verify/${id}`)
       .then((response) => response.json())
       .then(async (data) => {
-        const decryptedData = await AesDecrypt(data.payload);
+        const decryptedData = AesDecrypt(data.payload);
         const parsedEmailData = JSON.parse(decryptedData);
         if (parsedEmailData.status) {
           setMessage(`${parsedEmailData.message}`);

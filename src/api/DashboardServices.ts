@@ -1,15 +1,22 @@
-import { AesDecrypt, AesEncrypt, funcForDecrypt } from "@/components/helperFunctions";
+import {
+  AesDecrypt,
+  AesEncrypt,
+  funcForDecrypt,
+} from "@/components/helperFunctions";
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: `${process.env.baseUrl}`, 
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}`,
 });
 
 export const metalPrice = async () => {
   try {
-    const response = await fetch(`${process.env.baseUrl}/public/metal/price`, {
-      headers: { "content-type": "application/json" },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/public/metal/price`,
+      {
+        headers: { "content-type": "application/json" },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -27,9 +34,12 @@ export const metalPrice = async () => {
 
 export const fetchCoupons = async () => {
   try {
-    const response = await fetch(`${process.env.baseUrl}/public/coupons`, {
-      headers: { "content-type": "application/json" },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/public/coupons`,
+      {
+        headers: { "content-type": "application/json" },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Failed to fetch Coupons. Status: ${response.status}`);
@@ -47,12 +57,15 @@ export const getUserAddressList = async () => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`${process.env.baseUrl}/user/address/list`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/user/address/list`,
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await response.json();
     const decryptedData = await funcForDecrypt(data.payload);
@@ -75,7 +88,7 @@ export const fetchAllUPI = async () => {
     };
 
     const response = await fetch(
-      `${process.env.baseUrl}/user/upis`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/user/upis`,
       configHeaders
     );
 
@@ -84,7 +97,7 @@ export const fetchAllUPI = async () => {
     }
 
     const data = await response.json();
-    const decryptedData = await AesDecrypt(data.payload);
+    const decryptedData = AesDecrypt(data.payload);
 
     let decryptedDataList = JSON.parse(decryptedData).data;
     let UpiList = decryptedDataList.filter(function (value: any) {
@@ -98,19 +111,22 @@ export const fetchAllUPI = async () => {
     return { UpiList, BankList, decryptedDataList };
   } catch (error) {
     console.error(error);
-    return { UpiList: [], BankList: [], decryptedDataList: [] }; 
+    return { UpiList: [], BankList: [], decryptedDataList: [] };
   }
 };
 
 export const apiForWallet = async () => {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${process.env.baseUrl}/user/vault`, {
-      headers: {
-        authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/user/vault`,
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -121,12 +137,14 @@ export const apiForWallet = async () => {
     const userWallet = JSON.parse(decryptedData).data;
     return userWallet;
   } catch (error) {
-    alert(error); 
+    alert(error);
   }
 };
 
-
-export async function fetchTransactionData(id: string, token: string): Promise<any> {
+export async function fetchTransactionData(
+  id: string,
+  token: string
+): Promise<any> {
   const configHeaders = {
     headers: {
       authorization: `Bearer ${token}`,
@@ -145,7 +163,11 @@ export async function fetchTransactionData(id: string, token: string): Promise<a
   };
 
   try {
-    const response = await axios.post(`${process.env.baseUrl}/user/order/detailsById?`, body, configHeaders);
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/user/order/detailsById?`,
+      body,
+      configHeaders
+    );
     const decryptedData = await funcForDecrypt(response.data.payload);
     return JSON.parse(decryptedData);
   } catch (error) {

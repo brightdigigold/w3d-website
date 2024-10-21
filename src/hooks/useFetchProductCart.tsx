@@ -20,7 +20,7 @@ export default function useFetchProductCart(_id: string) {
                 },
             };
             const response = await axios.get(
-                `${process.env.baseUrl}/user/ecom/getCartProduct/cart/${_id}`,
+                `${process.env.NEXT_PUBLIC_BASE_URL}/user/ecom/getCartProduct/cart/${_id}`,
                 configHeaders
             );
             const decryptedData = AesDecrypt(response.data.payload);

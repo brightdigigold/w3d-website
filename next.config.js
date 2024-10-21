@@ -55,13 +55,13 @@ const nextConfig = {
   },
 
   env: {
-    baseUrl: "https://devapi.brightdigigold.com",
+    // baseUrl: "https://devapi.brightdigigold.com",
     // baseUrl: "https://api.brightdigigold.com",
     // baseUrl: "http://localhost:3032",
     cashfree: "sandbox",
-    GOOGLE_TAG: "GTM-5JFBNN5",
-    NEXT_PUBLIC_SANITY_PROJECT_ID: "nkdqpbbn",
-    MIX_PANNEL_TOKEN: "497551b628f786f66e8a0fb646d605eb",
+    // GOOGLE_TAG: "GTM-5JFBNN5",
+    // NEXT_PUBLIC_SANITY_PROJECT_ID: "nkdqpbbn",
+    // MIX_PANNEL_TOKEN: "497551b628f786f66e8a0fb646d605eb",
   },
 
   swcMinify: true,

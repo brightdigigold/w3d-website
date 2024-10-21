@@ -5,7 +5,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const apiForWallet = async () => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.baseUrl}/user/vault`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/user/vault`, {
       headers: {
         authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',

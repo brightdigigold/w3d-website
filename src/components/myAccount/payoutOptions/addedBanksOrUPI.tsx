@@ -80,11 +80,11 @@ const AddedBanksOrUpiIds = ({ toggled }: any) => {
               },
             };
             const response = await axios.post(
-              `${process.env.baseUrl}/user/destroy/upi`,
+              `${process.env.NEXT_PUBLIC_BASE_URL}/user/destroy/upi`,
               payloadToSend,
               configHeaders
             );
-            const decryptedData = await AesDecrypt(response.data.payload);
+            const decryptedData = AesDecrypt(response.data.payload);
             const finalResult = JSON.parse(decryptedData);
             if (finalResult.status) {
               Notiflix.Loading.remove();

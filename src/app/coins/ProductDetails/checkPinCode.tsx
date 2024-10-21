@@ -35,7 +35,7 @@ const CheckPinCode = () => {
         },
       };
       const response = await axios.get(
-        `${process.env.baseUrl}/user/ecom/pincode/${pincodeValue}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/ecom/pincode/${pincodeValue}`,
         configHeaders
       );
       const decryptedData = AesDecrypt(response.data.payload);

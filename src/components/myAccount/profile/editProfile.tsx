@@ -94,12 +94,12 @@ const EditProfile = ({ onSaveDetails, onCancel }: any) => {
           },
         };
         const response = await axios.post(
-          `${process.env.baseUrl}/user/profile/details`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/user/profile/details`,
           body,
           configHeaders
         );
 
-        const decryptedData = await AesDecrypt(response.data.payload);
+        const decryptedData = AesDecrypt(response.data.payload);
         const finalResult = JSON.parse(decryptedData);
 
         if (finalResult.status) {
@@ -157,7 +157,7 @@ const EditProfile = ({ onSaveDetails, onCancel }: any) => {
 
     axios
       .post(
-        `${process.env.baseUrl}/user/kyc/gst/verify`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/user/kyc/gst/verify`,
         payloadToSend,
         configHeaders
       )

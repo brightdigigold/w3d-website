@@ -100,7 +100,7 @@ const AddressTab = () => {
               },
             };
             const response = await axios.post(
-              `${process.env.baseUrl}/user/address/delete`,
+              `${process.env.NEXT_PUBLIC_BASE_URL}/user/address/delete`,
               payloadToSend,
               configHeaders
             );

@@ -67,7 +67,7 @@ export const fetchUserDetails = createAsyncThunk(
         try {
             const token = localStorage.getItem('token');
             const configHeaders = { headers: { authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } };
-            const response = await fetch(`${process.env.baseUrl}/auth/validate/token`, configHeaders);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/validate/token`, configHeaders);
 
             if (!response.ok) {
                 throw new Error(`Failed to fetch user details. Status: ${response.status}`);

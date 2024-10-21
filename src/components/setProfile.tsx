@@ -131,12 +131,12 @@ const SetProfileForNewUser: React.FC<setNewUserProfile> = ({
         payload: resAfterEncrypt,
       };
       const result = await axios.post(
-        `${process.env.baseUrl}/auth/signup`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/signup`,
         body,
         configHeaders
       );
 
-      const decryptedData = await AesDecrypt(result.data.payload);
+      const decryptedData = AesDecrypt(result.data.payload);
       const finalResult = JSON.parse(decryptedData);
 
       if (finalResult.status == true) {
