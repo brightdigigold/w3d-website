@@ -27,7 +27,6 @@ export default function RootLayout({ children }) {
     mixpanel.init(`${process.env.NEXT_PUBLIC_MIX_PANNEL_TOKEN}`, { track_pageview: true });
   }, []);
 
-
   return (
     <html lang="en">
       <head>
