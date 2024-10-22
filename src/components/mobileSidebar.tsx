@@ -135,7 +135,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
               </p>
             </div>
           </div>
-          <div className="space-y-1 px-2 pb-3 ">
+          <div className="px-2 pb-3 ">
             {isloggedIn && (
               <Link href="/myAccount" prefetch={true}>
                 <div
@@ -144,17 +144,6 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
                 >
                   <Image src="/bankmenu.png" alt="Add Bank" width={36} height={20} className="h-5 w-9 mt-2" />
                   <p className="mt-2">Add Bank</p>
-                </div>
-              </Link>
-            )}
-            {isloggedIn && (
-              <Link href="/myAccount" prefetch={true}>
-                <div
-                  onClick={() => onClose()}
-                  className={styles.p1}
-                >
-                  <Image src="/locationmenu.png" alt="Add Address" width={40} height={24} className="h-6 w-10" />
-                  Add Address
                 </div>
               </Link>
             )}
@@ -201,7 +190,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
               </div>
             </Link>
             <div onClick={handleLoginClick} className={styles.p1}>
-              <Image src="/receipt.png" alt="Receipt" width={28} height={20} className="h-6 w-9" />
+              <Image src="/receipt.png" alt="Receipt" width={28} height={20} className="h-6 w-7" />
               Donation Receipt
             </div>
             <Link target="_blank" href="https://gifting.brightdigigold.com/" prefetch={true}>
@@ -212,7 +201,7 @@ const SidebarAside = React.memo(({ isOpen, onClose }: SidebarAsideProps) => {
             </Link>
             <Link href="/digital-gold-blog" prefetch={true}>
               <div onClick={() => onClose()} className={styles.p1}>
-                <Image src="/Blog.png" alt="Blogs" width={40} height={40} className="h-12 w-11" />
+                <img src="/Blog.png" alt="Blogs"  className="h-11 w-10" />
                 Blogs
               </div>
             </Link>
