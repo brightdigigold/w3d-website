@@ -9,21 +9,17 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoginAside from "./authSection/loginAside";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { setPurpose } from "@/redux/authSlice";
 
 const Footer = () => {
   const isloggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const isLoggedInForTempleReceipt = useSelector((state: RootState) => state.auth.isLoggedInForTempleReceipt);
-  const [activeLink, setActiveLink] = useState('home');
+  const pathName = usePathname();
   const [openLoginAside, setOpenLoginAside] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
-
-  const handleLinkClick = (linkName: string) => {
-    setActiveLink(linkName);
-  };
 
   const handleLoginClick = () => {
     if (!isloggedIn && !isLoggedInForTempleReceipt) {
@@ -46,9 +42,9 @@ const Footer = () => {
         <>
           <div className="fixed bottom-0 loginGrad p-2 grid grid-cols-4 w-full z-[40] py-3 border-t xl:hidden">
             <div className=" flex justify-center">
-              <Link href="/" className="text-white text-sm" onClick={() => handleLinkClick('home')}>
+              <Link href="/" className="text-white text-sm" >
                 <img
-                  src={activeLink === 'home' ? "/images/homeNav.png" : "/images/homeNav_alt.png"}
+                  src={pathName === '/' ? "/images/homeNav.png" : "/images/homeNav_alt.png"}
                   className="h-7 mx-auto"
                   alt="Home"
                 />
@@ -56,9 +52,9 @@ const Footer = () => {
               </Link>
             </div>
             <div className=" flex justify-center">
-              <Link href="/dashboard" className="text-white text-sm" onClick={() => handleLinkClick('dashboard')}>
+              <Link href="/dashboard" className="text-white text-sm" >
                 <img
-                  src={activeLink === 'dashboard' ? "/images/investment.png" : "/images/investment _active.png"}
+                  src={pathName === '/dashboard' ? "/images/investment.png" : "/images/investment _active.png"}
                   className="h-7 mx-auto"
                   alt="Dashboard"
                 />
@@ -66,15 +62,15 @@ const Footer = () => {
               </Link>
             </div>
             <div className=" flex justify-center">
-              <Link href="/coins" className=" text-white text-sm" onClick={() => handleLinkClick('coins')}>
-                <img alt="product pic" src={activeLink === 'coins' ? "/images/products.png" : "/images/products_alt.png"} className="h-7 mx-auto " />
+              <Link href="/coins" className=" text-white text-sm" >
+                <img alt="product pic" src={pathName === '/coins' ? "/images/products.png" : "/images/products_alt.png"} className="h-7 mx-auto " />
                 Products
               </Link>
             </div>
 
             <div className=" flex justify-center">
-              <Link href="/myAccount" className=" text-white text-sm" onClick={() => handleLinkClick('myAccount')}>
-                <img alt="user icon" src={activeLink === 'myAccount' ? "/images/profile.png" : "/images/profilealt.png"} className="h-7 mx-auto " />
+              <Link href="/myAccount" className=" text-white text-sm" >
+                <img alt="user icon" src={pathName === '/myAccount' ? "/images/profile.png" : "/images/profilealt.png"} className="h-7 mx-auto " />
                 Profile
               </Link>
             </div>

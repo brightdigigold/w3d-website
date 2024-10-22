@@ -23,18 +23,12 @@ const PageEmailVerify = ({ id }: any) => {
         const parsedEmailData = JSON.parse(decryptedData);
         if (parsedEmailData.status) {
           setMessage(`${parsedEmailData.message}`);
-          // Swal.fire(
-          //     'Success',
-          //     `${parsedEmailData.data} ${parsedEmailData.message}`,
-          //     'success'
-          //   )
-          //   router.push("")
         } else {
           setMessage(`${parsedEmailData.message}`);
         }
       })
       .catch(async (error) => {
-        const decryptedData = await AesDecrypt(error.response.data.payload);
+        const decryptedData = AesDecrypt(error.response.data.payload);
         const parsedEmailData = JSON.parse(decryptedData);
         setMessage(`${parsedEmailData.message}`);
       })

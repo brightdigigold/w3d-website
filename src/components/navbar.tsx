@@ -90,7 +90,8 @@ const Navbar = () => {
   };
 
   return (
-    <Disclosure as="nav" className="bg-header fixed top-0 w-full z-[49] ">
+    <Disclosure as="nav" className="bg-header fixed top-0 w-full z-[49]">
+
       {({ open, close }) => (
         <>
           {openLoginAside && (
@@ -246,6 +247,7 @@ const Navbar = () => {
                 <div className="hidden xl:ml-6 xl:block">
                   <div className="flex space-x-4"></div>
                 </div>
+
                 {os === 'Android' &&
                   <Link
                     className="text-gold01 rounded-md text-md px-1 py-2 extrabold xl:hidden "
