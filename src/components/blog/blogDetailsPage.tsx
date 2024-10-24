@@ -1,7 +1,7 @@
 'use client';
 import PortableText from '@/components/sanity/showBlogsDetails';
 import BlogDetailsById from '@/components/sanity/showBlogsDetails';
-import { client } from '@/utils/sanityClient';
+import  { client, } from '@/utils/sanityClient';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -89,6 +89,7 @@ const PostDisplay = ({ slug }) => {
             }`;
             const params = { slug: slug[0] };
             const data = await client.fetch(query, params);
+            // console.log("Fetched post data:", JSON.stringify(data, null, 2));
             setPost(data);
         };
 
@@ -112,6 +113,8 @@ const PostDisplay = ({ slug }) => {
     }, [slug]);
 
     if (!post) return <div>No post data</div>;
+
+    console.log("bloclocloclocloclocloclocloclocloclocl", post.body)
 
     return (
         <div className="mt-28 text-white container mx-auto px-4">
@@ -137,9 +140,9 @@ const PostDisplay = ({ slug }) => {
                     <div className='w-full sm:grid sm:grid-cols-6 gap-10'>
                         <div className='col-span-4'>
                             <div className="text-justify pb-4 text-xl poppins-medium prose prose-bold:mb-10 text-white">
-                                {post.body && post.body.map((block, index) => (
+                                {post.body && post.body.map((block, index) =>
                                     <PortableText key={index} content={block} />
-                                ))}
+                                )}
                             </div>
                         </div>
                         <div className='col-span-2'>
@@ -172,3 +175,4 @@ const PostDisplay = ({ slug }) => {
 };
 
 export default PostDisplay;
+

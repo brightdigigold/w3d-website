@@ -1,6 +1,7 @@
 // Define TypeScript interfaces to describe the shape of your data
 
 import { client } from "@/utils/sanityClient";
+import { SanityClient } from "@sanity/client";
 
 interface PostAsset {
   url: string;
@@ -54,3 +55,7 @@ export async function getrefundsPosts() {
   const posts = await client.fetch(query);
   return posts;
 }
+
+
+
+

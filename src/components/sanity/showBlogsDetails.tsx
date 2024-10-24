@@ -1,117 +1,61 @@
-// import PortableText from "react-portable-text";
-import React, { ElementType } from 'react';
-import SanityBlockContent from "@sanity/block-content-to-react"
+import React from 'react';
+import { PortableText } from '@portabletext/react';
+import Image from 'next/image';
+import { urlForImage } from '@/utils/sanityClient';
+// import urlForImage from '@/utils/sanityClient';
 
-interface BlockSpan {
-  _key: string;
-  _type: string;
-  text: string;
-  marks?: string[];
-}
-
-interface Block {
-  _key: string;
-  _type: 'block' | string;
-  children: BlockSpan[];
-  markDefs?: any[];
-  style: string;
-}
-
-interface PortableTextProps {
-  content: BlockContent;
-  serializers?: SerializerComponents;
-}
-interface SerializerComponents {
-  [key: string]: ElementType<any>;
-}
-
-const defaultSerializers = SanityBlockContent.defaultSerializers
-
-const customSerializers = {
+const customComponents = {
+  types: {
+    image: ({ value }: any) => {
+      const imageUrl = urlForImage(value.asset._ref);
+      return (
+        <Image
+          src={urlForImage(value)}
+          alt="blog image"
+          width={700}
+          height={700}
+        // className="w-auto h-auto object-cover object-center mt-2 mb-1"
+        />
+      );
+    },
+  },
   marks: {
-    link: ({ mark, children }: { mark: any; children: React.ReactNode }) => (
-      <a href={mark.href} className='text-blue-600 bold'>
+    link: ({ value, children }: any) => (
+      <a href={value.href} className="text-blue-500 bold">
         {children}
       </a>
     ),
     strong: ({ children }: { children: React.ReactNode }) => (
-      <strong className='bold mb-5 text-white'>
+      <strong className="bold mb-5 text-white">{children}</strong>
+    ),
+    list: (props: any) => {
+      return <ul className="list-disc pl-3 p-1">{props.children}</ul>;
+    },
+    listItem: (props: any) => {
+      return <li className=" text-lg">{props.children}</li>;
+    },
+  },
+  block: {
+    // Add support for different HTML block elements
+    h4: ({ children }: any) => (
+      <h4 className="text-yellow-400 poppins-semibold tracking-wide text-xl sm:text-2xl mt-3">
         {children}
-      </strong>
+      </h4>
+    ),
+    h3: ({ children }: any) => (
+      <h3 className="text-yellow-500 text-lg sm:text-xl bold mt-5">{children}</h3>
+    ),
+    h2: ({ children }: any) => (
+      <h2 className="text-yellow-600 text-md font-bold sm:text-lg mt-6">{children}</h2>
+    ),
+    normal: ({ children }: any) => (
+      <p className="text-lg text-gray-100 my-4 leading-7">{children}</p>
     ),
   },
-  block: (props: any) => {
-    if (props.node.style === 'h4') {
-      return <h4 className='text-yellow-400 poppins-semibold tracking-wide text-xl sm:text-2xl mt-3'>{props.children}</h4>;
-    }
-    return defaultSerializers.types.block(props);
-  },
-  list: (props: any) => {
-    return <ul className="list-disc pl-3 p-1">{props.children}</ul>;
-  },
-  listItem: (props: any) => {
-    return <li className=" text-lg">{props.children}</li>;
-  },
 };
 
-const PortableText: React.FC<PortableTextProps> = ({ content, ...additionalOptions }) => {
-
+export default function BlogContent({ content }) {
   return (
-    <SanityBlockContent
-      blocks={content}
-      serializers={customSerializers}
-      {...additionalOptions}
-    />
+    <PortableText value={content} components={customComponents} />
   );
-};
-
-export default PortableText;
-
-
-
-/**
- * Converts portable text block content to a plain text string without formatting.
- *
- * @param {[Object]} [blocks=[]] Portable text blocks
- */
-
-interface Block {
-  _key: string;
-  _type: 'block' | string;
-  children: BlockSpan[];
-  markDefs?: any[]; // Adjust according to your needs
-  style: string; // For example: "h1", "h2", "normal", etc.
 }
-// If you have other block types, you can extend this union type
-type BlockContent = Block; // Extend this with other types as needed, e.g., `| ImageBlock | VideoBlock`
-
-export const blockContentToPlainText = (blocks: BlockContent[] = []) =>
-  blocks
-    .map((block) =>
-      block._type === "block" && block.children
-        ? block.children.map((span) => span.text).join("")
-        : ""
-    )
-    .join("\n\n");
-
-
-// Assuming you have a custom component for someCustomType
-// const CustomComponent = ({ children }) => (
-//   <div className="custom-component">{children}</div>
-// );
-
-// const BlogDetailsById = ({ portableTextContent }) => (
-//   <div>
-//     <PortableText
-//       content={portableTextContent}
-//       serializers={{
-//         h4: ({ children }) => <h4 className=" bold py-3 text-2xl">{children}</h4>,
-//         strong: ({ children }) => <strong className="bold">{children}</strong>,
-//         someCustomType: CustomComponent, // Use your actual custom type name here
-//         // Add more custom serializers as needed
-//       }}
-//     />
-//   </div>
-// );
-
-// export default BlogDetailsById;

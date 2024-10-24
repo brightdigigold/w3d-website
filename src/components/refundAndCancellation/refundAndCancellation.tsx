@@ -6,7 +6,6 @@ import { RootState } from '@/redux/store';
 import { getrefundsPosts } from '../sanity/getPost';
 import BlogDetailsById from '../sanity/showBlogsDetails';
 import PortableText from '../sanity/showBlogsDetails';
-import SanityBlockContent from '@sanity/block-content-to-react';
 interface refunds {
   body: any;
 }
