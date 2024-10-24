@@ -713,9 +713,12 @@ const BuySell = () => {
                     }}
                     className={`bg-transparent w-full pr-8 sm:pr-14 py-1  focus:outline-none text-gray-100 text-right ${activeTabPurchase === "grams" ? "text-2xl sm:text-3xl" : "text-sm sm:text-xl"}`}
                     value={
+                      // transactionType === "grams"
+                      //   ? (enteredAmount).toString()
+                      //   : (ParseFloat(metalQuantity, 4)).toString()
                       transactionType === "grams"
-                        ? (enteredAmount).toString()
-                        : (ParseFloat(metalQuantity, 4)).toString()
+                        ? enteredAmount
+                        : ParseFloat(metalQuantity, 4)
                     }
                   />
                   <div className={`pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400 ${activeTabPurchase === "grams" ? "text-sm sm:text-2xl" : "text-xs sm:text-xl"}`}>
