@@ -114,8 +114,6 @@ const PostDisplay = ({ slug }) => {
 
     if (!post) return <div>No post data</div>;
 
-    console.log("bloclocloclocloclocloclocloclocloclocl", post.body)
-
     return (
         <div className="mt-28 text-white container mx-auto px-4">
             {otpModal && <OtpModal />}
